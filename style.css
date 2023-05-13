@@ -1,6 +1,7 @@
 body{
     background-color: #1b1f3b;
     margin: 0;
+    background-image: url(images/background.jpg);
 }
 
 header{
@@ -11,6 +12,11 @@ header{
     padding: 1em;
     background-color: #8367c7;
     font-family: 'Patua One', cursive;
+}
+
+img{
+    overflow-clip-margin: content-box;
+    overflow: clip;
 }
 
 .companySection{
@@ -64,12 +70,13 @@ header{
 .heroContainer{
     display: flex;
     flex-direction: row;
-    background-color:  rgba(200, 116, 217, 0.384);
+    background-color:  #c874d9b4;
     border-radius: 1.5em;
     width: 85%;
     height: 100%;
     margin: 5em auto 0 auto;
     padding: 0.5em;
+    box-shadow: 0 0 1em rgba(255, 0, 85, 0.438);
 }
 
 .leftHeroSection{
@@ -77,6 +84,7 @@ header{
     color: white;
     display: flex;
     margin: 1em 1em 1em 1em;
+    padding-left: 1em;
     flex-direction: column;
     justify-content: center;
     align-items: center;
@@ -104,4 +112,20 @@ header{
     font-family: 'Lexend', sans-serif;
     font-weight: bold;
     border: solid white 2px;
+}
+
+#agendarButton:hover{
+    background-color: #383cb4;
+}
+
+.rightHeroSection{
+    width: 50vw;
+    margin: 3em 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+#heroImage{
+    width: 35vw;
+    border-radius: 1.5em;
 }
