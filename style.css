@@ -1,9 +1,53 @@
 body{
-    background-color: #F0FFF1;
+    background-color: #f0fff1;
     margin: 0;
 }
+
 header{
-    height: 6em;
-    background-color: #5603AD;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    height: 4em;
+    padding: 1em;
+    background-color: #8367c7;
+    font-family: 'Patua One', cursive;
 }
 
+#companySection{
+    display: flex;
+    height: 100%;
+    align-items: center;
+    font-size: 2em;
+    color: white;
+    border-right: 2px solid #7159ad; 
+}
+
+#company_logo{
+    height: 100%; 
+}
+
+#company_name{
+    padding-left: 1em;
+    padding-right: 1em;
+}
+
+#loginSection{
+    display: flex;
+    height: 100%;
+}
+
+.loginButton{
+    border-radius: 50em;
+    padding: 1em 2em;
+    align-self: center;
+    background-color:  #5603ad;
+    border: none;
+    color: white;
+    font-family: 'Lexend', sans-serif;
+    font-weight: bold;
+    margin: 1ex;
+}
+
+.loginButton:hover{
+    background-color: #b14aed; 
+}
