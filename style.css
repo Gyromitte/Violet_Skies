@@ -1,5 +1,5 @@
 body{
-    background-color: #f0fff1;
+    background-color: #1b1f3b;
     margin: 0;
 }
 
@@ -7,19 +7,27 @@ header{
     display: flex;
     flex-direction: row;
     justify-content: space-between;
-    height: 4em;
+    height: 2em;
     padding: 1em;
     background-color: #8367c7;
     font-family: 'Patua One', cursive;
 }
 
-#companySection{
+.companySection{
     display: flex;
     height: 100%;
     align-items: center;
     font-size: 2em;
     color: white;
-    border-right: 2px solid #7159ad; 
+}
+
+#tabsContainer{
+    font-size: medium;
+    padding-left: 2em;
+}
+
+.tabs{
+    padding: 1em; 
 }
 
 #company_logo{
@@ -29,6 +37,7 @@ header{
 #company_name{
     padding-left: 1em;
     padding-right: 1em;
+    border-right: 2px solid #7159ad; 
 }
 
 #loginSection{
@@ -50,4 +59,49 @@ header{
 
 .loginButton:hover{
     background-color: #b14aed; 
+}
+
+.heroContainer{
+    display: flex;
+    flex-direction: row;
+    background-color:  rgba(200, 116, 217, 0.384);
+    border-radius: 1.5em;
+    width: 85%;
+    height: 100%;
+    margin: 5em auto 0 auto;
+    padding: 0.5em;
+}
+
+.leftHeroSection{
+    width: 40vw;
+    color: white;
+    display: flex;
+    margin: 1em 1em 1em 1em;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    font-family: 'Patua One', cursive;
+}
+
+#greetings{
+    font-family: 'Archivo Black', sans-serif;
+    font-size: 3.5em;
+}
+
+#description{
+    margin: none;
+    font-family: 'Patua One', cursive;
+    font-size: 1em;
+}
+
+#agendarButton{
+    border-radius: 50em;
+    padding: 1em;
+    width: 15em;
+    font-size: medium;
+    background-color: #454ade;
+    color: white;
+    font-family: 'Lexend', sans-serif;
+    font-weight: bold;
+    border: solid white 2px;
 }
