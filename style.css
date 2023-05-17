@@ -93,7 +93,7 @@ img{
 
 #greetings{
     font-family: 'Archivo Black', sans-serif;
-    font-size: 3.5em;
+    font-size: 5vw;
 }
 
 #description{
@@ -126,6 +126,8 @@ img{
     align-items: center;
 }
 #heroImage{
+    max-width:100%;
+    height:auto;
     width: 35vw;
     border-radius: 1.5em;
 }
