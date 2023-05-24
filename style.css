@@ -153,5 +153,30 @@ img{
 
 #about-usDescription{
     font-family: 'Lexend', sans-serif;
-    font-size: 1vw
+    font-size: 1.5vw;
+    width: 55%;
+}
+
+.job-image{
+    background-color: #454ade;
+    background-image: url(images/meseros.jpg);
+    background-size: cover;
+    background-position: center;
+    position: relative;
+    overflow: hidden;
+    font-size: 2em;
+    height: 20vw;
+}
+
+#job-container{
+    color: white;
+    font-family: 'Archivo Black', sans-serif;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+#job-info{
+    font-size: small;
 }
