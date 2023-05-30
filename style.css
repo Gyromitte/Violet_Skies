@@ -133,11 +133,11 @@ img{
 }
 
 #about-us{
-    flex-direction: column;
-    justify-content: center;
+    flex-direction: row;
+    justify-content: space-between;
     align-items: center;
     background-color: #1b1f3b;
-    height: 10vw;
+    height: 100%;
     display: flex;
     padding: 4vw;
     color: white;
@@ -155,6 +155,16 @@ img{
     font-family: 'Lexend', sans-serif;
     font-size: 1.5vw;
     width: 55%;
+}
+
+#about-usLeft{
+    margin-right: 3em;
+}
+#crownePlaza{
+    max-width: 25vw;
+    height: 25vw;
+    border-radius: 50%;
+    border: #b14aed 8px solid;
 }
 
 .job-image{
