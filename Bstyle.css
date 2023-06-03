@@ -11,8 +11,13 @@ body{
     font-family: 'Patua One', cursive;
 }
 
+.nav-container{
+    justify-content: unset !important;
+}
+
 .navbar-header{
     border-right: 2px solid #7159ad;
+    margin-right: 1em;
     font-size: 2em;
 }
 
@@ -31,5 +36,5 @@ body{
 }
 
 .tabs{
-    margin: 15px;
+    margin-right: 30px;
 }
