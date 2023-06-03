@@ -1,0 +1,35 @@
+body{
+    background-color: #1b1f3b;
+    margin: 0;
+    background-image: url(images/background.jpg);
+    background-size: cover;
+}
+
+.navbar{
+    background-color: #8367c7;
+    color: white;
+    font-family: 'Patua One', cursive;
+}
+
+.navbar-header{
+    border-right: 2px solid #7159ad;
+    font-size: 2em;
+}
+
+#company-logo{
+    height: 1em;
+}
+
+#company-name{
+    padding-left: 1em;
+    padding-right: 1em;
+}
+
+.no-underline{
+    text-decoration: none;
+    color: white;
+}
+
+.tabs{
+    margin: 15px;
+}
