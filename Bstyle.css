@@ -1,10 +1,8 @@
 body{
-    background-color: #1b1f3b;
+    background-color: #1b1f3b !important;
     margin: 0;
-    background-image: url(images/background.jpg);
-    background-size: cover;
 }
-
+/*Nav*/
 .navbar{
     background-color: #8367c7;
     color: white;
@@ -24,9 +22,7 @@ body{
 }
 
 .row{
-    justify-content: space-between;
     padding-right: 0 !important;
-    width: unset !important;
 }
 
 .companySection{
@@ -57,10 +53,11 @@ body{
 .login-section{
     display: flex;
 }
+
 .loginButton{
-    border-radius: 50em;
+    border-radius: 50vw;
     font-size: small;
-    padding: 1em 2em;
+    padding: 0.8em 2em;
     align-self: center;
     background-color:  #5603ad;
     border: none;
@@ -69,3 +66,110 @@ body{
     font-weight: bold;
     margin: 5px;
 }
+
+.loginButton:hover{
+    background-color: #b14aed; 
+}
+
+/*Hero Section*/
+.heroContainer{
+    display: flex;
+    flex-direction: row;
+    background-color:  #c874d9b4;
+    border-radius: 1.5em;
+    width: 85%;
+    height: 100%;
+    margin: 5em auto 5em;
+    padding: 0.5em;
+    box-shadow: 0 0 1em rgba(255, 0, 85, 0.438);
+}
+
+.background-cover{
+    background-image: url(images/background.jpg);
+    background-size: cover;
+    padding: 1em;
+}
+
+.leftHeroSection{
+    width: 40vw;
+    color: white;
+    display: flex;
+    margin: 1em 1em 1em 1em;
+    padding-left: 1em;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    font-family: 'Patua One', cursive;
+}
+
+#greetings{
+    font-family: 'Archivo Black', sans-serif;
+    font-size: 5vw;
+}
+
+#description{
+    margin: none;
+    font-family: 'Patua One', cursive;
+    font-size: 1em;
+}
+
+#agendarButton{
+    border-radius: 50em;
+    padding: 1em;
+    width: 15em;
+    font-size: medium;
+    background-color: #454ade;
+    color: white;
+    font-family: 'Lexend', sans-serif;
+    font-weight: bold;
+    border: solid white 2px;
+}
+
+#agendarButton:hover{
+    background-color: #383cb4;
+}
+
+.rightHeroSection{
+    width: 50vw;
+    margin: 3em 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+#heroImage{
+    max-width:100%;
+    height:auto;
+    width: 35vw;
+    border-radius: 1.5em;
+}
+
+/* Estilos para dispositivos de moviles */
+@media (max-width: 767px) {
+    .heroContainer {
+      flex-direction: column; /* Cambia la dirección de los elementos a columna */
+      align-items: center;
+      margin: auto;
+    }
+    
+    .leftHeroSection{
+        width: unset;
+        align-items: unset;
+        text-align: center;
+        justify-content: center;
+        padding-left: unset;
+    }
+
+    .rightHeroSection {
+      margin-top: 20px; /* Agrega margen superior para separar de la sección izquierda */
+      margin-bottom: 0px;
+    }
+    #heroImage{
+        width: 50vw;
+    }
+    .companySection{
+        justify-content: center;
+    }
+    .login-section{
+        justify-content: center;
+    }
+  }
