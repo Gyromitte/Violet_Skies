@@ -1,0 +1,192 @@
+body{
+    background-color: #1b1f3b;
+    margin: 0;
+    background-image: url(images/background.jpg);
+}
+
+header{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    height: 2em;
+    padding: 1em;
+    background-color: #8367c7;
+    font-family: 'Patua One', cursive;
+}
+
+img{
+    overflow-clip-margin: content-box;
+    overflow: clip;
+}
+
+.companySection{
+    display: flex;
+    height: 100%;
+    align-items: center;
+    font-size: 2em;
+    color: white;
+}
+
+#tabsContainer{
+    font-size: medium;
+    padding-left: 2em;
+}
+
+.tabs{
+    padding: 1em; 
+}
+
+#company_logo{
+    height: 100%; 
+}
+
+#company_name{
+    padding-left: 1em;
+    padding-right: 1em;
+    border-right: 2px solid #7159ad; 
+}
+
+#loginSection{
+    display: flex;
+    height: 100%;
+}
+
+.loginButton{
+    border-radius: 50em;
+    padding: 1em 2em;
+    align-self: center;
+    background-color:  #5603ad;
+    border: none;
+    color: white;
+    font-family: 'Lexend', sans-serif;
+    font-weight: bold;
+    margin: 1ex;
+}
+
+.loginButton:hover{
+    background-color: #b14aed; 
+}
+
+.heroContainer{
+    display: flex;
+    flex-direction: row;
+    background-color:  #c874d9b4;
+    border-radius: 1.5em;
+    width: 85%;
+    height: 100%;
+    margin: 5em auto 5em;
+    padding: 0.5em;
+    box-shadow: 0 0 1em rgba(255, 0, 85, 0.438);
+}
+
+.leftHeroSection{
+    width: 40vw;
+    color: white;
+    display: flex;
+    margin: 1em 1em 1em 1em;
+    padding-left: 1em;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    font-family: 'Patua One', cursive;
+}
+
+#greetings{
+    font-family: 'Archivo Black', sans-serif;
+    font-size: 5vw;
+}
+
+#description{
+    margin: none;
+    font-family: 'Patua One', cursive;
+    font-size: 1em;
+}
+
+#agendarButton{
+    border-radius: 50em;
+    padding: 1em;
+    width: 15em;
+    font-size: medium;
+    background-color: #454ade;
+    color: white;
+    font-family: 'Lexend', sans-serif;
+    font-weight: bold;
+    border: solid white 2px;
+}
+
+#agendarButton:hover{
+    background-color: #383cb4;
+}
+
+.rightHeroSection{
+    width: 50vw;
+    margin: 3em 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+#heroImage{
+    max-width:100%;
+    height:auto;
+    width: 35vw;
+    border-radius: 1.5em;
+}
+
+#about-us{
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #1b1f3b;
+    height: 100%;
+    display: flex;
+    padding: 4vw;
+    color: white;
+    font-family: 'Archivo Black', sans-serif;
+    font-size: 4em;
+}
+
+#about-usHeader{
+    align-items: top;
+    margin-block-start: 0;
+    margin-block-end: 0;
+}
+
+#about-usDescription{
+    font-family: 'Lexend', sans-serif;
+    font-size: 1.5vw;
+    width: 55%;
+}
+
+#about-usLeft{
+    margin-right: 3em;
+}
+#crownePlaza{
+    max-width: 25vw;
+    height: 25vw;
+    border-radius: 50%;
+    border: #b14aed 8px solid;
+}
+
+.job-image{
+    background-color: #454ade;
+    background-image: url(images/meseros.jpg);
+    background-size: cover;
+    background-position: center;
+    position: relative;
+    overflow: hidden;
+    font-size: 2em;
+    height: 20vw;
+}
+
+#job-container{
+    color: white;
+    font-family: 'Archivo Black', sans-serif;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+#job-info{
+    font-size: small;
+}
