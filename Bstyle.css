@@ -23,6 +23,7 @@ body{
 
 .row{
     padding-right: 0 !important;
+    --bs-gutter-x: unset !important;
 }
 
 .companySection{
@@ -102,7 +103,7 @@ body{
     font-family: 'Patua One', cursive;
 }
 
-#greetings{
+.greetings{
     font-family: 'Archivo Black', sans-serif;
     font-size: 5vw;
 }
@@ -113,7 +114,7 @@ body{
     font-size: 1em;
 }
 
-#agendarButton{
+.agendarButton{
     border-radius: 50em;
     padding: 1em;
     width: 15em;
@@ -143,6 +144,101 @@ body{
     border-radius: 1.5em;
 }
 
+/*Job Section*/
+#job-section{
+    color: white;
+    padding: 2em 2em 2em 2em; 
+    height: 25vw;
+    background-color: #1b1f3b
+}
+
+.job-image{
+    background-color: #454ade;
+    background-image: url(images/mesero.jpg);
+    background-size: cover; 
+    background-position: center;
+    position: relative;
+    overflow: hidden;
+    height: 100%;
+    width: 50% !important;
+    border-radius: 2em;
+}
+
+.job-desc{
+    text-align: center;
+    font-family: 'Archivo Black', sans-serif;
+    font-size: 4vw;
+}
+
+.job-desc-text{
+    font-size: 1vw;
+}
+
+#apply-button{
+    padding: 2em 6em;
+    background-color: #454ade;
+}
+
+/*Salones*/
+.salones{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: #5603ad;
+    height: 40vw;
+    color: white;
+    font-family: 'Patua One', cursive;
+}
+
+.sal-greet{
+    border-bottom: 2px solid #7159ad;
+    justify-self: center;
+    height: 30%;
+}
+
+/*Carousel*/
+.carousel {
+    position: relative;
+    width: 90%;
+    overflow: hidden;
+    border-radius: 2em;
+    margin-top: 2em;
+    margin-bottom: 2em;
+  }
+  
+  .carousel-container {
+    display: flex;
+    transition: transform 0.5s ease-in-out;
+  }
+  
+  .carousel-slide {
+    display: flex;
+  }
+  
+  .carousel-slide img {
+    width: 100%;
+    height: auto;
+  }
+  
+  .carousel-prev,
+  .carousel-next {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #fff;
+    font-size: 24px;
+    text-decoration: none;
+  }
+  
+  .carousel-prev {
+    left: 10px;
+  }
+  
+  .carousel-next {
+    right: 10px;
+  }
+  
 /* Estilos para dispositivos de moviles */
 @media (max-width: 767px) {
     .heroContainer {
