@@ -1,3 +1,4 @@
+
 body{
     background-color: #1b1f3b !important;
     margin: 0;
@@ -186,7 +187,7 @@ body{
     justify-content: center;
     align-items: center;
     background-color: #5603ad;
-    height: 40vw;
+    height: 35vw;
     color: white;
     font-family: 'Patua One', cursive;
 }
@@ -194,51 +195,40 @@ body{
 .sal-greet{
     border-bottom: 2px solid #7159ad;
     justify-self: center;
-    height: 30%;
+    height: 20%;
 }
+  /*SlideShow*/
+  * {box-sizing:border-box !important}  
 
-/*Carousel*/
-.carousel {
+  .slideshow-container{
+    width: 50%;
+    height: 60%;
     position: relative;
-    width: 90%;
-    overflow: hidden;
-    border-radius: 2em;
-    margin-top: 2em;
-    margin-bottom: 2em;
-  }
-  
-  .carousel-container {
     display: flex;
-    transition: transform 0.5s ease-in-out;
+    margin-top: 20px; 
   }
-  
-  .carousel-slide {
-    display: flex;
+
+  /*Por defecto las imagenes no aparecen, su display cambia al estar activas*/
+  .slide{
+    display: none;
   }
-  
-  .carousel-slide img {
+
+  .slide-img{
     width: 100%;
+    border-radius: 2em;
     height: auto;
   }
-  
-  .carousel-prev,
-  .carousel-next {
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
-    color: #fff;
-    font-size: 24px;
-    text-decoration: none;
+
+  /* Fading animation */
+  .fade {
+    animation-name: fade;
+    animation-duration: 4s;
   }
   
-  .carousel-prev {
-    left: 10px;
+  @keyframes fade {
+    from {opacity: .4}
+    to {opacity: 1}
   }
-  
-  .carousel-next {
-    right: 10px;
-  }
-  
 /* Estilos para dispositivos de moviles */
 @media (max-width: 767px) {
     .heroContainer {
