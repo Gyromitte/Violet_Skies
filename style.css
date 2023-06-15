@@ -229,6 +229,29 @@ body{
     from {opacity: .4}
     to {opacity: 1}
   }
+
+  /*Ubicacion*/
+  .ubicacion{
+    color: white;
+    background-image: url(/images/back_ubicacion.jpg);
+    background-size: cover;
+  }
+
+  .ubic-greet{
+    text-align: center;
+    background-color:  #c874d9b4;
+    padding: 20px;
+  }
+
+  .map-container{
+    display: flex;
+    justify-content: center;
+    margin: 20px;
+  }
+  .g-map{
+    border-radius: 2em;
+  }
+
 /* Estilos para dispositivos de moviles */
 @media (max-width: 767px) {
     .heroContainer {
