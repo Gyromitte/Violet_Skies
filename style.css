@@ -41,6 +41,10 @@ body{
     padding-right: 1em;
 }
 
+#company-name:hover{
+    text-decoration: underline;
+}
+
 .no-underline{
     text-decoration: none;
     color: white;
@@ -49,6 +53,11 @@ body{
 .tabs{
     margin-right: 20px;
     margin-left: 20px;
+}
+
+.tabs:hover{
+    text-decoration: underline;
+    border-bottom: 1px solid #5603ad;
 }
 
 /*Login Section*/
@@ -127,7 +136,7 @@ body{
     border: solid white 2px;
 }
 
-#agendarButton:hover{
+.agendarButton:hover{
     background-color: #383cb4;
 }
 
@@ -250,6 +259,16 @@ body{
   }
   .g-map{
     border-radius: 2em;
+    margin-bottom: 10px;
+  }
+
+  /*Informes*/
+  .informes{
+    background-color: #5603ad;
+    height: 200px;
+    text-align: center;
+    color: white;
+    font-size: 3vw;
   }
 
 /* Estilos para dispositivos de moviles */
