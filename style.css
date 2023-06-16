@@ -265,10 +265,11 @@ body{
   /*Informes*/
   .informes{
     background-color: #5603ad;
-    height: 200px;
+    height: auto;
     text-align: center;
     color: white;
     font-size: 3vw;
+    padding: 20px;
   }
 
 /* Estilos para dispositivos de moviles */
