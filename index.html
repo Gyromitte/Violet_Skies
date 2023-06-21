@@ -12,7 +12,9 @@
         &#10; Trabaja con nosotros! Aplica para diversos eventos y trabaja como mesero o cocinero.">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <!--Style sheet-->
-        <link rel="stylesheet" href="style.css">
+        <link rel="stylesheet" href="/css/style.css">
+        <link rel="stylesheet" href="bootstrap/css/bootstrap.css">
+
         <!--Referencias a fuentes-->
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -21,88 +23,110 @@
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
         <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&display=swap" rel="stylesheet">
-        <script src="https://kit.fontawesome.com/b60c246061.js" crossorigin="anonymous"></script>
     </head>
     <body>
-        <!--Mensaje para usuarios con navegadores obsoletos para poder ver la pagina-->
-        <!--[if lt IE 7]>
-            <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="#">upgrade your browser</a> to improve your experience.</p>
-        <![endif]-->
-        <header>
-            <div class="companySection">
-                <img src="images/company_logo.jpg" alt="Company Logo" id="company_logo" >
-                <p id="company_name">Hoteleria</p>
-
-                <div class="companySection" id="tabsContainer">
-                    <p class="tabs">Nosotros</p>
-                    <P class="tabs">Agendar Evento</P>
-                    <p class="tabs">Trabajo</p>
-                </div>
-            </div>
-
-
-            <div id="loginSection">
+          <nav class="navbar navbar-default row">
+            <div class="companySection col-sm-auto">
+                <!--Company Logo-->
+                <div class="navbar-header">
+                    <img id="company-logo" class="img-fluid" src="images/company_logo.jpg" alt="companyLogo">
+                        <a class="no-underline" href="#" id="company-name">Hoteleria</a>
+                </div>      
+                <!--Tabs-->
+                <ul class="nav list-inline">
+                    <li class="mr-3 tabs">
+                        <a class="no-underline" href="#">Nosotros</a>
+                    </li>
+                    <li class="mr-3 tabs">
+                        <a class="no-underline" href="#">Agendar Evento</a>
+                    </li>
+                    <li class="mr-3 tabs">
+                        <a class="no-underline" href="#">Trabajo</a>
+                    </li>
+                </ul>
+            </div>         
+            <!--Login-section-->
+            <div class="login-section col-sm-auto" >
                 <button class="loginButton">
-                    <i class="fa-solid fa-door-open" style="color: #ffffff;"></i>
-                    Acceder</button>
+                    <i class="fa-solid fa-door-open" style="color: #ffffff;"></i>Acceder
+                </button>
                 <button class="loginButton">
-                    <i class="fa-solid fa-user" style="color: #ffffff;"></i>
-                    Registrarse</button>
+                    <i class="fa-solid fa-user" style="color: #ffffff;"></i>Registrarse
+                </button>
             </div>
-        </header>
-
+        </nav>
         <!--Hero container-->
-        <div class="heroContainer">
-            <div class="leftHeroSection">
-                <div id="greetings">
-                    Organizamos tus eventos
+        <div class="background-cover">
+            <div class="heroContainer">
+                <div class="leftHeroSection">
+                    <div class="greetings">
+                        Organizamos tus eventos
+                    </div>
+                    <p id="description">
+                        Quinceañeras, cumpleaños, bodas.
+                        <br>
+                        Solo agenda un evento con nosotros a tu gusto
+                        y nosotros nos encargaremos.
+                    </p>
+                    <button class="agendarButton">
+                        Agendar
+                    </button>    
                 </div>
-                <p id="description">
-                    Quinceañeras, cumpleaños, bodas etc...
-                    <br>
-                    Solo agenda un evento con nosotros a tu gusto
-                    y nosotros nos encargaremos.
-                </p>
-                <button id="agendarButton">
-                    Agendar
-                </button>    
-            </div>
-
-            <div class="rightHeroSection">
-                <img src="images/heroImage.jpg" id="heroImage">
+                <div class="rightHeroSection">
+                    <img src="images/heroImage.jpg" id="heroImage">
+                </div>
             </div>
         </div>
-
-        <!--About us-->
-        <div id="about-us">
-            <div id="about-usLeft">
-                <img src="images/crowne plaza.jpg" id="crownePlaza">
-            </div>
-
-            <div>
-                <p id="about-usHeader">Sobre Nosotros</p>
-                <p id="about-usDescription">
-                Lorem ipsum dolor, sit amet consectetur adipisicing elit.
-                Tempora alias ratione dolorum reiciendis inventore unde veniam quisquam modi,
-                veritatis saepe, magni fugiat laborum iusto dolore, recusandae omnis illo odit distinctio
-                </p>
-            </div>
-            
+        <!--Salones-->
+        <div class="salones">
+            <div class="greetings sal-greet">Salones para Eventos</div>
+                <div class="slideshow-container">
+                    <div class="slide fade">
+                        <img class="slide-img" src="/images/salones/salon1.jpg" alt="Salon 1">
+                    </div>
+                    <div class="slide fade">
+                        <img class="slide-img" src="/images/salones/salon2.jpg" alt="Salon 2">
+                    </div>
+                    <div class="slide fade">
+                        <img class="slide-img" src="/images/salones/salon3.jpg" alt="salon 3">
+                    </div>
+                </div>
+              </div>              
         </div>
-
-        <!--Trabajo-->
-        <div class="job-image" data-speed="0.5">
-            <div id="job-container">
+        <!--Job Section-->
+        <div class="row" id="job-section">
+            <div class="job-image col-6" data-speed="0.150"></div>
+            <div class="col-6 job-desc">
                 <p>Trabaja con nosotros</p>
-                <p id="job-info">
+                <p class="job-desc-text">
                     Lorem, ipsum dolor sit amet consectetur adipisicing elit.
                     Quisquam eaque libero perferendis quis repellat expedita repudiandae magni enim a officia,
                     aliquid, corrupti odio reprehenderit aut voluptate, saepe nam sint quo?
                 </p>
+                <button class="agendarButton">
+                    Aplicar
+                </button>
             </div>
-
         </div>
- 
-        <script src="js/parallax.js" async defer></script>
+        <!--Ubicacion-->
+        <div class="ubicacion">
+            <div class="greetings ubic-greet">
+                <i class="fa-solid fa-location-dot" style="color: #5603ad;"></i>
+                Ubicación
+            </div>
+            <div class="map-container">
+                <iframe class="g-map" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3600.104344285685!2d-103.40724728975775!3d25.534900977401225!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x868fdb758c52dedd%3A0xaec1a6ea92489b16!2sCrowne%20Plaza%20Torreon%2C%20an%20IHG%20Hotel!5e0!3m2!1ses!2smx!4v1686857620909!5m2!1ses!2smx" width="80%" height="500px" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+            </div>
+        </div>
+        <!--Informes-->
+        <footer class="informes greetings">
+            Contacto e Informes:<br>
+            <i class="fa-solid fa-phone" style="color: #ffffff;"></i>
+            87-17-35-85-98
+        </footer>
+        <script src="bootstrap/js/bootstrap.js"></script>
+        <script src="/js/parallax.js"></script>
+        <script src="/js/slideshow.js"></script>
+        <script src="https://kit.fontawesome.com/b60c246061.js" crossorigin="anonymous"></script>
     </body>
 </html>
