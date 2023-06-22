@@ -96,7 +96,7 @@ body{
 }
 
 .background-cover{
-    background-image: url(images/background.jpg);
+    background-image: url(/images/background.jpg);
     background-size: cover;
     padding: 1em;
 }
