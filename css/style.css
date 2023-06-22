@@ -164,7 +164,7 @@ body{
 
 .job-image{
     background-color: #454ade;
-    background-image: url(images/mesero.jpg);
+    background-image: url(/images/mesero.jpg);
     background-size: cover; 
     background-position: center;
     position: relative;
