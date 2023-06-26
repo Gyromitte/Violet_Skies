@@ -1,0 +1,30 @@
+body{
+    margin: 0;
+    color: white;
+    background-color: #1b1f3b;
+}
+nav{
+    background-color: #8367c7;
+    font-family: 'Patua One', cursive;
+    padding: 0.5em;
+    font-size: 2em;
+    display: flex;
+    justify-content: space-between;
+}
+.nav-user{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 20px;
+    width: 15%;
+}
+
+#nav-photo-user{
+    border-radius: 50%;
+    background-color: #454ADE;
+    padding: 20px;
+}
+
+fa-bars:hover{
+    color: aqua;
+}
