@@ -3,6 +3,9 @@ body{
     background-color: #1b1f3b !important;
     margin: 0;
 }
+h1{
+    font-family: 'Archivo Black', sans-serif;
+}
 /*Nav*/
 .navbar{
     background-color: #8367c7;
