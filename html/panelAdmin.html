@@ -10,6 +10,8 @@
         <title></title>
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
+        <!--StyleSheets-->
+        <link rel="stylesheet" href="/bootstrap/css/bootstrap-reboot.min.css">
         <link rel="stylesheet" href="/css/panelAdmin.css">
         <!--Referencias a fuentes-->
         <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -26,7 +28,9 @@
         <![endif]-->
         <nav>
             <div class="nav-menu">
-                <i class="fa-solid fa-bars" style="color: #ffffff;"></i>
+                <button id="nav-button">
+                    <i class="fa-solid fa-bars" style="color: #ffffff;"></i>
+                </button>
                 Hoteleria
             </div>
             <div class="nav-user">
@@ -35,7 +39,19 @@
                 Username
             </div>
         </nav>
-        <script src="" async defer></script>
+        <div id="dash-board">
+            <div id="dash-board-content">
+                <div id="dash-photo-user"></div>
+                Username<br>
+                Position<br><br>
+                <button class="dash-button"><i class="fa-solid fa-house" style="color: #ffffff;"></i>DashBoard</button>
+                <button class="dash-button"><i class="fa-solid fa-calendar-days" style="color: #ffffff;"></i>Eventos</button>
+                <button class="dash-button"><i class="fa-solid fa-briefcase" style="color: #ffffff;"></i>Empleados</button>
+                <button class="dash-button"><i class="fa-solid fa-user" style="color: #ffffff;"></i>Perfil</button>
+                <button class="dash-button"><i class="fa-solid fa-gear" style="color: #ffffff;"></i>Configuracion</button>
+            </div>
+        </div>
+        <script src="/js/panelAdmin.js" async defer></script>
         <script src="https://kit.fontawesome.com/b60c246061.js" crossorigin="anonymous"></script>
     </body>
 </html>
