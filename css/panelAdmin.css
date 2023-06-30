@@ -87,3 +87,16 @@ nav{
     margin-left: 300px; /* Cambia el valor según sea necesario para ajustar el desplazamiento */
     transition: margin-left  0.3s ease; /* Agrega una transición suave para una animación fluida */
 }
+.test{
+    background-color: #5603ad;
+    border-radius: 2em;
+    margin: 20px;
+    padding: 10px;
+    width: 50%;
+}
+#fecha{
+    background-color: #5603ad;
+    padding: 10px;
+    border-radius: 20px;
+    border-top: 50px solid #5603ad;
+}
