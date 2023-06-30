@@ -43,7 +43,7 @@ nav{
     left: -350px;
     width: 300px;
     height: 100vh;
-    background-color: #c874d9;
+    background-color: #b14aed;
     transition: left 0.3s ease;
     z-index: 1;
 }
@@ -56,6 +56,8 @@ nav{
     flex-direction: column;
     padding: 20px;
     text-align: center;
+    font-family: 'Lexend', sans-serif;
+    font-weight: bolder;
 }
 #dash-photo-user{
     width: 100px;
@@ -68,7 +70,14 @@ nav{
     border: none;
     border-radius: 2em;
     height: 50px;
-    background-color: #b14aed;
+    background-color:#5603ad;
     margin: 10px;
     color: white;
+    font-size: small;
+    font-family: 'Lexend', sans-serif;
+    font-weight: bolder;
+}
+.dash-button:hover{
+    background-color: #b14aed;
+    border: 2px solid white;
 }
