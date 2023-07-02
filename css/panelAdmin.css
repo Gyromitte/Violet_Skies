@@ -94,6 +94,16 @@ nav{
     padding: 10px;
     width: 50%;
 }
+
+.tab-content {
+    display: none;
+  }
+
+.tab-content.active {
+    display: block;
+  }
+
+
 #fecha{
     background-color: #5603ad;
     padding: 10px;

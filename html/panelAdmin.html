@@ -45,16 +45,35 @@
                 <div id="dash-photo-user"></div>
                 Username<br>
                 Position<br><br>
-                <button class="dash-button"><i class="fa-solid fa-house" style="color: #ffffff;"></i><br>DashBoard</button>
-                <button class="dash-button"><i class="fa-solid fa-calendar-days" style="color: #ffffff;"></i><br>Eventos</button>
-                <button class="dash-button"><i class="fa-solid fa-briefcase" style="color: #ffffff;"></i><br>Empleados</button>
-                <button class="dash-button"><i class="fa-solid fa-user" style="color: #ffffff;"></i><br>Perfil</button>
-                <button class="dash-button"><i class="fa-solid fa-gear" style="color: #ffffff;"></i><br>Configuracion</button>
+                <button data-tab="home" class="dash-button"><i class="fa-solid fa-house" style="color: #ffffff;"></i><br>Home</button>
+                <button data-tab="eventos" class="dash-button"><i class="fa-solid fa-calendar-days" style="color: #ffffff;"></i><br>Eventos</button>
+                <button data-tab="empleados" class="dash-button"><i class="fa-solid fa-briefcase" style="color: #ffffff;"></i><br>Empleados</button>
+                <button data-tab="perfil" class="dash-button"><i class="fa-solid fa-user" style="color: #ffffff;"></i><br>Perfil</button>
+                <button data-tab="configuracion" class="dash-button"><i class="fa-solid fa-gear" style="color: #ffffff;"></i><br>Configuracion</button>
             </div>
         </div>
         <div id="main">
-            Hello
-            <p class="test">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Odit aliquam, similique quam ipsum natus deserunt nihil molestiae laborum dolore? Illo placeat veniam rem officia soluta mollitia, impedit ea repellendus asperiores.</p>
+            <div id = "home" class="tab-content active">
+                Hello
+                <p class="test">Yo soy, home</p>
+            </div>
+            <div id = "eventos" class="tab-content">
+                Hello
+                <p class="test">Yo soy, eventos.</p>
+            </div>
+            <div id = "empleados" class="tab-content">
+                Hello
+                <p class="test">Yo soy, empleados.</p>
+            </div>
+            <div id = "perfil" class="tab-content">
+                Hello
+                <p class="test">Yo soy, perfiles.</p>
+            </div>
+            <div id = "configuracion" class="tab-content">
+                Hello
+                <p class="test">Yo soy, configuracion.</p>
+            </div>
+            
         </div>
         <script src="/js/panelAdmin.js" async defer></script>
         <script src="https://kit.fontawesome.com/b60c246061.js" crossorigin="anonymous"></script>
