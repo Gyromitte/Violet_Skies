@@ -1,0 +1,113 @@
+body{
+    background-color: #1b1f3b !important;
+    margin: 0;
+}
+.heroContainer{
+    display: flex;
+    flex-direction: row;
+    background-color:  #c874d9b4;
+    border-radius: 1.5em;
+    width: 85%;
+    height: 100%;
+    margin: 5em auto 5em;
+    padding: 0.5em;
+    box-shadow: 0 0 1em rgba(255, 0, 85, 0.438);
+}
+
+.background-cover{
+    background-image: url(/images/background.jpg);
+    background-size: cover;
+    padding: 1em;
+}
+.navbar{
+    background-color: #8367c7;
+    color: white;
+    font-family: 'Patua One', cursive;
+    padding: 0.5em !important;
+    margin: 0 !important;
+}
+
+.navbar-header{
+    border-right: 2px solid #7159ad;
+    margin-right: 1em;
+    font-size: 2em;
+}
+.companySection{
+    display: flex;
+    align-items: center;
+}
+#company-logo{
+    height: 1em;
+}
+#company-name{
+    padding-left: 1em;
+    padding-right: 1em;
+}
+
+#company-name:hover{
+    text-decoration: underline;
+}
+
+.no-underline{
+    text-decoration: none;
+    color: white;
+}
+
+.tabs{
+    margin-right: 20px;
+    margin-left: 20px;
+}
+
+.tabs:hover{
+    text-decoration: underline;
+    border-bottom: 1px solid #5603ad;
+}
+
+/*Login Section*/
+.login-section{
+    display: flex;
+}
+
+.loginButton{
+    border-radius: 50vw;
+    font-size: small;
+    padding: 0.8em 2em;
+    align-self: center;
+    background-color:  #5603ad;
+    border: none;
+    color: white;
+    font-family: 'Lexend', sans-serif;
+    font-weight: bold;
+    margin: 5px;
+}
+
+.loginButton:hover{
+    background-color: #b14aed; 
+}
+.leftHeroSection{
+    width: 40vw;
+    color: white;
+    display: flex;
+    margin: 1em 1em 1em 1em;
+    padding-left: 1em;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    font-family: 'Patua One', cursive;
+}
+#heroImage{
+    max-width:100%;
+    height:auto;
+    width: 35vw;
+    border-radius: 1.5em;
+}
+.center {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .background-cover{
+    background-image: url(/images/background.jpg);
+    background-size: cover;
+    padding: 1em;
+}
