@@ -4,7 +4,7 @@
         private $PDO_local;
         private $user = "root";
         private $password = "";
-        private $server = "mysql:host=localhost; dbname=empresa";
+        private $server = "mysql:host=localhost; dbname=proyecto";
 
         function conectarBD()
         {

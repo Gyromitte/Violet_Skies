@@ -11,7 +11,7 @@
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <!--StyleSheets-->
-        <link rel="stylesheet" href="/bootstrap/css/bootstrap-reboot.min.css">
+        <link rel="stylesheet" href="/bootstrap/css/bootstrap.min.css">
         <link rel="stylesheet" href="/css/panelAdmin.css">
         <!--Referencias a fuentes-->
         <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -62,8 +62,8 @@
                 <p class="test">Yo soy, eventos.</p>
             </div>
             <div id = "empleados" class="tab-content">
-                Hello
-                <p class="test">Yo soy, empleados.</p>
+                <p class="test">Empleados: </p>
+                <?php include "verEmpleados.php"; ?>
             </div>
             <div id = "perfil" class="tab-content">
                 Hello

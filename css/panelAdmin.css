@@ -1,7 +1,11 @@
 body{
     margin: 0;
-    color: white;
+    color: white !important;
     background-color: #1b1f3b;
+}
+
+.table{
+    color: white;
 }
 /*NavBar*/
 nav{
