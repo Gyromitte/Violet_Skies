@@ -93,18 +93,20 @@ nav{
 }
 .test{
     background-color: #5603ad;
-    border-radius: 2em;
+    border-radius: 10em;
     margin: 20px;
     padding: 10px;
     width: 50%;
 }
 
-.tab-content {
+.tab-content{
     display: none;
+    padding: 0px;
   }
 
-.tab-content.active {
+.tab-content.active{
     display: block;
+    padding: 10px;
   }
 
 

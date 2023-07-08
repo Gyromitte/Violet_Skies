@@ -54,11 +54,9 @@
         </div>
         <div id="main">
             <div id = "home" class="tab-content active">
-                Hello
                 <p class="test">Yo soy, home</p>
             </div>
             <div id = "eventos" class="tab-content">
-                Hello
                 <p class="test">Yo soy, eventos.</p>
             </div>
             <div id = "empleados" class="tab-content">
@@ -66,11 +64,9 @@
                 <?php include "verEmpleados.php"; ?>
             </div>
             <div id = "perfil" class="tab-content">
-                Hello
                 <p class="test">Yo soy, perfiles.</p>
             </div>
             <div id = "configuracion" class="tab-content">
-                Hello
                 <p class="test">Yo soy, configuracion.</p>
             </div>
             
