@@ -1,5 +1,5 @@
 <?php
-    include "/xampp/htdocs/php/scripts/dataBase.php";
+    include "../dataBase.php";
             $conexion = new Database();
             $conexion->conectarBD();
 
