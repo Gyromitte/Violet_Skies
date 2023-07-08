@@ -94,14 +94,12 @@ nav{
 .test{
     background-color: #5603ad;
     border-radius: 10em;
-    margin: 20px;
     padding: 10px;
     width: 50%;
 }
 
 .tab-content{
     display: none;
-    padding: 0px;
   }
 
 .tab-content.active{
@@ -115,4 +113,9 @@ nav{
     padding: 10px;
     border-radius: 20px;
     border-top: 50px solid #5603ad;
+}
+
+/*Modal*/
+.modal-content{
+    background-color: #454ADE;
 }

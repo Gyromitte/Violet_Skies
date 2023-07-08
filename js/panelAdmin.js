@@ -41,4 +41,26 @@ var tabContents = document.querySelectorAll('.tab-content');
     });
   });
 
+  /*Modal functionality*/
+  //Para evitar crear multiples modals en el .php y repetir codigo, solo hay un modal y sus campos
+  //Cambian dependiendo de quien lo llame
+  document.querySelectorAll('[data-bs-toggle="modal"]').forEach(function(button) {
+    button.addEventListener('click', function() {
+      var recipient = this.getAttribute('data-bs-whatever');
+      var modalTitle = document.querySelector('#mainModal .modal-title');
+      var recipientInput = document.querySelector('#mainModal #recipient-name');
+  
+      //Actualizar los campos del modal
+      switch(recipient)
+      {
+        case "@registrarEmpleado":
+          modalTitle.textContent = "Registar a un Empleado"
+        break;
+        case "@eliminarEmpleado":
+          modalTitle.textContent = "Eliminar a un Empleado"
+        break;
+      }
+    });
+  });
+  
 
