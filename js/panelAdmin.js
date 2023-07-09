@@ -67,19 +67,7 @@ function updateModalContent(formType) {
     case "@registrarEmpleado":
       modalTitle.textContent = "Registrar un Empleado";
       formContent = `
-      <form action="console.log('HELLO);" method="POST">
-        <div class="mb-3">
-          <label class="control-label">Nombre</label>
-          <input type="text" name="nombre" placeholder="Ingresa el nombre" class="form-control" required>
-        </div>
-        <div class="mb-3">
-          <label class="control-label">Apellido Paterno</label>
-          <input type="text" name="apellidoPaterno" placeholder="Ingresa el apellido paterno" class="form-control" required>
-        </div>
-        <div class="mb-3">
-          <label class="control-label">Apellido Materno</label>
-          <input type="text" name="apellidoMaterno" placeholder="Ingresa el apellido materno" class="form-control" required>
-        </div>
+      <form action="/php/views/guardarEmpleado.php" method="POST">
         <div class="mb-3">
           <label class="control-label">RFC</label>
           <input type="text" name="rfc" placeholder="Ingresa el RFC" class="form-control" required>
@@ -90,13 +78,13 @@ function updateModalContent(formType) {
         </div>
         <div class="form-group mb-3">
           <label for="tipoUsuario">Tipo de Trabajador</label>
-            <select class="form-control form-select" id="tipoUsuario">
+            <select name="tipoUsuario" class="form-control form-select" id="tipoUsuario">
               <option value="mesero">Mesero</option>
-              <option value="cocinero">Cocinero</option>
+              <option value="cocina">Cocinero</option>
             </select>
         </div>
-        <button type="button" class="btn btn-primary">Aceptar</button>
-        <button type="submit" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button type="submit" class="btn btn-primary">Aceptar</button>
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
       </form>
       `;
     break;
