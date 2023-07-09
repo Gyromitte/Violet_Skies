@@ -2,8 +2,9 @@
     include "../dataBase.php";
             $conexion = new Database();
             $conexion->conectarBD();
-
-            $consulta = "SELECT * FROM usuarios";
+            /*Mostrar solo a los empleados que tengan un tipo asignado*/
+            $consulta = "SELECT * FROM usuarios
+            WHERE tipoUsuario IS NOT NULL";
 
             $tabla = $conexion->seleccionar($consulta);
 
