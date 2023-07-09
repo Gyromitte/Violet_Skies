@@ -87,8 +87,36 @@ function updateModalContent(formType) {
   {
     case "@registrarEmpleado":
       modalTitle.textContent = "Registrar un Empleado";
-      formContent = `<label> Nombre: </label>
-      <input name="nombre" type="text" placeholder="Ingresa el nombre" class="form-control">
+      formContent = `
+      <form action="guardaCliente.php" method="POST">
+        <div class="mb-3">
+          <label class="control-label">Nombre</label>
+          <input type="text" name="nombre" placeholder="Ingresa el nombre" class="form-control" required>
+        </div>
+        <div class="mb-3">
+          <label class="control-label">Apellido Paterno</label>
+          <input type="text" name="apellidoPaterno" placeholder="Ingresa el apellido paterno" class="form-control" required>
+        </div>
+        <div class="mb-3">
+          <label class="control-label">Apellido Materno</label>
+          <input type="text" name="apellidoMaterno" placeholder="Ingresa el apellido materno" class="form-control" required>
+        </div>
+        <div class="mb-3">
+          <label class="control-label">RFC</label>
+          <input type="text" name="rfc" placeholder="Ingresa el RFC" class="form-control" required>
+        </div>
+        <div class="mb-3">
+          <label class="control-label">E-mail</label>
+          <input type="email" name="correo" placeholder="Ingresa el E-mail" class="form-control" required>
+        </div>
+        <div class="form-group">
+          <label for="tipoUsuario">Tipo de Trabajador</label>
+            <select class="form-control form-select" id="tipoUsuario">
+              <option value="mesero">Mesero</option>
+              <option value="cocinero">Cocinero</option>
+            </select>
+        </div>
+      </form>
       `;
     break;
     case "@eliminarEmpleado":
@@ -98,9 +126,7 @@ function updateModalContent(formType) {
     break;
   }
 
-
-
-  // Actualiza el contenido del elemento del formulario en el modal
+  // Actualiza el contenido del formulario en el modal
   modalForm.innerHTML = formContent;
 }
 
