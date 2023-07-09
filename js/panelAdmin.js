@@ -41,28 +41,7 @@ var tabContents = document.querySelectorAll('.tab-content');
     });
   });
 
-  /*Modal functionality*/
-  //Para evitar crear multiples modals en el .php y repetir codigo, solo hay un modal y sus campos
-  //Cambian dependiendo de quien lo llame
-  document.querySelectorAll('[data-bs-toggle="modal"]').forEach(function(button) {
-    button.addEventListener('click', function() {
-      var recipient = this.getAttribute('data-bs-whatever');
-      var modalTitle = document.querySelector('#mainModal .modal-title');
-  
-      //Actualizar los campos del modal
-      switch(recipient)
-      {
-        case "@registrarEmpleado":
-          modalTitle.textContent = "Registar a un Empleado"
-          createDynamicForm("modal-form", ["Nombre", "Apellido Paterno", "Apellido Materno", "RFC", "Correo", "Teléfono"]);
-        break;
-        case "@eliminarEmpleado":
-          modalTitle.textContent = "Eliminar a un Empleado"
-        break;
-      }
-    });
-  });
-  
+/*Modal functionality*/
 //Obtener modal y form
 var modal = document.getElementById("mainModal");
 var modalForm = document.getElementById("modal-form");
@@ -88,7 +67,7 @@ function updateModalContent(formType) {
     case "@registrarEmpleado":
       modalTitle.textContent = "Registrar un Empleado";
       formContent = `
-      <form action="guardaCliente.php" method="POST">
+      <form action="console.log('HELLO);" method="POST">
         <div class="mb-3">
           <label class="control-label">Nombre</label>
           <input type="text" name="nombre" placeholder="Ingresa el nombre" class="form-control" required>
@@ -116,6 +95,7 @@ function updateModalContent(formType) {
               <option value="cocinero">Cocinero</option>
             </select>
         </div>
+        <button type="button" class="btn btn-primary">Aceptar</button>
       </form>
       `;
     break;
