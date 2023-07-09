@@ -48,13 +48,13 @@ var tabContents = document.querySelectorAll('.tab-content');
     button.addEventListener('click', function() {
       var recipient = this.getAttribute('data-bs-whatever');
       var modalTitle = document.querySelector('#mainModal .modal-title');
-      var recipientInput = document.querySelector('#mainModal #recipient-name');
   
       //Actualizar los campos del modal
       switch(recipient)
       {
         case "@registrarEmpleado":
           modalTitle.textContent = "Registar a un Empleado"
+          createDynamicForm("modal-form", ["Nombre", "Apellido Paterno", "Apellido Materno", "RFC", "Correo", "Teléfono"]);
         break;
         case "@eliminarEmpleado":
           modalTitle.textContent = "Eliminar a un Empleado"
@@ -63,4 +63,45 @@ var tabContents = document.querySelectorAll('.tab-content');
     });
   });
   
+//Obtener modal y form
+var modal = document.getElementById("mainModal");
+var modalForm = document.getElementById("modal-form");
 
+//Evento para los botones
+modal.addEventListener("show.bs.modal", function(event) {
+  //Boton que activo el modal
+  var button = event.relatedTarget;
+  
+  //Obtener el form correspondiente al boton
+  var formType = button.getAttribute("data-bs-whatever");
+
+  //Actualizar el contenido del form
+  updateModalContent(formType);
+});
+
+//Funcion para actualizar el contenido del modal segun el boton correspondiente
+function updateModalContent(formType) {
+  var formContent = "";
+  var modalTitle = document.querySelector('#mainModal .modal-title');
+  switch(formType)
+  {
+    case "@registrarEmpleado":
+      modalTitle.textContent = "Registrar un Empleado";
+      formContent = `<label> Nombre: </label>
+      <input name="nombre" type="text" placeholder="Ingresa el nombre" class="form-control">
+      `;
+    break;
+    case "@eliminarEmpleado":
+      modalTitle.textContent = "Eliminar a un Empleado"
+      formContent =
+      "<h3>CUIDADO! Esta accion no es reversible</h3>"
+    break;
+  }
+
+
+
+  // Actualiza el contenido del elemento del formulario en el modal
+  modalForm.innerHTML = formContent;
+}
+
+  
