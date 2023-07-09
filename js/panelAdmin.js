@@ -88,7 +88,7 @@ function updateModalContent(formType) {
           <label class="control-label">E-mail</label>
           <input type="email" name="correo" placeholder="Ingresa el E-mail" class="form-control" required>
         </div>
-        <div class="form-group">
+        <div class="form-group mb-3">
           <label for="tipoUsuario">Tipo de Trabajador</label>
             <select class="form-control form-select" id="tipoUsuario">
               <option value="mesero">Mesero</option>
@@ -96,6 +96,7 @@ function updateModalContent(formType) {
             </select>
         </div>
         <button type="button" class="btn btn-primary">Aceptar</button>
+        <button type="submit" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
       </form>
       `;
     break;

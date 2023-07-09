@@ -83,24 +83,19 @@
 
         <!--Modal-->
         <div class="modal fade" id="mainModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                <div class="modal-dialog">
-                    <div class="modal-content custom-modal">
-                        <div class="modal-header">
+            <div class="modal-dialog">
+                <div class="modal-content custom-modal">
+                    <div class="modal-header">
                             <!--Titulo que tendra el modal-->
                             <h1 class="modal-title fs-5" id="firstLabe"></h1>
                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                        </div>
-                        <div class="modal-body" id="modal-form">
+                    </div>
+                    <div class="modal-body" id="modal-form">
                             <!--El contenido del modal cambia dependiendo del boton que lo activo-->
-
-                        </div>
-                        <div class="modal-footer">
-                            <button type="submit" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                            
-                        </div>
                     </div>
                 </div>
             </div>
+        </div>
 
     </div>
     <script src="/js/panelAdmin.js" async defer></script>
