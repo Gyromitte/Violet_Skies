@@ -67,7 +67,7 @@ function updateModalContent(formType) {
     case "@registrarEmpleado":
       modalTitle.textContent = "Registrar un Empleado";
       formContent = `
-      <form action="/php/views/guardarEmpleado.php" method="POST">
+      <form action="/php/viewsEmpleados/guardarEmpleado.php" method="POST">
         <div class="mb-3">
           <label class="control-label">RFC</label>
           <input type="text" name="rfc" placeholder="Ingresa el RFC" class="form-control" required>
@@ -91,7 +91,7 @@ function updateModalContent(formType) {
     case "@eliminarEmpleado":
       modalTitle.textContent = "Eliminar a un Empleado"
       formContent =
-      "<h3>CUIDADO! Esta accion no es reversible</h3>"
+      "<h5>CUIDADO! Esta accion no es reversible</h5>"
     break;
   }
 
