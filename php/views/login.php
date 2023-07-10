@@ -78,6 +78,11 @@
                             if($user[$tipo]=='cliente'){
                                 header('location:html\cliente\index.html');
                             }
+                            else if($user[$tipo]=='trabajador'){
+                                $Query="SELECT * FROM CUENTAS INNER JOIN USUARIOS ON
+                                CUENTAS.id=USUARIOS.cuentas_id WHERE CUENTAS.correo='$usu'";
+                                $trab=$conexion->Login($query);
+                            }
                          }
 
                     ?>
