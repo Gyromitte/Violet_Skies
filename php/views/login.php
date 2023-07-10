@@ -75,7 +75,9 @@
                          $Resultado=$conexion->Login($query);
 
                          if($user && password_verify($pass,$user['pass'])){
-                            
+                            if($user[$tipo]=='cliente'){
+                                header('location:html\cliente\index.html');
+                            }
                          }
 
                     ?>
