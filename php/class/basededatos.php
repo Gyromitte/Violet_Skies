@@ -21,5 +21,15 @@ class BDHotel{
             echo $e->getMessage();
         }
     }
+    function Select($consulta){
+        try{
+            $res = $this->PDOLocal->query($consulta);
+            $fila=$res->fetchAll(PDO::FETCH_OBJ);
+            return $fila;
+        }
+        catch(PDOException $e){
+            echo $e->getMessage();
+        }
+    }
 }
 ?>
