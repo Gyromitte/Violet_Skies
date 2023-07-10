@@ -68,8 +68,16 @@
                          include '../class/basededatos.php';
                          $conexion=new BDHotel();
                          $conexion->conexionHotel();
+                         $usu=$_POST['usu'];
+                         $pass=$_POST['pass'];
 
-                         $Query="SELECT * FROM CUENTAS WHERE " 
+                         $Query="SELECT COUNT(*) FROM CUENTAS WHERE correo='$usu' AND contraseña='$pass'"; 
+                         $Resultado=$conexion->Login($query);
+
+                         if($user && password_verify($pass,$user['pass'])){
+                            
+                         }
+
                     ?>
                     </div>
                 </div>

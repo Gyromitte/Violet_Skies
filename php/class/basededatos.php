@@ -21,10 +21,20 @@ class BDHotel{
             echo $e->getMessage();
         }
     }
-    function Select($consulta){
+    function Select($query){
         try{
-            $res = $this->PDOLocal->query($consulta);
+            $res = $this->PDOLocal->query($query);
             $fila=$res->fetchAll(PDO::FETCH_OBJ);
+            return $fila;
+        }
+        catch(PDOException $e){
+            echo $e->getMessage();
+        }
+    }
+    function Login($query){
+        try{
+            $res = $this->PDOLocal->query($query);
+            $fila=$res->fetch(PDO::FETCH_ASSOC);
             return $fila;
         }
         catch(PDOException $e){
