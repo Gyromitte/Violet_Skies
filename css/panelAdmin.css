@@ -82,7 +82,7 @@ nav{
     font-weight: bolder;
 }
 .dash-button:hover{
-    background-color: #b14aed;
+    background-color: #8367c7;
     border: 2px solid white;
 }
 
@@ -106,8 +106,6 @@ nav{
     display: block;
     padding: 10px;
   }
-
-
 #fecha{
     background-color: #5603ad;
     padding: 10px;
@@ -115,7 +113,20 @@ nav{
     border-top: 50px solid #5603ad;
 }
 
+/*Tablas*/
+.thead-purple {
+    background-color: #b14aed;
+  }
+.table-hover tbody tr:hover {
+    background-color: #f8f9fa;
+    color: #5603ad;
+}  
+
 /*Modal*/
+.custom-btn{
+    border: 2px solid white;
+    padding: 10px;
+}
 .modal-content{
     background-color: #454ADE;
 }
