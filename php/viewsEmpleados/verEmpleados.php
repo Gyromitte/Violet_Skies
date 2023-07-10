@@ -8,8 +8,8 @@
 
             $tabla = $conexion->seleccionar($consulta);
 
-            echo "<table class='table table-hover'>
-            <thead class='table-dark'>
+            echo "<table class='table table-hover mt-3'>
+            <thead class='thead-purple'>
             <tr>
             <th>ID</th>
             <th>Nombre</th>

@@ -60,19 +60,27 @@
     <div id="main">
         <div id="home" class="tab-content active">
             <p class="test">Yo soy, home</p>
+            
         </div>
         <div id="eventos" class="tab-content">
             <p class="test">Yo soy, eventos.</p>
             <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#mainModal" data-bs-whatever="@fat">Open modal for @fat</button>
         </div>
         <div id="empleados" class="tab-content">
-            <h3 class="test" style="text-align:center; ">Panel de Empleados </h3>
+            <h3 class="test" style="text-align:center; ">
+                Panel de Empleados
+                <i class="fa-solid fa-briefcase" style="color: #ffffff;"></i>
+            </h3>
             <br>
-            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#mainModal" data-bs-whatever="@registrarEmpleado">Registrar</button>
-            
-            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#mainModal" data-bs-whatever="@eliminarEmpleado">Eliminar</button>
+            <button type="button" class="btn btn-primary border-2 btn-outline-light rounded-5" data-bs-toggle="modal" data-bs-target="#mainModal" data-bs-whatever="@registrarEmpleado">
+                <i class="fa-solid fa-address-card" style="color: #ffffff;"></i>
+                Registrar
+            </button>
+            <button type="button" class="btn btn-primary border-2 btn-outline-light rounded-5" data-bs-toggle="modal" data-bs-target="#mainModal" data-bs-whatever="@eliminarEmpleado">
+                <i class="fa-solid fa-user-slash" style="color: #ffffff;"></i>
+                Eliminar
+            </button>
             <?php include "verEmpleados.php"; ?>
-
         </div>
         <div id="perfil" class="tab-content">
             <p class="test">Yo soy, perfiles.</p>
