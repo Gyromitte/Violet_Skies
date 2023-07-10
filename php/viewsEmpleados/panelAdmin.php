@@ -22,6 +22,9 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&display=swap" rel="stylesheet">
+    <script src="https://kit.fontawesome.com/b60c246061.js" crossorigin="anonymous"></script>
+    <script src="/js/panelAdmin.js" async defer></script>
+   
 </head>
 
 <body>
@@ -60,7 +63,7 @@
     <div id="main">
         <div id="home" class="tab-content active">
             <p class="test">Yo soy, home</p>
-            
+            <?php include "verEventos.php"; ?>
         </div>
         <div id="eventos" class="tab-content">
             <p class="test">Yo soy, eventos.</p>
@@ -106,9 +109,8 @@
         </div>
 
     </div>
-    <script src="/js/panelAdmin.js" async defer></script>
+
     <script src="/bootstrap/js/bootstrap.min.js"></script>
-    <script src="https://kit.fontawesome.com/b60c246061.js" crossorigin="anonymous"></script>
 </body>
 
 </html>
