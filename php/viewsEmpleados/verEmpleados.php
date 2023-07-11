@@ -1,5 +1,5 @@
 <?php
-    include "../dataBase.php";
+    include_once "../dataBase.php";
             $conexion = new Database();
             $conexion->conectarBD();
             /*Mostrar solo a los empleados que tengan un tipo asignado*/
