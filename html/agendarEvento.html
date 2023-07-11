@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Undefinided - Reserva tus eventos</title>
+    <meta name="description" content="Reserva tus eventos con nosostros: Cumpleaños, Bodas, Sex reveal, Quinceñeras.
+    &#10; Trabaja con nosotros! Aplica para diversos eventos y trabaja como mesero o cocinero.">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!--Style sheet-->
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../css/agendarEvento.css">
+
+    <!--Referencias a fuentes-->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Patua+One&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Lexend:wght@300&family=Patua+One&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&display=swap" rel="stylesheet">
+</head>
+<body>
+    <nav class="navbar navbar-default row">
+        <div class="companySection col-sm-auto">
+            <!--Company Logo-->
+            <div class="navbar-header">
+                <img id="company-logo" class="img-fluid" src="../images/company_logo.jpg" alt="companyLogo">
+                    <a class="no-underline" href="../index.html" id="company-name">Hoteleria</a>
+            </div>      
+            <!--Tabs-->
+            <ul class="nav list-inline">
+                <li class="mr-3 tabs">
+                    <a class="no-underline" href="/html/about-us/about us.html">Nosotros</a>
+                </li>
+                <li class="mr-3 tabs">
+                    <a class="no-underline" href="/html/agendarEvento.html">Agendar Evento</a>
+                </li>
+                <li class="mr-3 tabs">
+                    <a class="no-underline" href="/html/trabajo.html">Trabajo</a>
+                </li>
+            </ul>
+        </div>         
+        <!--Login-section-->
+        <div class="login-section col-sm-auto" >
+            <a class="no-underline" href="/html/acceder.html">
+                <button class="loginButton">
+                    <i class="fa-solid fa-door-open" style="color: #ffffff;"></i>
+                    Acceder  
+                </button>
+            </a> 
+            <a class="no-underline" href="/html/trabajo.html">
+                <button class="loginButton">
+                    <i class="fa-solid fa-user" style="color: #ffffff;"></i>
+                    Registrarse
+                </button>
+            </a>
+        </div>
+    </nav>
+    <!--Sección de Paquetes-->
+    <div class="background-cover">
+        <div class="packContainer">
+            <div class="paquetesUp">
+                <div class="greetings">
+                    Aparta tu salón favorito!!
+                </div>    
+            </div>
+        </div>
+<!-- Comienzan los Paquetes -->
+<div class="accordion" id="myAccordion">
+    <!--Salón 1-->
+    <div class="card">
+        <button class="btn colorbtn" type="button" data-toggle="collapse" data-target="#collapseOne">
+      <div class="card-header" id="headingOne">
+        <h5 class="mb-0" style="text-align: center;">
+          
+            Salón 1
+
+        </h5>
+      </div>
+    </button>
+      <div id="collapseOne" class="collapse" data-parent="#myAccordion">
+        <div class="card-body">
+          <!-- Contenido del Accordion 1 -->
+        </div>
+      </div>
+    </div>
+    <!--Salón 2-->
+    <div class="card">
+        <button class="btn colorbtn" type="button" data-toggle="collapse" data-target="#collapseTwo">
+      <div class="card-header" id="headingTwo">
+        <h5 class="mb-0">
+          
+            Salon 2
+          
+        </h5>
+      </div>
+    </button>
+      <div id="collapseTwo" class="collapse" data-parent="#myAccordion">
+        <div class="card-body">
+          <!-- Contenido del Accordion 2 -->
+        </div>
+      </div>
+    </div>
+    <!--Salón 3-->
+    <div class="card">
+        <button class="btn colorbtn" type="button" data-toggle="collapse" data-target="#collapseThree">
+      <div class="card-header" id="headingThree">
+        <h5 class="mb-0" style="text-align: center;">
+          
+            Salón 3
+
+        </h5>
+      </div>
+    </button>
+      <div id="collapseThree" class="collapse" data-parent="#myAccordion">
+        <div class="card-body">
+          <!-- Contenido del Accordion 3 -->
+        </div>
+      </div>
+    </div>
+    <!--Salón 4-->
+    <div class="card">
+        <button class="btn colorbtn" type="button" data-toggle="collapse" data-target="#collapseFour">
+      <div class="card-header" id="headingFour">
+        <h5 class="mb-0" style="text-align: center;">
+          
+            Salón 4
+
+        </h5>
+      </div>
+    </button>
+      <div id="collapseFour" class="collapse" data-parent="#myAccordion">
+        <div class="card-body">
+          <!-- Contenido del Accordion 4 -->
+        </div>
+      </div>
+    </div>
+  </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script>
+      $(document).ready(function() {
+        $('.collapse').on('shown.bs.collapse', function() {
+          $('html, body').animate({
+            scrollTop: $(this).offset().top
+          }, 500);
+        });
+      });
+    </script>
+</body>
+</html>
