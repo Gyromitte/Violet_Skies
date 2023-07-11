@@ -91,7 +91,7 @@
             <!--Opciones de Vistas-->
             <div class="view-options">
                 <div>
-                    <button type="button" class="btn btn-primary border-2 btn-outline-light rounded-5" data-bs-target="#mainModal" data-bs-whatever="">
+                    <button id="verCocineros" data-bs-toggle type="button" class="btn btn-primary border-2 btn-outline-light rounded-5" data-bs-target="#mainModal" data-bs-whatever="">
                         <i class="fa-solid fa-utensils" style="color: #ffffff;"></i>
                         Ver Cocineros
                     </button>
@@ -107,7 +107,11 @@
                     <i class="fa-solid fa-magnifying-glass" style="color: #1f71ff;"></i></button>
                 </div>
             </div>
-            <?php include "verEmpleados.php"; ?>
+            <!--Informacion de la tabla-->
+            <h3 id="table-info"></h3>
+            <!--Container para tablas-->
+            <div class="cont-table">
+            </div>
         </div>
         <div id="perfil" class="tab-content">
             <p class="test">Yo soy, perfiles.</p>
@@ -131,10 +135,9 @@
                 </div>
             </div>
         </div>
-
     </div>
-
+    <!--Scripts que necesitan ejecutarse hasta el final-->
+    <script src="/js/dinamicTable.js"></script>
     <script src="/bootstrap/js/bootstrap.min.js"></script>
 </body>
-
 </html>

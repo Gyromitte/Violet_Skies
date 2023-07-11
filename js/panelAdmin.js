@@ -98,5 +98,4 @@ function updateModalContent(formType) {
   // Actualiza el contenido del formulario en el modal
   modalForm.innerHTML = formContent;
 }
-
   
