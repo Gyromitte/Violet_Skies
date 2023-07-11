@@ -4,7 +4,7 @@
             $conexion->conectarBD();
             /*Mostrar solo a los empleados que tengan un tipo asignado*/
             $consulta = "SELECT * FROM usuarios
-            WHERE tipoUsuario IS NOT NULL";
+            WHERE tipoUsuario = 'mesero'";
 
             $tabla = $conexion->seleccionar($consulta);
 

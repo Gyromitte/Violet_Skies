@@ -1,22 +1,24 @@
 /*Dinamic tables*/
-/*Mostrar Cocineros*/
 document.addEventListener('DOMContentLoaded', function() {
-    /*Boton que llamara la tabla*/
-    var buttonCocineros = document.getElementById('verCocineros');
-    /*Container odnde se generara la tabla*/
-    var contTable = document.querySelector('.cont-table');
-    /*Titulo o informacion de la tabla*/
+    var buttons = document.querySelectorAll('.ver-empleados');
     var tableInfo = document.getElementById('table-info');
-    buttonCocineros.addEventListener('click', function() {
-      var xhr = new XMLHttpRequest();
-      xhr.onreadystatechange = function() {
-        if (xhr.readyState === 4 && xhr.status === 200) {
-            tableInfo.textContent = 'Mostrando Cocineros: ';
+    var contTable = document.querySelector('.cont-table');
+  
+    buttons.forEach(function(button) {
+      button.addEventListener('click', function() {
+        var url = this.getAttribute('data-url');
+        var buttonText = this.textContent;
+  
+        var xhr = new XMLHttpRequest();
+        xhr.onreadystatechange = function() {
+          if (xhr.readyState === 4 && xhr.status === 200) {
+            tableInfo.textContent = 'Mostrando ' + buttonText + ':';
             contTable.innerHTML = xhr.responseText;
-        }
-      };
-      xhr.open('GET', 'verCocineros.php', true);
-      xhr.send();
+          }
+        };
+        xhr.open('GET', url, true);
+        xhr.send();
+      });
     });
   });
   

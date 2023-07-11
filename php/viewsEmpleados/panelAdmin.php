@@ -24,7 +24,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&display=swap" rel="stylesheet">
     <script src="https://kit.fontawesome.com/b60c246061.js" crossorigin="anonymous"></script>
     <script src="/js/panelAdmin.js" async defer></script>
-   
+
 </head>
 
 <body>
@@ -91,11 +91,11 @@
             <!--Opciones de Vistas-->
             <div class="view-options">
                 <div>
-                    <button id="verCocineros" data-bs-toggle type="button" class="btn btn-primary border-2 btn-outline-light rounded-5" data-bs-target="#mainModal" data-bs-whatever="">
+                    <button id="verCocineros" data-url="verCocineros.php"  type="button" class="ver-empleados btn btn-primary border-2 btn-outline-light rounded-5" data-bs-target="#mainModal" data-bs-whatever="">
                         <i class="fa-solid fa-utensils" style="color: #ffffff;"></i>
                         Ver Cocineros
                     </button>
-                    <button type="button" class="btn btn-primary border-2 btn-outline-light rounded-5" data-bs-target="#mainModal" data-bs-whatever="">
+                    <button id="verMeseros" data-url="verMeseros.php" type="button" class="ver-empleados btn btn-primary border-2 btn-outline-light rounded-5" data-bs-target="#mainModal" data-bs-whatever="">
                         <i class="fa-solid fa-bell-concierge" style="color: #ffffff;"></i>
                         Ver Meseros
                     </button>
