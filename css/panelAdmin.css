@@ -123,10 +123,18 @@ nav{
 }  
 
 /*Modal*/
-.custom-btn{
-    border: 2px solid white;
-    padding: 10px;
-}
 .modal-content{
     background-color: #454ADE;
 }
+
+/*View options*/
+.view-options{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.search-bar{
+    width: 40% !important;
+}
+
