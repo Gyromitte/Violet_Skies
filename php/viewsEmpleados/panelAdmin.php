@@ -78,11 +78,11 @@
                 <i class="fa-solid fa-briefcase" style="color: #ffffff;"></i>
             </h3>
             <br>
-            <button type="button" class="btn btn-primary border-2 btn-outline-light rounded-5 btn-options" data-bs-toggle="modal" data-bs-target="#mainModal" data-bs-whatever="@registrarEmpleado">
+            <button type="button" class="btn btn-success border-2 btn-outline-light rounded-5 btn-options" data-bs-toggle="modal" data-bs-target="#mainModal" data-bs-whatever="@registrarEmpleado">
                 <i class="fa-solid fa-address-card" style="color: #ffffff;"></i>
                 Registrar
             </button>
-            <button type="button" class="btn btn-primary border-2 btn-outline-light rounded-5 btn-options" data-bs-toggle="modal" data-bs-target="#mainModal" data-bs-whatever="@eliminarEmpleado">
+            <button type="button" class="btn btn-danger border-2 btn-outline-light rounded-5 btn-options" data-bs-toggle="modal" data-bs-target="#mainModal" data-bs-whatever="@eliminarEmpleado">
                 <i class="fa-solid fa-user-slash" style="color: #ffffff;"></i>
                 Eliminar
             </button>
@@ -91,19 +91,20 @@
             <!--Opciones de Vistas-->
             <div class="view-options">
                 <div>
-                    <button type="button" class="btn btn-primary border-2 btn-outline-light rounded-5" data-bs-toggle="modal" data-bs-target="#mainModal" data-bs-whatever="">
+                    <button type="button" class="btn btn-primary border-2 btn-outline-light rounded-5" data-bs-target="#mainModal" data-bs-whatever="">
                         <i class="fa-solid fa-utensils" style="color: #ffffff;"></i>
                         Ver Cocineros
                     </button>
-                    <button type="button" class="btn btn-primary border-2 btn-outline-light rounded-5" data-bs-toggle="modal" data-bs-target="#mainModal" data-bs-whatever="">
+                    <button type="button" class="btn btn-primary border-2 btn-outline-light rounded-5" data-bs-target="#mainModal" data-bs-whatever="">
                         <i class="fa-solid fa-bell-concierge" style="color: #ffffff;"></i>
                         Ver Meseros
                     </button>
                 </div>
                 <!--Barra de Busqueda-->
                 <div class="input-group mb-3 search-bar">
-                    <input type="text" class="form-control" placeholder="Buscar a un empleado" aria-label="Recipient's username" aria-describedby="button-addon2">
-                    <button class="btn btn-outline-primary" type="button" id="button-addon2">Buscar</button>
+                    <input type="text" class="form-control" placeholder="Buscar a un empleado" aria-label="" aria-describedby="button-addon2">
+                    <button class="btn btn-outline-primary" type="button" id="button-addon2">
+                    <i class="fa-solid fa-magnifying-glass" style="color: #1f71ff;"></i></button>
                 </div>
             </div>
             <?php include "verEmpleados.php"; ?>

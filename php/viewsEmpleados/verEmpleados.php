@@ -11,7 +11,6 @@
             echo "<table class='table table-hover mt-3'>
             <thead class='thead-purple'>
             <tr>
-            <th>ID</th>
             <th>Nombre</th>
             <th>Ape. Paterno</th>
             <th>Ape. Materno</th>
@@ -25,7 +24,6 @@
             foreach($tabla as $registro)
             {
                 echo "<tr>";
-                echo "<td> $registro->id </td>";
                 echo "<td> $registro->nombre </td>";
                 echo "<td> $registro->apellidoPaterno </td>";
                 echo "<td> $registro->apellidoMaterno </td>";
