@@ -63,11 +63,14 @@
     <div id="main">
         <div id="home" class="tab-content active">
             <p class="test">Yo soy, home</p>
-            <?php include "verEventos.php"; ?>
         </div>
         <div id="eventos" class="tab-content">
-            <p class="test">Yo soy, eventos.</p>
+        <h3 class="test" style="text-align:center; ">
+                Panel de Eventos
+                <i class="fa-solid fa-briefcase" style="color: #ffffff;"></i>
+            </h3>
             <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#mainModal" data-bs-whatever="@fat">Open modal for @fat</button>
+            <?php include "verEventos.php"; ?>
         </div>
         <div id="empleados" class="tab-content">
             <h3 class="test" style="text-align:center; ">
