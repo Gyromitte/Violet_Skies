@@ -57,35 +57,13 @@
                     <div class="leftHeroSection">
                     <!--Oh mira aqui esta un form para el login-->
                     <h1>Acceder a tu Cuenta</h1><hr><br>
-                    <form action="#" method="post">
+                    <form action="../scripts/verificarlogin.php" method="post">
                         <label class="form-label" name="usu">Usuario: </label> 
-                        <input class="form-control" type="text" name="usu" placeholder="Usuario"><br><br>
+                        <input class="form-control" type="email" name="usu" placeholder="Usuario"><br><br>
                         <label class="form-label" name="pass">Contraseña: </label>
                         <input class="form-control" type="password" name="pass" placeholder="Contraseña"><br><br>
                         <button class="loginButton" type="submit">Iniciar Sesion</button>
                     </form>
-                    <?php
-                         include '../class/basededatos.php';
-                         $conexion=new BDHotel();
-                         $conexion->conexionHotel();
-                         $usu=$_POST['usu'];
-                         $pass=$_POST['pass'];
-
-                         $Query="SELECT COUNT(*) FROM CUENTAS WHERE correo='$usu' AND contraseña='$pass'"; 
-                         $Resultado=$conexion->Login($query);
-
-                         if($user && password_verify($pass,$user['pass'])){
-                            if($user[$tipo]=='cliente'){
-                                header('location:html\cliente\index.html');
-                            }
-                            else if($user[$tipo]=='trabajador'){
-                                $Query="SELECT * FROM CUENTAS INNER JOIN USUARIOS ON
-                                CUENTAS.id=USUARIOS.cuentas_id WHERE CUENTAS.correo='$usu'";
-                                $trab=$conexion->Login($query);
-                            }
-                         }
-
-                    ?>
                     </div>
                 </div>
             </div>
