@@ -40,8 +40,12 @@
 }
 
 .accordion .card-body {
-    background-color: #ffffff; /* Color de fondo del contenido */
+    background-color: transparent; /* Color de fondo del contenido */
 }
 .colorbtn{
     color:#c2f8cb;
+}
+
+.tamañoFontDesc{
+    font-size: larger;
 }
