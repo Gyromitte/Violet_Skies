@@ -1,16 +1,23 @@
 <?php
-    include "../dataBase.php";
+        if ($_SERVER['REQUEST_METHOD'] === 'POST')
+        {
+            include_once "../dataBase.php";
             $conexion = new Database();
             $conexion->conectarBD();
-            /*Mostrar solo a los empleados que tengan un tipo asignado*/
-            $consulta = "SELECT * FROM evento";
 
-            $tabla = $conexion->seleccionar($consulta);
+          extract($_POST);
+
+
+            if($depa === "todo") {$consulta = "SELECT * FROM evento";}
+            else {$consulta = "SELECT * FROM evento WHERE estado='$depa'";}
+
+          $tabla = $conexion->seleccionar($consulta);
 
             echo "<table class='table table-hover'>
-            <thead class='table-dark'>
+            <thead class='thead-purple'>
             <tr>
             <th>ID</th>
+            <th>Nombre</th>
             <th>Administrativo</th>
             <th>chef</th>
             <th>mesero</th>
@@ -29,6 +36,7 @@
             {
                 echo "<tr>";
                 echo "<td> $registro->ID</td>";
+                echo "<td> $registro->nombre</td>";
                 echo "<td> $registro->usuarioAdmin</td>";
                 echo "<td> $registro->usuarioChef</td>";
                 echo "<td> $registro->usuarioMesero</td>";
@@ -45,4 +53,5 @@
             echo "</tbody>
             </table>";
             $conexion->desconectarBD();
+        }
 ?>

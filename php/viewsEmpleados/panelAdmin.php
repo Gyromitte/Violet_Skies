@@ -70,7 +70,35 @@
                 <i class="fa-solid fa-briefcase" style="color: #ffffff;"></i>
             </h3>
             <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#mainModal" data-bs-whatever="@fat">Open modal for @fat</button>
-            <?php include "verEventos.php"; ?>
+            
+            <div class="container">
+            <form id="filtroForm" action="<?php echo $_SERVER['PHP_SELF']; ?>" method="POST">
+                <br>
+                <div class="btn-group">
+                    <label class="control-label">Estado:</label>
+                    <select id="estadoSelect" name="depa" class="form-select">;
+                        <option value="todo" selected>Todos</option>;
+                        <option value="Pendiente">Pendiente</option>;
+                        <option value="Finalizado">Finalizado</option>;
+                        <option value="En progreso">En progreso</option>;
+                        <option value="Cancelado">Cancelado</option>;
+                    </select>
+                </div>
+        
+            </form>
+            </div>
+            <br>
+            <div id="tablaResultados"></div>
+
+            
+
+
+
+
+
+
+
+
         </div>
         <div id="empleados" class="tab-content">
             <h3 class="test" style="text-align:center; ">
@@ -139,5 +167,6 @@
     <!--Scripts que necesitan ejecutarse hasta el final-->
     <script src="/js/dinamicTable.js"></script>
     <script src="/bootstrap/js/bootstrap.min.js"></script>
+    <script src="/js/filtroEventos.js"></script>
 </body>
 </html>
