@@ -41,4 +41,61 @@ var tabContents = document.querySelectorAll('.tab-content');
     });
   });
 
+/*Modal functionality*/
+//Obtener modal y form
+var modal = document.getElementById("mainModal");
+var modalForm = document.getElementById("modal-form");
 
+//Evento para los botones
+modal.addEventListener("show.bs.modal", function(event) {
+  //Boton que activo el modal
+  var button = event.relatedTarget;
+  
+  //Obtener el form correspondiente al boton
+  var formType = button.getAttribute("data-bs-whatever");
+
+  //Actualizar el contenido del form
+  updateModalContent(formType);
+});
+
+//Funcion para actualizar el contenido del modal segun el boton correspondiente
+function updateModalContent(formType) {
+  var formContent = "";
+  var modalTitle = document.querySelector('#mainModal .modal-title');
+  switch(formType)
+  {
+    case "@registrarEmpleado":
+      modalTitle.textContent = "Registrar un Empleado";
+      formContent = `
+      <form action="/php/viewsEmpleados/guardarEmpleado.php" method="POST">
+        <div class="mb-3">
+          <label class="control-label">RFC</label>
+          <input type="text" name="rfc" placeholder="Ingresa el RFC" class="form-control" required>
+        </div>
+        <div class="mb-3">
+          <label class="control-label">E-mail</label>
+          <input type="email" name="correo" placeholder="Ingresa el E-mail" class="form-control" required>
+        </div>
+        <div class="form-group mb-3">
+          <label for="tipoUsuario">Tipo de Trabajador</label>
+            <select name="tipoUsuario" class="form-control form-select" id="tipoUsuario">
+              <option value="mesero">Mesero</option>
+              <option value="cocina">Cocinero</option>
+            </select>
+        </div>
+        <button type="submit" class="btn btn-primary">Aceptar</button>
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+      </form>
+      `;
+    break;
+    case "@eliminarEmpleado":
+      modalTitle.textContent = "Eliminar a un Empleado"
+      formContent =
+      "<h5>CUIDADO! Esta accion no es reversible</h5>"
+    break;
+  }
+
+  // Actualiza el contenido del formulario en el modal
+  modalForm.innerHTML = formContent;
+}
+  
