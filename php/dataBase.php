@@ -2,9 +2,9 @@
     class Database
     {
         private $PDO_local;
-        private $user = "root";
-        private $password = "";
-        private $server = "mysql:host=localhost; dbname=proyecto";
+        private $user = "admin";
+        private $password = "admin123";
+        private $server = "mysql:host=database-1.cxbyakjiuopg.us-east-1.rds.amazonaws.com; dbname=VIOLET";
 
         function conectarBD()
         {
