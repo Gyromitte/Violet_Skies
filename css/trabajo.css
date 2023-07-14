@@ -91,7 +91,7 @@ h1{
     flex-direction: row;
     background-color:  #c874d9b4;
     border-radius: 1.5em;
-    width: 50%;
+    width: 85%;
     height: 100%;
     margin: 5em auto 5em;
     padding: 0.5em;
@@ -273,9 +273,10 @@ h1{
     color: white;
     font-size: 3vw;
     padding: 20px;
+    overflow:hidden;
   }
 
-/* Estilos para dispositivos de moviles */
+/* Estilos para dispositivos moviles */
 @media (max-width: 767px) {
     .heroContainer {
       flex-direction: column; /* Cambia la dirección de los elementos a columna */
@@ -304,4 +305,18 @@ h1{
     .login-section{
         justify-content: center;
     }
+    /*Desaparecer Job Section*/
+    #job-section{
+        display: none;
+    }
+    .salones{
+        height: 100vw;
+    }
+    .slideshow-container{
+        width: 80%;
+        height: 50%;
+        position: relative;
+        display: flex;
+        margin-top: 20px; 
+    }     
   }
