@@ -120,7 +120,11 @@ h1{
     font-family: 'Archivo Black', sans-serif;
     font-size: 5vw;
 }
-
+.greetingstitle{
+    font-family: 'Archivo Black', sans-serif;
+    font-size: 5vw;
+    color: white;
+}
 #description{
     margin: none;
     font-family: 'Patua One', cursive;
