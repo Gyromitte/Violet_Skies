@@ -9,13 +9,13 @@
 <body>
     <div class="container">
         <?php
-            include '../scripts/database.php';
-            $db=new BDHotel();
-            $db->conexionHotel();
+            include '../dataBase.php';
+            $db=new Database();
+            $db->conectarBD();
             extract($_POST);
 
             $db->Login("$usu","$pass");
-            $db->desconectarHotel();
+            $db->desconectarBD();
         ?>
     </div>
 </body>
