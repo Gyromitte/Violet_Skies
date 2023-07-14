@@ -3,8 +3,8 @@
             $conexion = new Database();
             $conexion->conectarBD();
             /*Mostrar solo a los empleados que sean cocineros*/
-            $consulta = "SELECT * FROM usuarios
-            WHERE tipoUsuario = 'cocina'";
+            $consulta = "SELECT * FROM empleados
+            WHERE tipo = 'cocina'";
             $tabla = $conexion->seleccionar($consulta);
             echo "<table class='table table-hover mt-3'>
             <thead class='thead-purple'>

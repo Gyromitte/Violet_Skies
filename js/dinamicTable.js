@@ -1,9 +1,10 @@
 /*Dinamic tables*/
+//Conseguir los elementos
 document.addEventListener('DOMContentLoaded', function() {
     var buttons = document.querySelectorAll('.ver-empleados');
     var tableInfo = document.getElementById('table-info');
     var contTable = document.querySelector('.cont-table');
-  
+  //Agregar el evento de click a los botones
     buttons.forEach(function(button) {
       button.addEventListener('click', function() {
         var url = this.getAttribute('data-url');
