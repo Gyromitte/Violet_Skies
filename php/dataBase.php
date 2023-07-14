@@ -1,59 +1,63 @@
 <?php
-    class Database
+class Database
+{
+    private $PDO_local;
+    private $user = "doadmin";
+    private $password = "AVNS_zPsBun59otEyJNJBtBv";
+    private $server = "db-mysql-nyc1-69612-do-user-14325582-0.b.db.ondigitalocean.com";
+    private $port = 25060;
+    private $database = "defaultdb";
+    private $sslmode = "REQUIRED";
+
+    function conectarBD()
     {
-        private $PDO_local;
-        private $user = "admin";
-        private $password = "admin123";
-        private $server = "mysql:host=database-1.cxbyakjiuopg.us-east-1.rds.amazonaws.com; dbname=VIOLET";
-
-        function conectarBD()
+        try
         {
-            try
-            {
-                $this->PDO_local = new PDO($this->server, $this->user, $this->password);
-            }
-            catch(PDOException $e)
-            {
-                echo $e->getMessage(); 
-            }
+            $dsn = "mysql:host={$this->server};port={$this->port};dbname={$this->database};sslmode={$this->sslmode}";
+            $this->PDO_local = new PDO($dsn, $this->user, $this->password);
         }
-
-        function desconectarBD()
+        catch(PDOException $e)
         {
-            try
-            {
-                $this->PDO_local = null;
-            }
-            catch(PDOException $e)
-            {
-                echo $e->getMessage(); 
-            }
-        }
-
-        function seleccionar($consulta)
-        {
-            try
-            {
-                $resultado = $this->PDO_local->query($consulta);
-                $fila = $resultado->fetchAll(PDO:: FETCH_OBJ);
-                return $fila;
-            }
-            catch(PDOException $e)
-            {
-                echo $e->getMessage();
-            }
-        }
-
-        function ejecutarSQL($consulta)
-        {
-            try
-            {
-                $this->PDO_local->query($consulta);
-            }
-            catch(PDOException $e)
-            {
-                echo $e->getMessage();
-            }
+            echo $e->getMessage(); 
         }
     }
+
+    function desconectarBD()
+    {
+        try
+        {
+            $this->PDO_local = null;
+        }
+        catch(PDOException $e)
+        {
+            echo $e->getMessage(); 
+        }
+    }
+
+    function seleccionar($consulta)
+    {
+        try
+        {
+            $resultado = $this->PDO_local->query($consulta);
+            $fila = $resultado->fetchAll(PDO::FETCH_OBJ);
+            return $fila;
+        }
+        catch(PDOException $e)
+        {
+            echo $e->getMessage();
+        }
+    }
+
+    function ejecutarSQL($consulta)
+    {
+        try
+        {
+            $this->PDO_local->query($consulta);
+        }
+        catch(PDOException $e)
+        {
+            echo $e->getMessage();
+        }
+    }
+}
 ?>
