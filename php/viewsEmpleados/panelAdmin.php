@@ -89,16 +89,6 @@
             </div>
             <br>
             <div id="tablaResultados"></div>
-
-            
-
-
-
-
-
-
-
-
         </div>
         <div id="empleados" class="tab-content">
             <h3 class="test" style="text-align:center; ">
