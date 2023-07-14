@@ -1,7 +1,11 @@
 body{
     margin: 0;
-    color: white;
+    color: white !important;
     background-color: #1b1f3b;
+}
+
+.table{
+    color: white;
 }
 /*NavBar*/
 nav{
@@ -78,7 +82,7 @@ nav{
     font-weight: bolder;
 }
 .dash-button:hover{
-    background-color: #b14aed;
+    background-color: #8367c7;
     border: 2px solid white;
 }
 
@@ -89,24 +93,48 @@ nav{
 }
 .test{
     background-color: #5603ad;
-    border-radius: 2em;
-    margin: 20px;
+    border-radius: 10em;
     padding: 10px;
     width: 50%;
 }
 
-.tab-content {
+.tab-content{
     display: none;
   }
 
-.tab-content.active {
+.tab-content.active{
     display: block;
+    padding: 10px;
   }
-
-
 #fecha{
     background-color: #5603ad;
     padding: 10px;
     border-radius: 20px;
     border-top: 50px solid #5603ad;
 }
+
+/*Tablas*/
+.thead-purple {
+    background-color: #b14aed;
+  }
+.table-hover tbody tr:hover {
+    background-color: #f8f9fa;
+    color: #5603ad;
+}  
+
+/*Modal*/
+.modal-content{
+    background-color: #454ADE;
+}
+
+/*View options*/
+.view-options{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.search-bar{
+    width: 40% !important;
+}
+
