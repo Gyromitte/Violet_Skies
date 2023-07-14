@@ -76,12 +76,12 @@
                 <br>
                 <div class="btn-group">
                     <label class="control-label">Estado:</label>
-                    <select id="estadoSelect" name="depa" class="form-select">;
+                    <select id="estadoSelect" name="estado" class="form-select">;
                         <option value="todo" selected>Todos</option>;
-                        <option value="Pendiente">Pendiente</option>;
-                        <option value="Finalizado">Finalizado</option>;
-                        <option value="En progreso">En progreso</option>;
-                        <option value="Cancelado">Cancelado</option>;
+                        <option value="PENDIENTE">Pendiente</option>;
+                        <option value="FINALIZADO">Finalizado</option>;
+                        <option value="EN PROCESO">En proceso</option>;
+                        <option value="CANCELADO">Cancelado</option>;
                     </select>
                 </div>
         
