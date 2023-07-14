@@ -36,7 +36,8 @@ h1{
 }
 
 #company-logo{
-    height: 1em;
+    height: 1.5em;
+    margin-left: 15px;
 }
 
 #company-name{
