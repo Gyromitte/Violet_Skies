@@ -4,7 +4,7 @@
         private $PDO_local;
         private $user = "doadmin";
         private $password = "AVNS_zPsBun59otEyJNJBtBv";
-        private $server = "mysql:host=db-mysql-nyc1-69612-do-user-14325582-0.b.db.ondigitalocean.com";
+        private $server = "db-mysql-nyc1-69612-do-user-14325582-0.b.db.ondigitalocean.com";
         private $port=25060;
         private $database = "VIOLET";
         private $sslmode = "REQUIRED";
