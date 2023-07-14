@@ -6,7 +6,7 @@ class Database
     private $password = "AVNS_zPsBun59otEyJNJBtBv";
     private $server = "db-mysql-nyc1-69612-do-user-14325582-0.b.db.ondigitalocean.com";
     private $port = 25060;
-    private $database = "defaultdb";
+    private $database = "VIOLET";
     private $sslmode = "REQUIRED";
 
     function conectarBD()
