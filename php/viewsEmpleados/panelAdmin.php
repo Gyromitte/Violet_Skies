@@ -158,6 +158,7 @@
     <!--Scripts que necesitan ejecutarse hasta el final-->
     <script src="/js/dinamicTable.js"></script>
     <script src="/bootstrap/js/bootstrap.min.js"></script>
+    <script src="/bootstrap/js/bootstrap.bundle.min.js"></script>
     <script src="/js/filtroEventos.js"></script>
 </body>
 </html>

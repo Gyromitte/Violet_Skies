@@ -120,8 +120,23 @@ nav{
 .table-hover tbody tr:hover {
     background-color: #f8f9fa;
     color: #5603ad;
-}  
+}
 
+.custom-dropdown{
+    background-color: #5603ad !important;
+    border: none;
+    width: 100%;
+}
+.custom-drop-menu{
+    background-color: #5603ad;
+    color: white !important;
+}
+.dropdown-item{
+    color: white;
+}
+.dropdown-item:hover{
+    background-color: #b14aed;
+}
 /*Modal*/
 .modal-content{
     background-color: #454ADE;
