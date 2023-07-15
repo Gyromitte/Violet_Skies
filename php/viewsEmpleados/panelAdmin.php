@@ -37,7 +37,8 @@
             <button id="nav-button">
                 <i class="fa-solid fa-bars" style="color: #ffffff;"></i>
             </button>
-            Hoteleria
+            <img id="company-logo" class="img-fluid" src="/images/company_logo.png" alt="companyLogo" style="height:1.5em; margin-right: 10px;">
+            Violet Skies
         </div>
         <h2><span id="fecha"></span></h2>
         <div class="nav-user">
