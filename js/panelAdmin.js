@@ -89,9 +89,13 @@ function updateModalContent(formType) {
       `;
     break;
     case "@eliminarEmpleado":
-      modalTitle.textContent = "Eliminar a un Empleado"
+      modalTitle.textContent = "Eliminar a un Empleado";
       formContent =
       "<h5>CUIDADO! Esta accion no es reversible</h5>"
+    break;
+    case "@editarEmpleado":
+      modalTitle.textContent = "Modificar datos";
+      formContent = "";
     break;
   }
 
