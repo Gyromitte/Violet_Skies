@@ -4,7 +4,7 @@ $conexion = new Database();
 $conexion->conectarBD();
 
 /* Mostrar solo a los empleados que sean cocineros */
-$consulta = "SELECT E.ID, C.NOMBRE, C.AP_PATERNO, C.AP_MATERNO, E.RFC, C.TELEFONO, C.CORREO, E.TIPO
+$consulta = "SELECT E.ID, C.NOMBRE, C.AP_PATERNO, C.AP_MATERNO, E.RFC, C.TELEFONO, C.CORREO, E.TIPO, E.CUENTA
                  FROM EMPLEADOS E
                  INNER JOIN CUENTAS C ON E.CUENTA = C.ID
                  WHERE E.TIPO = 'COCINA'";
@@ -42,7 +42,7 @@ foreach ($tabla as $registro) {
     echo '</button>';
     echo '<ul class="dropdown-menu custom-drop-menu">';
     echo '<li><a class="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#mainModal" data-bs-whatever="@editarEmpleado" 
-    data-id="' . $registro->ID . '">Editar</a></li>';
+    data-id="' . $registro->CUENTA . '">Editar</a></li>';
     echo '<li><a class="dropdown-item" href="#">Eliminar</a></li>';
     echo '</ul>';
     echo '</div>';

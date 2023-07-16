@@ -42,64 +42,100 @@ var tabContents = document.querySelectorAll('.tab-content');
   });
 
 /*Modal functionality*/
-//Obtener modal y form
+// Obtener el modal y el formulario
 var modal = document.getElementById("mainModal");
 var modalForm = document.getElementById("modal-form");
 
-//Evento para los botones
+// Evento para los botones
 modal.addEventListener("show.bs.modal", function(event) {
-  //Boton que activo el modal
+  // Botón que activó el modal
   var button = event.relatedTarget;
-  
-  //Obtener el form correspondiente al boton
+
+  // Obtener el tipo de formulario correspondiente al botón
   var formType = button.getAttribute("data-bs-whatever");
 
-  //Actualizar el contenido del form
+  // Actualizar el contenido del formulario
   updateModalContent(formType);
 });
 
-//Funcion para actualizar el contenido del modal segun el boton correspondiente
+// Función para actualizar el contenido del modal según el tipo de formulario
 function updateModalContent(formType) {
   var formContent = "";
   var modalTitle = document.querySelector('#mainModal .modal-title');
-  switch(formType)
-  {
+
+  switch (formType) {
     case "@registrarEmpleado":
       modalTitle.textContent = "Registrar un Empleado";
       formContent = `
-      <form action="/php/viewsEmpleados/guardarEmpleado.php" method="POST">
-        <div class="mb-3">
-          <label class="control-label">RFC</label>
-          <input type="text" name="rfc" placeholder="Ingresa el RFC" class="form-control" required>
-        </div>
-        <div class="mb-3">
-          <label class="control-label">E-mail</label>
-          <input type="email" name="correo" placeholder="Ingresa el E-mail" class="form-control" required>
-        </div>
-        <div class="form-group mb-3">
-          <label for="tipoUsuario">Tipo de Trabajador</label>
+        <form action="/php/viewsEmpleados/guardarEmpleado.php" method="POST">
+          <div class="mb-3">
+            <label class="control-label">RFC</label>
+            <input type="text" name="rfc" placeholder="Ingresa el RFC" class="form-control" required>
+          </div>
+          <div class="mb-3">
+            <label class="control-label">E-mail</label>
+            <input type="email" name="correo" placeholder="Ingresa el E-mail" class="form-control" required>
+          </div>
+          <div class="form-group mb-3">
+            <label for="tipoUsuario">Tipo de Trabajador</label>
             <select name="tipoUsuario" class="form-control form-select" id="tipoUsuario">
               <option value="mesero">Mesero</option>
               <option value="cocina">Cocinero</option>
             </select>
-        </div>
-        <button type="submit" class="btn btn-primary">Aceptar</button>
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-      </form>
+          </div>
+          <button type="submit" class="btn btn-primary">Aceptar</button>
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        </form>
       `;
-    break;
+      break;
     case "@eliminarEmpleado":
       modalTitle.textContent = "Eliminar a un Empleado";
-      formContent =
-      "<h5>CUIDADO! Esta accion no es reversible</h5>"
-    break;
+      formContent = "<h5>CUIDADO! Esta acción no es reversible</h5>";
+      break;
     case "@editarEmpleado":
       modalTitle.textContent = "Modificar datos";
-      formContent = "";
-    break;
+      //Realizar una solicitud AJAX para obtener los datos del empleado
+      var xhr = new XMLHttpRequest();
+      xhr.onreadystatechange = function() {
+        if (xhr.readyState === XMLHttpRequest.DONE) {
+          if (xhr.status === 200) {
+            // Parsear la respuesta JSON
+            var empleado = JSON.parse(xhr.responseText);
+            console.log(empleado);
+            //Actualizar el contenido del formulario con los datos obtenidos
+            formContent = `
+              <form>
+                <div class="mb-3">
+                  <label class="control-label">RFC</label>
+                  <input type="text" name="rfc" placeholder="Ingresa el RFC" class="form-control" required value="${empleado.RFC}">
+                </div>
+                <div class="mb-3">
+                  <label class="control-label">E-mail</label>
+                  <input type="email" name="correo" placeholder="Ingresa el E-mail" class="form-control" required value="${empleado.CORREO}">
+                </div>
+                <div class="form-group mb-3">
+                  <label for="tipoUsuario">Tipo de Trabajador</label>
+                  <select name="tipoUsuario" class="form-control form-select" id="tipoUsuario">
+                    <option value="mesero" ${empleado.TIPO === 'mesero' ? 'selected' : ''}>Mesero</option>
+                    <option value="cocina" ${empleado.TIPO === 'cocina' ? 'selected' : ''}>Cocinero</option>
+                  </select>
+                </div>
+                <button type="submit" class="btn btn-primary">Aceptar</button>
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+              </form>
+            `;
+            // Asignar el contenido al formulario del modal
+            modalForm.innerHTML = formContent;
+          } else {
+            console.error("Error en la solicitud AJAX");
+          }
+        }
+      };
+      // acer la solicitud al script PHP y pasar el ID del empleado
+      xhr.open("GET", "obtenerEmpleado.php?id=<?php echo $empleado; ?>", true);
+      xhr.send();
+      break;
   }
-
-  // Actualiza el contenido del formulario en el modal
+  // Asignar el contenido al formulario del modal
   modalForm.innerHTML = formContent;
 }
-  
