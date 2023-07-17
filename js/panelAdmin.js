@@ -105,6 +105,10 @@ function updateModalContent(formType, idEmpleado) {
             //Actualizar el contenido del formulario con los datos obtenidos
             formContent = `
               <form>
+                <h5>Empleado: </h5>
+                <h6 class="mb-3">${empleado.NOMBRE} ${empleado.AP_PATERNO} ${empleado.AP_MATERNO}</h6>
+                <h5>Telefono: </h5>
+                <h6 class="mb-3">${empleado.TELEFONO}</h6>
                 <div class="mb-3">
                   <label class="control-label">RFC</label>
                   <input type="text" name="rfc" placeholder="Ingresa el RFC" class="form-control" required value="${empleado.RFC}">
