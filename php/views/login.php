@@ -39,12 +39,6 @@
             </ul>
         </div>         
         <!--Login-section-->
-        <div class="login-section col-sm-auto" >
-            <button class="loginButton">
-                <i class="fa-solid fa-user" style="color: #ffffff;"></i>
-                <a class="no-underline" href="#">Registrarse</a>
-            </button>
-        </div>
     </nav>
     <div class="background-cover">
         <br>
@@ -61,6 +55,7 @@
                         <input class="form-control" type="password" name="pass" placeholder="Contraseña"><br><br>
                         <button class="loginButton" type="submit">Iniciar Sesion</button>
                     </form>
+                    <center><a href="../views/registrarse.php">No tienes cuenta? Registrate!</a></center>
                     </div>
                 </div>
             </div>
