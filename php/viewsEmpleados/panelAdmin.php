@@ -132,7 +132,10 @@
             </div>
         </div>
         <div id="perfil" class="tab-content">
-            <p class="test">Yo soy, perfiles.</p>
+            <h3 class="test" style="text-align:center; ">
+                PERFIL
+                <i class="fa-solid fa-briefcase" style="color: #ffffff;"></i>
+            </h3>
             <?php include "../viewsPerfil/verPerfil.php"?>
         </div>
         <div id="configuracion" class="tab-content">

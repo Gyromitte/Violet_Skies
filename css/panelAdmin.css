@@ -138,3 +138,7 @@ nav{
     width: 40% !important;
 }
 
+.container {
+    display: flex;
+    justify-content: space-between;
+  }
