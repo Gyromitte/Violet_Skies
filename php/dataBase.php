@@ -62,9 +62,10 @@
         function Login($usu,$pass){
             try{
                 $ver=false;
-                $query="SELECT * FROM CUENTAS WHERE CORREO='$usu'";
+                $query="SELECT CUENTAS.NOMBRE, CUENTAS.CONTRASEÑA, CUENTAS.TIPO_CUENTA FROM CUENTAS 
+                WHERE CORREO='$usu'";
                 $consulta=$this->PDO_local->query($query);
-    
+
                 while($renglon=$consulta->fetch(PDO::FETCH_ASSOC)){
                     if(password_verify($pass,$renglon['CONTRASEÑA'])){
                         $ver=true;
@@ -72,22 +73,22 @@
                 }
                 if($ver){
                     session_start();
-                    $_SESSION["name"]=$usu;
-                    if($renglon['TIPO_CUENTA']=='CLIENTE'){
+                    $_SESSION["name"]=$renglon['NOMBRE'];
+                    if($renglon['TIPO_CUENTA']==='CLIENTE'){
                         $_SESSION["access"]=1;
                         echo"<div class='alert alert-success'>";
                         echo"<h2 align='center'>Bienvenido ".$_SESSION["cliente"]."</h2>";
                         echo "</div>";
                         header("refresh:2;/html/cliente/index.html");
                     }
-                    else if($renglon['TIPO_CUENTA']=='ADMINISTRADOR'){
+                    else if($renglon['TIPO_CUENTA']==='ADMINISTRADOR'){
                         $_SESSION["access"]=3;
                         echo"<div class='alert alert-success'>";
                         echo"<h2 align='center'>Bienvenido ".$_SESSION["admin"]."</h2>";
                         echo "</div>";
-                        header("refresh:2;/html/panelAdmin.html");
+                        header("refresh:2;viewsEmpleados/panelAdmin.php");
                     }
-                    else if ($renglon['TIPO_CUENTA']=='EMPLEADO'){
+                    else if ($renglon['TIPO_CUENTA']==='EMPLEADO'){
                         $usu=$renglon['id'];
                         $query="SELECT * FROM EMPLEADOS JOIN CUENTAS ON CUENTAS.ID=EMPLEADOS.CUENTA
                         WHERE CUENTAS.ID='$usu'";
@@ -98,13 +99,13 @@
                                 echo"<div class='alert alert-success'>";
                                 echo"<h2 align='center'>Bienvenido ".$_SESSION["mesero"]."</h2>";
                                 echo "</div>";
-                                header("refresh:2;/html/trabajo.html");
+                                header("refresh:2;viewsEmpleados/verMeseros.php");
                             }
                             else{
                                 echo"<div class='alert alert-success'>";
                                 echo"<h2 align='center'>Bienvenido ".$_SESSION["chef"]."</h2>";
                                 echo "</div>";
-                                header("refresh:2;/html/cotisazion.html");
+                                header("refresh:2;viewsEmpleados/ver.php");
                             }
                         }
                     }
@@ -120,6 +121,11 @@
             catch(PDOException $e){
                 echo $e->getMessage();
             }
+        }
+        function cerrarSesion(){
+            session_start();
+            session_destroy();
+            header("Location:/index.html");
         }
     }
 ?>

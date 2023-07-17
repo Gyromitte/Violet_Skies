@@ -32,6 +32,13 @@
             <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="#">upgrade your browser</a> to improve your experience.</p>
         <![endif]-->
     <!--NavBar-->    
+    <?php
+        session_start();
+        if(!isset($_SESSION["access"])===3){
+            echo"No tienes acceso a esta pagina";
+            header("refresh:2;/index.html");
+        }
+  ?>
     <nav>
         <div class="nav-menu">
             <button id="nav-button">
@@ -43,7 +50,7 @@
         <div class="nav-user">
             <i class="fa-solid fa-bell" style="color: #ffffff;"></i>
             <div id="nav-photo-user"></div>
-            Username
+            <!--php echo $_SESSION["name"];-->
         </div>
     </nav>
     <!--DashBoard-->
@@ -56,7 +63,7 @@
             <button data-tab="eventos" class="dash-button"><i class="fa-solid fa-calendar-days" style="color: #ffffff;"></i><br>Eventos</button>
             <button data-tab="empleados" class="dash-button"><i class="fa-solid fa-briefcase" style="color: #ffffff;"></i><br>Empleados</button>
             <button data-tab="perfil" class="dash-button"><i class="fa-solid fa-user" style="color: #ffffff;"></i><br>Perfil</button>
-            <button data-tab="configuracion" class="dash-button"><i class="fa-solid fa-gear" style="color: #ffffff;"></i><br>Configuracion</button>
+            <a href="../scripts/CerrarSesion.php"><button data-tab="logout" class="dash-button"><i class="fa-solid fa-gear" style="color: #ffffff;"></i><br>Logout</button>
         </div>
     </div>
     <!--Main Content-->

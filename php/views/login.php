@@ -58,8 +58,8 @@
                     <!--Oh mira aqui esta un form para el login-->
                     <h1>Acceder a tu Cuenta</h1><hr><br>
                     <form action="../scripts/verificarlogin.php" method="post">
-                        <label class="form-label" name="usu">Usuario: </label> 
-                        <input class="form-control" type="email" name="usu" placeholder="Usuario"><br><br>
+                        <label class="form-label" name="usu">Correo: </label> 
+                        <input class="form-control" type="email" name="usu" placeholder="Correo"><br><br>
                         <label class="form-label" name="pass">Contraseña: </label>
                         <input class="form-control" type="password" name="pass" placeholder="Contraseña"><br><br>
                         <button class="loginButton" type="submit">Iniciar Sesion</button>
