@@ -22,8 +22,8 @@
         <div class="companySection col-sm-auto">
             <!--Company Logo-->
             <div class="navbar-header">
-                <img id="company-logo" class="img-fluid" src="/images/company_logo.jpg" alt="companyLogo">
-                    <a class="no-underline" href="/index.html" id="company-name">Violet Skies</a>
+                <img id="company-logo" class="img-fluid" src="/images/company_logo.png" alt="companyLogo">
+                    <a class="no-underline" href="/index.html" id="company-name">Violet Skies</a>   
             </div>      
             <!--Tabs-->
             <ul class="nav list-inline">
@@ -39,31 +39,23 @@
             </ul>
         </div>         
         <!--Login-section-->
-        <div class="login-section col-sm-auto" >
-            <button class="loginButton">
-                <i class="fa-solid fa-user" style="color: #ffffff;"></i>
-                <a class="no-underline" href="#">Registrarse</a>
-            </button>
-        </div>
     </nav>
     <div class="background-cover">
         <br>
         <div class="container">
             <div class="row">
-                <div class="col-6 d-none d-sm-block center" id="heroImage">
-                    <img id="" class="img-fluid" src="images/company_logo.jpg" alt="companylogo">
-                </div>
                 <div class="heroContainer col-6 ">
                     <div class="leftHeroSection">
                     <!--Oh mira aqui esta un form para el login-->
                     <h1>Acceder a tu Cuenta</h1><hr><br>
-                    <form action="login.php" method="post">
-                        <label class="form-label" name="usu">Usuario: </label> 
-                        <input class="form-control" type="text" name="usu" placeholder="Usuario"><br><br>
+                    <form action="../scripts/verificarlogin.php" method="post">
+                        <label class="form-label" name="usu">Correo: </label> 
+                        <input class="form-control" type="email" name="usu" placeholder="Correo"><br><br>
                         <label class="form-label" name="pass">Contraseña: </label>
                         <input class="form-control" type="password" name="pass" placeholder="Contraseña"><br><br>
                         <button class="loginButton" type="submit">Iniciar Sesion</button>
                     </form>
+                    <center><a href="../views/registrarse.php">No tienes cuenta? Registrate!</a></center>
                     </div>
                 </div>
             </div>
