@@ -133,6 +133,7 @@
         </div>
         <div id="perfil" class="tab-content">
             <p class="test">Yo soy, perfiles.</p>
+            <?php include "../viewsPerfil/verPerfil.php"?>
         </div>
         <div id="configuracion" class="tab-content">
             <p class="test">Yo soy, configuracion.</p>
