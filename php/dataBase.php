@@ -78,17 +78,17 @@
                     $_SESSION["name"] = $NOMBRE;
                     if($tipo==='CLIENTE'){
                         $_SESSION["access"]=1;
-                        echo"<div class='alert alert-success'>";
-                        echo"<h2 align='center'>Bienvenido ".$_SESSION["cliente"]."</h2>";
+                        echo"<div class=' container'>";
+                        echo"<h1 align='center'>Bienvenido ".$_SESSION["cliente"]."</h1>";
                         echo "</div>";
-                        header("refresh:2;/html/cliente/index.html");
+                        header("refresh:4;/html/cliente/index.html");
                     }
                     else if($tipo==='ADMINISTRADOR'){
                         $_SESSION["access"]=3;
-                        echo"<div class='alert alert-success'>";
-                        echo"<h2 align='center'>Bienvenido ".$_SESSION["name"]."</h2>";
+                        echo"<div class=' container'>";
+                        echo"<h1 align='center'>Bienvenido ".$_SESSION["name"]."</h1>";
                         echo "</div>";
-                        header("refresh:2;../viewsEmpleados/panelAdmin.php");
+                        header("refresh:4;../viewsEmpleados/panelAdmin.php");
                     }
                     else if ($tipo==='EMPLEADO'){
                         $query="SELECT * FROM EMPLEADOS JOIN CUENTAS ON CUENTAS.ID=EMPLEADOS.CUENTA
@@ -97,16 +97,16 @@
                         while($trabajo=$consulta->fetch(PDO::FETCH_ASSOC)){
                             $_SESSION["access"]=2;
                             if($trabajo['TIPO']=='MESERO'){
-                                echo"<div class='alert alert-success'>";
-                                echo"<h2 align='center'>Bienvenido ".$_SESSION["name"]."</h2>";
+                                echo"<div class=' container'>";
+                                echo"<h1 align='center'>Bienvenido ".$_SESSION["name"]."</h1>";
                                 echo "</div>";
-                                header("refresh:2;viewsEmpleados/verMeseros.php");
+                                header("refresh:4;../viewsEmpleados/verMeseros.php");
                             }
                             else{
-                                echo"<div class='alert alert-success'>";
-                                echo"<h2 align='center'>Bienvenido ".$_SESSION["name"]."</h2>";
+                                echo"<div class=' container'>";
+                                echo"<h1 align='center'>Bienvenido ".$_SESSION["name"]."</h1>";
                                 echo "</div>";
-                                header("refresh:2;viewsEmpleados/ver.php");
+                                header("refresh:4;../viewsEmpleados/ver.php");
                             }
                         }
                     }
