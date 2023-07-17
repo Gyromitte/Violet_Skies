@@ -61,48 +61,50 @@
         }
         function Login($usu,$pass){
             try{
-                $ver=false;
-                $query="SELECT CUENTAS.NOMBRE,CUENTAS.CONTRASEÑA, CUENTAS.TIPO_CUENTA FROM CUENTAS 
-                WHERE CORREO='$usu'";
-                $consulta=$this->PDO_local->query($query);
+                $ver = false;
+                $query="SELECT * FROM CUENTAS WHERE CORREO='$usu'";
+                $consulta = $this->PDO_local->query($query);
+
                 while($renglon = $consulta->fetch(PDO::FETCH_ASSOC)){
-                    if(password_verify($pass,$renglon['CONTRASEÑA'])){
-                        $ver=true;
+                    if($pass=== $renglon['CONTRASEÑA']){
+                        $ver = true;
+                        $NOMBRE = $renglon['NOMBRE'];
+                        $tipo = $renglon['TIPO_CUENTA'];
+                        $id=$renglon['ID'];
                     }
                 }
                 if($ver){
                     session_start();
-                    $_SESSION["name"]=$renglon['NOMBRE'];
-                    if($renglon['TIPO_CUENTA']==='CLIENTE'){
+                    $_SESSION["name"] = $NOMBRE;
+                    if($tipo==='CLIENTE'){
                         $_SESSION["access"]=1;
                         echo"<div class='alert alert-success'>";
                         echo"<h2 align='center'>Bienvenido ".$_SESSION["cliente"]."</h2>";
                         echo "</div>";
                         header("refresh:2;/html/cliente/index.html");
                     }
-                    else if($renglon['TIPO_CUENTA']==='ADMINISTRADOR'){
+                    else if($tipo==='ADMINISTRADOR'){
                         $_SESSION["access"]=3;
                         echo"<div class='alert alert-success'>";
                         echo"<h2 align='center'>Bienvenido ".$_SESSION["admin"]."</h2>";
                         echo "</div>";
                         header("refresh:2;viewsEmpleados/panelAdmin.php");
                     }
-                    else if ($renglon['TIPO_CUENTA']==='EMPLEADO'){
-                        $usu=$renglon['id'];
+                    else if ($tipo==='EMPLEADO'){
                         $query="SELECT * FROM EMPLEADOS JOIN CUENTAS ON CUENTAS.ID=EMPLEADOS.CUENTA
-                        WHERE CUENTAS.ID='$usu'";
+                        WHERE CUENTAS.ID='$id'";
                         $consulta=$this->PDO_local->query($query);
                         while($trabajo=$consulta->fetch(PDO::FETCH_ASSOC)){
                             $_SESSION["access"]=2;
                             if($trabajo['TIPO']=='MESERO'){
                                 echo"<div class='alert alert-success'>";
-                                echo"<h2 align='center'>Bienvenido ".$_SESSION["mesero"]."</h2>";
+                                echo"<h2 align='center'>Bienvenido ".$_SESSION["name"]."</h2>";
                                 echo "</div>";
                                 header("refresh:2;viewsEmpleados/verMeseros.php");
                             }
                             else{
                                 echo"<div class='alert alert-success'>";
-                                echo"<h2 align='center'>Bienvenido ".$_SESSION["chef"]."</h2>";
+                                echo"<h2 align='center'>Bienvenido ".$_SESSION["name"]."</h2>";
                                 echo "</div>";
                                 header("refresh:2;viewsEmpleados/ver.php");
                             }
