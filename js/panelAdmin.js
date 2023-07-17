@@ -102,8 +102,6 @@ function updateModalContent(formType, idEmpleado) {
             //Parsear la respuesta JSON
             var empleado = JSON.parse(xhr.responseText);
             console.log(empleado);
-            //Determinar el tipo de empleado para agregar el selected
-            //if(empleado.TIPO == 'MESERO')
             //Actualizar el contenido del formulario con los datos obtenidos
             formContent = `
               <form>
