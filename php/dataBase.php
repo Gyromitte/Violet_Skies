@@ -86,9 +86,9 @@
                     else if($tipo==='ADMINISTRADOR'){
                         $_SESSION["access"]=3;
                         echo"<div class='alert alert-success'>";
-                        echo"<h2 align='center'>Bienvenido ".$_SESSION["admin"]."</h2>";
+                        echo"<h2 align='center'>Bienvenido ".$_SESSION["name"]."</h2>";
                         echo "</div>";
-                        header("refresh:2;viewsEmpleados/panelAdmin.php");
+                        header("refresh:2;../viewsEmpleados/panelAdmin.php");
                     }
                     else if ($tipo==='EMPLEADO'){
                         $query="SELECT * FROM EMPLEADOS JOIN CUENTAS ON CUENTAS.ID=EMPLEADOS.CUENTA

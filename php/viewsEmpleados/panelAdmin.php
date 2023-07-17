@@ -38,7 +38,7 @@
             echo"No tienes acceso a esta pagina";
             header("refresh:2;/index.html");
         }
-  ?>
+    ?>
     <nav>
         <div class="nav-menu">
             <button id="nav-button">
@@ -50,14 +50,14 @@
         <div class="nav-user">
             <i class="fa-solid fa-bell" style="color: #ffffff;"></i>
             <div id="nav-photo-user"></div>
-            <!--php echo $_SESSION["name"];-->
+            <?php echo $_SESSION["name"];?>
         </div>
     </nav>
     <!--DashBoard-->
     <div id="dash-board">
         <div id="dash-board-content">
             <div id="dash-photo-user"></div>
-            Username<br>
+            <?php echo $_SESSION["name"];?><br>
             Position<br><br>
             <button data-tab="home" class="dash-button"><i class="fa-solid fa-house" style="color: #ffffff;"></i><br>Home</button>
             <button data-tab="eventos" class="dash-button"><i class="fa-solid fa-calendar-days" style="color: #ffffff;"></i><br>Eventos</button>
