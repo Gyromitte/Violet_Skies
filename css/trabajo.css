@@ -325,9 +325,8 @@ h1{
         display: flex;
         margin-top: 20px; 
     }     
-  }
 
-  /*css del panel*/
+     /*css del panel*/
   body{
     margin: 0;
     color: white !important;
@@ -468,3 +467,8 @@ nav{
     width: 40% !important;
 }
 
+
+  }
+
+  
+ 
