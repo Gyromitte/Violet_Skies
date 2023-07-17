@@ -139,7 +139,15 @@ nav{
 }
 /*Modal*/
 .modal-content{
-    background-color: #454ADE;
+    background-color: #5603ad;
+}
+.btn-close-custom{
+    background-color: white;
+}
+.btn-modal{
+    border-radius: 2em;
+    background-color: #b14aed;
+    border: 2px solid white;
 }
 
 /*View options*/

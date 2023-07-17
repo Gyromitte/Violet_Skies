@@ -83,8 +83,8 @@ function updateModalContent(formType, idEmpleado) {
               <option value="cocina">Cocinero</option>
             </select>
           </div>
-          <button type="submit" class="btn btn-primary">Aceptar</button>
-          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          <button type="submit" class="btn btn-primary btn-modal">Registrar</button>
+          <button type="button" class="btn btn-secondary btn-modal" data-bs-dismiss="modal">Cancelar</button>
         </form>
       `;
       break;
@@ -120,8 +120,8 @@ function updateModalContent(formType, idEmpleado) {
                     <option value="cocina" ${empleado.TIPO === 'COCINA' ? 'selected' : ''}>Cocinero</option>
                   </select>
                 </div>
-                <button type="submit" class="btn btn-primary">Aceptar</button>
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <button type="submit" class="btn btn-primary btn-modal">Modificar</button>
+                <button type="button" class="btn btn-secondary btn-modal" data-bs-dismiss="modal">Cancelar</button>
               </form>
             `;
             // Asignar el contenido al formulario del modal

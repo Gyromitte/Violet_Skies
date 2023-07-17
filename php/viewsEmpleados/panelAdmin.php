@@ -146,7 +146,7 @@
                     <div class="modal-header">
                             <!--Titulo que tendra el modal-->
                             <h1 class="modal-title fs-5" id="firstLabe"></h1>
-                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            <button type="button" class="btn-close btn-close-custom" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body" id="modal-form">
                             <!--El contenido del modal cambia dependiendo del boton que lo activo-->
