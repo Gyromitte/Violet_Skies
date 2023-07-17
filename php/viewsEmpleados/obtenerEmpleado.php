@@ -10,7 +10,7 @@ $employeeId = $_GET['id'];
 $consulta = "SELECT E.ID, C.NOMBRE, C.AP_PATERNO, C.AP_MATERNO, E.RFC, C.TELEFONO, C.CORREO, E.TIPO, E.CUENTA
              FROM EMPLEADOS E
              INNER JOIN CUENTAS C ON E.CUENTA = C.ID
-             WHERE E.ID = 4";
+             WHERE E.CUENTA = '$employeeId'";
 
 $tabla = $conexion->seleccionar($consulta);
 

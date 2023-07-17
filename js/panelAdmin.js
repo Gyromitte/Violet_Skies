@@ -53,13 +53,13 @@ modal.addEventListener("show.bs.modal", function(event) {
 
   // Obtener el tipo de formulario correspondiente al botón
   var formType = button.getAttribute("data-bs-whatever");
-
+  var idEmpleado = button.getAttribute("data-id");
   // Actualizar el contenido del formulario
-  updateModalContent(formType);
+  updateModalContent(formType, idEmpleado);
 });
 
 // Función para actualizar el contenido del modal según el tipo de formulario
-function updateModalContent(formType) {
+function updateModalContent(formType, idEmpleado) {
   var formContent = "";
   var modalTitle = document.querySelector('#mainModal .modal-title');
 
@@ -131,8 +131,9 @@ function updateModalContent(formType) {
           }
         }
       };
-      // acer la solicitud al script PHP y pasar el ID del empleado
-      xhr.open("GET", "obtenerEmpleado.php?id=<?php echo $empleado; ?>", true);
+      //Hacer la solicitud al script PHP y pasar el ID del empleado
+      xhr.open("GET", "obtenerEmpleado.php?id=" + idEmpleado, true);
+      console.log(idEmpleado);
       xhr.send();
       break;
   }
