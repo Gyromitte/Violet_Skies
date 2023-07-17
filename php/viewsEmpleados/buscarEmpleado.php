@@ -11,23 +11,26 @@ if (isset($_GET['busqueda'])) {
     FROM EMPLEADOS E
     INNER JOIN CUENTAS C ON E.CUENTA = C.ID
     WHERE C.CORREO = '$busqueda'";
-    $tabla = $conexion->seleccionar($consulta);
+  $tabla = $conexion->seleccionar($consulta);
 
+  if (empty($tabla)) {
+    echo "No se encontró ninguna coincidencia";
+  } else {
     echo "<table class='table table-hover mt-3'>
-                <thead class='thead-purple'>
-                    <tr>
-                        <th>Nombre</th>
-                        <th>Ape. Paterno</th>
-                        <th>Ape. Materno</th>
-                        <th>RFC</th>
-                        <th>Teléfono</th>
-                        <th>Correo</th>
-                        <th>Tipo</th>
-                        <th style='align-content': center;><th>
-                    </tr>
-                </thead>
-                <tbody>";
-    
+            <thead class='thead-purple'>
+                <tr>
+                    <th>Nombre</th>
+                    <th>Ape. Paterno</th>
+                    <th>Ape. Materno</th>
+                    <th>RFC</th>
+                    <th>Teléfono</th>
+                    <th>Correo</th>
+                    <th>Tipo</th>
+                    <th style='align-content': center;><th>
+                </tr>
+            </thead>
+            <tbody>";
+
     foreach ($tabla as $registro) {
         echo "<tr>";
         echo "<td> $registro->NOMBRE </td>";
@@ -51,10 +54,12 @@ if (isset($_GET['busqueda'])) {
         echo "</td>";
         echo '</tr>'; 
     }
-    
+
     echo "</tbody>
-              </table>";
+          </table>";
+  }
 } 
 
 $conexion->desconectarBD();
 ?>
+
