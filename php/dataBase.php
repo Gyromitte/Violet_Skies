@@ -62,11 +62,10 @@
         function Login($usu,$pass){
             try{
                 $ver=false;
-                $query="SELECT CUENTAS.NOMBRE, CUENTAS.CONTRASEÑA, CUENTAS.TIPO_CUENTA FROM CUENTAS 
+                $query="SELECT CUENTAS.NOMBRE,CUENTAS.CONTRASEÑA, CUENTAS.TIPO_CUENTA FROM CUENTAS 
                 WHERE CORREO='$usu'";
                 $consulta=$this->PDO_local->query($query);
-
-                while($renglon=$consulta->fetch(PDO::FETCH_ASSOC)){
+                while($renglon = $consulta->fetch(PDO::FETCH_ASSOC)){
                     if(password_verify($pass,$renglon['CONTRASEÑA'])){
                         $ver=true;
                     }
