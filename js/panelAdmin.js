@@ -99,9 +99,11 @@ function updateModalContent(formType, idEmpleado) {
       xhr.onreadystatechange = function() {
         if (xhr.readyState === XMLHttpRequest.DONE) {
           if (xhr.status === 200) {
-            // Parsear la respuesta JSON
+            //Parsear la respuesta JSON
             var empleado = JSON.parse(xhr.responseText);
             console.log(empleado);
+            //Determinar el tipo de empleado para agregar el selected
+            //if(empleado.TIPO == 'MESERO')
             //Actualizar el contenido del formulario con los datos obtenidos
             formContent = `
               <form>
@@ -109,15 +111,11 @@ function updateModalContent(formType, idEmpleado) {
                   <label class="control-label">RFC</label>
                   <input type="text" name="rfc" placeholder="Ingresa el RFC" class="form-control" required value="${empleado.RFC}">
                 </div>
-                <div class="mb-3">
-                  <label class="control-label">E-mail</label>
-                  <input type="email" name="correo" placeholder="Ingresa el E-mail" class="form-control" required value="${empleado.CORREO}">
-                </div>
                 <div class="form-group mb-3">
                   <label for="tipoUsuario">Tipo de Trabajador</label>
                   <select name="tipoUsuario" class="form-control form-select" id="tipoUsuario">
-                    <option value="mesero" ${empleado.TIPO === 'mesero' ? 'selected' : ''}>Mesero</option>
-                    <option value="cocina" ${empleado.TIPO === 'cocina' ? 'selected' : ''}>Cocinero</option>
+                    <option value="mesero" ${empleado.TIPO === 'MESERO' ? 'selected' : ''}>Mesero</option>
+                    <option value="cocina" ${empleado.TIPO === 'COCINA' ? 'selected' : ''}>Cocinero</option>
                   </select>
                 </div>
                 <button type="submit" class="btn btn-primary">Aceptar</button>
