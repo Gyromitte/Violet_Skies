@@ -20,40 +20,75 @@
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
         <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&display=swap" rel="stylesheet">
         <script src="https://kit.fontawesome.com/b60c246061.js" crossorigin="anonymous"></script>
+        <script src="/js/panelAdmin.js" async defer></script>
     </head>
 <body >
-  <nav class="navbar navbar-default row">
-    <div class="companySection col-sm-auto">
-        <!--Company Logo-->
-        <div class="navbar-header">
-            <img id="company-logo" class="img-fluid" src="/images/company_logo.jpg" alt="companyLogo">
-                <a class="no-underline" href="/index.html" id="company-name">Violet Skies</a>
-        </div>      
-        <!--Tabs-->
-        <ul class="nav list-inline">
-            <li class="mr-3 tabs">
-                <a class="no-underline" href="/html/about-us/about us.html">Nosotros</a>
-            </li>
-            <li class="mr-3 tabs">
-                <a class="no-underline" href="#">Agendar Evento</a>
-            </li>
-            <li class="mr-3 tabs">
-                <a class="no-underline" href="/html/trabajo.html">Trabajo</a>
-            </li>
-        </ul>
-    </div>         
-    <!--Login-section-->
-    <div class="login-section col-sm-auto" >
+
+<!--NavBar Pantalla Completa-->
+<nav class="navbar navbar-default row">
+  <div class="companySection col-sm-auto">
+      <!--Company Logo-->
+      <div class="navbar-header">
+          <img id="company-logo" class="img-fluid" src="/images/company_logo.png" alt="companyLogo">
+              <a class="no-underline" href="/index.html" id="company-name">Violet Skies</a>
+      </div>      
+      <!--Tabs-->
+      <ul class="nav list-inline">
+          <li class="mr-3 tabs">
+              <a class="no-underline" href="/html/about-us/about us.html">Nosotros</a>
+          </li>
+          <li class="mr-3 tabs">
+              <a class="no-underline" href="#">Agendar Evento</a>
+          </li>
+          <li class="mr-3 tabs">
+              <a class="no-underline" href="/html/trabajo.html">Trabajo</a>
+          </li>
+      </ul>
+  </div>         
+  <!--Login-section-->
+  <div class="login-section col-sm-auto" >
       <button class="loginButton">
-        <i class="fa-solid fa-door-open" style="color: #ffffff;"></i>
-        <a class="no-underline" href="/html/acceder.html">Acceder</a>   
+          <i class="fa-solid fa-door-open" style="color: #ffffff;"></i>
+          <a class="no-underline" href="/php/views/login.php">Acceder</a>   
       </button>
       <button class="loginButton">
-        <i class="fa-solid fa-user" style="color: #ffffff;"></i>
-        <a class="no-underline" href="#">Registrarse</a>
+          <i class="fa-solid fa-user" style="color: #ffffff;"></i>
+          <a class="no-underline" href="#">Registrarse</a>
       </button>
-    </div>
+  </div>
 </nav>
+
+  <!--[if lt IE 7]>
+            <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="#">upgrade your browser</a> to improve your experience.</p>
+        <![endif]-->
+    <!--NavBar-->    
+    <nav>
+      <div class="nav-menu">
+          <button id="nav-button">
+              <i class="fa-solid fa-bars" style="color: #ffffff;"></i>
+          </button>
+          Hoteleria
+      </div>
+      <h2><span id="fecha"></span></h2>
+      <div class="nav-user">
+          <i class="fa-solid fa-bell" style="color: #ffffff;"></i>
+          <div id="nav-photo-user"></div>
+          Username
+      </div>
+  </nav>
+  <!--DashBoard-->
+  <div id="dash-board">
+      <div id="dash-board-content">
+          <div id="dash-photo-user"></div>
+          Username<br>
+          Position<br><br>
+          <button data-tab="home" class="dash-button"><i class="fa-solid fa-house" style="color: #ffffff;"></i><br>Home</button>
+          <button data-tab="eventos" class="dash-button"><i class="fa-solid fa-calendar-days" style="color: #ffffff;"></i><br>Eventos</button>
+          <button data-tab="empleados" class="dash-button"><i class="fa-solid fa-briefcase" style="color: #ffffff;"></i><br>Empleados</button>
+          <button data-tab="perfil" class="dash-button"><i class="fa-solid fa-user" style="color: #ffffff;"></i><br>Perfil</button>
+          <button data-tab="configuracion" class="dash-button"><i class="fa-solid fa-gear" style="color: #ffffff;"></i><br>Configuracion</button>
+      </div>
+  </div>
 <!--card de titulo -->
 <div >
 <!--contenedor de central de informacion -->
@@ -160,6 +195,9 @@
   </div>
 </div>
 </div>
+
+    <script src="/js/filtroEventos.js"></script>
     <script src="bootstrap/js/bootstrap.js"></script>
+    <script src="/js/dinamicTable.js"></script>
 </body>
 </html>
