@@ -142,3 +142,10 @@ nav{
     display: flex;
     justify-content: space-between;
   }
+
+  
+  .personal-info,
+  .event-history {
+    flex: 1;
+  }
+  

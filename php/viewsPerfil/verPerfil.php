@@ -20,13 +20,11 @@
 </head>
 <body>
     <div class="container">
-        <div class="row">
-            <div class="col-lg-6">
-                <div>
-                    <hr>
-                    <h3 align="center">Datos personales</h3>
-                    <hr>
-                    <div class="mb-3 row">
+        <div class="personal-info">
+            <hr>
+            <h3 alig="center">Datos personales</h3>
+            <hr>
+            <div class="mb-3 row">
                 <label class="col-sm-2 col-form-label">Nombre:</label>
                 <div class="col-sm-10">
                     <input type="text" readonly class="col-10 col-form-label" value="<?php echo $_SESSION['nombre']; ?>">
@@ -62,20 +60,15 @@
                     <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modalCambiarContrasena">Cambiar contraseña</button>
                 </div>
             </div>
-                </div>
-            </div>
-            <div class="col-lg-6">
-                <div>
-                    <hr>
-                    <h3 align="center">Historial de eventos</h3>
-                    <hr>
-                    
-                </div>
-            </div>
-            </div>
-
-        
         </div>
+
+        <div class="event-history">
+            <hr>
+            <h3 alig="center">Historial de eventos</h3>
+            <hr>
+            
+        </div>
+    </div>
 
     <div class="modal fade" id="modalCambiarContrasena" tabindex="-1" aria-labelledby="modalCambiarContrasenaLabel" aria-hidden="true">
         <div class="modal-dialog">
@@ -105,6 +98,7 @@
         </div>
     </div>
 </body>
+
 
 
 </html>
