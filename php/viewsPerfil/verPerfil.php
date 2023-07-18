@@ -22,18 +22,18 @@
     <div class="container">
         <div class="personal-info">
             <hr>
-            <h3 alig="center">Datos personales</h3>
+            <h3 align="center">Datos personales</h3>
             <hr>
             <div class="mb-3 row">
                 <label class="col-sm-2 col-form-label">Nombre:</label>
                 <div class="col-sm-10">
-                    <input type="text" readonly class="col-10 col-form-label" value="<?php echo $_SESSION['nombre']; ?>">
+                    <input type="text" readonly class="col-10 col-form-label" value="<?php echo $_SESSION['name']; ?>">
                 </div>
             </div>
             <div class="mb-3 row">
                 <label class="col-sm-2 col-form-label">Apellido paterno:</label>
                 <div class="col-sm-10">
-                    <input type="text" readonly class="col-10 col-form-label" value="<?php echo $_SESSION['apellido_paterno']; ?>">
+                    <input type="text" readonly class="col-10 col-form-label" value="<?php echo $_SESSION['ap_paterno']; ?>">
                 </div>
             </div>
             <div class="mb-3 row">
@@ -64,9 +64,9 @@
 
         <div class="event-history">
             <hr>
-            <h3 alig="center">Historial de eventos</h3>
+            <h3 align="center">Historial de eventos</h3>
             <hr>
-            
+
         </div>
     </div>
 
@@ -98,8 +98,5 @@
         </div>
     </div>
 </body>
-
-
-
 </html>
 
