@@ -6,8 +6,8 @@
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!--StyleSheets-->
-    <link rel="stylesheet" href="/bootstrap/css/bootstrap.min.css">
-    <link rel="stylesheet" href="/css/panelAdmin.css">
+    <link rel="stylesheet" href="../../bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../../css/panelAdmin.css">
     <!--Referencias a fuentes-->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -15,8 +15,22 @@
     <link href="https://fonts.googleapis.com/css2?family=Lexend:wght@300&family=Patua+One&display=swap" rel="stylesheet">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&display=swap" rel="stylesheet">
     <title>verPerfil</title>
+    <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&display=swap" rel="stylesheet">
+    <style>
+        @media (max-width: 767px) {
+            .container {
+                flex-direction: column;
+            }
+
+            .personal-info,
+            .event-history {
+                width: 100%;
+                margin-bottom: 20px;
+            }
+        }
+    </style>
+    
 </head>
 <body>
     <div class="container">
@@ -27,31 +41,31 @@
             <div class="mb-3 row">
                 <label class="col-sm-2 col-form-label">Nombre:</label>
                 <div class="col-sm-10">
-                    <input type="text" readonly class="col-10 col-form-label" value="<?php echo $_SESSION['name']; ?>">
+                    <input class="form-control" type="text" value="<?php echo $_SESSION['name']; ?>" disabled>
                 </div>
             </div>
             <div class="mb-3 row">
                 <label class="col-sm-2 col-form-label">Apellido paterno:</label>
                 <div class="col-sm-10">
-                    <input type="text" readonly class="col-10 col-form-label" value="<?php echo $_SESSION['ap_paterno']; ?>">
+                    <input class="form-control" type="text" value="<?php echo $_SESSION['ap_paterno']; ?>" disabled>
                 </div>
             </div>
             <div class="mb-3 row">
                 <label class="col-sm-2 col-form-label">Apellido materno:</label>
                 <div class="col-sm-10">
-                    <input type="text" readonly class="col-10 col-form-label" value="<?php echo $_SESSION['ap_materno']; ?>">
+                   <input class="form-control" type="text" value="<?php echo $_SESSION['ap_materno']; ?>" disabled>
                 </div>
             </div>
             <div class="mb-3 row">
                 <label class="col-sm-2 col-form-label">Teléfono:</label>
                 <div class="col-sm-10">
-                    <input type="text" readonly class="col-10 col-form-label" value="<?php echo $_SESSION['telefono']; ?>">
+                    <input class="form-control" type="text" value="<?php echo $_SESSION['telefono']; ?>" disabled>
                 </div>
             </div>
             <div class="mb-3 row">
                 <label class="col-sm-2 col-form-label">Correo:</label>
                 <div class="col-sm-10">
-                    <input type="text" readonly class="col-10 col-form-label" value="<?php echo $_SESSION['correo']; ?>">
+                    <input class="form-control" type="text" value="<?php echo $_SESSION['correo']; ?>" disabled>
                 </div>
             </div>
             <div class="mb-3 row">
@@ -81,15 +95,15 @@
                     <form action="cambContraseña.php" method="POST">
                         <div class="mb-3">
                             <label for="currentPassword" class="form-label">Contraseña actual:</label>
-                            <input type="password" class="form-control" id="contraseñaActual" required>
+                            <input type="password" class="form-control" id="contraseñaActual" name="currentPassword" required>
                         </div>
                         <div class="mb-3">
                             <label for="newPassword" class="form-label">Nueva contraseña:</label>
-                            <input type="password" class="form-control" id="newPassword" required>
+                            <input type="password" class="form-control" id="newPassword" name="newPassword" required>
                         </div>
                         <div class="mb-3">
                             <label for="confirmPassword" class="form-label">Confirmar contraseña:</label>
-                            <input type="password" class="form-control" id="confirmPassword" required>
+                            <input type="password" class="form-control" id="confirmPassword" name="confirmPassword" required>
                         </div>
                         <button type="submit" class="btn btn-primary">Guardar cambios</button>
                     </form>
@@ -97,6 +111,6 @@
             </div>
         </div>
     </div>
+
 </body>
 </html>
-

@@ -142,7 +142,7 @@
             </div>
         </div>
         <div id="perfil" class="tab-content">
-            <h3 class="test" style="text-align:center; ">
+            <h3 class="test" style="text-align:center";>
                 PERFIL
                 <i class="fa-solid fa-briefcase" style="color: #ffffff;"></i>
             </h3>
