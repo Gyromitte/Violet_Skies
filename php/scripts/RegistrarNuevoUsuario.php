@@ -33,14 +33,21 @@
 </head>
 <body>
     <div>
-        <?php
-            include '../dataBase.php';
+         <?php
+            include'../dataBase.php';
             $db=new Database();
             $db->conectarBD();
             extract($_POST);
+            $hash=password_hash($pass,PASSWORD_DEFAULT);
 
-            $db->Login("$usu","$pass");
+            $cadena="INSERT INTO CUENTAS(NOMBRE, AP_PATERNO,AP_MATERNO, CORREO, 
+            CONTRASEÑA, TELEFONO,TIPO_CUENTA) VALUES('$user','$hash')";
+
+            $db->ejecutarSQL($cadena);
             $db->desconectarBD();
+
+            echo"<div class='container'>Usuario Registrado</div>";
+            header("refresh:4; ../views/login.php");
         ?>
     </div>
 </body>
