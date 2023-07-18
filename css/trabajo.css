@@ -466,7 +466,27 @@ nav{
 .search-bar{
     width: 40% !important;
 }
-
+/* Estilo para el dash-board lateral */
+#dash-board {
+    /* ... */
+  }
+  
+  /* Estilo para abrir el dash-board */
+  #dash-board.dashboard-open {
+    /* ... */
+  }
+  
+  /* Estilo para el overlay */
+  #overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 2; /* Asegúrate de que el z-index sea mayor que el del dash-board */
+  }
+  
 
   }
 
