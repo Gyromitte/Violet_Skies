@@ -56,7 +56,7 @@ document.addEventListener('DOMContentLoaded', function() {
       case 'verMeseros':
         return 'Mostrando a los meseros:';
       case 'buscarEmpleado':
-        return 'Se encontró:';
+        return 'Resultados de busqueda:';
       default:
         return 'Mostrando información:';
     }

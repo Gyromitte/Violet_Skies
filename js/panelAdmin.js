@@ -25,21 +25,21 @@ document.getElementById('fecha').innerHTML = formatDate;
 var tabs = document.querySelectorAll('.dash-button');
 var tabContents = document.querySelectorAll('.tab-content');
 //Asignar evento de click a cada boton y relacionarlo con el id del contenido
-  tabs.forEach(function(tab) {
-    tab.addEventListener('click', function() {
-      var tabId = this.getAttribute('data-tab');
+tabs.forEach(function(tab) {
+  tab.addEventListener('click', function() {
+    var tabId = this.getAttribute('data-tab');
 
-      tabs.forEach(function(tab) {
-        tab.classList.remove('active');
-      });
-      tabContents.forEach(function(content) {
-        content.classList.remove('active');
-      });
-
-      this.classList.add('active');
-      document.getElementById(tabId).classList.add('active');
+    tabs.forEach(function(tab) {
+      tab.classList.remove('active');
     });
+    tabContents.forEach(function(content) {
+      content.classList.remove('active');
+    });
+
+    this.classList.add('active');
+    document.getElementById(tabId).classList.add('active');
   });
+});
 
 /*Modal functionality*/
 // Obtener el modal y el formulario
@@ -62,19 +62,21 @@ modal.addEventListener("show.bs.modal", function(event) {
 function updateModalContent(formType, idEmpleado) {
   var formContent = "";
   var modalTitle = document.querySelector('#mainModal .modal-title');
+  var form;
 
   switch (formType) {
     case "@registrarEmpleado":
       modalTitle.textContent = "Registrar un Empleado";
       formContent = `
-        <form action="/php/viewsEmpleados/guardarEmpleado.php" method="POST">
+        <div id="mensajeDiv" method="POST"></div>
+        <form id="formularioEmpleado">
           <div class="mb-3">
             <label class="control-label">RFC</label>
-            <input type="text" name="rfc" placeholder="Ingresa el RFC" class="form-control" required>
+            <input type="text" name="RFC" placeholder="Ingresa el RFC" class="form-control" required>
           </div>
           <div class="mb-3">
             <label class="control-label">E-mail</label>
-            <input type="email" name="correo" placeholder="Ingresa el E-mail" class="form-control" required>
+            <input type="email" name="CORREO" placeholder="Ingresa el E-mail" class="form-control" required>
           </div>
           <div class="form-group mb-3">
             <label for="tipoUsuario">Tipo de Trabajador</label>
@@ -87,6 +89,44 @@ function updateModalContent(formType, idEmpleado) {
           <button type="button" class="btn btn-primary btn-modal" data-bs-dismiss="modal">Cancelar</button>
         </form>
       `;
+      // Asignar el contenido al formulario del modal
+      modalForm.innerHTML = formContent;
+
+      // Obtener el formulario después de haberlo asignado al DOM
+      form = document.querySelector('#formularioEmpleado');
+
+      // Agregar evento de envío del formulario
+      form.addEventListener('submit', function(event) {
+        event.preventDefault(); // Evitar el envío del formulario por defecto
+
+        // Crear instancia de XMLHttpRequest
+        var xhr = new XMLHttpRequest();
+
+        // Configurar la solicitud
+        xhr.open("POST", "guardarEmpleado.php", true);
+        xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+
+        // Obtener los datos del formulario
+        var rfc = form.elements['RFC'].value;
+        var correo = form.elements['CORREO'].value;
+        var tipoUsuario = form.elements['tipoUsuario'].value;
+
+        // Crear el cuerpo de la solicitud
+        var formData = 'rfc=' + encodeURIComponent(rfc) + '&correo=' + (correo) + '&tipoUsuario=' + encodeURIComponent(tipoUsuario);
+        console.log(formData);
+        // Definir la función de respuesta
+        xhr.onreadystatechange = function() {
+          if (xhr.readyState === XMLHttpRequest.DONE && xhr.status === 200) {
+            // Manejar la respuesta aquí
+            var respuesta = xhr.responseText;
+            document.getElementById('mensajeDiv').innerHTML = respuesta;
+          }
+        };
+
+        // Enviar el formulario
+        xhr.send(formData);
+      });
+
       break;
     case "@eliminarEmpleado":
       modalTitle.textContent = "Eliminar a un Empleado";
@@ -137,6 +177,4 @@ function updateModalContent(formType, idEmpleado) {
       xhr.send();
       break;
   }
-  // Asignar el contenido al formulario del modal
-  modalForm.innerHTML = formContent;
 }
