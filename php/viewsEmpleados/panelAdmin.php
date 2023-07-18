@@ -34,7 +34,7 @@
     <!--NavBar-->    
     <?php
         session_start();
-        if(!isset($_SESSION["access"])===3){
+        if (!isset($_SESSION["access"]) || $_SESSION["access"] !== 3) {
             echo"No tienes acceso a esta pagina";
             header("refresh:2;/index.html");
         }

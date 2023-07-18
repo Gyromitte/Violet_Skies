@@ -69,14 +69,23 @@
                 while($renglon = $consulta->fetch(PDO::FETCH_ASSOC)){
                     if($pass=== $renglon['CONTRASEÑA']){
                         $ver = true;
+                        $id=$renglon['ID'];
                         $NOMBRE = $renglon['NOMBRE'];
                         $tipo = $renglon['TIPO_CUENTA'];
-                        $id=$renglon['ID'];
+                        $ap_paterno=$renglon['AP_PATERNO'];
+                        $ap_materno=$renglon['AP_MATERNO'];
+                        $telefono=$renglon['TELEFONO'];
+                        $correo=$renglon['CORREO'];
                     }
                 }
                 if($ver){
                     session_start();
                     $_SESSION["name"] = $NOMBRE;
+                    $_SESSION["telefono"] = $telefono;
+                    $_SESSION["ap_paterno"] = $ap_paterno;
+                    $_SESSION["ap_materno"] = $ap_materno;
+                    $_SESSION["correo"] = $correo;
+
                     if($tipo==='CLIENTE'){
                         $_SESSION["access"]=1;
                         echo"<div class=' container'>";

@@ -39,7 +39,7 @@
             <div class="mb-3 row">
                 <label class="col-sm-2 col-form-label">Apellido materno:</label>
                 <div class="col-sm-10">
-                    <input type="text" readonly class="col-10 col-form-label" value="<?php echo $_SESSION['apellido_materno']; ?>">
+                    <input type="text" readonly class="col-10 col-form-label" value="<?php echo $_SESSION['ap_materno']; ?>">
                 </div>
             </div>
             <div class="mb-3 row">
