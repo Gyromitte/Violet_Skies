@@ -1,9 +1,13 @@
 .paquetesDown{
-    width: 50vw;
-    margin: 3em 0;
+    width: fit-content;
+    color: white;
     display: flex;
-    flex-direction: row;
-    align-items: center;
+    margin: 1em 1em 1em 1em;
+    padding-left: 1em;
+    flex-direction:row;
+    justify-content: left;
+    font-family: 'Patua One', cursive;
+    text-align: center;
 }
 .paquetesUp{
     width: fit-content;
@@ -36,16 +40,20 @@
 }
 
 .accordion .card-header {
-    background-color: transparent;
+    background-color: #454adec2;
 }
 
 .accordion .card-body {
     background-color: transparent; /* Color de fondo del contenido */
 }
 .colorbtn{
-    color:#c2f8cb;
+    color:#FFFFFF;
+    font-size: 50px ;
 }
 
-.tamañoFontDesc{
-    font-size: larger;
+.contact-back{
+    background-image: url(/images/back-contact.jpg);
+    background-size: cover;
+    padding: 1em;
+
 }

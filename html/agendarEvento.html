@@ -26,9 +26,9 @@
         <div class="companySection col-sm-auto">
             <!--Company Logo-->
             <div class="navbar-header">
-                <img id="company-logo" class="img-fluid" src="../images/company_logo.jpg" alt="companyLogo">
-                    <a class="no-underline" href="../index.html" id="company-name">Hoteleria</a>
-            </div>      
+              <a class="no-underline" href="../index.html" id="company-name">
+                <img style="padding-right: 10px;" id="company-logo" class="img-fluid" src="../images/company_logo.png" alt="companyLogo">Hoteleria</a>
+            </div>       
             <!--Tabs-->
             <ul class="nav list-inline">
                 <li class="mr-3 tabs">
@@ -59,31 +59,81 @@
         </div>
     </nav>
     <!--Sección de Paquetes-->
-    <div class="background-cover">
-        <div class="packContainer">
-            <div class="paquetesUp">
-                <div class="greetings">
+    <div class="contact-back" >
+        <div class="packContainer" >
+            <div class="paquetesUp" style="font-size: 60px;">
                     Aparta tu salón favorito!!
-                </div>    
+            </div>
+              <div class="paquetesDown" style="text-align:center; font-size: 35px;" >
+                ¿Cómo agendo mi evento? <br>
+                Es muy sencillo! <br> 
+              </div>
+              <div style="text-align: left; font-size: 20px; padding-left: 15%; padding-right: 15%;" class="paquetesDown">
+                <p>paso 1: Primero tienes que echarle un vistazo a todos nuestros salones y verficar cual de ellos se ajusta más a tus necesidades <br>
+                Paso 2: Presionas el botón de agendar para contactarte con nuestros organizadores.</p>
+              </div>
+            <!--Botón de agendar evento via whatsapp (ponerse en contacto con el administrador para dar más especificaciones de los eventos )-->
+            <div style="display: flex; justify-content: center; margin-bottom: 20px;">
+              <a href="https://wa.me/528715659629?text=¡Hola! Me gustaría agendar un evento con ustedes." target="_blank" style="display: inline-block; background-color: green; color: white; padding: 10px 20px; text-decoration: none; border-radius: 20px;">
+                  <i class="fa-brands fa-whatsapp" style="color: #ffffff;"></i><b>AGENDAR MI EVENTO</b>
+                </a>                               
             </div>
         </div>
+        
 <!-- Comienzan los Paquetes -->
-<div class="accordion" id="myAccordion">
-    <!--Salón 1-->
-    <div class="card">
-        <button class="btn colorbtn" type="button" data-toggle="collapse" data-target="#collapseOne">
+  <div class="accordion" id="myAccordion">
+  <!--Salón 1-->
+  <div class="card">
+    <button class="btn colorbtn" type="button" data-toggle="collapse" data-target="#collapseOne" data-parent="#myAccordion" onclick="focusContent()">
       <div class="card-header" id="headingOne">
         <h5 class="mb-0" style="text-align: center;">
-          
-            Salón 1
-
+          Salones Cuatrocienegas
         </h5>
       </div>
     </button>
-      <div id="collapseOne" class="collapse" data-parent="#myAccordion">
+    <div id="collapseOne" class="collapse" data-parent="#myAccordion">
+      <div class="card-body">
+        <!-- Contenido del Accordion 1 -->
+        <div class="heroContainer">
+          <div class="leftHeroSection">
+            <div style="font-size: 25px;">
+              <ul>
+                <li>Una gran variedad de comidas a elección en nuestro menú</li>
+                <li>1 Mesero por cada 10 personas</li>
+                <li>Ambientación a tu estilo</li>
+                <li>Bebidas ilimitadas de la cadena (Coca-cola)</li>
+                <li>Host para recibir invitados y tomar fotos.</li>
+                <li>5 Horas de evento efectivo</li>
+                <li>3 Horas previas para la preparación del evento</li>
+                <li>Capacidad de 20 personas </li>
+              </ul>
+            </div>
+          </div>
+          <div class="rightHeroSection">
+            <img src="../images/salones/salon1.jpg" id="heroImage">
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+    <!--Salón 2-->
+    <div class="card">
+        <button class="btn colorbtn" type="button" data-toggle="collapse" data-target="#collapseTwo"data-parent="#myAccordion" onclick="focusContent()">
+      <div class="card-header" id="headingTwo">
+        <h5 class="mb-0">
+          
+            Salones Torreón
+          
+        </h5>
+      </div>
+    </button>
+      <div id="collapseTwo" class="collapse" data-parent="#myAccordion">
         <div class="card-body">
-          <!-- Contenido del Accordion 1 -->
+          <!-- Contenido del Accordion 2 -->
           <div class="heroContainer">
+            <div class="rightHeroSection">
+                <img src="../images/salones/salon3.jpg" id="heroImage">
+            </div>
             <div class="leftHeroSection">
               <div style="font-size: 25px;">
                   <ul>
@@ -94,41 +144,21 @@
                     <li>Host para recibir invitados y tomar fotos.</li>
                     <li>5 Horas de evento efectivo</li>
                     <li>3 Horas  previas para la preparación del evento</li>
-                    <li>Capacidad </li>
+                    <li>Capacidad de 50 personas</li>
                   </ul>
               </div>
             </div>
-            <div class="rightHeroSection">
-                <img src="../images/salones/salon1.jpg" id="heroImage">
-            </div>
-        </div>
-        </div>
-      </div>
-    </div>
-    <!--Salón 2-->
-    <div class="card">
-        <button class="btn colorbtn" type="button" data-toggle="collapse" data-target="#collapseTwo">
-      <div class="card-header" id="headingTwo">
-        <h5 class="mb-0">
-          
-            Salon 2
-          
-        </h5>
-      </div>
-    </button>
-      <div id="collapseTwo" class="collapse" data-parent="#myAccordion">
-        <div class="card-body">
-          <!-- Contenido del Accordion 2 -->
+          </div>
         </div>
       </div>
     </div>
     <!--Salón 3-->
     <div class="card">
-        <button class="btn colorbtn" type="button" data-toggle="collapse" data-target="#collapseThree">
+        <button class="btn colorbtn" type="button" data-toggle="collapse" data-target="#collapseThree"data-parent="#myAccordion" onclick="focusContent()">
       <div class="card-header" id="headingThree">
         <h5 class="mb-0" style="text-align: center;">
           
-            Salón 3
+            Salones Saltillo
 
         </h5>
       </div>
@@ -136,28 +166,66 @@
       <div id="collapseThree" class="collapse" data-parent="#myAccordion">
         <div class="card-body">
           <!-- Contenido del Accordion 3 -->
+          <div class="heroContainer">
+            <div class="rightHeroSection">
+                <img src="../images/salones/salon1.jpg" id="heroImage">
+            </div>
+            <div class="leftHeroSection">
+              <div style="font-size: 25px;">
+                  <ul>
+                    <li>Una gran variedad de comidas a elección en nuestro menú</li>
+                    <li>1 Mesero por cada 10 personas</li>
+                    <li>Ambientación a tu estilo</li>
+                    <li>Bebidas ilimitadas de la cadena (Coca-cola)</li>
+                    <li>Host para recibir invitados y tomar fotos.</li>
+                    <li>5 Horas de evento efectivo</li>
+                    <li>3 Horas  previas para la preparación del evento</li>
+                    <li>Capacidad de 80 personas</li>
+                  </ul>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </div>
     <!--Salón 4-->
     <div class="card">
-        <button class="btn colorbtn" type="button" data-toggle="collapse" data-target="#collapseFour">
+        <button class="btn colorbtn" type="button" data-toggle="collapse" data-target="#collapseFour"data-parent="#myAccordion" onclick="focusContent()">
       <div class="card-header" id="headingFour">
         <h5 class="mb-0" style="text-align: center;">
           
-            Salón 4
+            Salones Coahuila
 
         </h5>
       </div>
-    </button>
+    </button id="colorbtn">
       <div id="collapseFour" class="collapse" data-parent="#myAccordion">
         <div class="card-body">
           <!-- Contenido del Accordion 4 -->
+          <div class="heroContainer">
+            <div class="leftHeroSection">
+              <div style="font-size: 25px;">
+                  <ul>
+                    <li>Una gran variedad de comidas a elección en nuestro menú</li>
+                    <li>1 Mesero por cada 15 personas</li>
+                    <li>Ambientación a tu estilo</li>
+                    <li>Bebidas ilimitadas de la cadena (Coca-cola)</li>
+                    <li>Host para recibir invitados y tomar fotos.</li>
+                    <li>5 Horas de evento efectivo</li>
+                    <li>3 Horas  previas para la preparación del evento</li>
+                    <li>Capacidad de hasta 120 personas <br> (la capacidad puede ser expansible hasta 240 y 360 invitados)</li>
+                  </ul>
+              </div>
+            </div>
+            <div class="rightHeroSection">
+                <img src="../images/salones/salon2.jpg" id="heroImage">
+            </div>
+          </div>
         </div>
       </div>
     </div>
   </div>
-    </div>
+</div>
 
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
@@ -167,9 +235,46 @@
         $('.collapse').on('shown.bs.collapse', function() {
           $('html, body').animate({
             scrollTop: $(this).offset().top
-          }, 500);
+          }, 100);
         });
       });
+    </script>
+    <script>
+      document.getElementById("collapseOne").addEventListener('shown.bs.collapse', focusContent);
+
+      function focusContent() {
+        var contentElement = document.getElementById("collapseOne");
+        setTimeout(function() {
+          contentElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }, 200);
+      }
+    </script>
+    <script>
+      document.getElementById("collapseTwo").addEventListener('shown.bs.collapse', focusContent);
+      function focusContent() {
+        var contentElement = document.getElementById("collapseTwo");
+        setTimeout(function() {
+          contentElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }, 200);
+      }
+    </script>
+    <script>
+      document.getElementById("collapseThree").addEventListener('shown.bs.collapse', focusContent);
+      function focusContent() {
+        var contentElement = document.getElementById("collapseThree");
+        setTimeout(function() {
+          contentElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }, 200);
+      }
+    </script>
+    <script>
+      document.getElementById("collapseFour").addEventListener('shown.bs.collapse', focusContent);
+      function focusContent() {
+        var contentElement = document.getElementById("collapseFour");
+        setTimeout(function() {
+          contentElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }, 300);
+      }
     </script>
 </body>
 </html>
