@@ -32,13 +32,14 @@
             <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="#">upgrade your browser</a> to improve your experience.</p>
         <![endif]-->
     <!--NavBar-->    
-    <?php
-        session_start();
-        if(!isset($_SESSION["access"])===3){
+    <!--php
+        session_start();-->
+        <!--if(!isset($_SESSION["access"])===3){
             echo"No tienes acceso a esta pagina";
             header("refresh:2;/index.html");
         }
     ?>
+    -->
     <nav>
         <div class="nav-menu">
             <button id="nav-button">

@@ -24,13 +24,17 @@
             top: 0;
             overflow-x: hidden;
             padding-top: 20px;
+            font-size: 40px;
+            font-weight: bold;
         }
         .left {
             left: 0;
+            color:sienna;
             background-image: url(/images/mesero.jpg);
         }
         .right {
             right: 0;
+            color:blueviolet;
             background-image:url(/images/heroImage.jpg)
         }
         .centered {
@@ -39,6 +43,20 @@
             left: 50%;
             transform: translate(-50%, -50%);
             text-align: center;
+        }
+        .left:hover{
+            cursor:pointer;
+            color: white;
+            text-shadow: 2px rgba(227, 122, 57,0.5);
+            background-color: rgba(117, 62, 28, 0.5);
+            background-blend-mode: overlay;
+        }
+        .right:hover{
+            cursor:pointer;
+            color: white;
+            text-shadow: 2px rgba(210, 65, 250,0.5);
+            background-color: rgba(103, 33, 122, 0.5);
+            background-blend-mode: overlay;
         }
     </style>
 </head>
@@ -66,24 +84,22 @@
     </nav>
     <div class="container">
         <div class="row">
-            <div class="split left" data-bs-toggle="modal" data-bs-target="#exampleModal">
+            <div class="split left" data-bs-toggle="modal" data-bs-target="#Empleado">
                 <div class="centered">
                     <h1>Registrate como Empleado!</h1>
                 </div>
             </div>
 
-            <div class="split right">
+            <div class="split right" data-bs-toggle="modal" data-bs-target="#Cliente">
                 <div class="centered">
                     <h1>Registrate como Cliente!</h1>
                 </div>
             </div>
         </div>
     </div>
-    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
-</button>
 
 <!-- Modal -->
-<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade" id="Empleado" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
@@ -91,7 +107,7 @@
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
-        <form action="../scripts/verificarlogin.php" method="post">
+        <form action="../scripts/RegistrarNuevoUsuario.php" method="post">
             <label class="form-label" name="nom">Nombre(s): </label> 
             <input class="form-control" type="text" name="nom" placeholder="Nombre"><br><br>
             <label class="form-label" name="ap">Apellido Paterno: </label> 
@@ -106,7 +122,7 @@
             <input class="form-control" type="password" name="pass" placeholder="Contraseña"><br><br>
             <label class="form-label" name="ckpass">Comprobar Contraseña: </label>
             <input class="form-control" type="password" name="ckpass" placeholder="Comprobar Contraseña"><br><br>
-            <button class="loginButton" type="submit">Iniciar Sesion</button>
+            <button class="loginButton" type="submit">Registrarse</button>
         </form>
       </div>
       <div class="modal-footer">
@@ -117,15 +133,15 @@
   </div>
 </div>
 
-<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade" id="Cliente" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
-        <h1 class="modal-title fs-5" id="exampleModalLabel">Registrar como Empleado</h1>
+        <h1 class="modal-title fs-5" id="exampleModalLabel">Registrar como Cliente</h1>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
-        <form action="../scripts/verificarlogin.php" method="post">
+        <form action="../scripts/RegistrarNuevoUsuario.php" method="post">
             <label class="form-label" name="nom">Nombre(s): </label> 
             <input class="form-control" type="text" name="nom" placeholder="Nombre"><br><br>
             <label class="form-label" name="ap">Apellido Paterno: </label> 
@@ -152,5 +168,6 @@
 </div>
 
     <script src="https://kit.fontawesome.com/b60c246061.js" crossorigin="anonymous"></script>
+    <script src="/bootstrap/js/bootstrap.min.js"></script>
 </body>
 </html>
