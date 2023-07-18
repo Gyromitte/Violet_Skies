@@ -64,7 +64,9 @@
             <button data-tab="eventos" class="dash-button"><i class="fa-solid fa-calendar-days" style="color: #ffffff;"></i><br>Eventos</button>
             <button data-tab="empleados" class="dash-button"><i class="fa-solid fa-briefcase" style="color: #ffffff;"></i><br>Empleados</button>
             <button data-tab="perfil" class="dash-button"><i class="fa-solid fa-user" style="color: #ffffff;"></i><br>Perfil</button>
-            <a href="../scripts/CerrarSesion.php"><button data-tab="logout" class="dash-button"><i class="fa-solid fa-gear" style="color: #ffffff;"></i><br>Logout</button>
+            <a href="../scripts/CerrarSesion.php">
+                <button data-tab="logout" class="dash-button"><i class="fa-solid fa-gear" style="color: #ffffff;"></i><br>Logout</button>
+            </a>
         </div>
     </div>
     <!--Main Content-->
