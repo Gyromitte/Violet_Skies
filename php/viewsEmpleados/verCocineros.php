@@ -21,7 +21,7 @@ echo "<table class='table table-hover mt-3'>
                     <th>Teléfono</th>
                     <th>Correo</th>
                     <th>Tipo</th>
-                    <th style='align-content': center;><th>
+                    <th style='align-content': center;></th>
                 </tr>
             </thead>
             <tbody>";
