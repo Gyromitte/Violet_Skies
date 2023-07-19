@@ -8,10 +8,11 @@ $rfc = $_POST['rfc'];
 $correo = $_POST['correo'];
 $tipo = filter_input(INPUT_POST, 'tipoUsuario', FILTER_SANITIZE_FULL_SPECIAL_CHARS);
 
-print_r($_POST);
+//Debugear: print_r($_POST);
 
 // Checar si el empleado ya está registrado en la tabla EMPLEADOS
-$consultaEmpleado = "SELECT * FROM EMPLEADOS WHERE CUENTA IN (SELECT ID FROM CUENTAS WHERE CORREO = :correo AND TIPO_CUENTA = 'EMPLEADO')";
+$consultaEmpleado = "SELECT * FROM EMPLEADOS WHERE CUENTA IN 
+(SELECT ID FROM CUENTAS WHERE CORREO = :correo AND TIPO_CUENTA = 'EMPLEADO')";
 $parametrosEmpleado = array(':correo' => $correo);
 $resultadoEmpleado = $db->seleccionarPreparado($consultaEmpleado, $parametrosEmpleado);
 

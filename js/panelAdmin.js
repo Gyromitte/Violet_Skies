@@ -89,44 +89,37 @@ function updateModalContent(formType, idEmpleado) {
           <button type="button" class="btn btn-primary btn-modal" data-bs-dismiss="modal">Cancelar</button>
         </form>
       `;
-      // Asignar el contenido al formulario del modal
+      //Asignar el contenido al formulario del modal
       modalForm.innerHTML = formContent;
 
-      // Obtener el formulario después de haberlo asignado al DOM
+      //Obtener el formulario después de haberlo asignado al DOM
       form = document.querySelector('#formularioEmpleado');
 
-      // Agregar evento de envío del formulario
+      //Agregar evento de envio al formulario
       form.addEventListener('submit', function(event) {
-        event.preventDefault(); // Evitar el envío del formulario por defecto
+        event.preventDefault(); //Para que la pagina no de refresh al dar submit
 
-        // Crear instancia de XMLHttpRequest
+        //Solicitud AJAX
         var xhr = new XMLHttpRequest();
-
-        // Configurar la solicitud
+        //Configurar la solicitud
         xhr.open("POST", "guardarEmpleado.php", true);
         xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
-
-        // Obtener los datos del formulario
+        //Obtener los datos del formulario
         var rfc = form.elements['RFC'].value;
         var correo = form.elements['CORREO'].value;
         var tipoUsuario = form.elements['tipoUsuario'].value;
-
-        // Crear el cuerpo de la solicitud
+        //Como se va enviar la solicitud: un string
         var formData = 'rfc=' + encodeURIComponent(rfc) + '&correo=' + (correo) + '&tipoUsuario=' + encodeURIComponent(tipoUsuario);
-        console.log(formData);
-        // Definir la función de respuesta
         xhr.onreadystatechange = function() {
           if (xhr.readyState === XMLHttpRequest.DONE && xhr.status === 200) {
-            // Manejar la respuesta aquí
+            //Manejo de la respuesta:
             var respuesta = xhr.responseText;
             document.getElementById('mensajeDiv').innerHTML = respuesta;
           }
         };
-
-        // Enviar el formulario
+        //Enviar el formulario
         xhr.send(formData);
       });
-
       break;
     case "@eliminarEmpleado":
       modalTitle.textContent = "Eliminar a un Empleado";
