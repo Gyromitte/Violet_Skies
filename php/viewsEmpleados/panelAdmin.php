@@ -2,7 +2,7 @@
 <!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
 <!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
 <!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
-<!--[if gt IE 8]>      <html class="no-js"> <!--<![endif]-->
+<!--[if gt IE 8]>      <html class="no-js"> <!-<![endif]-->
 <html>
 
 <head>
@@ -32,6 +32,14 @@
             <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="#">upgrade your browser</a> to improve your experience.</p>
         <![endif]-->
     <!--NavBar-->    
+    <?php
+        session_start();
+        if (!isset($_SESSION["access"]) || $_SESSION["access"] !== 3) {
+            echo"No tienes acceso a esta pagina";
+            header("refresh:2;/index.html");
+        }
+    ?>
+
     <nav>
         <div class="nav-menu">
             <button id="nav-button">
@@ -44,20 +52,22 @@
         <div class="nav-user">
             <i class="fa-solid fa-bell" style="color: #ffffff;"></i>
             <div id="nav-photo-user"></div>
-            Username
+            <?php echo $_SESSION["name"];?>
         </div>
     </nav>
     <!--DashBoard-->
     <div id="dash-board">
         <div id="dash-board-content">
             <div id="dash-photo-user"></div>
-            Username<br>
+            <?php echo $_SESSION["name"];?><br>
             Position<br><br>
             <button data-tab="home" class="dash-button"><i class="fa-solid fa-house" style="color: #ffffff;"></i><br>Home</button>
             <button data-tab="eventos" class="dash-button"><i class="fa-solid fa-calendar-days" style="color: #ffffff;"></i><br>Eventos</button>
             <button data-tab="empleados" class="dash-button"><i class="fa-solid fa-briefcase" style="color: #ffffff;"></i><br>Empleados</button>
             <button data-tab="perfil" class="dash-button"><i class="fa-solid fa-user" style="color: #ffffff;"></i><br>Perfil</button>
-            <button data-tab="configuracion" class="dash-button"><i class="fa-solid fa-gear" style="color: #ffffff;"></i><br>Configuracion</button>
+            <a href="../scripts/CerrarSesion.php">
+                <button data-tab="logout" class="dash-button"><i class="fa-solid fa-gear" style="color: #ffffff;"></i><br>Logout</button>
+            </a>
         </div>
     </div>
     <!--Main Content-->
@@ -133,7 +143,11 @@
             </div>
         </div>
         <div id="perfil" class="tab-content">
-            <p class="test">Yo soy, perfiles.</p>
+            <h3 class="test" style="text-align:center";>
+                PERFIL
+                <i class="fa-solid fa-briefcase" style="color: #ffffff;"></i>
+            </h3>
+            <?php include "../viewsPerfil/verPerfil.php"?>
         </div>
         <div id="configuracion" class="tab-content">
             <p class="test">Yo soy, configuracion.</p>

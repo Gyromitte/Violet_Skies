@@ -161,3 +161,14 @@ nav{
     width: 40% !important;
 }
 
+.container {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .personal-info,
+  .event-history {
+    flex: 1;
+    
+  }
+  
