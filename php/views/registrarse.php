@@ -123,11 +123,10 @@
             <label class="form-label" name="ckpass">Comprobar Contraseña: </label>
             <input class="form-control" type="password" name="ckpass" placeholder="Comprobar Contraseña"><br><br>
             <button class="loginButton" type="submit">Registrarse</button>
+            <?php
+                $tipo="EMPLEADO";
+            ?>
         </form>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Save changes</button>
       </div>
     </div>
   </div>
@@ -156,12 +155,11 @@
             <input class="form-control" type="password" name="pass" placeholder="Contraseña"><br><br>
             <label class="form-label" name="ckpass">Comprobar Contraseña: </label>
             <input class="form-control" type="password" name="ckpass" placeholder="Comprobar Contraseña"><br><br>
-            <button class="loginButton" type="submit">Iniciar Sesion</button>
+            <button class="loginButton" type="submit">Iniciar Sesion</button>   
+            <?php
+                $tipo="CLIENTE";
+            ?>
         </form>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Save changes</button>
       </div>
     </div>
   </div>

@@ -38,16 +38,21 @@
             $db=new Database();
             $db->conectarBD();
             extract($_POST);
-            $hash=password_hash($pass,PASSWORD_DEFAULT);
-
-            $cadena="INSERT INTO CUENTAS(NOMBRE, AP_PATERNO,AP_MATERNO, CORREO, 
-            CONTRASEÑA, TELEFONO,TIPO_CUENTA) VALUES('$user','$hash')";
-
-            $db->ejecutarSQL($cadena);
-            $db->desconectarBD();
-
-            echo"<div class='container'>Usuario Registrado</div>";
-            header("refresh:4; ../views/login.php");
+            if($pass==$ckpass){
+                $hash=password_hash($pass,PASSWORD_DEFAULT);
+                
+                $cadena="INSERT INTO CUENTAS(NOMBRE, AP_PATERNO,AP_MATERNO, CORREO, 
+                CONTRASEÑA, TELEFONO,TIPO_CUENTA) VALUES('$nom','$ap','$am','$usu','$hash','$cel','$tipo')";
+    
+                $db->ejecutarSQL($cadena);
+                $db->desconectarBD();
+                echo"<div class='container'>Usuario Registrado</div>";
+                header("refresh:4; ../views/login.php");
+            }
+            else{
+                echo"Contrasena no corresponde";
+                header("refresh:4; ../views/registrarse.php");
+            }
         ?>
     </div>
 </body>
