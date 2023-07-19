@@ -25,7 +25,7 @@
 <body >
 
 <!--NavBar Pantalla Completa-->
-<div class="element">
+<div class="tab-content">
 <nav class="navbar navbar-default row">
   <div class="companySection col-sm-auto">
       <!--Company Logo-->
@@ -63,7 +63,7 @@
             <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="#">upgrade your browser</a> to improve your experience.</p>
         <![endif]-->
     <!--NavBar para movil-->    
-    <div class="tab-content">
+    <div class="element fixed-top">
   <nav>
   <div class="nav-menu">
     <button id="nav-button">
@@ -71,20 +71,12 @@
     </button>
     Hoteleria
   </div>
-  <h2><span id="fecha"></span></h2>
-  <div class="nav-user">
-    <i class="fa-solid fa-bell" style="color: #ffffff;"></i>
-    <div id="nav-photo-user"></div>
-    Username
-  </div>
 </nav>
-
+<div >
+  <div class="d-block overflow-hidden">
 <!--DashBoard-->
-<div id="dash-board">
-  <div id="dash-board-content">
-    <div id="dash-photo-user"></div>
-    Username<br>
-    Position<br><br>
+<div class="d-block" style="overflow: hidden;" id="dash-board">
+  <div  id="dash-board-content">
     <button data-tab="home" class="dash-button"><i class="fa-solid fa-house" style="color: #ffffff;"></i><br>Home</button>
     <button data-tab="eventos" class="dash-button"><i class="fa-solid fa-calendar-days" style="color: #ffffff;"></i><br>Eventos</button>
     <button data-tab="empleados" class="dash-button"><i class="fa-solid fa-briefcase" style="color: #ffffff;"></i><br>Empleados</button>
@@ -93,6 +85,9 @@
   </div>
 </div>
 </div>
+  </div>
+</div>
+
 
 
 <!--card de titulo -->
@@ -204,6 +199,5 @@
 
     <script src="/js/filtroEventos.js"></script>
     <script src="/bootstrap/js/bootstrap.js"></script>
-    <script src="/js/trabajodinamicTable.js"></script>
-</body>
+   </body>
 </html>
