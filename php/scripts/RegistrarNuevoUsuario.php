@@ -6,9 +6,9 @@
     <link rel="stylesheet" href="/bootstrap/css/bootstrap.min.css">
     <title>Login</title>
     <style>
-        *{
+        /*{
             background-color: rgb(27, 31, 59);
-        }
+        }*/
         h1{
             text-align: center;
             color:rgb(131, 103, 199);
@@ -33,14 +33,26 @@
 </head>
 <body>
     <div>
-        <?php
-            include '../dataBase.php';
+         <?php
+            include'../dataBase.php';
             $db=new Database();
             $db->conectarBD();
             extract($_POST);
+            if($pass==$ckpass){
+                $hash=password_hash($pass,PASSWORD_DEFAULT);
+                
+                $cadena="INSERT INTO CUENTAS(NOMBRE, AP_PATERNO,AP_MATERNO, CORREO, 
+                CONTRASEÑA, TELEFONO,TIPO_CUENTA) VALUES('$nom','$ap','$am','$usu','$hash','$cel','$tipo')";
 
-            $db->Login("$usu","$pass");
-            $db->desconectarBD();
+                $db->ejecutarSQL($cadena);
+                $db->desconectarBD();
+                echo"<div class='container'>Usuario Registrado</div>";
+                header("refresh:4; ../views/login.php");
+            }
+            else{
+                echo"Contrasena no corresponde";
+                header("refresh:4; ../views/registrarse.php");
+            }
         ?>
     </div>
 </body>
