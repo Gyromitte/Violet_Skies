@@ -4,7 +4,7 @@ $db = new Database();
 $db->conectarBD();
 
 // Obtener los datos del formulario de manera segura
-$rfc = filter_input(INPUT_POST, 'RFC', FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+$rfc = $_POST['rfc'];
 $correo = $_POST['correo'];
 $tipo = filter_input(INPUT_POST, 'tipoUsuario', FILTER_SANITIZE_FULL_SPECIAL_CHARS);
 
