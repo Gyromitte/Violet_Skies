@@ -140,6 +140,7 @@
         </div>
 
         <!--Modal-->
+        <!--Modal-->
         <div class="modal fade" id="mainModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div class="modal-dialog">
                 <div class="modal-content custom-modal">

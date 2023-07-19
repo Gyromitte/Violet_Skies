@@ -51,7 +51,8 @@ if (isset($_GET['busqueda'])) {
         echo '<ul class="dropdown-menu custom-drop-menu">';
         echo '<li><a class="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#mainModal" data-bs-whatever="@editarEmpleado" 
         data-id="' . $registro->CUENTA . '">Editar</a></li>';
-        echo '<li><a class="dropdown-item" href="#">Eliminar</a></li>';
+        echo '<li><a class="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#mainModal" data-bs-whatever="@eliminarEmpleado" 
+        data-id="' . $registro->CUENTA . '">Eliminar</a></li>';
         echo '</ul>';
         echo '</div>';
         echo "</td>";

@@ -85,8 +85,10 @@ function updateModalContent(formType, idEmpleado) {
               <option value="cocina">Cocinero</option>
             </select>
           </div>
-          <button type="submit" class="btn btn-primary btn-modal">Registrar</button>
+          <div class="d-flex justify-content-center">
+          <button type="submit" class="btn btn-primary btn-modal me-2">Modificar</button>
           <button type="button" class="btn btn-primary btn-modal" data-bs-dismiss="modal">Cancelar</button>
+          </div>
         </form>
       `;
       //Asignar el contenido al formulario del modal
@@ -123,7 +125,50 @@ function updateModalContent(formType, idEmpleado) {
       break;
     case "@eliminarEmpleado":
       modalTitle.textContent = "Eliminar a un Empleado";
-      formContent = "<h5>CUIDADO! Esta acción no es reversible</h5>";
+      //Conseguir el modal header para cambiarle el color
+      var modalHeader = document.getElementById('modal-header');
+      modalHeader.classList.add('modal-header-warning');
+      //Realizar una solicitud AJAX para obtener los datos del empleado
+      var xhr = new XMLHttpRequest();
+      xhr.onreadystatechange = function() {
+        if (xhr.readyState === XMLHttpRequest.DONE) {
+          if (xhr.status === 200) {
+            //Parsear la respuesta JSON
+            var empleado = JSON.parse(xhr.responseText);
+            //Debug: console.log(empleado);
+            //Actualizar el contenido del formulario con los datos obtenidos
+            formContent = `
+              <form>
+                <h5>Empleado: </h5>
+                <h6 class="mb-3">${empleado.NOMBRE} ${empleado.AP_PATERNO} ${empleado.AP_MATERNO}</h6>
+                <h5>Telefono: </h5>
+                <h6 class="mb-3">${empleado.TELEFONO}</h6>
+                <h5>Correo: </h5>
+                <h6 class="mb-3">${empleado.CORREO}</h6>
+                <h5>RFC: </h5>
+                <h6 class="mb-3">${empleado.RFC}</h6>
+                <h5>Tipo: </h5>
+                <h6 class="mb-3">${empleado.TIPO}</h6>
+                <h4><strong>¿Seguro de que quieres eliminar este empleado?</strong></h4>
+                <div class="d-flex justify-content-center">
+                <button type="submit" class="btn btn-primary btn-modal me-2">Modificar</button>
+                <button type="button" class="btn btn-primary btn-modal" data-bs-dismiss="modal">Cancelar</button>
+                </div>
+              </form>
+
+              
+            `;
+            // Asignar el contenido al formulario del modal
+            modalForm.innerHTML = formContent;
+          } else {
+            console.error("Error en la solicitud AJAX");
+          }
+        }
+      };
+      //Hacer la solicitud al script PHP y pasar el ID del empleado
+      xhr.open("GET", "obtenerEmpleado.php?id=" + idEmpleado, true);
+      console.log(idEmpleado);
+      xhr.send();
       break;
     case "@editarEmpleado":
       modalTitle.textContent = "Modificar datos";
@@ -142,6 +187,8 @@ function updateModalContent(formType, idEmpleado) {
                 <h6 class="mb-3">${empleado.NOMBRE} ${empleado.AP_PATERNO} ${empleado.AP_MATERNO}</h6>
                 <h5>Telefono: </h5>
                 <h6 class="mb-3">${empleado.TELEFONO}</h6>
+                <h5>Correo: </h5>
+                <h6 class="mb-3">${empleado.CORREO}</h6>
                 <div class="mb-3">
                   <label class="control-label">RFC</label>
                   <input type="text" name="rfc" placeholder="Ingresa el RFC" class="form-control" required value="${empleado.RFC}">
@@ -153,8 +200,10 @@ function updateModalContent(formType, idEmpleado) {
                     <option value="cocina" ${empleado.TIPO === 'COCINA' ? 'selected' : ''}>Cocinero</option>
                   </select>
                 </div>
-                <button type="submit" class="btn btn-primary btn-modal">Modificar</button>
+                <div class="d-flex justify-content-center">
+                <button type="submit" class="btn btn-primary btn-modal me-2">Modificar</button>
                 <button type="button" class="btn btn-primary btn-modal" data-bs-dismiss="modal">Cancelar</button>
+                </div>
               </form>
             `;
             // Asignar el contenido al formulario del modal
