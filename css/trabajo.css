@@ -280,8 +280,11 @@ h1{
     overflow:hidden;
   }
 
-
-  
+  @media (min-width: 768px) {
+    .element {
+      display: none;
+    }
+  }
 /* Estilos para dispositivos moviles */
 @media (max-width: 767px) {
     .heroContainer {
@@ -466,16 +469,6 @@ nav{
 .search-bar{
     width: 40% !important;
 }
-/* Estilo para el dash-board lateral */
-#dash-board {
-    /* ... */
-  }
-  
-  /* Estilo para abrir el dash-board */
-  #dash-board.dashboard-open {
-    /* ... */
-  }
-  
   /* Estilo para el overlay */
   #overlay {
     position: fixed;
@@ -487,8 +480,11 @@ nav{
     z-index: 2; /* Asegúrate de que el z-index sea mayor que el del dash-board */
   }
   
+ 
 
   }
+
+
 
   
  
