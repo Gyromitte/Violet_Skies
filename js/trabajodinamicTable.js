@@ -22,15 +22,4 @@ document.addEventListener('DOMContentLoaded', function() {
       });
     });
   });
-
-  // JavaScript para abrir y cerrar el dash-board y el overlay
-const navButton = document.getElementById('nav-button');
-const dashBoard = document.getElementById('dash-board');
-const overlay = document.getElementById('overlay');
-
-navButton.addEventListener('click', function() {
-  dashBoard.classList.toggle('dashboard-open');
-  overlay.classList.toggle('overlay-open');
-});
-
   
