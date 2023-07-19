@@ -9,6 +9,11 @@ body{
 }
 /*NavBar*/
 nav{
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 99;
     background-color: #8367c7;
     font-family: 'Patua One', cursive;
     padding: 0.5em;
@@ -87,8 +92,11 @@ nav{
 }
 
 /*Main*/
+#main{
+    margin-top: 86px;
+}
 .main-dash-open {
-    margin-left: 300px; /* Cambia el valor según sea necesario para ajustar el desplazamiento */
+    margin-left: 300px;
     transition: margin-left  0.3s ease; /* Agrega una transición suave para una animación fluida */
 }
 .test{
