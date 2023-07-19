@@ -6,9 +6,9 @@
     <link rel="stylesheet" href="/bootstrap/css/bootstrap.min.css">
     <title>Login</title>
     <style>
-        *{
+        /*{
             background-color: rgb(27, 31, 59);
-        }
+        }*/
         h1{
             text-align: center;
             color:rgb(131, 103, 199);
@@ -43,7 +43,7 @@
                 
                 $cadena="INSERT INTO CUENTAS(NOMBRE, AP_PATERNO,AP_MATERNO, CORREO, 
                 CONTRASEÑA, TELEFONO,TIPO_CUENTA) VALUES('$nom','$ap','$am','$usu','$hash','$cel','$tipo')";
-    
+
                 $db->ejecutarSQL($cadena);
                 $db->desconectarBD();
                 echo"<div class='container'>Usuario Registrado</div>";

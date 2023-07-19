@@ -58,7 +58,22 @@
             background-color: rgba(103, 33, 122, 0.5);
             background-blend-mode: overlay;
         }
+        .alert{
+            text-align: center;
+        }
     </style>
+    <script>
+        function onChange() {
+            const password = document.querySelector('input[name=pass]');
+            const confirm = document.querySelector('input[name=ckpass]');
+            if (confirm.value === password.value) {
+                confirm.setCustomValidity('');
+            } 
+            else {
+                confirm.setCustomValidity('Passwords do not match');
+            }
+        }
+    </script>
 </head>
 <body>
     <nav class="navbar navbar-default row">
@@ -119,13 +134,11 @@
             <label class="form-label" name="cel">Numero de Celular: </label> 
             <input class="form-control" type="text" name="cel" placeholder="Telefono"><br><br>
             <label class="form-label" name="pass">Contraseña: </label>
-            <input class="form-control" type="password" name="pass" placeholder="Contraseña"><br><br>
+            <input class="form-control" type="password" name="pass" onChange="onChange()" placeholder="Contraseña"><br><br>
             <label class="form-label" name="ckpass">Comprobar Contraseña: </label>
-            <input class="form-control" type="password" name="ckpass" placeholder="Comprobar Contraseña"><br><br>
+            <input class="form-control" type="password" name="ckpass" onChange="onChange()" placeholder="Comprobar Contraseña"><br><br>
             <button class="loginButton" type="submit">Registrarse</button>
-            <?php
-                $tipo="EMPLEADO";
-            ?>
+            
         </form>
       </div>
     </div>
@@ -152,9 +165,9 @@
             <label class="form-label" name="cel">Numero de Celular: </label> 
             <input class="form-control" type="text" name="cel" placeholder="Telefono"><br><br>
             <label class="form-label" name="pass">Contraseña: </label>
-            <input class="form-control" type="password" name="pass" placeholder="Contraseña"><br><br>
+            <input class="form-control" type="password" name="pass" onChange="onChange()" placeholder="Contraseña"><br><br>
             <label class="form-label" name="ckpass">Comprobar Contraseña: </label>
-            <input class="form-control" type="password" name="ckpass" placeholder="Comprobar Contraseña"><br><br>
+            <input class="form-control" type="password" name="ckpass" onChange="onChange()" placeholder="Comprobar Contraseña"><br><br>
             <button class="loginButton" type="submit">Iniciar Sesion</button>   
             <?php
                 $tipo="CLIENTE";
@@ -164,7 +177,6 @@
     </div>
   </div>
 </div>
-
     <script src="https://kit.fontawesome.com/b60c246061.js" crossorigin="anonymous"></script>
     <script src="/bootstrap/js/bootstrap.min.js"></script>
 </body>
