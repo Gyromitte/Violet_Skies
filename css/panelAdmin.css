@@ -149,12 +149,27 @@ nav{
 .modal-content{
     background-color: #5603ad;
 }
+.modal-header{
+    background-color: #5603ad;
+}
+.modal-header-warning{
+    background-color: #dc3545;
+}
 .btn-close-custom{
     background-color: white;
 }
 .btn-modal{
     border-radius: 2em;
     background-color: #b14aed;
+    border: 2px solid white;
+}
+.btn-modal-warning{
+    border-radius: 2em;
+    background-color: #dc3545;
+    border: 2px solid white;
+}
+.btn-modal-warning:hover{
+    background-color: #a33d42;
     border: 2px solid white;
 }
 

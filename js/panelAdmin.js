@@ -63,10 +63,13 @@ function updateModalContent(formType, idEmpleado) {
   var formContent = "";
   var modalTitle = document.querySelector('#mainModal .modal-title');
   var form;
+  //Conseguir el modal header para cambiarle el color
+  var modalHeader = document.querySelector('.modal-header');
 
   switch (formType) {
     case "@registrarEmpleado":
       modalTitle.textContent = "Registrar un Empleado";
+      modalHeader.classList.remove('modal-header-warning');
       formContent = `
         <div id="mensajeDiv" method="POST"></div>
         <form id="formularioEmpleado">
@@ -86,7 +89,7 @@ function updateModalContent(formType, idEmpleado) {
             </select>
           </div>
           <div class="d-flex justify-content-center">
-          <button type="submit" class="btn btn-primary btn-modal me-2">Modificar</button>
+          <button type="submit" class="btn btn-primary btn-modal me-2">Registrar</button>
           <button type="button" class="btn btn-primary btn-modal" data-bs-dismiss="modal">Cancelar</button>
           </div>
         </form>
@@ -125,8 +128,7 @@ function updateModalContent(formType, idEmpleado) {
       break;
     case "@eliminarEmpleado":
       modalTitle.textContent = "Eliminar a un Empleado";
-      //Conseguir el modal header para cambiarle el color
-      var modalHeader = document.getElementById('modal-header');
+      //Cambiar el color del header a rojo
       modalHeader.classList.add('modal-header-warning');
       //Realizar una solicitud AJAX para obtener los datos del empleado
       var xhr = new XMLHttpRequest();
@@ -151,12 +153,10 @@ function updateModalContent(formType, idEmpleado) {
                 <h6 class="mb-3">${empleado.TIPO}</h6>
                 <h4><strong>¿Seguro de que quieres eliminar este empleado?</strong></h4>
                 <div class="d-flex justify-content-center">
-                <button type="submit" class="btn btn-primary btn-modal me-2">Modificar</button>
+                <button type="submit" class="btn btn-primary btn-modal-warning me-2">Eliminar</button>
                 <button type="button" class="btn btn-primary btn-modal" data-bs-dismiss="modal">Cancelar</button>
                 </div>
               </form>
-
-              
             `;
             // Asignar el contenido al formulario del modal
             modalForm.innerHTML = formContent;
@@ -172,6 +172,7 @@ function updateModalContent(formType, idEmpleado) {
       break;
     case "@editarEmpleado":
       modalTitle.textContent = "Modificar datos";
+      modalHeader.classList.remove('modal-header-warning');
       //Realizar una solicitud AJAX para obtener los datos del empleado
       var xhr = new XMLHttpRequest();
       xhr.onreadystatechange = function() {
