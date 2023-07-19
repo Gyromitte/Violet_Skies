@@ -31,11 +31,13 @@
             left: 0;
             color:sienna;
             background-image: url(/images/mesero.jpg);
+            background-size: cover;
         }
         .right {
             right: 0;
             color:blueviolet;
-            background-image:url(/images/heroImage.jpg)
+            background-image:url(/images/evento.jpeg);
+            background-size: cover;
         }
         .centered {
             position: absolute;
@@ -48,14 +50,14 @@
             cursor:pointer;
             color: white;
             text-shadow: 2px rgba(227, 122, 57,0.5);
-            background-color: rgba(117, 62, 28, 0.5);
+            background-color: rgba(117, 62, 28, 0.8);
             background-blend-mode: overlay;
         }
         .right:hover{
             cursor:pointer;
             color: white;
             text-shadow: 2px rgba(210, 65, 250,0.5);
-            background-color: rgba(103, 33, 122, 0.5);
+            background-color: rgba(103, 33, 122, 0.7);
             background-blend-mode: overlay;
         }
         .alert{
@@ -76,7 +78,7 @@
     </script>
 </head>
 <body>
-    <nav class="navbar navbar-default row">
+    <nav class="navbar navbar-default row fixed-top">
         <div class="companySection col-sm-auto">
             <!--Company Logo-->
             <div class="navbar-header">
@@ -134,11 +136,10 @@
             <label class="form-label" name="cel">Numero de Celular: </label> 
             <input class="form-control" type="text" name="cel" placeholder="Telefono"><br><br>
             <label class="form-label" name="pass">Contraseña: </label>
-            <input class="form-control" type="password" name="pass" onChange="onChange()" placeholder="Contraseña"><br><br>
+            <input class="form-control" type="password" name="pass" onkeyup="onChange()" placeholder="Contraseña"><br><br>
             <label class="form-label" name="ckpass">Comprobar Contraseña: </label>
-            <input class="form-control" type="password" name="ckpass" onChange="onChange()" placeholder="Comprobar Contraseña"><br><br>
+            <input class="form-control" type="password" name="ckpass" onkeyup="onChange()" placeholder="Comprobar Contraseña"><br><br>
             <button class="loginButton" type="submit">Registrarse</button>
-            
         </form>
       </div>
     </div>
@@ -165,10 +166,10 @@
             <label class="form-label" name="cel">Numero de Celular: </label> 
             <input class="form-control" type="text" name="cel" placeholder="Telefono"><br><br>
             <label class="form-label" name="pass">Contraseña: </label>
-            <input class="form-control" type="password" name="pass" onChange="onChange()" placeholder="Contraseña"><br><br>
+            <input class="form-control" type="password" name="pass" onkeyup="onChange()" placeholder="Contraseña"><br><br>
             <label class="form-label" name="ckpass">Comprobar Contraseña: </label>
-            <input class="form-control" type="password" name="ckpass" onChange="onChange()" placeholder="Comprobar Contraseña"><br><br>
-            <button class="loginButton" type="submit">Iniciar Sesion</button>   
+            <input class="form-control" type="password" name="ckpass" onkeyup="onChange()" placeholder="Comprobar Contraseña"><br><br>
+            <button class="loginButton" type="submit">Registrarse</button>   
             <?php
                 $tipo="CLIENTE";
             ?>

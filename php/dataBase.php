@@ -59,6 +59,32 @@
                 echo $e->getMessage();
             }
         }
+        function seleccionarPreparado($consulta, $parametros)
+        {
+            try
+            {
+                $statement = $this->PDO_local->prepare($consulta);
+                $statement->execute($parametros);
+                $fila = $statement->fetchAll(PDO::FETCH_OBJ);
+                return $fila;
+            }
+            catch(PDOException $e)
+            {
+                echo $e->getMessage();
+            }
+        }
+        function ejecutarPreparado($consulta, $parametros)
+        {
+            try
+            {
+                $statement = $this->PDO_local->prepare($consulta);
+                $statement->execute($parametros);
+            }
+            catch(PDOException $e)
+            {
+                echo $e->getMessage();
+            }
+        }
         function Login($usu,$pass){
             try{
                 $ver = false;
