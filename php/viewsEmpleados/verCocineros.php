@@ -7,7 +7,8 @@ $conexion->conectarBD();
 $consulta = "SELECT E.ID, C.NOMBRE, C.AP_PATERNO, C.AP_MATERNO, E.RFC, C.TELEFONO, C.CORREO, E.TIPO, E.CUENTA
                  FROM EMPLEADOS E
                  INNER JOIN CUENTAS C ON E.CUENTA = C.ID
-                 WHERE E.TIPO = 'COCINA'";
+                 WHERE E.TIPO = 'COCINA'
+                 AND C.ESTADO = 'ACTIVO'";
 
 $tabla = $conexion->seleccionar($consulta);
 

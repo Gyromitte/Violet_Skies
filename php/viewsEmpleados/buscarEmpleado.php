@@ -10,10 +10,10 @@ if (isset($_GET['busqueda'])) {
   $consulta = "SELECT E.ID, C.NOMBRE, C.AP_PATERNO, C.AP_MATERNO, E.RFC, C.TELEFONO, C.CORREO, E.TIPO, E.CUENTA
     FROM EMPLEADOS E
     INNER JOIN CUENTAS C ON E.CUENTA = C.ID
-    WHERE C.CORREO = '$busqueda'
+    WHERE (C.CORREO = '$busqueda'
     OR C.NOMBRE = '$busqueda'
     OR C.AP_PATERNO = '$busqueda'
-    OR C.AP_MATERNO = '$busqueda'";
+    OR C.AP_MATERNO = '$busqueda') AND C.ESTADO = 'ACTIVO'";
   $tabla = $conexion->seleccionar($consulta);
 
   if (empty($tabla)) {
@@ -29,7 +29,7 @@ if (isset($_GET['busqueda'])) {
                     <th>Teléfono</th>
                     <th>Correo</th>
                     <th>Tipo</th>
-                    <th style='align-content': center;><th>
+                    <th style='align-content': center;></th>
                 </tr>
             </thead>
             <tbody>";
