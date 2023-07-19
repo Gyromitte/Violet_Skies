@@ -74,29 +74,74 @@
             }
         }
     </script>
+     <script src="/js/panelAdmin.js" async defer></script>
 </head>
 <body>
+    <!--NavBar Pantalla Completa-->
+<div class="tab-content">
     <nav class="navbar navbar-default row">
-        <div class="companySection col-sm-auto">
-            <!--Company Logo-->
-            <div class="navbar-header">
-                <img id="company-logo" class="img-fluid" src="/images/company_logo.png" alt="companyLogo">
-                <a class="no-underline" href="/index.html" id="company-name">Violet Skies</a>   
-            </div>      
-            <!--Tabs-->
-            <ul class="nav list-inline">
-                <li class="mr-3 tabs">
-                    <a class="no-underline" href="/html/about-us/about us.html">Nosotros</a>
-                </li>
-                <li class="mr-3 tabs">
-                    <a class="no-underline" href="#">Agendar Evento</a>
-                </li>
-                <li class="mr-3 tabs">
-                    <a class="no-underline" href="/html/trabajo.html">Trabajo</a>
-                </li>
-            </ul>
-        </div>         
+      <div class="companySection col-sm-auto">
+          <!--Company Logo-->
+          <div class="navbar-header">
+              <img id="company-logo" class="img-fluid" src="/images/company_logo.png" alt="companyLogo">
+                  <a class="no-underline" href="/index.html" id="company-name">Violet Skies</a>
+          </div>      
+          <!--Tabs-->
+          <ul class="nav list-inline">
+              <li class="mr-3 tabs">
+                  <a class="no-underline" href="/html/about-us/about us.html">Nosotros</a>
+              </li>
+              <li class="mr-3 tabs">
+                  <a class="no-underline" href="#">Agendar Evento</a>
+              </li>
+              <li class="mr-3 tabs">
+                  <a class="no-underline" href="/html/trabajo.html">Trabajo</a>
+              </li>
+          </ul>
+      </div>         
+      <!--Login-section-->
+      <div class="login-section col-sm-auto" >
+          <button class="loginButton">
+              <i class="fa-solid fa-door-open" style="color: #ffffff;"></i>
+              <a class="no-underline" href="/php/views/login.php">Acceder</a>   
+          </button>
+          <button class="loginButton">
+              <i class="fa-solid fa-user" style="color: #ffffff;"></i>
+              <a class="no-underline" href="#">Registrarse</a>
+          </button>
+      </div>
     </nav>
+    </div>
+      <!--[if lt IE 7]>
+                <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="#">upgrade your browser</a> to improve your experience.</p>
+            <![endif]-->
+        <!--NavBar para movil-->    
+        <div class="element fixed-top">
+      <nav>
+      <div class="nav-menu">
+        <button id="nav-button">
+          <i class="fa-solid fa-bars" style="color: #ffffff;"></i>
+        </button>
+        Hoteleria
+      </div>
+    </nav>
+    <div >
+      <div class="d-block overflow-hidden">
+    <!--DashBoard-->
+    <div class="d-block" style="overflow: hidden;" id="dash-board">
+      <div  id="dash-board-content">
+        <a data-tab="home" class="dash-button no-underline" href="/index.html"><i class="fa-solid fa-house" style="color: #ffffff;"></i><br>Home</a>
+        <a data-tab="eventos" class="dash-button no-underline" href="/html/about-us/about us.html"><i class="fa-solid fa-calendar-days"style="color: #ffffff;"></i><br>Nosotros</a>
+        <a data-tab="empleados" class="dash-button no-underline" href="trabajo.html"><i class="fa-solid fa-briefcase" style="color: #ffffff;"></i><br>Trabajo</a>
+        <a data-tab="perfil" class="dash-button no-underline" href="/php/views/login.php"><i class="fa-solid fa-door-open" style="color: #ffffff;"></i><br>Acceder</a>
+        <a data-tab="perfil" class="dash-button no-underline" href="/php/views/registrarse.php"><i class="fa-solid fa-user" style="color: #ffffff;"></i><br>Registrarsez</a>
+      </div>
+    </div>
+    </div>
+      </div>
+    </div>
+<!--main content-->    
+   
     <div class="container">
         <div class="row">
             <div class="split left" data-bs-toggle="modal" data-bs-target="#Empleado">
