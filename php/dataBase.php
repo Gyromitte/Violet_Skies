@@ -52,7 +52,7 @@
         {
             try
             {
-                $this->PDO_local->query($consulta);
+                return $this->PDO_local->query($consulta);
             }
             catch(PDOException $e)
             {
@@ -69,7 +69,7 @@
                 while($renglon = $consulta->fetch(PDO::FETCH_ASSOC)){
                     if($pass=== $renglon['CONTRASEÑA']){
                         $ver = true;
-                        $id=$renglon['ID'];
+                        $ID=$renglon['ID'];
                         $NOMBRE = $renglon['NOMBRE'];
                         $tipo = $renglon['TIPO_CUENTA'];
                         $ap_paterno=$renglon['AP_PATERNO'];
@@ -80,6 +80,7 @@
                 }
                 if($ver){
                     session_start();
+                    $_SESSION["ID"] = $ID; 
                     $_SESSION["name"] = $NOMBRE;
                     $_SESSION["telefono"] = $telefono;
                     $_SESSION["ap_paterno"] = $ap_paterno;

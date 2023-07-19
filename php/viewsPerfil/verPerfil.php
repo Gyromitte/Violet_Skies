@@ -71,7 +71,7 @@
             <div class="mb-3 row">
                 <label class="col-sm-2 col-form-label">Contraseña:</label>
                 <div class="col-sm-10">
-                    <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modalCambiarContrasena">Cambiar contraseña</button>
+                    <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modalCambiarContrasena" onclic="cambContraseña.php">Cambiar contraseña</button>
                 </div>
             </div>
         </div>
@@ -84,33 +84,9 @@
         </div>
     </div>
 
-    <div class="modal fade" id="modalCambiarContrasena" tabindex="-1" aria-labelledby="modalCambiarContrasenaLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="modalCambiarContrasenaLabel">Cambiar contraseña</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    <form action="cambContraseña.php" method="POST">
-                        <div class="mb-3">
-                            <label for="currentPassword" class="form-label">Contraseña actual:</label>
-                            <input type="password" class="form-control" id="contraseñaActual" name="currentPassword" required>
-                        </div>
-                        <div class="mb-3">
-                            <label for="newPassword" class="form-label">Nueva contraseña:</label>
-                            <input type="password" class="form-control" id="newPassword" name="newPassword" required>
-                        </div>
-                        <div class="mb-3">
-                            <label for="confirmPassword" class="form-label">Confirmar contraseña:</label>
-                            <input type="password" class="form-control" id="confirmPassword" name="confirmPassword" required>
-                        </div>
-                        <button type="submit" class="btn btn-primary">Guardar cambios</button>
-                    </form>
-                </div>
-            </div>
-        </div>
-    </div>
+    
+
+    <?php include_once 'cambContraseña.php'; ?>
 
 </body>
 </html>
