@@ -89,7 +89,7 @@ function updateModalContent(formType, idEmpleado) {
             </select>
           </div>
           <div class="d-flex justify-content-center">
-          <button type="submit" class="btn btn-primary btn-modal me-2">Registrar</button>
+          <button type="submit" class="btn btn-primary btn-modal me-2"><i class="fa-solid fa-address-card me-2" style="color: #ffffff;"></i>Registrar</button>
           <button type="button" class="btn btn-primary btn-modal" data-bs-dismiss="modal">Cancelar</button>
           </div>
         </form>
@@ -153,7 +153,7 @@ function updateModalContent(formType, idEmpleado) {
                 <h6 class="mb-3">${empleado.TIPO}</h6>
                 <h4><strong>¿Seguro de que quieres eliminar este empleado?</strong></h4>
                 <div class="d-flex justify-content-center">
-                <button type="submit" class="btn btn-primary btn-modal-warning me-2">Eliminar</button>
+                <button type="submit" class="btn btn-primary btn-modal-warning me-2"><i class="fa-solid fa-user-slash me-2" style="color: #ffffff;"></i>Eliminar</button>
                 <button type="button" class="btn btn-primary btn-modal" data-bs-dismiss="modal">Cancelar</button>
                 </div>
               </form>
@@ -202,7 +202,7 @@ function updateModalContent(formType, idEmpleado) {
                   </select>
                 </div>
                 <div class="d-flex justify-content-center">
-                <button type="submit" class="btn btn-primary btn-modal me-2">Modificar</button>
+                <button type="submit" class="btn btn-primary btn-modal me-2"><i class="fa-solid fa-pencil me-2" style="color: #ffffff;"></i>Modificar</button>
                 <button type="button" class="btn btn-primary btn-modal" data-bs-dismiss="modal">Cancelar</button>
                 </div>
               </form>

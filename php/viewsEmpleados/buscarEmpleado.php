@@ -50,9 +50,11 @@ if (isset($_GET['busqueda'])) {
         echo '</button>';
         echo '<ul class="dropdown-menu custom-drop-menu">';
         echo '<li><a class="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#mainModal" data-bs-whatever="@editarEmpleado" 
-        data-id="' . $registro->CUENTA . '">Editar</a></li>';
+        data-id="' . $registro->CUENTA . '">
+        <i class="fa-solid fa-pencil me-2" style="color: #ffffff;"></i>Editar</a></li>';
         echo '<li><a class="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#mainModal" data-bs-whatever="@eliminarEmpleado" 
-        data-id="' . $registro->CUENTA . '">Eliminar</a></li>';
+        data-id="' . $registro->CUENTA . '">
+        <i class="fa-solid fa-user-slash me-2" style="color: #ffffff;"></i>Eliminar</a></li>';
         echo '</ul>';
         echo '</div>';
         echo "</td>";

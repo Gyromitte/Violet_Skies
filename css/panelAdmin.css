@@ -126,7 +126,7 @@ nav{
     background-color: #b14aed;
   }
 .table-hover tbody tr:hover {
-    background-color: #f8f9fa;
+    background-color: #e0c3ee;
     color: #5603ad;
 }
 
@@ -138,6 +138,7 @@ nav{
 .custom-drop-menu{
     background-color: #5603ad;
     color: white !important;
+    border: 2px solid white;
 }
 .dropdown-item{
     color: white;
