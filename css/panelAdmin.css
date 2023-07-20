@@ -164,6 +164,10 @@ nav{
     background-color: #b14aed;
     border: 2px solid white;
 }
+.btn-modal:hover{
+    background-color: #7c56db;
+    border: 2px solid white;
+}
 .btn-modal-warning{
     border-radius: 2em;
     background-color: #dc3545;
@@ -180,7 +184,12 @@ nav{
     flex-direction: row;
     justify-content: space-between;
 }
-
+.btn-options{
+    background-color: #5603ad;
+}
+.btn-options:hover{
+    background-color: #b14aed;
+}
 .search-bar{
     width: 40% !important;
 }

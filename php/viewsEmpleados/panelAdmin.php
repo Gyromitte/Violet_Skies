@@ -101,20 +101,16 @@
                 <i class="fa-solid fa-address-card" style="color: #ffffff;"></i>
                 Registrar
             </button>
-            <button type="button" class="btn btn-danger border-2 btn-outline-light rounded-5 btn-options" data-bs-toggle="modal" data-bs-target="#mainModal" data-bs-whatever="@eliminarEmpleado">
-                <i class="fa-solid fa-user-slash" style="color: #ffffff;"></i>
-                Eliminar
-            </button>
             <br>
             <br>
             <!--Opciones de Vistas-->
             <div class="view-options">
                 <div>
-                    <button id="verCocineros" data-url="verCocineros.php"  type="button" class="ver-empleados btn btn-primary border-2 btn-outline-light rounded-5" data-bs-target="#mainModal">
+                    <button id="verCocineros" data-url="verCocineros.php"  type="button" class="btn-options ver-empleados btn btn-primary border-2 btn-outline-light rounded-5" data-bs-target="#mainModal">
                         <i class="fa-solid fa-utensils" style="color: #ffffff;"></i>
                         Ver Cocineros
                     </button>
-                    <button id="verMeseros" data-url="verMeseros.php" type="button" class="ver-empleados btn btn-primary border-2 btn-outline-light rounded-5" data-bs-target="#mainModal">
+                    <button id="verMeseros" data-url="verMeseros.php" type="button" class="btn-options ver-empleados btn btn-primary border-2 btn-outline-light rounded-5" data-bs-target="#mainModal">
                         <i class="fa-solid fa-bell-concierge" style="color: #ffffff;"></i>
                         Ver Meseros
                     </button>
