@@ -1,3 +1,6 @@
+//Variable para saber que tabla esta activa
+var currentTable;
+
 // Conseguir los elementos
 document.addEventListener('DOMContentLoaded', function() {
   var buttons = document.querySelectorAll('.ver-empleados');
@@ -26,7 +29,8 @@ document.addEventListener('DOMContentLoaded', function() {
             tableInfo.innerHTML = message; // Modificar el innerHTML en lugar de textContent
             contTable.innerHTML = xhr.responseText;
             // Limpiar la barra de búsqueda después de una búsqueda exitosa
-            busquedaInput.value = '';
+            //Bug donde al querer eliminar o editar el warning salia por que la barra estaba vacia
+            //busquedaInput.value = '';
           }
         };
         xhr.open('GET', "buscarEmpleado.php?busqueda=" + busquedaValor, true);
@@ -51,10 +55,13 @@ document.addEventListener('DOMContentLoaded', function() {
 function getMessageByButtonId(buttonId) {
   switch (buttonId) {
     case 'verCocineros':
+      currentTable = 'cocineros';
       return 'Mostrando a los cocineros: <i class="fas fa-utensils" style="color: #ffffff;"></i>'; 
     case 'verMeseros':
+      currentTable = 'meseros';
       return 'Mostrando a los meseros: <i class="fa-solid fa-bell-concierge" style="color: #ffffff;"></i>';
     case 'buscarEmpleado':
+      currentTable = 'busqueda';
       return 'Resultados de búsqueda: <i class="fa-solid fa-magnifying-glass" style="color: #ffffff;"></i>';
     default:
       return 'Mostrando información:';

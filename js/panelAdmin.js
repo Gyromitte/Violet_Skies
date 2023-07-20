@@ -46,6 +46,26 @@ tabs.forEach(function(tab) {
 var modal = document.getElementById("mainModal");
 var modalForm = document.getElementById("modal-form");
 
+//Checar cual tabla es la que se esta mostrando actualmente
+function checkCurrentTable(currentTable){
+  switch(currentTable)
+  { //Simular un click para refrescar los cambios
+    case 'cocineros':
+      btnCocineros.click();
+    break;
+    case 'meseros':
+      btnMeseros.click();
+    break;
+    case 'busqueda':
+      btnBusqueda.click();
+    break;
+  }
+}
+//Obtener botones para refrescar vistas
+var btnCocineros = document.getElementById('verCocineros');
+var btnMeseros = document.getElementById('verMeseros');
+var btnBusqueda = document.getElementById('buscarEmpleado');
+
 // Evento para los botones
 modal.addEventListener("show.bs.modal", function(event) {
   // Botón que activó el modal
@@ -124,52 +144,54 @@ function updateModalContent(formType, idEmpleado) {
         };
         //Enviar el formulario
         xhr.send(formData);
+        //Ver cual es la tabla activa para refrescar cualquier cambio
+        checkCurrentTable(currentTable);
       });
       break;
-    case "@eliminarEmpleado":
-      modalTitle.textContent = "Eliminar a un Empleado";
-      //Cambiar el color del header a rojo
-      modalHeader.classList.add('modal-header-warning');
-      //Realizar una solicitud AJAX para obtener los datos del empleado
-      var xhr = new XMLHttpRequest();
-      xhr.onreadystatechange = function() {
-        if (xhr.readyState === XMLHttpRequest.DONE) {
-          if (xhr.status === 200) {
-            //Parsear la respuesta JSON
-            var empleado = JSON.parse(xhr.responseText);
-            //Debug: console.log(empleado);
-            //Actualizar el contenido del formulario con los datos obtenidos
-            formContent = `
-              <form>
-                <h5>Empleado: </h5>
-                <h6 class="mb-3">${empleado.NOMBRE} ${empleado.AP_PATERNO} ${empleado.AP_MATERNO}</h6>
-                <h5>Telefono: </h5>
-                <h6 class="mb-3">${empleado.TELEFONO}</h6>
-                <h5>Correo: </h5>
-                <h6 class="mb-3">${empleado.CORREO}</h6>
-                <h5>RFC: </h5>
-                <h6 class="mb-3">${empleado.RFC}</h6>
-                <h5>Tipo: </h5>
-                <h6 class="mb-3">${empleado.TIPO}</h6>
-                <h4><strong>¿Seguro de que quieres eliminar este empleado?</strong></h4>
-                <div class="d-flex justify-content-center">
-                <button type="submit" class="btn btn-primary btn-modal-warning me-2"><i class="fa-solid fa-user-slash me-2" style="color: #ffffff;"></i>Eliminar</button>
-                <button type="button" class="btn btn-primary btn-modal" data-bs-dismiss="modal">Cancelar</button>
-                </div>
-              </form>
-            `;
-            // Asignar el contenido al formulario del modal
-            modalForm.innerHTML = formContent;
-          } else {
-            console.error("Error en la solicitud AJAX");
+      case "@eliminarEmpleado":
+        modalTitle.textContent = "Eliminar a un Empleado";
+        modalHeader.classList.add('modal-header-warning');
+        // Obtener los datos del empleado con una solicitud AJAX
+        var xhr = new XMLHttpRequest();
+        xhr.onreadystatechange = function() {
+          if (xhr.readyState === XMLHttpRequest.DONE) {
+            if (xhr.status === 200) {
+              // Parsear la respuesta JSON
+              var empleado = JSON.parse(xhr.responseText);
+              // Actualizar el contenido del formulario con los datos obtenidos
+              formContent = `
+                <form onsubmit="return eliminarEmpleado(${idEmpleado})">
+                  <div id="mensajeDiv" method="POST"></div> 
+                  <h5>Empleado: </h5>
+                  <h6 class="mb-3">${empleado.NOMBRE} ${empleado.AP_PATERNO} ${empleado.AP_MATERNO}</h6>
+                  <h5>Telefono: </h5>
+                  <h6 class="mb-3">${empleado.TELEFONO}</h6>
+                  <h5>Correo: </h5>
+                  <h6 class="mb-3">${empleado.CORREO}</h6>
+                  <h5>RFC: </h5>
+                  <h6 class="mb-3">${empleado.RFC}</h6>
+                  <h5>Tipo: </h5>
+                  <h6 class="mb-3">${empleado.TIPO}</h6>
+                  <h4><strong>¿Seguro de que quieres eliminar este empleado?</strong></h4>
+                  <div class="d-flex justify-content-center">
+                    <button type="submit" class="btn btn-primary btn-modal-warning me-2"><i class="fa-solid fa-user-slash me-2" style="color: #ffffff;"></i>Eliminar</button>
+                    <button type="button" class="btn btn-primary btn-modal" data-bs-dismiss="modal">Cancelar</button>
+                  </div>
+                </form>
+              `;
+              // Asignar el contenido al formulario del modal
+              modalForm.innerHTML = formContent;
+            } else {
+              console.error("Error en la solicitud AJAX");
+            }
           }
-        }
-      };
-      //Hacer la solicitud al script PHP y pasar el ID del empleado
-      xhr.open("GET", "obtenerEmpleado.php?id=" + idEmpleado, true);
-      console.log(idEmpleado);
-      xhr.send();
-      break;
+        };
+        // Hacer la solicitud al script PHP y pasar el ID del empleado
+        xhr.open("GET", "obtenerEmpleado.php?id=" + idEmpleado, true);
+        xhr.send();
+        //Ver cual es la tabla activa para refrescar cualquier cambio
+        checkCurrentTable(currentTable);
+        break;
     case "@editarEmpleado":
       modalTitle.textContent = "Modificar datos";
       modalHeader.classList.remove('modal-header-warning');
@@ -221,3 +243,40 @@ function updateModalContent(formType, idEmpleado) {
       break;
   }
 }
+
+// Función para eliminar al empleado
+function eliminarEmpleado(id) {
+  var xhrEliminar = new XMLHttpRequest();
+  xhrEliminar.onreadystatechange = function() {
+    if (xhrEliminar.readyState === XMLHttpRequest.DONE) {
+      if (xhrEliminar.status === 200) {
+        // Manejo de la respuesta:
+        var respuesta = xhrEliminar.responseText;
+        document.getElementById('mensajeDiv').innerHTML = respuesta; // Mostrar el mensaje de respuesta en el div 'mensajeDiv'
+
+        // Cerrar el modal después de eliminar al empleado después de 1.5 segundos
+        setTimeout(function() {
+          // Simular clic en el botón "Cancelar" para cerrar el modal
+          var cancelButton = document.querySelector('#mainModal .btn-modal[data-bs-dismiss="modal"]');
+          cancelButton.click();
+
+          document.getElementById('modalForm').innerHTML = formContent;
+        }, 1500); //(1.5 segundos)
+
+      } else {
+        console.error("Error al eliminar al empleado");
+      }
+    }
+  };
+  xhrEliminar.open("POST", "eliminarEmpleado.php", true);
+  xhrEliminar.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+  xhrEliminar.send("id=" + id); // Asegurarse de que el ID se pase correctamente en la solicitud AJAX
+  //Ver cual es la tabla activa para refrescar cualquier cambio
+  checkCurrentTable(currentTable);
+  // Retornar false para evitar que el formulario se recargue la página
+  return false;
+}
+
+
+
+
