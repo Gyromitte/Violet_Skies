@@ -64,9 +64,6 @@
             position: fixed;
 
         }
-        .modal-dialog{
-            overflow-y: scroll;
-        }
         .modal-body{
             height: 80vh;
             overflow-y: scroll;
@@ -152,7 +149,7 @@
         </div>
     </div>
 
-<!-- Modal -->
+<!-- Modal de Empleado -->
 <div class="modal fade" id="Empleado" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog fixed-top">
     <div class="modal-content">
@@ -161,7 +158,7 @@
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
-        <form action="../scripts/RegistrarNuevoUsuario.php" method="post">
+        <form action="" method="post">
             <label class="form-label" name="nom">Nombre(s): </label> 
             <input class="form-control" type="text" name="nom" placeholder="Nombre"><br><br>
             <label class="form-label" name="ap">Apellido Paterno: </label> 
@@ -178,13 +175,14 @@
             <label class="form-label" name="ckpass">Comprobar Contraseña: </label>
             <input class="form-control" type="password" name="ckpass" onChange="onChange()"
              placeholder="Comprobar Contraseña" required`><br><br>
-            <button class="loginButton" type="submit">Registrarse</button>
+            <button class="loginButton" type="submit" name="reg">Registrarse</button>
         </form>
       </div>
     </div>
   </div>
 </div>
 
+<!--Modal de Cliente-->
 <div class="modal fade" id="Cliente" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
@@ -193,7 +191,7 @@
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
-        <form action="../scripts/RegistrarNuevoUsuario.php" method="post">
+        <form action="" method="post">
             <label class="form-label" name="nom">Nombre(s): </label> 
             <input class="form-control" type="text" name="nom" placeholder="Nombre"><br><br>
             <label class="form-label" name="ap">Apellido Paterno: </label> 
@@ -208,24 +206,38 @@
             <input class="form-control" type="password" name="pass" onChange="onChange()" placeholder="Contraseña"><br><br>
             <label class="form-label" name="ckpass">Comprobar Contraseña: </label>
             <input class="form-control" type="password" name="ckpass" onChange="onChange()" placeholder="Comprobar Contraseña"><br><br>
-            <button class="loginButton" type="submit">Iniciar Sesion</button>   
-            <?php
-                $tipo="CLIENTE";
-            ?>
+            <button class="loginButton" type="submit" name="regc">Iniciar Sesion</button>   
         </form>
       </div>
     </div>
   </div>
 </div>
    <?php
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    include '../dataBase.php';
+    extract($_POST);
+    $db=new Database();
+    $db->conectarBD();
     $pass=$_POST('pass');
     $confirm=$_POST('ckpass');
-    if($pass!==$confirm){
-    echo"<div>Passowrd incorrecto</div>";
-}
-}
-    ?>
+    if(isset($_POST['reg'])){
+      $tipo="EMPLEADO";  
+      if($pass!==$confirm){
+          echo"<div>Contrasenas no concuerdan</div>";
+      }
+      else{
+        $db->Register($nom);
+      }
+    }
+    else if(isset($_POST['regc'])){
+      $tipo="CLIENTE";  
+      if($pass!==$confirm){
+        echo"<div>Contrasenas no concuerdan</div>";
+      }
+      else{
+        $db->Register($nom);
+      }
+    }
+  ?>
     <script src="/js/filtroEventos.js"></script>
     <script src="https://kit.fontawesome.com/b60c246061.js" crossorigin="anonymous"></script>
     <script src="/bootstrap/js/bootstrap.min.js"></script>

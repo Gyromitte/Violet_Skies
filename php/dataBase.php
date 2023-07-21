@@ -154,5 +154,13 @@
             session_destroy();
             header("Location:/index.html");
         }
+        function Register($nom){
+            try{
+
+            }
+            catch(PDOException $e){
+                echo $e->getMessage();
+            }
+        }
     }
 ?>
