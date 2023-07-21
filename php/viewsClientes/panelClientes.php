@@ -81,7 +81,7 @@
             <p><strong>Teléfono:</strong> <span id="telefono"><?php echo $_SESSION["telefono"]; ?></span></p>
             <p><strong>Correo:</strong> <span id="correo"><?php echo $_SESSION["correo"]; ?></span></p>
             <p><strong>Tipo de cuenta:</strong> <span id="tipo_cuenta">Cliente</span></p>
-            <button class="btn btn-primary" id="editarDatos" data-toggle="modal" data-target="#mainModal" data-bs-whatever="@registrarEmpleado">Editar Datos</button>
+            <button class="btn btn-primary" id="editarDatos" data-toggle="modal" data-target="#mainModal" data-bs-whatever="@editarEmpleado">Editar Datos</button>
         </div>
     </div>
         <!--Modal-->
@@ -91,7 +91,7 @@
                     <div class="modal-header">
                             <!--Titulo que tendra el modal-->
                             <h1 class="modal-title fs-5" id="firstLabe"></h1>
-                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            <button type="button" class="btn-close btn-close-custom" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body" id="modal-form">
                             <!--El contenido del modal cambia dependiendo del boton que lo activo-->
@@ -111,6 +111,5 @@
     <script src="/bootstrap/js/bootstrap.min.js"></script>
     <script src="/bootstrap/js/bootstrap.bundle.min.js"></script>
     <script src="/js/filtroEventos.js"></script>
-    
 </body>
 </html>

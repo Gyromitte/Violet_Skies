@@ -281,6 +281,7 @@ function updateModalContent(formType, idEmpleado) {
       checkCurrentTable(currentTable);
       break;
       case "@editarPerfil":
+        console.log("hola");
         modalTitle.textContent ="Editar Datos"
         formContent=`<form id="formularioEditarDatos" method="post" action="pruebaComprobación.php">
         <div class="form-group">
