@@ -92,7 +92,7 @@
                 $consulta = $this->PDO_local->query($query);
 
                 while($renglon = $consulta->fetch(PDO::FETCH_ASSOC)){
-                    if($pass=== $renglon['CONTRASEÑA']){
+                    if(password_verify($pass,$renglon['CONTRASEÑA'])){
                         $ver = true;
                         $NOMBRE = $renglon['NOMBRE'];
                         $tipo = $renglon['TIPO_CUENTA'];
@@ -102,6 +102,7 @@
                 if($ver){
                     session_start();
                     $_SESSION["name"] = $NOMBRE;
+                    $_SESSION["logged_in"]=true;
                     if($tipo==='CLIENTE'){
                         $_SESSION["access"]=1;
                         echo"<div class=' container'>";
@@ -157,7 +158,7 @@
         function Register($nom,$ap,$am,$usu,$pass,$confirm,$cel,$tipo){
             try{
                 if($pass!==$confirm){
-                    echo"<div class=' alert alert-warning'>
+                    echo"<div class='alert alert-warning'>
                     <h3>Contrasenas no concuerdan</h3></div>";
                     header("refresh:2;../views/registrarse.php");
                 }
@@ -166,7 +167,7 @@
                     $cadena="INSERT INTO CUENTAS(NOMBRE, AP_PATERNO,AP_MATERNO, CORREO, CONTRASEÑA, 
                     TELEFONO,TIPO_CUENTA) VALUES('$nom','$ap','$am','$usu','$hash','$cel','$tipo')";
                     $this->PDO_local->query($cadena);
-                    echo"<div class=' alert alert-success'>Usuario Registrado</div>";
+                    echo"<div class='alert alert-success'>Usuario Registrado</div>";
                     header("refresh:3;../views/login.php");
                 }
             }

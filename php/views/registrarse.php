@@ -29,12 +29,12 @@
         .left {
             left: 0;
             color:sienna;
-            /*background-image: url(/images/mesero.jpg);*/
+            background-image: url(/images/mesero.jpg);
         }
         .right {
             right: 0;
             color:blueviolet;
-            /*background-image:url(/images/heroImage.jpg)*/
+            background-image:url(/images/heroImage.jpg);
         }
         .centered {
             position: absolute;
@@ -59,6 +59,7 @@
         }
         .alert{
             text-align: center;
+            z-index: 99;
         }
         .modal{
             position: fixed;
@@ -74,19 +75,17 @@
 <body>
   
    <!-- Desktop Navbar -->
-   <!--
-   <div class=" desktop-nav">
+  
+   <div class=" desktop-nav fixed-top">
 <div class="tab-content">
   <nav class="navbar navbar-default row">
     <div class="companySection col-sm-auto">
-      -->
-      <!-- Company Logo 
+      <!-- Company Logo -->
       <div class="navbar-header">
         <img id="company-logo" class="img-fluid" src="/images/company_logo.png" alt="companyLogo">
         <a class="no-underline" href="/index.html" id="company-name">Violet Skies</a>
       </div>
-      -->
-      <!-- Tabs 
+      <!-- Tabs -->
       <ul class="nav list-inline">
         <li class="mr-3 tabs">
           <a class="no-underline" href="/html/about-us/about us.html">Nosotros</a>
@@ -99,8 +98,7 @@
         </li>
       </ul>
     </div>
-      -->
-    <!-- Login Section 
+    <!-- Login Section -->
     <div class="login-section col-sm-auto">
       <button class="loginButton">
         <i class="fa-solid fa-door-open" style="color: #ffffff;"></i>
@@ -110,7 +108,6 @@
   </nav>
 </div>
    </div>
-      -->
       
    <!-- Mobile Side Menu -->
    <!--
@@ -154,7 +151,7 @@
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
-        <form action="" method="post">
+        <form action="#" method="post">
             <label class="form-label" name="nom">Nombre(s): </label> 
             <input class="form-control" type="text" name="nom" placeholder="Nombre"><br><br>
             <label class="form-label" name="ap">Apellido Paterno: </label> 
@@ -187,7 +184,7 @@
         <button type="button" class="btn-close" aria-label="Close"></button>
       </div>
       <div class="modal-body">
-        <form action="" method="post">
+        <form action="#" method="post">
             <label class="form-label" name="nom">Nombre(s): </label> 
             <input class="form-control" type="text" name="nom" placeholder="Nombre"><br><br>
             <label class="form-label" name="ap">Apellido Paterno: </label> 
@@ -209,6 +206,7 @@
   </div>
 </div>
    <?php
+      if ($_SERVER['REQUEST_METHOD'] === 'POST'){
       include '../dataBase.php';
       extract($_POST);
       $db=new Database();
@@ -220,8 +218,10 @@
        else if(isset($_POST['regc'])){
           $tipo="CLIENTE";  
           $db->Register($nom,$ap,$am,$usu,$pass,$ckpass,$cel,$tipo);
+          exit;
         }
       $db->desconectarBD();
+      }
    ?>
     
     <script src="/js/filtroEventos.js"></script>
