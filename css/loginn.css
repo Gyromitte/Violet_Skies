@@ -469,20 +469,7 @@ nav{
 
 .search-bar{
     width: 40% !important;
-}
-  /* Estilo para el overlay */
-  #overlay {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.5);
-    z-index: 2; /* Asegúrate de que el z-index sea mayor que el del dash-board */
-  }
-  
- 
-
+} 
   }
 
 
@@ -635,14 +622,14 @@ body{
         color: white;
         text-shadow: 2px rgba(227, 122, 57,0.5);
         background-color: rgba(117, 62, 28, 0.5);
-        background-blend-mode: overlay;
+       
     }
     .right:hover{
         cursor:pointer;
         color: white;
         text-shadow: 2px rgba(210, 65, 250,0.5);
         background-color: rgba(103, 33, 122, 0.5);
-        background-blend-mode: overlay;
+   
     }
     .alert{
         text-align: center;
