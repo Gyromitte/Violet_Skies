@@ -24,6 +24,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&display=swap" rel="stylesheet">
     <script src="https://kit.fontawesome.com/b60c246061.js" crossorigin="anonymous"></script>
     <script src="/js/panelAdmin.js" async defer></script>
+    
 </head>
 <body>
     <!--[if lt IE 7]>
@@ -81,8 +82,10 @@
             <p><strong>Teléfono:</strong> <span id="telefono"><?php echo $_SESSION["telefono"]; ?></span></p>
             <p><strong>Correo:</strong> <span id="correo"><?php echo $_SESSION["correo"]; ?></span></p>
             <p><strong>Tipo de cuenta:</strong> <span id="tipo_cuenta">Cliente</span></p>
-            <button class="btn btn-primary" id="editarDatos" data-toggle="modal" data-target="#mainModal" data-bs-whatever="@editarEmpleado">Editar Datos</button>
+            <button class="btn btn-primary" id="editarDatos" data-bs-toggle="modal" data-bs-target="#mainModal" data-bs-whatever="@editarPerfil">Editar Datos</button>
+
         </div>
+
     </div>
         <!--Modal-->
         <div class="modal fade" id="mainModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
