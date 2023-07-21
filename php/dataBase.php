@@ -159,14 +159,15 @@
                 if($pass!==$confirm){
                     echo"<div class=' alert alert-warning'>
                     <h3>Contrasenas no concuerdan</h3></div>";
+                    header("refresh:2;../views/registrarse.php");
                 }
                 else{
                     $hash=password_hash($pass,PASSWORD_DEFAULT);
                     $cadena="INSERT INTO CUENTAS(NOMBRE, AP_PATERNO,AP_MATERNO, CORREO, CONTRASEÑA, 
                     TELEFONO,TIPO_CUENTA) VALUES('$nom','$ap','$am','$usu','$hash','$cel','$tipo')";
                     $this->PDO_local->query($cadena);
-                    echo"<div class=' alert alert-success'> Usuario Registrado</div>";
-                    header("refresh:3;../php/views/login.php");
+                    echo"<div class=' alert alert-success'>Usuario Registrado</div>";
+                    header("refresh:3;../views/login.php");
                 }
             }
             catch(PDOException $e){

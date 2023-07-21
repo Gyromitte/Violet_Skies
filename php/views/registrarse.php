@@ -221,7 +221,7 @@
           $tipo="CLIENTE";  
           $db->Register($nom,$ap,$am,$usu,$pass,$ckpass,$cel,$tipo);
         }
-
+      $db->desconectarBD();
    ?>
     
     <script src="/js/filtroEventos.js"></script>
