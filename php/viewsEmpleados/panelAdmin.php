@@ -33,7 +33,7 @@
             <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="#">upgrade your browser</a> to improve your experience.</p>
         <![endif]-->
     <!--NavBar-->    
-    <?php
+    <!--php
         session_start();
         if(isset($_SESSION["logged_in"])){
             if(!isset($_SESSION["access"])===3){
@@ -42,9 +42,9 @@
             }
         }
         else if(!isset($_SESSION["logged_in"])){
-            header("refresh:2;../views/login.php");
+            //header("refresh:2;../views/login.php");
         }
-    ?>
+    ?>-->
     <nav>
         <div class="nav-menu">
             <button id="nav-button">
