@@ -64,33 +64,35 @@
         }
     }
 
-    function seleccionarPreparado($consulta, $parametros)
-    {
-        try
-        {
-            $statement = $this->PDO_local->prepare($consulta);
-            $statement->execute($parametros);
-            $fila = $statement->fetchAll(PDO::FETCH_OBJ);
-            return $fila;
-        }
-        catch(PDOException $e)
-        {
-            echo $e->getMessage();
-        }
-    }
 
-    function ejecutarPreparado($consulta, $parametros)
-    {
-        try
+
+
+        function seleccionarPreparado($consulta, $parametros)
         {
-            $statement = $this->PDO_local->prepare($consulta);
-            $statement->execute($parametros);
+            try
+            {
+                $statement = $this->PDO_local->prepare($consulta);
+                $statement->execute($parametros);
+                $fila = $statement->fetchAll(PDO::FETCH_OBJ);
+                return $fila;
+            }
+            catch(PDOException $e)
+            {
+                echo $e->getMessage();
+            }
         }
-        catch(PDOException $e)
+        function ejecutarPreparado($consulta, $parametros)
         {
-            echo $e->getMessage();
+            try
+            {
+                $statement = $this->PDO_local->prepare($consulta);
+                $statement->execute($parametros);
+            }
+            catch(PDOException $e)
+            {
+                echo $e->getMessage();
+            }
         }
-    }
         function Login($usu,$pass){
             try{
                 $ver = false;
@@ -98,7 +100,7 @@
                 $consulta = $this->PDO_local->query($query);
 
                 while($renglon = $consulta->fetch(PDO::FETCH_ASSOC)){
-                    if($pass=== $renglon['CONTRASEÑA']){
+                    if(password_verify($pass,$renglon['CONTRASEÑA'])){
                         $ver = true;
                         $NOMBRE = $renglon['NOMBRE'];
                         $tipo = $renglon['TIPO_CUENTA'];
@@ -108,6 +110,7 @@
                 if($ver){
                     session_start();
                     $_SESSION["name"] = $NOMBRE;
+                    $_SESSION["logged_in"]=true;
                     if($tipo==='CLIENTE'){
                         $_SESSION["access"]=1;
                         echo"<div class=' container'>";
@@ -160,7 +163,25 @@
             session_destroy();
             header("Location:/index.html");
         }
+        function Register($nom,$ap,$am,$usu,$pass,$confirm,$cel,$tipo){
+            try{
+                if($pass!==$confirm){
+                    echo"<div class='alert alert-warning'>
+                    <h3>Contrasenas no concuerdan</h3></div>";
+                    header("refresh:2;../views/registrarse.php");
+                }
+                else{
+                    $hash=password_hash($pass,PASSWORD_DEFAULT);
+                    $cadena="INSERT INTO CUENTAS(NOMBRE, AP_PATERNO,AP_MATERNO, CORREO, CONTRASEÑA, 
+                    TELEFONO,TIPO_CUENTA) VALUES('$nom','$ap','$am','$usu','$hash','$cel','$tipo')";
+                    $this->PDO_local->query($cadena);
+                    echo"<div class='alert alert-success'>Usuario Registrado</div>";
+                    header("refresh:3;../views/login.php");
+                }
+            }
+            catch(PDOException $e){
+                echo $e->getMessage();
+            }
+        }
     }
-
-
 ?>

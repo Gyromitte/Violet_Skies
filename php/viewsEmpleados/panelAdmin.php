@@ -25,7 +25,40 @@
     <script src="https://kit.fontawesome.com/b60c246061.js" crossorigin="anonymous"></script>
     <!--Scripts que necesitan ejecutarse primero-->
     <script src="/js/panelAdmin.js" async defer></script>
-
+    <!--<style>
+        .redirect div{
+            background-color: rgb(27, 31, 59);
+            background-blend-mode: overlay;
+        }
+        .redirect h1{
+            text-align: center;
+            color:rgb(131, 103, 199);
+            animation: anim-glow 2s ease infinite;
+            font-size: 70px;
+        }
+        .redirect h3{
+            text-align: center;
+            color:rgb(131, 103, 199);
+            animation: anim-glow 2s ease infinite;
+            font-size: 40px;
+        }
+        @keyframes anim-glow {
+	        0% {
+		        box-shadow: 0 0 rgba(188, 44, 201, 1);
+	        }
+	        100% {
+		        box-shadow: 0 0 10px 8px transparent;
+		        border-width: 2px;
+	        }
+        }
+        .redirect div .container{
+            background-color: rgb(27, 31, 59);
+            height: 100%;
+            width: 100%;
+            padding-top: 300px;
+        }
+    </style>
+    -->
 </head>
 
 <body>
@@ -33,14 +66,26 @@
             <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="#">upgrade your browser</a> to improve your experience.</p>
         <![endif]-->
     <!--NavBar-->    
-    <!--php
-        session_start();-->
-        <!--if(!isset($_SESSION["access"])===3){
-            echo"No tienes acceso a esta pagina";
-            header("refresh:2;/index.html");
+    <?php
+        session_start();
+        if(isset($_SESSION["logged_in"])){
+            if(isset($_SESSION["access"])==2){
+                echo "<div class='redirect'>";
+                echo"<div class=' container'>";
+                echo"<h1 align='center'>No tienes acceso a esta pagina</h1><br>";
+                echo"<h3 align='center'>Redirigiendo...</h3>";
+                echo "</div>";
+                echo "</div>";
+                header("refresh:4;/index.html");
+            }
+            else if(isset($_SESSION["access"])==1){
+                include'../scripts/access.php';
+            }
+        }
+        else if(!isset($_SESSION["logged_in"])){
+            header("Location:../views/login.php");
         }
     ?>
-    -->
     <nav>
         <div class="nav-menu">
             <button id="nav-button">
@@ -53,20 +98,39 @@
         <div class="nav-user">
             <i class="fa-solid fa-bell" style="color: #ffffff;"></i>
             <div id="nav-photo-user"></div>
-            <?php echo $_SESSION["name"];?>
+            <?php 
+            if(isset($_SESSION["logged_in"])){
+                if(isset($_SESSION["access"])==3){
+                    echo $_SESSION["name"];
+                }
+            }
+            else{
+                echo"Username";
+            }
+            ?>
         </div>
     </nav>
     <!--DashBoard-->
     <div id="dash-board">
         <div id="dash-board-content">
             <div id="dash-photo-user"></div>
-            <?php echo $_SESSION["name"];?><br>
+            <?php
+            if(isset($_SESSION["logged_in"])){
+                if(isset($_SESSION["access"])==3){
+                    echo $_SESSION["name"];
+                }
+            }
+            else{
+                echo"Username";
+            }
+            ?>
+            <br>
             Position<br><br>
             <button data-tab="home" class="dash-button"><i class="fa-solid fa-house" style="color: #ffffff;"></i><br>Home</button>
             <button data-tab="eventos" class="dash-button"><i class="fa-solid fa-calendar-days" style="color: #ffffff;"></i><br>Eventos</button>
             <button data-tab="empleados" class="dash-button"><i class="fa-solid fa-briefcase" style="color: #ffffff;"></i><br>Empleados</button>
             <button data-tab="perfil" class="dash-button"><i class="fa-solid fa-user" style="color: #ffffff;"></i><br>Perfil</button>
-            <a href="../scripts/CerrarSesion.php"><button data-tab="logout" class="dash-button"><i class="fa-solid fa-gear" style="color: #ffffff;"></i><br>Logout</button>
+            <a href="../scripts/CerrarSesion.php"><button data-tab="logout" class="dash-button"><i class="fa-solid fa-gear" style="color: #ffffff;"></i><br>Logout</button></a>
         </div>
     </div>
     <!--Main Content-->

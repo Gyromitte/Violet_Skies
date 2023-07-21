@@ -77,11 +77,11 @@
 <!--DashBoard-->
 <div class="d-block" style="overflow: hidden;" id="dash-board">
   <div  id="dash-board-content">
-    <a data-tab="home" class="dash-button no-underline" href="/index.html"><i class="fa-solid fa-house" style="color: #ffffff;"></i><br>Home</a>
-    <a data-tab="eventos" class="dash-button no-underline" href="/html/about-us/about us.html"><i class="fa-solid fa-calendar-days"style="color: #ffffff;"></i><br>Nosotros</a>
-    <a data-tab="empleados" class="dash-button no-underline" href="trabajo.html"><i class="fa-solid fa-briefcase" style="color: #ffffff;"></i><br>Trabajo</a>
-    <a data-tab="perfil" class="dash-button no-underline" href="/php/views/login.php"><i class="fa-solid fa-door-open" style="color: #ffffff;"></i><br>Acceder</a>
-    <a data-tab="perfil" class="dash-button no-underline" href="/php/views/registrarse.php"><i class="fa-solid fa-user" style="color: #ffffff;"></i><br>Registrarsez</a>
+    <button data-tab="home" class="dash-button" href="/index.html"><i class="fa-solid fa-house" style="color: #ffffff;"></i><br>Home</button>
+    <button data-tab="eventos" class="dash-button"><i class="fa-solid fa-calendar-days"style="color: #ffffff;"></i><br>Nosotros</button>
+    <button data-tab="empleados" class="dash-button"><i class="fa-solid fa-briefcase" style="color: #ffffff;"></i><br>Empleados</button>
+    <button data-tab="perfil" class="dash-button"><i class="fa-solid fa-door-open" style="color: #ffffff;"></i><br>Acceder</button>
+    <button data-tab="configuracion" class="dash-button"><i class="fa-solid fa-user" style="color: #ffffff;"></i><br>Registrarse</button>
   </div>
 </div>
 </div>
@@ -117,23 +117,82 @@
     </div>
     <div class="col-1"></div>
     <!--datos-izquierda-->
-    <div class="col-4 leftHeroSection">
-     
-        <div class="heroContainer">
-          <div id="description">
-            <b class="greetingstitle">Únete</b> <br>Únete a nosotros y ayúdanos a formar un mejor servicio a nuestros huéspedes.
-
-<br>
-<br>
-<a data-tab="empleados" class="btn dash-board" style="      width: 100%;     color: white; background-color:#5603ad;" href="../php/views/registrarse.php" role="button"> <i class="fa-solid fa-briefcase" style="color: #ffffff;"></i> <br> Únete</a>
-           
-
-          
-          </div>
-
-        
+    <div class="col-4 heroContainer">
+        <div class="leftHeroSection">
+            <div class="greetingstitle">
+                Ingresa tus datos
+            </div>
+            <!--recolecion-data-->
+            <form class="row needs-validation text-center"  novalidate>
+                <div class="col-xl-12">
+                  <label for="validationCustom01" class="form-label">Nombres</label>
+                  <input type="text" class="form-control" id="validationCustom01" value="" required>
+                  <div class="valid-feedback">
+                    datos aceptados
+                  </div>
+                </div>
+                </form>
+                <form class="row g-12 needs-validation text-center"  novalidate>
+                <div class="col-lg">
+                  <label for="validationCustom02" class="form-label">Apellido Materno </label>
+                  <input type="text" class="form-control" id="validationCustom02" value="" required>
+                  <div class="valid-feedback">
+                   datos aceptados
+                  </div>
+                </div>
+                </form>
+                <form class="row g-12 needs-validation text-center"  novalidate>
+                  <div class="col-lg">
+                    <label for="validationCustom02" class="form-label">Apellidos Paterno</label>
+                    <input type="text" class="form-control" id="validationCustom02" value="" required>
+                    <div class="valid-feedback">
+                     datos aceptados
+                    </div>
+                  </div>
+                  </form>
+                <div class="col-lg text-center">
+                  <label for="validationCustomUsername" class="form-label">Correo</label>
+                  <div class="input-group has-validation">
+                    <input type="email" class="form-control" id="validationCustomUsername" aria-describedby="inputGroupPrepend" required>
+                    <div class="valid-feedback">
+                      Porfavor ingrese su Correo
+                    </div>
+                  </div>
+                </div>
+                <div class="col-lg text-center">
+                  <label for="validationCustom03" class="form-label">Numero Tel.</label>
+                  <input type="number" class="form-control" id="validationCustom05" required>
+                  <div class="invalid-feedback">
+                   Porfavor ingrese su numero.
+                  </div>
+                  <a name="" id="" class="btn btn-primary" href="#" role="button">Enviar </a>
+              </form>
+              <br>
+        </div>
     </div>
 </div>
+<div class="col-1"></div>
+    
+  </div>
+</div>
+</div>
 
-   </body>
+
+    <!--contenedor de central de informacion -->
+    <div  class="background-cover">
+<div >
+  <div class="row">
+    <!--datos de la derecha -->
+    
+  <!--datos-izquierda-->
+     
+                
+    <div>
+        <div class="container-fluid">
+            
+        </div>
+    </div>
+  </div>
+    <script src="bootstrap/js/bootstrap.js"></script>
+</body>
 </html>
