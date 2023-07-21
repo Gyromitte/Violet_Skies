@@ -192,55 +192,93 @@ function updateModalContent(formType, idEmpleado) {
         //Ver cual es la tabla activa para refrescar cualquier cambio
         checkCurrentTable(currentTable);
         break;
-    case "@editarEmpleado":
-      modalTitle.textContent = "Modificar datos";
-      modalHeader.classList.remove('modal-header-warning');
-      //Realizar una solicitud AJAX para obtener los datos del empleado
-      var xhr = new XMLHttpRequest();
-      xhr.onreadystatechange = function() {
-        if (xhr.readyState === XMLHttpRequest.DONE) {
-          if (xhr.status === 200) {
-            //Parsear la respuesta JSON
-            var empleado = JSON.parse(xhr.responseText);
-            console.log(empleado);
-            //Actualizar el contenido del formulario con los datos obtenidos
-            formContent = `
-              <form>
-                <h5>Empleado: </h5>
-                <h6 class="mb-3">${empleado.NOMBRE} ${empleado.AP_PATERNO} ${empleado.AP_MATERNO}</h6>
-                <h5>Telefono: </h5>
-                <h6 class="mb-3">${empleado.TELEFONO}</h6>
-                <h5>Correo: </h5>
-                <h6 class="mb-3">${empleado.CORREO}</h6>
-                <div class="mb-3">
-                  <label class="control-label">RFC</label>
-                  <input type="text" name="rfc" placeholder="Ingresa el RFC" class="form-control" required value="${empleado.RFC}">
-                </div>
-                <div class="form-group mb-3">
-                  <label for="tipoUsuario">Tipo de Trabajador</label>
-                  <select name="tipoUsuario" class="form-control form-select" id="tipoUsuario">
-                    <option value="mesero" ${empleado.TIPO === 'MESERO' ? 'selected' : ''}>Mesero</option>
-                    <option value="cocina" ${empleado.TIPO === 'COCINA' ? 'selected' : ''}>Cocinero</option>
-                  </select>
-                </div>
-                <div class="d-flex justify-content-center">
-                <button type="submit" class="btn btn-primary btn-modal me-2"><i class="fa-solid fa-pencil me-2" style="color: #ffffff;"></i>Modificar</button>
-                <button type="button" class="btn btn-primary btn-modal" data-bs-dismiss="modal">Cancelar</button>
-                </div>
-              </form>
-            `;
-            // Asignar el contenido al formulario del modal
-            modalForm.innerHTML = formContent;
-          } else {
-            console.error("Error en la solicitud AJAX");
-          }
-        }
-      };
-      //Hacer la solicitud al script PHP y pasar el ID del empleado
-      xhr.open("GET", "obtenerEmpleado.php?id=" + idEmpleado, true);
-      console.log(idEmpleado);
-      xhr.send();
-      break;
+        case "@editarEmpleado":
+          modalTitle.textContent = "Modificar datos";
+          modalHeader.classList.remove('modal-header-warning');
+          //Realizar una solicitud AJAX para obtener los datos del empleado
+          var xhr = new XMLHttpRequest();
+          xhr.onreadystatechange = function() {
+            if (xhr.readyState === XMLHttpRequest.DONE) {
+              if (xhr.status === 200) {
+                //Parsear la respuesta JSON
+                var empleado = JSON.parse(xhr.responseText);
+                console.log(empleado);
+                //Actualizar el contenido del formulario con los datos obtenidos
+                formContent = `
+                  <form id="formularioEditarEmpleado">
+                    <div id="mensajeDiv" method="POST"></div> <!-- Div para mensajes de respuesta -->
+                    <h5>Empleado: </h5>
+                    <h6 class="mb-3">${empleado.NOMBRE} ${empleado.AP_PATERNO} ${empleado.AP_MATERNO}</h6>
+                    <h5>Telefono: </h5>
+                    <h6 class="mb-3">${empleado.TELEFONO}</h6>
+                    <h5>Correo: </h5>
+                    <h6 class="mb-3">${empleado.CORREO}</h6>
+                    <div class="mb-3">
+                      <label class="control-label">RFC</label>
+                      <input type="text" name="rfc" placeholder="Ingresa el RFC" class="form-control" required value="${empleado.RFC}">
+                    </div>
+                    <div class="form-group mb-3">
+                      <label for="tipoUsuario">Tipo de Trabajador</label>
+                      <select name="tipoUsuario" class="form-control form-select" id="tipoUsuario">
+                        <option value="mesero" ${empleado.TIPO === 'MESERO' ? 'selected' : ''}>Mesero</option>
+                        <option value="cocina" ${empleado.TIPO === 'COCINA' ? 'selected' : ''}>Cocinero</option>
+                      </select>
+                    </div>
+                    <div class="d-flex justify-content-center">
+                    <button type="submit" class="btn btn-primary btn-modal me-2"><i class="fa-solid fa-pencil me-2" style="color: #ffffff;"></i>Modificar</button>
+                    <button type="button" class="btn btn-primary btn-modal" data-bs-dismiss="modal">Cancelar</button>
+                    </div>
+                  </form>
+                `;
+                // Asignar el contenido al formulario del modal
+                modalForm.innerHTML = formContent;
+        
+                // Obtener el formulario después de haberlo asignado al DOM
+                var formEditarEmpleado = document.querySelector('#formularioEditarEmpleado');
+        
+                // Agregar evento de envío al formulario de edición
+                formEditarEmpleado.addEventListener('submit', function(event) {
+                  event.preventDefault(); // Evitar que el formulario se envíe por defecto
+        
+                  // Obtener los valores del formulario
+                  var rfc = formEditarEmpleado.elements.rfc.value;
+                  var tipoUsuario = formEditarEmpleado.elements.tipoUsuario.value;
+        
+                  // Realizar una nueva solicitud AJAX para actualizar los datos
+                  var updateXHR = new XMLHttpRequest();
+                  updateXHR.onreadystatechange = function() {
+                    if (updateXHR.readyState === XMLHttpRequest.DONE) {
+                      if (updateXHR.status === 200) {
+                        // Estilos al div de mensajes según la respuesta
+                        var respuesta = updateXHR.responseText;
+                        document.getElementById('mensajeDiv').innerHTML = respuesta;
+                        
+                      } else {
+                        console.error("Error en la solicitud AJAX de actualización");
+                      }
+                    }
+                  };
+                  // Hacer la solicitud al script PHP para editar al empleado y pasar los datos actualizados
+                  updateXHR.open("POST", "editarEmpleado.php", true);
+                  updateXHR.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+                  updateXHR.send(`id=${idEmpleado}&rfc=${rfc}&tipoUsuario=${tipoUsuario}`);
+                //Ver cual es la tabla activa para refrescar cualquier cambio
+                checkCurrentTable(currentTable);
+                });
+        
+              } else {
+                console.error("Error en la solicitud AJAX");
+              }
+            }
+          };
+          //Hacer la solicitud al script PHP y pasar el ID del empleado
+          xhr.open("GET", "obtenerEmpleado.php?id=" + idEmpleado, true);
+          console.log(idEmpleado);
+          xhr.send();
+          //Ver cual es la tabla activa para refrescar cualquier cambio
+          checkCurrentTable(currentTable);
+          break;
+
   }
 }
 
