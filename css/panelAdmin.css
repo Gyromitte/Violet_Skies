@@ -9,6 +9,11 @@ body{
 }
 /*NavBar*/
 nav{
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 99;
     background-color: #8367c7;
     font-family: 'Patua One', cursive;
     padding: 0.5em;
@@ -87,8 +92,11 @@ nav{
 }
 
 /*Main*/
+#main{
+    margin-top: 86px;
+}
 .main-dash-open {
-    margin-left: 300px; /* Cambia el valor según sea necesario para ajustar el desplazamiento */
+    margin-left: 300px;
     transition: margin-left  0.3s ease; /* Agrega una transición suave para una animación fluida */
 }
 .test{
@@ -118,13 +126,56 @@ nav{
     background-color: #b14aed;
   }
 .table-hover tbody tr:hover {
-    background-color: #f8f9fa;
+    background-color: #e0c3ee;
     color: #5603ad;
-}  
+}
 
+.custom-dropdown{
+    background-color: #5603ad !important;
+    border: none;
+    width: 100%;
+}
+.custom-drop-menu{
+    background-color: #5603ad;
+    color: white !important;
+    border: 2px solid white;
+}
+.dropdown-item{
+    color: white;
+}
+.dropdown-item:hover{
+    background-color: #b14aed;
+}
 /*Modal*/
 .modal-content{
-    background-color: #454ADE;
+    background-color: #5603ad;
+}
+.modal-header{
+    background-color: #5603ad;
+}
+.modal-header-warning{
+    background-color: #dc3545;
+}
+.btn-close-custom{
+    background-color: white;
+}
+.btn-modal{
+    border-radius: 2em;
+    background-color: #b14aed;
+    border: 2px solid white;
+}
+.btn-modal:hover{
+    background-color: #7c56db;
+    border: 2px solid white;
+}
+.btn-modal-warning{
+    border-radius: 2em;
+    background-color: #dc3545;
+    border: 2px solid white;
+}
+.btn-modal-warning:hover{
+    background-color: #a33d42;
+    border: 2px solid white;
 }
 
 /*View options*/
@@ -133,7 +184,12 @@ nav{
     flex-direction: row;
     justify-content: space-between;
 }
-
+.btn-options{
+    background-color: #5603ad;
+}
+.btn-options:hover{
+    background-color: #b14aed;
+}
 .search-bar{
     width: 40% !important;
 }

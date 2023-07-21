@@ -23,6 +23,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&display=swap" rel="stylesheet">
     <script src="https://kit.fontawesome.com/b60c246061.js" crossorigin="anonymous"></script>
+    <!--Scripts que necesitan ejecutarse primero-->
     <script src="/js/panelAdmin.js" async defer></script>
 
 </head>
@@ -45,7 +46,8 @@
             <button id="nav-button">
                 <i class="fa-solid fa-bars" style="color: #ffffff;"></i>
             </button>
-            Hoteleria
+            <img id="company-logo" class="img-fluid" src="/images/company_logo.png" alt="companyLogo" style="height:1.5em; margin-right: 10px;">
+            Violet Skies
         </div>
         <h2><span id="fecha"></span></h2>
         <div class="nav-user">
@@ -108,28 +110,24 @@
                 <i class="fa-solid fa-address-card" style="color: #ffffff;"></i>
                 Registrar
             </button>
-            <button type="button" class="btn btn-danger border-2 btn-outline-light rounded-5 btn-options" data-bs-toggle="modal" data-bs-target="#mainModal" data-bs-whatever="@eliminarEmpleado">
-                <i class="fa-solid fa-user-slash" style="color: #ffffff;"></i>
-                Eliminar
-            </button>
             <br>
             <br>
             <!--Opciones de Vistas-->
             <div class="view-options">
                 <div>
-                    <button id="verCocineros" data-url="verCocineros.php"  type="button" class="ver-empleados btn btn-primary border-2 btn-outline-light rounded-5" data-bs-target="#mainModal" data-bs-whatever="">
+                    <button id="verCocineros" data-url="verCocineros.php"  type="button" class="btn-options ver-empleados btn btn-primary border-2 btn-outline-light rounded-5" data-bs-target="#mainModal">
                         <i class="fa-solid fa-utensils" style="color: #ffffff;"></i>
                         Ver Cocineros
                     </button>
-                    <button id="verMeseros" data-url="verMeseros.php" type="button" class="ver-empleados btn btn-primary border-2 btn-outline-light rounded-5" data-bs-target="#mainModal" data-bs-whatever="">
+                    <button id="verMeseros" data-url="verMeseros.php" type="button" class="btn-options ver-empleados btn btn-primary border-2 btn-outline-light rounded-5" data-bs-target="#mainModal">
                         <i class="fa-solid fa-bell-concierge" style="color: #ffffff;"></i>
                         Ver Meseros
                     </button>
                 </div>
                 <!--Barra de Busqueda-->
                 <div class="input-group mb-3 search-bar">
-                    <input type="text" class="form-control" placeholder="Buscar a un empleado" aria-label="" aria-describedby="button-addon2">
-                    <button class="btn btn-outline-primary" type="button" id="button-addon2">
+                    <input type="text" id="busqueda" class="form-control" placeholder="Buscar a un empleado" aria-label="" aria-describedby="button-addon2">
+                    <button id="buscarEmpleado" data-url="buscarEmpleado.php" class="ver-empleados btn btn-outline-primary" type="button" id="button-addon2">
                     <i class="fa-solid fa-magnifying-glass" style="color: #1f71ff;"></i></button>
                 </div>
             </div>
@@ -145,7 +143,6 @@
         <div id="configuracion" class="tab-content">
             <p class="test">Yo soy, configuracion.</p>
         </div>
-
         <!--Modal-->
         <div class="modal fade" id="mainModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div class="modal-dialog">
@@ -153,7 +150,7 @@
                     <div class="modal-header">
                             <!--Titulo que tendra el modal-->
                             <h1 class="modal-title fs-5" id="firstLabe"></h1>
-                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            <button type="button" class="btn-close btn-close-custom" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body" id="modal-form">
                             <!--El contenido del modal cambia dependiendo del boton que lo activo-->
@@ -165,6 +162,7 @@
     <!--Scripts que necesitan ejecutarse hasta el final-->
     <script src="/js/dinamicTable.js"></script>
     <script src="/bootstrap/js/bootstrap.min.js"></script>
+    <script src="/bootstrap/js/bootstrap.bundle.min.js"></script>
     <script src="/js/filtroEventos.js"></script>
 </body>
 </html>
