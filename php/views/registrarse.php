@@ -29,12 +29,12 @@
         .left {
             left: 0;
             color:sienna;
-            background-image: url(/images/mesero.jpg);
+            /*background-image: url(/images/mesero.jpg);*/
         }
         .right {
             right: 0;
             color:blueviolet;
-            background-image:url(/images/heroImage.jpg)
+            /*background-image:url(/images/heroImage.jpg)*/
         }
         .centered {
             position: absolute;
@@ -69,32 +69,24 @@
             overflow-y: scroll;
         }
     </style>
-    <script>
-        function onChange() {
-            const password = document.querySelector('input[name=pass]');
-            const confirm = document.querySelector('input[name=ckpass]');
-            if (confirm.value === password.value) {
-                confirm.setCustomValidity('');
-            } 
-            else {
-                confirm.setCustomValidity('Passwords do not match');
-            }
-        }
-    </script>
     <script src="/js/panelAdmin.js" async defer></script>
 </head>
 <body>
+  
    <!-- Desktop Navbar -->
+   <!--
    <div class=" desktop-nav">
 <div class="tab-content">
   <nav class="navbar navbar-default row">
     <div class="companySection col-sm-auto">
-      <!-- Company Logo -->
+      -->
+      <!-- Company Logo 
       <div class="navbar-header">
         <img id="company-logo" class="img-fluid" src="/images/company_logo.png" alt="companyLogo">
         <a class="no-underline" href="/index.html" id="company-name">Violet Skies</a>
       </div>
-      <!-- Tabs -->
+      -->
+      <!-- Tabs 
       <ul class="nav list-inline">
         <li class="mr-3 tabs">
           <a class="no-underline" href="/html/about-us/about us.html">Nosotros</a>
@@ -107,7 +99,8 @@
         </li>
       </ul>
     </div>
-    <!-- Login Section -->
+      -->
+    <!-- Login Section 
     <div class="login-section col-sm-auto">
       <button class="loginButton">
         <i class="fa-solid fa-door-open" style="color: #ffffff;"></i>
@@ -117,7 +110,10 @@
   </nav>
 </div>
    </div>
-<!-- Mobile Side Menu -->
+      -->
+      
+   <!-- Mobile Side Menu -->
+   <!--
 <div class=" mobile-nav">
 <div id="dash-board" class="d-block overflow-hidden">
   <div class="d-block" style="overflow: hidden;">
@@ -131,7 +127,7 @@
   </div>
 </div>
 </div>
-
+      -->
     <!--Divided page-->
     <div class="container">
         <div class="row">
@@ -170,10 +166,10 @@
             <label class="form-label" name="cel">Numero de Celular: </label> 
             <input class="form-control" type="text" name="cel" placeholder="Telefono"><br><br>
             <label class="form-label" name="pass">Contraseña: </label>
-            <input class="form-control" type="password" name="pass" onChange="onChange()" 
+            <input class="form-control" type="password" name="pass" 
             placeholder="Contraseña" required><br><br>
             <label class="form-label" name="ckpass">Comprobar Contraseña: </label>
-            <input class="form-control" type="password" name="ckpass" onChange="onChange()"
+            <input class="form-control" type="password" name="ckpass"
              placeholder="Comprobar Contraseña" required`><br><br>
             <button class="loginButton" type="submit" name="reg">Registrarse</button>
         </form>
@@ -188,7 +184,7 @@
     <div class="modal-content">
       <div class="modal-header">
         <h1 class="modal-title fs-5" id="exampleModalLabel">Registrar como Cliente</h1>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        <button type="button" class="btn-close" aria-label="Close"></button>
       </div>
       <div class="modal-body">
         <form action="" method="post">
@@ -203,9 +199,9 @@
             <label class="form-label" name="cel">Numero de Celular: </label> 
             <input class="form-control" type="text" name="cel" placeholder="Telefono"><br><br>
             <label class="form-label" name="pass">Contraseña: </label>
-            <input class="form-control" type="password" name="pass" onChange="onChange()" placeholder="Contraseña"><br><br>
+            <input class="form-control" type="password" name="pass" placeholder="Contraseña"><br><br>
             <label class="form-label" name="ckpass">Comprobar Contraseña: </label>
-            <input class="form-control" type="password" name="ckpass" onChange="onChange()" placeholder="Comprobar Contraseña"><br><br>
+            <input class="form-control" type="password" name="ckpass" placeholder="Comprobar Contraseña"><br><br>
             <button class="loginButton" type="submit" name="regc">Iniciar Sesion</button>   
         </form>
       </div>
@@ -213,31 +209,21 @@
   </div>
 </div>
    <?php
-    include '../dataBase.php';
-    extract($_POST);
-    $db=new Database();
-    $db->conectarBD();
-    $pass=$_POST('pass');
-    $confirm=$_POST('ckpass');
-    if(isset($_POST['reg'])){
-      $tipo="EMPLEADO";  
-      if($pass!==$confirm){
-          echo"<div>Contrasenas no concuerdan</div>";
+      include '../dataBase.php';
+      extract($_POST);
+      $db=new Database();
+      $db->conectarBD();
+      if(isset($_POST['reg'])){
+        $tipo="EMPLEADO";  
+        $db->Register($nom,$ap,$am,$usu,$pass,$ckpass,$cel,$tipo);
       }
-      else{
-        $db->Register($nom);
-      }
-    }
-    else if(isset($_POST['regc'])){
-      $tipo="CLIENTE";  
-      if($pass!==$confirm){
-        echo"<div>Contrasenas no concuerdan</div>";
-      }
-      else{
-        $db->Register($nom);
-      }
-    }
-  ?>
+       else if(isset($_POST['regc'])){
+          $tipo="CLIENTE";  
+          $db->Register($nom,$ap,$am,$usu,$pass,$ckpass,$cel,$tipo);
+        }
+
+   ?>
+    
     <script src="/js/filtroEventos.js"></script>
     <script src="https://kit.fontawesome.com/b60c246061.js" crossorigin="anonymous"></script>
     <script src="/bootstrap/js/bootstrap.min.js"></script>

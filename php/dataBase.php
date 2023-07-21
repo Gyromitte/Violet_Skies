@@ -154,9 +154,20 @@
             session_destroy();
             header("Location:/index.html");
         }
-        function Register($nom){
+        function Register($nom,$ap,$am,$usu,$pass,$confirm,$cel,$tipo){
             try{
-
+                if($pass!==$confirm){
+                    echo"<div class=' alert alert-warning'>
+                    <h3>Contrasenas no concuerdan</h3></div>";
+                }
+                else{
+                    $hash=password_hash($pass,PASSWORD_DEFAULT);
+                    $cadena="INSERT INTO CUENTAS(NOMBRE, AP_PATERNO,AP_MATERNO, CORREO, CONTRASEÑA, 
+                    TELEFONO,TIPO_CUENTA) VALUES('$nom','$ap','$am','$usu','$hash','$cel','$tipo')";
+                    $this->PDO_local->query($cadena);
+                    echo"<div class=' alert alert-success'> Usuario Registrado</div>";
+                    header("refresh:3;../php/views/login.php");
+                }
             }
             catch(PDOException $e){
                 echo $e->getMessage();
