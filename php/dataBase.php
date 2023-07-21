@@ -93,6 +93,9 @@
                 echo $e->getMessage();
             }
         }
+
+        
+        
         function Login($usu,$pass){
             try{
                 $ver = false;
@@ -102,21 +105,26 @@
                 while($renglon = $consulta->fetch(PDO::FETCH_ASSOC)){
                     if(password_verify($pass,$renglon['CONTRASEÑA'])){
                         $ver = true;
+                        $ID=$renglon['ID'];
                         $NOMBRE = $renglon['NOMBRE'];
                         $tipo = $renglon['TIPO_CUENTA'];
-                        $id=$renglon['ID'];
+                        $ap_paterno=$renglon['AP_PATERNO'];
+                        $ap_materno=$renglon['AP_MATERNO'];
+                        $telefono=$renglon['TELEFONO'];
+                        $correo=$renglon['CORREO'];
                     }
                 }
                 if($ver){
                     session_start();
+                    $_SESSION["ID"] = $ID; 
                     $_SESSION["name"] = $NOMBRE;
                     $_SESSION["logged_in"]=true;
                     if($tipo==='CLIENTE'){
                         $_SESSION["access"]=1;
                         echo"<div class=' container'>";
-                        echo"<h1 align='center'>Bienvenido ".$_SESSION["cliente"]."</h1>";
+                        echo"<h1 align='center'>Bienvenido ".$_SESSION["name"]."</h1>";
                         echo "</div>";
-                        header("refresh:4;/html/cliente/index.html");
+                        header("refresh:4;/php/viewsClientes/panelClientes.php");
                     }
                     else if($tipo==='ADMINISTRADOR'){
                         $_SESSION["access"]=3;
@@ -127,7 +135,7 @@
                     }
                     else if ($tipo==='EMPLEADO'){
                         $query="SELECT * FROM EMPLEADOS JOIN CUENTAS ON CUENTAS.ID=EMPLEADOS.CUENTA
-                        WHERE CUENTAS.ID='$id'";
+                        WHERE CUENTAS.ID='$ID'";
                         $consulta=$this->PDO_local->query($query);
                         while($trabajo=$consulta->fetch(PDO::FETCH_ASSOC)){
                             $_SESSION["access"]=2;

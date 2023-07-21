@@ -2,7 +2,7 @@
 <!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
 <!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
 <!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
-<!--[if gt IE 8]>      <html class="no-js"> <!--<![endif]-->
+<!--[if gt IE 8]>      <html class="no-js"> <!-<![endif]-->
 <html>
 
 <head>
@@ -86,6 +86,7 @@
             header("Location:../views/login.php");
         } */
     ?>
+
     <nav>
         <div class="nav-menu">
             <button id="nav-button">
@@ -202,7 +203,11 @@
             </div>
         </div>
         <div id="perfil" class="tab-content">
-            <p class="test">Yo soy, perfiles.</p>
+            <h3 class="test" style="text-align:center";>
+                PERFIL
+                <i class="fa-solid fa-briefcase" style="color: #ffffff;"></i>
+            </h3>
+            <?php include "../viewsPerfil/verPerfil.php"?>
         </div>
         <div id="configuracion" class="tab-content">
             <p class="test">Yo soy, configuracion.</p>
