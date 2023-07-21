@@ -6,6 +6,17 @@ body{
 h1{
     font-family: 'Archivo Black', sans-serif;
 }
+.dash-button{
+    border: none;
+    border-radius: 2em;
+    height: 50px;
+    background-color:#5603ad;
+    margin: 10px;
+    color: white;
+    font-size: small;
+    font-family: 'Lexend', sans-serif;
+    font-weight: bolder;
+}
 /*Nav*/
 .navbar{
     background-color: #8367c7;
@@ -111,6 +122,13 @@ h1{
     margin: 1em 1em 1em 1em;
     padding-left: 1em;
     flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    font-family: 'Patua One', cursive;
+}
+.btleftHeroSection{
+    width: 40vw;
+    color: white;
     justify-content: center;
     align-items: center;
     font-family: 'Patua One', cursive;
