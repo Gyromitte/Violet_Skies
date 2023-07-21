@@ -90,9 +90,9 @@
                     if($tipo==='CLIENTE'){
                         $_SESSION["access"]=1;
                         echo"<div class=' container'>";
-                        echo"<h1 align='center'>Bienvenido ".$_SESSION["cliente"]."</h1>";
+                        echo"<h1 align='center'>Bienvenido ".$_SESSION["name"]."</h1>";
                         echo "</div>";
-                        header("refresh:4;/html/cliente/index.html");
+                        header("refresh:4;/php/viewsClientes/panelClientes.php");
                     }
                     else if($tipo==='ADMINISTRADOR'){
                         $_SESSION["access"]=3;
@@ -103,7 +103,7 @@
                     }
                     else if ($tipo==='EMPLEADO'){
                         $query="SELECT * FROM EMPLEADOS JOIN CUENTAS ON CUENTAS.ID=EMPLEADOS.CUENTA
-                        WHERE CUENTAS.ID='$id'";
+                        WHERE CUENTAS.ID='$ID'";
                         $consulta=$this->PDO_local->query($query);
                         while($trabajo=$consulta->fetch(PDO::FETCH_ASSOC)){
                             $_SESSION["access"]=2;
