@@ -67,7 +67,7 @@
         <![endif]-->
     <!--NavBar-->    
     <?php
-        session_start();
+        /*session_start();
         if(isset($_SESSION["logged_in"])){
             if(isset($_SESSION["access"])==2){
                 echo "<div class='redirect'>";
@@ -84,7 +84,7 @@
         }
         else if(!isset($_SESSION["logged_in"])){
             header("Location:../views/login.php");
-        }
+        } */
     ?>
     <nav>
         <div class="nav-menu">
