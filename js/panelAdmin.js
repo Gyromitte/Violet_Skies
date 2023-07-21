@@ -50,13 +50,19 @@ var modalForm = document.getElementById("modal-form");
 function checkCurrentTable(currentTable) {
   switch (currentTable) { //Simular un click para refrescar los cambios
     case 'cocineros':
-      btnCocineros.click();
+      setTimeout(function () {
+        btnCocineros.click();
+      }, 500); // 0.5 segundos, si la funcion se ejecuta muy rapido no reflejara los cambios
       break;
     case 'meseros':
-      btnMeseros.click();
+      setTimeout(function () {
+        btnMeseros.click();
+      }, 500); // 0.5 segundos, si la funcion se ejecuta muy rapido no reflejara los cambios
       break;
     case 'busqueda':
-      btnBusqueda.click();
+      setTimeout(function () {
+        btnBusqueda.click();
+      }, 500); // 0.5 segundos, si la funcion se ejecuta muy rapido no reflejara los cambios
       break;
   }
 }
@@ -144,7 +150,7 @@ function updateModalContent(formType, idEmpleado) {
         //Enviar el formulario
         xhr.send(formData);
         //Ver cual es la tabla activa para refrescar cualquier cambio
-        console.log(currentTable);
+        //console.log(currentTable);
         setTimeout(function() {
           checkCurrentTable(currentTable);
         }, 500); // 0.5 segundos, si la funcion se ejecuta muy rapido no reflejara los cambios
@@ -192,7 +198,7 @@ function updateModalContent(formType, idEmpleado) {
       xhr.open("GET", "obtenerEmpleado.php?id=" + idEmpleado, true);
       xhr.send();
       //Ver cual es la tabla activa para refrescar cualquier cambio
-      checkCurrentTable(currentTable);
+
       break;
     case "@editarEmpleado":
       modalTitle.textContent = "Modificar datos";
@@ -280,7 +286,6 @@ function updateModalContent(formType, idEmpleado) {
       //Ver cual es la tabla activa para refrescar cualquier cambio
       checkCurrentTable(currentTable);
       break;
-
   }
 }
 
