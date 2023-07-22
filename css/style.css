@@ -30,23 +30,128 @@ h1{
     --bs-gutter-x: unset !important;
 }
 
-.companySection{
-    display: flex;
-    align-items: center;
-}
-
-#company-logo{
+#company-logo {
     height: 1.5em;
     margin-left: 15px;
-}
+    margin-right: 15px;
+    transition: transform 0.2s ease; /* Agregar una transición suave para el efecto de rebote */
+    transform-origin: top left; /* Ajustar el punto de transformación a la esquina superior izquierda */
+  }
+  
+  .companySection {
+    display: flex;
+    align-items: center;
+    position: relative; /* Agregar posición relativa para poder posicionar el logo */
+  }
+  #company-logo.clicked {
+    animation: bounce 0.5s forwards, shake 0.6s 1.5s forwards, rocket 1.5s 2.5s forwards, rocketExit 1s 4.2s forwards, rocketEnter 1s 5.2s forwards;  /* Aplicar las animaciones al pasar el mouse por encima */
+  }
+  
+  @keyframes bounce {
+    0%, 100% {
+      transform: translateY(0); /* Posición inicial y final sin rebote */
+    }
+    25% {
+      transform: translateY(-15px); /* El logo salta hacia arriba */
+    }
+    50% {
+      transform: translateY(0); /* El logo vuelve a su posición original */
+    }
+  }
+  
+  @keyframes rocket {
+    0% {
+      transform: translateY(0); /* Posición inicial sin cohete */
+    }
+    100% {
+      transform: translateY(-150px); /* Cohete espacial, despega hacia arriba (ajustar la distancia a recorrer) */
+    }
+  }
+  
+  @keyframes shake {
+    0%, 100% {
+      transform: rotate(0); /* Posición inicial y final sin temblor */
+    }
+    10% {
+      transform: rotate(-8deg); /* El logo tiembla hacia la izquierda */
+    }
+    20% {
+      transform: rotate(8deg); /* El logo tiembla hacia la derecha */
+    }
+    30% {
+      transform: rotate(-8deg); /* El logo tiembla hacia la izquierda */
+    }
+    40% {
+      transform: rotate(8deg); /* El logo tiembla hacia la derecha */
+    }
+    50% {
+      transform: rotate(-8deg); /* El logo tiembla hacia la izquierda */
+    }
+    60% {
+      transform: rotate(8deg); /* El logo tiembla hacia la derecha */
+    }
+    70% {
+      transform: rotate(-8deg); /* El logo tiembla hacia la izquierda */
+    }
+    80% {
+      transform: rotate(8deg); /* El logo tiembla hacia la derecha */
+    }
+    90% {
+      transform: rotate(-8deg); /* El logo tiembla hacia la izquierda */
+    }
+    100% {
+      transform: rotate(0); /* Volver a la posición inicial sin temblor */
+    }
+  }
+  
+  @keyframes rocketExit {
+    0% {
+      opacity: 1; /* Logo es visible antes de salir de la pantalla */
+    }
+    100% {
+      transform: translateY(-1000px); /* Logo se desplaza hacia arriba para salir de la pantalla */
+      opacity: 0; /* Logo se vuelve invisible */
+    }
+  }
+
+  @keyframes rocketEnter {
+    0% {
+      transform: translateY(1000px); /* Posición del logo antes de entrar desde abajo */
+      opacity: 0; /* Logo es invisible */
+    }
+    100% {
+      transform: translateY(0); /* Logo se mueve desde abajo hacia su posición inicial */
+      opacity: 1; /* Logo vuelve a ser visible */
+    }
+  }
+  
+
+
+
+
 
 #company-name{
     padding-left: 1em;
-    padding-right: 1em;
+    padding-right: 1em; 
 }
 
-#company-name:hover{
-    text-decoration: underline;
+#company-name {
+    position: relative;
+}
+
+#company-name::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background-color: #fafafa; /* Color del subrayado */
+    transition: width 0.3s ease;
+}
+
+#company-name:hover::after {
+    width: 100%; /* Hacer que el subrayado aparezca gradualmente al pasar el mouse */
 }
 
 .no-underline{
@@ -54,15 +159,35 @@ h1{
     color: white;
 }
 
-.tabs{
+.tabs {
+    position: relative;
+    transition: transform 0.3s ease, border-bottom 0.3s ease;
     margin-right: 20px;
     margin-left: 20px;
 }
 
-.tabs:hover{
-    text-decoration: underline;
-    border-bottom: 1px solid #5603ad;
+/* Efecto de la barra en cascada */
+.tabs::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background-color: #ffffff; /* Color del subrayado */
+    transition: width 0.3s ease;
 }
+
+.tabs:hover::after {
+    width: 100%; /* Hacer que el subrayado aparezca con un efecto de desplazamiento al pasar el mouse */
+}
+
+/* Efecto de desplazamiento lateral al pasar el mouse */
+.tabs:hover {
+    transform: translateX(5px); /* Desplazar el tab lateralmente al pasar el mouse */
+    z-index: 1;
+}
+
 
 /*Login Section*/
 .login-section{
