@@ -60,8 +60,8 @@
     background: linear-gradient(135deg, #5603ad, #8a2be2);
     color: white;
     border: 2px solid white; 
-    padding: 10px 20px;
-    border-radius: 20px; 
+    padding: 30px 40px;
+    border-radius: 30px; 
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     text-decoration: none; 
     display: inline-block; 
@@ -76,4 +76,12 @@
   }
   .btn-agend-custom:hover a {
     text-decoration: none;
+  }
+
+  .how-to{
+    color: white;
+  }
+  .header-how-to{
+    background-image: linear-gradient(135deg, #5603ad, #f58cd6);
+    height: 100px;
   }
