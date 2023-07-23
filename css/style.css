@@ -35,7 +35,6 @@ h1{
     margin-left: 15px;
     margin-right: 15px;
     transition: transform 0.2s ease; /* Agregar una transición suave para el efecto de rebote */
-    transform-origin: top left; /* Ajustar el punto de transformación a la esquina superior izquierda */
   }
   
   .companySection {
