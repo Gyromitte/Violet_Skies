@@ -4,8 +4,10 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Acceder</title>
-    <link rel="stylesheet" href="/css/loginn.css">
+    <title>Violet skies - Registrarse</title>
+    <link rel="stylesheet" href="/css/style.css">
+    <!--Favi icon-->
+    <link rel="icon" type="image/x-icon" href="/images/company_logo.png">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Patua+One&display=swap" rel="stylesheet">
@@ -28,13 +30,13 @@
         }
         .left {
             left: 0;
-            color:sienna;
-            background-image: url(/images/mesero.jpg);
+            color: white;
+            background-color: #baa0cd;
         }
         .right {
             right: 0;
-            color:blueviolet;
-            background-image:url(/images/heroImage.jpg);
+            color: white;
+            background-color: #6C3483;
         }
         .centered {
             position: absolute;
@@ -70,73 +72,61 @@
             overflow-y: scroll;
         }
     </style>
-    <script src="/js/panelAdmin.js" async defer></script>
 </head>
 <body>
   
    <!-- Desktop Navbar -->
-  
    <div class=" desktop-nav fixed-top">
-<div class="tab-content">
-  <nav class="navbar navbar-default row">
-    <div class="companySection col-sm-auto">
-      <!-- Company Logo -->
-      <div class="navbar-header">
-        <img id="company-logo" class="img-fluid" src="/images/company_logo.png" alt="companyLogo">
-        <a class="no-underline" href="/index.html" id="company-name">Violet Skies</a>
-      </div>
-      <!-- Tabs -->
-      <ul class="nav list-inline">
-        <li class="mr-3 tabs">
-          <a class="no-underline" href="/html/about-us/about us.html">Nosotros</a>
-        </li>
-        <li class="mr-3 tabs">
-          <a class="no-underline" href="#">Agendar Evento</a>
-        </li>
-        <li class="mr-3 tabs">
-          <a class="no-underline" href="/html/trabajo.html">Trabajo</a>
-        </li>
-      </ul>
-    </div>
-    <!-- Login Section -->
-    <div class="login-section col-sm-auto">
-      <button class="loginButton">
-        <i class="fa-solid fa-door-open" style="color: #ffffff;"></i>
-        <a class="no-underline" href="/php/views/login.php">Acceder</a>
-      </button>
-    </div>
-  </nav>
-</div>
+   <nav class="navbar navbar-default row">
+            <div class="companySection col-sm-auto">
+                <!--Company Logo-->
+                <div class="navbar-header">
+                    <img id="company-logo" class="img-fluid" src="/images/company_logo.png" alt="companyLogo" onclick="this.classList.toggle('clicked')">
+                        <a class="no-underline" href="/index.html" id="company-name">Violet Skies</a>
+                </div>      
+                <!--Tabs-->
+                <ul class="nav list-inline">
+                    <li class="mr-3 tabs">
+                        <a class="no-underline" href="/html/about-us/about us.html">Nosotros</a>
+                    </li>
+                    <li class="mr-3 tabs">
+                        <a class="no-underline" href="/html/agendarEvento.html">Agendar Evento</a>
+                    </li>
+                    <li class="mr-3 tabs">
+                        <a class="no-underline" href="/html/trabajo.html">Trabajo</a>
+                    </li>
+                </ul>
+            </div>         
+            <!--Login-section-->
+            <div class="login-section col-sm-auto" >
+                <a class="no-underline" href="/php/views/login.php"><button class="loginButton">
+                    <i class="fa-solid fa-door-open" style="color: #ffffff;"></i>
+                    Acceder  
+                </button>
+                </a>
+                <a class="no-underline" href="/php/views/registrarse.php"><button class="loginButton">
+                    <i class="fa-solid fa-user" style="color: #ffffff;"></i>
+                    Registrarse
+                </button>
+                </a>
+            </div>
+        </nav>
    </div>
       
-   <!-- Mobile Side Menu -->
-   <!--
-<div class=" mobile-nav">
-<div id="dash-board" class="d-block overflow-hidden">
-  <div class="d-block" style="overflow: hidden;">
-    <div id="dash-board-content">
-      <button data-tab="home" class="dash-button"><i class="fa-solid fa-house" style="color: #ffffff;"></i><br>Home</button>
-      <button data-tab="eventos" class="dash-button"><i class="fa-solid fa-calendar-days" style="color: #ffffff;"></i><br>Eventos</button>
-      <button data-tab="empleados" class="dash-button"><i class="fa-solid fa-briefcase" style="color: #ffffff;"></i><br>Empleados</button>
-      <button data-tab="perfil" class="dash-button"><i class="fa-solid fa-user" style="color: #ffffff;"></i><br>Perfil</button>
-      <a href="../scripts/CerrarSesion.php"><button data-tab="logout" class="dash-button"><i class="fa-solid fa-gear" style="color: #ffffff;"></i><br>Logout</button></a>
-    </div>
-  </div>
-</div>
-</div>
-      -->
     <!--Divided page-->
     <div class="container">
         <div class="row">
             <div class="split left" data-bs-toggle="modal" data-bs-target="#Empleado">
                 <div class="centered">
                     <h1>Registrate como Empleado!</h1>
+                    <img src="/images/waiter.jpg" style="height: 400px;">
                 </div>
             </div>
 
             <div class="split right" data-bs-toggle="modal" data-bs-target="#Cliente">
                 <div class="centered">
                     <h1>Registrate como Cliente!</h1>
+                    <img src="/images/customers.jpg" style="height: 400px;">
                 </div>
             </div>
         </div>
