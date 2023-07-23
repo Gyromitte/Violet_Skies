@@ -8,6 +8,8 @@
     <style>
         div{
             background-color: rgb(27, 31, 59);
+            height: 100%;
+            width: 100%;
         }
         h1{
             text-align: center;
@@ -34,16 +36,21 @@
             height: 100%;
             width: 100%;
             padding-top: 300px;
+            padding-bottom: 300px;
         }
     </style>
 </head>
 <body>
+    <div>
         <?php
             echo"<div class='container'>";
             echo"<h1 align='center'>No tienes acceso a esta pagina</h1><br>";
             echo"<h3 align='center'>Redirigiendo...</h3>";
             echo "</div>";
+        ?>
+        <?php
             header("refresh:4;/index.html");
         ?>
+    </div>
 </body>
 </html>
