@@ -25,40 +25,6 @@
     <script src="https://kit.fontawesome.com/b60c246061.js" crossorigin="anonymous"></script>
     <!--Scripts que necesitan ejecutarse primero-->
     <script src="/js/panelAdmin.js" async defer></script>
-    <!--<style>
-        .redirect div{
-            background-color: rgb(27, 31, 59);
-            background-blend-mode: overlay;
-        }
-        .redirect h1{
-            text-align: center;
-            color:rgb(131, 103, 199);
-            animation: anim-glow 2s ease infinite;
-            font-size: 70px;
-        }
-        .redirect h3{
-            text-align: center;
-            color:rgb(131, 103, 199);
-            animation: anim-glow 2s ease infinite;
-            font-size: 40px;
-        }
-        @keyframes anim-glow {
-	        0% {
-		        box-shadow: 0 0 rgba(188, 44, 201, 1);
-	        }
-	        100% {
-		        box-shadow: 0 0 10px 8px transparent;
-		        border-width: 2px;
-	        }
-        }
-        .redirect div .container{
-            background-color: rgb(27, 31, 59);
-            height: 100%;
-            width: 100%;
-            padding-top: 300px;
-        }
-    </style>
-    -->
 </head>
 
 <body>
@@ -119,7 +85,7 @@
             }
             ?>
             <br>
-            Position<br><br>
+            Admin<br><br>
             <button data-tab="home" class="dash-button"><i class="fa-solid fa-house" style="color: #ffffff;"></i><br>Home</button>
             <button data-tab="eventos" class="dash-button"><i class="fa-solid fa-calendar-days" style="color: #ffffff;"></i><br>Eventos</button>
             <button data-tab="empleados" class="dash-button"><i class="fa-solid fa-briefcase" style="color: #ffffff;"></i><br>Empleados</button>
