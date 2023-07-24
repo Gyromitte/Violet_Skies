@@ -204,8 +204,14 @@ nav{
     flex: 1;
   }
   /*Charts*/
+#eventosAño, #proporcionEmpleados{
+    background-color: #b14aed;
+    color: white;
+    border-radius: 20px;
+}
 #proporcionEmpleados{
-    height: 300px;
+    height: 200px;
+    width: 200px; 
 }
   
   

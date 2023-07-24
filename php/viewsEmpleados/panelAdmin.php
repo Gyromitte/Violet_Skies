@@ -14,6 +14,8 @@
     <!--StyleSheets-->
     <link rel="stylesheet" href="/bootstrap/css/bootstrap.min.css">
     <link rel="stylesheet" href="/css/panelAdmin.css">
+    <!--Favi icon-->
+    <link rel="icon" type="image/x-icon" href="/images/company_logo.png">
     <!--Referencias a fuentes-->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -141,10 +143,10 @@
 
             <div class="container-fluid">
                 <div class="row">
-                    <div class="col-md-6">
+                    <div class="col-md-7">
                         <canvas id="eventosAño"></canvas>
                     </div>
-                    <div class="col-md-6">
+                    <div class="col-md-5">
                         <canvas id="proporcionEmpleados"></canvas>
                     </div>
                 </div>
