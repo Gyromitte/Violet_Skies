@@ -1,3 +1,5 @@
+document.addEventListener('DOMContentLoaded', function() {
+
 /*Funcionamiento de la dashboard*/
 // Obtener elementos
 const toggleDashboardBtn = document.getElementById('nav-button');
@@ -349,7 +351,5 @@ function eliminarEmpleado(id) {
   // Retornar false para evitar que el formulario se recargue la página
   return false;
 }
-
-
-
+});
 

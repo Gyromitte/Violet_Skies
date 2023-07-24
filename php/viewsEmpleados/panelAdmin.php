@@ -23,6 +23,8 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&display=swap" rel="stylesheet">
     <script src="https://kit.fontawesome.com/b60c246061.js" crossorigin="anonymous"></script>
+    <!--Chart.js-->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <!--Scripts que necesitan ejecutarse primero-->
     <script src="/js/panelAdmin.js" async defer></script>
     <!--<style>
@@ -65,9 +67,9 @@
     <!--[if lt IE 7]>
             <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="#">upgrade your browser</a> to improve your experience.</p>
         <![endif]-->
-    <!--NavBar-->    
+    <!--NavBar-->
     <?php
-        /*session_start();
+    /*session_start();
         if(isset($_SESSION["logged_in"])){
             if(isset($_SESSION["access"])==2){
                 echo "<div class='redirect'>";
@@ -99,14 +101,13 @@
         <div class="nav-user">
             <i class="fa-solid fa-bell" style="color: #ffffff;"></i>
             <div id="nav-photo-user"></div>
-            <?php 
-            if(isset($_SESSION["logged_in"])){
-                if(isset($_SESSION["access"])==3){
+            <?php
+            if (isset($_SESSION["logged_in"])) {
+                if (isset($_SESSION["access"]) == 3) {
                     echo $_SESSION["name"];
                 }
-            }
-            else{
-                echo"Username";
+            } else {
+                echo "Username";
             }
             ?>
         </div>
@@ -116,13 +117,12 @@
         <div id="dash-board-content">
             <div id="dash-photo-user"></div>
             <?php
-            if(isset($_SESSION["logged_in"])){
-                if(isset($_SESSION["access"])==3){
+            if (isset($_SESSION["logged_in"])) {
+                if (isset($_SESSION["access"]) == 3) {
                     echo $_SESSION["name"];
                 }
-            }
-            else{
-                echo"Username";
+            } else {
+                echo "Username";
             }
             ?>
             <br>
@@ -137,30 +137,43 @@
     <!--Main Content-->
     <div id="main">
         <div id="home" class="tab-content active">
-            <p class="test">Yo soy, home</p>
+            <p class="test">Home</p>
+
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-md-6">
+                        <canvas id="eventosAño"></canvas>
+                    </div>
+                    <div class="col-md-6">
+                        <canvas id="proporcionEmpleados"></canvas>
+                    </div>
+                </div>
+            </div>
+
+
         </div>
         <div id="eventos" class="tab-content">
-        <h3 class="test" style="text-align:center; ">
+            <h3 class="test" style="text-align:center; ">
                 Panel de Eventos
                 <i class="fa-solid fa-briefcase" style="color: #ffffff;"></i>
             </h3>
             <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#mainModal" data-bs-whatever="@fat">Open modal for @fat</button>
-            
+
             <div class="container">
-            <form id="filtroForm" action="<?php echo $_SERVER['PHP_SELF']; ?>" method="POST">
-                <br>
-                <div class="btn-group">
-                    <label class="control-label">Estado:</label>
-                    <select id="estadoSelect" name="estado" class="form-select">;
-                        <option value="todo" selected>Todos</option>;
-                        <option value="PENDIENTE">Pendiente</option>;
-                        <option value="FINALIZADO">Finalizado</option>;
-                        <option value="EN PROCESO">En proceso</option>;
-                        <option value="CANCELADO">Cancelado</option>;
-                    </select>
-                </div>
-        
-            </form>
+                <form id="filtroForm" action="<?php echo $_SERVER['PHP_SELF']; ?>" method="POST">
+                    <br>
+                    <div class="btn-group">
+                        <label class="control-label">Estado:</label>
+                        <select id="estadoSelect" name="estado" class="form-select">;
+                            <option value="todo" selected>Todos</option>;
+                            <option value="PENDIENTE">Pendiente</option>;
+                            <option value="FINALIZADO">Finalizado</option>;
+                            <option value="EN PROCESO">En proceso</option>;
+                            <option value="CANCELADO">Cancelado</option>;
+                        </select>
+                    </div>
+
+                </form>
             </div>
             <br>
             <div id="tablaResultados"></div>
@@ -180,7 +193,7 @@
             <!--Opciones de Vistas-->
             <div class="view-options">
                 <div>
-                    <button id="verCocineros" data-url="verCocineros.php"  type="button" class="btn-options ver-empleados btn btn-primary border-2 btn-outline-light rounded-5" data-bs-target="#mainModal">
+                    <button id="verCocineros" data-url="verCocineros.php" type="button" class="btn-options ver-empleados btn btn-primary border-2 btn-outline-light rounded-5" data-bs-target="#mainModal">
                         <i class="fa-solid fa-utensils" style="color: #ffffff;"></i>
                         Ver Cocineros
                     </button>
@@ -193,7 +206,7 @@
                 <div class="input-group mb-3 search-bar">
                     <input type="text" id="busqueda" class="form-control" placeholder="Buscar a un empleado" aria-label="" aria-describedby="button-addon2">
                     <button id="buscarEmpleado" data-url="buscarEmpleado.php" class="ver-empleados btn btn-outline-primary" type="button" id="button-addon2">
-                    <i class="fa-solid fa-magnifying-glass" style="color: #1f71ff;"></i></button>
+                        <i class="fa-solid fa-magnifying-glass" style="color: #1f71ff;"></i></button>
                 </div>
             </div>
             <!--Informacion de la tabla-->
@@ -203,11 +216,11 @@
             </div>
         </div>
         <div id="perfil" class="tab-content">
-            <h3 class="test" style="text-align:center";>
+            <h3 class="test" style="text-align:center" ;>
                 PERFIL
                 <i class="fa-solid fa-briefcase" style="color: #ffffff;"></i>
             </h3>
-            <?php include "../viewsPerfil/verPerfil.php"?>
+            <?php include "../viewsPerfil/verPerfil.php" ?>
         </div>
         <div id="configuracion" class="tab-content">
             <p class="test">Yo soy, configuracion.</p>
@@ -217,21 +230,23 @@
             <div class="modal-dialog">
                 <div class="modal-content custom-modal">
                     <div class="modal-header">
-                            <!--Titulo que tendra el modal-->
-                            <h1 class="modal-title fs-5" id="firstLabe"></h1>
-                            <button type="button" class="btn-close btn-close-custom" data-bs-dismiss="modal" aria-label="Close"></button>
+                        <!--Titulo que tendra el modal-->
+                        <h1 class="modal-title fs-5" id="firstLabe"></h1>
+                        <button type="button" class="btn-close btn-close-custom" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body" id="modal-form">
-                            <!--El contenido del modal cambia dependiendo del boton que lo activo-->
+                        <!--El contenido del modal cambia dependiendo del boton que lo activo-->
                     </div>
                 </div>
             </div>
         </div>
     </div>
     <!--Scripts que necesitan ejecutarse hasta el final-->
+    <script src="/js/charts.js"></script>
     <script src="/js/dinamicTable.js"></script>
     <script src="/bootstrap/js/bootstrap.min.js"></script>
     <script src="/bootstrap/js/bootstrap.bundle.min.js"></script>
     <script src="/js/filtroEventos.js"></script>
 </body>
+
 </html>
