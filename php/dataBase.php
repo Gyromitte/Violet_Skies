@@ -21,11 +21,6 @@
                 echo $e->getMessage(); 
             }
         }
-
-
-
-
-        
     function desconectarBD()
     {
         try
@@ -63,10 +58,6 @@
             echo $e->getMessage();
         }
     }
-
-
-
-
         function seleccionarPreparado($consulta, $parametros)
         {
             try

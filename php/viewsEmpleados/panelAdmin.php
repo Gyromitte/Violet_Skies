@@ -1,4 +1,3 @@
-<!DOCTYPE html>
 <!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
 <!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
 <!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
@@ -139,8 +138,11 @@
     <!--Main Content-->
     <div id="main">
         <div id="home" class="tab-content active">
-            <p class="test">Home</p>
-
+        <h3 class="test" style="text-align:center; ">
+                Home
+                <i class="fa-solid fa-house" style="color: #ffffff;"></i>
+            </h3>
+    <!--Charts-->
             <div class="container-fluid">
                 <div class="row">
                     <div class="col-md-7">
@@ -151,8 +153,6 @@
                     </div>
                 </div>
             </div>
-
-
         </div>
         <div id="eventos" class="tab-content">
             <h3 class="test" style="text-align:center; ">

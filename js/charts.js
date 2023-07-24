@@ -13,12 +13,6 @@ const eventosRealizados = [
     { mes: 'Septiembre', cantidad: 19 },
   ];
   
-  // Datos para el gráfico de proporción de empleados (doughnut)
-  const proporcionEmpleados = {
-    cocineros: 35,
-    meseros: 65,
-  };
-  
   // Obtiene el contexto de los canvas
   var ctxEventos = document.getElementById('eventosAño').getContext('2d');
   var ctxProporcion = document.getElementById('proporcionEmpleados').getContext('2d');
@@ -66,31 +60,52 @@ const eventosRealizados = [
     }
   });
   
-  
-  
-  //(doughnut)
-  var doughnutChart = new Chart(ctxProporcion, {
-    type: 'doughnut',
-    data: {
-      labels: ['Cocineros', 'Meseros'],
-      datasets: [{
-        data: Object.values(proporcionEmpleados),
-        backgroundColor: ['#5603ad', '#8367c7'], // Colores de las secciones
-        borderColor: ['white', 'white'], // Colores de los bordes de las secciones
-        borderWidth: 1,
-      }]
-    },
-    options: {
-      responsive: true,
-      maintainAspectRatio: false,
-      plugins: {
-        legend: {
-            display: true,
-            position: 'bottom',
-            labels:{
-                fontColor: 'white'
-            },
-        },
-      }
+  // Define el gráfico de "doughnut" sin datos iniciales
+var doughnutChart = new Chart(ctxProporcion, {
+  type: 'doughnut',
+  data: {
+    labels: ['Cocineros', 'Meseros'],
+    datasets: [{
+      data: [], // Sin datos iniciales
+      backgroundColor: ['#5603ad', '#8367c7'], // Colores de las secciones
+      borderColor: ['white', 'white'], // Colores de los bordes de las secciones
+      borderWidth: 1,
+    }]
+  },
+  options: {
+    responsive: true,
+    maintainAspectRatio: false,
+    plugins: {
+      legend: {
+          display: true,
+          position: 'bottom',
+          labels:{
+              fontColor: 'white'
+          },
+      },
     }
-  });
+  }
+});
+
+/*Functionality*/
+function actualizarGraficoDoughnut(countCocina, countMesero) {
+  // Actualizar el gráfico de "doughnut" con los nuevos datos
+  doughnutChart.data.datasets[0].data = [countCocina, countMesero];
+  doughnutChart.update();
+}
+
+// Realizar la solicitud AJAX para obtener los conteos de empleados
+fetch('/php/viewsCharts/countEmpleados.php') // Ruta de la consulta PHP
+  .then(response => response.json())
+  .then(data => {
+    // data contiene los conteos de empleados de cada tipo
+    console.log(data); // Agregar esta línea para verificar la respuesta
+
+    const countCocina = data.count_cocina;
+    const countMesero = data.count_mesero;
+
+    // Llamar a la función para actualizar el gráfico de "doughnut"
+    actualizarGraficoDoughnut(countCocina, countMesero);
+  })
+  .catch(error => console.error('Error al obtener los conteos de empleados:', error));
+
