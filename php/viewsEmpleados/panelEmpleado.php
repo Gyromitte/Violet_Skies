@@ -82,8 +82,8 @@
             ?>
             <br><br>
             <button data-tab="home" class="dash-button"><i class="fa-solid fa-house" style="color: #ffffff;"></i><br>Home</button>
-            <button data-tab="eventos" class="dash-button"><i class="fa-solid fa-calendar-days" style="color: #ffffff;"></i><br>Eventos</button>
-            <button data-tab="empleados" class="dash-button"><i class="fa-solid fa-briefcase" style="color: #ffffff;"></i><br>Empleados</button>
+            <button data-tab="eventos" class="dash-button"><i class="fa-solid fa-calendar-days" style="color: #ffffff;"></i><br>Eventos Disponibles</button>
+            <button data-tab="empleados" class="dash-button"><i class="fa-solid fa-calendar-days" style="color: #ffffff;"></i><br>Eventos Asistiendo</button>
             <button data-tab="perfil" class="dash-button"><i class="fa-solid fa-user" style="color: #ffffff;"></i><br>Perfil</button>
             <a href="../scripts/CerrarSesion.php"><button data-tab="logout" class="dash-button"><i class="fa-solid fa-gear" style="color: #ffffff;"></i><br>Logout</button></a>
         </div>
@@ -95,33 +95,15 @@
         </div>
         <div id="eventos" class="tab-content">
         <h3 class="test" style="text-align:center; ">
-                Panel de Eventos
+                Eventos Disponibles
                 <i class="fa-solid fa-briefcase" style="color: #ffffff;"></i>
             </h3>
-            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#mainModal" data-bs-whatever="@fat">Open modal for @fat</button>
-            
-            <div class="container">
-            <form id="filtroForm" action="<?php echo $_SERVER['PHP_SELF']; ?>" method="POST">
-                <br>
-                <div class="btn-group">
-                    <label class="control-label">Estado:</label>
-                    <select id="estadoSelect" name="estado" class="form-select">;
-                        <option value="todo" selected>Todos</option>;
-                        <option value="PENDIENTE">Pendiente</option>;
-                        <option value="FINALIZADO">Finalizado</option>;
-                        <option value="EN PROCESO">En proceso</option>;
-                        <option value="CANCELADO">Cancelado</option>;
-                    </select>
-                </div>
-        
-            </form>
-            </div>
             <br>
             <div id="tablaResultados"></div>
         </div>
         <div id="empleados" class="tab-content">
             <h3 class="test" style="text-align:center; ">
-                Panel de Empleados
+                Eventos Asistiendo
                 <i class="fa-solid fa-briefcase" style="color: #ffffff;"></i>
             </h3>
             <br>

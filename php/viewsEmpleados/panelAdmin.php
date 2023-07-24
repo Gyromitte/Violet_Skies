@@ -75,14 +75,7 @@
         <div id="dash-board-content">
             <div id="dash-photo-user"></div>
             <?php
-            if(isset($_SESSION["logged_in"])){
-                if(isset($_SESSION["access"])==3){
-                    echo $_SESSION["name"];
-                }
-            }
-            else{
-                echo"Username";
-            }
+                echo $_SESSION["name"];
             ?>
             <br>
             Admin<br><br>
