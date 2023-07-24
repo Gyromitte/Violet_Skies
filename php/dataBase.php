@@ -124,16 +124,18 @@
                         while($trabajo=$consulta->fetch(PDO::FETCH_ASSOC)){
                             $_SESSION["access"]=2;
                             if($trabajo['TIPO']=='MESERO'){
+                                $_SESSION["tipo"]="Mesero";
                                 echo"<div class=' container'>";
                                 echo"<h1 align='center'>Bienvenido ".$_SESSION["name"]."</h1>";
                                 echo "</div>";
-                                header("refresh:4;../viewsEmpleados/verMeseros.php");
+                                header("refresh:4;../viewsEmpleados/panelEmpleado.php");
                             }
                             else{
+                                $_SESSION["tipo"]="Mesero";
                                 echo"<div class=' container'>";
                                 echo"<h1 align='center'>Bienvenido ".$_SESSION["name"]."</h1>";
                                 echo "</div>";
-                                header("refresh:4;../viewsEmpleados/ver.php");
+                                header("refresh:4;../viewsEmpleados/panelEmpleado.php");
                             }
                         }
                     }

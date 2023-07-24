@@ -32,18 +32,18 @@
         <![endif]-->
     <!--NavBar-->    
     <?php
-        session_start();
-        if(isset($_SESSION["logged_in"])){
-            if(isset($_SESSION["access"])===3){
-                header("Location:../scripts/access.php");
-            }
-            else if(isset($_SESSION["access"])===1){
-                header("Location:../scripts/access.php");
-            }
-        }
-        else if(!isset($_SESSION["logged_in"])){
-            header("Location:../views/login.php");
-        }
+         session_start();
+         if(isset($_SESSION["logged_in"])){
+             if($_SESSION["access"]===3){
+                 header("Location:../scripts/access.php");
+             }
+             else if($_SESSION["access"]===1){
+                 header("Location:../scripts/access.php");
+             }
+         }
+         else if(!isset($_SESSION["logged_in"])){
+             header("Location:../views/login.php");
+         }
     ?>
     <nav>
         <div class="nav-menu">
@@ -74,17 +74,13 @@
         <div id="dash-board-content">
             <div id="dash-photo-user"></div>
             <?php
-            if(isset($_SESSION["logged_in"])){
-                if(isset($_SESSION["access"])==3){
-                    echo $_SESSION["name"];
-                }
-            }
-            else{
-                echo"Username";
-            }
+                echo $_SESSION["name"];
             ?>
             <br>
-            Position<br><br>
+            <?php
+                echo $_SESSION["tipo"];
+            ?>
+            <br><br>
             <button data-tab="home" class="dash-button"><i class="fa-solid fa-house" style="color: #ffffff;"></i><br>Home</button>
             <button data-tab="eventos" class="dash-button"><i class="fa-solid fa-calendar-days" style="color: #ffffff;"></i><br>Eventos</button>
             <button data-tab="empleados" class="dash-button"><i class="fa-solid fa-briefcase" style="color: #ffffff;"></i><br>Empleados</button>
