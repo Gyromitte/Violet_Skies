@@ -35,10 +35,10 @@
     <?php
         session_start();
         if(isset($_SESSION["logged_in"])){
-            if(isset($_SESSION["access"])===2){
+            if($_SESSION["access"]===2){
                 header("Location:../scripts/access.php");
             }
-            else if(isset($_SESSION["access"])===1){
+            else if($_SESSION["access"]===1){
                 header("Location:../scripts/access.php");
             }
         }
