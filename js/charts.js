@@ -1,6 +1,5 @@
 // Datos para el gráfico de puntos (scatter)
 Chart.defaults.color = 'white';
-
 const eventosRealizados = [
     { mes: 'Enero', cantidad: 10 },
     { mes: 'Febrero', cantidad: 15 },

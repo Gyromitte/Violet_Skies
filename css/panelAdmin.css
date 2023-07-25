@@ -93,7 +93,7 @@ nav{
 
 /*Main*/
 #main{
-    margin-top: 86px;
+    margin-top: 83px; /*Tamano de la navbar*/
 }
 .main-dash-open {
     margin-left: 300px;
