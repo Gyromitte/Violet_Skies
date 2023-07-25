@@ -7,7 +7,7 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title></title>
+    <title>Violet skies - Panel Admininistrador</title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!--StyleSheets-->
@@ -100,8 +100,6 @@
         </div>
         <h2><span id="fecha"></span></h2>
         <div class="nav-user">
-            <i class="fa-solid fa-bell" style="color: #ffffff;"></i>
-            <div id="nav-photo-user"></div>
             <?php
             if (isset($_SESSION["logged_in"])) {
                 if (isset($_SESSION["access"]) == 3) {
@@ -116,7 +114,6 @@
     <!--DashBoard-->
     <div id="dash-board">
         <div id="dash-board-content">
-            <div id="dash-photo-user"></div>
             <?php
             if (isset($_SESSION["logged_in"])) {
                 if (isset($_SESSION["access"]) == 3) {
@@ -126,13 +123,12 @@
                 echo "Username";
             }
             ?>
-            <br>
-            Position<br><br>
             <button data-tab="home" class="dash-button"><i class="fa-solid fa-house" style="color: #ffffff;"></i><br>Home</button>
             <button data-tab="eventos" class="dash-button"><i class="fa-solid fa-calendar-days" style="color: #ffffff;"></i><br>Eventos</button>
             <button data-tab="empleados" class="dash-button"><i class="fa-solid fa-briefcase" style="color: #ffffff;"></i><br>Empleados</button>
             <button data-tab="perfil" class="dash-button"><i class="fa-solid fa-user" style="color: #ffffff;"></i><br>Perfil</button>
-            <a href="../scripts/CerrarSesion.php"><button data-tab="logout" class="dash-button"><i class="fa-solid fa-gear" style="color: #ffffff;"></i><br>Logout</button></a>
+            <a style="text-decoration: none;" data-tab="logout" class="dash-button" href="../scripts/CerrarSesion.php">
+                <i class="fa-solid fa-door-open" style="color: #ffffff; padding-top: 10px;"></i><br>Logout</a>
         </div>
     </div>
     <!--Main Content-->
