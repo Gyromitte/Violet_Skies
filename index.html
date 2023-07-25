@@ -14,6 +14,8 @@
         <!--Style sheet-->
         <link rel="stylesheet" href="/css/style.css">
         <link rel="stylesheet" href="bootstrap/css/bootstrap.css">
+        <!--Favi icon-->
+        <link rel="icon" type="image/x-icon" href="./images/company_logo.png">
 
         <!--Referencias a fuentes-->
         <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -29,7 +31,7 @@
             <div class="companySection col-sm-auto">
                 <!--Company Logo-->
                 <div class="navbar-header">
-                    <img id="company-logo" class="img-fluid" src="/images/company_logo.png" alt="companyLogo">
+                    <img id="company-logo" class="img-fluid" src="/images/company_logo.png" alt="companyLogo" onclick="this.classList.toggle('clicked')">
                         <a class="no-underline" href="/index.html" id="company-name">Violet Skies</a>
                 </div>      
                 <!--Tabs-->
@@ -38,7 +40,7 @@
                         <a class="no-underline" href="/html/about-us/about us.html">Nosotros</a>
                     </li>
                     <li class="mr-3 tabs">
-                        <a class="no-underline" href="#">Agendar Evento</a>
+                        <a class="no-underline" href="/html/agendarEvento.html">Agendar Evento</a>
                     </li>
                     <li class="mr-3 tabs">
                         <a class="no-underline" href="/html/trabajo.html">Trabajo</a>
@@ -47,14 +49,16 @@
             </div>         
             <!--Login-section-->
             <div class="login-section col-sm-auto" >
-                <button class="loginButton">
+                <a class="no-underline" href="/php/views/login.php"><button class="loginButton">
                     <i class="fa-solid fa-door-open" style="color: #ffffff;"></i>
-                    <a class="no-underline" href="/html/acceder.html">Acceder</a>   
+                    Acceder  
                 </button>
-                <button class="loginButton">
+                </a>
+                <a class="no-underline" href="/php/views/registrarse.php"><button class="loginButton">
                     <i class="fa-solid fa-user" style="color: #ffffff;"></i>
-                    <a class="no-underline" href="#">Registrarse</a>
+                    Registrarse
                 </button>
+                </a>
             </div>
         </nav>
         <!--Hero container-->
@@ -65,14 +69,16 @@
                         Organizamos tus eventos
                     </div>
                     <p id="description">
-                        Quinceañeras, cumpleaños, bodas.
+                        "Experiencias Inolvidables para Eventos Extraordinarios"
                         <br>
                         Solo agenda un evento con nosotros a tu gusto
                         y nosotros nos encargaremos.
                     </p>
-                    <button class="agendarButton">
-                        Agendar
-                    </button>    
+                    <a href="/html/agendarEvento.html">
+                        <button class="agendarButton">
+                            Agendar
+                        </button>  
+                    </a>
                 </div>
                 <div class="rightHeroSection">
                     <img src="images/heroImage.jpg" id="heroImage">
@@ -103,9 +109,12 @@
                 <p class="job-desc-text">
                     Envianos tus datos y nos pondremos en contacto contigo!
                 </p>
-                <button class="agendarButton">
-                    Aplicar
-                </button>
+                <a href="/html/trabajo.html">
+                    <button class="agendarButton">
+                        Aplicar
+                    </button>
+                </a>
+
             </div>
         </div>
         <!--Ubicacion-->

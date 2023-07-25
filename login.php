@@ -4,10 +4,10 @@
     $Password = $_POST['pass'];
     
     //Conectando con el base de datos(cambiara despues)
-    define('DB_USER','root');
-    define('DB_PASSWORD','');
-    define('DB_HOST','localhost');
-    define('DB_NAME','HotelDB');
+    define('DB_USER','admin');
+    define('DB_PASSWORD','admin123');
+    define('DB_HOST','database-1.cxbyakjiuopg.us-east-1.rds.amazonaws.com');
+    define('DB_NAME','Violet');
 
     $con = new mysqli(DB_HOST,DB_USER,DB_NAME,DB_PASSWORD);
 

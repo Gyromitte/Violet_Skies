@@ -1,323 +1,510 @@
+body {
+  background-color: #1b1f3b !important;
+  margin: 0;
+}
 
-body{
-    background-color: #1b1f3b !important;
-    margin: 0;
+h1 {
+  font-family: 'Archivo Black', sans-serif;
 }
-h1{
-    font-family: 'Archivo Black', sans-serif;
-}
+
 /*Nav*/
-.navbar{
-    background-color: #8367c7;
-    color: white;
-    font-family: 'Patua One', cursive;
-    padding: 0.5em !important;
-    margin: 0 !important;
+.navbar {
+  background-color: #8367c7;
+  color: white;
+  font-family: 'Patua One', cursive;
+  padding: 0.5em !important;
+  margin: 0 !important;
 }
 
-.navbar-header{
-    border-right: 2px solid #7159ad;
-    margin-right: 1em;
-    font-size: 2em;
+.navbar-header {
+  border-right: 2px solid #7159ad;
+  margin-right: 1em;
+  font-size: 2em;
 }
 
-.container{
-    width: 100%;
+.container {
+  width: 100%;
 }
 
-.row{
-    padding-right: 0 !important;
-    --bs-gutter-x: unset !important;
+.row {
+  padding-right: 0 !important;
+  --bs-gutter-x: unset !important;
 }
 
-.companySection{
-    display: flex;
-    align-items: center;
+#company-logo {
+  height: 1.5em;
+  margin-left: 15px;
+  margin-right: 15px;
+  transition: transform 0.2s ease;
+  /* Agregar una transición suave para el efecto de rebote */
 }
 
-#company-logo{
-    height: 1.5em;
-    margin-left: 15px;
+.companySection {
+  display: flex;
+  align-items: center;
+  position: relative;
+  /* Agregar posición relativa para poder posicionar el logo */
 }
 
-#company-name{
-    padding-left: 1em;
-    padding-right: 1em;
+#company-logo.clicked {
+  animation: bounce 0.5s forwards, shake 0.6s 1.5s forwards, rocket 1.5s 2.5s forwards, rocketExit 1s 4.2s forwards, rocketEnter 1s 5.2s forwards;
+  /* Aplicar las animaciones al pasar el mouse por encima */
 }
 
-#company-name:hover{
-    text-decoration: underline;
+@keyframes bounce {
+
+  0%,
+  100% {
+    transform: translateY(0);
+    /* Posición inicial y final sin rebote */
+  }
+
+  25% {
+    transform: translateY(-15px);
+    /* El logo salta hacia arriba */
+  }
+
+  50% {
+    transform: translateY(0);
+    /* El logo vuelve a su posición original */
+  }
 }
 
-.no-underline{
-    text-decoration: none;
-    color: white;
+@keyframes rocket {
+  0% {
+    transform: translateY(0);
+    /* Posición inicial sin cohete */
+  }
+
+  100% {
+    transform: translateY(-150px);
+    /* Cohete espacial, despega hacia arriba (ajustar la distancia a recorrer) */
+  }
 }
 
-.tabs{
-    margin-right: 20px;
-    margin-left: 20px;
+@keyframes shake {
+
+  0%,
+  100% {
+    transform: rotate(0);
+    /* Posición inicial y final sin temblor */
+  }
+
+  10% {
+    transform: rotate(-8deg);
+    /* El logo tiembla hacia la izquierda */
+  }
+
+  20% {
+    transform: rotate(8deg);
+    /* El logo tiembla hacia la derecha */
+  }
+
+  30% {
+    transform: rotate(-8deg);
+    /* El logo tiembla hacia la izquierda */
+  }
+
+  40% {
+    transform: rotate(8deg);
+    /* El logo tiembla hacia la derecha */
+  }
+
+  50% {
+    transform: rotate(-8deg);
+    /* El logo tiembla hacia la izquierda */
+  }
+
+  60% {
+    transform: rotate(8deg);
+    /* El logo tiembla hacia la derecha */
+  }
+
+  70% {
+    transform: rotate(-8deg);
+    /* El logo tiembla hacia la izquierda */
+  }
+
+  80% {
+    transform: rotate(8deg);
+    /* El logo tiembla hacia la derecha */
+  }
+
+  90% {
+    transform: rotate(-8deg);
+    /* El logo tiembla hacia la izquierda */
+  }
+
+  100% {
+    transform: rotate(0);
+    /* Volver a la posición inicial sin temblor */
+  }
 }
 
-.tabs:hover{
-    text-decoration: underline;
-    border-bottom: 1px solid #5603ad;
+@keyframes rocketExit {
+  0% {
+    opacity: 1;
+    /* Logo es visible antes de salir de la pantalla */
+  }
+
+  100% {
+    transform: translateY(-1000px);
+    /* Logo se desplaza hacia arriba para salir de la pantalla */
+    opacity: 0;
+    /* Logo se vuelve invisible */
+  }
 }
+
+@keyframes rocketEnter {
+  0% {
+    transform: translateY(1000px);
+    /* Posición del logo antes de entrar desde abajo */
+    opacity: 0;
+    /* Logo es invisible */
+  }
+
+  100% {
+    transform: translateY(0);
+    /* Logo se mueve desde abajo hacia su posición inicial */
+    opacity: 1;
+    /* Logo vuelve a ser visible */
+  }
+}
+
+#company-name {
+  padding-left: 1em;
+  padding-right: 1em;
+}
+
+#company-name {
+  position: relative;
+}
+
+#company-name::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background-color: #fafafa;
+  /* Color del subrayado */
+  transition: width 0.3s ease;
+}
+
+#company-name:hover::after {
+  width: 100%;
+  /* Hacer que el subrayado aparezca gradualmente al pasar el mouse */
+}
+
+.no-underline {
+  text-decoration: none;
+  color: white;
+}
+
+.tabs {
+  position: relative;
+  transition: transform 0.3s ease, border-bottom 0.3s ease;
+  margin-right: 20px;
+  margin-left: 20px;
+}
+
+/* Efecto de la barra en cascada */
+.tabs::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background-color: #ffffff;
+  /* Color del subrayado */
+  transition: width 0.3s ease;
+}
+
+.tabs:hover::after {
+  width: 100%;
+  /* Hacer que el subrayado aparezca con un efecto de desplazamiento al pasar el mouse */
+}
+
+/* Efecto de desplazamiento lateral al pasar el mouse */
+.tabs:hover {
+  transform: translateX(5px);
+  /* Desplazar el tab lateralmente al pasar el mouse */
+  z-index: 1;
+}
+
 
 /*Login Section*/
-.login-section{
-    display: flex;
+.login-section {
+  display: flex;
 }
 
-.loginButton{
-    border-radius: 50vw;
-    font-size: small;
-    padding: 0.8em 2em;
-    align-self: center;
-    background-color:  #5603ad;
-    border: none;
-    color: white;
-    font-family: 'Lexend', sans-serif;
-    font-weight: bold;
-    margin: 5px;
+.loginButton {
+  border-radius: 50vw;
+  font-size: small;
+  padding: 0.8em 2em;
+  align-self: center;
+  background-color: #5603ad;
+  border: none;
+  color: white;
+  font-family: 'Lexend', sans-serif;
+  font-weight: bold;
+  margin: 5px;
 }
 
-.loginButton:hover{
-    background-color: #b14aed; 
+.loginButton:hover {
+  background-color: #b14aed;
 }
 
 /*Hero Section*/
-.heroContainer{
-    display: flex;
-    flex-direction: row;
-    background-color:  #c874d9b4;
-    border-radius: 1.5em;
-    width: 85%;
-    height: 100%;
-    margin: 5em auto 5em;
-    padding: 0.5em;
-    box-shadow: 0 0 1em rgba(255, 0, 85, 0.438);
+.heroContainer {
+  display: flex;
+  flex-direction: row;
+  background-image: linear-gradient(135deg, #5603ad, #f58cd6);
+  border-radius: 1.5em;
+  width: 85%;
+  height: 100%;
+  margin: 5em auto 5em;
+  padding: 0.5em;
+
 }
 
-.background-cover{
-    background-image: url(/images/background.jpg);
-    background-size: cover;
-    padding: 1em;
+.background-cover {
+  background-size: cover;
+  padding: 1em;
 }
 
-.leftHeroSection{
-    width: 40vw;
-    color: white;
-    display: flex;
-    margin: 1em 1em 1em 1em;
-    padding-left: 1em;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    font-family: 'Patua One', cursive;
+.leftHeroSection {
+  width: 40vw;
+  color: white;
+  display: flex;
+  margin: 1em 1em 1em 1em;
+  padding-left: 1em;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  font-family: 'Patua One', cursive;
 }
 
-.greetings{
-    font-family: 'Archivo Black', sans-serif;
-    font-size: 5vw;
+.greetings {
+  font-family: 'Archivo Black', sans-serif;
+  font-size: 5vw;
 }
 
-#description{
-    margin: none;
-    font-family: 'Patua One', cursive;
-    font-size: 1em;
+#description {
+  margin: none;
+  font-family: 'Patua One', cursive;
+  font-size: 1em;
 }
 
-.agendarButton{
-    border-radius: 50em;
-    padding: 1em;
-    width: 15em;
-    font-size: medium;
-    background-color: #454ade;
-    color: white;
-    font-family: 'Lexend', sans-serif;
-    font-weight: bold;
-    border: solid white 2px;
+.agendarButton {
+  border-radius: 50em;
+  padding: 1em;
+  width: 15em;
+  font-size: medium;
+  background-color: #454ade;
+  color: white;
+  font-family: 'Lexend', sans-serif;
+  font-weight: bold;
+  border: solid white 2px;
 }
 
-.agendarButton:hover{
-    background-color: #383cb4;
+.agendarButton:hover {
+  background-color: #383cb4;
 }
 
-.rightHeroSection{
-    width: 50vw;
-    margin: 3em 0;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+.rightHeroSection {
+  width: 50vw;
+  margin: 3em 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
-#heroImage{
-    max-width:100%;
-    height:auto;
-    width: 35vw;
-    border-radius: 1.5em;
+
+#heroImage {
+  max-width: 100%;
+  height: auto;
+  width: 35vw;
+  border-radius: 1.5em;
 }
 
 /*Job Section*/
-#job-section{
-    color: white;
-    padding: 2em 2em 2em 2em; 
-    height: 25vw;
-    background-color: #1b1f3b
+#job-section {
+  color: white;
+  padding: 2em 2em 2em 2em;
+  height: 25vw;
+  background-color: #1b1f3b
 }
 
-.job-image{
-    background-color: #454ade;
-    background-image: url(/images/mesero.jpg);
-    background-size: cover; 
-    background-position: center;
-    position: relative;
-    overflow: hidden;
-    height: 100%;
-    width: 50% !important;
-    border-radius: 2em;
+.job-image {
+  background-color: #454ade;
+  background-image: url(/images/mesero.jpg);
+  background-size: cover;
+  background-position: center;
+  position: relative;
+  overflow: hidden;
+  height: 100%;
+  width: 50% !important;
+  border-radius: 2em;
 }
 
-.job-desc{
-    text-align: center;
-    font-family: 'Archivo Black', sans-serif;
-    font-size: 4vw;
+.job-desc {
+  text-align: center;
+  font-family: 'Archivo Black', sans-serif;
+  font-size: 4vw;
 }
 
-.job-desc-text{
-    font-size: 1vw;
+.job-desc-text {
+  font-size: 1vw;
 }
 
-#apply-button{
-    padding: 2em 6em;
-    background-color: #454ade;
+#apply-button {
+  padding: 2em 6em;
+  background-color: #454ade;
 }
 
 /*Salones*/
-.salones{
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    background-color: #5603ad;
-    height: 35vw;
-    color: white;
-    font-family: 'Patua One', cursive;
+.salones {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: #5603ad;
+  height: 35vw;
+  color: white;
+  font-family: 'Patua One', cursive;
 }
 
-.sal-greet{
-    border-bottom: 2px solid #7159ad;
-    justify-self: center;
-    height: 20%;
+.sal-greet {
+  border-bottom: 2px solid #7159ad;
+  justify-self: center;
+  height: 20%;
 }
-  /*SlideShow*/
-  * {box-sizing:border-box !important}  
 
-  .slideshow-container{
-    width: 50%;
-    height: 60%;
-    position: relative;
-    display: flex;
-    margin-top: 20px; 
-  }
+/*SlideShow*/
+* {
+  box-sizing: border-box !important
+}
 
-  /*Por defecto las imagenes no aparecen, su display cambia al estar activas*/
-  .slide{
-    display: none;
-  }
+.slideshow-container {
+  width: 50%;
+  height: 70%;
+  position: relative;
+  display: flex;
+  margin-top: 20px;
+}
 
-  .slide-img{
-    width: 100%;
-    border-radius: 2em;
-    height: auto;
-  }
+/*Por defecto las imagenes no aparecen, su display cambia al estar activas*/
+.slide {
+  display: none;
+}
 
-  /* Fading animation */
-  .fade {
-    animation-name: fade;
-    animation-duration: 4s;
-  }
-  
-  @keyframes fade {
-    from {opacity: .4}
-    to {opacity: 1}
-  }
+.slide-img {
+  width: 100%;
+  border-radius: 2em;
+  height: auto;
+}
 
-  /*Ubicacion*/
-  .ubicacion{
-    color: white;
-    background-image: url(/images/back_ubicacion.jpg);
-    background-size: cover;
+/* Fading animation */
+.fade {
+  animation-name: fade;
+  animation-duration: 4s;
+}
+
+@keyframes fade {
+  from {
+    opacity: .4
   }
 
-  .ubic-greet{
-    text-align: center;
-    background-color:  #c874d9b4;
-    padding: 20px;
+  to {
+    opacity: 1
   }
+}
 
-  .map-container{
-    display: flex;
-    justify-content: center;
-    margin: 20px;
-  }
-  .g-map{
-    border-radius: 2em;
-    margin-bottom: 10px;
-  }
+/*Ubicacion*/
+.ubicacion {
+  color: white;
+  background-size: cover;
+}
 
-  /*Informes*/
-  .informes{
-    background-color: #5603ad;
-    height: auto;
-    text-align: center;
-    color: white;
-    font-size: 3vw;
-    padding: 20px;
-    overflow:hidden;
-  }
+.ubic-greet {
+  text-align: center;
+  background-image: linear-gradient(135deg, #5603ad, #f58cd6);
+  padding: 20px;
+}
+
+.map-container {
+  display: flex;
+  justify-content: center;
+  margin: 20px;
+}
+
+.g-map {
+  border-radius: 2em;
+  margin-bottom: 10px;
+}
+
+/*Informes*/
+.informes {
+  background-color: #5603ad;
+  height: auto;
+  text-align: center;
+  color: white;
+  font-size: 3vw;
+  padding: 20px;
+  overflow: hidden;
+}
 
 /* Estilos para dispositivos moviles */
 @media (max-width: 767px) {
-    .heroContainer {
-      flex-direction: column; /* Cambia la dirección de los elementos a columna */
-      align-items: center;
-      margin: auto;
-    }
-    
-    .leftHeroSection{
-        width: unset;
-        align-items: unset;
-        text-align: center;
-        justify-content: center;
-        padding-left: unset;
-    }
-
-    .rightHeroSection {
-      margin-top: 20px; /* Agrega margen superior para separar de la sección izquierda */
-      margin-bottom: 0px;
-    }
-    #heroImage{
-        width: 50vw;
-    }
-    .companySection{
-        justify-content: center;
-    }
-    .login-section{
-        justify-content: center;
-    }
-    /*Desaparecer Job Section*/
-    #job-section{
-        display: none;
-    }
-    .salones{
-        height: 100vw;
-    }
-    .slideshow-container{
-        width: 80%;
-        height: 50%;
-        position: relative;
-        display: flex;
-        margin-top: 20px; 
-    }     
+  .heroContainer {
+    flex-direction: column;
+    /* Cambia la dirección de los elementos a columna */
+    align-items: center;
+    margin: auto;
   }
+
+  .leftHeroSection {
+    width: unset;
+    align-items: unset;
+    text-align: center;
+    justify-content: center;
+    padding-left: unset;
+  }
+
+  .rightHeroSection {
+    margin-top: 20px;
+    /* Agrega margen superior para separar de la sección izquierda */
+    margin-bottom: 0px;
+  }
+
+  #heroImage {
+    width: 50vw;
+  }
+
+  .companySection {
+    justify-content: center;
+  }
+
+  .login-section {
+    justify-content: center;
+  }
+
+  /*Desaparecer Job Section*/
+  #job-section {
+    display: none;
+  }
+
+  .salones {
+    height: 100vw;
+  }
+
+  .slideshow-container {
+    width: 80%;
+    height: 50%;
+    position: relative;
+    display: flex;
+    margin-top: 20px;
+  }
+}

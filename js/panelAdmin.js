@@ -1,3 +1,5 @@
+document.addEventListener('DOMContentLoaded', function() {
+
 /*Funcionamiento de la dashboard*/
 // Obtener elementos
 const toggleDashboardBtn = document.getElementById('nav-button');
@@ -6,7 +8,7 @@ const main = document.getElementById('main');
 // Función para abrir o cerrar el dashboard
 function toggleDashboard() {
   dashboard.classList.toggle('dashboard-open');
-  main.classList.toggle('main-dash-open')
+  main.classList.toggle('main-dash-open');
 }
 // Asignar evento de clic al botón
 toggleDashboardBtn.addEventListener('click', toggleDashboard);
@@ -50,19 +52,19 @@ var modalForm = document.getElementById("modal-form");
 function checkCurrentTable(currentTable) {
   switch (currentTable) { //Simular un click para refrescar los cambios
     case 'cocineros':
-      setTimeout(function () {
+      setTimeout(function() {
         btnCocineros.click();
-      }, 500); // 0.5 segundos, si la funcion se ejecuta muy rapido no reflejara los cambios
+      }, 500);
       break;
     case 'meseros':
-      setTimeout(function () {
+      setTimeout(function() {
         btnMeseros.click();
-      }, 500); // 0.5 segundos, si la funcion se ejecuta muy rapido no reflejara los cambios
+      }, 500);
       break;
     case 'busqueda':
-      setTimeout(function () {
+      setTimeout(function() {
         btnBusqueda.click();
-      }, 500); // 0.5 segundos, si la funcion se ejecuta muy rapido no reflejara los cambios
+      }, 500);
       break;
   }
 }
@@ -286,6 +288,41 @@ function updateModalContent(formType, idEmpleado) {
       //Ver cual es la tabla activa para refrescar cualquier cambio
       checkCurrentTable(currentTable);
       break;
+      case "@editarPerfil":
+        console.log("hola");
+        modalTitle.textContent ="Editar Datos"
+        formContent=`<form id="formularioEditarDatos" method="post" action="pruebaComprobación.php">
+        <div class="form-group">
+            <label for="nombreInput">Nombre:</label>
+            <input type="text" class="form-control" name="nombre" id="nombreInput" required>
+        </div>
+        <div class="form-group">
+            <label for="ap_paternoInput">Apellido Paterno:</label>
+            <input type="text" class="form-control" name="ap_paterno" id="ap_paternoInput" required>
+        </div>
+        <div class="form-group">
+            <label for="ap_maternoInput">Apellido Materno:</label>
+            <input type="text" class="form-control" name="ap_materno" id="ap_maternoInput" required>
+        </div>
+        <div class="form-group">
+            <label for="telefonoInput">Teléfono:</label>
+            <input type="tel" class="form-control" name="telefono" id="telefonoInput" required>
+        </div>
+        <div class="form-group">
+            <label for="contrasenaActualInput">Contraseña Actual:</label>
+            <input type="password" class="form-control" name="contrasena_actual" id="contrasenaActualInput" required>
+        </div>
+
+        </div>
+        <br>
+        <input type="hidden" name="correo" id="correoInput">
+        <input type="hidden" name="tipo_cuenta" id="tipo_cuentaInput">
+        <button type="button" class="btn btn-primary" id="guardarCambios">Guardar Cambios</button>
+        </form>`;
+        modalForm.innerHTML = formContent;
+        //Ver cual es la tabla activa para refrescar cualquier cambio
+        checkCurrentTable(currentTable);
+        break;
   }
 }
 
@@ -321,7 +358,5 @@ function eliminarEmpleado(id) {
   // Retornar false para evitar que el formulario se recargue la página
   return false;
 }
-
-
-
+});
 
