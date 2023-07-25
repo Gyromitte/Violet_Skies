@@ -52,13 +52,19 @@ var modalForm = document.getElementById("modal-form");
 function checkCurrentTable(currentTable) {
   switch (currentTable) { //Simular un click para refrescar los cambios
     case 'cocineros':
-      btnCocineros.click();
+      setTimeout(function() {
+        btnCocineros.click();
+      }, 500);
       break;
     case 'meseros':
-      btnMeseros.click();
+      setTimeout(function() {
+        btnMeseros.click();
+      }, 500);
       break;
     case 'busqueda':
-      btnBusqueda.click();
+      setTimeout(function() {
+        btnBusqueda.click();
+      }, 500);
       break;
   }
 }
@@ -314,7 +320,8 @@ function updateModalContent(formType, idEmpleado) {
         <button type="button" class="btn btn-primary" id="guardarCambios">Guardar Cambios</button>
         </form>`;
         modalForm.innerHTML = formContent;
-        console.log(formType);
+        //Ver cual es la tabla activa para refrescar cualquier cambio
+        checkCurrentTable(currentTable);
         break;
   }
 }
