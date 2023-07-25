@@ -98,6 +98,9 @@
                 Eventos Disponibles
                 <i class="fa-solid fa-briefcase" style="color: #ffffff;"></i>
             </h3>
+            <div class="container">
+                
+            </div>
             <br>
             <div id="tablaResultados"></div>
         </div>

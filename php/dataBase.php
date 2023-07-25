@@ -106,7 +106,7 @@
                     if($tipo==='CLIENTE'){
                         $_SESSION["access"]=1;
                         echo"<div class=' container'>";
-                        echo"<h1 align='center'>Bienvenido ".$_SESSION["cliente"]."</h1>";
+                        echo"<h1 align='center'>Bienvenido ".$_SESSION["name"]."</h1>";
                         echo "</div>";
                         header("refresh:4;/html/cliente/index.html");
                     }
