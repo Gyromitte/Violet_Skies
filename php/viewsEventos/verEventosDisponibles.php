@@ -1,4 +1,6 @@
 <?php
+     if ($_SERVER['REQUEST_METHOD'] === 'POST')
+     {
     include_once "../dataBase.php";
     $conexion = new Database();
     $conexion->conectarBD();
@@ -23,6 +25,7 @@
             <th>Salon</th>
             <th>Meseros Necesarios</th>
             <th>Cocineros Necesarios</th>
+            <th style='align-content': center;></th>
             </tr>
             </thead>
             <tbody>";
@@ -35,11 +38,28 @@
                 echo "<td> $registro->F_CREACION</td>";
                 echo "<td> $registro->F_EVENTO</td>";
                 echo "<td> $registro->CLIENTE</td>";
+                echo "<td> $registro->INVITADOS</td>";
+                echo "<td> $registro->SALON</td>";
+                echo "<td> $registro->SALON</td>";
+                echo "<td> $registro->SALON</td>";
+                echo "<td class='text-center'>";
+                echo '<div class="dropdown">';
+                echo '<button class="btn btn-secondary dropdown-toggle custom-dropdown" type="button" 
+                data-bs-toggle="dropdown" aria-expanded="false">';
+                echo '</button>';
+                echo '<ul class="dropdown-menu custom-drop-menu">';
+                echo '<li><a class="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#empModal" 
+                data-bs-whatever="@ponerte" 
+                data-id="' . $registro->CUENTA . '">
+                <i class="fa-solid fa-pencil me-2" style="color: #ffffff;"></i>Entrar</a></li>';
+                echo '</ul></div>';
+                echo "</td>";
                 echo "</tr>";
             }
 
             echo "</tbody>
             </table>";
             $conexion->desconectarBD();
+        }
         
 ?>

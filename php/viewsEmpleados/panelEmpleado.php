@@ -24,7 +24,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&display=swap" rel="stylesheet">
     <script src="https://kit.fontawesome.com/b60c246061.js" crossorigin="anonymous"></script>
     <!--Scripts que necesitan ejecutarse primero-->
-    <script src="/js/panelAdmin.js" async defer></script>
+    <script src="/js/panelEmpleado.js" async defer></script>
 </head>
 <body>
     <!--[if lt IE 7]>
@@ -58,14 +58,7 @@
             <i class="fa-solid fa-bell" style="color: #ffffff;"></i>
             <div id="nav-photo-user"></div>
             <?php 
-            if(isset($_SESSION["logged_in"])){
-                if(isset($_SESSION["access"])==3){
-                    echo $_SESSION["name"];
-                }
-            }
-            else{
-                echo"Username";
-            }
+                echo $_SESSION["name"];
             ?>
         </div>
     </nav>
@@ -98,6 +91,7 @@
                 Eventos Disponibles
                 <i class="fa-solid fa-briefcase" style="color: #ffffff;"></i>
             </h3>
+            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#empModal" data-bs-whatever="@fat" >Open modal for @fat</button>
             <div class="container">
                 
             </div>
@@ -148,7 +142,7 @@
             <p class="test">Yo soy, configuracion.</p>
         </div>
         <!--Modal-->
-        <div class="modal fade" id="mainModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal fade" id="empModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div class="modal-dialog">
                 <div class="modal-content custom-modal">
                     <div class="modal-header">
@@ -164,9 +158,9 @@
         </div>
     </div>
     <!--Scripts que necesitan ejecutarse hasta el final-->
+    <script src="/js/EventosDisp.js"></script>
     <script src="/js/dinamicTable.js"></script>
     <script src="/bootstrap/js/bootstrap.min.js"></script>
     <script src="/bootstrap/js/bootstrap.bundle.min.js"></script>
-    <script src="/js/filtroEventos.js"></script>
 </body>
 </html>
