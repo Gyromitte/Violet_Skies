@@ -93,7 +93,7 @@ nav{
 
 /*Main*/
 #main{
-    margin-top: 86px;
+    margin-top: 83px; /*Tamano de la navbar*/
 }
 .main-dash-open {
     margin-left: 300px;
@@ -194,3 +194,26 @@ nav{
     width: 40% !important;
 }
 
+.container {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .personal-info,
+  .event-history {
+    flex: 1;
+  }
+  /*Charts*/
+#eventosAño, #proporcionEmpleados{
+    background-color: #b14aed;
+    color: white;
+    border-radius: 20px;
+}
+#proporcionEmpleados{
+    height: 200px;
+    width: 200px; 
+}
+  
+  
+  
+  

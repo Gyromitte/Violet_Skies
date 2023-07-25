@@ -1,0 +1,87 @@
+.main-container{
+    padding: 15px;
+}
+.info-eventos{
+    color: white;
+}
+.custom-card{
+    background-image: linear-gradient(135deg, #5603ad, #f58cd6);
+    color: white;
+}
+
+.custom-item{
+    background-color: #5603ad;
+    color: white;
+}
+.custom-card {
+    box-shadow: 0 20px 20px rgba(86, 3, 173, 0.2);
+    margin: 5px;
+    position: relative;
+    overflow: hidden; /* Asegura que el pseudo-elemento no sobresalga del contenedor */
+  }
+
+  .custom-card::before {
+    content: "";
+    position: absolute;
+    bottom: -100%; /* Inicia la línea fuera de la card, oculta debajo */
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(to top, transparent 50%, rgba(255, 255, 255, 0.6) 80%); /* Gradiente para la línea reflectiva */
+    opacity: 0.5; /* Opacidad de la línea */
+    transition: bottom 0.5s; /* Transición para suavizar el efecto */
+  }
+
+  .custom-card:hover::before {
+    bottom: 100%; /* Mueve la línea hacia arriba hasta cubrir toda la card */
+  }
+
+  /* Estilo para el primer tier */
+  .tier1 {
+    background: linear-gradient(135deg, #8a2be2, #5603ad);
+    color: white;
+    /* Otros estilos adicionales para resaltar */
+  }
+
+  /* Estilo para el segundo tier */
+  .tier2 {
+    background: linear-gradient(135deg, #ae52d4, #8a2be2);
+    color: white;
+    /* Otros estilos adicionales para resaltar */
+  }
+
+  /* Estilo para el tercer tier */
+  .tier3 {
+    background: linear-gradient(135deg, #c77dff, #ae52d4);
+    color: white;
+    /* Otros estilos adicionales para resaltar */
+  }
+.btn-agend-custom {
+    background: linear-gradient(135deg, #5603ad, #8a2be2);
+    color: white;
+    border: 2px solid white; 
+    padding: 30px 40px;
+    border-radius: 30px; 
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    text-decoration: none; 
+    display: inline-block; 
+  }
+
+  .btn-agend-custom:hover {
+    opacity: 0.8;
+  }
+  .btn-agend-custom a {
+    color: white;
+    text-decoration: none; 
+  }
+  .btn-agend-custom:hover a {
+    text-decoration: none;
+  }
+
+  .how-to{
+    color: white;
+  }
+  .header-how-to{
+    background-image: linear-gradient(135deg, #5603ad, #f58cd6);
+    height: 100px;
+  }
