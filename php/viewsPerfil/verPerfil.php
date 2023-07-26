@@ -53,19 +53,19 @@
             <div class="mb-3 row">
                 <label class="col-sm-2 col-form-label">Apellido materno:</label>
                 <div class="col-sm-10">
-                   <input class="form-control" type="text" value="<?php echo $_SESSION['ap_materno']; ?>" disabled>
+                   <input class="form-control" type="text" value="<?php echo $_SESSION['AP_MATERNO']; ?>" disabled>
                 </div>
             </div>
             <div class="mb-3 row">
                 <label class="col-sm-2 col-form-label">Teléfono:</label>
                 <div class="col-sm-10">
-                    <input class="form-control" type="text" value="<?php echo $_SESSION['telefono']; ?>" disabled>
+                    <input class="form-control" type="text" value="<?php echo $_SESSION['TELEFONO']; ?>" disabled>
                 </div>
             </div>
             <div class="mb-3 row">
                 <label class="col-sm-2 col-form-label">Correo:</label>
                 <div class="col-sm-10">
-                    <input class="form-control" type="text" value="<?php echo $_SESSION['correo']; ?>" disabled>
+                    <input class="form-control" type="text" value="<?php echo $_SESSION['CORREO']; ?>" disabled>
                 </div>
             </div>
             <div class="mb-3 row">
