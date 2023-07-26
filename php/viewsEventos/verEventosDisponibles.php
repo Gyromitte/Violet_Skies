@@ -8,13 +8,13 @@
         extract($_POST);
         if($orden="porcreacion"){
             $consulta = "SELECT E.NOMBRE, E.F_CREACION, E.F_EVENTO, CONCAT(CU.NOMBRE, ' ', CU.AP_PATERNO, ' ', CU.AP_MATERNO) AS CLIENTE,
-            DE.INVITADOS, S.NOMBRE, DE.MESEROS, DE.COCINEROS
+            DE.INVITADOS, S.NOMBRE AS SALON, DE.MESEROS, DE.COCINEROS
             FROM EVENTO E JOIN CUENTAS CU ON E.CLIENTE=CU.ID JOIN DETALLE_EVENTO DE ON
             DE.ID=E.ID JOIN SALONES S ON S.ID=DE.SALON WHERE E.ESTADO='EN PROCESO' ORDER BY E.F_CREACION";
         }
         else if($orden="lejanoevento"){
             $consulta = "SELECT E.NOMBRE, E.F_CREACION, E.F_EVENTO, CONCAT(CU.NOMBRE, ' ', CU.AP_PATERNO, ' ', CU.AP_MATERNO) AS CLIENTE,
-            DE.INVITADOS, S.NOMBRE, DE.MESEROS, DE.COCINEROS
+            DE.INVITADOS, S.NOMBRE AS SALON, DE.MESEROS, DE.COCINEROS
             FROM EVENTO E JOIN CUENTAS CU ON E.CLIENTE=CU.ID JOIN DETALLE_EVENTO DE ON
             DE.ID=E.ID JOIN SALONES S ON S.ID=DE.SALON WHERE E.ESTADO='EN PROCESO' ORDER BY E.F_EVENTO desc";
         }
@@ -28,7 +28,7 @@
             echo "<p>Fecha de Evento: $registro->F_EVENTO</p>";
             echo "<p>Cliente: $registro->CLIENTE</p>";
             echo "<p>Cantidad de invitados: $registro->INVITADOS</p>";
-            echo "<p>Salon: $registro->NOMBRE</p>";
+            echo "<p>Salon: $registro->SALON</p>";
             echo "<p> $registro->MESEROS</p>";
             echo "<p> $registro->COCINEROS</p>";
             echo "<div class='text-center'>";
