@@ -219,7 +219,32 @@ nav{
     border-radius: 20px;
     padding: 50px;
 }
-  
-  
-  
-  
+
+.search-container {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .search-container .filter {
+    flex: 1;
+  }
+
+  .search-container .search {
+    flex: 0.4;
+    display: flex;
+    justify-content: flex-end;
+  }
+  .panel-header {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}
+
+#estadoSelect {
+    width: 300px;
+    margin-left: 10px;
+}
+#modalConfirmacion {
+    z-index: 3000;
+  }
