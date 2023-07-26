@@ -1,6 +1,12 @@
+var form = document.getElementById('EmpDisp');
+var tablaResultados = document.getElementById('tablaResultados');
+var estadoSelect = document.getElementById('tipoorden');
 VerDisp();
+tipoorden.addEventListener('change', filtrarEventos);
 // Función para filtrar los eventos
 function VerDisp() {
+    var formData = new FormData(form);
+    formData.append('depa', tipoorden.value);
     // Crear una instancia de XMLHttpRequest
     var xhr = new XMLHttpRequest();
 
@@ -21,3 +27,7 @@ function VerDisp() {
     var params = new URLSearchParams(formData);
     history.replaceState(null, '', '?' + params.toString());
 }
+window.addEventListener('load', function() {
+    var params = new URLSearchParams(window.location.search);
+    estadoSelect.value = params.get('depa') || 'porcreacion';
+});

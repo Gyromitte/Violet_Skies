@@ -23,6 +23,18 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&display=swap" rel="stylesheet">
     <script src="https://kit.fontawesome.com/b60c246061.js" crossorigin="anonymous"></script>
+    <style>
+			.evento{
+				border: 3px solid darkblue;
+				background-color: violet;
+				color: white;
+				padding: 5px; 
+				margin: 5px;
+				float: left;
+				width: 300px;
+				height: 300px;
+			}
+		</style>
     <!--Scripts que necesitan ejecutarse primero-->
     <script src="/js/panelEmpleado.js" async defer></script>
 </head>
@@ -93,7 +105,16 @@
             </h3>
             <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#empModal" data-bs-whatever="@fat" >Open modal for @fat</button>
             <div class="container">
-                
+            <form id="EmpDisp" action="<?php echo $_SERVER['PHP_SELF']; ?>" method="POST">
+                <br>
+                <div class="btn-group">
+                    <label class="control-label">Orden: </label>
+                    <select id="tipoorden" name="estado" class="form-select">;
+                        <option value="porcreacion" selected>Recientemente Creadas</option>;
+                        <option value="lejanoevento">Eventos Lejanos</option>;
+                    </select>
+                </div>
+            </form>
             </div>
             <br>
             <div id="tablaResultados"></div>
