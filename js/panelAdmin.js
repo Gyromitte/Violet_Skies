@@ -1,4 +1,3 @@
-document.addEventListener('DOMContentLoaded', function() {
 
 /*Funcionamiento de la dashboard*/
 // Obtener elementos
@@ -85,6 +84,8 @@ modal.addEventListener("show.bs.modal", function (event) {
   updateModalContent(formType, idEmpleado);
 });
 
+
+
 // Función para actualizar el contenido del modal según el tipo de formulario
 function updateModalContent(formType, idEmpleado) {
   var formContent = "";
@@ -158,18 +159,18 @@ function updateModalContent(formType, idEmpleado) {
         }, 500); // 0.5 segundos, si la funcion se ejecuta muy rapido no reflejara los cambios
       });
       break;
-    case "@eliminarEmpleado":
-      modalTitle.textContent = "Eliminar a un Empleado";
-      modalHeader.classList.add('modal-header-warning');
-      // Obtener los datos del empleado con una solicitud AJAX
-      var xhr = new XMLHttpRequest();
-      xhr.onreadystatechange = function () {
-        if (xhr.readyState === XMLHttpRequest.DONE) {
-          if (xhr.status === 200) {
-            // Parsear la respuesta JSON
-            var empleado = JSON.parse(xhr.responseText);
-            // Actualizar el contenido del formulario con los datos obtenidos
-            formContent = `
+      case "@eliminarEmpleado":
+        modalTitle.textContent = "Eliminar a un Empleado";
+        modalHeader.classList.add('modal-header-warning');
+        // Obtener los datos del empleado con una solicitud AJAX
+        var xhr = new XMLHttpRequest();
+        xhr.onreadystatechange = function() {
+          if (xhr.readyState === XMLHttpRequest.DONE) {
+            if (xhr.status === 200) {
+              // Parsear la respuesta JSON
+              var empleado = JSON.parse(xhr.responseText);
+              // Actualizar el contenido del formulario con los datos obtenidos
+              formContent = `
                 <form onsubmit="return eliminarEmpleado(${idEmpleado})">
                   <div id="mensajeDiv" method="POST"></div> 
                   <h5>Empleado: </h5>
@@ -189,19 +190,18 @@ function updateModalContent(formType, idEmpleado) {
                   </div>
                 </form>
               `;
-            // Asignar el contenido al formulario del modal
-            modalForm.innerHTML = formContent;
-          } else {
-            console.error("Error en la solicitud AJAX");
-          }
-        }
-      };
-      // Hacer la solicitud al script PHP y pasar el ID del empleado
-      xhr.open("GET", "obtenerEmpleado.php?id=" + idEmpleado, true);
-      xhr.send();
-      //Ver cual es la tabla activa para refrescar cualquier cambio
-
-      break;
+              // Asignar el contenido al formulario del modal
+              modalForm.innerHTML = formContent;
+            } else {
+              console.error("Error en la solicitud AJAX");
+            }
+          }};
+        // Hacer la solicitud al script PHP y pasar el ID del empleado
+        xhr.open("GET", "obtenerEmpleado.php?id=" + idEmpleado, true);
+        xhr.send();
+        //Ver cual es la tabla activa para refrescar cualquier cambio
+        checkCurrentTable(currentTable);
+        break;
     case "@editarEmpleado":
       modalTitle.textContent = "Modificar datos";
       modalHeader.classList.remove('modal-header-warning');
@@ -358,5 +358,6 @@ function eliminarEmpleado(id) {
   // Retornar false para evitar que el formulario se recargue la página
   return false;
 }
-});
+
+
 

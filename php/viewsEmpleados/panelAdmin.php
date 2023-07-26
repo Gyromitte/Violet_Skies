@@ -27,7 +27,7 @@
     <!--Chart.js-->
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <!--Scripts que necesitan ejecutarse primero-->
-    <script src="/js/panelAdmin.js" async defer></script>
+    
     <!--<style>
         .redirect div{
             background-color: rgb(27, 31, 59);
@@ -276,6 +276,7 @@
         </div>
     </div>
     <!--Scripts que necesitan ejecutarse hasta el final-->
+    <script src="/js/panelAdmin.js" async defer></script>
     <script src="/js/charts.js"></script>
     <script src="/js/dinamicTable.js"></script>
     <script src="/bootstrap/js/bootstrap.min.js"></script>
