@@ -1,4 +1,3 @@
-
 /*Funcionamiento de la dashboard*/
 // Obtener elementos
 const toggleDashboardBtn = document.getElementById('nav-button');
@@ -80,14 +79,14 @@ modal.addEventListener("show.bs.modal", function (event) {
   // Obtener el tipo de formulario correspondiente al botón
   var formType = button.getAttribute("data-bs-whatever");
   var idEmpleado = button.getAttribute("data-id");
+  var idEvento = button.getAttribute("data-event-id");
   // Actualizar el contenido del formulario
-  updateModalContent(formType, idEmpleado);
+  updateModalContent(formType, idEmpleado, idEvento);
 });
 
 
-
 // Función para actualizar el contenido del modal según el tipo de formulario
-function updateModalContent(formType, idEmpleado) {
+function updateModalContent(formType, idEmpleado, idEvento) {
   var formContent = "";
   var modalTitle = document.querySelector('#mainModal .modal-title');
   var form;
@@ -358,6 +357,3 @@ function eliminarEmpleado(id) {
   // Retornar false para evitar que el formulario se recargue la página
   return false;
 }
-
-
-
