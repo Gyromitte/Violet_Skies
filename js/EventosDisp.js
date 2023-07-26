@@ -1,9 +1,12 @@
+
 var form = document.getElementById('EmpDisp');
 var tablaResultados = document.getElementById('tablaResultados');
-var estadoSelect = document.getElementById('tipoorden');
+var tipoorden = document.getElementById('tipoorden');
+
 VerDisp();
-tipoorden.addEventListener('ord', filtrarEventos);
-// Función para filtrar los eventos
+
+tipoorden.addEventListener('change', VerDisp);
+//Ver los eventos disponibles en tal orden
 function VerDisp() {
 
     var formData = new FormData(form);
