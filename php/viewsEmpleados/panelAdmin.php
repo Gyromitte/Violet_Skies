@@ -24,6 +24,12 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&display=swap" rel="stylesheet">
     <script src="https://kit.fontawesome.com/b60c246061.js" crossorigin="anonymous"></script>
+    <!-- Incluir jQuery -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+    <!-- Incluir datetimepicker -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-datetimepicker/2.5.20/jquery.datetimepicker.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-datetimepicker/2.5.20/jquery.datetimepicker.full.min.js"></script>
     <!--Chart.js-->
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <!--Scripts que necesitan ejecutarse primero-->
@@ -186,31 +192,61 @@
             </div>
         </div>
         <div id="eventos" class="tab-content">
-            <h3 class="test" style="text-align:center; ">
+        <div class="panel-header">  
+            <h3 class="test">
                 Panel de Eventos
-                <i class="fa-solid fa-briefcase" style="color: #ffffff;"></i>
+                <i class="fa-solid fa-calendar-days" style="color: #ffffff;"></i>
             </h3>
-            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#mainModal" data-bs-whatever="@fat">Open modal for @fat</button>
-
-            <div class="container">
-                <form id="filtroForm" action="<?php echo $_SERVER['PHP_SELF']; ?>" method="POST">
-                    <br>
-                    <div class="btn-group">
-                        <label class="control-label">Estado:</label>
-                        <select id="estadoSelect" name="estado" class="form-select">;
-                            <option value="todo" selected>Todos</option>;
-                            <option value="PENDIENTE">Pendiente</option>;
-                            <option value="FINALIZADO">Finalizado</option>;
-                            <option value="EN PROCESO">En proceso</option>;
-                            <option value="CANCELADO">Cancelado</option>;
-                        </select>
+        </div><br>
+            <form id="filtroForm" action="<?php echo $_SERVER['PHP_SELF']; ?>" method="POST">
+                <div class="search-container">
+                    <!-- Filtro de estado - A la izquierda -->
+                    <div class="filter">
+                        <div class="btn-group">
+                            <label class="control-label">Estado:</label>
+                            <select id="estadoSelect" name="estado" class="form-select">
+                                <option value="todo" selected>Todos</option>
+                                <option value="PENDIENTE">Pendiente</option>
+                                <option value="FINALIZADO">Finalizado</option>
+                                <option value="EN PROCESO">En proceso</option>
+                                <option value="CANCELADO">Cancelado</option>
+                            </select>
+                        </div>
                     </div>
-
-                </form>
-            </div>
+                    <!-- Buscador - A la derecha -->
+                    <div class="search">
+                        <div class="input-group">
+                            <input type="text" class="form-control" id="searchInput" placeholder="Buscar evento por nombre o cliente">
+                            <button type="button" class="btn btn-primary" id="searchButton">Buscar</button>
+                        </div>
+                    </div>
+                </div>
+            </form>
             <br>
             <div id="tablaResultados"></div>
+
+            <!-- Modal de Confirmación -->
+            <div class="modal fade" id="modalConfirmacion" tabindex="-1" role="dialog" aria-labelledby="modalConfirmacionLabel" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="modalConfirmacionLabel">Confirmar acción</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            ¿Estás seguro de que deseas cancelar este evento?
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal" id="btnCancelModal">No</button>
+                            <button type="button" class="btn btn-danger" id="btnAceptarCancelar" data-dismiss="modal" tabindex="-1";>Sí</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
+        
         <div id="empleados" class="tab-content">
             <h3 class="test" style="text-align:center; ">
                 Panel de Empleados
