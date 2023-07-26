@@ -179,6 +179,7 @@
                     </div>
                 </div>
             </div>
+
             <!--Charts-->
             <div class="container-fluid">
                 <div class="row">
@@ -286,11 +287,11 @@
             </div>
         </div>
         <div id="perfil" class="tab-content">
-            <h3 class="test" style="text-align:center" ;>
+            <h3 class="test" style="text-align:center";>
                 PERFIL
-                <i class="fa-solid fa-briefcase" style="color: #ffffff;"></i>
+                <i class="fa-solid fa-user" style="color: #ffffff;"></i>
             </h3>
-            <?php include "../viewsPerfil/verPerfil.php" ?>
+            <?php include "../viewsPerfil/Perfil.php"?>
         </div>
         <div id="configuracion" class="tab-content">
             <p class="test">Yo soy, configuracion.</p>
