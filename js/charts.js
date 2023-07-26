@@ -1,3 +1,18 @@
+//Cards del home (peticion a countAll.php)
+    var xhttp = new XMLHttpRequest();
+    xhttp.onreadystatechange = function() {
+    if (this.readyState == 4 && this.status == 200) {
+    // Parsear la respuesta JSON
+    var data = JSON.parse(this.responseText);
+    // Actualizar el contenido de las cards con los datos recibidos
+    document.getElementById("clientesCard").innerHTML = data.count_clientes;
+    document.getElementById("empleadosCard").innerHTML = data.count_empleados;
+    document.getElementById("eventosCard").innerHTML = data.count_eventos;
+  }
+}
+xhttp.open("GET", "/php/viewsCharts/countAll.php", true);
+xhttp.send();
+
 // Datos para el gráfico de puntos (scatter)
 Chart.defaults.color = 'white';
 const eventosRealizados = [

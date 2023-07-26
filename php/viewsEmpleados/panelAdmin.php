@@ -134,11 +134,46 @@
     <!--Main Content-->
     <div id="main">
         <div id="home" class="tab-content active">
-        <h3 class="test" style="text-align:center; ">
+            <h3 class="test" style="text-align:center; ">
                 Home
                 <i class="fa-solid fa-house" style="color: #ffffff;"></i>
             </h3>
-    <!--Charts-->
+            <!--Info Cards-->
+            <div class="container-fluid mt-4">
+                <div class="row">
+                    <!--Clientes-->
+                    <div class="col-md-4 mb-4">
+                        <div class="info-card d-flex align-items-center justify-content-between">
+                            <div class="info d-flex flex-column align-items-center mb-2">
+                                <h3 id="clientesCard"></h3>
+                                <h5>Clientes registrados</h5>
+                            </div>
+                            <i class="fa-solid fa-user fa-5x" style="color: #ffffff;"></i>
+                        </div>
+                    </div>
+                    <!--Empleados-->
+                    <div class="col-md-4">
+                        <div class="info-card d-flex align-items-center justify-content-between">
+                            <div class="info d-flex flex-column align-items-center mb-2">
+                                <h3 id="empleadosCard"></h3>
+                                <h5>Empleados activos</h5>
+                            </div>
+                            <i class="fa-solid fa-briefcase fa-5x" style="color: #ffffff;"></i>
+                        </div>
+                    </div>
+                    <!--Eventos-->
+                    <div class="col-md-4">
+                        <div class="info-card d-flex align-items-center justify-content-between">
+                            <div class="info d-flex flex-column align-items-center mb-2">
+                                <h3 id="eventosCard"></h3>
+                                <h5>Eventos realizados</h5>
+                            </div>
+                            <i class="fa-solid fa-calendar-days fa-5x" style="color: #ffffff;"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!--Charts-->
             <div class="container-fluid">
                 <div class="row">
                     <div class="col-md-7">
@@ -211,6 +246,7 @@
             <h3 id="table-info"></h3>
             <!--Container para tablas-->
             <div class="cont-table">
+                <!--Contenido Default-->
             </div>
         </div>
         <div id="perfil" class="tab-content">

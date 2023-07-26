@@ -203,15 +203,21 @@ nav{
   .event-history {
     flex: 1;
   }
-  /*Charts*/
+/*Charts and info*/
 #eventosAño, #proporcionEmpleados{
-    background-color: #b14aed;
+    background-image: linear-gradient(135deg, #5603ad, #f58cd6);
     color: white;
     border-radius: 20px;
+    height: 240px;
 }
 #proporcionEmpleados{
     height: 200px;
     width: 200px; 
+}
+.info-card{
+    background-image: linear-gradient(135deg, #5603ad, #ab8cf5);
+    border-radius: 20px;
+    padding: 50px;
 }
   
   
