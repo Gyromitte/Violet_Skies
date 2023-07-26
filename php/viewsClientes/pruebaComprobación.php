@@ -26,16 +26,16 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     }
 
     // Obtener el hash de la contraseña actual del usuario desde la base de datos
-    $sql = "SELECT CONTRASENA FROM CUENTAS WHERE CORREO='$correo'";
+    $sql = "SELECT CONTRASEÑA FROM CUENTAS WHERE CORREO='$correo'";
     $result = $conn->query($sql);
     if ($result->num_rows > 0) {
         $row = $result->fetch_assoc();
-        $hashed_password = $row["CONTRASENA"];
+        $hashed_password = $row["CONTRASEÑA"];
 
         // Verificar la contraseña actual utilizando password_verify
         if (password_verify($contrasena_actual, $hashed_password)) {
             // La contraseña es válida, proceder con la actualización de datos
-            $sql = "UPDATE CUENTAS SET NOMBRE='$nombre', AP_PATERNO='$apPaterno', AP_MATERNO='$apMaterno', TELEFONO='$telefono', TIPO_CUENTA='$tipoCuenta' WHERE CORREO='$correo'";
+            $sql = "UPDATE CUENTAS SET NOMBRE='$nombre', AP_PATERNO='$apPaterno', AP_MATERNO='$apMaterno', TELEFONO='$telefono' WHERE CORREO='$correo'";
 
             // Ejecuta la consulta
             if ($conn->query($sql) === TRUE) {
@@ -53,5 +53,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     }
 
     $conn->close();
+} else {
+    // Si no se ha enviado un formulario POST, devolver un mensaje de error JSON
+    echo json_encode(['success' => false, 'error' => 'No se recibieron datos del formulario']);
 }
 ?>

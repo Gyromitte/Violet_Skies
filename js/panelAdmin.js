@@ -50,19 +50,13 @@ var modalForm = document.getElementById("modal-form");
 function checkCurrentTable(currentTable) {
   switch (currentTable) { //Simular un click para refrescar los cambios
     case 'cocineros':
-      setTimeout(function () {
-        btnCocineros.click();
-      }, 500); // 0.5 segundos, si la funcion se ejecuta muy rapido no reflejara los cambios
+      btnCocineros.click();
       break;
     case 'meseros':
-      setTimeout(function () {
-        btnMeseros.click();
-      }, 500); // 0.5 segundos, si la funcion se ejecuta muy rapido no reflejara los cambios
+      btnMeseros.click();
       break;
     case 'busqueda':
-      setTimeout(function () {
-        btnBusqueda.click();
-      }, 500); // 0.5 segundos, si la funcion se ejecuta muy rapido no reflejara los cambios
+      btnBusqueda.click();
       break;
   }
 }
@@ -150,7 +144,7 @@ function updateModalContent(formType, idEmpleado) {
         //Enviar el formulario
         xhr.send(formData);
         //Ver cual es la tabla activa para refrescar cualquier cambio
-        //console.log(currentTable);
+        console.log(currentTable);
         setTimeout(function() {
           checkCurrentTable(currentTable);
         }, 500); // 0.5 segundos, si la funcion se ejecuta muy rapido no reflejara los cambios
@@ -198,7 +192,7 @@ function updateModalContent(formType, idEmpleado) {
       xhr.open("GET", "obtenerEmpleado.php?id=" + idEmpleado, true);
       xhr.send();
       //Ver cual es la tabla activa para refrescar cualquier cambio
-
+      checkCurrentTable(currentTable);
       break;
     case "@editarEmpleado":
       modalTitle.textContent = "Modificar datos";
@@ -286,6 +280,79 @@ function updateModalContent(formType, idEmpleado) {
       //Ver cual es la tabla activa para refrescar cualquier cambio
       checkCurrentTable(currentTable);
       break;
+      case "@editarPerfil":
+        console.log("hola");
+        modalTitle.textContent = "Editar Datos";
+        formContent = `
+          <form id="formularioEditarDatos" method="post" action="pruebaComprobación.php">
+              <div class="form-group">
+                  <label for="nombreInput">Nombre:</label>
+                  <input type="text" class="form-control" name="nombre" id="nombreInput" required value="${datosUsuario.nombre}">
+              </div>
+              <div class="form-group">
+                  <label for="ap_paternoInput">Apellido Paterno:</label>
+                  <input type="text" class="form-control" name="ap_paterno" id="ap_paternoInput" required value="${datosUsuario.ap_paterno}">
+              </div>
+              <div class="form-group">
+                  <label for="ap_maternoInput">Apellido Materno:</label>
+                  <input type="text" class="form-control" name="ap_materno" id="ap_maternoInput" required value="${datosUsuario.ap_materno}">
+              </div>
+              <div class="form-group">
+                  <label for="telefonoInput">Teléfono:</label>
+                  <input type="tel" class="form-control" name="telefono" id="telefonoInput" required value="${datosUsuario.telefono}">
+              </div>
+              <div class="form-group">
+                  <label for="contrasenaActualInput">Contraseña Actual:</label>
+                  <input type="password" class="form-control" name="contrasena_actual" id="contrasenaActualInput" required>
+              </div>
+              <input type="hidden" name="correo" id="correoInput" value="${datosUsuario.correo}">
+              <input type="hidden" name="tipo_cuenta" id="tipo_cuentaInput"><br>
+              <button type="button" class="btn btn-primary" id="guardarCambios">Guardar Cambios</button>
+          </form>`;
+          modalForm.innerHTML = formContent;
+
+          // Vincular el evento de clic al botón "Guardar Cambios"
+          var formEditarDatos = document.getElementById("formularioEditarDatos");
+          var guardarCambiosBtn = document.getElementById("guardarCambios");
+          
+          guardarCambiosBtn.addEventListener("click", function () {
+            // Realizar una nueva solicitud AJAX para actualizar los datos del perfil
+            var updatePerfilXHR = new XMLHttpRequest();
+            updatePerfilXHR.onreadystatechange = function () {
+              if (updatePerfilXHR.readyState === XMLHttpRequest.DONE) {
+                if (updatePerfilXHR.status === 200) {
+                  // Verificar la respuesta en la consola antes de analizarla como JSON
+                  console.log(updatePerfilXHR.responseText);
+                  // Manejo de la respuesta:
+                  try{
+                    var respuesta = JSON.parse(updatePerfilXHR.responseText);
+                    if (respuesta.success) {
+                      // Los datos se actualizaron con éxito
+                      // Puedes mostrar un mensaje de éxito aquí si lo deseas
+                    } else {
+                      // Hubo un error al actualizar los datos
+                      // Puedes mostrar un mensaje de error aquí si lo deseas
+                    }
+                  }
+                  catch (error) {
+                    // Si la respuesta no es un JSON válido, manejar el error aquí
+                    console.error("Error al analizar la respuesta JSON: " + error.message);
+                  }
+                } else {
+                  console.error("Error en la solicitud AJAX de actualización");
+                }
+              }
+            };
+        
+            // Obtener los valores del formulario
+            var formData = new FormData(formEditarDatos);
+            
+            // Configurar la solicitud al script PHP para editar el perfil y pasar los datos actualizados
+            updatePerfilXHR.open("POST", "pruebaComprobación.php", true);
+            updatePerfilXHR.send(formData);
+          });
+          console.log(formType);
+          break;
   }
 }
 

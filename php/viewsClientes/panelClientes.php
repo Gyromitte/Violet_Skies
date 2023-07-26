@@ -32,13 +32,23 @@
         <![endif]-->
     <!--NavBar-->    
     <?php
-        session_start();
-        if (!isset($_SESSION["access"]) || $_SESSION["access"] !== 1) {
-            echo"No tienes acceso a esta pagina";
-            header("refresh:2;/index.html");
-        }
-        
+    session_start();
+    if (!isset($_SESSION["access"]) || $_SESSION["access"] !== 1) {
+        echo"No tienes acceso a esta pagina";
+        header("refresh:2;/index.html");
+    }
+    $datosUsuario = array(
+        "nombre" => $_SESSION["name"],
+        "ap_paterno" => $_SESSION["ap_paterno"],
+        "ap_materno" => $_SESSION["ap_materno"],
+        "telefono" => $_SESSION["telefono"],
+        "correo" => $_SESSION["correo"],
+    );
+
+    // Convertir el array de datos del usuario en formato JSON para poder pasarlo a JavaScript
+    $datosUsuarioJSON = json_encode($datosUsuario);
     ?>
+    
     <nav>
         <div class="nav-menu">
             <button id="nav-button">
@@ -64,11 +74,17 @@
             <button data-tab="configuracion" class="dash-button"><i class="fa-solid fa-gear" style="color: #ffffff;"></i><br>Configuracion</button>
         </div>
     </div>
+
+
+
     <!--Main Content-->
     <div id="main">
         <!-- Página de Eventos del cliente -->
         <div id="home" class="tab-content active">
-            <p class="test">Yo soy, home</p>
+            <div class="container" id="cardContainer">
+    <!-- Las cards se generan dinámicamente con JavaScript -->
+            
+            </div>
         </div>
         <!-- Página de Perfil del cliente -->
         <div id="perfil" class="tab-content">
@@ -110,9 +126,14 @@
 
 
     <!--Scripts que necesitan ejecutarse hasta el final-->
+    <script>
+    // Definir una variable global en JavaScript para almacenar los datos del usuario
+    var datosUsuario = <?php echo $datosUsuarioJSON; ?>;
+    </script>
     <script src="/js/dinamicTable.js"></script>
     <script src="/bootstrap/js/bootstrap.min.js"></script>
     <script src="/bootstrap/js/bootstrap.bundle.min.js"></script>
     <script src="/js/filtroEventos.js"></script>
+    <script src="/js/app.js"></script>
 </body>
 </html>
