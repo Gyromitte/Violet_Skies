@@ -49,14 +49,14 @@
             cursor:pointer;
             color: white;
             text-shadow: 2px rgba(227, 122, 57,0.5);
-            background-color: rgba(252, 58, 192, 0.8);
+            font-style: italic;
             background-blend-mode: overlay;
         }
         .right:hover{
             cursor:pointer;
             color: white;
             text-shadow: 2px rgba(210, 65, 250,0.5);
-            background-color: rgba(147, 6, 186, 0.8);
+            font-style: italic;
             background-blend-mode: overlay;
         }
         .alert{
