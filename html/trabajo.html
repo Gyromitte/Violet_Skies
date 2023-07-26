@@ -3,14 +3,16 @@
     <head>
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <title>Undefinided - Reserva tus eventos</title>
+        <title>Violet skies - Trabajo</title>
         <meta name="description" content="Reserva tus eventos con nosostros: Cumpleaños, Bodas, Sex reveal, Quinceñeras.
         &#10; Trabaja con nosotros! Aplica para diversos eventos y trabaja como mesero o cocinero.">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <!--Style sheet-->
+        <link rel="stylesheet" href="/css/style.css">
+        <link rel="stylesheet" href="/bootstrap/css/bootstrap.min.css">
         <link rel="stylesheet" href="/css/trabajo.css">
-        <link rel="stylesheet" href="/bootstrap/css/bootstrap.css">
-
+        <!--Favi icon-->
+        <link rel="icon" type="image/x-icon" href="/images/company_logo.png">
         <!--Referencias a fuentes-->
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -20,13 +22,14 @@
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
         <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&display=swap" rel="stylesheet">
         <script src="https://kit.fontawesome.com/b60c246061.js" crossorigin="anonymous"></script>
+        <script src="/js/panelAdmin.js" async defer></script>
     </head>
 <body >
   <nav class="navbar navbar-default row">
     <div class="companySection col-sm-auto">
         <!--Company Logo-->
         <div class="navbar-header">
-            <img id="company-logo" class="img-fluid" src="/images/company_logo.jpg" alt="companyLogo">
+            <img id="company-logo" class="img-fluid" src="/images/company_logo.png" alt="companyLogo">
                 <a class="no-underline" href="/index.html" id="company-name">Violet Skies</a>
         </div>      
         <!--Tabs-->
@@ -44,13 +47,13 @@
     </div>         
     <!--Login-section-->
     <div class="login-section col-sm-auto" >
-      <a class="no-underline" href="/html/acceder.html">
+      <a class="no-underline" href="/php/views/login.php">
           <button class="loginButton">
               <i class="fa-solid fa-door-open" style="color: #ffffff;"></i>
               Acceder  
           </button>
       </a> 
-      <a class="no-underline" href="/html/trabajo.html">
+      <a class="no-underline" href="/php/views/registrarse.php">
           <button class="loginButton">
               <i class="fa-solid fa-user" style="color: #ffffff;"></i>
               Registrarse
@@ -58,74 +61,57 @@
       </a>
       </div>
 </nav>
-<!--datos-izquierda-->
-<div class="background-cover">
-     <div class="heroContainer">
-                <div class="leftHeroSection">
-                    <div id="greetings">
-                        Ingresa tus datos
-                    </div>
-                    <!--recolecion-data-->
-                    <form class="row needs-validation text-center"  novalidate>
-                        <div class="col-xl-12">
-                          <label for="validationCustom01" class="form-label">Nombres</label>
-                          <input type="text" class="form-control" id="validationCustom01" value="" required>
-                          <div class="valid-feedback">
-                            datos aceptados
-                          </div>
-                        </div>
-                        </form>
-                        <form class="row g-12 needs-validation text-center"  novalidate>
-                        <div class="col-lg">
-                          <label for="validationCustom02" class="form-label">Apellidos</label>
-                          <input type="text" class="form-control" id="validationCustom02" value="" required>
-                          <div class="valid-feedback">
-                           datos aceptados
-                          </div>
-                        </div>
-                        </form>
-                        <div class="col-lg text-center">
-                          <label for="validationCustomUsername" class="form-label">Correo</label>
-                          <div class="input-group has-validation">
-                            <input type="email" class="form-control" id="validationCustomUsername" aria-describedby="inputGroupPrepend" required>
-                            <div class="valid-feedback">
-                              Porfavor ingrese su Correo
-                            </div>
-                          </div>
-                        </div>
-                        <div class="col-lg text-center">
-                          <label for="validationCustom03" class="form-label">Numero Tel.</label>
-                          <input type="number" class="form-control" id="validationCustom05" required>
-                          <div class="invalid-feedback">
-                           Porfavor ingrese su numero.
-                          </div>
-                        </div>
-                        <div class="col-12">
-                          <div class="form-check">
-                            <input class="form-check-input" type="checkbox" value="" id="invalidCheck" required>
-                            <label class="form-check-label" for="invalidCheck">
-                              Agree to terms and conditions
-                            </label>
-                            <div class="invalid-feedback">
-                              You must agree before submitting.
-                            </div>
-                          </div>
-                        </div>
-                        <div class="col-12 ">
-                          <button class="btn btn-primary" type="submit">Submit form</button>
-                        </div>
-                      </form>
-                      <br>
-                </div>
-            </div>
-        </div>
-                
-    <div>
-        <div class="container-fluid">
-            
-        </div>
-    </div>
+</div>
+ 
+    <div class="element fixed-top">
+  <nav>
+
+
+
+<!--Nav para dipositivos moviles-->
+<div class="d-none">
+  <div class="d-block overflow-hidden">
+
+<div  style="overflow: hidden;" id="dash-board">
+  <div  id="dash-board-content">
+    <button data-tab="home" class="dash-button" href="/index.html"><i class="fa-solid fa-house" style="color: #ffffff;"></i><br>Home</button>
+    <button data-tab="eventos" class="dash-button"><i class="fa-solid fa-calendar-days"style="color: #ffffff;"></i><br>Nosotros</button>
+    <button data-tab="empleados" class="dash-button"><i class="fa-solid fa-briefcase" style="color: #ffffff;"></i><br>Empleados</button>
+    <button data-tab="perfil" class="dash-button"><i class="fa-solid fa-door-open" style="color: #ffffff;"></i><br>Acceder</button>
+    <button data-tab="configuracion" class="dash-button"><i class="fa-solid fa-user" style="color: #ffffff;"></i><br>Registrarse</button>
   </div>
-    <script src="bootstrap/js/bootstrap.js"></script>
+</div>
+</div>
+  </div>
+</div>
+
+<!--Header-->
+<div class="header row justify-content-center d-flex align-items-center">
+  <h1 class="text-center"><strong>Trabaja con nosotros</strong></h1>
+</div>
+<!--Main content-->
+<div class="offer-container d-flex flex-row">
+  <div class="info-job col-6 p-5">
+    <h3>Únete a nuestro equipo de meseros y cocineros.</h3>
+    <p>
+      Ofrecemos horarios flexibles que se adaptan a tus necesidades, permitiéndote equilibrar trabajo y vida personal. No necesitas tener experiencia previa
+    </p>
+    <p>
+      Al registrarte y ser aceptado tu podras decidir en que eventos deseas participar!
+    </p>
+    <a class="no-underline" href="/php/views/registrarse.php">
+      <button class="loginButton" id="login-btn">
+          <i class="fa-solid fa-user" style="color: #ffffff;"></i>
+          Registrarse
+      </button>
+  </a>
+  </div>
+  <img class="col-6 chef-img rounded-5" src="/images/chef.jpg">
+</div>
+
+
+
+
+<    <script src="bootstrap/js/bootstrap.js"></script>
 </body>
 </html>

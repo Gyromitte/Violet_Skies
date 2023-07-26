@@ -58,3 +58,4 @@ echo "</tbody>
           </table>";
 
 $conexion->desconectarBD();
+?>

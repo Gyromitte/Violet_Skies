@@ -1,3 +1,5 @@
+document.addEventListener('DOMContentLoaded', function() {
+
 /*Funcionamiento de la dashboard*/
 // Obtener elementos
 const toggleDashboardBtn = document.getElementById('nav-button');
@@ -6,7 +8,7 @@ const main = document.getElementById('main');
 // Función para abrir o cerrar el dashboard
 function toggleDashboard() {
   dashboard.classList.toggle('dashboard-open');
-  main.classList.toggle('main-dash-open')
+  main.classList.toggle('main-dash-open');
 }
 // Asignar evento de clic al botón
 toggleDashboardBtn.addEventListener('click', toggleDashboard);
@@ -50,13 +52,19 @@ var modalForm = document.getElementById("modal-form");
 function checkCurrentTable(currentTable) {
   switch (currentTable) { //Simular un click para refrescar los cambios
     case 'cocineros':
-      btnCocineros.click();
+      setTimeout(function() {
+        btnCocineros.click();
+      }, 500);
       break;
     case 'meseros':
-      btnMeseros.click();
+      setTimeout(function() {
+        btnMeseros.click();
+      }, 500);
       break;
     case 'busqueda':
-      btnBusqueda.click();
+      setTimeout(function() {
+        btnBusqueda.click();
+      }, 500);
       break;
   }
 }
@@ -388,7 +396,5 @@ function eliminarEmpleado(id) {
   // Retornar false para evitar que el formulario se recargue la página
   return false;
 }
-
-
-
+});
 

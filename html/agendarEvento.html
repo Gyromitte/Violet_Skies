@@ -3,7 +3,9 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Undefinided - Reserva tus eventos</title>
+    <title>Violet Skies - Agendar Evento</title>
+    <!--Favi icon-->
+    <link rel="icon" type="image/x-icon" href="/images/company_logo.png">
     <meta name="description" content="Reserva tus eventos con nosostros: Cumpleaños, Bodas, Sex reveal, Quinceñeras.
     &#10; Trabaja con nosotros! Aplica para diversos eventos y trabaja como mesero o cocinero.">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -22,259 +24,159 @@
     <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&display=swap" rel="stylesheet">
 </head>
 <body>
-    <nav class="navbar navbar-default row">
-        <div class="companySection col-sm-auto">
-            <!--Company Logo-->
-            <div class="navbar-header">
-              <a class="no-underline" href="../index.html" id="company-name">
-                <img style="padding-right: 10px;" id="company-logo" class="img-fluid" src="../images/company_logo.png" alt="companyLogo">Hoteleria</a>
-            </div>       
-            <!--Tabs-->
-            <ul class="nav list-inline">
-                <li class="mr-3 tabs">
-                    <a class="no-underline" href="/html/about-us/about us.html">Nosotros</a>
-                </li>
-                <li class="mr-3 tabs">
-                    <a class="no-underline" href="/html/agendarEvento.html">Agendar Evento</a>
-                </li>
-                <li class="mr-3 tabs">
-                    <a class="no-underline" href="/html/trabajo.html">Trabajo</a>
-                </li>
-            </ul>
-        </div>         
-        <!--Login-section-->
-        <div class="login-section col-sm-auto" >
-            <a class="no-underline" href="/html/acceder.html">
-                <button class="loginButton">
-                    <i class="fa-solid fa-door-open" style="color: #ffffff;"></i>
-                    Acceder  
-                </button>
-            </a> 
-            <a class="no-underline" href="/html/trabajo.html">
-                <button class="loginButton">
-                    <i class="fa-solid fa-user" style="color: #ffffff;"></i>
-                    Registrarse
-                </button>
-            </a>
-        </div>
-    </nav>
-    <!--Sección de Paquetes-->
-    <div class="contact-back" >
-        <div class="packContainer" >
-            <div class="paquetesUp" style="font-size: 60px;">
-                    Aparta tu salón favorito!!
-            </div>
-              <div class="paquetesDown" style="text-align:center; font-size: 35px;" >
-                ¿Cómo agendo mi evento? <br>
-                Es muy sencillo! <br> 
-              </div>
-              <div style="text-align: left; font-size: 20px; padding-left: 15%; padding-right: 15%;" class="paquetesDown">
-                <p>paso 1: Primero tienes que echarle un vistazo a todos nuestros salones y verficar cual de ellos se ajusta más a tus necesidades <br>
-                Paso 2: Presionas el botón de agendar para contactarte con nuestros organizadores.</p>
-              </div>
-            <!--Botón de agendar evento via whatsapp (ponerse en contacto con el administrador para dar más especificaciones de los eventos )-->
-            <div style="display: flex; justify-content: center; margin-bottom: 20px;">
-              <a href="https://wa.me/528715659629?text=¡Hola! Me gustaría agendar un evento con ustedes." target="_blank" style="display: inline-block; background-color: green; color: white; padding: 10px 20px; text-decoration: none; border-radius: 20px;">
-                  <i class="fa-brands fa-whatsapp" style="color: #ffffff;"></i><b>AGENDAR MI EVENTO</b>
-                </a>                               
-            </div>
-        </div>
-        
-<!-- Comienzan los Paquetes -->
-  <div class="accordion" id="myAccordion">
-  <!--Salón 1-->
-  <div class="card">
-    <button class="btn colorbtn" type="button" data-toggle="collapse" data-target="#collapseOne" data-parent="#myAccordion" onclick="focusContent()">
-      <div class="card-header" id="headingOne">
-        <h5 class="mb-0" style="text-align: center;">
-          Salones Cuatrocienegas
-        </h5>
-      </div>
-    </button>
-    <div id="collapseOne" class="collapse" data-parent="#myAccordion">
-      <div class="card-body">
-        <!-- Contenido del Accordion 1 -->
-        <div class="heroContainer">
-          <div class="leftHeroSection">
-            <div style="font-size: 25px;">
-              <ul>
-                <li>Una gran variedad de comidas a elección en nuestro menú</li>
-                <li>1 Mesero por cada 10 personas</li>
-                <li>Ambientación a tu estilo</li>
-                <li>Bebidas ilimitadas de la cadena (Coca-cola)</li>
-                <li>Host para recibir invitados y tomar fotos.</li>
-                <li>5 Horas de evento efectivo</li>
-                <li>3 Horas previas para la preparación del evento</li>
-                <li>Capacidad de 20 personas </li>
-              </ul>
-            </div>
-          </div>
-          <div class="rightHeroSection">
-            <img src="../images/salones/salon1.jpg" id="heroImage">
-          </div>
-        </div>
-      </div>
+  <nav class="navbar navbar-default row">
+    <div class="companySection col-sm-auto">
+        <!--Company Logo-->
+        <div class="navbar-header">
+            <img id="company-logo" class="img-fluid" src="/images/company_logo.png" alt="companyLogo" onclick="this.classList.toggle('clicked')">
+                <a class="no-underline" href="/index.html" id="company-name">Violet Skies</a>
+        </div>      
+        <!--Tabs-->
+        <ul class="nav list-inline">
+            <li class="mr-3 tabs">
+                <a class="no-underline" href="/html/about-us/about us.html">Nosotros</a>
+            </li>
+            <li class="mr-3 tabs">
+                <a class="no-underline" href="/html/agendarEvento.html">Agendar Evento</a>
+            </li>
+            <li class="mr-3 tabs">
+                <a class="no-underline" href="/html/trabajo.html">Trabajo</a>
+            </li>
+        </ul>
+    </div>         
+    <!--Login-section-->
+    <div class="login-section col-sm-auto" >
+        <a class="no-underline" href="/php/views/login.php"><button class="loginButton">
+            <i class="fa-solid fa-door-open" style="color: #ffffff;"></i>
+            Acceder  
+        </button>
+        </a>
+        <a class="no-underline" href="/php/views/registrarse.php"><button class="loginButton">
+            <i class="fa-solid fa-user" style="color: #ffffff;"></i>
+            Registrarse
+        </button>
+        </a>
     </div>
+</nav>
+
+
+
+<!--Salones-->
+<div class="d-flex flex-row main-container justify-content-center">
+  <div class="info-eventos d-flex flex-column justify-content-center">
+    <h1 class="text-center">Nuestros salones para eventos:</h1>
+    <br>
+    <h5 class="text-center">Cada salón ofrece:</h5>
+    <br>
+    <p><i class="fa-solid fa-bowl-food me-2" style="color: #ffffff;"></i>Una gran variedad de comidas de nuestro menú</p>
+    <p><i class="fa-solid fa-bell-concierge me-2" style="color: #ffffff;"></i>1 Mesero para cada 10 personas</p>
+    <p><i class="fa-solid fa-glass-water me-2" style="color: #ffffff;"></i>Bebidas ilimitadas de Coca-Cola</p>
+    <p><i class="fa-solid fa-camera me-2" style="color: #ffffff;"></i>Host para recibir a tus invitados y tomarse fotos</p>
+    <p><i class="fa-solid fa-clock me-2" style="color: #ffffff;"></i>5 horas de evento efectivo</p>
+    <a href="#howto" class="card-link">
+      <button class="mx-auto btn-agend-custom"><strong>Quiero Agendar!</strong></button>
+    </a>
   </div>
-    <!--Salón 2-->
-    <div class="card">
-        <button class="btn colorbtn" type="button" data-toggle="collapse" data-target="#collapseTwo"data-parent="#myAccordion" onclick="focusContent()">
-      <div class="card-header" id="headingTwo">
-        <h5 class="mb-0">
-          
-            Salones Torreón
-          
-        </h5>
-      </div>
-    </button>
-      <div id="collapseTwo" class="collapse" data-parent="#myAccordion">
-        <div class="card-body">
-          <!-- Contenido del Accordion 2 -->
-          <div class="heroContainer">
-            <div class="rightHeroSection">
-                <img src="../images/salones/salon3.jpg" id="heroImage">
-            </div>
-            <div class="leftHeroSection">
-              <div style="font-size: 25px;">
-                  <ul>
-                    <li>Una gran variedad de comidas a elección en nuestro menú</li>
-                    <li>1 Mesero por cada 10 personas</li>
-                    <li>Ambientación a tu estilo</li>
-                    <li>Bebidas ilimitadas de la cadena (Coca-cola)</li>
-                    <li>Host para recibir invitados y tomar fotos.</li>
-                    <li>5 Horas de evento efectivo</li>
-                    <li>3 Horas  previas para la preparación del evento</li>
-                    <li>Capacidad de 50 personas</li>
-                  </ul>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-    <!--Salón 3-->
-    <div class="card">
-        <button class="btn colorbtn" type="button" data-toggle="collapse" data-target="#collapseThree"data-parent="#myAccordion" onclick="focusContent()">
-      <div class="card-header" id="headingThree">
-        <h5 class="mb-0" style="text-align: center;">
-          
-            Salones Saltillo
+  
+  <!--CuatroCienegas-->
+<div class="card custom-card tier1" style="width: 18rem;">
+  <img src="/images/salones/salon2.jpg" class="card-img-top" alt="...">
+  <div class="card-body text-center">
+    <h5 class="card-title">Salon -Cuatrocienegas-</h5>
+    <p class="card-text">Ideal para eventos casuales o de menor escala</p>
+  </div>
+  <ul class="list-group list-group-flush">
+    <li class="list-group-item custom-item d-flex align-items-center justify-content-center">
+      <i class="fa-solid fa-user me-2" style="color: #ffffff;"></i>
+      Capacidad para 20 personas
+    </li>
+  </ul>
+</div>
+<!--Torreon-->
+<div class="card custom-card tier2" style="width: 18rem;">
+  <img src="/images/salones/salon3.jpg" class="card-img-top" alt="...">
+  <div class="card-body text-center">
+    <h5 class="card-title">Salon -Torreon-</h5>
+    <p class="card-text">Adecuado para todo tipo de fiestas a escala mediana</p>
+  </div>
+  <ul class="list-group list-group-flush">
+    <li class="list-group-item custom-item d-flex align-items-center justify-content-center">
+      <i class="fa-solid fa-user me-2" style="color: #ffffff;"></i>
+      Capacidad para 50 personas
+    </li>
+  </ul>
+</div>
+<!--Saltillo-->
+<div class="card custom-card tier3" style="width: 18rem;">
+  <img src="/images/salones/salon3.jpg" class="card-img-top" alt="...">
+  <div class="card-body text-center">
+    <h5 class="card-title">Salon -Saltillo-</h5>
+    <p class="card-text">Perfecto para ocaciones especiales como bodas o quinceañeras</p>
+  </div>
+  <ul class="list-group list-group-flush">
+    <li class="list-group-item custom-item d-flex align-items-center justify-content-center">
+      <i class="fa-solid fa-user me-2" style="color: #ffffff;"></i>
+      Capacidad para 80 personas
+    </li>
+  </ul>
+</div>
+<!--Coahuila-->
+<div class="card custom-card" style="width: 18rem;">
+  <img src="/images/salones/salon1.jpg" class="card-img-top" alt="...">
+  <div class="card-body text-center">
+    <h5 class="card-title">Salon -Coahuila-</h5>
+    <p class="card-text">Merecedor de su nombre, este salon es el indicado para tus eventos soñados!</p>
+  </div>
+  <ul class="list-group list-group-flush">
+    <li class="list-group-item custom-item d-flex align-items-center justify-content-center">
+      <i class="fa-solid fa-user me-2" style="color: #ffffff;"></i>
+      Capacidad para 120 personas
+    </li>
+  </ul>
+</div>
+</div>
 
-        </h5>
-      </div>
-    </button>
-      <div id="collapseThree" class="collapse" data-parent="#myAccordion">
-        <div class="card-body">
-          <!-- Contenido del Accordion 3 -->
-          <div class="heroContainer">
-            <div class="rightHeroSection">
-                <img src="../images/salones/salon1.jpg" id="heroImage">
-            </div>
-            <div class="leftHeroSection">
-              <div style="font-size: 25px;">
-                  <ul>
-                    <li>Una gran variedad de comidas a elección en nuestro menú</li>
-                    <li>1 Mesero por cada 10 personas</li>
-                    <li>Ambientación a tu estilo</li>
-                    <li>Bebidas ilimitadas de la cadena (Coca-cola)</li>
-                    <li>Host para recibir invitados y tomar fotos.</li>
-                    <li>5 Horas de evento efectivo</li>
-                    <li>3 Horas  previas para la preparación del evento</li>
-                    <li>Capacidad de 80 personas</li>
-                  </ul>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
+<div class="how-to mt-5">
+  <div class="header-how-to justify-content-center d-flex align-items-center">
+    <h1 id="howto" class="text-center">Como Agendar un evento:</h1>
+  </div>
+  <div class="row p-5">
+    <div class="col-md-6">
+      <img src="/images/registr.png" class="img-fluid" alt="Registro de evento">
     </div>
-    <!--Salón 4-->
-    <div class="card">
-        <button class="btn colorbtn" type="button" data-toggle="collapse" data-target="#collapseFour"data-parent="#myAccordion" onclick="focusContent()">
-      <div class="card-header" id="headingFour">
-        <h5 class="mb-0" style="text-align: center;">
-          
-            Salones Coahuila
-
-        </h5>
+    <div class="col-md-6">
+      
+      <h3><strong>Registrate:</strong></h3>
+      <p>Para agendar un evento con nosotros primero tienes que tener una cuenta registrada</p>
+      <a class="no-underline" href="/php/views/registrarse.php"><button class="loginButton">
+        <i class="fa-solid fa-user" style="color: #ffffff;"></i>
+        Registrarse
+    </button>
+    </a>
+    <br>
+    <br>
+      <h3><strong>Ingresa a tu cuenta:</strong></h3>
+      <p>Cuando ingreses a tu cuenta podrás solicitar y especificar los detalles de tu evento</p>
+      <a class="no-underline" href="/php/views/login.php"><button class="loginButton">
+        <i class="fa-solid fa-door-open" style="color: #ffffff;"></i>
+        Acceder  
+    </button>
+    </a>
+    <br>
+    <br>
+      <h3><strong>Comunicate a través de WhatsApp:</strong></h3>
+      <p>Mándanos un mensaje con tus datos, nosotros veremos tu solicitud de evento y manejaremos los detalles</p>
+      <div>
+        <a href="https://wa.me/528715659629?text=¡Hola! Me gustaría agendar un evento con ustedes." target="_blank" style="display: inline-block; background-color: green; color: white; padding: 10px 20px; text-decoration: none; border-radius: 20px;">
+            <i class="fa-brands fa-whatsapp me-1" style="color: #ffffff;"></i><b>WhatsApp</b>
+          </a>                               
       </div>
-    </button id="colorbtn">
-      <div id="collapseFour" class="collapse" data-parent="#myAccordion">
-        <div class="card-body">
-          <!-- Contenido del Accordion 4 -->
-          <div class="heroContainer">
-            <div class="leftHeroSection">
-              <div style="font-size: 25px;">
-                  <ul>
-                    <li>Una gran variedad de comidas a elección en nuestro menú</li>
-                    <li>1 Mesero por cada 15 personas</li>
-                    <li>Ambientación a tu estilo</li>
-                    <li>Bebidas ilimitadas de la cadena (Coca-cola)</li>
-                    <li>Host para recibir invitados y tomar fotos.</li>
-                    <li>5 Horas de evento efectivo</li>
-                    <li>3 Horas  previas para la preparación del evento</li>
-                    <li>Capacidad de hasta 120 personas <br> (la capacidad puede ser expansible hasta 240 y 360 invitados)</li>
-                  </ul>
-              </div>
-            </div>
-            <div class="rightHeroSection">
-                <img src="../images/salones/salon2.jpg" id="heroImage">
-            </div>
-          </div>
-        </div>
-      </div>
+  </div>
     </div>
   </div>
 </div>
 
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-    <script>
-      $(document).ready(function() {
-        $('.collapse').on('shown.bs.collapse', function() {
-          $('html, body').animate({
-            scrollTop: $(this).offset().top
-          }, 100);
-        });
-      });
-    </script>
-    <script>
-      document.getElementById("collapseOne").addEventListener('shown.bs.collapse', focusContent);
 
-      function focusContent() {
-        var contentElement = document.getElementById("collapseOne");
-        setTimeout(function() {
-          contentElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
-        }, 200);
-      }
-    </script>
-    <script>
-      document.getElementById("collapseTwo").addEventListener('shown.bs.collapse', focusContent);
-      function focusContent() {
-        var contentElement = document.getElementById("collapseTwo");
-        setTimeout(function() {
-          contentElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
-        }, 200);
-      }
-    </script>
-    <script>
-      document.getElementById("collapseThree").addEventListener('shown.bs.collapse', focusContent);
-      function focusContent() {
-        var contentElement = document.getElementById("collapseThree");
-        setTimeout(function() {
-          contentElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
-        }, 200);
-      }
-    </script>
-    <script>
-      document.getElementById("collapseFour").addEventListener('shown.bs.collapse', focusContent);
-      function focusContent() {
-        var contentElement = document.getElementById("collapseFour");
-        setTimeout(function() {
-          contentElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
-        }, 300);
-      }
-    </script>
+<script src="https://kit.fontawesome.com/b60c246061.js" crossorigin="anonymous"></script>
 </body>
 </html>

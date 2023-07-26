@@ -1,59 +1,87 @@
-.paquetesDown{
-    width: fit-content;
+.main-container{
+    padding: 15px;
+}
+.info-eventos{
     color: white;
-    display: flex;
-    margin: 1em 1em 1em 1em;
-    padding-left: 1em;
-    flex-direction:row;
-    justify-content: left;
-    font-family: 'Patua One', cursive;
-    text-align: center;
 }
-.paquetesUp{
-    width: fit-content;
+.custom-card{
+    background-image: linear-gradient(135deg, #5603ad, #f58cd6);
     color: white;
-    display: flex;
-    margin: 1em 1em 1em 1em;
-    padding-left: 1em;
-    flex-direction:row;
-    justify-content: center;
-    align-items: center;
-    font-family: 'Patua One', cursive;
-    text-align: center;
 }
-.packContainer{
-    display: flex;
-    flex-direction: column;
-    background-color:  #c874d9b4;
-    border-radius: 1.5em;
-    width: 70%;
+
+.custom-item{
+    background-color: #5603ad;
+    color: white;
+}
+.custom-card {
+    box-shadow: 0 20px 20px rgba(86, 3, 173, 0.2);
+    margin: 5px;
+    position: relative;
+    overflow: hidden; /* Asegura que el pseudo-elemento no sobresalga del contenedor */
+  }
+
+  .custom-card::before {
+    content: "";
+    position: absolute;
+    bottom: -100%; /* Inicia la línea fuera de la card, oculta debajo */
+    left: 0;
+    width: 100%;
     height: 100%;
-    margin: 5em auto 5em;
-    padding: 0.5em;
-    box-shadow: 0 0 1em rgba(255, 0, 85, 0.438);
-    align-items: center;
-}
-.accordion .card {
-    height: 100%;
-    background-color: transparent;
-    border: none;
-}
+    background: linear-gradient(to top, transparent 50%, rgba(255, 255, 255, 0.6) 80%); /* Gradiente para la línea reflectiva */
+    opacity: 0.5; /* Opacidad de la línea */
+    transition: bottom 0.5s; /* Transición para suavizar el efecto */
+  }
 
-.accordion .card-header {
-    background-color: #454adec2;
-}
+  .custom-card:hover::before {
+    bottom: 100%; /* Mueve la línea hacia arriba hasta cubrir toda la card */
+  }
 
-.accordion .card-body {
-    background-color: transparent; /* Color de fondo del contenido */
-}
-.colorbtn{
-    color:#FFFFFF;
-    font-size: 50px ;
-}
+  /* Estilo para el primer tier */
+  .tier1 {
+    background: linear-gradient(135deg, #8a2be2, #5603ad);
+    color: white;
+    /* Otros estilos adicionales para resaltar */
+  }
 
-.contact-back{
-    background-image: url(/images/back-contact.jpg);
-    background-size: cover;
-    padding: 1em;
+  /* Estilo para el segundo tier */
+  .tier2 {
+    background: linear-gradient(135deg, #ae52d4, #8a2be2);
+    color: white;
+    /* Otros estilos adicionales para resaltar */
+  }
 
-}
+  /* Estilo para el tercer tier */
+  .tier3 {
+    background: linear-gradient(135deg, #c77dff, #ae52d4);
+    color: white;
+    /* Otros estilos adicionales para resaltar */
+  }
+.btn-agend-custom {
+    background: linear-gradient(135deg, #5603ad, #8a2be2);
+    color: white;
+    border: 2px solid white; 
+    padding: 30px 40px;
+    border-radius: 30px; 
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    text-decoration: none; 
+    display: inline-block; 
+  }
+
+  .btn-agend-custom:hover {
+    opacity: 0.8;
+  }
+  .btn-agend-custom a {
+    color: white;
+    text-decoration: none; 
+  }
+  .btn-agend-custom:hover a {
+    text-decoration: none;
+  }
+
+  .how-to{
+    color: white;
+  }
+  .header-how-to{
+    background-image: linear-gradient(135deg, #5603ad, #f58cd6);
+    height: 100px;
+  }

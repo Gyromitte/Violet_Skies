@@ -1,307 +1,32 @@
-
-body{
-    background-color: #1b1f3b !important;
-    margin: 0;
-}
-h1{
-    font-family: 'Archivo Black', sans-serif;
-}
-/*Nav*/
-.navbar{
-    background-color: #8367c7;
+.header{
+    background-image: linear-gradient(135deg, #5603ad, #f58cd6);
+    height: 100px;
     color: white;
-    font-family: 'Patua One', cursive;
-    padding: 0.5em !important;
-    margin: 0 !important;
-}
-
-.navbar-header{
-    border-right: 2px solid #7159ad;
-    margin-right: 1em;
-    font-size: 2em;
-}
-
-.container{
-    width: 100%;
-}
-
-.row{
-    padding-right: 0 !important;
-    --bs-gutter-x: unset !important;
-}
-
-.companySection{
-    display: flex;
-    align-items: center;
-}
-
-#company-logo{
-    height: 1em;
-}
-
-#company-name{
-    padding-left: 1em;
-    padding-right: 1em;
-}
-
-#company-name:hover{
-    text-decoration: underline;
-}
-
-.no-underline{
-    text-decoration: none;
-    color: white;
-}
-
-.tabs{
-    margin-right: 20px;
-    margin-left: 20px;
-}
-
-.tabs:hover{
-    text-decoration: underline;
-    border-bottom: 1px solid #5603ad;
-}
-
-/*Login Section*/
-.login-section{
-    display: flex;
-}
-
-.loginButton{
-    border-radius: 50vw;
-    font-size: small;
-    padding: 0.8em 2em;
-    align-self: center;
-    background-color:  #5603ad;
-    border: none;
-    color: white;
-    font-family: 'Lexend', sans-serif;
-    font-weight: bold;
-    margin: 5px;
-}
-
-.loginButton:hover{
-    background-color: #b14aed; 
-}
-
-/*Hero Section*/
-.heroContainer{
-    display: flex;
-    flex-direction: row;
-    background-color:  #c874d9b4;
-    border-radius: 1.5em;
-    width: 50%;
-    height: 100%;
-    margin: 5em auto 5em;
-    padding: 0.5em;
-    box-shadow: 0 0 1em rgba(255, 0, 85, 0.438);
-}
-
-.background-cover{
-    background-image: url(/images/background.jpg);
-    background-size: cover;
-    padding: 1em;
-}
-
-.leftHeroSection{
-    width: 40vw;
-    color: white;
-    display: flex;
-    margin: 1em 1em 1em 1em;
-    padding-left: 1em;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    font-family: 'Patua One', cursive;
-}
-
-.greetings{
-    font-family: 'Archivo Black', sans-serif;
-    font-size: 5vw;
-}
-
-#description{
-    margin: none;
-    font-family: 'Patua One', cursive;
-    font-size: 1em;
-}
-
-.agendarButton{
-    border-radius: 50em;
-    padding: 1em;
-    width: 15em;
-    font-size: medium;
-    background-color: #454ade;
-    color: white;
-    font-family: 'Lexend', sans-serif;
-    font-weight: bold;
-    border: solid white 2px;
-}
-
-.agendarButton:hover{
-    background-color: #383cb4;
-}
-
-.rightHeroSection{
-    width: 50vw;
-    margin: 3em 0;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
-#heroImage{
-    max-width:100%;
-    height:auto;
-    width: 35vw;
-    border-radius: 1.5em;
-}
-
-/*Job Section*/
-#job-section{
-    color: white;
-    padding: 2em 2em 2em 2em; 
-    height: 25vw;
-    background-color: #1b1f3b
-}
-
-.job-image{
-    background-color: #454ade;
-    background-image: url(/images/mesero.jpg);
-    background-size: cover; 
-    background-position: center;
-    position: relative;
-    overflow: hidden;
-    height: 100%;
-    width: 50% !important;
-    border-radius: 2em;
-}
-
-.job-desc{
-    text-align: center;
-    font-family: 'Archivo Black', sans-serif;
-    font-size: 4vw;
-}
-
-.job-desc-text{
-    font-size: 1vw;
-}
-
-#apply-button{
-    padding: 2em 6em;
-    background-color: #454ade;
-}
-
-/*Salones*/
-.salones{
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
+  }
+.offer-container{
     background-color: #5603ad;
-    height: 35vw;
     color: white;
-    font-family: 'Patua One', cursive;
+    margin: 30px;
 }
-
-.sal-greet{
-    border-bottom: 2px solid #7159ad;
-    justify-self: center;
-    height: 20%;
+.info-job, .chef-image, .offer-container{
+    border-radius: 50px;
 }
-  /*SlideShow*/
-  * {box-sizing:border-box !important}  
-
-  .slideshow-container{
-    width: 50%;
-    height: 60%;
-    position: relative;
-    display: flex;
-    margin-top: 20px; 
+#login-btn {
+    padding: 1.5em 2.5em;
+    border: 2px solid transparent;
+    border-image: linear-gradient(135deg, #5603ad, #f58cd6) 1;
+    border-style: solid;
+    border-radius: 10px;
+    color: white;
+    font-size: 1.2em;
+    background-color: transparent;
+  }
+  #login-btn:hover {
+    cursor: pointer;
+    background-color: rgba(255, 255, 255, 0.1);
   }
 
-  /*Por defecto las imagenes no aparecen, su display cambia al estar activas*/
-  .slide{
-    display: none;
-  }
 
-  .slide-img{
-    width: 100%;
-    border-radius: 2em;
-    height: auto;
-  }
 
-  /* Fading animation */
-  .fade {
-    animation-name: fade;
-    animation-duration: 4s;
-  }
   
-  @keyframes fade {
-    from {opacity: .4}
-    to {opacity: 1}
-  }
-
-  /*Ubicacion*/
-  .ubicacion{
-    color: white;
-    background-image: url(/images/back_ubicacion.jpg);
-    background-size: cover;
-  }
-
-  .ubic-greet{
-    text-align: center;
-    background-color:  #c874d9b4;
-    padding: 20px;
-  }
-
-  .map-container{
-    display: flex;
-    justify-content: center;
-    margin: 20px;
-  }
-  .g-map{
-    border-radius: 2em;
-    margin-bottom: 10px;
-  }
-
-  /*Informes*/
-  .informes{
-    background-color: #5603ad;
-    height: auto;
-    text-align: center;
-    color: white;
-    font-size: 3vw;
-    padding: 20px;
-  }
-
-/* Estilos para dispositivos de moviles */
-@media (max-width: 767px) {
-    .heroContainer {
-      flex-direction: column; /* Cambia la dirección de los elementos a columna */
-      align-items: center;
-      margin: auto;
-    }
-    
-    .leftHeroSection{
-        width: unset;
-        align-items: unset;
-        text-align: center;
-        justify-content: center;
-        padding-left: unset;
-    }
-
-    .rightHeroSection {
-      margin-top: 20px; /* Agrega margen superior para separar de la sección izquierda */
-      margin-bottom: 0px;
-    }
-    #heroImage{
-        width: 50vw;
-    }
-    .companySection{
-        justify-content: center;
-    }
-    .login-section{
-        justify-content: center;
-    }
-  }
+ 
