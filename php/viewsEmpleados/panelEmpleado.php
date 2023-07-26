@@ -109,7 +109,7 @@
                 <br>
                 <div class="btn-group">
                     <label class="control-label">Orden: </label>
-                    <select id="tipoorden" name="estado" class="form-select">;
+                    <select id="tipoorden" name="orden" class="form-select">;
                         <option value="porcreacion" selected>Recientemente Creadas</option>;
                         <option value="lejanoevento">Eventos Lejanos</option>;
                     </select>

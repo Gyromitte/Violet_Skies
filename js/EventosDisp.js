@@ -2,12 +2,13 @@ var form = document.getElementById('EmpDisp');
 var tablaResultados = document.getElementById('tablaResultados');
 var estadoSelect = document.getElementById('tipoorden');
 VerDisp();
-tipoorden.addEventListener('change', filtrarEventos);
+tipoorden.addEventListener('ord', filtrarEventos);
 // Función para filtrar los eventos
 function VerDisp() {
+
     var formData = new FormData(form);
-    formData.append('depa', tipoorden.value);
-    // Crear una instancia de XMLHttpRequest
+    formData.append('tipo', tipoorden.value);
+
     var xhr = new XMLHttpRequest();
 
     // Configurar la solicitud AJAX
@@ -29,5 +30,5 @@ function VerDisp() {
 }
 window.addEventListener('load', function() {
     var params = new URLSearchParams(window.location.search);
-    estadoSelect.value = params.get('depa') || 'porcreacion';
+    estadoSelect.value = params.get('tipo') || 'porcreacion';
 });
