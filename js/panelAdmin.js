@@ -451,9 +451,11 @@ function updateModalContent(formType, idEmpleado, idEvento) {
                 </table>
                 <br>
                 <div align="center">
-                  <button type="button" class="btn btn-primary" id="btnModify">Modificar Detalles</button>
-                  <button type="button" class="btn btn-primary" id="btnGuardar" style="display: none;">Guardar</button>
-                  <button type="button" class="btn btn-danger" id="btnCancelarEvento">Cancelar Evento</button>
+                  ${detallesEvento.ESTADO !== 'CANCELADO' && detallesEvento.ESTADO !== 'FINALIZADO' ? 
+                    '<button type="button" class="btn btn-primary" id="btnModify">Modificar Detalles</button>' :''}
+                    <button type="button" class="btn btn-primary" id="btnGuardar" style="display: none;">Guardar</button>
+                  ${detallesEvento.ESTADO !== 'CANCELADO' && detallesEvento.ESTADO !== 'FINALIZADO'? 
+                    '<button type="button" class="btn btn-danger" id="btnCancelarEvento">Cancelar Evento</button>' : ''}
                 </div>
               </form>
             `;
@@ -519,9 +521,6 @@ function updateModalContent(formType, idEmpleado, idEvento) {
               btnModificarGuardar.style.display = "";
             });
 
-
-
-
             var btnCancelarEvento = document.getElementById('btnCancelarEvento');
             btnCancelarEvento.addEventListener('click', function() {
               // Mostrar el modal de confirmación
@@ -562,10 +561,7 @@ function updateModalContent(formType, idEmpleado, idEvento) {
       // Hacer la solicitud al script PHP y pasar el ID del evento
       xhrDetalles.open("GET", "../viewsEventos/verDetalles.php?id=" + idEvento, true);
       xhrDetalles.send();
-
-      
     break;
-
   }
 }
 
