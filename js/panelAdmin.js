@@ -5,8 +5,11 @@ const dashboard = document.getElementById('dash-board');
 const main = document.getElementById('main');
 // Función para abrir o cerrar el dashboard
 function toggleDashboard() {
-  dashboard.classList.toggle('dashboard-open');
-  main.classList.toggle('main-dash-open');
+  const modal = document.querySelector('.modal.show');
+  if (!modal) { // Si no hay ningún modal abierto
+    dashboard.classList.toggle('dashboard-open');
+    main.classList.toggle('main-dash-open');
+  }
 }
 // Asignar evento de clic al botón
 toggleDashboardBtn.addEventListener('click', toggleDashboard);
@@ -325,7 +328,6 @@ function updateModalContent(formType, idEmpleado, idEvento) {
 
         case "@verDetallesEvento":
         modalTitle.textContent = "Detalles del Evento";
-        
         // Realizar una solicitud AJAX para obtener los detalles del evento
         var xhrDetalles = new XMLHttpRequest();
         xhrDetalles.onreadystatechange = function() {
@@ -333,7 +335,6 @@ function updateModalContent(formType, idEmpleado, idEvento) {
             if (xhrDetalles.status === 200) {
               // Parsear la respuesta JSON
               var detallesEvento = JSON.parse(xhrDetalles.responseText);
-      
               // Realizar una solicitud AJAX para obtener la lista de salones disponibles
               var xhrSalones = new XMLHttpRequest();
               xhrSalones.onreadystatechange = function() {
@@ -351,17 +352,14 @@ function updateModalContent(formType, idEmpleado, idEvento) {
                     optionSeleccionar.value = ""; // Asignar un valor vacío o el que corresponda
                     optionSeleccionar.textContent = "-Seleccionar salón-"; // Texto a mostrar en la opción predeterminada
                     selectSalon.appendChild(optionSeleccionar);
-              
                     // Variable para verificar si el salón del evento está en la lista de salones disponibles
                     var salonEncontrado = false;
-              
                     // Crear una opción para cada salón en la lista de salones disponibles
                     salones.forEach(function(salon) {
                       var option = document.createElement('option');
                       option.value = salon.ID; // Asignar el valor del ID del salón (puedes usar otro campo si lo prefieres)
                       option.textContent = salon.NOMBRE; // Asignar el nombre del salón
                       selectSalon.appendChild(option);
-              
                       // Verificar si el nombre del salón del evento coincide con el salón actual en el bucle
                       if (salon.NOMBRE === detallesEvento.SALON) {
                         // Si se encuentra el salón del evento, seleccionarlo en el select y marcarlo como encontrado
@@ -369,7 +367,6 @@ function updateModalContent(formType, idEmpleado, idEvento) {
                         salonEncontrado = true;
                       }
                     });
-              
                     // Si el salón del evento no está en la lista de salones disponibles, agregar un mensaje de error
                     if (!salonEncontrado) {
                       console.error("El salón del evento no se encuentra en la lista de salones disponibles:", detallesEvento.SALON);
@@ -379,7 +376,6 @@ function updateModalContent(formType, idEmpleado, idEvento) {
                   }
                 }
               };
-      
             // Hacer la solicitud al script PHP "obtenerSalones.php" para obtener la lista de salones
             xhrSalones.open("GET", "../viewsEventos/obtenerSalones.php", true);
             xhrSalones.send();
@@ -394,23 +390,19 @@ function updateModalContent(formType, idEmpleado, idEvento) {
                   var selectMenu = document.getElementById('comida');
                   // Limpiar cualquier opción previa del select
                   selectMenu.innerHTML = "";
-              
                   // Agregar la opción predeterminada "Seleccionar menú"
                   var optionSeleccionar = document.createElement('option');
                   optionSeleccionar.value = ""; // Asignar un valor vacío o el que corresponda
                   optionSeleccionar.textContent = "-Seleccionar menú-"; // Texto a mostrar en la opción predeterminada
                   selectMenu.appendChild(optionSeleccionar);
-            
                   // Variable para verificar si el menú del evento está en la lista de menu disponibles
                   var menuEncontrado = false;
-              
                   // Crear una opción para cada menú en la lista de menu disponibles
                   menu.forEach(function(comida) {
                     var option = document.createElement('option');
                     option.value = comida.ID; // Asignar el valor del ID del menú (puedes usar otro campo si lo prefieres)
                     option.textContent = comida.NOMBRE; // Asignar el nombre del menú
                     selectMenu.appendChild(option);
-              
                     // Verificar si el nombre del menú del evento coincide con el menú actual en el bucle
                     if (comida.NOMBRE === detallesEvento.COMIDA) {
                       // Si se encuentra el menú del evento, seleccionarlo en el select y marcarlo como encontrado
@@ -418,7 +410,6 @@ function updateModalContent(formType, idEmpleado, idEvento) {
                       menuEncontrado = true;
                     }
                   });
-              
                   // Si el menú del evento no está en la lista de menu disponibles, agregar un mensaje de error
                   if (!menuEncontrado) {
                     console.error("El menú del evento no se encuentra en la lista de menu disponibles:", detallesEvento.COMIDA);
@@ -428,7 +419,6 @@ function updateModalContent(formType, idEmpleado, idEvento) {
                 }
               }
             };
-      
             xhrComida.open("GET", "../viewsEventos/obtenerComida.php", true);
             xhrComida.send();
 
@@ -480,56 +470,7 @@ function updateModalContent(formType, idEmpleado, idEvento) {
                 ]
               });
             });
-                
-            // Agregar eventos de clic a los botones
-            var btnModificar = document.getElementById('btnModificar');
-            btnModificar.addEventListener('click', function() {
-              var inputs = modalForm.querySelectorAll('input, select');
-              for (var i = 0; i < inputs.length; i++) {
-                inputs[i].removeAttribute('disabled');
-              }
-                  
-              btnModificar.style.display = "none";
-              btnModificarGuardar.style.display = "";
-            });
-                
-            btnModificarGuardar.addEventListener('click', function() {
-              // Obtener los valores editados de los campos del formulario
-              var fecha = document.getElementById('fechaEvento').value;
-              var invitados = document.getElementById('invitados').value;
-              var salon = document.getElementById('salon').value;
-              var comida = document.getElementById('comida').value;
-                   
-              // Realizar la solicitud AJAX para guardar los cambios en la base de datos
-              var xhrGuardarCambios = new XMLHttpRequest();
-              xhrGuardarCambios.onreadystatechange = function() {                    
-                if (xhrGuardarCambios.readyState === XMLHttpRequest.DONE) {
-                  if (xhrGuardarCambios.status === 200) {
-                    /// Parsear la respuesta JSON para verificar si hubo un error en el servidor
-                    var response = JSON.parse(xhrGuardarCambios.responseText);
-                    if (response.success) {
-                      // Actualizar el contenido del formulario del modal con un mensaje de éxito
-                      formContent += `<br><div class="alert alert-success" role="alert" align='center'>
-                        Evento modificado exitosamente</div>`;
-                      setTimeout(() => {
-                        updateModalContent(formType, idEmpleado, idEvento);
-                      }, 1000); // Actualizar el modal después de 2000 milisegundos (2 segundos)
-                      actualizarTablaEventos();
-                      modalForm.innerHTML = formContent;
-                    } else {
-                      console.error("Error en el servidor:", response.message);
-                    }
-                  } else {
-                    console.error("Error AJAX al guardar cambios en el evento. Código de estado:", xhrGuardarCambios.status);
-                  }
-                }
-              };
-              // Hacer la solicitud al script PHP "editarEvento.php" y pasar los datos editados
-              var urlEditarEvento = `../viewsEventos/editarDetalles.php?id=${idEvento}&F_EVENTO=${fecha}&INVITADOS=${invitados}&SALON=${salon}&COMIDA=${comida}`;
-              xhrGuardarCambios.open("GET", urlEditarEvento, true);
-              xhrGuardarCambios.send();
-            });
-
+            
             var btnCancelarEvento = document.getElementById('btnCancelarEvento');
             btnCancelarEvento.addEventListener('click', function() {
               // Mostrar el modal de confirmación
@@ -547,7 +488,6 @@ function updateModalContent(formType, idEmpleado, idEvento) {
                       setTimeout(() => {
                         updateModalContent(formType, idEmpleado, idEvento);
                       }, 500); // Actualizar el modal después de 2000 milisegundos (2 segundos)  
-                      actualizarTablaEventos();  
                       modalForm.innerHTML = formContent;
                     } else {
                       console.error("Error AJAX para cancelar el evento");
@@ -572,26 +512,9 @@ function updateModalContent(formType, idEmpleado, idEvento) {
       xhrDetalles.open("GET", "../viewsEventos/verDetalles.php?id=" + idEvento, true);
       xhrDetalles.send();
 
-      function actualizarTablaEventos() {
-        var xhr = new XMLHttpRequest();
-        xhr.onreadystatechange = function() {
-          if (xhr.readyState === XMLHttpRequest.DONE) {
-            if (xhr.status === 200) {
-              // Parsear la respuesta JSON con los datos actualizados
-              var eventosActualizados = JSON.parse(xhr.responseText);
-              // Llamar a una función para actualizar la tabla con los nuevos datos
-              actualizarTabla(eventosActualizados);
-            } else {
-              console.error("Error en la solicitud AJAX para obtener eventos");
-            }
-          }
-        };
       
-        // Hacer la solicitud al script PHP que devuelve los datos actualizados de la tabla de eventos
-        xhr.open("GET", "../viewsEventos/verEventos.php", true);
-        xhr.send();
-      }
     break;
+
   }
 }
 
