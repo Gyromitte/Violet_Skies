@@ -495,6 +495,7 @@ function updateModalContent(formType, idEmpleado, idEvento) {
                       setTimeout(() => {
                         updateModalContent(formType, idEmpleado, idEvento);
                       }, 1000); // Actualizar el modal después de 2000 milisegundos (2 segundos)
+                      filtrarEventos();
                       modalForm.innerHTML = formContent;
                     } else {
                       console.error("Error en el servidor:", response.message);
@@ -538,6 +539,7 @@ function updateModalContent(formType, idEmpleado, idEvento) {
                       setTimeout(() => {
                         updateModalContent(formType, idEmpleado, idEvento);
                       }, 500); // Actualizar el modal después de 2000 milisegundos (2 segundos)  
+                      filtrarEventos();
                       modalForm.innerHTML = formContent;
                     } else {
                       console.error("Error AJAX para cancelar el evento");
