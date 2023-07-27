@@ -161,7 +161,7 @@ function updateModalContent(formType, idEmpleado, idEvento) {
         }, 500); // 0.5 segundos, si la funcion se ejecuta muy rapido no reflejara los cambios
       });
       break;
-      case "@eliminarEmpleado":
+    case "@eliminarEmpleado":
         modalTitle.textContent = "Eliminar a un Empleado";
         modalHeader.classList.add('modal-header-warning');
         // Obtener los datos del empleado con una solicitud AJAX
@@ -290,7 +290,7 @@ function updateModalContent(formType, idEmpleado, idEvento) {
       //Ver cual es la tabla activa para refrescar cualquier cambio
       checkCurrentTable(currentTable);
       break;
-      case "@editarPerfil":
+    case "@editarPerfil":
         console.log("hola");
         modalTitle.textContent ="Editar Datos"
         formContent=`<form id="formularioEditarDatos" method="post" action="pruebaComprobación.php">
@@ -326,7 +326,7 @@ function updateModalContent(formType, idEmpleado, idEvento) {
         checkCurrentTable(currentTable);
         break;
 
-        case "@verDetallesEvento":
+    case "@verDetallesEvento":
         modalTitle.textContent = "Detalles del Evento";
         // Realizar una solicitud AJAX para obtener los detalles del evento
         var xhrDetalles = new XMLHttpRequest();
@@ -451,8 +451,8 @@ function updateModalContent(formType, idEmpleado, idEvento) {
                 </table>
                 <br>
                 <div align="center">
-                  <button type="button" class="btn btn-primary" id="btnModificar">Modificar Detalles</button>
-                  <button type="button" class="btn btn-primary" id="btnModificarGuardar" style="display: none;">Guardar</button>
+                  <button type="button" class="btn btn-primary" id="btnModify">Modificar Detalles</button>
+                  <button type="button" class="btn btn-primary" id="btnGuardar" style="display: none;">Guardar</button>
                   <button type="button" class="btn btn-danger" id="btnCancelarEvento">Cancelar Evento</button>
                 </div>
               </form>
@@ -471,6 +471,57 @@ function updateModalContent(formType, idEmpleado, idEvento) {
               });
             });
             
+            var btnModificarGuardar = document.getElementById('btnGuardar');
+            btnModificarGuardar.addEventListener('click', function() {
+              // Obtener los valores editados de los campos del formulario
+              var fecha = document.getElementById('fechaEvento').value;
+              var invitados = document.getElementById('invitados').value;
+              var salon = document.getElementById('salon').value;
+              var comida = document.getElementById('comida').value;
+                   
+              // Realizar la solicitud AJAX para guardar los cambios en la base de datos
+              var xhrGuardarCambios = new XMLHttpRequest();
+              xhrGuardarCambios.onreadystatechange = function() {                    
+                if (xhrGuardarCambios.readyState === XMLHttpRequest.DONE) {
+                  if (xhrGuardarCambios.status === 200) {
+                    /// Parsear la respuesta JSON para verificar si hubo un error en el servidor
+                    var response = JSON.parse(xhrGuardarCambios.responseText);
+                    if (response.success) {
+                      // Actualizar el contenido del formulario del modal con un mensaje de éxito
+                      formContent += `<br><div class="alert alert-success" role="alert" align='center'>
+                        Evento modificado exitosamente</div>`;
+                      setTimeout(() => {
+                        updateModalContent(formType, idEmpleado, idEvento);
+                      }, 1000); // Actualizar el modal después de 2000 milisegundos (2 segundos)
+                      modalForm.innerHTML = formContent;
+                    } else {
+                      console.error("Error en el servidor:", response.message);
+                    }
+                  } else {
+                    console.error("Error AJAX al guardar cambios en el evento. Código de estado:", xhrGuardarCambios.status);
+                  }
+                }
+              };
+              // Hacer la solicitud al script PHP "editarEvento.php" y pasar los datos editados
+              var urlEditarEvento = `../viewsEventos/editarDetalles.php?id=${idEvento}&F_EVENTO=${fecha}&INVITADOS=${invitados}&SALON=${salon}&COMIDA=${comida}`;
+              xhrGuardarCambios.open("GET", urlEditarEvento, true);
+              xhrGuardarCambios.send();
+            });
+
+            var btnModificar = document.getElementById('btnModify');
+            btnModificar.addEventListener('click', function() {
+              var inputs = modalForm.querySelectorAll('input, select');
+              for (var i = 0; i < inputs.length; i++) {
+                inputs[i].removeAttribute('disabled');
+              }
+                  
+              btnModificar.style.display = "none";
+              btnModificarGuardar.style.display = "";
+            });
+
+
+
+
             var btnCancelarEvento = document.getElementById('btnCancelarEvento');
             btnCancelarEvento.addEventListener('click', function() {
               // Mostrar el modal de confirmación
