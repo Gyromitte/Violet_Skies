@@ -68,7 +68,7 @@ modal.addEventListener("show.bs.modal", function (event) {
     switch (formType) {
       case "@ponerte":
         modalTitle.textContent = "Trabajar en este evento?";
-        modalHeader.classList.add('modal-header-warning');
+        modalHeader.classList.add('modal-header');
         // Obtener los datos del empleado con una solicitud AJAX
         var xhr = new XMLHttpRequest();
         xhr.onreadystatechange = function () {
@@ -78,37 +78,55 @@ modal.addEventListener("show.bs.modal", function (event) {
               var empleado = JSON.parse(xhr.responseText);
               // Actualizar el contenido del formulario con los datos obtenidos
               formContent = `
-                  <form onsubmit="return eliminarEmpleado(${idEmpleado})">
+                  <form id="enterEvent">
                     <div id="mensajeDiv" method="POST"></div> 
-                    <h5>Empleado: </h5>
-                    <h6 class="mb-3">${empleado.NOMBRE} ${empleado.AP_PATERNO} ${empleado.AP_MATERNO}</h6>
-                    <h5>Telefono: </h5>
-                    <h6 class="mb-3">${empleado.TELEFONO}</h6>
-                    <h5>Correo: </h5>
-                    <h6 class="mb-3">${empleado.CORREO}</h6>
-                    <h5>RFC: </h5>
-                    <h6 class="mb-3">${empleado.RFC}</h6>
-                    <h5>Tipo: </h5>
-                    <h6 class="mb-3">${empleado.TIPO}</h6>
-                    <h4><strong>¿Seguro de que quieres eliminar este empleado?</strong></h4>
                     <div class="d-flex justify-content-center">
-                      <button type="submit" class="btn btn-primary btn-modal-warning me-2"><i class="fa-solid fa-user-slash me-2" style="color: #ffffff;"></i>Eliminar</button>
-                      <button type="button" class="btn btn-primary btn-modal" data-bs-dismiss="modal">Cancelar</button>
+                      <button type="submit" class="btn btn-primary btn-modal-warning me-2">
+                        <i class="fa-solid fa-user-slash me-2" style="color: #ffffff;">
+                          Asistir
+                        </i>
+                      </button>
+                    </div>
                     </div>
                   </form>
                 `;
               // Asignar el contenido al formulario del modal
               modalForm.innerHTML = formContent;
-            } else {
-              console.error("Error en la solicitud AJAX");
-            }
+
+              //Obtener el formulario después de haberlo asignado al DOM
+              form = document.querySelector('#enterEvent');
+
+              //Agregar evento de envio al formulario
+              form.addEventListener('submit', function (event) {
+                event.preventDefault(); //Para que la pagina no de refresh al dar submit
+
+                //Solicitud AJAX
+                var xhr = new XMLHttpRequest();
+                //Configurar la solicitud
+                xhr.open("POST", "asistirEvento.php", true);
+                xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+                //Obtener los datos del formulario
+                var rfc = form.elements['RFC'].value;
+                var correo = form.elements['CORREO'].value;
+                var tipoUsuario = form.elements['tipoUsuario'].value;
+                //Como se va enviar la solicitud: un string
+                var formData = 'rfc=' + encodeURIComponent(rfc) + '&correo=' + (correo) + '&tipoUsuario=' + encodeURIComponent(tipoUsuario);
+                xhr.onreadystatechange = function () {
+                  if (xhr.readyState === XMLHttpRequest.DONE && xhr.status === 200) {
+                //Manejo de la respuesta:
+                var respuesta = xhr.responseText;
+                document.getElementById('mensajeDiv').innerHTML = respuesta;
+                  }
+                };
+                //Enviar el formulario
+                xhr.send(formData);
+                //Ver cual es la tabla activa para refrescar cualquier cambio
+                console.log(currentTable);
+                setTimeout(function() {
+              checkCurrentTable(currentTable);
+                }, 500); // 0.5 segundos, si la funcion se ejecuta muy rapido no reflejara los cambios
+              });
+            }}}
+            break;
           }
-        };
-        // Hacer la solicitud al script PHP y pasar el ID del empleado
-        xhr.open("GET", "obtenerEmpleado.php?id=" + idEmpleado, true);
-        xhr.send();
-        //Ver cual es la tabla activa para refrescar cualquier cambio
-        checkCurrentTable(currentTable);
-        break;
-    }
   }

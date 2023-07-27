@@ -24,15 +24,13 @@
     <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&display=swap" rel="stylesheet">
     <script src="https://kit.fontawesome.com/b60c246061.js" crossorigin="anonymous"></script>
     <style>
-			.evento{
+			#cuadroEvento{
 				border: 3px solid darkblue;
 				background-color: violet;
 				color: white;
 				padding: 5px; 
 				margin: 5px;
 				float: left;
-				width: 300px;
-				height: 300px;
 			}
 		</style>
     <!--Scripts que necesitan ejecutarse primero-->
@@ -112,6 +110,7 @@
                     <select id="tipoorden" name="orden" class="form-select">;
                         <option value="porcreacion" selected>Recientemente Creadas</option>;
                         <option value="lejanoevento">Eventos Lejanos</option>;
+                        <option value="cercasevento">Eventos Cercanos</option>;
                     </select>
                 </div>
             </form>
