@@ -162,7 +162,7 @@
             try{
                 if($pass!==$confirm){
                     echo"<div class='alert alert-warning'>
-                    <h3>Contrasenas no concuerdan</h3></div>";
+                    Contrasenas no concuerdan</div>";
                 }
                 else{
                     try{

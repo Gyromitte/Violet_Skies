@@ -54,11 +54,11 @@ function updateModalContent(formType) {
                     <input class="form-control" type="password" name="ckpass"
                     placeholder="Comprobar Contraseña" required><br>
                 </div>
+                <div id="mensajeDiv" method="POST"></div>
                 <div class="d-flex justify-content-center">
                     <button class="loginButton" type="submit">Registrarse</button>
                 </div>
             </form>
-            <div id="mensajeDiv" method="POST"></div>
             `;
             modalForm.innerHTML = formContent;
 
@@ -145,11 +145,12 @@ function updateModalContent(formType) {
                     <input class="form-control" type="password" name="ckpass"
                     placeholder="Comprobar Contraseña" required><br>
                 </div>
+                <div id="mensajeDiv" method="POST"></div>
                 <div class="d-flex justify-content-center">
                     <button class="loginButton" type="submit">Registrarse</button>
                 </div>
             </form>
-            <div id="mensajeDiv" method="POST"></div>
+            
             `;
             modalForm.innerHTML = formContent;
     
