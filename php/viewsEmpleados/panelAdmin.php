@@ -95,7 +95,6 @@
             header("Location:../views/login.php");
         } */
     ?>
-
     <nav>
         <div class="nav-menu">
             <button id="nav-button">
@@ -107,6 +106,7 @@
         <h2><span id="fecha"></span></h2>
         <div class="nav-user">
             <?php
+            session_start();
             if (isset($_SESSION["logged_in"])) {
                 if (isset($_SESSION["access"]) == 3) {
                     echo $_SESSION["name"];
@@ -291,7 +291,7 @@
                 PERFIL
                 <i class="fa-solid fa-user" style="color: #ffffff;"></i>
             </h3>
-            <?php include "../viewsPerfil/Perfil.php"?>
+            <?php include "../viewsPerfil/BuscarDatos.php"?>
         </div>
         <div id="configuracion" class="tab-content">
             <p class="test">Yo soy, configuracion.</p>
