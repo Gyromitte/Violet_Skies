@@ -128,7 +128,16 @@
                         $query="SELECT * FROM EMPLEADOS JOIN CUENTAS ON CUENTAS.ID=EMPLEADOS.CUENTA
                         WHERE CUENTAS.ID='$ID'";
                         $consulta=$this->PDO_local->query($query);
-                        while($trabajo=$consulta->fetch(PDO::FETCH_ASSOC)){
+                        $trabajo=$consulta->fetch(PDO::FETCH_ASSOC);
+                        if($trabajo==0){
+                            $_SESSION["access"]=1.5;
+                            echo"<div class=' container'>";
+                            echo"<h1 align='center'>Bienvenido ".$_SESSION["name"]."</h1>";
+                            echo "</div>";
+                            header("refresh:4;../viewsEmpleados/panelEmpleado.php");
+                        }
+                        else{
+                            foreach($trabajo as $emp){
                             $_SESSION["access"]=2;
                             $_SESSION["id"]=$trabajo['ID'];
                             if($trabajo['TIPO']=='MESERO'){
@@ -145,8 +154,10 @@
                                 echo "</div>";
                                 header("refresh:4;../viewsEmpleados/panelEmpleado.php");
                             }
+                            }
                         }
                     }
+
                 }
                 else{
                     echo"<div class='container'>";

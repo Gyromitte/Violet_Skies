@@ -76,7 +76,14 @@
                 echo $_SESSION["name"];
             ?>
             <br>
-            <?php echo $_SESSION["tipo"]; ?><br><br>
+            <?php 
+                if($_SESSION["access"]==1.5){
+                    echo"Ninguno";
+                }
+                else{
+                echo $_SESSION["tipo"]; 
+                }
+            ?><br><br>
             <button data-tab="home" class="dash-button"><i class="fa-solid fa-house" style="color: #ffffff;"></i><br>Home</button>
             <button data-tab="eventos" class="dash-button"><i class="fa-solid fa-calendar-days" style="color: #ffffff;"></i><br>Eventos Disponibles</button>
             <button data-tab="empleados" class="dash-button"><i class="fa-solid fa-briefcase" style="color: #ffffff;"></i><br>Eventos Asistiendo</button>
@@ -95,23 +102,30 @@
                 Eventos Disponibles
                 <i class="fa-solid fa-briefcase" style="color: #ffffff;"></i>
             </h3>
-            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#empModal" data-bs-whatever="@fat" >Open modal for @fat</button>
-            <div class="container">
-            <form id="EmpDisp" action="<?php echo $_SERVER['PHP_SELF']; ?>" method="POST">
+            <?php
+            if($_SESSION["access"]==1.5){
+                echo"<h1>El Administrador aun no confirma tu cuenta</h1>";
+            }
+            else{
+            echo"<button type='button' class='btn btn-primary' data-bs-toggle='modal' data-bs-target='#empModal' data-bs-whatever='@fat' >Open modal for @fat</button>
+            <div class='container'>
+            <form id='EmpDisp' action=".$_SERVER['PHP_SELF']." method='POST'>
                 <br>
-                <div class="btn-group">
-                    <label class="control-label">Orden: </label>
-                    <select id="tipoorden" name="orden" class="form-select">;
-                        <option value="porcreacion" selected>Recientemente Creadas</option>;
-                        <option value="lejanoevento">Eventos Lejanos</option>;
-                        <option value="cercasevento">Eventos Cercanos</option>;
+                <div class='btn-group'>
+                    <label class='control-label'>Orden: </label>
+                    <select id='tipoorden' name='orden' class='form-select'>;
+                        <option value='porcreacion' selected>Recientemente Creadas</option>;
+                        <option value='lejanoevento'>Eventos Lejanos</option>;
+                        <option value='cercasevento'>Eventos Cercanos</option>;
                     </select>
                 </div>
             </form>
             </div>
             <br>
-            <div id="tablaResultados"></div>
-        </div>
+            <div id='tablaResultados'></div>
+        </div>";
+        }
+        ?>
         <div id="empleados" class="tab-content">
             <h3 class="test" style="text-align:center; ">
                 Eventos Asistiendo
