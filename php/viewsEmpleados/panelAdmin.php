@@ -98,7 +98,6 @@
             <img id="company-logo" class="img-fluid" src="/images/company_logo.png" alt="companyLogo" style="height:1.5em; margin-right: 10px;">
             Violet Skies
         </div>
-        <h2><span id="fecha"></span></h2>
         <div class="nav-user">
             <?php
             if (isset($_SESSION["logged_in"])) {
