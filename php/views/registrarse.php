@@ -85,7 +85,7 @@
           <!--Menu for mobiles-->
           <div class="btn-group dropdown drop-mobile" id="nav-button">
               <a href="#" class="btn btn-secondary dropdown-btn-custom" role="button" data-toggle="dropdown" aria-expanded="false">
-              <i class="fa-solid fa-bars" style="color: #ffffff;"></i>
+              <i class="fa-solid fa-bars fa-2x" style="color: #ffffff;"></i>
               </a>
           </div>
           <img id="company-logo" class="img-fluid" src="/images/company_logo.png" alt="companyLogo"
@@ -160,6 +160,7 @@
         <div class="split left" data-bs-toggle="modal" data-bs-target="#Empleado">
             <div class="centered">
                 <br>
+                <br>
                 <h1>Registrate <br>
                     como <br>
                     Empleado!</h1>
@@ -169,6 +170,7 @@
 
         <div class="split right" data-bs-toggle="modal" data-bs-target="#Cliente">
             <div class="centered">
+                <br>
                 <br>
                 <h1>Registrate <br>
                     como <br>
