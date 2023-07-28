@@ -1,3 +1,5 @@
+var datosUsuarioJSON = {};
+var updatePerfilXHR = new XMLHttpRequest();
 document.addEventListener('DOMContentLoaded', function() {
 
 /*Funcionamiento de la dashboard*/
@@ -289,10 +291,10 @@ function updateModalContent(formType, idEmpleado) {
       checkCurrentTable(currentTable);
       break;
       case "@editarPerfil":
-        console.log("hola");
         modalTitle.textContent = "Editar Datos";
         formContent = `
-          <form id="formularioEditarDatos" method="post" action="pruebaComprobación.php">
+          <form id="formularioEditarDatos">
+          <div id="mensajeDiv"></div>
               <div class="form-group">
                   <label for="nombreInput">Nombre:</label>
                   <input type="text" class="form-control" name="nombre" id="nombreInput" required value="${datosUsuario.nombre}">
@@ -317,50 +319,71 @@ function updateModalContent(formType, idEmpleado) {
               <input type="hidden" name="tipo_cuenta" id="tipo_cuentaInput"><br>
               <button type="button" class="btn btn-primary" id="guardarCambios">Guardar Cambios</button>
           </form>`;
-          modalForm.innerHTML = formContent;
-
-          // Vincular el evento de clic al botón "Guardar Cambios"
-          var formEditarDatos = document.getElementById("formularioEditarDatos");
-          var guardarCambiosBtn = document.getElementById("guardarCambios");
-          
-          guardarCambiosBtn.addEventListener("click", function () {
-            // Realizar una nueva solicitud AJAX para actualizar los datos del perfil
+        modalForm.innerHTML = formContent;
+    
+        // Obtener el formulario después de haberlo asignado al DOM
+        var formEditarDatos = document.getElementById("formularioEditarDatos");
+        var guardarCambiosBtn = document.getElementById("guardarCambios");
+    
+        guardarCambiosBtn.addEventListener("click", function () {
             var updatePerfilXHR = new XMLHttpRequest();
+            // Realizar una nueva solicitud AJAX para actualizar los datos del perfil
             updatePerfilXHR.onreadystatechange = function () {
-              if (updatePerfilXHR.readyState === XMLHttpRequest.DONE) {
-                if (updatePerfilXHR.status === 200) {
-                  // Verificar la respuesta en la consola antes de analizarla como JSON
-                  console.log(updatePerfilXHR.responseText);
-                  // Manejo de la respuesta:
-                  try{
-                    var respuesta = JSON.parse(updatePerfilXHR.responseText);
-                    if (respuesta.success) {
-                      // Los datos se actualizaron con éxito
-                      // Puedes mostrar un mensaje de éxito aquí si lo deseas
+                if (updatePerfilXHR.readyState === XMLHttpRequest.DONE) {
+                    if (updatePerfilXHR.status === 200) {
+                        console.log(updatePerfilXHR.responseText); // Agregar esta línea para imprimir la respuesta
+                        try {
+                            var respuesta = JSON.parse(updatePerfilXHR.responseText);
+                            if (respuesta.success) {
+                                // Los datos se actualizaron con éxito
+                                document.getElementById('mensajeDiv').innerHTML = `<div style="text-align:center;"class="alert alert-success">Cambios guardados exitosamente<br>Tienes que volver a iniciar sesión</div>`;
+                                // Actualizar la sesión del usuario con los nuevos datos
+                                datosUsuario = respuesta.usuario;
+                                // Cerrar sesión y redirigir al usuario a la página index.html después de 1.5 segundos
+                                setTimeout(function () {
+                                    // Hacer la solicitud de cierre de sesión
+                                    var logoutXHR = new XMLHttpRequest();
+                                    logoutXHR.onreadystatechange = function () {
+                                        if (logoutXHR.readyState === XMLHttpRequest.DONE) {
+                                            if (logoutXHR.status === 200) {
+                                                // Redirigir al usuario a la página index.html
+                                                window.location.href = "/index.html";
+                                            } else {
+                                                console.error("Error al cerrar sesión");
+                                            }
+                                        }
+                                    };
+                                    logoutXHR.open("GET", "logout.php", true);
+                                    logoutXHR.send();
+                                }, 5000);
+                            } else if (respuesta.error === 'badPass') {
+                                document.getElementById('mensajeDiv').innerHTML = `<div class="alert alert-danger">Contraseña incorrecta</div>`;
+                            } else {
+                                // Hubo un error al actualizar los datos
+                                document.getElementById('mensajeDiv').innerHTML = `<div style="text-align:center;" class="alert alert-danger">Error al actualizar los datos<br>Contraseña incorrecta</div>`;
+                            }
+                        } catch (error) {
+                            // Si la respuesta no es un JSON válido, manejar el error aquí
+                            console.error("Error al analizar la respuesta JSON: " + error.message);
+                        }
                     } else {
-                      // Hubo un error al actualizar los datos
-                      // Puedes mostrar un mensaje de error aquí si lo deseas
+                        console.error("Error en la solicitud AJAX de actualización");
                     }
-                  }
-                  catch (error) {
-                    // Si la respuesta no es un JSON válido, manejar el error aquí
-                    console.error("Error al analizar la respuesta JSON: " + error.message);
-                  }
-                } else {
-                  console.error("Error en la solicitud AJAX de actualización");
                 }
-              }
             };
-        
+    
             // Obtener los valores del formulario
             var formData = new FormData(formEditarDatos);
-            
+            // Agregar el campo tipo_cuenta al objeto formData
+            formData.append('tipo_cuenta', datosUsuario.tipo_cuenta);
+    
             // Configurar la solicitud al script PHP para editar el perfil y pasar los datos actualizados
-            updatePerfilXHR.open("POST", "pruebaComprobación.php", true);
+            updatePerfilXHR.open("POST", "./pruebaComprobación.php", true);
             updatePerfilXHR.send(formData);
-          });
-          console.log(formType);
-          break;
+        });
+        console.log(formType);
+        break;
+      
   }
 }
 
@@ -396,5 +419,7 @@ function eliminarEmpleado(id) {
   // Retornar false para evitar que el formulario se recargue la página
   return false;
 }
+
+
 });
 

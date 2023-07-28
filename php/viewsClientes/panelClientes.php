@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
 <!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
@@ -42,7 +41,7 @@
         "ap_paterno" => $_SESSION["ap_paterno"],
         "ap_materno" => $_SESSION["ap_materno"],
         "telefono" => $_SESSION["telefono"],
-        "correo" => $_SESSION["correo"],
+        "correo" => $_SESSION["correo"]
     );
 
     // Convertir el array de datos del usuario en formato JSON para poder pasarlo a JavaScript
@@ -91,15 +90,14 @@
         <!-- Datos personales del usuario -->
         <div class="container mt-5">
         <div style="display: flex; flex-direction: column;">
-        <h1>Mis Datos Personales</h1>
-            <p><strong>Nombre:</strong> <span id="nombre"><?php echo $_SESSION["name"]; ?></span></p>
+            <h1>Mis Datos Personales</h1>
+            <p><strong>Nombre:</strong> <span id="nombre"><?php echo $_SESSION["name"] ?></span></p>
             <p><strong>Apellido Paterno:</strong> <span id="ap_paterno"><?php echo $_SESSION["ap_paterno"]; ?></span></p>
             <p><strong>Apellido Materno:</strong> <span id="ap_materno"><?php echo $_SESSION["ap_materno"]; ?></span></p>
             <p><strong>Teléfono:</strong> <span id="telefono"><?php echo $_SESSION["telefono"]; ?></span></p>
             <p><strong>Correo:</strong> <span id="correo"><?php echo $_SESSION["correo"]; ?></span></p>
             <p><strong>Tipo de cuenta:</strong> <span id="tipo_cuenta">Cliente</span></p>
             <button class="btn btn-primary" id="editarDatos" data-bs-toggle="modal" data-bs-target="#mainModal" data-bs-whatever="@editarPerfil">Editar Datos</button>
-
         </div>
 
     </div>
@@ -126,6 +124,7 @@
 
 
     <!--Scripts que necesitan ejecutarse hasta el final-->
+    
     <script>
     // Definir una variable global en JavaScript para almacenar los datos del usuario
     var datosUsuario = <?php echo $datosUsuarioJSON; ?>;
@@ -135,5 +134,7 @@
     <script src="/bootstrap/js/bootstrap.bundle.min.js"></script>
     <script src="/js/filtroEventos.js"></script>
     <script src="/js/app.js"></script>
+    <span id="datosUsuarioJSON" style="display: none;"><?php echo $datosUsuarioJSON; ?></span>
+
 </body>
 </html>

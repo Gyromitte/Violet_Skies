@@ -39,22 +39,50 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
             // Ejecuta la consulta
             if ($conn->query($sql) === TRUE) {
-                echo json_encode(['success' => true]);
+                // Actualización exitosa, cerrar la sesión del usuario y redirigirlo a la página de inicio
+                session_unset();
+                $nuevosDatosUsuario = [
+                    'nombre' => $nombre,
+                    'ap_paterno' => $apPaterno,
+                    'ap_materno' => $apMaterno,
+                    'telefono' => $telefono,
+                    'correo' => $correo,
+                    'tipo_cuenta' => $tipoCuenta
+                ];
+                $response = ['success' => true, 'usuario' => $nuevosDatosUsuario];
+                header('Content-Type: application/json');
+                echo json_encode($response);
+                exit();
             } else {
-                echo json_encode(['success' => false, 'error' => 'Error al actualizar los datos: ' . $conn->error]);
+                // Error al actualizar los datos
+                $response = ['success' => false, 'error' => 'Error al actualizar los datos: ' . $conn->error];
+                header('Content-Type: application/json');
+                echo json_encode($response);
+                exit();
             }
         } else {
             // La contraseña es incorrecta, no se puede realizar la actualización
-            echo json_encode(['success' => false, 'error' => 'Contraseña incorrecta']);
+            $response = ['success' => false, 'error' => 'Contraseña incorrecta, no se puede actualizar los datos'];
+            header('Content-Type: application/json');
+            echo json_encode($response);
+            exit();
         }
     } else {
         // No se encontró el usuario con el correo especificado
-        echo json_encode(['success' => false, 'error' => 'No se encontró el usuario']);
+        $response = ['success' => false, 'error' => 'No se encontró el usuario con el correo especificado'];
+        header('Content-Type: application/json');
+        echo json_encode($response);
+        exit();
     }
 
     $conn->close();
+    exit(); // Salir para evitar que se envíe contenido adicional
+
 } else {
     // Si no se ha enviado un formulario POST, devolver un mensaje de error JSON
-    echo json_encode(['success' => false, 'error' => 'No se recibieron datos del formulario']);
+    $response = ['success' => false, 'error' => 'No se recibieron datos del formulario'];
+    header('Content-Type: application/json');
+    echo json_encode($response);
+    exit(); // Salir para evitar que se envíe contenido adicional
 }
 ?>
