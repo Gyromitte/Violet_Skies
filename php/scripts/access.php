@@ -6,24 +6,22 @@
     <link rel="stylesheet" href="../../bootstrap/css/bootstrap.min.css">
     <title>Login</title>
     <style>
-        .redirect div{
+        div{
             background-color: rgb(27, 31, 59);
-            background-blend-mode: overlay;
-            z-index: 9999;
+            height: 100%;
+            width: 100%;
         }
-        .redirect h1{
+        h1{
             text-align: center;
             color:rgb(131, 103, 199);
             animation: anim-glow 2s ease infinite;
             font-size: 70px;
-            z-index: 9999;
         }
-        .redirect h3{
+        h3{
             text-align: center;
             color:rgb(131, 103, 199);
             animation: anim-glow 2s ease infinite;
-            font-size: 70px;
-            z-index: 9999;
+            font-size: 40px;
         }
         @keyframes anim-glow {
 	        0% {
@@ -34,22 +32,23 @@
 		        border-width: 2px;
 	        }
         }
-        .redirect div .container{
-            background-color: rgb(27, 31, 59);
+         div .container{
             height: 100%;
             width: 100%;
             padding-top: 300px;
-            z-index: 9999;
+            padding-bottom: 300px;
         }
     </style>
 </head>
-<body class="redirect">
+<body>
     <div>
         <?php
-            echo"<div class=' container'>";
+            echo"<div class='container'>";
             echo"<h1 align='center'>No tienes acceso a esta pagina</h1><br>";
             echo"<h3 align='center'>Redirigiendo...</h3>";
             echo "</div>";
+        ?>
+        <?php
             header("refresh:4;/index.html");
         ?>
     </div>

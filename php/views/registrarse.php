@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Violet skies - Registrarse</title>
     <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="/css/loginn.css">
     <!--Favi icon-->
     <link rel="icon" type="image/x-icon" href="/images/company_logo.png">
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -61,7 +62,7 @@
         }
         .alert{
             text-align: center;
-            z-index: 99;
+            z-index: 9999;
         }
         .modal{
             position: fixed;
@@ -72,6 +73,7 @@
             overflow-y: scroll;
         }
     </style>
+    <script src="/js/registro.js" async defer></script>
 </head>
 <body>
   
@@ -157,112 +159,36 @@
       
     <!-- Divided page -->
     <div class="container">
-        <div class="split left" data-bs-toggle="modal" data-bs-target="#Empleado">
-            <div class="centered">
-                <br>
-                <br>
-                <h1>Registrate <br>
-                    como <br>
-                    Empleado!</h1>
-                <img src="/images/waiter.jpg" style="height: 400px;">
+        <div class="row">
+            <div class="split left" data-bs-toggle="modal" data-bs-target="#Main" data-bs-whatever=@emp>
+                <div class="centered">
+                    <h1>Registrate como Empleado!</h1>
+                </div>
             </div>
         </div>
 
-        <div class="split right" data-bs-toggle="modal" data-bs-target="#Cliente">
-            <div class="centered">
-                <br>
-                <br>
-                <h1>Registrate <br>
-                    como <br>
-                    Cliente!</h1>
-                <img src="/images/customers.jpg" style="height: 400px;">
+            <div class="split right" data-bs-toggle="modal" data-bs-target="#Main" data-bs-whatever=@cliente>
+                <div class="centered">
+                    <h1>Registrate como Cliente!</h1>
+                </div>
             </div>
         </div>
     </div>
+    <div class="modal" id="Main" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content custom-modal">
+                    <div class="modal-header">
+                            <!--Titulo que tendra el modal-->
+                            <h1 class="modal-title fs-5" id="firstLabe"></h1>
+                            <button type="button" class="btn-close btn-close-custom" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body" id="modal-form">
+                            <!--El contenido del modal cambia dependiendo del boton que lo activo-->
+                    </div>
+                </div>
+            </div>
+        </div>
 
-<!-- Modal de Empleado -->
-<div class="modal fade" id="Empleado" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog fixed-top">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h1 class="modal-title fs-5" id="exampleModalLabel">Registrar como Empleado</h1>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-      <div class="modal-body">
-        <form action="#" method="post">
-            <label class="form-label" name="nom">Nombre(s): </label> 
-            <input class="form-control" type="text" name="nom" placeholder="Nombre"><br><br>
-            <label class="form-label" name="ap">Apellido Paterno: </label> 
-            <input class="form-control" type="text" name="ap" placeholder="Apellido Paterno"><br><br>
-            <label class="form-label" name="am">Apellido Materno: </label> 
-            <input class="form-control" type="text" name="am" placeholder="Apellido Materno"><br><br>
-            <label class="form-label" name="usu">Correo: </label> 
-            <input class="form-control" type="email" name="usu" placeholder="Correo"><br><br>
-            <label class="form-label" name="cel">Numero de Celular: </label> 
-            <input class="form-control" type="text" name="cel" placeholder="Telefono"><br><br>
-            <label class="form-label" name="pass">Contraseña: </label>
-            <input class="form-control" type="password" name="pass" 
-            placeholder="Contraseña" required><br><br>
-            <label class="form-label" name="ckpass">Comprobar Contraseña: </label>
-            <input class="form-control" type="password" name="ckpass"
-             placeholder="Comprobar Contraseña" required`><br><br>
-            <button class="loginButton" type="submit" name="reg">Registrarse</button>
-        </form>
-      </div>
-    </div>
-  </div>
-</div>
-
-<!--Modal de Cliente-->
-<div class="modal fade" id="Cliente" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h1 class="modal-title fs-5" id="exampleModalLabel">Registrar como Cliente</h1>
-        <button type="button" class="btn-close" aria-label="Close"></button>
-      </div>
-      <div class="modal-body">
-        <form action="#" method="post">
-            <label class="form-label" name="nom">Nombre(s): </label> 
-            <input class="form-control" type="text" name="nom" placeholder="Nombre"><br><br>
-            <label class="form-label" name="ap">Apellido Paterno: </label> 
-            <input class="form-control" type="text" name="ap" placeholder="Apellido Paterno"><br><br>
-            <label class="form-label" name="am">Apellido Materno: </label> 
-            <input class="form-control" type="text" name="am" placeholder="Apellido Materno"><br><br>
-            <label class="form-label" name="usu">Correo: </label> 
-            <input class="form-control" type="email" name="usu" placeholder="Correo"><br><br>
-            <label class="form-label" name="cel">Numero de Celular: </label> 
-            <input class="form-control" type="text" name="cel" placeholder="Telefono"><br><br>
-            <label class="form-label" name="pass">Contraseña: </label>
-            <input class="form-control" type="password" name="pass" placeholder="Contraseña"><br><br>
-            <label class="form-label" name="ckpass">Comprobar Contraseña: </label>
-            <input class="form-control" type="password" name="ckpass" placeholder="Comprobar Contraseña"><br><br>
-            <button class="loginButton" type="submit" name="regc">Iniciar Sesion</button>   
-        </form>
-      </div>
-    </div>
-  </div>
-</div>
-   <?php
-      if ($_SERVER['REQUEST_METHOD'] === 'POST'){
-      include '../dataBase.php';
-      extract($_POST);
-      $db=new Database();
-      $db->conectarBD();
-      if(isset($_POST['reg'])){
-        $tipo="EMPLEADO";  
-        $db->Register($nom,$ap,$am,$usu,$pass,$ckpass,$cel,$tipo);
-      }
-       else if(isset($_POST['regc'])){
-          $tipo="CLIENTE";  
-          $db->Register($nom,$ap,$am,$usu,$pass,$ckpass,$cel,$tipo);
-          exit;
-        }
-      $db->desconectarBD();
-      }
-   ?>
-
-    <script src="/js/filtroEventos.js"></script>
     <script src="https://kit.fontawesome.com/b60c246061.js" crossorigin="anonymous"></script>
     <script src="/bootstrap/js/bootstrap.min.js"></script>
     <script src="/js/navbarMovil.js"></script>

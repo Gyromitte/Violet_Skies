@@ -26,42 +26,6 @@
     <script src="https://kit.fontawesome.com/b60c246061.js" crossorigin="anonymous"></script>
     <!--Chart.js-->
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <!--Scripts que necesitan ejecutarse primero-->
-    
-    <!--<style>
-        .redirect div{
-            background-color: rgb(27, 31, 59);
-            background-blend-mode: overlay;
-        }
-        .redirect h1{
-            text-align: center;
-            color:rgb(131, 103, 199);
-            animation: anim-glow 2s ease infinite;
-            font-size: 70px;
-        }
-        .redirect h3{
-            text-align: center;
-            color:rgb(131, 103, 199);
-            animation: anim-glow 2s ease infinite;
-            font-size: 40px;
-        }
-        @keyframes anim-glow {
-	        0% {
-		        box-shadow: 0 0 rgba(188, 44, 201, 1);
-	        }
-	        100% {
-		        box-shadow: 0 0 10px 8px transparent;
-		        border-width: 2px;
-	        }
-        }
-        .redirect div .container{
-            background-color: rgb(27, 31, 59);
-            height: 100%;
-            width: 100%;
-            padding-top: 300px;
-        }
-    </style>
-    -->
 </head>
 
 <body>
@@ -70,24 +34,18 @@
         <![endif]-->
     <!--NavBar-->
     <?php
-    /*session_start();
+        session_start();
         if(isset($_SESSION["logged_in"])){
-            if(isset($_SESSION["access"])==2){
-                echo "<div class='redirect'>";
-                echo"<div class=' container'>";
-                echo"<h1 align='center'>No tienes acceso a esta pagina</h1><br>";
-                echo"<h3 align='center'>Redirigiendo...</h3>";
-                echo "</div>";
-                echo "</div>";
-                header("refresh:4;/index.html");
+            if($_SESSION["access"]===2){
+                header("Location:../scripts/access.php");
             }
-            else if(isset($_SESSION["access"])==1){
-                include'../scripts/access.php';
+            else if($_SESSION["access"]===1){
+                header("Location:../scripts/access.php");
             }
         }
         else if(!isset($_SESSION["logged_in"])){
             header("Location:../views/login.php");
-        } */
+        }
     ?>
 
     <nav>
@@ -100,13 +58,7 @@
         </div>
         <div class="nav-user">
             <?php
-            if (isset($_SESSION["logged_in"])) {
-                if (isset($_SESSION["access"]) == 3) {
-                    echo $_SESSION["name"];
-                }
-            } else {
-                echo "Username";
-            }
+                echo $_SESSION["name"];
             ?>
         </div>
     </nav>
@@ -114,14 +66,10 @@
     <div id="dash-board">
         <div id="dash-board-content">
             <?php
-            if (isset($_SESSION["logged_in"])) {
-                if (isset($_SESSION["access"]) == 3) {
-                    echo $_SESSION["name"];
-                }
-            } else {
-                echo "Username";
-            }
+                echo $_SESSION["name"];
             ?>
+            <br>
+            Admin<br><br>
             <button data-tab="home" class="dash-button"><i class="fa-solid fa-house" style="color: #ffffff;"></i><br>Home</button>
             <button data-tab="eventos" class="dash-button"><i class="fa-solid fa-calendar-days" style="color: #ffffff;"></i><br>Eventos</button>
             <button data-tab="empleados" class="dash-button"><i class="fa-solid fa-briefcase" style="color: #ffffff;"></i><br>Empleados</button>
@@ -255,9 +203,7 @@
             </h3>
             <?php include "../viewsPerfil/verPerfil.php" ?>
         </div>
-        <div id="configuracion" class="tab-content">
-            <p class="test">Yo soy, configuracion.</p>
-        </div>
+
         <!--Modal-->
         <div class="modal fade" id="mainModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div class="modal-dialog">
