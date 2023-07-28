@@ -10,7 +10,9 @@ $resultadoClientes = $conexion->seleccionar($consultaClientes);
 $countClientes = $resultadoClientes[0]->count_clientes;
 
 /* Consulta para contar a todos los empleados */
-$consultaEmpleados = "SELECT COUNT(*) AS count_empleados FROM EMPLEADOS E";
+$consultaEmpleados = "SELECT COUNT(*) AS count_empleados FROM EMPLEADOS E
+INNER JOIN CUENTAS C ON E.CUENTA = C.ID
+WHERE C.ESTADO = 'ACTIVO'";
 $resultadoEmpleados = $conexion->seleccionar($consultaEmpleados);
 $countEmpleados = $resultadoEmpleados[0]->count_empleados;
 
