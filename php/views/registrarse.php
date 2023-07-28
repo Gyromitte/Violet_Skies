@@ -70,7 +70,7 @@
             overflow-y: scroll;
         }
     </style>
-    <script src="/js/panelAdmin.js" async defer></script>
+    <script src="/js/registro.js" async defer></script>
 </head>
 <body>
   
@@ -128,21 +128,35 @@
     <!--Divided page-->
     <div class="container">
         <div class="row">
-            <div class="split left" data-bs-toggle="modal" data-bs-target="#Empleado" data-bs-whatever=@emp>
+            <div class="split left" data-bs-toggle="modal" data-bs-target="#Main" data-bs-whatever=@emp>
                 <div class="centered">
                     <h1>Registrate como Empleado!</h1>
                 </div>
             </div>
 
-            <div class="split right" data-bs-toggle="modal" data-bs-target="#Cliente">
+            <div class="split right" data-bs-toggle="modal" data-bs-target="#Main" data-bs-whatever=@cliente>
                 <div class="centered">
                     <h1>Registrate como Cliente!</h1>
                 </div>
             </div>
         </div>
     </div>
+    <div class="modal fade" id="Main" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content custom-modal">
+                    <div class="modal-header">
+                            <!--Titulo que tendra el modal-->
+                            <h1 class="modal-title fs-5" id="firstLabe"></h1>
+                            <button type="button" class="btn-close btn-close-custom" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body" id="modal-form">
+                            <!--El contenido del modal cambia dependiendo del boton que lo activo-->
+                    </div>
+                </div>
+            </div>
+        </div>
 
-    
+
 <!-- Modal de Empleado -->
 <div class="modal fade" id="Empleado" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true"
 data-bs-backdrop="static">
@@ -270,6 +284,7 @@ data-bs-backdrop="static">
     });
 </script>
     
+    <script src="/js/registro.js"></script>
     <script src="https://kit.fontawesome.com/b60c246061.js" crossorigin="anonymous"></script>
     <script src="/bootstrap/js/bootstrap.min.js"></script>
 </body>

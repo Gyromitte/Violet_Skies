@@ -11,7 +11,7 @@
     $ckpass = $_POST['ckpass'];
     $cel = $_POST['cel'];
     $tipo = $_POST['tipo'];
-    $tipo="EMPLEADO";
+    $tipo="CLIENTE";
 
     if($pass!==$confirm){
         echo"<div class='alert alert-warning'>
