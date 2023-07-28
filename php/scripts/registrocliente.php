@@ -1,4 +1,7 @@
 <?php
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
     include '../dataBase.php';
     extract($_POST);
     $db=new Database();
@@ -12,22 +15,6 @@
     $cel = $_POST['cel'];
     $tipo="CLIENTE";
 
-    if($pass!==$confirm){
-        echo"<div class='alert alert-warning'>
-        <h3>Contrasenas no concuerdan</h3></div>";
-    }
-    else{
-        try{
-        $hash=password_hash($pass,PASSWORD_DEFAULT);
-        $cadena="INSERT INTO CUENTAS(NOMBRE, AP_PATERNO,AP_MATERNO, CORREO, CONTRASEÑA, 
-        TELEFONO,TIPO_CUENTA) VALUES('$nom','$ap','$am','$usu','$hash','$cel','$tipo')";
-        $db->ejecutarSQL($cadena);
-        echo"<div class='alert alert-success'>Usuario Registrado</div>";
-        header("refresh:3;/php/views/login.php");
-        }
-        catch(PDOException $e){
-            echo"<div class='alert alert-danger'>".$e->getMessage()."</div>";
-        }
-    }
+    $db->Register($nom,$ap,$am,$usu,$pass,$confirm,$cel,$tipo);
     $db->desconectarBD();
 ?>

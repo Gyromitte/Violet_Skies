@@ -177,9 +177,13 @@ function updateModalContent(formType) {
                 '&ckpass=' + encodeURIComponent(ckpass);
                 xhr.onreadystatechange = function () {
                 if (xhr.readyState === XMLHttpRequest.DONE && xhr.status === 200) {
-                    //Manejo de la respuesta:
                     var respuesta = xhr.responseText;
                     document.getElementById('mensajeDiv').innerHTML = respuesta;
+                    if(respuesta==="<div class='alert alert-success'>Usuario Registrado</div>"){
+                        setTimeout(function () {
+                            window.location.href = "../views/login.php";
+                          }, 3000);
+                    }
                 }
             };
             

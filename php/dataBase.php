@@ -163,7 +163,6 @@
                 if($pass!==$confirm){
                     echo"<div class='alert alert-warning'>
                     <h3>Contrasenas no concuerdan</h3></div>";
-                    header("refresh:2;../views/registrarse.php");
                 }
                 else{
                     try{
@@ -172,8 +171,6 @@
                     TELEFONO,TIPO_CUENTA) VALUES('$nom','$ap','$am','$usu','$hash','$cel','$tipo')";
                     $this->PDO_local->query($cadena);
                     echo"<div class='alert alert-success'>Usuario Registrado</div>";
-                    header("refresh:3;../views/login.php");
-                    exit;
                     }
                     catch(PDOException $e){
                         $errorMessage = $e->getMessage();
