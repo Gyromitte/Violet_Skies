@@ -10,15 +10,14 @@ function toggleDashboard() {
 }
 // Asignar evento de clic al botón
 toggleDashboardBtn.addEventListener('click', toggleDashboard);
-
-/*Fecha*/
-var currentDate = new Date();
-var day = currentDate.getDate();
-var month = currentDate.getMonth() + 1; // Los meses en JavaScript comienzan desde 0
-var year = currentDate.getFullYear();
-// Construir la cadena de la fecha (DD/MM/YYYY)
-var formatDate = day + ' / ' + month + ' / ' + year;
-document.getElementById('fecha').innerHTML = formatDate;
+document.addEventListener('click', function (event) {
+  const targetElement = event.target;
+  if (!targetElement.closest('#dash-board') && !targetElement.closest('#nav-button')) {
+    // Si el clic no es dentro del dashboard ni en el botón de la navbar, cerrar el dashboard
+    dashboard.classList.remove('dashboard-open');
+    main.classList.remove('main-dash-open');
+  }
+});
 
 /*Main content*/
 // Obtener las pestañas y el contenido 

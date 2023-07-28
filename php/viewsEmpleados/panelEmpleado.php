@@ -63,11 +63,8 @@
             <img id="company-logo" class="img-fluid" src="/images/company_logo.png" alt="companyLogo" style="height:1.5em; margin-right: 10px;">
             Violet Skies
         </div>
-        <h2><span id="fecha"></span></h2>
         <div class="nav-user">
-            <i class="fa-solid fa-bell" style="color: #ffffff;"></i>
-            <div id="nav-photo-user"></div>
-            <?php 
+            <?php
                 echo $_SESSION["name"];
             ?>
         </div>
@@ -75,20 +72,17 @@
     <!--DashBoard-->
     <div id="dash-board">
         <div id="dash-board-content">
-            <div id="dash-photo-user"></div>
             <?php
                 echo $_SESSION["name"];
             ?>
             <br>
-            <?php
-                echo $_SESSION["tipo"];
-            ?>
-            <br><br>
+            <?php echo $_SESSION["tipo"]; ?><br><br>
             <button data-tab="home" class="dash-button"><i class="fa-solid fa-house" style="color: #ffffff;"></i><br>Home</button>
             <button data-tab="eventos" class="dash-button"><i class="fa-solid fa-calendar-days" style="color: #ffffff;"></i><br>Eventos Disponibles</button>
-            <button data-tab="empleados" class="dash-button"><i class="fa-solid fa-calendar-days" style="color: #ffffff;"></i><br>Eventos Asistiendo</button>
+            <button data-tab="empleados" class="dash-button"><i class="fa-solid fa-briefcase" style="color: #ffffff;"></i><br>Eventos Asistiendo</button>
             <button data-tab="perfil" class="dash-button"><i class="fa-solid fa-user" style="color: #ffffff;"></i><br>Perfil</button>
-            <a href="../scripts/CerrarSesion.php"><button data-tab="logout" class="dash-button"><i class="fa-solid fa-gear" style="color: #ffffff;"></i><br>Logout</button></a>
+            <a style="text-decoration: none;" data-tab="logout" class="dash-button" href="../scripts/CerrarSesion.php">
+                <i class="fa-solid fa-door-open" style="color: #ffffff; padding-top: 10px;"></i><br>Logout</a>
         </div>
     </div>
     <!--Main Content-->
