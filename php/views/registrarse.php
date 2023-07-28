@@ -49,14 +49,14 @@
             cursor:pointer;
             color: white;
             text-shadow: 2px rgba(227, 122, 57,0.5);
-            background-color: rgba(252, 58, 192, 0.8);
+            font-style: italic;
             background-blend-mode: overlay;
         }
         .right:hover{
             cursor:pointer;
             color: white;
             text-shadow: 2px rgba(210, 65, 250,0.5);
-            background-color: rgba(147, 6, 186, 0.8);
+            font-style: italic;
             background-blend-mode: overlay;
         }
         .alert{
@@ -77,57 +77,105 @@
   
    <!-- Desktop Navbar -->
    <div class=" desktop-nav fixed-top">
-   <nav class="navbar navbar-default row">
-            <div class="companySection col-sm-auto">
-                <!--Company Logo-->
-                <div class="navbar-header">
-                    <img id="company-logo" class="img-fluid" src="/images/company_logo.png" alt="companyLogo" onclick="this.classList.toggle('clicked')">
-                        <a class="no-underline" href="/index.html" id="company-name">Violet Skies</a>
-                </div>      
-                <!--Tabs-->
-                <ul class="nav list-inline">
-                    <li class="mr-3 tabs">
-                        <a class="no-underline" href="/html/about-us/about us.html">Nosotros</a>
-                    </li>
-                    <li class="mr-3 tabs">
-                        <a class="no-underline" href="/html/agendarEvento.html">Agendar Evento</a>
-                    </li>
-                    <li class="mr-3 tabs">
-                        <a class="no-underline" href="/html/trabajo.html">Trabajo</a>
-                    </li>
-                </ul>
-            </div>         
-            <!--Login-section-->
-            <div class="login-section col-sm-auto" >
-                <a class="no-underline" href="/php/views/login.php"><button class="loginButton">
-                    <i class="fa-solid fa-door-open" style="color: #ffffff;"></i>
-                    Acceder  
-                </button>
-                </a>
-                <a class="no-underline" href="/php/views/registrarse.php"><button class="loginButton">
-                    <i class="fa-solid fa-user" style="color: #ffffff;"></i>
-                    Registrarse
-                </button>
-                </a>
-            </div>
-        </nav>
+        <!-- Navbar -->
+<nav class="navbar navbar-default row">
+  <div class="companySection col-sm-auto">
+      <!--Company Logo-->
+      <div class="navbar-header">
+          <!--Menu for mobiles-->
+          <div class="btn-group dropdown drop-mobile" id="nav-button">
+              <a href="#" class="btn btn-secondary dropdown-btn-custom" role="button" data-toggle="dropdown" aria-expanded="false">
+              <i class="fa-solid fa-bars fa-2x" style="color: #ffffff;"></i>
+              </a>
+          </div>
+          <img id="company-logo" class="img-fluid" src="/images/company_logo.png" alt="companyLogo"
+              onclick="this.classList.toggle('clicked')">
+          <a class="no-underline" href="/index.html" id="company-name">Violet Skies</a>
+      </div>
+      <!--Tabs-->
+      <ul class="nav list-inline">
+          <li class="mr-3 tabs">
+              <a class="no-underline" href="/html/about-us/about us.html">Nosotros</a>
+          </li>
+          <li class="mr-3 tabs">
+              <a class="no-underline" href="/html/agendarEvento.html">Agendar Evento</a>
+          </li>
+          <li class="mr-3 tabs">
+              <a class="no-underline" href="/html/trabajo.html">Trabajo</a>
+          </li>
+      </ul>
+  </div>
+  <!--Login-section-->
+  <div class="login-section col-sm-auto">
+      <a class="no-underline" href="/php/views/login.php">
+          <button class="loginButton">
+              <i class="fa-solid fa-door-open" style="color: #ffffff;"></i>
+              Acceder
+          </button>
+      </a>
+      <a class="no-underline" href="/php/views/registrarse.php">
+          <button class="loginButton">
+              <i class="fa-solid fa-user" style="color: #ffffff;"></i>
+              Registrarse
+          </button>
+      </a>
+  </div>
+</nav>
+
+<!--DashBoard-->
+<div id="dash-board" class="d-flex flex-column">
+  <div id="dash-board-content">
+      <ul>
+          <li class="mr-3 tabs mb-4">
+              <i class="fa-solid fa-users" style="color: #ffffff;"></i>
+              <a class="no-underline" href="/html/about-us/about us.html">Nosotros</a>
+          </li>
+          <li class="mr-3 tabs mb-4">
+              <i class="fa-solid fa-calendar-days" style="color: #ffffff;"></i>
+              <a class="no-underline" href="/html/agendarEvento.html">Agendar Evento</a>
+          </li>
+          <li class="mr-3 tabs mb-4">
+              <i class="fa-solid fa-briefcase" style="color: #ffffff;"></i>
+              <a class="no-underline" href="/html/trabajo.html">Trabajo</a>
+          </li>
+          <li class="mr-3 tabs mb-4">
+              <a class="no-underline mb-4" href="/php/views/login.php">
+                  <i class="fa-solid fa-door-open" style="color: #ffffff;"></i>
+                  Acceder
+              </a>
+          </li>
+          <li class="mr-3 tabs mb-4">
+              <a class="no-underline mb-4" href="/php/views/registrarse.php">
+                  <i class="fa-solid fa-user" style="color: #ffffff;"></i>
+                  Registrarse
+              </a>
+          </li>
+      </ul>
+  </div>
+</div>
    </div>
       
-    <!--Divided page-->
+    <!-- Divided page -->
     <div class="container">
-        <div class="row">
-            <div class="split left" data-bs-toggle="modal" data-bs-target="#Empleado">
-                <div class="centered">
-                    <h1>Registrate como Empleado!</h1>
-                    <img src="/images/waiter.jpg" style="height: 400px;">
-                </div>
+        <div class="split left" data-bs-toggle="modal" data-bs-target="#Empleado">
+            <div class="centered">
+                <br>
+                <br>
+                <h1>Registrate <br>
+                    como <br>
+                    Empleado!</h1>
+                <img src="/images/waiter.jpg" style="height: 400px;">
             </div>
+        </div>
 
-            <div class="split right" data-bs-toggle="modal" data-bs-target="#Cliente">
-                <div class="centered">
-                    <h1>Registrate como Cliente!</h1>
-                    <img src="/images/customers.jpg" style="height: 400px;">
-                </div>
+        <div class="split right" data-bs-toggle="modal" data-bs-target="#Cliente">
+            <div class="centered">
+                <br>
+                <br>
+                <h1>Registrate <br>
+                    como <br>
+                    Cliente!</h1>
+                <img src="/images/customers.jpg" style="height: 400px;">
             </div>
         </div>
     </div>
@@ -213,9 +261,10 @@
       $db->desconectarBD();
       }
    ?>
-    
+
     <script src="/js/filtroEventos.js"></script>
     <script src="https://kit.fontawesome.com/b60c246061.js" crossorigin="anonymous"></script>
     <script src="/bootstrap/js/bootstrap.min.js"></script>
+    <script src="/js/navbarMovil.js"></script>
 </body>
 </html>
