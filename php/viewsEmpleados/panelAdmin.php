@@ -291,7 +291,7 @@
                 PERFIL
                 <i class="fa-solid fa-user" style="color: #ffffff;"></i>
             </h3>
-            <?php include "../viewsPerfil/BuscarDatos.php"?>
+            <?php include "../viewsPerfil/datosPersonales.php"?>
         </div>
         <div id="configuracion" class="tab-content">
             <p class="test">Yo soy, configuracion.</p>

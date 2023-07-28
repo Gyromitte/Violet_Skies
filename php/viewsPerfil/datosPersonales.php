@@ -61,7 +61,7 @@ if (isset($_SESSION["ID"])) {
                       <div class="mb-3 row">
                           <label class="col-sm-2 col-form-label">Contraseña:</label>
                           <div class="col-sm-10">
-                              <input class="form-control" type="password" value="<?php echo $result[0]->CONTRASEÑA; ?>"  name="contraseña"disabled>
+                          <button class="btn btn-light" type="button" data-bs-toggle="modal" data-bs-target="#modalCambiarContrasena">Cambiar contraseña</button>
                           </div>
                       </div>
                       <input type="hidden" name="id" value="<?php echo $_SESSION["ID"]; ?>">
@@ -102,6 +102,41 @@ if (isset($_SESSION["ID"])) {
     </div>
   </div>
 </div>
+
+<form action="../viewsPerfil/cambContraseña.php" method="POST">
+<div class="modal fade" id="modalCambiarContrasena" tabindex="-1" aria-labelledby="modalCambiarContrasenaLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="modalCambiarContrasenaLabel">Cambiar contraseña</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form id="formCambiarContrasena" method="POST">
+                    <div class="mb-3">
+                        <label for="currentPassword" class="form-label">Contraseña actual:</label>
+                        <input type="password" class="form-control" id="currentPassword" name="currentPassword" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="newPassword" class="form-label">Nueva contraseña:</label>
+                        <input type="password" class="form-control" id="newPassword" name="newPassword" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="confirmPassword" class="form-label">Confirmar contraseña:</label>
+                        <input type="password" class="form-control" id="confirmPassword" name="confirmPassword" required>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Cambiar</button>
+                    <?php if (!empty($mensaje)) { ?>
+                        <div class="alert alert-danger" role="alert" id="mensajeAlerta">
+                            <?php echo $mensaje; ?>
+                        </div>
+                    <?php } ?>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+</form>
 
 <?php
         } else {
@@ -189,6 +224,10 @@ const btnModificar = document.getElementById('btnModificar');
 
     btnModificar.classList.remove('d-none');
     btnGuardarCambios.classList.add('d-none');
-    btnCancelarCambios.classList.add('d-none');
+    btnCancelarCambios.classList.ad
+    
+    
   }
+
+  
 </script>

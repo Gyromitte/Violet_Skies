@@ -1,117 +1,66 @@
-<!DOCTYPE html>
-<html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="description" content="">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <!--StyleSheets-->
-        <link rel="stylesheet" href="../../bootstrap/css/bootstrap.min.css">
-        <link rel="stylesheet" href="../../css/panelAdmin.css">
-        <!--Referencias a fuentes-->
-        <link rel="preconnect" href="https://fonts.googleapis.com">
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-        <link href="https://fonts.googleapis.com/css2?family=Patua+One&display=swap" rel="stylesheet">
-        <link href="https://fonts.googleapis.com/css2?family=Lexend:wght@300&family=Patua+One&display=swap" rel="stylesheet">
-        <link rel="preconnect" href="https://fonts.googleapis.com">
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-        <title>cambContraseña</title>
-        <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&display=swap" rel="stylesheet">
-</head>
-<body>
 <?php
-// Inicializar la variable de mensaje
-$mensaje = "";
+// cambContraseña.php
+
+// Incluye el archivo de conexión a la base de datos
 include_once "../dataBase.php";
-// Verificar si se ha enviado el formulario
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    // Obtener los valores del formulario
-    session_start();
 
-    $currentPassword = $_POST['currentPassword'];
-    $newPassword = $_POST['newPassword'];
-    $confirmPassword = $_POST['confirmPassword'];
+// Verifica si se ha enviado el formulario para cambiar la contraseña
+if ($_SERVER["REQUEST_METHOD"] === "POST") {
+    // Obtén los datos del formulario
+    $currentPassword = $_POST["currentPassword"];
+    $newPassword = $_POST["newPassword"];
+    $confirmPassword = $_POST["confirmPassword"];
 
-    if ($newPassword !== $confirmPassword) {
+    // Realiza las validaciones necesarias (puedes agregar más validaciones según tus requerimientos)
+    if (empty($currentPassword) || empty($newPassword) || empty($confirmPassword)) {
+        $mensaje = "Por favor, complete todos los campos.";
+    } elseif ($newPassword !== $confirmPassword) {
         $mensaje = "Las contraseñas no coinciden.";
     } else {
-        // Crear una instancia de la clase Database
-        $database = new Database();
-        $database->conectarBD();
+        // Obtiene el ID del usuario desde la sesión (asegúrate de que se haya iniciado la sesión en tus archivos)
+        if (isset($_SESSION["ID"])) {
+            $user_id = $_SESSION["ID"];
 
-        // Obtener el ID del usuario actualmente logueado
-        $correo=$_SESSION['correo'];
-        $consulta="SELECT ID FROM CUENTAS WHERE CORREO = '$correo'";
-        $userId = $database->seleccionar($consulta);
-        
-        // Obtener la contraseña actual almacenada en la base de datos para el usuario
-        $consulta = "SELECT CONTRASEÑA FROM CUENTAS WHERE CORREO = '$correo'";
-        $resultados = $database->seleccionar($consulta);
+            try {
+                // Crea una instancia de la clase DataBase para usar los identificadores de la clase
+                $db = new DataBase();
+                // Llama al método conectar() para establecer la conexión a la base de datos
+                $conexion = $db->conectarBD();
 
-        if (!empty($resultados)) {
-            $contraseñaActual = $resultados[0]->CONTRASEÑA;
+                // Consulta preparada para buscar los datos del usuario por su ID y contraseña actual
+                $query = "SELECT * FROM CUENTAS WHERE ID = :user_id AND CONTRASENA = :currentPassword";
+                $parametros = array(':user_id' => $user_id, ':currentPassword' => $currentPassword);
+                $result = $db->seleccionarPreparado($query, $parametros);
 
-            // Verificar si la contraseña actual ingresada coincide con la almacenada en la base de datos
-            if (!password_verify($currentPassword, $contraseñaActual)) {
-                $mensaje = "La contraseña actual es incorrecta.";
-            } else {
-                // Actualizar la contraseña en la base de datos
-                $hashNuevaContraseña = password_hash($newPassword, PASSWORD_DEFAULT); // Hashear la nueva contraseña
-                $consulta = "UPDATE CUENTAS SET CONTRASEÑA = :newPassword WHERE ID = :id";
-                $actualizar = $database->PDO_local->prepare($consulta);
-                $actualizar->bindParam(':newPassword', $hashNuevaContraseña);
-                $actualizar->bindParam(':id', $userId); // Reemplaza $userId por el identificador del usuario
-                $actualizar->execute();
+                if ($result) {
+                    // Si la consulta arroja un resultado, significa que la contraseña actual es correcta
+                    // Ahora podemos actualizar la contraseña en la base de datos
+                    $query = "UPDATE CUENTAS SET CONTRASENA = :newPassword WHERE ID = :user_id";
+                    $parametros = array(':newPassword' => $newPassword, ':user_id' => $user_id);
+                    $result = $db->actualizarPreparado($query, $parametros);
 
-                if ($actualizar->rowCount() === 0) {
-                    $mensaje = "Error al actualizar la contraseña.";
-                    // Manejo del error y redirección si es necesario
-
+                    if ($result) {
+                        // Los datos se actualizaron correctamente en la base de datos
+                        $response = array('success' => true, 'message' => '¡Contraseña cambiada exitosamente!');
+                    } else {
+                        $response = array('success' => false, 'message' => 'Error al cambiar la contraseña. Por favor, inténtelo de nuevo.');
+                    }
+                } else {
+                    $response = array('success' => false, 'message' => 'La contraseña actual es incorrecta.');
                 }
 
-                $mensaje = "Contraseña actualizada exitosamente.";
-                header("Location: verPerfil.php");
-                // Redirección a la página de perfil o cualquier otra página
+                // Cerrar la conexión
+                $db->desconectarBD();
+            } catch (PDOException $e) {
+                $response = array('success' => false, 'message' => 'Error: ' . $e->getMessage());
             }
         } else {
-            $mensaje = "No se encontró el usuario.";
+            $response = array('success' => false, 'message' => 'No se ha proporcionado un identificador de usuario.');
         }
-        $database->desconectarBD();
     }
+
+    // Devuelve la respuesta como un JSON
+    header('Content-Type: application/json');
+    echo json_encode($response);
 }
 ?>
-
-<div class="modal fade" id="modalCambiarContrasena" tabindex="-1" aria-labelledby="modalCambiarContrasenaLabel" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="modalCambiarContrasenaLabel">Cambiar contraseña</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-                <form action="" method="POST">
-                    <div class="mb-3">
-                        <label for="currentPassword" class="form-label">Contraseña actual:</label>
-                        <input type="password" class="form-control" id="currentPassword" name="currentPassword" required>
-                    </div>
-                    <div class="mb-3">
-                        <label for="newPassword" class="form-label">Nueva contraseña:</label>
-                        <input type="password" class="form-control" id="newPassword" name="newPassword" required>
-                    </div>
-                    <div class="mb-3">
-                        <label for="confirmPassword" class="form-label">Confirmar contraseña:</label>
-                        <input type="password" class="form-control" id="confirmPassword" name="confirmPassword" required>
-                    </div>
-                    <button type="submit" class="btn btn-primary">Guardar cambios</button>
-                    <?php if (!empty($mensaje)) { ?>
-                        <div class="alert alert-danger" role="alert">
-                            <?php echo $mensaje; ?>
-                        </div>
-                    <?php } ?>
-                </form>
-            </div>
-        </div>
-    </div>
-</div>
-</body>
-</html>
