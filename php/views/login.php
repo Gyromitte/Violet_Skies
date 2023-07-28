@@ -15,7 +15,14 @@
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
         <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&display=swap" rel="stylesheet">
-
+    <style>
+        .register{
+            color:darkblue;
+        }
+        .register:hover{
+            color:purple;
+        }
+    </style>
 </head>
 <body>
     <nav class="navbar navbar-default row">
@@ -55,7 +62,7 @@
                         <input class="form-control" type="password" name="pass" placeholder="Contraseña"><br><br>
                         <button class="loginButton" type="submit">Iniciar Sesion</button>
                     </form>
-                    <center><a href="../views/registrarse.php">No tienes cuenta? Registrate!</a></center>
+                    <center><a href="../views/registrarse.php" class="register">No tienes cuenta? Registrate!</a></center>
                     </div>
                 </div>
             </div>
