@@ -94,6 +94,11 @@ function updateModalContent(formType) {
                   //Manejo de la respuesta:
                   var respuesta = xhr.responseText;
                   document.getElementById('mensajeDiv').innerHTML = respuesta;
+                  if(respuesta==="<div class='alert alert-success'>Usuario Registrado</div>"){
+                    setTimeout(function () {
+                        window.location.href = "../views/login.php";
+                      }, 2000);
+                }
                 }
               };
               //Enviar el formulario
