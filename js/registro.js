@@ -182,7 +182,7 @@ function updateModalContent(formType) {
                     if(respuesta==="<div class='alert alert-success'>Usuario Registrado</div>"){
                         setTimeout(function () {
                             window.location.href = "../views/login.php";
-                          }, 3000);
+                          }, 2000);
                     }
                 }
             };
