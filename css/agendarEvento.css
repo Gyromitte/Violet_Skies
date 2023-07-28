@@ -85,3 +85,33 @@
     background-image: linear-gradient(135deg, #5603ad, #f58cd6);
     height: 100px;
   }
+
+  .main-container {
+    justify-content: center;
+  }
+
+  .info-eventos {
+    max-width: 500px;
+    margin-right: 20px;
+  }
+
+  .custom-card {
+    width: 18rem;
+    margin-bottom: 20px;
+  }
+
+/* Estilos para resoluciones de celular */
+@media (max-width: 767px) {
+  .main-container {
+    flex-direction: column;
+    align-items: center; /* Alinear todo el contenido al centro */
+  }
+}
+
+  
+  
+  
+  
+  
+  
+  

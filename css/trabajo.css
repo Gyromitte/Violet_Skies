@@ -20,12 +20,31 @@
     color: white;
     font-size: 1.2em;
     background-color: transparent;
-  }
+}
   #login-btn:hover {
     cursor: pointer;
     background-color: rgba(255, 255, 255, 0.1);
+}
+@media screen and (max-width: 768px) {
+  .offer-container {
+    flex-direction: column; /* Cambiamos la dirección a columna para dispositivos móviles */
   }
 
+  .info-job,
+  .chef-img {
+    width: 100%; /* Aseguramos que los elementos ocupen todo el ancho disponible */
+    text-align: center; /* Centramos el contenido */
+  }
+
+  .info-job {
+    padding: 20px; /* Ajustamos el padding para dispositivos móviles */
+  }
+
+
+}
+
+
+  
 
 
   

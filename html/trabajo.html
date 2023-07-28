@@ -25,15 +25,23 @@
         <script src="/js/panelAdmin.js" async defer></script>
     </head>
 <body >
-  <nav class="navbar navbar-default row">
-    <div class="companySection col-sm-auto">
-        <!--Company Logo-->
-        <div class="navbar-header">
-            <img id="company-logo" class="img-fluid" src="/images/company_logo.png" alt="companyLogo">
-                <a class="no-underline" href="/index.html" id="company-name">Violet Skies</a>
-        </div>      
-        <!--Tabs-->
-        <ul class="nav list-inline">
+<!-- Navbar -->
+<nav class="navbar navbar-default row">
+  <div class="companySection col-sm-auto">
+      <!--Company Logo-->
+      <div class="navbar-header">
+          <!--Menu for mobiles-->
+          <div class="btn-group dropdown drop-mobile" id="nav-button">
+              <a href="#" class="btn btn-secondary dropdown-btn-custom" role="button" data-toggle="dropdown" aria-expanded="false">
+              <i class="fa-solid fa-bars fa-2x" style="color: #ffffff;"></i>
+              </a>
+          </div>
+          <img id="company-logo" class="img-fluid" src="/images/company_logo.png" alt="companyLogo"
+              onclick="this.classList.toggle('clicked')">
+          <a class="no-underline" href="/index.html" id="company-name">Violet Skies</a>
+      </div>
+      <!--Tabs-->
+      <ul class="nav list-inline">
           <li class="mr-3 tabs">
               <a class="no-underline" href="/html/about-us/about us.html">Nosotros</a>
           </li>
@@ -44,44 +52,53 @@
               <a class="no-underline" href="/html/trabajo.html">Trabajo</a>
           </li>
       </ul>
-    </div>         
-    <!--Login-section-->
-    <div class="login-section col-sm-auto" >
+  </div>
+  <!--Login-section-->
+  <div class="login-section col-sm-auto">
       <a class="no-underline" href="/php/views/login.php">
           <button class="loginButton">
               <i class="fa-solid fa-door-open" style="color: #ffffff;"></i>
-              Acceder  
+              Acceder
           </button>
-      </a> 
+      </a>
       <a class="no-underline" href="/php/views/registrarse.php">
           <button class="loginButton">
               <i class="fa-solid fa-user" style="color: #ffffff;"></i>
               Registrarse
           </button>
       </a>
-      </div>
-</nav>
-</div>
- 
-    <div class="element fixed-top">
-  <nav>
-
-
-
-<!--Nav para dipositivos moviles-->
-<div class="d-none">
-  <div class="d-block overflow-hidden">
-
-<div  style="overflow: hidden;" id="dash-board">
-  <div  id="dash-board-content">
-    <button data-tab="home" class="dash-button" href="/index.html"><i class="fa-solid fa-house" style="color: #ffffff;"></i><br>Home</button>
-    <button data-tab="eventos" class="dash-button"><i class="fa-solid fa-calendar-days"style="color: #ffffff;"></i><br>Nosotros</button>
-    <button data-tab="empleados" class="dash-button"><i class="fa-solid fa-briefcase" style="color: #ffffff;"></i><br>Empleados</button>
-    <button data-tab="perfil" class="dash-button"><i class="fa-solid fa-door-open" style="color: #ffffff;"></i><br>Acceder</button>
-    <button data-tab="configuracion" class="dash-button"><i class="fa-solid fa-user" style="color: #ffffff;"></i><br>Registrarse</button>
   </div>
-</div>
-</div>
+</nav>
+
+<!--DashBoard-->
+<div id="dash-board" class="d-flex flex-column">
+  <div id="dash-board-content">
+      <ul>
+          <li class="mr-3 tabs mb-4">
+              <i class="fa-solid fa-users" style="color: #ffffff;"></i>
+              <a class="no-underline" href="/html/about-us/about us.html">Nosotros</a>
+          </li>
+          <li class="mr-3 tabs mb-4">
+              <i class="fa-solid fa-calendar-days" style="color: #ffffff;"></i>
+              <a class="no-underline" href="/html/agendarEvento.html">Agendar Evento</a>
+          </li>
+          <li class="mr-3 tabs mb-4">
+              <i class="fa-solid fa-briefcase" style="color: #ffffff;"></i>
+              <a class="no-underline" href="/html/trabajo.html">Trabajo</a>
+          </li>
+          <li class="mr-3 tabs mb-4">
+              <a class="no-underline mb-4" href="/php/views/login.php">
+                  <i class="fa-solid fa-door-open" style="color: #ffffff;"></i>
+                  Acceder
+              </a>
+          </li>
+          <li class="mr-3 tabs mb-4">
+              <a class="no-underline mb-4" href="/php/views/registrarse.php">
+                  <i class="fa-solid fa-user" style="color: #ffffff;"></i>
+                  Registrarse
+              </a>
+          </li>
+      </ul>
   </div>
 </div>
 
@@ -90,7 +107,7 @@
   <h1 class="text-center"><strong>Trabaja con nosotros</strong></h1>
 </div>
 <!--Main content-->
-<div class="offer-container d-flex flex-row">
+<div class="offer-container d-flex">
   <div class="info-job col-6 p-5">
     <h3>Únete a nuestro equipo de meseros y cocineros.</h3>
     <p>
@@ -108,10 +125,7 @@
   </div>
   <img class="col-6 chef-img rounded-5" src="/images/chef.jpg">
 </div>
-
-
-
-
-<    <script src="bootstrap/js/bootstrap.js"></script>
+<script src="bootstrap/js/bootstrap.js"></script>
+<script src="/js/navbarMovil.js"></script>
 </body>
 </html>

@@ -24,45 +24,85 @@
     <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&display=swap" rel="stylesheet">
 </head>
 <body>
-  <nav class="navbar navbar-default row">
-    <div class="companySection col-sm-auto">
-        <!--Company Logo-->
-        <div class="navbar-header">
-            <img id="company-logo" class="img-fluid" src="/images/company_logo.png" alt="companyLogo" onclick="this.classList.toggle('clicked')">
-                <a class="no-underline" href="/index.html" id="company-name">Violet Skies</a>
-        </div>      
-        <!--Tabs-->
-        <ul class="nav list-inline">
-            <li class="mr-3 tabs">
-                <a class="no-underline" href="/html/about-us/about us.html">Nosotros</a>
-            </li>
-            <li class="mr-3 tabs">
-                <a class="no-underline" href="/html/agendarEvento.html">Agendar Evento</a>
-            </li>
-            <li class="mr-3 tabs">
-                <a class="no-underline" href="/html/trabajo.html">Trabajo</a>
-            </li>
-        </ul>
-    </div>         
-    <!--Login-section-->
-    <div class="login-section col-sm-auto" >
-        <a class="no-underline" href="/php/views/login.php"><button class="loginButton">
-            <i class="fa-solid fa-door-open" style="color: #ffffff;"></i>
-            Acceder  
-        </button>
-        </a>
-        <a class="no-underline" href="/php/views/registrarse.php"><button class="loginButton">
-            <i class="fa-solid fa-user" style="color: #ffffff;"></i>
-            Registrarse
-        </button>
-        </a>
-    </div>
+<!-- Navbar -->
+<nav class="navbar navbar-default row">
+  <div class="companySection col-sm-auto">
+      <!--Company Logo-->
+      <div class="navbar-header">
+          <!--Menu for mobiles-->
+          <div class="btn-group dropdown drop-mobile" id="nav-button">
+              <a href="#" class="btn btn-secondary dropdown-btn-custom" role="button" data-toggle="dropdown" aria-expanded="false">
+              <i class="fa-solid fa-bars fa-2x" style="color: #ffffff;"></i>
+              </a>
+          </div>
+          <img id="company-logo" class="img-fluid" src="/images/company_logo.png" alt="companyLogo"
+              onclick="this.classList.toggle('clicked')">
+          <a class="no-underline" href="/index.html" id="company-name">Violet Skies</a>
+      </div>
+      <!--Tabs-->
+      <ul class="nav list-inline">
+          <li class="mr-3 tabs">
+              <a class="no-underline" href="/html/about-us/about us.html">Nosotros</a>
+          </li>
+          <li class="mr-3 tabs">
+              <a class="no-underline" href="/html/agendarEvento.html">Agendar Evento</a>
+          </li>
+          <li class="mr-3 tabs">
+              <a class="no-underline" href="/html/trabajo.html">Trabajo</a>
+          </li>
+      </ul>
+  </div>
+  <!--Login-section-->
+  <div class="login-section col-sm-auto">
+      <a class="no-underline" href="/php/views/login.php">
+          <button class="loginButton">
+              <i class="fa-solid fa-door-open" style="color: #ffffff;"></i>
+              Acceder
+          </button>
+      </a>
+      <a class="no-underline" href="/php/views/registrarse.php">
+          <button class="loginButton">
+              <i class="fa-solid fa-user" style="color: #ffffff;"></i>
+              Registrarse
+          </button>
+      </a>
+  </div>
 </nav>
 
+<!--DashBoard-->
+<div id="dash-board" class="d-flex flex-column">
+  <div id="dash-board-content">
+      <ul>
+          <li class="mr-3 tabs mb-4">
+              <i class="fa-solid fa-users" style="color: #ffffff;"></i>
+              <a class="no-underline" href="/html/about-us/about us.html">Nosotros</a>
+          </li>
+          <li class="mr-3 tabs mb-4">
+              <i class="fa-solid fa-calendar-days" style="color: #ffffff;"></i>
+              <a class="no-underline" href="/html/agendarEvento.html">Agendar Evento</a>
+          </li>
+          <li class="mr-3 tabs mb-4">
+              <i class="fa-solid fa-briefcase" style="color: #ffffff;"></i>
+              <a class="no-underline" href="/html/trabajo.html">Trabajo</a>
+          </li>
+          <li class="mr-3 tabs mb-4">
+              <a class="no-underline mb-4" href="/php/views/login.php">
+                  <i class="fa-solid fa-door-open" style="color: #ffffff;"></i>
+                  Acceder
+              </a>
+          </li>
+          <li class="mr-3 tabs mb-4">
+              <a class="no-underline mb-4" href="/php/views/registrarse.php">
+                  <i class="fa-solid fa-user" style="color: #ffffff;"></i>
+                  Registrarse
+              </a>
+          </li>
+      </ul>
+  </div>
+</div>
 
-
-<!--Salones-->
-<div class="d-flex flex-row main-container justify-content-center">
+  <!-- Salones -->
+<div class="d-flex main-container justify-content-center">
   <div class="info-eventos d-flex flex-column justify-content-center">
     <h1 class="text-center">Nuestros salones para eventos:</h1>
     <br>
@@ -77,64 +117,70 @@
       <button class="mx-auto btn-agend-custom"><strong>Quiero Agendar!</strong></button>
     </a>
   </div>
-  
+
+  <!--Cards-->
+
   <!--CuatroCienegas-->
-<div class="card custom-card tier1" style="width: 18rem;">
-  <img src="/images/salones/salon2.jpg" class="card-img-top" alt="...">
-  <div class="card-body text-center">
-    <h5 class="card-title">Salon -Cuatrocienegas-</h5>
-    <p class="card-text">Ideal para eventos casuales o de menor escala</p>
+  <div class="card custom-card tier1" style="width: 18rem;">
+    <img src="/images/salones/salon2.jpg" class="card-img-top" alt="...">
+    <div class="card-body text-center">
+      <h5 class="card-title">Salon -Cuatrocienegas-</h5>
+      <p class="card-text">Ideal para eventos casuales o de menor escala</p>
+    </div>
+    <ul class="list-group list-group-flush">
+      <li class="list-group-item custom-item d-flex align-items-center justify-content-center">
+        <i class="fa-solid fa-user me-2" style="color: #ffffff;"></i>
+        Capacidad para 20 personas
+      </li>
+    </ul>
   </div>
-  <ul class="list-group list-group-flush">
-    <li class="list-group-item custom-item d-flex align-items-center justify-content-center">
-      <i class="fa-solid fa-user me-2" style="color: #ffffff;"></i>
-      Capacidad para 20 personas
-    </li>
-  </ul>
-</div>
-<!--Torreon-->
-<div class="card custom-card tier2" style="width: 18rem;">
-  <img src="/images/salones/salon3.jpg" class="card-img-top" alt="...">
-  <div class="card-body text-center">
-    <h5 class="card-title">Salon -Torreon-</h5>
-    <p class="card-text">Adecuado para todo tipo de fiestas a escala mediana</p>
+
+  <!--Torreon-->
+  <div class="card custom-card tier2" style="width: 18rem;">
+    <img src="/images/salones/salon3.jpg" class="card-img-top" alt="...">
+    <div class="card-body text-center">
+      <h5 class="card-title">Salon -Torreon-</h5>
+      <p class="card-text">Adecuado para todo tipo de fiestas a escala mediana</p>
+    </div>
+    <ul class="list-group list-group-flush">
+      <li class="list-group-item custom-item d-flex align-items-center justify-content-center">
+        <i class="fa-solid fa-user me-2" style="color: #ffffff;"></i>
+        Capacidad para 50 personas
+      </li>
+    </ul>
   </div>
-  <ul class="list-group list-group-flush">
-    <li class="list-group-item custom-item d-flex align-items-center justify-content-center">
-      <i class="fa-solid fa-user me-2" style="color: #ffffff;"></i>
-      Capacidad para 50 personas
-    </li>
-  </ul>
-</div>
-<!--Saltillo-->
-<div class="card custom-card tier3" style="width: 18rem;">
-  <img src="/images/salones/salon3.jpg" class="card-img-top" alt="...">
-  <div class="card-body text-center">
-    <h5 class="card-title">Salon -Saltillo-</h5>
-    <p class="card-text">Perfecto para ocaciones especiales como bodas o quinceañeras</p>
+
+  <!--Saltillo-->
+  <div class="card custom-card tier3" style="width: 18rem;">
+    <img src="/images/salones/salon3.jpg" class="card-img-top" alt="...">
+    <div class="card-body text-center">
+      <h5 class="card-title">Salon -Saltillo-</h5>
+      <p class="card-text">Perfecto para ocasiones especiales como bodas o quinceañeras</p>
+    </div>
+    <ul class="list-group list-group-flush">
+      <li class="list-group-item custom-item d-flex align-items-center justify-content-center">
+        <i class="fa-solid fa-user me-2" style="color: #ffffff;"></i>
+        Capacidad para 80 personas
+      </li>
+    </ul>
   </div>
-  <ul class="list-group list-group-flush">
-    <li class="list-group-item custom-item d-flex align-items-center justify-content-center">
-      <i class="fa-solid fa-user me-2" style="color: #ffffff;"></i>
-      Capacidad para 80 personas
-    </li>
-  </ul>
-</div>
-<!--Coahuila-->
-<div class="card custom-card" style="width: 18rem;">
-  <img src="/images/salones/salon1.jpg" class="card-img-top" alt="...">
-  <div class="card-body text-center">
-    <h5 class="card-title">Salon -Coahuila-</h5>
-    <p class="card-text">Merecedor de su nombre, este salon es el indicado para tus eventos soñados!</p>
+
+  <!--Coahuila-->
+  <div class="card custom-card" style="width: 18rem;">
+    <img src="/images/salones/salon1.jpg" class="card-img-top" alt="...">
+    <div class="card-body text-center">
+      <h5 class="card-title">Salon -Coahuila-</h5>
+      <p class="card-text">Merecedor de su nombre, este salon es el indicado para tus eventos soñados!</p>
+    </div>
+    <ul class="list-group list-group-flush">
+      <li class="list-group-item custom-item d-flex align-items-center justify-content-center">
+        <i class="fa-solid fa-user me-2" style="color: #ffffff;"></i>
+        Capacidad para 120 personas
+      </li>
+    </ul>
   </div>
-  <ul class="list-group list-group-flush">
-    <li class="list-group-item custom-item d-flex align-items-center justify-content-center">
-      <i class="fa-solid fa-user me-2" style="color: #ffffff;"></i>
-      Capacidad para 120 personas
-    </li>
-  </ul>
 </div>
-</div>
+
 
 <div class="how-to mt-5">
   <div class="header-how-to justify-content-center d-flex align-items-center">
@@ -178,5 +224,6 @@
 
 
 <script src="https://kit.fontawesome.com/b60c246061.js" crossorigin="anonymous"></script>
+<script src="/js/navbarMovil.js"></script>
 </body>
 </html>
