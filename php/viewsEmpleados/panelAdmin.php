@@ -35,11 +35,9 @@
     <!--NavBar-->
     <?php
         session_start();
+        $access=3;
         if(isset($_SESSION["logged_in"])){
-            if($_SESSION["access"]===2){
-                header("Location:../scripts/access.php");
-            }
-            else if($_SESSION["access"]===1){
+            if($_SESSION["access"]!==$access){
                 header("Location:../scripts/access.php");
             }
         }
