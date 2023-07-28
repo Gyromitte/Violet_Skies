@@ -229,6 +229,12 @@ nav{
     .nav-user{
         display: none;
     }
+    .info-card, #proporcionEmpleados, #eventosAño{
+        margin-bottom: 10px;
+    }
+    .btn-options{
+        margin-bottom: 10px;
+    }
 }
 
 @media (max-width: 576px) {

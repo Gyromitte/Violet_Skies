@@ -12,20 +12,21 @@ $consulta = "SELECT E.ID, C.NOMBRE, C.AP_PATERNO, C.AP_MATERNO, E.RFC, C.TELEFON
 
 $tabla = $conexion->seleccionar($consulta);
 
-echo "<table class='table table-hover mt-3'>
-            <thead class='thead-purple'>
-                <tr>
-                    <th>Nombre</th>
-                    <th>Ape. Paterno</th>
-                    <th>Ape. Materno</th>
-                    <th>RFC</th>
-                    <th>Teléfono</th>
-                    <th>Correo</th>
-                    <th>Tipo</th>
-                    <th style='align-content': center;></th>
-                </tr>
-            </thead>
-            <tbody>";
+echo '<div class="table-responsive">';
+echo '<table class="table table-hover mt-3">';
+echo '<thead class="thead-purple">';
+echo '<tr>';
+echo '<th>Nombre</th>';
+echo '<th>Ape. Paterno</th>';
+echo '<th>Ape. Materno</th>';
+echo '<th>RFC</th>';
+echo '<th>Teléfono</th>';
+echo '<th>Correo</th>';
+echo '<th>Tipo</th>';
+echo '<th style="text-align: center;"></th>';
+echo '</tr>';
+echo '</thead>';
+echo '<tbody>';
 
 foreach ($tabla as $registro) {
     echo "<tr>";
@@ -51,11 +52,12 @@ foreach ($tabla as $registro) {
     echo '</ul>';
     echo '</div>';
     echo "</td>";
-    echo '</tr>'; 
+    echo '</tr>';
 }
 
-echo "</tbody>
-          </table>";
+echo '</tbody>';
+echo '</table>';
+echo '</div>';
 
 $conexion->desconectarBD();
 ?>
