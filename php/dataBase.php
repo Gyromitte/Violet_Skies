@@ -166,12 +166,26 @@
                     header("refresh:2;../views/registrarse.php");
                 }
                 else{
+                    try{
                     $hash=password_hash($pass,PASSWORD_DEFAULT);
                     $cadena="INSERT INTO CUENTAS(NOMBRE, AP_PATERNO,AP_MATERNO, CORREO, CONTRASEÑA, 
                     TELEFONO,TIPO_CUENTA) VALUES('$nom','$ap','$am','$usu','$hash','$cel','$tipo')";
                     $this->PDO_local->query($cadena);
                     echo"<div class='alert alert-success'>Usuario Registrado</div>";
                     header("refresh:3;../views/login.php");
+                    exit;
+                    }
+                    catch(PDOException $e){
+                        $errorMessage = $e->getMessage();
+
+                        // Extract the relevant part of the error message
+                        // Assuming the error message format is "SQLSTATE[45000]: <>: 1644 Your trigger message"
+                        $startIndex = strpos($errorMessage, "1644") + 5;
+                        $triggerMessage = substr($errorMessage, $startIndex);
+
+                        // Display the trigger message without the unwanted part
+                        echo "<div class='alert alert-danger'>" . $triggerMessage . "</div>";
+                    }
                 }
             }
             catch(PDOException $e){

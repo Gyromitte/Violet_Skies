@@ -23,7 +23,6 @@ function updateModalContent(formType) {
             modalTitle.textContent = "Registrar como Empleado";
             modalHeader.classList.remove('modal-header-warning');
             formContent = `
-            <div id="mensajeDiv" method="POST"></div>
             <form id="EmpReg">
                 <div class="mb-3">
                     <label class="control-label">Nombre(s): </label> 
@@ -59,6 +58,7 @@ function updateModalContent(formType) {
                     <button class="loginButton" type="submit">Registrarse</button>
                 </div>
             </form>
+            <div id="mensajeDiv" method="POST"></div>
             `;
             modalForm.innerHTML = formContent;
 
@@ -102,14 +102,13 @@ function updateModalContent(formType) {
               console.log(currentTable);
               setTimeout(function() {
                 checkCurrentTable(currentTable);
-              }, 500); // 0.5 segundos, si la funcion se ejecuta muy rapido no reflejara los cambios
+              }, 500); 
             });
             break;
         case "@cliente":
             modalTitle.textContent = "Registrar como Cliente";
             modalHeader.classList.remove('modal-header-warning');
             formContent = `
-            <div id="mensajeDiv" method="POST"></div>
             <form id="CliReg">
                 <div class="mb-3">
                     <label class="control-label">Nombre(s): </label> 
@@ -145,6 +144,7 @@ function updateModalContent(formType) {
                     <button class="loginButton" type="submit">Registrarse</button>
                 </div>
             </form>
+            <div id="mensajeDiv" method="POST"></div>
             `;
             modalForm.innerHTML = formContent;
     
@@ -182,13 +182,13 @@ function updateModalContent(formType) {
                     document.getElementById('mensajeDiv').innerHTML = respuesta;
                 }
             };
-            //Enviar el formulario
+            
             xhr.send(formData);
-            //Ver cual es la tabla activa para refrescar cualquier cambio
+           
             console.log(currentTable);
             setTimeout(function() {
                 checkCurrentTable(currentTable);
-            }, 500); // 0.5 segundos, si la funcion se ejecuta muy rapido no reflejara los cambios
+            }, 500); 
         });
         break;
     }
