@@ -123,15 +123,16 @@
                         $consulta=$this->PDO_local->query($query);
                         while($trabajo=$consulta->fetch(PDO::FETCH_ASSOC)){
                             $_SESSION["access"]=2;
+                            $_SESSION["id"]=$trabajo['ID'];
                             if($trabajo['TIPO']=='MESERO'){
-                                $_SESSION["tipo"]="Mesero";
+                                $_SESSION["tipo"]="MESERO";
                                 echo"<div class=' container'>";
                                 echo"<h1 align='center'>Bienvenido ".$_SESSION["name"]."</h1>";
                                 echo "</div>";
                                 header("refresh:4;../viewsEmpleados/panelEmpleado.php");
                             }
                             else{
-                                $_SESSION["tipo"]="Mesero";
+                                $_SESSION["tipo"]="COCINERO";
                                 echo"<div class=' container'>";
                                 echo"<h1 align='center'>Bienvenido ".$_SESSION["name"]."</h1>";
                                 echo "</div>";

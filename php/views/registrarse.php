@@ -128,7 +128,7 @@
     <!--Divided page-->
     <div class="container">
         <div class="row">
-            <div class="split left" data-bs-toggle="modal" data-bs-target="#Empleado">
+            <div class="split left" data-bs-toggle="modal" data-bs-target="#Empleado" data-bs-whatever=@emp>
                 <div class="centered">
                     <h1>Registrate como Empleado!</h1>
                 </div>
@@ -142,6 +142,7 @@
         </div>
     </div>
 
+    
 <!-- Modal de Empleado -->
 <div class="modal fade" id="Empleado" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true"
 data-bs-backdrop="static">
@@ -269,7 +270,6 @@ data-bs-backdrop="static">
     });
 </script>
     
-    <script src="/js/filtroEventos.js"></script>
     <script src="https://kit.fontawesome.com/b60c246061.js" crossorigin="anonymous"></script>
     <script src="/bootstrap/js/bootstrap.min.js"></script>
 </body>

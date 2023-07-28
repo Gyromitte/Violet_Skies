@@ -157,9 +157,7 @@
         <div id="perfil" class="tab-content">
             <p class="test">Yo soy, perfiles.</p>
         </div>
-        <div id="configuracion" class="tab-content">
-            <p class="test">Yo soy, configuracion.</p>
-        </div>
+
         <!--Modal-->
         <div class="modal fade" id="mainModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div class="modal-dialog">

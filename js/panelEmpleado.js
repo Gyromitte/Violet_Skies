@@ -52,13 +52,13 @@ modal.addEventListener("show.bs.modal", function (event) {
   
     // Obtener el tipo de formulario correspondiente al botón
     var formType = button.getAttribute("data-bs-whatever");
-    var idEmpleado = button.getAttribute("data-id");
+    var idEvento = button.getAttribute("data-id");
     // Actualizar el contenido del formulario
     updateModalContent(formType, idEmpleado);
   });
   
   // Función para actualizar el contenido del modal según el tipo de formulario
-  function updateModalContent(formType, idEmpleado) {
+  function updateModalContent(formType, idEvento) {
     var formContent = "";
     var modalTitle = document.querySelector('#empModal .modal-title');
     var form;
@@ -75,7 +75,6 @@ modal.addEventListener("show.bs.modal", function (event) {
           if (xhr.readyState === XMLHttpRequest.DONE) {
             if (xhr.status === 200) {
               // Parsear la respuesta JSON
-              var empleado = JSON.parse(xhr.responseText);
               // Actualizar el contenido del formulario con los datos obtenidos
               formContent = `
                   <form id="enterEvent">
@@ -100,31 +99,25 @@ modal.addEventListener("show.bs.modal", function (event) {
               form.addEventListener('submit', function (event) {
                 event.preventDefault(); //Para que la pagina no de refresh al dar submit
 
-                //Solicitud AJAX
-                var xhr = new XMLHttpRequest();
-                //Configurar la solicitud
-                xhr.open("POST", "asistirEvento.php", true);
-                xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
-                //Obtener los datos del formulario
-                var rfc = form.elements['RFC'].value;
-                var correo = form.elements['CORREO'].value;
-                var tipoUsuario = form.elements['tipoUsuario'].value;
-                //Como se va enviar la solicitud: un string
-                var formData = 'rfc=' + encodeURIComponent(rfc) + '&correo=' + (correo) + '&tipoUsuario=' + encodeURIComponent(tipoUsuario);
-                xhr.onreadystatechange = function () {
-                  if (xhr.readyState === XMLHttpRequest.DONE && xhr.status === 200) {
-                //Manejo de la respuesta:
-                var respuesta = xhr.responseText;
-                document.getElementById('mensajeDiv').innerHTML = respuesta;
+                var updateXHR = new XMLHttpRequest();
+                updateXHR.onreadystatechange = function () {
+                  if (updateXHR.readyState === XMLHttpRequest.DONE) {
+                    if (updateXHR.status === 200) {
+                      // Estilos al div de mensajes según la respuesta
+                      var respuesta = updateXHR.responseText;
+                      document.getElementById('mensajeDiv').innerHTML = respuesta;
+                    } 
+                    else {
+                      console.error("Error en la solicitud AJAX de actualización");
+                    }
                   }
                 };
-                //Enviar el formulario
-                xhr.send(formData);
+
+                updateXHR.open("POST", "asistirEvento.php", true);
+                updateXHR.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+                updateXHR.send(`id=${idEvento}`);
                 //Ver cual es la tabla activa para refrescar cualquier cambio
-                console.log(currentTable);
-                setTimeout(function() {
-              checkCurrentTable(currentTable);
-                }, 500); // 0.5 segundos, si la funcion se ejecuta muy rapido no reflejara los cambios
+                checkCurrentTable(currentTable);
               });
             }}}
             break;

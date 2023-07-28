@@ -124,31 +124,6 @@
                 <i class="fa-solid fa-briefcase" style="color: #ffffff;"></i>
             </h3>
             <br>
-            <button type="button" class="btn btn-success border-2 btn-outline-light rounded-5 btn-options" data-bs-toggle="modal" data-bs-target="#mainModal" data-bs-whatever="@registrarEmpleado">
-                <i class="fa-solid fa-address-card" style="color: #ffffff;"></i>
-                Registrar
-            </button>
-            <br>
-            <br>
-            <!--Opciones de Vistas-->
-            <div class="view-options">
-                <div>
-                    <button id="verCocineros" data-url="verCocineros.php"  type="button" class="btn-options ver-empleados btn btn-primary border-2 btn-outline-light rounded-5" data-bs-target="#mainModal">
-                        <i class="fa-solid fa-utensils" style="color: #ffffff;"></i>
-                        Ver Cocineros
-                    </button>
-                    <button id="verMeseros" data-url="verMeseros.php" type="button" class="btn-options ver-empleados btn btn-primary border-2 btn-outline-light rounded-5" data-bs-target="#mainModal">
-                        <i class="fa-solid fa-bell-concierge" style="color: #ffffff;"></i>
-                        Ver Meseros
-                    </button>
-                </div>
-                <!--Barra de Busqueda-->
-                <div class="input-group mb-3 search-bar">
-                    <input type="text" id="busqueda" class="form-control" placeholder="Buscar a un empleado" aria-label="" aria-describedby="button-addon2">
-                    <button id="buscarEmpleado" data-url="buscarEmpleado.php" class="ver-empleados btn btn-outline-primary" type="button" id="button-addon2">
-                    <i class="fa-solid fa-magnifying-glass" style="color: #1f71ff;"></i></button>
-                </div>
-            </div>
             <!--Informacion de la tabla-->
             <h3 id="table-info"></h3>
             <!--Container para tablas-->
@@ -158,9 +133,7 @@
         <div id="perfil" class="tab-content">
             <p class="test">Yo soy, perfiles.</p>
         </div>
-        <div id="configuracion" class="tab-content">
-            <p class="test">Yo soy, configuracion.</p>
-        </div>
+
         <!--Modal-->
         <div class="modal fade" id="empModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div class="modal-dialog">
