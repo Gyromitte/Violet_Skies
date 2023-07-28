@@ -462,6 +462,7 @@ h1 {
 }
 .dropdown-btn-custom, .dropdown-menu-costum{
   background-color: #5603ad !important;
+  padding: 50px;
   border: 2px solid white;
 }
 .dropdown-item{
