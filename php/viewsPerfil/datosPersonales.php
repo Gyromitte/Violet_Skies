@@ -152,6 +152,7 @@ if (isset($_SESSION["ID"])) {
                       </div>
                       <input type="hidden" name="cuenta" value="<?php echo $_SESSION["ID"]; ?>">
                       <button type="submit" class="btn btn-primary">Cambiar</button>
+                      <div><br></div>
                       <div class="alert d-none" role="alert" align="center" id="alertMessage">
                         </div>
                     </form>
@@ -192,11 +193,9 @@ if (isset($_SESSION["ID"])) {
         const alertDiv = document.getElementById('alertMessage');
         if (response.success) {
           alertDiv.classList.add('alert-success')
-          // Los datos se actualizaron correctamente en la base de datos
           alertDiv.textContent = response.message;
-          // Aplicar la clase CSS para alerta de éxito
-          successDiv.textContent = response.message;
           successDiv.classList.remove('d-none');
+          successDiv.textContent = response.message;
           console.log(response.message);
 
           setTimeout(function() {
@@ -206,7 +205,6 @@ if (isset($_SESSION["ID"])) {
         } else {
           alertDiv.classList.add('alert-danger');
             alertDiv.textContent = response.message;
-            // Aplicar la clase CSS para alerta de error
             successDiv.classList.remove('d-none');
             successDiv.textContent = response.message;
             console.log(response.message);
