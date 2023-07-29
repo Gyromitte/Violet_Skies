@@ -36,20 +36,32 @@ document.addEventListener('DOMContentLoaded', function() {
         xhr.open('GET', "buscarEmpleado.php?busqueda=" + busquedaValor, true);
         xhr.send();
       } else {
-        var xhr = new XMLHttpRequest();
-        xhr.onreadystatechange = function() {
-          if (xhr.readyState === 4 && xhr.status === 200) {
-            var message = getMessageByButtonId(buttonId);
-            tableInfo.innerHTML = message; // Modificar el innerHTML en lugar de textContent
-            contTable.innerHTML = xhr.responseText;
-          }
-        };
-        xhr.open('GET', url, true);
-        xhr.send();
+        if(buttonId == "verGraficos")
+        {
+          //Re-insertar el grafico
+          contTable.innerHTML = `<div class="col-md-5">
+          <canvas id="proporcionEmpleados2"></canvas>
+          </div>`;
+          //Volver a ejecutar el codigo de la grafica para actualizar datos:
+          recargarGraficos(); //Llamado desde chart.js
+          tableInfo.innerHTML = '';
+        }else{
+          var xhr = new XMLHttpRequest();
+          xhr.onreadystatechange = function() {
+            if (xhr.readyState === 4 && xhr.status === 200) {
+              var message = getMessageByButtonId(buttonId);
+              tableInfo.innerHTML = message; // Modificar el innerHTML en lugar de textContent
+              contTable.innerHTML = xhr.responseText;
+            }
+          };
+          xhr.open('GET', url, true);
+          xhr.send();
+        }
       }
     });
   });
 });
+
 
 //Cambiar el mensaje de información
 function getMessageByButtonId(buttonId) {
@@ -62,11 +74,12 @@ function getMessageByButtonId(buttonId) {
       return 'Mostrando a los meseros: <i class="fa-solid fa-bell-concierge" style="color: #ffffff;"></i>';
     case 'buscarEmpleado':
       currentTable = 'busqueda';
-      return 'Resultados de búsqueda: <i class="fa-solid fa-magnifying-glass" style="color: #ffffff;"></i>';
+      return 'Resultados de búsqueda: <i class="fa-solid fa-magnifying-glass" style="color: #ffffff;"></i>';;
     default:
       return 'Mostrando información:';
   }
 }
+
 
   
 

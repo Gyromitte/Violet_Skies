@@ -17,7 +17,14 @@
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
         <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&display=swap" rel="stylesheet">
-
+    <style>
+        .register{
+            color:darkblue;
+        }
+        .register:hover{
+            color:purple;
+        }
+    </style>
 </head>
 <body>
 <!-- Navbar -->

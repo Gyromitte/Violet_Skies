@@ -3,6 +3,7 @@
 const toggleDashboardBtn = document.getElementById('nav-button');
 const dashboard = document.getElementById('dash-board');
 const main = document.getElementById('main');
+
 // Función para abrir o cerrar el dashboard
 function toggleDashboard() {
   const modal = document.querySelector('.modal.show');
@@ -11,17 +12,28 @@ function toggleDashboard() {
     main.classList.toggle('main-dash-open');
   }
 }
-// Asignar evento de clic al botón
+
+// Asignar evento de clic al botón para abrir/cerrar la dashboard
 toggleDashboardBtn.addEventListener('click', toggleDashboard);
 
-/*Fecha*/
-var currentDate = new Date();
-var day = currentDate.getDate();
-var month = currentDate.getMonth() + 1; // Los meses en JavaScript comienzan desde 0
-var year = currentDate.getFullYear();
-// Construir la cadena de la fecha (DD/MM/YYYY)
-var formatDate = day + ' / ' + month + ' / ' + year;
-document.getElementById('fecha').innerHTML = formatDate;
+// Agregar evento de clic al documento para cerrar el dashboard cuando se haga clic fuera de él
+document.addEventListener('click', function (event) {
+  const targetElement = event.target;
+  if (!targetElement.closest('#dash-board') && !targetElement.closest('#nav-button')) {
+    // Si el clic no es dentro del dashboard ni en el botón de la navbar, cerrar el dashboard
+    dashboard.classList.remove('dashboard-open');
+    main.classList.remove('main-dash-open');
+  }
+});
+
+// Agregar evento de scroll al documento para cerrar el dashboard cuando se haga scroll
+document.addEventListener('scroll', function () {
+  if (dashboard.classList.contains('dashboard-open')) {
+    dashboard.classList.remove('dashboard-open');
+    main.classList.remove('main-dash-open');
+  }
+});
+
 
 /*Main content*/
 // Obtener las pestañas y el contenido 
@@ -55,17 +67,17 @@ function checkCurrentTable(currentTable) {
     case 'cocineros':
       setTimeout(function() {
         btnCocineros.click();
-      }, 500);
+      }, 100);
       break;
     case 'meseros':
       setTimeout(function() {
         btnMeseros.click();
-      }, 500);
+      }, 100);
       break;
     case 'busqueda':
       setTimeout(function() {
         btnBusqueda.click();
-      }, 500);
+      }, 100);
       break;
   }
 }
