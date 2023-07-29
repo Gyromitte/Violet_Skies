@@ -8,6 +8,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $currentPassword = $_POST['currentPassword'];
     $newPassword = $_POST['newPassword'];
     $confirmPassword = $_POST['confirmPassword'];
+    $cuenta = $_POST['cuenta'];
 
     if ($newPassword !== $confirmPassword) {
         $mensaje = "Las contraseñas no coinciden";
@@ -63,6 +64,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 $mensaje = "No se encontró el usuario";
                 // Envía una respuesta JSON con error
                 $response = array('success' => false, 'message' => $mensaje);
+                
                 exit;
             }
         } catch (PDOException $e) {
