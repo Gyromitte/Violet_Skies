@@ -13,34 +13,33 @@
 xhttp.open("GET", "/php/viewsCharts/countAll.php", true);
 xhttp.send();
 
-// Datos para el gráfico de puntos (scatter)
-Chart.defaults.color = 'white';
-const eventosRealizados = [
-    { mes: 'Enero', cantidad: 10 },
-    { mes: 'Febrero', cantidad: 15 },
-    { mes: 'Marzo', cantidad: 11 },
-    { mes: 'Abril', cantidad: 13 },
-    { mes: 'Mayo', cantidad: 20 },
-    { mes: 'Junio', cantidad: 18 },
-    { mes: 'Julio', cantidad: 25 },
-    { mes: 'Agosto', cantidad: 23 },
-    { mes: 'Septiembre', cantidad: 19 },
-  ];
-  
-  // Obtiene el contexto de los canvas
+// Realizar la solicitud AJAX para obtener los conteos de eventos finalizados por mes
+fetch('/php/viewsCharts/eventosMeses.php') // Ruta de la consulta PHP
+  .then(response => response.json())
+  .then(data => {
+    // data contiene los conteos de eventos finalizados por mes
+    console.log(data); // Agregar esta línea para verificar la respuesta
+
+    // Llamar a la función para actualizar el gráfico de puntos
+    actualizarGraficoPuntos(data);
+  })
+  .catch(error => console.error('Error al obtener los conteos de eventos:', error));
+
+// Función para actualizar el gráfico de puntos (scatter)
+function actualizarGraficoPuntos(data) {
+  Chart.defaults.color = 'white';
   var ctxEventos = document.getElementById('eventosAño').getContext('2d');
-  var ctxProporcion = document.getElementById('proporcionEmpleados').getContext('2d');
   var scatterChart = new Chart(ctxEventos, {
-    type: 'line', // Cambiamos el tipo de gráfico a 'line'
+    type: 'line',
     data: {
       datasets: [{
         label: 'Eventos por Mes',
-        data: eventosRealizados.map(({ mes, cantidad }) => ({ x: mes, y: cantidad })),
-        backgroundColor: 'transparent', // Color de fondo transparente para los puntos
-        borderColor: 'white', // Color de las líneas de conexión
+        data: data.map((cantidad, mes) => ({ x: obtenerNombreMes(mes + 1), y: cantidad })),
+        backgroundColor: 'transparent',
+        borderColor: 'white',
         borderWidth: 2,
-        pointRadius: 5, // Tamaño de los puntos
-        pointBackgroundColor: 'white', // Color de los puntos
+        pointRadius: 5,
+        pointBackgroundColor: 'white',
       }]
     },
     options: {
@@ -73,8 +72,17 @@ const eventosRealizados = [
       }
     }
   });
+}
+
+// Función auxiliar para obtener el nombre del mes a partir de su número
+function obtenerNombreMes(numeroMes) {
+  const nombresMeses = ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'];
+  return nombresMeses[numeroMes - 1];
+}
+
   
-  // Define el gráfico de "doughnut" sin datos iniciales
+
+var ctxProporcion = document.getElementById('proporcionEmpleados').getContext('2d');
 var doughnutChart = new Chart(ctxProporcion, {
   type: 'doughnut',
   data: {
