@@ -63,7 +63,7 @@ if (isset($_SESSION["ID"])) {
                   </div>
                   <input type="hidden" name="id" value="<?php echo $_SESSION["ID"]; ?>">
                   <div class="d-flex justify-content-end">
-                    <button class="btn btn-primary" onclick="habilitarEdicion()" id="btnModificar">Modificar datos</button>
+                    <button class="btn btn-primary" onclick="habilitarEdicion()" id="btnModificarDatos">Modificar datos</button>
                     <div class="d-flex justify-content-end">
                       <button class="btn btn-success d-none" id="btnGuardarCambios" onclick="guardarCambios()">Guardar cambios</button>
                       <button class="btn btn-danger d-none" id="btnCancelarCambios" onclick="cancelarCambios()">Cancelar</button>
@@ -174,12 +174,12 @@ if (isset($_SESSION["ID"])) {
 ?>
 
 <script>
-  const btnModificar = document.getElementById('btnModificar');
+  const btnModificarDatos = document.getElementById('btnModificarDatos');
   const btnGuardarCambios = document.getElementById('btnGuardarCambios');
   const btnCancelarCambios = document.getElementById('btnCancelarCambios');
   const registrarAdmin = document.getElementById('registrarAdmin');
   const formu = document.getElementById('formCambiarContrasena');
-  const formData = new FormData(formu);
+  const formuData = new FormData(formu);
   const successDiv = document.getElementById('alertMessage');
 
   function cambiarContraseña() {
@@ -212,7 +212,7 @@ if (isset($_SESSION["ID"])) {
       }
     };
     xhttp.open("POST", "../viewsPerfil/cambContraseña.php", true);
-    xhttp.send(formData);
+    xhttp.send(formuData);
   }
   
   document.getElementById('formCambiarContrasena').addEventListener('submit', function(event) {
@@ -223,10 +223,10 @@ if (isset($_SESSION["ID"])) {
   function habilitarEdicion() {
     const inputs = document.querySelectorAll('.personal-info input[disabled]');
     inputs.forEach(input => input.removeAttribute('disabled'));    
-    const btnModificar = document.getElementById('btnModificar');
+    const btnModificarDatos = document.getElementById('btnModificarDatos');
     const btnGuardarCambios = document.getElementById('btnGuardarCambios');
     const btnCancelarCambios = document.getElementById('btnCancelarCambios');
-    btnModificar.classList.add('d-none');
+    btnModificarDatos.classList.add('d-none');
     btnGuardarCambios.classList.remove('d-none');
     btnCancelarCambios.classList.remove('d-none');
   }
@@ -260,10 +260,10 @@ if (isset($_SESSION["ID"])) {
           }, 3000);
           console.log(response.message);
         }
-        const btnModificar = document.getElementById('btnModificar');
+        const btnModificarDatos = document.getElementById('btnModificarDatos');
         const btnGuardarCambios = document.getElementById('btnGuardarCambios');
         const btnCancelarCambios = document.getElementById('btnCancelarCambios');
-        btnModificar.classList.remove('d-none');
+        btnModificarDatos.classList.remove('d-none');
         btnGuardarCambios.classList.add('d-none');
         btnCancelarCambios.classList.add('d-none');
       }
@@ -279,10 +279,10 @@ if (isset($_SESSION["ID"])) {
       input.setAttribute('disabled', 'true');
       input.value = input.defaultValue;
     });
-    const btnModificar = document.getElementById('btnModificar');
+    const btnModificarDatos = document.getElementById('btnModificarDatos');
     const btnGuardarCambios = document.getElementById('btnGuardarCambios');
     const btnCancelarCambios = document.getElementById('btnCancelarCambios');
-    btnModificar.classList.remove('d-none');
+    btnModificarDatos.classList.remove('d-none');
     btnGuardarCambios.classList.add('d-none');
     btnCancelarCambios.classList.ad  
   }
