@@ -294,7 +294,7 @@ if (isset($_SESSION["ID"])) {
 
     btnEditarDatosPersonales.classList.remove('d-none');
     btnGuardarCambios.classList.add('d-none');
-    btnCancelarCambios.classList.ad  
+    btnCancelarCambios.classList.add('d-none');
   }
   
   function nuevoAdmin() {
