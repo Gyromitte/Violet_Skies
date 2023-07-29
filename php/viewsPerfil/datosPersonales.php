@@ -329,12 +329,10 @@ if (isset($_SESSION["ID"])) {
         },
         success: function (response) {
           // Aquí puedes manejar la respuesta del servidor después de procesar los datos
-          window.confirm(response)
-          console.log(response); // Solo para depuración, puedes hacer algo más con la respuesta
+          console.log("Se registró exitosamente");
         },
         error: function (error) {
           // Aquí puedes manejar el caso en que ocurra un error en la solicitud AJAX
-          window.confirm(response)
           console.error("Error al enviar los datos:", error);
         }
       });
