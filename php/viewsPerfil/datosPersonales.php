@@ -76,30 +76,60 @@ if (isset($_SESSION["ID"])) {
             <div class="accordion-item">
               <h2 class="accordion-header">
                 <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
-                  Accordion Item #2
+                  Registrar nuevo administrador
                 </button>
               </h2>
               <div id="collapseTwo" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
                 <div class="accordion-body">
-                  <strong>This is the second item's accordion body.</strong> It is hidden by default, until the collapse plugin adds the appropriate classes that we use to style each element. These classes control the overall appearance, as well as the showing and hiding via CSS transitions. You can modify any of this with custom CSS or overriding our default variables. It's also worth noting that just about any HTML can go within the <code>.accordion-body</code>, though the transition does limit overflow.
-                </div>
-              </div>
-            </div>
-            <div class="accordion-item">
-              <h2 class="accordion-header">
-                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
-                  Accordion Item #3
-                </button>
-              </h2>
-              <div id="collapseThree" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
-                <div class="accordion-body">
-                  <strong>This is the third item's accordion body.</strong> It is hidden by default, until the collapse plugin adds the appropriate classes that we use to style each element. These classes control the overall appearance, as well as the showing and hiding via CSS transitions. You can modify any of this with custom CSS or overriding our default variables. It's also worth noting that just about any HTML can go within the <code>.accordion-body</code>, though the transition does limit overflow.
+                  <strong>Recuerda que las personas que des de alta tendrán privilegios sobre los trabajadores y eventos registrados en esta página</strong>
+                  <div class="personal-info">
+                    <br>
+                    <div class="mb-3 row">
+                      <label class="col-sm-2 col-form-label">Nombre:</label>
+                      <div class="col-sm-10">
+                        <input class="form-control" type="text" name="nombre">
+                      </div>
+                    </div>
+                    <div class="mb-3 row">
+                      <label class="col-sm-2 col-form-label">Apellido paterno:</label>
+                      <div class="col-sm-10">
+                        <input class="form-control" type="text" name="ap_paterno">
+                      </div>
+                    </div>
+                    <div class="mb-3 row">
+                      <label class="col-sm-2 col-form-label">Apellido materno:</label>
+                      <div class="col-sm-10">
+                        <input class="form-control" type="text" name="ap_materno">
+                      </div>
+                    </div>
+                    <div class="mb-3 row">
+                      <label class="col-sm-2 col-form-label">Teléfono:</label>
+                      <div class="col-sm-10">
+                        <input class="form-control" type="text" name="telefono">
+                      </div>
+                    </div>
+                    <div class="mb-3 row">
+                      <label class="col-sm-2 col-form-label">Correo:</label>
+                      <div class="col-sm-10">
+                        <input class="form-control" type="text" name="correo">
+                      </div>
+                    </div>
+                    <div class="mb-3 row">
+                      <label class="col-sm-2 col-form-label">RFC:</label>
+                      <div class="col-sm-10">
+                        <input class="form-control" type="text" name="RFC">
+                      </div>
+                    </div>
+                    <div class="d-flex justify-content-end">
+                      <button class="btn btn-primary" onclick="registrarAdmin()" id="nuevoAdmin">Agregar nuevo administrador</button>
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>
           </div>
+        </div>
 
-          
             <div class="modal fade" id="modalCambiarContrasena" tabindex="-1" aria-labelledby="modalCambiarContrasenaLabel" aria-hidden="true">
               <div class="modal-dialog">
                 <div class="modal-content">
