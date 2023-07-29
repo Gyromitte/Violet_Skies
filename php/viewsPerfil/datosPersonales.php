@@ -63,43 +63,72 @@ if (isset($_SESSION["ID"])) {
                     </div>
                     <input type="hidden" name="id" value="<?php echo $_SESSION["ID"]; ?>">
                     <div class="d-flex justify-content-end">
-                      <button class="btn btn-primary" onclick="habilitarEdicion()" id="btnModificar">Modificar datos</button>
+                      <button class="btn btn-primary" onclick="habilitarEdicion()" id="btnEditarDatosPersonales">Modificar datos</button>
                       <div class="d-flex justify-content-end">
                         <button class="btn btn-success d-none" id="btnGuardarCambios" onclick="guardarCambios()">Guardar cambios</button>
                         <button class="btn btn-danger d-none" id="btnCancelarCambios" onclick="cancelarCambios()">Cancelar</button>
                       </div>
                     </div>
+                    <div id="mensajeModificar"></div>
                   </div>
                 </div>
               </div>
             </div>
             <div class="accordion-item">
               <h2 class="accordion-header">
-                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
-                  Accordion Item #2
-                </button>
+              <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                Registrar nuevo administrador
+              </button>
               </h2>
               <div id="collapseTwo" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
                 <div class="accordion-body">
-                  <strong>This is the second item's accordion body.</strong> It is hidden by default, until the collapse plugin adds the appropriate classes that we use to style each element. These classes control the overall appearance, as well as the showing and hiding via CSS transitions. You can modify any of this with custom CSS or overriding our default variables. It's also worth noting that just about any HTML can go within the <code>.accordion-body</code>, though the transition does limit overflow.
+                <strong>Considera que el registrar un nuevo administrador estás otorgando permisos para manejar los eventos futuros</strong>
+                <div><br></div>
+                <div class="mb-3 row">
+                  <label class="col-sm-2 col-form-label">Nombre:</label>
+                  <div class="col-sm-10">
+                    <input class="form-control" type="text" name="nombreNEW" required>
+                  </div>
                 </div>
-              </div>
-            </div>
-            <div class="accordion-item">
-              <h2 class="accordion-header">
-                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
-                  Accordion Item #3
-                </button>
-              </h2>
-              <div id="collapseThree" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
-                <div class="accordion-body">
-                  <strong>This is the third item's accordion body.</strong> It is hidden by default, until the collapse plugin adds the appropriate classes that we use to style each element. These classes control the overall appearance, as well as the showing and hiding via CSS transitions. You can modify any of this with custom CSS or overriding our default variables. It's also worth noting that just about any HTML can go within the <code>.accordion-body</code>, though the transition does limit overflow.
+                <div class="mb-3 row">
+                  <label class="col-sm-2 col-form-label">Apellido paterno:</label>
+                  <div class="col-sm-10">
+                    <input class="form-control" type="text" name="ap_paternoNEW">
+                  </div>
                 </div>
+                <div class="mb-3 row">
+                  <label class="col-sm-2 col-form-label">Apellido materno:</label>
+                  <div class="col-sm-10">
+                    <input class="form-control" type="text" name="ap_maternoNEW">
+                  </div>
+                </div>
+                <div class="mb-3 row">
+                  <label class="col-sm-2 col-form-label">Teléfono:</label>
+                  <div class="col-sm-10">
+                    <input class="form-control" type="text" name="telefonoNEW">
+                  </div>
+                </div>
+                <div class="mb-3 row">
+                  <label class="col-sm-2 col-form-label">Correo:</label>
+                  <div class="col-sm-10">
+                    <input class="form-control" type="email" name="correoNEW">
+                  </div>
+                </div>
+                <div class="mb-3 row">
+                  <label class="col-sm-2 col-form-label">RFC:</label>
+                  <div class="col-sm-10">
+                    <input class="form-control" type="text" name="rfcNEW">
+                  </div>
+                </div>
+                <div class="d-flex justify-content-end">
+                  <button class="btn btn-primary" onclick="nuevoAdmin()" id="nuevoAdmin">Registrar administrador</button>
+                </div>
+                <div id="mensaje"></div>
               </div>
             </div>
           </div>
+        </div>
 
-          
             <div class="modal fade" id="modalCambiarContrasena" tabindex="-1" aria-labelledby="modalCambiarContrasenaLabel" aria-hidden="true">
               <div class="modal-dialog">
                 <div class="modal-content">
@@ -146,7 +175,7 @@ if (isset($_SESSION["ID"])) {
 ?>
 
 <script>
-  const btnModificar = document.getElementById('btnModificar');
+  const btnEditarDatosPersonales = document.getElementById('btnEditarDatosPersonales');
   const btnGuardarCambios = document.getElementById('btnGuardarCambios');
   const btnCancelarCambios = document.getElementById('btnCancelarCambios');
   const successDiv = document.getElementById('alertMessage');
@@ -202,11 +231,11 @@ if (isset($_SESSION["ID"])) {
     const inputs = document.querySelectorAll('.personal-info input[disabled]');
     inputs.forEach(input => input.removeAttribute('disabled'));
     
-    const btnModificar = document.getElementById('btnModificar');
+    const btnEditarDatosPersonales = document.getElementById('btnEditarDatosPersonales');
     const btnGuardarCambios = document.getElementById('btnGuardarCambios');
     const btnCancelarCambios = document.getElementById('btnCancelarCambios');
 
-    btnModificar.classList.add('d-none');
+    btnEditarDatosPersonales.classList.add('d-none');
     btnGuardarCambios.classList.remove('d-none');
     btnCancelarCambios.classList.remove('d-none');
   }
@@ -226,19 +255,25 @@ if (isset($_SESSION["ID"])) {
         // La respuesta del servidor ha sido recibida correctamente
         const response = JSON.parse(this.responseText);
         if (response.success) {
-          // Los datos se actualizaron correctamente en la base de datos
-          // Puedes mostrar un mensaje de éxito o realizar alguna acción adicional
+          $("#mensajeModificar").text("Cambios guardados correctamente");
+          $("#mensajeModificar").show();
+          setTimeout(function () {
+            $("#mensajeModificar").hide();
+          }, 3000);
           console.log(response.message);
         } else {
-          // Hubo un error al actualizar los datos en la base de datos
-          // Puedes mostrar un mensaje de error o realizar alguna acción de manejo de errores
+          $("#mensajeModificar").text("Error al intentar hacer los cambios");
+          $("#mensajeModificar").show();
+          setTimeout(function () {
+            $("#mensajeModificar").hide();
+          }, 3000);
           console.log(response.message);
         }
-        const btnModificar = document.getElementById('btnModificar');
+        const btnEditarDatosPersonales = document.getElementById('btnEditarDatosPersonales');
         const btnGuardarCambios = document.getElementById('btnGuardarCambios');
         const btnCancelarCambios = document.getElementById('btnCancelarCambios');
 
-        btnModificar.classList.remove('d-none');
+        btnEditarDatosPersonales.classList.remove('d-none');
         btnGuardarCambios.classList.add('d-none');
         btnCancelarCambios.classList.add('d-none');
       }
@@ -255,12 +290,67 @@ if (isset($_SESSION["ID"])) {
       input.value = input.defaultValue;
     });
 
-    const btnModificar = document.getElementById('btnModificar');
+    const btnEditarDatosPersonales = document.getElementById('btnEditarDatosPersonales');
     const btnGuardarCambios = document.getElementById('btnGuardarCambios');
     const btnCancelarCambios = document.getElementById('btnCancelarCambios');
 
-    btnModificar.classList.remove('d-none');
+    btnEditarDatosPersonales.classList.remove('d-none');
     btnGuardarCambios.classList.add('d-none');
     btnCancelarCambios.classList.ad  
   }
+  
+  function nuevoAdmin() {
+    const nombre = $('input[name="nombreNEW"]').val();
+    const ap_paterno = $('input[name="ap_paternoNEW"]').val();
+    const ap_materno = $('input[name="ap_maternoNEW"]').val();
+    const telefono = $('input[name="telefonoNEW"]').val();
+    const correo = $('input[name="correoNEW"]').val();
+    const rfc = $('input[name="rfcNEW"]').val();
+    if (!nombre || !ap_paterno || !ap_materno || !telefono || !correo || !rfc) {
+      alert("Por favor, complete todos los campos requeridos");
+      return; // Detener la ejecución de la función si hay campos vacíos
+    }
+    const mensajeConfirmacion = `¿Seguro que desea registrar un administrador con los siguientes datos?\n\nNombre: ${nombre}\nApellido Paterno: ${ap_paterno}\nApellido Materno: ${ap_materno}\nTeléfono: ${telefono}\nCorreo: ${correo}\nRFC: ${rfc}`;
+    if (window.confirm(mensajeConfirmacion)) {
+      // Si el usuario acepta, enviar los datos a registrarAdmin.php mediante una solicitud AJAX
+      $.ajax({
+        type: "POST", // O el método que utilices para enviar los datos
+        url: "../viewsPerfil/registrarAdmin.php", // Archivo PHP que procesará los datos y los agregará a la base de datos
+        data: {
+          nombre,
+          ap_paterno,
+          ap_materno,
+          telefono,
+          correo,
+          rfc
+        },
+        success: function () {
+          $("#mensaje").text("Administrador registrado correctamente");
+          $("#mensaje").show();
+          console.log("Se registró exitosamente");
+          setTimeout(function () {
+            $('input[name="nombreNEW"]').val('');
+            $('input[name="ap_paternoNEW"]').val('');
+            $('input[name="ap_maternoNEW"]').val('');
+            $('input[name="telefonoNEW"]').val('');
+            $('input[name="correoNEW"]').val('');
+            $('input[name="rfcNEW"]').val('');
+            $("#mensaje").hide();
+          }, 3000);
+        },
+        error: function (error) {
+          $("#mensaje").text("Error al registrar nuevo usuario");
+          $("#mensaje").show();
+          setTimeout(function () {
+            $("#mensaje").hide();
+          }, 3000);
+          console.error("Error al enviar los datos:", error);
+        }
+      });
+    }
+  }
+  // Manejo del clic en el botón "Registrar administrador"
+  $(document).ready(function () {
+    $('#registrarAdmin').click(nuevoAdmin);
+  });
 </script>
