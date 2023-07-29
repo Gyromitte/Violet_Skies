@@ -74,7 +74,9 @@ function getMessageByButtonId(buttonId) {
       return 'Mostrando a los meseros: <i class="fa-solid fa-bell-concierge" style="color: #ffffff;"></i>';
     case 'buscarEmpleado':
       currentTable = 'busqueda';
-      return 'Resultados de búsqueda: <i class="fa-solid fa-magnifying-glass" style="color: #ffffff;"></i>';;
+      return 'Resultados de búsqueda: <i class="fa-solid fa-magnifying-glass" style="color: #ffffff;"></i>';
+    case 'verSolicitudes':
+      return 'Estas son tus solicitudes pendientes: <i class="fa-solid fa-business-time" style="color: #ffffff;"></i>';
     default:
       return 'Mostrando información:';
   }

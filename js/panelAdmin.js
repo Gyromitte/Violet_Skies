@@ -254,10 +254,8 @@ function updateModalContent(formType, idEmpleado) {
                 `;
             // Asignar el contenido al formulario del modal
             modalForm.innerHTML = formContent;
-
             // Obtener el formulario después de haberlo asignado al DOM
             var formEditarEmpleado = document.querySelector('#formularioEditarEmpleado');
-
             // Agregar evento de envío al formulario de edición
             formEditarEmpleado.addEventListener('submit', function (event) {
               event.preventDefault(); // Evitar que el formulario se envíe por defecto
@@ -301,7 +299,6 @@ function updateModalContent(formType, idEmpleado) {
       checkCurrentTable(currentTable);
       break;
       case "@editarPerfil":
-        console.log("hola");
         modalTitle.textContent ="Editar Datos"
         formContent=`<form id="formularioEditarDatos" method="post" action="pruebaComprobación.php">
         <div class="form-group">
@@ -334,6 +331,37 @@ function updateModalContent(formType, idEmpleado) {
         modalForm.innerHTML = formContent;
         //Ver cual es la tabla activa para refrescar cualquier cambio
         checkCurrentTable(currentTable);
+        break;
+      case "@verSolicitud":
+        modalTitle.textContent = "Manejar solicitud";
+        formContent = `
+        <form>
+          <div id="mensajeDiv" method="POST"></div> 
+          <h5>Empleado: </h5>
+          <h6 class="mb-3"></h6>
+          <h5>Telefono: </h5>
+          <h6 class="mb-3"></h6>
+          <h5>Correo: </h5>
+          <h6 class="mb-3"></h6>
+          <div class="mb-3">
+          <label class="control-label">RFC</label>
+          <input type="text" name="RFC" placeholder="Ingresa el RFC" class="form-control" required>
+          </div>
+          <div class="form-group mb-3">
+            <label for="tipoUsuario">Tipo de Trabajador</label>
+            <select name="tipoUsuario" class="form-control form-select" id="tipoUsuario">
+              <option value="mesero">Mesero</option>
+              <option value="cocina">Cocinero</option>
+            </select>
+          </div>
+          <div class="d-flex justify-content-center">
+          <button type="submit" class="btn btn-primary btn-modal me-2"><i class="fa-solid fa-circle-check me-2" style="color: #ffffff;"></i>
+          Aceptar</button>
+            <button type="submit" class="btn btn-primary btn-modal-warning me-2"><i class="fa-solid fa-ban me-2" style="color: #ffffff;"></i>
+          Rechazar</button>
+          </div>
+        </form>`;
+        modalForm.innerHTML = formContent;
         break;
   }
 }
