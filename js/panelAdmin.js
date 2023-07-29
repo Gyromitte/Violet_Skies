@@ -332,36 +332,54 @@ function updateModalContent(formType, idEmpleado) {
         //Ver cual es la tabla activa para refrescar cualquier cambio
         checkCurrentTable(currentTable);
         break;
-      case "@verSolicitud":
-        modalTitle.textContent = "Manejar solicitud";
-        formContent = `
-        <form>
-          <div id="mensajeDiv" method="POST"></div> 
-          <h5>Empleado: </h5>
-          <h6 class="mb-3"></h6>
-          <h5>Telefono: </h5>
-          <h6 class="mb-3"></h6>
-          <h5>Correo: </h5>
-          <h6 class="mb-3"></h6>
-          <div class="mb-3">
-          <label class="control-label">RFC</label>
-          <input type="text" name="RFC" placeholder="Ingresa el RFC" class="form-control" required>
-          </div>
-          <div class="form-group mb-3">
-            <label for="tipoUsuario">Tipo de Trabajador</label>
-            <select name="tipoUsuario" class="form-control form-select" id="tipoUsuario">
-              <option value="mesero">Mesero</option>
-              <option value="cocina">Cocinero</option>
-            </select>
-          </div>
-          <div class="d-flex justify-content-center">
-          <button type="submit" class="btn btn-primary btn-modal me-2"><i class="fa-solid fa-circle-check me-2" style="color: #ffffff;"></i>
-          Aceptar</button>
-            <button type="submit" class="btn btn-primary btn-modal-warning me-2"><i class="fa-solid fa-ban me-2" style="color: #ffffff;"></i>
-          Rechazar</button>
-          </div>
-        </form>`;
-        modalForm.innerHTML = formContent;
+        case "@verSolicitud":
+          modalTitle.textContent = "Manejar solicitud";
+          modalHeader.classList.remove('modal-header-warning');
+          // Obtener los datos de la solicitud con una solicitud AJAX
+          var xhr = new XMLHttpRequest();
+          xhr.onreadystatechange = function() {
+            if (xhr.readyState === XMLHttpRequest.DONE) {
+              if (xhr.status === 200) {
+                // Parsear la respuesta JSON
+                var solicitud = JSON.parse(xhr.responseText);
+                // Actualizar el contenido del formulario con los datos obtenidos
+                formContent = `
+                  <form>
+                    <div id="mensajeDiv" method="POST"></div> 
+                    <h5>Empleado: </h5>
+                    <h6 class="mb-3">${solicitud.NOMBRE}</h6>
+                    <h5>Telefono: </h5>
+                    <h6 class="mb-3">${solicitud.TELEFONO}</h6>
+                    <h5>Correo: </h5>
+                    <h6 class="mb-3">${solicitud.CORREO}</h6>
+                    <div class="mb-3">
+                      <label class="control-label">RFC</label>
+                      <input type="text" name="RFC" placeholder="Ingresa el RFC" class="form-control" required>
+                    </div>
+                    <div class="form-group mb-3">
+                      <label for="tipoUsuario">Tipo de Trabajador</label>
+                      <select name="tipoUsuario" class="form-control form-select" id="tipoUsuario">
+                        <option value="mesero">Mesero</option>
+                        <option value="cocina">Cocinero</option>
+                      </select>
+                    </div>
+                    <div class="d-flex justify-content-center">
+                      <button type="submit" class="btn btn-primary btn-modal me-2"><i class="fa-solid fa-circle-check me-2" style="color: #ffffff;"></i>Aceptar</button>
+                      <button type="submit" class="btn btn-primary btn-modal-warning me-2"><i class="fa-solid fa-ban me-2" style="color: #ffffff;"></i>Rechazar</button>
+                    </div>
+                  </form>
+                `;
+                // Asignar el contenido al formulario del modal
+                modalForm.innerHTML = formContent;
+              } else {
+                console.error("Error en la solicitud AJAX");
+              }
+            }
+          };
+          console.log(idEmpleado);
+          // Hacer la solicitud al script PHP y pasar el ID de la solicitud
+          xhr.open("GET", "obtenerSolicitud.php?id=" + idEmpleado, true);
+          xhr.send();
         break;
   }
 }
