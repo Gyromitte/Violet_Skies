@@ -174,6 +174,10 @@
             <!--Opciones de Vistas-->
             <div class="view-options">
                 <div>
+                    <button id="verGraficos" data-url="" type="button" class="btn-options ver-empleados btn btn-primary border-2 btn-outline-light rounded-5" data-bs-target="#mainModal">
+                        <i class="fa-solid fa-chart-pie" style="color: #ffffff;"></i>
+                        Ver Graficos
+                    </button>
                     <button id="verCocineros" data-url="verCocineros.php" type="button" class="btn-options ver-empleados btn btn-primary border-2 btn-outline-light rounded-5" data-bs-target="#mainModal">
                         <i class="fa-solid fa-utensils" style="color: #ffffff;"></i>
                         Ver Cocineros
@@ -197,7 +201,7 @@
                 <!--Contenido Default-->
                 <div class="col-md-5">
                         <canvas id="proporcionEmpleados2"></canvas>
-                    </div>
+                </div>
             </div>
         </div>
         <div id="perfil" class="tab-content">

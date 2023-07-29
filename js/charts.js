@@ -116,7 +116,8 @@ function actualizarGraficoDoughnut(countCocina, countMesero) {
   doughnutChart.update();
 }
 
-// JavaScript para la segunda instancia de gráficas
+function recargarGraficos(){
+  // JavaScript para la segunda instancia de gráficas
 var ctxProporcion2 = document.getElementById('proporcionEmpleados2').getContext('2d');
 var doughnutChart2 = new Chart(ctxProporcion2, {
   type: 'doughnut',
@@ -168,5 +169,8 @@ fetch('/php/viewsCharts/countEmpleados.php') // Ruta de la consulta PHP
     actualizarGraficoDoughnut2(countCocina, countMesero);
   })
   .catch(error => console.error('Error al obtener los conteos de empleados:', error));
+}
 
+//Cargar el segundo grafico una vez al principio del load de la pagina
+recargarGraficos();
 

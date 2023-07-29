@@ -65,17 +65,17 @@ function checkCurrentTable(currentTable) {
     case 'cocineros':
       setTimeout(function() {
         btnCocineros.click();
-      }, 500);
+      }, 100);
       break;
     case 'meseros':
       setTimeout(function() {
         btnMeseros.click();
-      }, 500);
+      }, 100);
       break;
     case 'busqueda':
       setTimeout(function() {
         btnBusqueda.click();
-      }, 500);
+      }, 100);
       break;
   }
 }
