@@ -1,3 +1,4 @@
+<!DOCTYPE html>
 <!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
 <!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
 <!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
@@ -194,6 +195,9 @@
             <!--Container para tablas-->
             <div class="cont-table">
                 <!--Contenido Default-->
+                <div class="col-md-5">
+                        <canvas id="proporcionEmpleados2"></canvas>
+                    </div>
             </div>
         </div>
         <div id="perfil" class="tab-content">

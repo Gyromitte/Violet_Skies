@@ -79,9 +79,9 @@ function obtenerNombreMes(numeroMes) {
   const nombresMeses = ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'];
   return nombresMeses[numeroMes - 1];
 }
-
-  
-
+//Doughnout (proporcion empleados)
+// JavaScript para la primera instancia de gráficas
+var ctxEventos = document.getElementById('eventosAño').getContext('2d');
 var ctxProporcion = document.getElementById('proporcionEmpleados').getContext('2d');
 var doughnutChart = new Chart(ctxProporcion, {
   type: 'doughnut',
@@ -109,11 +109,46 @@ var doughnutChart = new Chart(ctxProporcion, {
   }
 });
 
-/*Functionality*/
+/* Functionality */
 function actualizarGraficoDoughnut(countCocina, countMesero) {
   // Actualizar el gráfico de "doughnut" con los nuevos datos
   doughnutChart.data.datasets[0].data = [countCocina, countMesero];
   doughnutChart.update();
+}
+
+// JavaScript para la segunda instancia de gráficas
+var ctxProporcion2 = document.getElementById('proporcionEmpleados2').getContext('2d');
+var doughnutChart2 = new Chart(ctxProporcion2, {
+  type: 'doughnut',
+  data: {
+    labels: ['Cocineros', 'Meseros'],
+    datasets: [{
+      data: [], // Sin datos iniciales
+      backgroundColor: ['#5603ad', '#8367c7'], // Colores de las secciones
+      borderColor: ['white', 'white'], // Colores de los bordes de las secciones
+      borderWidth: 1,
+    }]
+  },
+  options: {
+    responsive: true,
+    maintainAspectRatio: false,
+    plugins: {
+      legend: {
+          display: true,
+          position: 'bottom',
+          labels:{
+              fontColor: 'white'
+          },
+      },
+    }
+  }
+});
+
+/* Functionality para la segunda instancia */
+function actualizarGraficoDoughnut2(countCocina, countMesero) {
+  // Actualizar el gráfico de "doughnut" con los nuevos datos
+  doughnutChart2.data.datasets[0].data = [countCocina, countMesero];
+  doughnutChart2.update();
 }
 
 // Realizar la solicitud AJAX para obtener los conteos de empleados
@@ -126,8 +161,12 @@ fetch('/php/viewsCharts/countEmpleados.php') // Ruta de la consulta PHP
     const countCocina = data.count_cocina;
     const countMesero = data.count_mesero;
 
-    // Llamar a la función para actualizar el gráfico de "doughnut"
+    // Llamar a la función para actualizar el gráfico de "doughnut" para la primera instancia
     actualizarGraficoDoughnut(countCocina, countMesero);
+
+    // Llamar a la función para actualizar el gráfico de "doughnut" para la segunda instancia
+    actualizarGraficoDoughnut2(countCocina, countMesero);
   })
   .catch(error => console.error('Error al obtener los conteos de empleados:', error));
+
 
