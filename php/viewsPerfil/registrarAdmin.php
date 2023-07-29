@@ -20,10 +20,8 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     $sql = "INSERT INTO CUENTAS (NOMBRE, AP_PATERNO, AP_MATERNO, TELEFONO, CORREO, CONTRASEÑA, TIPO_CUENTA) 
     VALUES ('$nombre', '$ap_paterno', '$ap_materno', '$telefono', '$correo', '$passHash', 'ADMINISTRADOR')";
 
-
-$resultado = $conexion->ejecutarSQL($sql);
     // Ejecutar la consulta y verificar si se realizó correctamente
-    if ($resultado === TRUE) {
+    if ($conexion->ejecutarSQL($sql) === TRUE) {
         echo "El administrador se registró correctamente";
     } else {
         echo "Error al registrar al administrador" ;
