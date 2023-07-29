@@ -1,66 +1,80 @@
 <?php
-// cambContraseña.php
-
-// Incluye el archivo de conexión a la base de datos
 include_once "../dataBase.php";
 
-// Verifica si se ha enviado el formulario para cambiar la contraseña
-if ($_SERVER["REQUEST_METHOD"] === "POST") {
-    // Obtén los datos del formulario
-    $currentPassword = $_POST["currentPassword"];
-    $newPassword = $_POST["newPassword"];
-    $confirmPassword = $_POST["confirmPassword"];
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    // Obtener los valores del formulario
+    session_start();
 
-    // Realiza las validaciones necesarias (puedes agregar más validaciones según tus requerimientos)
-    if (empty($currentPassword) || empty($newPassword) || empty($confirmPassword)) {
-        $mensaje = "Por favor, complete todos los campos.";
-    } elseif ($newPassword !== $confirmPassword) {
-        $mensaje = "Las contraseñas no coinciden.";
+    $currentPassword = $_POST['currentPassword'];
+    $newPassword = $_POST['newPassword'];
+    $confirmPassword = $_POST['confirmPassword'];
+
+    if ($newPassword !== $confirmPassword) {
+        $mensaje = "Las contraseñas no coinciden";
+        $response = array('success' => false, 'message' => $mensaje);
+                    header('Content-Type: application/json');
+                    echo json_encode($response);
     } else {
-        // Obtiene el ID del usuario desde la sesión (asegúrate de que se haya iniciado la sesión en tus archivos)
-        if (isset($_SESSION["ID"])) {
-            $user_id = $_SESSION["ID"];
+        try {
+            $database = new Database();
+            $database->conectarBD();
 
-            try {
-                // Crea una instancia de la clase DataBase para usar los identificadores de la clase
-                $db = new DataBase();
-                // Llama al método conectar() para establecer la conexión a la base de datos
-                $conexion = $db->conectarBD();
+            // Obtener la contraseña actual almacenada en la base de datos para el usuario
+            $consulta = "SELECT CONTRASEÑA FROM CUENTAS WHERE ID = :cuenta";
+            $parametros = array(':cuenta' => $cuenta);
+            $resultados = $database->seleccionarPreparado($consulta, $parametros);
 
-                // Consulta preparada para buscar los datos del usuario por su ID y contraseña actual
-                $query = "SELECT * FROM CUENTAS WHERE ID = :user_id AND CONTRASENA = :currentPassword";
-                $parametros = array(':user_id' => $user_id, ':currentPassword' => $currentPassword);
-                $result = $db->seleccionarPreparado($query, $parametros);
+            if (!empty($resultados)) {
+                $contraseñaActual = $resultados[0]->CONTRASEÑA;
 
-                if ($result) {
-                    // Si la consulta arroja un resultado, significa que la contraseña actual es correcta
-                    // Ahora podemos actualizar la contraseña en la base de datos
-                    $query = "UPDATE CUENTAS SET CONTRASENA = :newPassword WHERE ID = :user_id";
-                    $parametros = array(':newPassword' => $newPassword, ':user_id' => $user_id);
-                    $result = $db->actualizarPreparado($query, $parametros);
-
-                    if ($result) {
-                        // Los datos se actualizaron correctamente en la base de datos
-                        $response = array('success' => true, 'message' => '¡Contraseña cambiada exitosamente!');
-                    } else {
-                        $response = array('success' => false, 'message' => 'Error al cambiar la contraseña. Por favor, inténtelo de nuevo.');
-                    }
+                // Verificar si la contraseña actual ingresada coincide con la almacenada en la base de datos
+                if (!password_verify($currentPassword, $contraseñaActual)) {
+                    $mensaje = "La contraseña actual es incorrecta";
+                    $response = array('success' => false, 'message' => $mensaje);
+                        header('Content-Type: application/json');
+                        echo json_encode($response);
+                        exit;
                 } else {
-                    $response = array('success' => false, 'message' => 'La contraseña actual es incorrecta.');
+                    // Actualizar la contraseña en la base de datos
+                    $hashNuevaContraseña = password_hash($newPassword, PASSWORD_DEFAULT); // Hashear la nueva contraseña
+                    $consulta = "UPDATE CUENTAS SET CONTRASEÑA = :newPassword WHERE ID = :cuenta";
+                    $actualizar = $database->getPDO()->prepare($consulta);
+                    $actualizar->bindParam(':newPassword', $hashNuevaContraseña);
+                    $actualizar->bindParam(':cuenta', $cuenta);
+                    $actualizar->execute();
+
+                    if ($actualizar->rowCount() === 0) {
+                        $mensaje = "Error al actualizar la contraseña";
+                        // Manejo del error y redirección si es necesario
+                        $response = array('success' => false, 'message' => $mensaje);
+                        header('Content-Type: application/json');
+                        echo json_encode($response);
+                        exit;
+                    } else {
+                        $mensaje = "Contraseña actualizada exitosamente";
+                        // Envía una respuesta JSON con éxito
+                        $response = array('success' => true, 'message' => $mensaje);
+                        header('Content-Type: application/json');
+                        echo json_encode($response);
+                        exit;
+                    }
                 }
-
-                // Cerrar la conexión
-                $db->desconectarBD();
-            } catch (PDOException $e) {
-                $response = array('success' => false, 'message' => 'Error: ' . $e->getMessage());
+            } else {
+                $mensaje = "No se encontró el usuario";
+                // Envía una respuesta JSON con error
+                $response = array('success' => false, 'message' => $mensaje);
+                exit;
             }
-        } else {
-            $response = array('success' => false, 'message' => 'No se ha proporcionado un identificador de usuario.');
+        } catch (PDOException $e) {
+            $mensaje = "Error en la base de datos: " . $e->getMessage();
+            // Envía una respuesta JSON con error
+            $response = array('success' => false, 'message' => $mensaje);
+            header('Content-Type: application/json');
+            echo json_encode($response);
+            exit;
         }
-    }
 
-    // Devuelve la respuesta como un JSON
-    header('Content-Type: application/json');
-    echo json_encode($response);
+        $database->desconectarBD();
+    }
 }
 ?>

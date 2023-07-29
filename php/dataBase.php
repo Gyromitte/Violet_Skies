@@ -21,6 +21,7 @@
                 echo $e->getMessage(); 
             }
         }
+
     function desconectarBD()
     {
         try
@@ -85,6 +86,10 @@
             }
         }
 
+        public function getPDO() {
+            return $this->PDO_local;
+        }
+        
         function Login($usu,$pass){
             try{
                 $ver = false;
