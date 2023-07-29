@@ -104,25 +104,25 @@ if (isset($_SESSION["ID"])) {
               <div class="modal-dialog">
                 <div class="modal-content">
                   <div class="modal-header">
-                    <h5 class="modal-title" id="modalCambiarContrasenaLabel">Cambiar contraseña</h5>
+                    <h5 class="modal-title">Cambiar contraseña</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                   </div>
                   <div class="modal-body">
                     <form id="formCambiarContrasena" method="POST">
                       <div class="mb-3">
-                        <label for="currentPassword" class="form-label">Contraseña actual:</label>
+                        <label class="form-label">Contraseña actual:</label>
                         <input type="password" class="form-control" id="currentPassword" name="currentPassword" required>
                       </div>
                       <div class="mb-3">
-                        <label for="newPassword" class="form-label">Nueva contraseña:</label>
+                        <label class="form-label">Nueva contraseña:</label>
                         <input type="password" class="form-control" id="newPassword" name="newPassword" required>
                       </div>
                       <div class="mb-3">
-                        <label for="confirmPassword" class="form-label">Confirmar contraseña:</label>
+                        <label class="form-label">Confirmar contraseña:</label>
                         <input type="password" class="form-control" id="confirmPassword" name="confirmPassword" required>
                       </div>
                       <input type="hidden" name="cuenta" value="<?php echo $_SESSION["ID"]; ?>">
-                      <button type="submit" class="btn btn-primary" id="btnCambiarContrasena">Cambiar</button>
+                      <button type="submit" class="btn btn-primary">Cambiar</button>
                       <div class="alert d-none" role="alert" align="center" id="alertMessage">
                         </div>
                     </form>
@@ -131,7 +131,6 @@ if (isset($_SESSION["ID"])) {
               </div>
             </div>
           
-
       <?php
       } else {
         echo "Usuario no encontrado.";
@@ -150,12 +149,11 @@ if (isset($_SESSION["ID"])) {
   const btnModificar = document.getElementById('btnModificar');
   const btnGuardarCambios = document.getElementById('btnGuardarCambios');
   const btnCancelarCambios = document.getElementById('btnCancelarCambios');
-  const formu = document.getElementById('formCambiarContrasena');
-    const formData = new FormData(formu);
-    const successDiv = document.getElementById('alertMessage');
+  const successDiv = document.getElementById('alertMessage');
   // Función para enviar los datos del formulario a cambContraseña.php mediante AJAX
   function cambiarContraseña() {
-
+    const formu = document.getElementById('formCambiarContrasena');
+      const formCambiarPass = new FormData(formu);
     // Realizar la solicitud AJAX
     const xhttp = new XMLHttpRequest();
     xhttp.onreadystatechange = function() {
@@ -163,7 +161,6 @@ if (isset($_SESSION["ID"])) {
         // La respuesta del servidor ha sido recibida correctamente
         const response = JSON.parse(this.responseText);
         const alertDiv = document.getElementById('alertMessage');
-
         if (response.success) {
           alertDiv.classList.add('alert-success')
           // Los datos se actualizaron correctamente en la base de datos
@@ -192,7 +189,7 @@ if (isset($_SESSION["ID"])) {
       }
     };
     xhttp.open("POST", "../viewsPerfil/cambContraseña.php", true);
-    xhttp.send(formData);
+    xhttp.send(formCambiarPass);
   }
 
   // Agregar un evento al formulario para llamar a la función cambiarContraseña al enviarlo
