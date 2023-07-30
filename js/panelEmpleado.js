@@ -53,7 +53,7 @@ modal.addEventListener("show.bs.modal", function (event) {
     var formType = button.getAttribute("data-bs-whatever");
     var idEvento = button.getAttribute("data-id");
     // Actualizar el contenido del formulario
-    updateModalContent(formType, idEmpleado);
+    updateModalContent(formType, idEvento);
   });
   
   // Función para actualizar el contenido del modal según el tipo de formulario
@@ -67,58 +67,43 @@ modal.addEventListener("show.bs.modal", function (event) {
     switch (formType) {
       case "@ponerte":
         modalTitle.textContent = "Trabajar en este evento?";
-        modalHeader.classList.add('modal-header');
-        // Obtener los datos del empleado con una solicitud AJAX
+        modalHeader.classList.add('modal-header-warning');
         var xhr = new XMLHttpRequest();
-        xhr.onreadystatechange = function () {
+        xhr.onreadystatechange = function() {
           if (xhr.readyState === XMLHttpRequest.DONE) {
             if (xhr.status === 200) {
               // Parsear la respuesta JSON
-              // Actualizar el contenido del formulario con los datos obtenidos
+              var evento = JSON.parse(xhr.responseText);
+              // Actualizar el contenido del formulario con los datos obtenido
               formContent = `
-                  <form id="enterEvent">
-                    <div id="mensajeDiv" method="POST"></div> 
+                <form onsubmit="return asistirEvento(${idEvento})">
+                  <div id="mensajeDiv" method="POST"></div> 
                     <div class="d-flex justify-content-center">
+                      <h4>
+                        ${evento.NOMBRE}
+                      </h4>
+                      <br>
                       <button type="submit" class="btn btn-primary btn-modal-warning me-2">
-                        <i class="fa-solid fa-user-slash me-2" style="color: #ffffff;">
-                          Asistir
+                        <i class="fa-solid fa-user me-2" style="color: #ffffff;">
+                            Asistir
                         </i>
                       </button>
+                      <br>
                     </div>
-                    </div>
-                  </form>
-                `;
-              // Asignar el contenido al formulario del modal
+                  </div>
+                </form>
+              `;
               modalForm.innerHTML = formContent;
-
-              //Obtener el formulario después de haberlo asignado al DOM
-              form = document.querySelector('#enterEvent');
-
-              //Agregar evento de envio al formulario
-              form.addEventListener('submit', function (event) {
-                event.preventDefault(); //Para que la pagina no de refresh al dar submit
-
-                var updateXHR = new XMLHttpRequest();
-                updateXHR.onreadystatechange = function () {
-                  if (updateXHR.readyState === XMLHttpRequest.DONE) {
-                    if (updateXHR.status === 200) {
-                      // Estilos al div de mensajes según la respuesta
-                      var respuesta = updateXHR.responseText;
-                      document.getElementById('mensajeDiv').innerHTML = respuesta;
-                    } 
-                    else {
-                      console.error("Error en la solicitud AJAX de actualización");
-                    }
-                  }
-                };
-
-                updateXHR.open("POST", "asistirEvento.php", true);
-                updateXHR.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-                updateXHR.send(`id=${idEvento}`);
-                //Ver cual es la tabla activa para refrescar cualquier cambio
-                checkCurrentTable(currentTable);
-              });
-            }}}
-            break;
+            }
+            else {
+              console.error("Error en la solicitud AJAX");
+            }
           }
+        };
+        xhr.open("GET", "obtenerEvento.php?id=" + idEvento, true);
+        xhr.send();
+        //Ver cual es la tabla activa para refrescar cualquier cambio
+        checkCurrentTable(currentTable);
+      break;
+    };
   }

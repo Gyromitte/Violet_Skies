@@ -36,7 +36,7 @@
         $tabla = $conexion->seleccionar($consulta);
         $num=count($tabla);
         if($num==0){
-            echo"<h1> No hay eventos pendientes al momento</h1>";
+            echo"<h1> No estas en ningun evento al momento</h1>";
         }
         foreach($tabla as $registro){
             $evento=$registro->ID;
@@ -72,7 +72,7 @@
                         echo '<ul class="dropdown-menu custom-drop-menu">';
                             echo '<li>
                                 <a class="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#empModal" 
-                                data-bs-whatever="@ponerte" 
+                                data-bs-whatever="@cancelar" 
                                 data-id="'.$registro->ID.'">
                                     <i class="fa-solid fa-pencil me-2" style="color: #ffffff;"></i>Entrar
                                 </a>

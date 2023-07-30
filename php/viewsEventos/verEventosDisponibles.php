@@ -67,14 +67,14 @@
                 echo "<div class='text-center'>";
                     echo '<div class="dropdown">';
                         echo '<button class="btn btn-secondary dropdown-toggle custom-dropdown" type="button" 
-                        data-bs-toggle="dropdown" aria-expanded="false">Entrar';
+                        data-bs-toggle="dropdown" aria-expanded="false">Asistir';
                         echo '</button>';
                         echo '<ul class="dropdown-menu custom-drop-menu">';
                             echo '<li>
                                 <a class="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#empModal" 
                                 data-bs-whatever="@ponerte" 
                                 data-id="'.$registro->ID.'">
-                                    <i class="fa-solid fa-pencil me-2" style="color: #ffffff;"></i>Entrar
+                                    <i class="fa-solid fa-pencil me-2" style="color: #ffffff;"></i>Asistir
                                 </a>
                                 </li>';
                         echo '</ul>

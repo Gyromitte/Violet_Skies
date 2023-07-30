@@ -2,9 +2,10 @@
     include "../dataBase.php";
     $db = new Database();
     $db->conectarBD();
+    session_start();
     $emp=$_SESSION["trabajo"];
     $tipo=$_SESSION["tipo"];
-    $eventoId = $_POST['id'];
+    $eventoId = $_GET['id'];
 
     if($emp=="MESERO"){
         $cant="SELECT DE.MESEROS FROM DETALLE_EVENTO DE WHERE ID='$eventoId'";
