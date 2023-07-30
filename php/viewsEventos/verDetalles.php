@@ -22,7 +22,7 @@ if (count($resultadoEvento) > 0) {
     exit;
 }
 
-$consultaDetalles = "SELECT D.INVITADOS, S.NOMBRE AS SALON, C.NOMBRE AS COMIDA
+$consultaDetalles = "SELECT D.INVITADOS, S.NOMBRE AS SALON, C.NOMBRE AS COMIDA, D.MESEROS, D.COCINEROS
                       FROM DETALLE_EVENTO D JOIN SALONES S ON S.ID=D.SALON JOIN COMIDAS C ON C.ID=D.COMIDA
                       WHERE D.ID=$eventoId";
 

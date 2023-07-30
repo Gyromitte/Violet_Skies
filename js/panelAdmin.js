@@ -456,6 +456,14 @@ function updateModalContent(formType, idEmpleado, idEvento) {
                     <td><h6>Menú</h6></td>
                     <td><select class="form-control" id="comida" disabled></select></td>
                   </tr>
+                  <tr id="trMeseros" style="display: ${detallesEvento.ESTADO === 'EN PROCESO' ? 'table-row' : 'none'}">
+                    <td><h6>Meseros</h6></td>
+                    <td><input class="form-control" type="number" placeholder="Meseros requeridos" id="meserosRequeridos" value="${detallesEvento.MESEROS || ''}" disabled></td>
+                  </tr>
+                  <tr id="trCocineros" style="display: ${detallesEvento.ESTADO === 'EN PROCESO' ? 'table-row' : 'none'}">
+                    <td><h6>Cocineros</h6></td>
+                    <td><input class="form-control" type="number" placeholder="Cocineros requeridos" id="cocinerosRequeridos" value="${detallesEvento.COCINEROS || ''}" disabled></td>
+                  </tr>
                   <tr>
                     <td><h6>Estado</h6></td>
                     <td>${detallesEvento.ESTADO}</td>
@@ -463,6 +471,8 @@ function updateModalContent(formType, idEmpleado, idEvento) {
                 </table>
                 <br>
                 <div align="center">
+                  ${detallesEvento.ESTADO === 'PENDIENTE' ? 
+                    '<button type="button" class="btn btn-success" id="btnAceptarEvento">Aceptar Evento</button>' : ''}
                   ${detallesEvento.ESTADO !== 'CANCELADO' && detallesEvento.ESTADO !== 'FINALIZADO' ? 
                     '<button type="button" class="btn btn-primary" id="btnModify">Modificar Detalles</button>' :''}
                     <button type="button" class="btn btn-primary" id="btnGuardar" style="display: none;">Guardar</button>
@@ -492,6 +502,8 @@ function updateModalContent(formType, idEmpleado, idEvento) {
               var invitados = document.getElementById('invitados').value;
               var salon = document.getElementById('salon').value;
               var comida = document.getElementById('comida').value;
+              var meserosRequeridos = document.getElementById('meserosRequeridos').value;
+              var cocinerosRequeridos = document.getElementById('cocinerosRequeridos').value;
                    
               // Realizar la solicitud AJAX para guardar los cambios en la base de datos
               var xhrGuardarCambios = new XMLHttpRequest();
@@ -518,7 +530,7 @@ function updateModalContent(formType, idEmpleado, idEvento) {
                 }
               };
               // Hacer la solicitud al script PHP "editarEvento.php" y pasar los datos editados
-              var urlEditarEvento = `../viewsEventos/editarDetalles.php?id=${idEvento}&F_EVENTO=${fecha}&INVITADOS=${invitados}&SALON=${salon}&COMIDA=${comida}`;
+              var urlEditarEvento = `../viewsEventos/editarDetalles.php?id=${idEvento}&F_EVENTO=${fecha}&INVITADOS=${invitados}&SALON=${salon}&COMIDA=${comida}&MESEROS=${meserosRequeridos}&COCINEROS=${cocinerosRequeridos}`;
               xhrGuardarCambios.open("GET", urlEditarEvento, true);
               xhrGuardarCambios.send();
             });
@@ -562,11 +574,44 @@ function updateModalContent(formType, idEmpleado, idEvento) {
                 xhrCancelarEvento.open("GET", "../viewsEventos/cancelarEvento.php?id=" + idEvento, true);
                 xhrCancelarEvento.send();
               } else {
-              // Si el usuario hace clic en "Cancelar", no se realiza ninguna acción
-              console.log("Cancelación del evento cancelada por el usuario");
-            }
-          });
+                // Si el usuario hace clic en "Cancelar", no se realiza ninguna acción
+                console.log("Cancelación del evento cancelada por el usuario");
+              }
+            });
 
+            var btnAceptarEvento = document.getElementById('btnAceptarEvento');
+            btnAceptarEvento.addEventListener('click', function() {
+              // Mostrar el modal de confirmación
+              var confirmarAceptar = window.confirm("¿Estás seguro que deseas aceptar este evento?");
+  
+              if (confirmarAceptar) {
+              // Si el usuario hace clic en "Aceptar", ejecutar la solicitud AJAX para cancelar el evento
+                var xhrAceptarEvento = new XMLHttpRequest();
+                xhrAceptarEvento.onreadystatechange = function() {
+                  if (xhrAceptarEvento.readyState === XMLHttpRequest.DONE) {
+                    if (xhrAceptarEvento.status === 200) {
+                      // Actualizar el contenido del formulario del modal con un mensaje de éxito
+                      formContent += `<br><div class="alert alert-success" role="alert" align='center'>
+                        Evento aceptado</div>`;
+                      setTimeout(() => {
+                        updateModalContent(formType, idEmpleado, idEvento);
+                      }, 500); // Actualizar el modal después de 2000 milisegundos (2 segundos)  
+                      filtrarEventos();
+                      modalForm.innerHTML = formContent;
+                    } else {
+                      console.error("Error AJAX para aceptar el evento");
+                    }
+                  }
+                };
+                // Hacer la solicitud al script PHP y pasar el ID del evento para cancelar
+                xhrAceptarEvento.open("GET", "../viewsEventos/aceptarEvento.php?id=" + idEvento, true);
+                xhrAceptarEvento.send();
+              } else {
+                // Si el usuario hace clic en "Cancelar", no se realiza ninguna acción
+                console.log("Aceptación del evento cancelada por el usuario");
+              }
+            });
+            
           } else {
             console.error("Error en la solicitud AJAX");
           }
@@ -575,39 +620,39 @@ function updateModalContent(formType, idEmpleado, idEvento) {
       // Hacer la solicitud al script PHP y pasar el ID del evento
       xhrDetalles.open("GET", "../viewsEventos/verDetalles.php?id=" + idEvento, true);
       xhrDetalles.send();
-    break;
-  }
-}
-
-// Función para eliminar al empleado
-function eliminarEmpleado(id) {
-  var xhrEliminar = new XMLHttpRequest();
-  xhrEliminar.onreadystatechange = function () {
-    if (xhrEliminar.readyState === XMLHttpRequest.DONE) {
-      if (xhrEliminar.status === 200) {
-        // Manejo de la respuesta:
-        var respuesta = xhrEliminar.responseText;
-        document.getElementById('mensajeDiv').innerHTML = respuesta; // Mostrar el mensaje de respuesta en el div 'mensajeDiv'
-
-        // Cerrar el modal después de eliminar al empleado después de 1.5 segundos
-        setTimeout(function () {
-          // Simular clic en el botón "Cancelar" para cerrar el modal
-          var cancelButton = document.querySelector('#mainModal .btn-modal[data-bs-dismiss="modal"]');
-          cancelButton.click();
-
-          document.getElementById('modalForm').innerHTML = formContent;
-        }, 1500); //(1.5 segundos)
-
-      } else {
-        console.error("Error al eliminar al empleado");
-      }
+      break;
     }
-  };
-  xhrEliminar.open("POST", "eliminarEmpleado.php", true);
-  xhrEliminar.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-  xhrEliminar.send("id=" + id); // Asegurarse de que el ID se pase correctamente en la solicitud AJAX
-  //Ver cual es la tabla activa para refrescar cualquier cambio
-  checkCurrentTable(currentTable);
-  // Retornar false para evitar que el formulario se recargue la página
-  return false;
-}
+  }
+  
+  // Función para eliminar al empleado
+  function eliminarEmpleado(id) {
+    var xhrEliminar = new XMLHttpRequest();
+    xhrEliminar.onreadystatechange = function () {
+      if (xhrEliminar.readyState === XMLHttpRequest.DONE) {
+        if (xhrEliminar.status === 200) {
+          // Manejo de la respuesta:
+          var respuesta = xhrEliminar.responseText;
+          document.getElementById('mensajeDiv').innerHTML = respuesta; // Mostrar el mensaje de respuesta en el div 'mensajeDiv'
+  
+          // Cerrar el modal después de eliminar al empleado después de 1.5 segundos
+          setTimeout(function () {
+            // Simular clic en el botón "Cancelar" para cerrar el modal
+            var cancelButton = document.querySelector('#mainModal .btn-modal[data-bs-dismiss="modal"]');
+            cancelButton.click();
+  
+            document.getElementById('modalForm').innerHTML = formContent;
+          }, 1500); //(1.5 segundos)
+  
+        } else {
+          console.error("Error al eliminar al empleado");
+        }
+      }
+    };
+    xhrEliminar.open("POST", "eliminarEmpleado.php", true);
+    xhrEliminar.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+    xhrEliminar.send("id=" + id); // Asegurarse de que el ID se pase correctamente en la solicitud AJAX
+    //Ver cual es la tabla activa para refrescar cualquier cambio
+    checkCurrentTable(currentTable);
+    // Retornar false para evitar que el formulario se recargue la página
+    return false;
+  }

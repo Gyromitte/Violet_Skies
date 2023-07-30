@@ -41,6 +41,18 @@ if (isset($_GET['id'])) {
         $parametros[':comida'] = $comida;
     }
 
+    if (isset($_GET['MESEROS'])) {
+        $meseros = $_GET['MESEROS'];
+        $consulta .= "D.MESEROS = :meseros, ";
+        $parametros[':meseros'] = $meseros;
+    }
+
+    if (isset($_GET['COCINEROS'])) {
+        $cocineros = $_GET['COCINEROS'];
+        $consulta .= "D.COCINEROS = :cocineros, ";
+        $parametros[':cocineros'] = $cocineros;
+    }
+
     // Eliminar la coma final de la consulta
     $consulta = rtrim($consulta, ", ");
 
