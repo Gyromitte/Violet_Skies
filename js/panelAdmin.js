@@ -1,4 +1,3 @@
-
 /*Funcionamiento de la dashboard*/
 // Obtener elementos
 const toggleDashboardBtn = document.getElementById('nav-button');
@@ -299,42 +298,13 @@ function updateModalContent(formType, idEmpleado) {
       checkCurrentTable(currentTable);
       break;
       case "@editarPerfil":
-        modalTitle.textContent ="Editar Datos"
-        formContent=`<form id="formularioEditarDatos" method="post" action="pruebaComprobación.php">
-        <div class="form-group">
-            <label for="nombreInput">Nombre:</label>
-            <input type="text" class="form-control" name="nombre" id="nombreInput" required>
-        </div>
-        <div class="form-group">
-            <label for="ap_paternoInput">Apellido Paterno:</label>
-            <input type="text" class="form-control" name="ap_paterno" id="ap_paternoInput" required>
-        </div>
-        <div class="form-group">
-            <label for="ap_maternoInput">Apellido Materno:</label>
-            <input type="text" class="form-control" name="ap_materno" id="ap_maternoInput" required>
-        </div>
-        <div class="form-group">
-            <label for="telefonoInput">Teléfono:</label>
-            <input type="tel" class="form-control" name="telefono" id="telefonoInput" required>
-        </div>
-        <div class="form-group">
-            <label for="contrasenaActualInput">Contraseña Actual:</label>
-            <input type="password" class="form-control" name="contrasena_actual" id="contrasenaActualInput" required>
-        </div>
-
-        </div>
-        <br>
-        <input type="hidden" name="correo" id="correoInput">
-        <input type="hidden" name="tipo_cuenta" id="tipo_cuentaInput">
-        <button type="button" class="btn btn-primary" id="guardarCambios">Guardar Cambios</button>
-        </form>`;
-        modalForm.innerHTML = formContent;
         //Ver cual es la tabla activa para refrescar cualquier cambio
         checkCurrentTable(currentTable);
         break;
         case "@verSolicitud":
           modalTitle.textContent = "Manejar solicitud";
           modalHeader.classList.remove('modal-header-warning');
+          
           // Obtener los datos de la solicitud con una solicitud AJAX
           var xhr = new XMLHttpRequest();
           xhr.onreadystatechange = function() {
@@ -346,8 +316,8 @@ function updateModalContent(formType, idEmpleado) {
                 formContent = `
                   <form>
                     <div id="mensajeDiv" method="POST"></div> 
-                    <h5>Empleado: </h5>
-                    <h6 class="mb-3">${solicitud.NOMBRE}</h6>
+                    <h5>Solicitante: </h5>
+                    <h6 class="mb-3">${solicitud.NOMBRE} ${solicitud.AP_PATERNO} ${solicitud.AP_MATERNO}</h6>
                     <h5>Telefono: </h5>
                     <h6 class="mb-3">${solicitud.TELEFONO}</h6>
                     <h5>Correo: </h5>
@@ -364,23 +334,75 @@ function updateModalContent(formType, idEmpleado) {
                       </select>
                     </div>
                     <div class="d-flex justify-content-center">
-                      <button type="submit" class="btn btn-primary btn-modal me-2"><i class="fa-solid fa-circle-check me-2" style="color: #ffffff;"></i>Aceptar</button>
-                      <button type="submit" class="btn btn-primary btn-modal-warning me-2"><i class="fa-solid fa-ban me-2" style="color: #ffffff;"></i>Rechazar</button>
+                      <button id="btn-aceptar-solicitud" type="button" class="btn btn-primary btn-modal me-2"><i class="fa-solid fa-circle-check me-2" style="color: #ffffff;"></i>Aceptar</button>
+                      <button type="btn" class="btn btn-primary btn-modal-warning me-2"><i class="fa-solid fa-ban me-2" style="color: #ffffff;"></i>Rechazar</button>
                     </div>
                   </form>
                 `;
                 // Asignar el contenido al formulario del modal
                 modalForm.innerHTML = formContent;
+        
+                // Obtener el botón "Aceptar" del formulario después de haberlo asignado al DOM
+                var btnAceptarSolicitud = document.getElementById("btn-aceptar-solicitud");
+        
+                // Agregar evento de clic al botón "Aceptar"
+                btnAceptarSolicitud.addEventListener("click", function(event) {
+                  event.preventDefault(); // Evitar que el formulario se envíe automáticamente
+        
+                  // Obtener el valor del campo RFC
+                  var rfcInput = document.getElementsByName("RFC")[0];
+                  var rfc = rfcInput.value.trim(); // Eliminar espacios en blanco al inicio y final
+        
+                  // Verificar si el campo RFC está vacío
+                  if (rfc === "") {
+                    // Mostrar un mensaje de error en el modal o donde consideres apropiado
+                    document.getElementById("mensajeDiv").innerHTML = "<div class='alert alert-danger'>Debes ingresar el RFC</div>";
+                    return; // Detener la ejecución del evento click
+                  }
+        
+                  // Obtener los valores del formulario
+                  var correo = solicitud.CORREO; // Aquí asumo que ya tienes disponible la variable solicitud con los datos del empleado
+                  var tipoUsuario = document.getElementById("tipoUsuario").value;
+        
+                  // Crear un objeto con los datos del formulario para enviar en la solicitud AJAX
+                  var datosFormulario = {
+                    rfc: rfc,
+                    correo: correo,
+                    tipoUsuario: tipoUsuario
+                  };
+        
+                  // Realizar la solicitud AJAX al archivo PHP encargado de aceptar la solicitud
+                  var xhrAceptar = new XMLHttpRequest();
+                  xhrAceptar.onreadystatechange = function() {
+                    if (xhrAceptar.readyState === XMLHttpRequest.DONE) {
+                      if (xhrAceptar.status === 200) {
+                        // Mostrar la respuesta del servidor en el modal
+                        document.getElementById("mensajeDiv").innerHTML = xhrAceptar.responseText;
+                      } else {
+                        console.error("Error en la solicitud AJAX de Aceptar");
+                      }
+                    }
+                  };
+        
+                  // Hacer la solicitud al script PHP para aceptar la solicitud
+                  xhrAceptar.open("POST", "aceptarSolicitud.php", true);
+                  xhrAceptar.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+                  // Instead of sending JSON, create a query string from the data
+                  var formData = new URLSearchParams(datosFormulario).toString();
+                  xhrAceptar.send(formData);
+                });
               } else {
                 console.error("Error en la solicitud AJAX");
               }
             }
           };
-          console.log(idEmpleado);
+        
           // Hacer la solicitud al script PHP y pasar el ID de la solicitud
           xhr.open("GET", "obtenerSolicitud.php?id=" + idEmpleado, true);
           xhr.send();
-        break;
+          // Ver cual es la tabla activa para refrescar cualquier cambio
+          checkCurrentTable(currentTable);
+          break;
   }
 }
 
