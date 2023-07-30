@@ -10,7 +10,7 @@ tipoorden.addEventListener('change', VerDisp);
 function VerDisp() {
 
     var formData = new FormData(form);
-    formData.append('tipo', tipoorden.value);
+    formData.append('tipo', tipoorden.value); 
 
     var xhr = new XMLHttpRequest();
 

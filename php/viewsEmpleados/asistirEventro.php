@@ -2,7 +2,7 @@
     include "../dataBase.php";
     $db = new Database();
     $db->conectarBD();
-    $emp=$_SESSION["id"];
+    $emp=$_SESSION["trabajo"];
     $tipo=$_SESSION["tipo"];
     $eventoId = $_POST['id'];
 

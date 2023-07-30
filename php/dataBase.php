@@ -125,11 +125,10 @@
                         header("refresh:4;../viewsEmpleados/panelAdmin.php");
                     }
                     else if ($tipo==='EMPLEADO'){
-                        $query="SELECT * FROM EMPLEADOS JOIN CUENTAS ON CUENTAS.ID=EMPLEADOS.CUENTA
-                        WHERE CUENTAS.ID='$ID'";
-                        $consulta=$this->PDO_local->query($query);
-                        $trabajo=$consulta->fetch(PDO::FETCH_ASSOC);
-                        if($trabajo==0){
+                        $query="SELECT EMP.ID, EMP.RFC,EMP.TIPO, EMP.CUENTA FROM EMPLEADOS EMP 
+                        JOIN CUENTAS ON CUENTAS.ID=EMP.CUENTA WHERE CUENTAS.ID='$ID'";
+                        $empleados=$this->PDO_local->query($query);
+                        if($empleados->rowCount()===0){
                             $_SESSION["access"]=1.5;
                             echo"<div class=' container'>";
                             echo"<h1 align='center'>Bienvenido ".$_SESSION["name"]."</h1>";
@@ -137,23 +136,25 @@
                             header("refresh:4;../viewsEmpleados/panelEmpleado.php");
                         }
                         else{
-                            foreach($trabajo as $emp){
-                            $_SESSION["access"]=2;
-                            $_SESSION["id"]=$trabajo['ID'];
-                            if($trabajo['TIPO']=='MESERO'){
-                                $_SESSION["tipo"]="MESERO";
-                                echo"<div class=' container'>";
-                                echo"<h1 align='center'>Bienvenido ".$_SESSION["name"]."</h1>";
-                                echo "</div>";
-                                header("refresh:4;../viewsEmpleados/panelEmpleado.php");
-                            }
-                            else{
-                                $_SESSION["tipo"]="COCINERO";
-                                echo"<div class=' container'>";
-                                echo"<h1 align='center'>Bienvenido ".$_SESSION["name"]."</h1>";
-                                echo "</div>";
-                                header("refresh:4;../viewsEmpleados/panelEmpleado.php");
-                            }
+                            while($trabajo = $empleados->fetch(PDO::FETCH_ASSOC)){
+                                $idemp=$trabajo['ID'];
+                                $_SESSION["trabajo"]=$idemp;
+
+                                $_SESSION["access"]=2;
+                                if($trabajo['TIPO']=='MESERO'){
+                                    $_SESSION["tipo"]="MESERO";
+                                    echo"<div class=' container'>";
+                                    echo"<h1 align='center'>Bienvenido ".$_SESSION["name"]."</h1>";
+                                    echo "</div>";
+                                    header("refresh:10;../viewsEmpleados/panelEmpleado.php");
+                                }
+                                else{
+                                    $_SESSION["tipo"]="COCINERO";
+                                    echo"<div class=' container'>";
+                                    echo"<h1 align='center'>Bienvenido ".$_SESSION["name"]."</h1>";
+                                    echo "</div>";
+                                    header("refresh:4;../viewsEmpleados/panelEmpleado.php");
+                                }
                             }
                         }
                     }

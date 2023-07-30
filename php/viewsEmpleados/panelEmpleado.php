@@ -14,6 +14,7 @@
     <!--StyleSheets-->
     <link rel="stylesheet" href="/bootstrap/css/bootstrap.min.css">
     <link rel="stylesheet" href="/css/panelAdmin.css">
+    <link rel="icon" type="image/x-icon" href="./images/company_logo.png">
     <!--Referencias a fuentes-->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -131,13 +132,19 @@
                 Eventos Asistiendo
                 <i class="fa-solid fa-briefcase" style="color: #ffffff;"></i>
             </h3>
-            <br>
-            <!--Informacion de la tabla-->
-            <h3 id="table-info"></h3>
-            <!--Container para tablas-->
-            <div class="cont-table">
+            <?php
+            if($_SESSION["access"]==1.5){
+                echo"<h1>El Administrador aun no confirma tu cuenta</h1>";
+            }
+            else{
+            echo"<br>
+            <h3 id='table-info'></h3>
+            
+            <div class='cont-table'>
             </div>
-        </div>
+        </div>";
+            }
+        ?>
         <div id="perfil" class="tab-content">
             <p class="test">Yo soy, perfiles.</p>
         </div>
