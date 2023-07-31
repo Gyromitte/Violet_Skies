@@ -292,6 +292,24 @@ nav{
         width: 60px;
         font-size: 0.8em;
     }
-}  
-  
-  
+}
+
+.accordion{
+    width: 95%; 
+}
+.accordion-item{
+    background-color: #d2c4f1;
+}
+.accordion-button {
+    background: #ab8cf5;
+}
+.accordion-item:hover .accordion-button {
+    background-color: #5603ad;
+     color: white;
+}
+#profile {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;        
+}
