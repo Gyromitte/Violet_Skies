@@ -1,8 +1,10 @@
 /*Funcionamiento de la dashboard*/
-// Obtener elementos
+
 const toggleDashboardBtn = document.getElementById('nav-button');
 const dashboard = document.getElementById('dash-board');
 const main = document.getElementById('main');
+var currentTable = "";
+
 // Función para abrir o cerrar el dashboard
 function toggleDashboard() {
   dashboard.classList.toggle('dashboard-open');
@@ -39,6 +41,24 @@ tabs.forEach(function (tab) {
     document.getElementById(tabId).classList.add('active');
   });
 });
+
+function checkCurrentTable(currentTable) {
+  switch (currentTable) { //Simular un click para refrescar los cambios
+    case 'pend':
+      setTimeout(function() {
+        btnCocineros.click();
+      }, 500);
+      break;
+    case 'fin':
+      setTimeout(function() {
+        btnMeseros.click();
+      }, 500);
+      break;
+  }
+}
+//Obtener botones para refrescar vistas
+var btnPend = document.getElementById('verEventosAtendiendo');
+var btnFin = document.getElementById('verFinalizados');
 
 /*Modal functionality*/
 // Obtener el modal y el formulario

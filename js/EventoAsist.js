@@ -11,6 +11,7 @@ document.addEventListener('DOMContentLoaded', function() {
   
       switch (selectedButtonId) {
         case 'verPend':
+            currentTable="pend";
           if (selectedOrder === 'lejanoevento') {
             makeAjaxRequest('verEventosAtendiendo.php?orden=lejanoevento', 'Pendientes: <i class="fas fa-utensils" style="color: #ffffff;"></i>');
           } else if (selectedOrder === 'cercasevento') {
@@ -18,6 +19,7 @@ document.addEventListener('DOMContentLoaded', function() {
           }
           break;
         case 'verFin':
+            currentTable="fin";
           if (selectedOrder === 'lejanoevento') {
             makeAjaxRequest('verFinalizados.php?orden=lejanoevento', 'Historial de Eventos Atendidos: <i class="fa-solid fa-bell-concierge" style="color: #ffffff;"></i>');
           } else if (selectedOrder === 'cercasevento') {
@@ -44,6 +46,7 @@ document.addEventListener('DOMContentLoaded', function() {
   
         switch (buttonId) {
           case 'verPend':
+            currentTable="pend";
             if (selectedOrder === 'lejanoevento') {
               makeAjaxRequest('verEventosAtendiendo.php?orden=lejanoevento', 'Pendientes: <i class="fas fa-utensils" style="color: #ffffff;"></i>');
             } else if (selectedOrder === 'cercasevento') {
@@ -51,6 +54,7 @@ document.addEventListener('DOMContentLoaded', function() {
             }
             break;
           case 'verFin':
+            currentTable="fin";
             if (selectedOrder === 'lejanoevento') {
               makeAjaxRequest('verFinalizados.php?orden=lejanoevento', 'Historial de Eventos Atendidos: <i class="fa-solid fa-bell-concierge" style="color: #ffffff;"></i>');
             } else if (selectedOrder === 'cercasevento') {

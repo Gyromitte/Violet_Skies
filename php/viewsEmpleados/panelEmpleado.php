@@ -194,7 +194,7 @@
         </div>
     </div>
     <!--Scripts que necesitan ejecutarse hasta el final-->
-    <script src="/js/EventosAsist.js"></script>
+    <script src="/js/EventoAsist.js"></script>
     <script src="/js/EventosDisp.js"></script>
     <script src="/bootstrap/js/bootstrap.min.js"></script>
     <script src="/bootstrap/js/bootstrap.bundle.min.js"></script>
