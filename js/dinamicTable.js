@@ -18,7 +18,7 @@ document.addEventListener('DOMContentLoaded', function() {
         var busquedaValor = busquedaInput.value.trim(); // Obtener el valor de la barra de búsqueda y eliminar los espacios en blanco al inicio y al final
 
         if (busquedaValor === '') {
-          alert('La barra de búsqueda está vacía. Por favor, ingrese un correo o nombre');
+          ('La barra de búsqueda está vacía. Por favor, ingrese un correo o nombre');
           return; // Detener la ejecución si la barra de búsqueda está vacía
         }
         // Realizar la búsqueda con el valor ingresado en la barra de búsqueda
@@ -76,6 +76,7 @@ function getMessageByButtonId(buttonId) {
       currentTable = 'busqueda';
       return 'Resultados de búsqueda: <i class="fa-solid fa-magnifying-glass" style="color: #ffffff;"></i>';
     case 'verSolicitudes':
+      currentTable = 'solicitud';
       return 'Estas son tus solicitudes pendientes: <i class="fa-solid fa-business-time" style="color: #ffffff;"></i>';
     default:
       return 'Mostrando información:';
