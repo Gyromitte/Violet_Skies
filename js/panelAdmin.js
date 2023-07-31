@@ -478,8 +478,11 @@ function updateModalContent(formType, idEmpleado, idEvento) {
                     <button type="button" class="btn btn-primary" id="btnGuardar" style="display: none;">Guardar</button>
                   ${detallesEvento.ESTADO !== 'CANCELADO' && detallesEvento.ESTADO !== 'FINALIZADO'? 
                     '<button type="button" class="btn btn-danger" id="btnCancelarEvento">Cancelar Evento</button>' : ''}
+                  ${detallesEvento.ESTADO !== 'CANCELADO' && detallesEvento.ESTADO !== 'PENDIENTE'? 
+                    '<button type="button" class="btn btn-info" id="btnEmpleadosRegistrados">Empleados</button>' : ''}
                 </div>
               </form>
+              <div id="tablaEmpleados"></div>
             `;
             // Asignar el contenido al formulario del modal
             modalForm.innerHTML = formContent;
@@ -611,7 +614,7 @@ function updateModalContent(formType, idEmpleado, idEvento) {
                 console.log("Aceptación del evento cancelada por el usuario");
               }
             });
-            
+
           } else {
             console.error("Error en la solicitud AJAX");
           }
