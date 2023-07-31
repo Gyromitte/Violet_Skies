@@ -1,26 +1,26 @@
 
-var form = document.getElementById('EmpDisp');
-var tablaResultados = document.getElementById('tablaResultados');
-var tipoorden = document.getElementById('tipoorden');
+var forma = document.getElementById('EmpAsist');
+var tablaRes = document.getElementById('tablaAsist');
+var tipoorde = document.getElementById('tipoorde');
 
-VerDisp();
+VerAsist();
 
-tipoorden.addEventListener('change', VerDisp);
+tipoorde.addEventListener('change', VerAsist);
 //Ver los eventos disponibles en tal orden
-function VerDisp() {
+function VerAsist() {
 
-    var formData = new FormData(form);
-    formData.append('tipo', tipoorden.value); 
+    var formData = new FormData(forma);
+    formData.append('asis', tipoorde.value); 
 
     var xhr = new XMLHttpRequest();
 
     // Configurar la solicitud AJAX
-    xhr.open('POST', '../viewsEventos/verEventosDisponibles.php', true);
+    xhr.open('POST', '../viewsEventos/verEventosAtendiendo.php', true);
 
     // Configurar la función de callback cuando se reciba la respuesta
     xhr.onload = function() {
         if (xhr.status === 200) {
-            tablaResultados.innerHTML = xhr.responseText; // Actualizar la tabla de resultados con la respuesta
+            tablaRes.innerHTML = xhr.responseText; // Actualizar la tabla de resultados con la respuesta
         }
     };
 
@@ -33,5 +33,5 @@ function VerDisp() {
 }
 window.addEventListener('load', function() {
     var params = new URLSearchParams(window.location.search);
-    tipoorden.value = params.get('tipo') || 'porcreacion';
+    tipoorde.value = params.get('orden') || 'lejanoevento';
 });

@@ -103,28 +103,38 @@
                         $ap_materno=$renglon['AP_MATERNO'];
                         $telefono=$renglon['TELEFONO'];
                         $correo=$renglon['CORREO'];
+                        $estado=$renglon['ESTADO'];
                     }
                 }
                 if($ver){
-                    session_start();
-                    $_SESSION["ID"] = $ID; 
-                    $_SESSION["name"] = $NOMBRE;
-                    $_SESSION["logged_in"]=true;
-                    if($tipo==='CLIENTE'){
+                    if($estado=="INACTIVO"){
+                        echo"<div class=' container'>";
+                        echo"<h1 align='center'>Parece que tu cuenta fue desactivada..</h1>";
+                        echo"<h4 align='center'>Comunicase con un Administrador para volver 
+                        a activarlo.</h4>";
+                        echo "</div>";
+                        header("refresh:8;/index.html");
+                    }
+                    else{
+                        session_start();
+                        $_SESSION["ID"] = $ID; 
+                        $_SESSION["name"] = $NOMBRE;
+                        $_SESSION["logged_in"]=true;
+                        if($tipo==='CLIENTE'){
                         $_SESSION["access"]=1;
                         echo"<div class=' container'>";
                         echo"<h1 align='center'>Bienvenido ".$_SESSION["name"]."</h1>";
                         echo "</div>";
                         header("refresh:4;/php/viewsClientes/panelClientes.php");
-                    }
-                    else if($tipo==='ADMINISTRADOR'){
+                        }
+                        else if($tipo==='ADMINISTRADOR'){
                         $_SESSION["access"]=3;
                         echo"<div class=' container'>";
                         echo"<h1 align='center'>Bienvenido ".$_SESSION["name"]."</h1>";
                         echo "</div>";
                         header("refresh:4;../viewsEmpleados/panelAdmin.php");
-                    }
-                    else if ($tipo==='EMPLEADO'){
+                        }
+                        else if ($tipo==='EMPLEADO'){
                         $query="SELECT EMP.ID, EMP.RFC,EMP.TIPO, EMP.CUENTA FROM EMPLEADOS EMP 
                         JOIN CUENTAS ON CUENTAS.ID=EMP.CUENTA WHERE CUENTAS.ID='$ID'";
                         $empleados=$this->PDO_local->query($query);
@@ -156,6 +166,7 @@
                                     header("refresh:4;../viewsEmpleados/panelEmpleado.php");
                                 }
                             }
+                        }
                         }
                     }
 

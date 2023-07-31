@@ -106,7 +106,7 @@
             </h3>
             <?php
             if($_SESSION["access"]==1.5){
-                echo"<h1>El Administrador aun no confirma tu cuenta</h1>";
+                echo"<h1>El Administrador aun no confirma tu cuenta</h1></div>";
             }
             else{
             echo"<button type='button' class='btn btn-primary' data-bs-toggle='modal' data-bs-target='#empModal' data-bs-whatever='@fat' >Open modal for @fat</button>
@@ -134,18 +134,29 @@
                 <i class="fa-solid fa-briefcase" style="color: #ffffff;"></i>
             </h3>
             <?php
-            if($_SESSION["access"]==1.5){
-                echo"<h1>El Administrador aun no confirma tu cuenta</h1>";
-            }
-            else{
-            echo"<br>
-            <h3 id='table-info'></h3>
-            
-            <div class='cont-table'>
-            </div>
-        </div>";
-            }
-        ?>
+                if($_SESSION["access"]==1.5){
+                    echo"<h1>El Administrador aun no confirma tu cuenta</h1>";
+                }
+                else{
+                    echo"
+                    <div class='container' data-url='../viewsEventos/verEventosAtendiendo.php'>
+                        <form id='EmpAsist' action=".$_SERVER['PHP_SELF']." method='POST'>
+                            <br>
+                            <div class='btn-group'>
+                                <label class='control-label'>Orden: </label>
+                                <select id='tipoorde' name='asis' class='form-select'>;
+                                    <option value='lejanoevento'>Eventos Lejanos</option>;
+                                    <option value='cercasevento'>Eventos Cercanos</option>;
+                                </select>
+                            </div>
+                        </form>
+                    </div>
+                    <br>
+                    <div id='tablaAsist'>";
+                    echo"</div>";
+                }
+            ?>
+        </div>
         <div id="perfil" class="tab-content">
             <p class="test">Yo soy, perfiles.</p>
         </div>
@@ -167,6 +178,7 @@
         </div>
     </div>
     <!--Scripts que necesitan ejecutarse hasta el final-->
+    <script src="/js/EventosAsist.js"></script>
     <script src="/js/EventosDisp.js"></script>
     <script src="/js/dinamicTable.js"></script>
     <script src="/bootstrap/js/bootstrap.min.js"></script>
