@@ -176,6 +176,27 @@
             <i class="fa-solid fa-phone" style="color: #ffffff;"></i>
             87-17-35-85-98
         </footer>
+        <script>
+            // JavaScript code to check if the user is logged in
+            // This code assumes you are using jQuery for AJAX, but you can use vanilla JavaScript as well
+            $(document).ready(function() {
+                $.ajax({
+                    url: 'checkarindex.php', // URL of the PHP file that checks login status
+                    type: 'POST',
+                    dataType: 'json',
+                    success: function(response) {
+                        if (response.authenticated) {
+                           window.location.href='php/scripts.access.php';
+                        } else {
+                            
+                        }
+                    },
+                    error: function(xhr, status, error) {
+                        // Handle error
+                    }
+                });
+            });
+        </script>
         <script src="/bootstrap/js/bootstrap.min.js"></script>
         <script src="/bootstrap/js/bootstrap.bundle.min.js"></script> 
         <script src="/js/parallax.js"></script>

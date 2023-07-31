@@ -139,21 +139,37 @@
                 }
                 else{
                     echo"
-                    <div class='container' data-url='../viewsEventos/verEventosAtendiendo.php'>
-                        <form id='EmpAsist' action=".$_SERVER['PHP_SELF']." method='POST'>
-                            <br>
-                            <div class='btn-group'>
-                                <label class='control-label'>Orden: </label>
-                                <select id='tipoorde' name='asis' class='form-select'>;
-                                    <option value='lejanoevento'>Eventos Lejanos</option>;
-                                    <option value='cercasevento'>Eventos Cercanos</option>;
-                                </select>
-                            </div>
-                        </form>
+                    <br>
+                    <div class='container'>
+                        <div class='btn-group'>
+                            <label class='control-label'>Orden: </label>
+                            <select id='tipoorde' name='asis' class='form-select'>;
+                                <option value='lejanoevento'>Eventos Lejanos</option>;
+                                <option value='cercasevento'>Eventos Cercanos</option>;
+                            </select>
+                        </div>
+                    </div>
+                        <br>
+                        <br>
+                    <div>
+                        <button id='verPend' data-url='verEventosAtendiendo.php' type='button'
+                        class='btn-options ver-eventos btn btn-primary border-2 btn-outline-light rounded-5'
+                        data-bs-target='#Main'>
+                            <i class='fa-solid fa-calendar-days' style='color: #ffffff;'></i>
+                            Eventos Pendientes
+                        </button>
+                        <button id='verFin' data-url='verFinalizados.php' type='button' 
+                        class='btn-options ver-eventos btn btn-primary border-2 btn-outline-light rounded-5'
+                        data-bs-target='#Main'>
+                            <i class='fa-solid fa-bell-concierge' style='color: #ffffff;'></i>
+                            Historial
+                        </button>
                     </div>
                     <br>
-                    <div id='tablaAsist'>";
-                    echo"</div>";
+                    
+                    <h3 id='table-info'></h3>
+
+                    <div class='cont-table'>";
                 }
             ?>
         </div>
@@ -180,7 +196,6 @@
     <!--Scripts que necesitan ejecutarse hasta el final-->
     <script src="/js/EventosAsist.js"></script>
     <script src="/js/EventosDisp.js"></script>
-    <script src="/js/dinamicTable.js"></script>
     <script src="/bootstrap/js/bootstrap.min.js"></script>
     <script src="/bootstrap/js/bootstrap.bundle.min.js"></script>
 </body>

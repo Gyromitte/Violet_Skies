@@ -1,37 +1,81 @@
-var currentTable;
-var forma = document.getElementById('EmpAsist');
-var tablaRes = document.getElementById('tablaAsist');
-var tipoorde = document.getElementById('tipoorde');
-
-VerAsist();
-
-tipoorde.addEventListener('change', VerAsist);
-//Ver los eventos disponibles en tal orden
-function VerAsist() {
-
-    var formData = new FormData(forma);
-    formData.append('asis', tipoorde.value); 
-
-    var xhr = new XMLHttpRequest();
-
-    // Configurar la solicitud AJAX
-    xhr.open('POST', '../viewsEventos/verEventosAtendiendo.php', true);
-
-    // Configurar la función de callback cuando se reciba la respuesta
-    xhr.onload = function() {
-        if (xhr.status === 200) {
-            tablaRes.innerHTML = xhr.responseText; // Actualizar la tabla de resultados con la respuesta
+document.addEventListener('DOMContentLoaded', function() {
+    var buttons = document.querySelectorAll('.ver-eventos');
+    var tableInfo = document.getElementById('table-info');
+    var contTable = document.querySelector('.cont-table');
+    var tipoorde = document.getElementById('tipoorde');
+  
+    // Add event listener to tipoorde select
+    tipoorde.addEventListener('change', function() {
+      var selectedOrder = tipoorde.value;
+      var selectedButtonId = document.querySelector('.ver-eventos.selected').getAttribute('id');
+  
+      switch (selectedButtonId) {
+        case 'verPend':
+          if (selectedOrder === 'lejanoevento') {
+            makeAjaxRequest('verEventosAtendiendo.php?orden=lejanoevento', 'Pendientes: <i class="fas fa-utensils" style="color: #ffffff;"></i>');
+          } else if (selectedOrder === 'cercasevento') {
+            makeAjaxRequest('verEventosAtendiendo.php?orden=cercasevento', 'Pendientes: <i class="fas fa-utensils" style="color: #ffffff;"></i>');
+          }
+          break;
+        case 'verFin':
+          if (selectedOrder === 'lejanoevento') {
+            makeAjaxRequest('verFinalizados.php?orden=lejanoevento', 'Historial de Eventos Atendidos: <i class="fa-solid fa-bell-concierge" style="color: #ffffff;"></i>');
+          } else if (selectedOrder === 'cercasevento') {
+            makeAjaxRequest('verFinalizados.php?orden=cercasevento', 'Historial de Eventos Atendidos: <i class="fa-solid fa-bell-concierge" style="color: #ffffff;"></i>');
+          }
+          break;
+        default:
+          tableInfo.innerHTML = 'Mostrando información:';
+          contTable.innerHTML = '';
+          break;
+      }
+    });
+  
+    // Add event listener to the buttons
+    buttons.forEach(function(button) {
+      button.addEventListener('click', function() {
+        buttons.forEach(function(btn) {
+          btn.classList.remove('selected');
+        });
+        this.classList.add('selected');
+        var url = this.getAttribute('data-url');
+        var buttonId = this.getAttribute('id');
+        var selectedOrder = tipoorde.value;
+  
+        switch (buttonId) {
+          case 'verPend':
+            if (selectedOrder === 'lejanoevento') {
+              makeAjaxRequest('verEventosAtendiendo.php?orden=lejanoevento', 'Pendientes: <i class="fas fa-utensils" style="color: #ffffff;"></i>');
+            } else if (selectedOrder === 'cercasevento') {
+              makeAjaxRequest('verEventosAtendiendo.php?orden=cercasevento', 'Pendientes: <i class="fas fa-utensils" style="color: #ffffff;"></i>');
+            }
+            break;
+          case 'verFin':
+            if (selectedOrder === 'lejanoevento') {
+              makeAjaxRequest('verFinalizados.php?orden=lejanoevento', 'Historial de Eventos Atendidos: <i class="fa-solid fa-bell-concierge" style="color: #ffffff;"></i>');
+            } else if (selectedOrder === 'cercasevento') {
+              makeAjaxRequest('verFinalizados.php?orden=cercasevento', 'Historial de Eventos Atendidos: <i class="fa-solid fa-bell-concierge" style="color: #ffffff;"></i>');
+            }
+            break;
+          default:
+            tableInfo.innerHTML = 'Mostrando información:';
+            contTable.innerHTML = '';
+            break;
         }
+      });
+    });
+  });
+  
+  // Function to make the AJAX request
+  function makeAjaxRequest(url, message) {
+    var xhr = new XMLHttpRequest();
+    xhr.onreadystatechange = function() {
+      if (xhr.readyState === 4 && xhr.status === 200) {
+        tableInfo.innerHTML = message;
+        contTable.innerHTML = xhr.responseText;
+      }
     };
-
-    // Enviar la solicitud AJAX con los datos del formulario
-    xhr.send(formData);
-
-    // Modificar la URL sin recargar la página
-    var params = new URLSearchParams(formData);
-    history.replaceState(null, '', '?' + params.toString());
-}
-window.addEventListener('load', function() {
-    var params = new URLSearchParams(window.location.search);
-    tipoorde.value = params.get('orden') || 'lejanoevento';
-});
+    xhr.open('GET', url, true);
+    xhr.send();
+  }
+  
