@@ -1,4 +1,4 @@
-
+var currentTable;
 var forma = document.getElementById('EmpAsist');
 var tablaRes = document.getElementById('tablaAsist');
 var tipoorde = document.getElementById('tipoorde');

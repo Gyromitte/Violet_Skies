@@ -109,7 +109,7 @@
                 echo"<h1>El Administrador aun no confirma tu cuenta</h1></div>";
             }
             else{
-            echo"<button type='button' class='btn btn-primary' data-bs-toggle='modal' data-bs-target='#empModal' data-bs-whatever='@fat' >Open modal for @fat</button>
+            echo"
             <div class='container'>
             <form id='EmpDisp' action=".$_SERVER['PHP_SELF']." method='POST'>
                 <br>
