@@ -219,7 +219,56 @@ nav{
     border-radius: 20px;
     padding: 50px;
 }
+
+.search-container {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .search-container .filter {
+    flex: 1;
+  }
+
+  .search-container .search {
+    flex: 0.4;
+    display: flex;
+    justify-content: flex-end;
+  }
+  .panel-header {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}
+
+#estadoSelect {
+    width: 300px;
+    margin-left: 10px;
+}
+#modalConfirmacion {
+    z-index: 3000;
+  }
+
+  .alert {
+    /* Estilo común para todas las alertas */
+    padding: 10px;
+    border-radius: 5px;
+    margin-bottom: 10px;
+  }
   
+  .alert-success {
+    /* Estilo para alerta de éxito */
+    color: #155724;
+    background-color: #d4edda;
+    border-color: #c3e6cb;
+  }
+  
+  .alert-danger {
+    /* Estilo para alerta de error */
+    color: #721c24;
+    background-color: #f8d7da;
+    border-color: #f5c6cb;
+  }
 @media (max-width: 768px) {
     /* Adjust the width and font-size for smaller screens */
     #nav-button {
@@ -243,6 +292,28 @@ nav{
         width: 60px;
         font-size: 0.8em;
     }
-}  
-  
-  
+}
+
+.accordion{
+    width: 95%; 
+}
+.accordion-item{
+    background-color: #d2c4f1;
+}
+.accordion-button {
+    background: #ab8cf5;
+}
+.accordion-item:hover .accordion-button {
+    background-color: #5603ad;
+     color: white;
+}
+#profile {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;        
+}
+
+.detalles {
+    max-width: 600px; /* Cambia este valor según sea necesario */
+  }

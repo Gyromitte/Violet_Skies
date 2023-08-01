@@ -1,0 +1,354 @@
+<?php
+include_once "../dataBase.php";
+
+// Obtener el identificador único del usuario para buscar sus datos
+if (isset($_SESSION["ID"])) {
+  $user_id = $_SESSION["ID"];
+    try {
+      // Crear una instancia de la clase DataBase para usar los identificadores de la clase
+      $db = new DataBase();
+      // Llamar al método conectar() para establecer la conexión a la base de datos
+      $conexion = $db->conectarBD();
+      // Consulta preparada para buscar los datos del usuario por su ID
+      $query = "SELECT * FROM CUENTAS WHERE ID = :user_id";
+      $parametros = array(':user_id' => $user_id);
+      $result = $db->seleccionarPreparado($query, $parametros);
+      if ($result) {
+      ?>
+        <div class="accordion" id="accordionExample">
+          <div class="accordion-item">
+            <h2 class="accordion-header">
+            <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+            Datos personales
+            </button>
+            </h2>
+            <div id="collapseOne" class="accordion-collapse collapse show" data-bs-parent="#accordionExample">
+              <div class="accordion-body">
+                <div class="personal-info">
+                  <div class="mb-3 row">
+                    <label class="col-sm-2 col-form-label">Nombre:</label>
+                    <div class="col-sm-10">
+                      <input class="form-control" type="text" value="<?php echo $result[0]->NOMBRE; ?>" name="nombre" disabled>
+                    </div>
+                    </div>
+                    <div class="mb-3 row">
+                      <label class="col-sm-2 col-form-label">Apellido paterno:</label>
+                      <div class="col-sm-10">
+                        <input class="form-control" type="text" value="<?php echo $result[0]->AP_PATERNO; ?>" name="ap_paterno" disabled>
+                      </div>
+                    </div>
+                    <div class="mb-3 row">
+                      <label class="col-sm-2 col-form-label">Apellido materno:</label>
+                      <div class="col-sm-10">
+                        <input class="form-control" type="text" value="<?php echo $result[0]->AP_MATERNO; ?>" name="ap_materno" disabled>
+                      </div>
+                    </div>
+                    <div class="mb-3 row">
+                      <label class="col-sm-2 col-form-label">Teléfono:</label>
+                      <div class="col-sm-10">
+                        <input class="form-control" type="text" value="<?php echo $result[0]->TELEFONO; ?>" name="telefono" disabled>
+                      </div>
+                    </div>
+                    <div class="mb-3 row">
+                      <label class="col-sm-2 col-form-label">Correo:</label>
+                      <div class="col-sm-10">
+                        <input class="form-control" type="text" value="<?php echo $result[0]->CORREO; ?>" name="correo" disabled>
+                      </div>
+                    </div>
+                    <div class="mb-3 row">
+                      <label class="col-sm-2 col-form-label">Contraseña:</label>
+                      <div class="col-sm-10">
+                        <button class="btn btn-light" type="button" data-bs-toggle="modal" data-bs-target="#modalCambiarContrasena">Cambiar contraseña</button>
+                      </div>
+                    </div>
+                    <input type="hidden" name="id" value="<?php echo $_SESSION["ID"]; ?>">
+                    <div class="d-flex justify-content-end">
+                      <button class="btn btn-primary" onclick="habilitarEdicion()" id="btnEditarDatosPersonales">Modificar datos</button>
+                      <div class="d-flex justify-content-end">
+                        <button class="btn btn-success d-none" id="btnGuardarCambios" onclick="guardarCambios()">Guardar cambios</button>
+                        <button class="btn btn-danger d-none" id="btnCancelarCambios" onclick="cancelarCambios()">Cancelar</button>
+                      </div>
+                    </div>
+                    <div id="mensajeModificar"></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="accordion-item">
+              <h2 class="accordion-header">
+              <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                Registrar nuevo administrador
+              </button>
+              </h2>
+              <div id="collapseTwo" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
+                <div class="accordion-body">
+                <strong>Considera que el registrar un nuevo administrador estás otorgando permisos para manejar los eventos futuros</strong>
+                <div><br></div>
+                <div class="mb-3 row">
+                  <label class="col-sm-2 col-form-label">Nombre:</label>
+                  <div class="col-sm-10">
+                    <input class="form-control" type="text" name="nombreNEW" required>
+                  </div>
+                </div>
+                <div class="mb-3 row">
+                  <label class="col-sm-2 col-form-label">Apellido paterno:</label>
+                  <div class="col-sm-10">
+                    <input class="form-control" type="text" name="ap_paternoNEW">
+                  </div>
+                </div>
+                <div class="mb-3 row">
+                  <label class="col-sm-2 col-form-label">Apellido materno:</label>
+                  <div class="col-sm-10">
+                    <input class="form-control" type="text" name="ap_maternoNEW">
+                  </div>
+                </div>
+                <div class="mb-3 row">
+                  <label class="col-sm-2 col-form-label">Teléfono:</label>
+                  <div class="col-sm-10">
+                    <input class="form-control" type="text" name="telefonoNEW">
+                  </div>
+                </div>
+                <div class="mb-3 row">
+                  <label class="col-sm-2 col-form-label">Correo:</label>
+                  <div class="col-sm-10">
+                    <input class="form-control" type="email" name="correoNEW">
+                  </div>
+                </div>
+                <div class="mb-3 row">
+                  <label class="col-sm-2 col-form-label">RFC:</label>
+                  <div class="col-sm-10">
+                    <input class="form-control" type="text" name="rfcNEW">
+                  </div>
+                </div>
+                <div class="d-flex justify-content-end">
+                  <button class="btn btn-primary" onclick="nuevoAdmin()" id="nuevoAdmin">Registrar administrador</button>
+                </div>
+                <div id="mensaje"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+            <div class="modal fade" id="modalCambiarContrasena" tabindex="-1" aria-labelledby="modalCambiarContrasenaLabel" aria-hidden="true">
+              <div class="modal-dialog">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h5 class="modal-title">Cambiar contraseña</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                  </div>
+                  <div class="modal-body">
+                    <form id="formCambiarContrasena" method="POST">
+                      <div class="mb-3">
+                        <label class="form-label">Contraseña actual:</label>
+                        <input type="password" class="form-control" id="currentPassword" name="currentPassword" required>
+                      </div>
+                      <div class="mb-3">
+                        <label class="form-label">Nueva contraseña:</label>
+                        <input type="password" class="form-control" id="newPassword" name="newPassword" required>
+                      </div>
+                      <div class="mb-3">
+                        <label class="form-label">Confirmar contraseña:</label>
+                        <input type="password" class="form-control" id="confirmPassword" name="confirmPassword" required>
+                      </div>
+                      <input type="hidden" name="cuenta" value="<?php echo $_SESSION["ID"]; ?>">
+                      <button type="submit" class="btn btn-primary">Cambiar</button>
+                      <div><br></div>
+                      <div class="alert d-none" role="alert" align="center" id="alertMessage">
+                        </div>
+                    </form>
+                  </div>
+                </div>
+              </div>
+            </div>
+          
+      <?php
+      } else {
+        echo "Usuario no encontrado.";
+      }
+    } catch (PDOException $e) {
+      echo "Error: " . $e->getMessage();
+    }
+    // Cerrar la conexión
+    $db->desconectarBD();
+  } else {
+    echo "No se ha proporcionado un identificador de usuario.";
+  }
+?>
+
+<script>
+  const btnEditarDatosPersonales = document.getElementById('btnEditarDatosPersonales');
+  const btnGuardarCambios = document.getElementById('btnGuardarCambios');
+  const btnCancelarCambios = document.getElementById('btnCancelarCambios');
+  const successDiv = document.getElementById('alertMessage');
+  // Función para enviar los datos del formulario a cambContraseña.php mediante AJAX
+  function cambiarContraseña() {
+    const formu = document.getElementById('formCambiarContrasena');
+      const formCambiarPass = new FormData(formu);
+    // Realizar la solicitud AJAX
+    const xhttp = new XMLHttpRequest();
+    xhttp.onreadystatechange = function() {
+      if (this.readyState === 4 && this.status === 200) {
+        // La respuesta del servidor ha sido recibida correctamente
+        const response = JSON.parse(this.responseText);
+        const alertDiv = document.getElementById('alertMessage');
+        if (response.success) {
+          alertDiv.classList.add('alert-success')
+          alertDiv.textContent = response.message;
+          successDiv.classList.remove('d-none');
+          successDiv.textContent = response.message;
+          console.log(response.message);
+
+          setTimeout(function() {
+            location.reload();
+          }, 3000); // 3000 milisegundos = 3 segundos
+
+        } else {
+          alertDiv.classList.add('alert-danger');
+            alertDiv.textContent = response.message;
+            successDiv.classList.remove('d-none');
+            successDiv.textContent = response.message;
+            console.log(response.message);
+
+            setTimeout(function() {
+              alertDiv.classList.add('d-none'); // Agrega la clase para ocultar el div
+            }, 3000); 
+        }
+      }
+    };
+    xhttp.open("POST", "../viewsPerfil/cambContraseña.php", true);
+    xhttp.send(formCambiarPass);
+  }
+
+  // Agregar un evento al formulario para llamar a la función cambiarContraseña al enviarlo
+  document.getElementById('formCambiarContrasena').addEventListener('submit', function(event) {
+    event.preventDefault(); // Prevenir el envío normal del formulario
+    cambiarContraseña();
+  });
+
+  function habilitarEdicion() {
+    const inputs = document.querySelectorAll('.personal-info input[disabled]');
+    inputs.forEach(input => input.removeAttribute('disabled'));
+    
+    const btnEditarDatosPersonales = document.getElementById('btnEditarDatosPersonales');
+    const btnGuardarCambios = document.getElementById('btnGuardarCambios');
+    const btnCancelarCambios = document.getElementById('btnCancelarCambios');
+
+    btnEditarDatosPersonales.classList.add('d-none');
+    btnGuardarCambios.classList.remove('d-none');
+    btnCancelarCambios.classList.remove('d-none');
+  }
+
+  function guardarCambios() {
+    const inputs = document.querySelectorAll('.personal-info input:not([disabled])');
+    const newData = {}; // Objeto para almacenar los nuevos datos editados.
+
+    inputs.forEach(input => {
+      newData[input.name] = input.value; // Almacena el nuevo valor en el objeto newData con el nombre del campo como clave.
+      input.setAttribute('disabled', 'true'); // Deshabilitar los inputs nuevamente después de guardar los cambios.
+    });
+    // Aquí usaremos AJAX para enviar newData al archivo guardarCambios.php
+    const xhttp = new XMLHttpRequest();
+    xhttp.onreadystatechange = function() {
+      if (this.readyState === 4 && this.status === 200) {
+        // La respuesta del servidor ha sido recibida correctamente
+        const response = JSON.parse(this.responseText);
+        if (response.success) {
+          $("#mensajeModificar").text("Cambios guardados correctamente");
+          $("#mensajeModificar").show();
+          setTimeout(function () {
+            $("#mensajeModificar").hide();
+          }, 3000);
+          console.log(response.message);
+        } else {
+          $("#mensajeModificar").text("Error al intentar hacer los cambios");
+          $("#mensajeModificar").show();
+          setTimeout(function () {
+            $("#mensajeModificar").hide();
+          }, 3000);
+          console.log(response.message);
+        }
+        const btnEditarDatosPersonales = document.getElementById('btnEditarDatosPersonales');
+        const btnGuardarCambios = document.getElementById('btnGuardarCambios');
+        const btnCancelarCambios = document.getElementById('btnCancelarCambios');
+
+        btnEditarDatosPersonales.classList.remove('d-none');
+        btnGuardarCambios.classList.add('d-none');
+        btnCancelarCambios.classList.add('d-none');
+      }
+    };
+    xhttp.open("POST", "../viewsPerfil/guardarDatos.php", true);
+    xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+    xhttp.send("data=" + JSON.stringify(newData));
+  }
+
+  function cancelarCambios() {
+    const inputs = document.querySelectorAll('.personal-info input:not([disabled])');
+    inputs.forEach(input => {
+      input.setAttribute('disabled', 'true');
+      input.value = input.defaultValue;
+    });
+
+    const btnEditarDatosPersonales = document.getElementById('btnEditarDatosPersonales');
+    const btnGuardarCambios = document.getElementById('btnGuardarCambios');
+    const btnCancelarCambios = document.getElementById('btnCancelarCambios');
+
+    btnEditarDatosPersonales.classList.remove('d-none');
+    btnGuardarCambios.classList.add('d-none');
+    btnCancelarCambios.classList.add('d-none');
+  }
+  
+  function nuevoAdmin() {
+    const nombre = $('input[name="nombreNEW"]').val();
+    const ap_paterno = $('input[name="ap_paternoNEW"]').val();
+    const ap_materno = $('input[name="ap_maternoNEW"]').val();
+    const telefono = $('input[name="telefonoNEW"]').val();
+    const correo = $('input[name="correoNEW"]').val();
+    const rfc = $('input[name="rfcNEW"]').val();
+    if (!nombre || !ap_paterno || !ap_materno || !telefono || !correo || !rfc) {
+      alert("Por favor, complete todos los campos requeridos");
+      return; // Detener la ejecución de la función si hay campos vacíos
+    }
+    const mensajeConfirmacion = `¿Seguro que desea registrar un administrador con los siguientes datos?\n\nNombre: ${nombre}\nApellido Paterno: ${ap_paterno}\nApellido Materno: ${ap_materno}\nTeléfono: ${telefono}\nCorreo: ${correo}\nRFC: ${rfc}`;
+    if (window.confirm(mensajeConfirmacion)) {
+      // Si el usuario acepta, enviar los datos a registrarAdmin.php mediante una solicitud AJAX
+      $.ajax({
+        type: "POST", // O el método que utilices para enviar los datos
+        url: "../viewsPerfil/registrarAdmin.php", // Archivo PHP que procesará los datos y los agregará a la base de datos
+        data: {
+          nombre,
+          ap_paterno,
+          ap_materno,
+          telefono,
+          correo,
+          rfc
+        },
+        success: function () {
+          $("#mensaje").text("Administrador registrado correctamente");
+          $("#mensaje").show();
+          console.log("Se registró exitosamente");
+          setTimeout(function () {
+            $('input[name="nombreNEW"]').val('');
+            $('input[name="ap_paternoNEW"]').val('');
+            $('input[name="ap_maternoNEW"]').val('');
+            $('input[name="telefonoNEW"]').val('');
+            $('input[name="correoNEW"]').val('');
+            $('input[name="rfcNEW"]').val('');
+            $("#mensaje").hide();
+          }, 3000);
+        },
+        error: function (error) {
+          $("#mensaje").text("Error al registrar nuevo usuario");
+          $("#mensaje").show();
+          setTimeout(function () {
+            $("#mensaje").hide();
+          }, 3000);
+          console.error("Error al enviar los datos:", error);
+        }
+      });
+    }
+  }
+  // Manejo del clic en el botón "Registrar administrador"
+  $(document).ready(function () {
+    $('#registrarAdmin').click(nuevoAdmin);
+  });
+</script>
