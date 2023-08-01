@@ -19,6 +19,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $tabla = $conexion->seleccionar($consulta);
 
     if (count($tabla) > 0) {
+        echo '<div class="table-responsive">';
         echo "<table class='table table-hover'>
                 <thead class='thead-purple'>
                     <tr>
@@ -44,7 +45,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             echo "</tr>";
         }
         echo "</tbody>
-            </table>";
+            </table>
+            </div>
+            ";
     } else {
         echo "<p>No se encontraron coincidencias.</p>";
     }

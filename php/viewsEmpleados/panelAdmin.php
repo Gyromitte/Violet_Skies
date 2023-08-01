@@ -201,10 +201,20 @@
                 <i class="fa-solid fa-briefcase" style="color: #ffffff;"></i>
             </h3>
             <br>
-            <button type="button" class="btn btn-success border-2 btn-outline-light rounded-5 btn-options" data-bs-toggle="modal" data-bs-target="#mainModal" data-bs-whatever="@registrarEmpleado">
-                <i class="fa-solid fa-address-card" style="color: #ffffff;"></i>
-                Registrar
-            </button>
+            <div class="search-container">
+                <div class="filter">
+                    <button type="button" class="btn btn-success border-2 btn-outline-light rounded-5 btn-options" data-bs-toggle="modal" data-bs-target="#mainModal" data-bs-whatever="@registrarEmpleado">
+                        <i class="fa-solid fa-address-card" style="color: #ffffff;"></i>
+                        Registrar
+                    </button>
+                </div>
+                <!--Barra de Busqueda-->
+                <div class="input-group mb-3 search-bar" id="search">
+                    <input type="text" class="form-control" placeholder="Buscar a un empleado" aria-label="" aria-describedby="button-addon2">
+                    <button id="buscarEmpleado" data-url="buscarEmpleado.php" class="ver-empleados btn btn-outline-primary" type="button" id="button-addon2">
+                    <i class="fa-solid fa-magnifying-glass" style="color: #1f71ff;"></i></button>
+                </div>
+            </div>
             <br>
             <br>
             <!--Opciones de Vistas-->
@@ -227,12 +237,7 @@
                         Ver Solicitudes
                     </button>
                 </div>
-                <!--Barra de Busqueda-->
-                <div class="input-group mb-3 search-bar">
-                    <input type="text" id="busqueda" class="form-control" placeholder="Buscar a un empleado" aria-label="" aria-describedby="button-addon2">
-                    <button id="buscarEmpleado" data-url="buscarEmpleado.php" class="ver-empleados btn btn-outline-primary" type="button" id="button-addon2">
-                        <i class="fa-solid fa-magnifying-glass" style="color: #1f71ff;"></i></button>
-                </div>
+                
             </div>
             <!--Informacion de la tabla-->
             <h3 id="table-info"></h3>
