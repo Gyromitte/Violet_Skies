@@ -235,9 +235,6 @@ nav{
     justify-content: flex-end;
   }
   .panel-header {
-    display: flex;
-    align-items: center;
-    justify-content: center;
     text-align: center;
 }
 
@@ -306,12 +303,6 @@ nav{
 .accordion-item:hover .accordion-button {
     background-color: #5603ad;
      color: white;
-}
-#profile {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;        
 }
 
 .detalles {
