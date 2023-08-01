@@ -435,8 +435,8 @@ function updateModalContent(formType, idEmpleado, idEvento) {
             xhrComida.send();
 
             // Construir el contenido del formulario del modal con los detalles del evento
-            formContent = `
-              <form>
+            formContent = `<div class="detalles">
+            <form>
                 <h4 align='center'>${detallesEvento.NOMBRE}</h4>
                 <h5 align='center'>${detallesEvento.CLIENTE}</h5><br>
                 <table align='center' cellspacing="20" cellpadding="5">
@@ -479,11 +479,13 @@ function updateModalContent(formType, idEmpleado, idEvento) {
                   ${detallesEvento.ESTADO !== 'CANCELADO' && detallesEvento.ESTADO !== 'FINALIZADO'? 
                     '<button type="button" class="btn btn-danger" id="btnCancelarEvento">Cancelar Evento</button>' : ''}
                   ${detallesEvento.ESTADO !== 'CANCELADO' && detallesEvento.ESTADO !== 'PENDIENTE'? 
-                    '<button type="button" class="btn btn-info" id="btnEmpleadosRegistrados">Empleados</button>' : ''}
+                  '<button type="button" class="btn btn-info" id="btnEmpleadosRegistrados">Empleados</button>' : ''}
                 </div>
               </form>
-              <div id="tablaEmpleados"></div>
-            `;
+              <br>
+              <div id="empleadosTable"></div></div>
+              `;              
+              
             // Asignar el contenido al formulario del modal
             modalForm.innerHTML = formContent;
             // Inicializar el datetimepicker en el campo de fecha
@@ -496,6 +498,32 @@ function updateModalContent(formType, idEmpleado, idEvento) {
                   // [20, 24] // Ejemplo: deshabilita desde las 8:00 pm hasta la medianoche
                 ]
               });
+            });
+            
+            var tablaVisible = false;
+
+            var btnEmpleadosRegistrados = document.getElementById('btnEmpleadosRegistrados');
+            btnEmpleadosRegistrados.addEventListener('click', function() {
+              if (!tablaVisible) {
+                // Realizar una petición AJAX para obtener la tabla de empleados registrados
+                $.ajax({
+                  type: "GET",
+                  url: `../viewsEventos/verEmpleadosRegistrados.php?id=${idEvento}`,
+                  success: function (response) {
+                    // Una vez se obtenga la respuesta exitosa, insertar la tabla debajo del formulario
+                    $("#empleadosTable").html(response);
+                    tablaVisible = true; // La tabla está visible
+                  },
+                  error: function (xhr, status, error) {
+                    // En caso de error, mostrar un mensaje o realizar alguna otra acción
+                    console.error(error);
+                  },
+                });
+              } else {
+                // Si la tabla está visible, ocultarla
+                $("#empleadosTable").html("");
+                tablaVisible = false; // La tabla está oculta
+              }
             });
             
             var btnModificarGuardar = document.getElementById('btnGuardar');

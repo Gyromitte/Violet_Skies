@@ -313,3 +313,7 @@ nav{
     align-items: center;
     justify-content: center;        
 }
+
+.detalles {
+    max-width: 600px; /* Cambia este valor según sea necesario */
+  }
