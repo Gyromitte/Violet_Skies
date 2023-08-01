@@ -247,7 +247,7 @@
                     <i class="fa-solid fa-user" style="color: #ffffff;"></i>
                 </h3>
                 <br>
-                <?php include "../viewsPerfil/datosPersonales.php"?>
+                <?php include "../viewsPerfil/datosAdmin.php"?>
             </div>
         </div>
 
@@ -274,6 +274,7 @@
     <script src="/bootstrap/js/bootstrap.min.js"></script>
     <script src="/bootstrap/js/bootstrap.bundle.min.js"></script>
     <script src="/js/filtroEventos.js"></script>
+    <script src="/js/datosAdmin.js"></script>
 </body>
 
 </html>
