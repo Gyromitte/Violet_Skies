@@ -67,7 +67,7 @@ if (isset($_GET['id'])) {
     } else {
         // Si $_GET['COCINEROS'] no está definido o es una cadena vacía, asignar el valor null a 'COCINEROS'
         $consulta .= "D.COCINEROS = :cocineros, ";
-        $parametros[':cocineros'] = null;
+        $parametros[':cocineros'] = 0;
     }
     
 

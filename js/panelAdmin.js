@@ -520,6 +520,15 @@ function updateModalContent(formType, idEmpleado, idEvento) {
               var meserosRequeridos = document.getElementById('meserosRequeridos').value;
               var cocinerosRequeridos = document.getElementById('cocinerosRequeridos').value;
   
+              if (!fecha || !salon || !comida) {
+                alert('Por favor, llene todos los campos correctamente');
+                return;
+              }
+              if (!invitados || isNaN(invitados) || parseInt(invitados) <= 0) {
+                alert('Por favor, llene los campos correctamente\nInvitados debe ser un número válido');
+                return;
+              }
+
               var xhrGuardarCambios = new XMLHttpRequest();
               xhrGuardarCambios.onreadystatechange = function() {
                 if (xhrGuardarCambios.readyState === XMLHttpRequest.DONE) {
