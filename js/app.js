@@ -1,7 +1,7 @@
 // Datos para las cards (puedes modificar estos valores)
 const cardsData = [
     {
-      imageUrl: 'imagen1.jpg',
+      imageUrl: '/images/salones/salon1.jpg',
       cosas: ['cosa 1', 'cosa 2', 'cosa 3', 'cosa 4'],
     },
     {
