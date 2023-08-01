@@ -155,8 +155,8 @@
                             <select id="estadoSelect" name="estado" class="form-select">
                                 <option value="todo" selected>Todos</option>
                                 <option value="PENDIENTE">Pendiente</option>
-                                <option value="FINALIZADO">Finalizado</option>
                                 <option value="EN PROCESO">En proceso</option>
+                                <option value="FINALIZADO">Finalizado</option>
                                 <option value="CANCELADO">Cancelado</option>
                             </select>
                         </div>
