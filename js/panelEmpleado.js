@@ -85,7 +85,7 @@ modal.addEventListener("show.bs.modal", function (event) {
     var modalHeader = document.querySelector('.modal-header');
   
     switch (formType) {
-      case "@ponerte":
+      case "@asist":
         modalTitle.textContent = "Trabajar en este evento?";
         modalHeader.classList.add('modal-header-warning');
         var xhr = new XMLHttpRequest();
@@ -123,7 +123,6 @@ modal.addEventListener("show.bs.modal", function (event) {
         xhr.open("GET", "obtenerEvento.php?id=" + idEvento, true);
         xhr.send();
         //Ver cual es la tabla activa para refrescar cualquier cambio
-        checkCurrentTable(currentTable);
       break;
       case "@cancelar":
         modalTitle.textContent = "No asistir este evento?";
@@ -136,7 +135,7 @@ modal.addEventListener("show.bs.modal", function (event) {
               var evento = JSON.parse(xhr.responseText);
               // Actualizar el contenido del formulario con los datos obtenido
               formContent = `
-                <form onsubmit="return asistirEvento(${idEvento})">
+                <form onsubmit="return cancelarAsistir(${idEvento})">
                   <div id="mensajeDiv" method="POST"></div> 
                     <div class="d-flex justify-content-center">
                       <h4>

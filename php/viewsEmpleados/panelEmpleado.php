@@ -28,12 +28,15 @@
     <style>
 			#cuadroEvento{
 				border: 3px solid darkblue;
-				background-color: violet;
+				background-image: linear-gradient(145deg, #5603ad, #f58cd6);
 				color: white;
 				padding: 5px; 
 				margin: 5px;
 				float: left;
 			}
+            #cuadroEvent:hover{
+                background-color: rgb(140, 39, 140);
+            }
 		</style>
     <!--Scripts que necesitan ejecutarse primero-->
     <script src="/js/panelEmpleado.js" async defer></script>
@@ -104,7 +107,7 @@
                 Eventos Disponibles
                 <i class="fa-solid fa-briefcase" style="color: #ffffff;"></i>
             </h3>
-            <button type="button" class="btn btn-primary" data-bs-toggle="modal"  data-bs-target="#mainModal" data-bs-whatever="@fat">Open modal for @fat</button>
+            <button type="button" class="btn btn-primary" data-bs-toggle="modal"  data-bs-target="#empModal" data-bs-whatever="@fat">Open modal for @fat</button>
             <?php
             if($_SESSION["access"]==1.5){
                 echo"<h1>El Administrador aun no confirma tu cuenta</h1></div>";
@@ -166,7 +169,10 @@
             ?>
         </div>
         <div id="perfil" class="tab-content">
-            <p class="test">Yo soy, perfiles.</p>
+            <p class="test">Tu Perfil</p>
+            <div class="container">
+                
+            </div>
         </div>
 
         <!--Modal-->

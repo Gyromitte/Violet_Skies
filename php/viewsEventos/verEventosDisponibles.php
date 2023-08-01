@@ -72,8 +72,8 @@
                         echo '<ul class="dropdown-menu custom-drop-menu">';
                             echo '<li>
                                 <a class="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#empModal" 
-                                data-bs-whatever="@ponerte" 
-                                data-id="'.$registro->ID.'">
+                                data-bs-whatever="@asist" 
+                                data-id="'.$evento.'">
                                     <i class="fa-solid fa-pencil me-2" style="color: #ffffff;"></i>Asistir
                                 </a>
                                 </li>';
