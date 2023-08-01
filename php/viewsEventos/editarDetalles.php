@@ -41,17 +41,35 @@ if (isset($_GET['id'])) {
         $parametros[':comida'] = $comida;
     }
 
-    if (isset($_GET['MESEROS'])) {
+    if (isset($_GET['MESEROS']) && $_GET['MESEROS'] !== "") {
         $meseros = $_GET['MESEROS'];
+        $consulta .= "D.MESEROS = :meseros, ";
+        $parametros[':meseros'] = $meseros;
+    } else {
+        // Si $_GET['MESEROS'] no está definido o es una cadena vacía, calcular el valor según la operación invitados/15
+        // Asegurémonos de que invitados sea un número válido antes de hacer la operación
+        if (isset($_GET['INVITADOS']) && is_numeric($_GET['INVITADOS'])) {
+            $invitados = $_GET['INVITADOS'];
+            $meseros = floor($invitados / 15);
+        } else {
+            // Si INVITADOS no está definido o no es un número válido, asignar un valor predeterminado (por ejemplo, 0)
+            $meseros = 0;
+        }
+    
         $consulta .= "D.MESEROS = :meseros, ";
         $parametros[':meseros'] = $meseros;
     }
 
-    if (isset($_GET['COCINEROS'])) {
+    if (isset($_GET['COCINEROS']) && $_GET['COCINEROS'] !== "") {
         $cocineros = $_GET['COCINEROS'];
         $consulta .= "D.COCINEROS = :cocineros, ";
         $parametros[':cocineros'] = $cocineros;
+    } else {
+        // Si $_GET['COCINEROS'] no está definido o es una cadena vacía, asignar el valor null a 'COCINEROS'
+        $consulta .= "D.COCINEROS = :cocineros, ";
+        $parametros[':cocineros'] = 0;
     }
+    
 
     // Eliminar la coma final de la consulta
     $consulta = rtrim($consulta, ", ");

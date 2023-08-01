@@ -18,36 +18,36 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     $tabla = $conexion->seleccionar($consulta);
 
-    echo "<table class='table table-hover'>
-            <thead class='thead-purple'>
-                <tr>
-                    <th>Nombre</th>
-                    <th>Estado</th>
-                    <th>Creación</th>
-                    <th>Fecha</th>
-                    <th>Cliente</th>
-                    <th></th>
-                </tr>
-            </thead>
-            <tbody>";
-
-    foreach ($tabla as $registro) {
-        echo "<tr>";
-        echo "<td> $registro->NOMBRE</td>";
-        echo "<td> $registro->ESTADO</td>";
-        echo "<td> $registro->F_CREACION</td>";
-        echo "<td> $registro->F_EVENTO</td>";
-        echo "<td> $registro->CLIENTE</td>";
-        echo "<td>
-        <button type='button' class='btn btn-info' data-bs-toggle='modal' data-bs-target='#mainModal' data-bs-whatever='@verDetallesEvento' data-event-id='$registro->ID'>Ver más</button>
-
-
+    if (count($tabla) > 0) {
+        echo "<table class='table table-hover'>
+                <thead class='thead-purple'>
+                    <tr>
+                        <th>Nombre</th>
+                        <th>Estado</th>
+                        <th>Creación</th>
+                        <th>Fecha</th>
+                        <th>Cliente</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>";
+        foreach ($tabla as $registro) {
+            echo "<tr>";
+            echo "<td> $registro->NOMBRE</td>";
+            echo "<td> $registro->ESTADO</td>";
+            echo "<td> $registro->F_CREACION</td>";
+            echo "<td> $registro->F_EVENTO</td>";
+            echo "<td> $registro->CLIENTE</td>";
+            echo "<td>
+                <button type='button' class='btn btn-info' data-bs-toggle='modal' data-bs-target='#mainModal' data-bs-whatever='@verDetallesEvento' data-event-id='$registro->ID'>Ver más</button>
             </td>";
-        echo "</tr>";
+            echo "</tr>";
+        }
+        echo "</tbody>
+            </table>";
+    } else {
+        echo "<p>No se encontraron coincidencias.</p>";
     }
-
-    echo "</tbody>
-        </table>";
     $conexion->desconectarBD();
 }
 ?>

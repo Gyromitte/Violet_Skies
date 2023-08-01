@@ -155,8 +155,8 @@
                             <select id="estadoSelect" name="estado" class="form-select">
                                 <option value="todo" selected>Todos</option>
                                 <option value="PENDIENTE">Pendiente</option>
-                                <option value="FINALIZADO">Finalizado</option>
                                 <option value="EN PROCESO">En proceso</option>
+                                <option value="FINALIZADO">Finalizado</option>
                                 <option value="CANCELADO">Cancelado</option>
                             </select>
                         </div>
@@ -263,7 +263,7 @@
                     <i class="fa-solid fa-user" style="color: #ffffff;"></i>
                 </h3>
                 <br>
-                <?php include "../viewsPerfil/datosPersonales.php"?>
+                <?php include "../viewsPerfil/datosAdmin.php"?>
             </div>
         </div>
 
@@ -290,6 +290,7 @@
     <script src="/bootstrap/js/bootstrap.min.js"></script>
     <script src="/bootstrap/js/bootstrap.bundle.min.js"></script>
     <script src="/js/filtroEventos.js"></script>
+    <script src="/js/datosAdmin.js"></script>
 </body>
 
 </html>

@@ -17,25 +17,29 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
                          ORDER BY E.TIPO, NOMBRE ASC";
 
             $tabla = $conexion->seleccionar($consulta);
-            echo "<table class='table table-hover'>
-            <thead class='thead-purple'>
-                <tr>
-                  <th>TIPO</th><th>NOMBRE</th><th>TELÉFONO</th>
-                  </tr>
-                  </thead>
-                  <tbody>";
 
-            foreach($tabla as $registro)
-            {
-              echo "<tr>";
-              echo "<td> $registro->TIPO </td>";
-              echo "<td> $registro->NOMBRE </td>";
-              echo "<td> $registro->TELEFONO </td>";
-              echo "</tr>";
+            if (count($tabla) > 0) {
+                echo "<br><table class='table table-hover'>
+                <thead class='thead-purple'>
+                    <tr>
+                        <th>TIPO</th><th>NOMBRE</th><th>TELÉFONO</th>
+                    </tr>
+                </thead>
+                <tbody>";
+
+                foreach ($tabla as $registro) {
+                    echo "<tr>";
+                    echo "<td> $registro->TIPO </td>";
+                    echo "<td> $registro->NOMBRE </td>";
+                    echo "<td> $registro->TELEFONO </td>";
+                    echo "</tr>";
+                }
+
+                echo "</tbody>
+                </table>";
+            } else {
+                echo "<br><p>Aún no hay empleados registrados para este evento.</p>";
             }
-
-            echo "</tbody>
-                  </table>";
 
             $conexion->desconectarBD();
         } catch (Exception $e) {
