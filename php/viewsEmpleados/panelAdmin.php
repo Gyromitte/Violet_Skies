@@ -257,14 +257,12 @@
             </div>
         </div>
         <div id="perfil" class="tab-content">
-            <div id="profile">
                 <h3 class="test" style="text-align:center";>
-                    PERFIL
+                    Perfil
                     <i class="fa-solid fa-user" style="color: #ffffff;"></i>
                 </h3>
                 <br>
                 <?php include "../viewsPerfil/datosAdmin.php"?>
-            </div>
         </div>
 
         <!--Modal-->
