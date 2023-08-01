@@ -1,3 +1,4 @@
+<!DOCTYPE html>
 <!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
 <!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
 <!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
@@ -152,7 +153,6 @@
                             <option value="CANCELADO">Cancelado</option>;
                         </select>
                     </div>
-
                 </form>
             </div>
             <br>
@@ -173,6 +173,10 @@
             <!--Opciones de Vistas-->
             <div class="view-options">
                 <div>
+                    <button id="verGraficos" data-url="" type="button" class="btn-options ver-empleados btn btn-primary border-2 btn-outline-light rounded-5" data-bs-target="#mainModal">
+                        <i class="fa-solid fa-chart-pie" style="color: #ffffff;"></i>
+                        Ver Graficos
+                    </button>
                     <button id="verCocineros" data-url="verCocineros.php" type="button" class="btn-options ver-empleados btn btn-primary border-2 btn-outline-light rounded-5" data-bs-target="#mainModal">
                         <i class="fa-solid fa-utensils" style="color: #ffffff;"></i>
                         Ver Cocineros
@@ -180,6 +184,10 @@
                     <button id="verMeseros" data-url="verMeseros.php" type="button" class="btn-options ver-empleados btn btn-primary border-2 btn-outline-light rounded-5" data-bs-target="#mainModal">
                         <i class="fa-solid fa-bell-concierge" style="color: #ffffff;"></i>
                         Ver Meseros
+                    </button>
+                    <button id="verSolicitudes" data-url="verSolicitudes.php" type="button" class="btn-options ver-empleados btn btn-primary border-2 btn-outline-light rounded-5" data-bs-target="#mainModal">
+                        <i class="fa-solid fa-business-time" style="color: #ffffff;"></i>
+                        Ver Solicitudes
                     </button>
                 </div>
                 <!--Barra de Busqueda-->
@@ -194,6 +202,21 @@
             <!--Container para tablas-->
             <div class="cont-table">
                 <!--Contenido Default-->
+                <div class="container-fluid">
+                    <div class="row">
+                        <!-- Contenido de la izquierda -->
+                        <div class="col-md-5">
+                            <div class="info-card mb-2" style="height: 25px;">Solicitudes pendientes:</div>
+                            <div class="col-md-12">
+                                <canvas id="proporcionEmpleados2" style="height: 40px"></canvas>
+                            </div>
+                        </div>
+                        <!-- Canvas a la derecha -->
+                        <div class="info-card col-md-7">
+                        
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
         <div id="perfil" class="tab-content">
