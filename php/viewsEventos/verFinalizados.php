@@ -5,23 +5,13 @@
         session_start();
         $emp=$_SESSION["trabajo"];
         extract($_POST);
-        $asis=$_GET['asis'];
-        if($asis=="lejanoevento"){
-            $consulta = "SELECT E.ID,E.NOMBRE, E.F_CREACION, E.F_EVENTO, CONCAT(CU.NOMBRE, ' ', CU.AP_PATERNO, ' ', CU.AP_MATERNO) AS CLIENTE,
-            DE.INVITADOS, S.NOMBRE AS SALON, DE.MESEROS, DE.COCINEROS
-            FROM EVENTO E JOIN CUENTAS CU ON E.CLIENTE=CU.ID JOIN DETALLE_EVENTO DE ON
-            DE.ID=E.ID JOIN SALONES S ON S.ID=DE.SALON WHERE E.ESTADO='FINALIZADO' AND 
-            EXISTS (SELECT 1 FROM EVENTO_EMPLEADOS EE
-            WHERE EE.EVENTO = E.ID AND EE.EMPLEADOS = '$emp') ORDER BY E.F_EVENTO DESC";
-        }
-        else if($asis=="cercasevento"){
+       
             $consulta = "SELECT E.ID,E.NOMBRE, E.F_CREACION, E.F_EVENTO, CONCAT(CU.NOMBRE, ' ', CU.AP_PATERNO, ' ', CU.AP_MATERNO) AS CLIENTE,
             DE.INVITADOS, S.NOMBRE AS SALON, DE.MESEROS, DE.COCINEROS
             FROM EVENTO E JOIN CUENTAS CU ON E.CLIENTE=CU.ID JOIN DETALLE_EVENTO DE ON
             DE.ID=E.ID JOIN SALONES S ON S.ID=DE.SALON WHERE E.ESTADO='FINALIZADO'
              AND EXISTS (SELECT 1 FROM EVENTO_EMPLEADOS EE
             WHERE EE.EVENTO = E.ID AND EE.EMPLEADOS = '$emp') ORDER BY E.F_EVENTO ASC";
-        }
         
         $tabla = $conexion->seleccionar($consulta);
         $num=count($tabla);

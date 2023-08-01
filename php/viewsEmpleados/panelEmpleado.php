@@ -140,30 +140,21 @@
                 else{
                     echo"
                     <br>
-                    <div class='container'>
-                        <div class='btn-group'>
-                            <label class='control-label'>Orden: </label>
-                            <select id='tipoorde' name='asis' class='form-select'>;
-                                <option value='lejanoevento'>Eventos Lejanos</option>;
-                                <option value='cercasevento'>Eventos Cercanos</option>;
-                            </select>
-                        </div>
-                    </div>
-                        <br>
-                        <br>
-                    <div>
-                        <button id='verPend' data-url='verEventosAtendiendo.php' type='button'
+                    <div class='view-options'>
+                        <div>
+                        <button id='verPend' data-url='../viewsEventos/viewEventosAtendiendo.php' type='button'
                         class='btn-options ver-eventos btn btn-primary border-2 btn-outline-light rounded-5'
                         data-bs-target='#Main'>
                             <i class='fa-solid fa-calendar-days' style='color: #ffffff;'></i>
                             Eventos Pendientes
                         </button>
-                        <button id='verFin' data-url='verFinalizados.php' type='button' 
+                        <button id='verFin' data-url='../viewsEventos/verFinalizados.php' type='button' 
                         class='btn-options ver-eventos btn btn-primary border-2 btn-outline-light rounded-5'
                         data-bs-target='#Main'>
                             <i class='fa-solid fa-bell-concierge' style='color: #ffffff;'></i>
                             Historial
                         </button>
+                        </div>
                     </div>
                     <br>
                     

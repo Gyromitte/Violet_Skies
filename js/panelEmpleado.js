@@ -46,19 +46,19 @@ function checkCurrentTable(currentTable) {
   switch (currentTable) { //Simular un click para refrescar los cambios
     case 'pend':
       setTimeout(function() {
-        btnCocineros.click();
+        btnPend.click();
       }, 500);
       break;
     case 'fin':
       setTimeout(function() {
-        btnMeseros.click();
+        btnFin.click();
       }, 500);
       break;
   }
 }
 //Obtener botones para refrescar vistas
-var btnPend = document.getElementById('verEventosAtendiendo');
-var btnFin = document.getElementById('verFinalizados');
+var btnPend = document.getElementById('verPend');
+var btnFin = document.getElementById('verFin');
 
 /*Modal functionality*/
 // Obtener el modal y el formulario
