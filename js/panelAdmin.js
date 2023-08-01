@@ -453,18 +453,18 @@ function updateModalContent(formType, idEmpleado, idEvento) {
               </table>
               <br>
               <div align="center">
-                ${detallesEvento.ESTADO === 'PENDIENTE' ? 
-                  '<button type="button" class="btn btn-success" id="btnAceptarEvento">Aceptar Evento</button>' : ''}
-                ${detallesEvento.ESTADO !== 'CANCELADO' && detallesEvento.ESTADO !== 'FINALIZADO' ? 
-                  '<button type="button" class="btn btn-primary" id="btnModify">Modificar Detalles</button>' :''}
-                  <button type="button" class="btn btn-primary" id="btnSaveChanges" style="display: none;">Guardar</button>
-                ${detallesEvento.ESTADO !== 'CANCELADO' && detallesEvento.ESTADO !== 'FINALIZADO'? 
-                  '<button type="button" class="btn btn-danger" id="btnCancelarEvento">Cancelar Evento</button>' : ''}
-                ${detallesEvento.ESTADO !== 'CANCELADO' && detallesEvento.ESTADO !== 'PENDIENTE'? 
-                '<button type="button" class="btn btn-info" id="btnEmpleadosRegistrados">Empleados</button>' : ''}            
+                <button type="button" class="btn btn-success" id="btnAceptarEvento" 
+                  ${detallesEvento.ESTADO === 'PENDIENTE' ? '' : 'style="display: none;"'}>Aceptar Evento</button>
+                <button type="button" class="btn btn-primary" id="btnModify"
+                  ${detallesEvento.ESTADO === 'CANCELADO' || detallesEvento.ESTADO === 'FINALIZADO' ? 'style="display: none;"' : ''}>Modificar Detalles</button>
+                <button type="button" class="btn btn-primary" id="btnSaveChanges" style="display: none;">Guardar</button>            
+                <button type="button" class="btn btn-danger" id="btnCancelarEvento" 
+                  ${detallesEvento.ESTADO === 'CANCELADO' || detallesEvento.ESTADO === 'FINALIZADO' ? 'style="display: none;"' : ''}>Cancelar Evento</button>            
+                <button type="button" class="btn btn-info" id="btnEmpleadosRegistrados"
+                  ${detallesEvento.ESTADO === 'CANCELADO' || detallesEvento.ESTADO === 'PENDIENTE' ? 'style="display: none;"' : ''}>Empleados</button>
               </form>
-              <div></div>
-              <div id="empleadosTable"></div></div>`;              
+              <div id="empleadosTable"></div>
+            `;              
             
             modalForm.innerHTML = formContent;
             $(document).ready(function() {
