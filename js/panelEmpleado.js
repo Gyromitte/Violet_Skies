@@ -125,5 +125,45 @@ modal.addEventListener("show.bs.modal", function (event) {
         //Ver cual es la tabla activa para refrescar cualquier cambio
         checkCurrentTable(currentTable);
       break;
+      case "@cancelar":
+        modalTitle.textContent = "No asistir este evento?";
+        modalHeader.classList.add('modal-header-warning');
+        var xhr = new XMLHttpRequest();
+        xhr.onreadystatechange = function() {
+          if (xhr.readyState === XMLHttpRequest.DONE) {
+            if (xhr.status === 200) {
+              // Parsear la respuesta JSON
+              var evento = JSON.parse(xhr.responseText);
+              // Actualizar el contenido del formulario con los datos obtenido
+              formContent = `
+                <form onsubmit="return asistirEvento(${idEvento})">
+                  <div id="mensajeDiv" method="POST"></div> 
+                    <div class="d-flex justify-content-center">
+                      <h4>
+                        ${evento.NOMBRE}
+                      </h4>
+                      <br>
+                      <button type="submit" class="btn btn-primary btn-modal-warning me-2">
+                        <i class="fa-solid fa-user me-2" style="color: #ffffff;">
+                            Asistir
+                        </i>
+                      </button>
+                      <br>
+                    </div>
+                  </div>
+                </form>
+              `;
+              modalForm.innerHTML = formContent;
+            }
+            else {
+              console.error("Error en la solicitud AJAX");
+            }
+          }
+        };
+        xhr.open("GET", "obtenerEvento.php?id=" + idEvento, true);
+        xhr.send();
+        //Ver cual es la tabla activa para refrescar cualquier cambio
+        checkCurrentTable(currentTable);
+      break;
     };
   }

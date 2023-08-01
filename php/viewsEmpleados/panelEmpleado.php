@@ -104,6 +104,7 @@
                 Eventos Disponibles
                 <i class="fa-solid fa-briefcase" style="color: #ffffff;"></i>
             </h3>
+            <button type="button" class="btn btn-primary" data-bs-toggle="modal"  data-bs-target="#mainModal" data-bs-whatever="@fat">Open modal for @fat</button>
             <?php
             if($_SESSION["access"]==1.5){
                 echo"<h1>El Administrador aun no confirma tu cuenta</h1></div>";

@@ -44,22 +44,6 @@
             echo "<p><b>Salon: </b> $registro->SALON</p>";
             echo "<p><b>Meseros Necesarios: </b>$cantm / $registro->MESEROS</p>";
             echo "<p><b>Cocineros Necesarios: </b>$cantc / $registro->COCINEROS</p>";
-                echo "<div class='text-center'>";
-                    echo '<div class="dropdown">';
-                        echo '<button class="btn btn-secondary dropdown-toggle custom-dropdown" type="button" 
-                        data-bs-toggle="dropdown" aria-expanded="false">Entrar';
-                        echo '</button>';
-                        echo '<ul class="dropdown-menu custom-drop-menu">';
-                            echo '<li>
-                                <a class="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#empModal" 
-                                data-bs-whatever="@cancelar" 
-                                data-id="'.$registro->ID.'">
-                                    <i class="fa-solid fa-pencil me-2" style="color: #ffffff;"></i>Entrar
-                                </a>
-                                </li>';
-                        echo '</ul>
-                        </div>';
-                echo "</div>";
                 echo"</div>";
             echo "</div>";
             echo"</div>";
