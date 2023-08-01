@@ -5,12 +5,15 @@ $conexion->conectarBD();
 
 /* Consulta para contar cuentas de clientes */
 $consultaClientes = "SELECT COUNT(*) AS count_clientes FROM CUENTAS C
-WHERE TIPO_CUENTA = 'CLIENTE'";
+WHERE TIPO_CUENTA = 'CLIENTE'
+AND C.ESTADO = 'ACTIVO'";
 $resultadoClientes = $conexion->seleccionar($consultaClientes);
 $countClientes = $resultadoClientes[0]->count_clientes;
 
 /* Consulta para contar a todos los empleados */
-$consultaEmpleados = "SELECT COUNT(*) AS count_empleados FROM EMPLEADOS E";
+$consultaEmpleados = "SELECT COUNT(*) AS count_empleados FROM EMPLEADOS E
+INNER JOIN CUENTAS C ON E.CUENTA = C.ID
+WHERE C.ESTADO = 'ACTIVO'";
 $resultadoEmpleados = $conexion->seleccionar($consultaEmpleados);
 $countEmpleados = $resultadoEmpleados[0]->count_empleados;
 

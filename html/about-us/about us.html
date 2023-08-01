@@ -25,58 +25,101 @@
 </head>
 
 <body>
-    <nav class="navbar navbar-default row">
-        <div class="companySection col-sm-auto">
-            <!--Company Logo-->
-            <div class="navbar-header">
-                <img id="company-logo" class="img-fluid" src="/images/company_logo.png" alt="companyLogo">
-                <a class="no-underline" href="/index.html" id="company-name">Violet Skies</a>
+<!-- Navbar -->
+<nav class="navbar navbar-default row">
+    <div class="companySection col-sm-auto">
+        <!--Company Logo-->
+        <div class="navbar-header">
+            <!--Menu for mobiles-->
+            <div class="btn-group dropdown drop-mobile" id="nav-button">
+                <a href="#" class="btn btn-secondary dropdown-btn-custom" role="button" data-toggle="dropdown" aria-expanded="false">
+                <i class="fa-solid fa-bars fa-2x" style="color: #ffffff;"></i>
+                </a>
             </div>
-            <!--Tabs-->
-            <ul class="nav list-inline">
-                <li class="mr-3 tabs">
-                    <a class="no-underline" href="/html/about-us/about us.html">Nosotros</a>
-                </li>
-                <li class="mr-3 tabs">
-                    <a class="no-underline" href="/html/agendarEvento.html">Agendar Evento</a>
-                </li>
-                <li class="mr-3 tabs">
-                    <a class="no-underline" href="/html/trabajo.html">Trabajo</a>
-                </li>
-            </ul>
+            <img id="company-logo" class="img-fluid" src="/images/company_logo.png" alt="companyLogo"
+                onclick="this.classList.toggle('clicked')">
+            <a class="no-underline" href="/index.html" id="company-name">Violet Skies</a>
         </div>
-        <!--Login-section-->
-        <div class="login-section col-sm-auto">
-            <a class="no-underline" href="/php/views/login.php">
-                <button class="loginButton">
+        <!--Tabs-->
+        <ul class="nav list-inline">
+            <li class="mr-3 tabs">
+                <a class="no-underline" href="/html/about-us/about us.html">Nosotros</a>
+            </li>
+            <li class="mr-3 tabs">
+                <a class="no-underline" href="/html/agendarEvento.html">Agendar Evento</a>
+            </li>
+            <li class="mr-3 tabs">
+                <a class="no-underline" href="/html/trabajo.html">Trabajo</a>
+            </li>
+        </ul>
+    </div>
+    <!--Login-section-->
+    <div class="login-section col-sm-auto">
+        <a class="no-underline" href="/php/views/login.php">
+            <button class="loginButton">
+                <i class="fa-solid fa-door-open" style="color: #ffffff;"></i>
+                Acceder
+            </button>
+        </a>
+        <a class="no-underline" href="/php/views/registrarse.php">
+            <button class="loginButton">
+                <i class="fa-solid fa-user" style="color: #ffffff;"></i>
+                Registrarse
+            </button>
+        </a>
+    </div>
+</nav>
+
+<!--DashBoard-->
+<div id="dash-board" class="d-flex flex-column">
+    <div id="dash-board-content">
+        <ul>
+            <li class="mr-3 tabs mb-4">
+                <i class="fa-solid fa-users" style="color: #ffffff;"></i>
+                <a class="no-underline" href="/html/about-us/about us.html">Nosotros</a>
+            </li>
+            <li class="mr-3 tabs mb-4">
+                <i class="fa-solid fa-calendar-days" style="color: #ffffff;"></i>
+                <a class="no-underline" href="/html/agendarEvento.html">Agendar Evento</a>
+            </li>
+            <li class="mr-3 tabs mb-4">
+                <i class="fa-solid fa-briefcase" style="color: #ffffff;"></i>
+                <a class="no-underline" href="/html/trabajo.html">Trabajo</a>
+            </li>
+            <li class="mr-3 tabs mb-4">
+                <a class="no-underline mb-4" href="/php/views/login.php">
                     <i class="fa-solid fa-door-open" style="color: #ffffff;"></i>
                     Acceder
-                </button>
-            </a>
-            <a class="no-underline" href="/html/trabajo.html">
-                <button class="loginButton">
+                </a>
+            </li>
+            <li class="mr-3 tabs mb-4">
+                <a class="no-underline mb-4" href="/php/views/registrarse.php">
                     <i class="fa-solid fa-user" style="color: #ffffff;"></i>
                     Registrarse
-                </button>
-            </a>
-        </div>
-    </nav>
-    <div class="main-container mt-4">
-        <h1>Somos Violet Skies</h1>
-        <h5>Ofreciendote experiencias inolvidables</h5>
-        <div class="row two-part mt-5 p-3">
-            <img id="mountain" class="col-5" src="/html/about-us/imgs/mountain.png">
-            <div class="col-7 p-3">
-                <p>Nuestro equipo de profesionales dedicados se esfuerza por hacer realidad tus sueños. Ya sea que estés planificando una boda de ensueño, una conferencia importante o una fiesta de celebración, estamos aquí para atender cada detalle y asegurarnos de que cada momento sea inolvidable.</p>
-                <p>En Violet Skies, la calidad y la excelencia son nuestras prioridades. Nuestros salones están equipados con tecnología de última generación y un diseño elegante para garantizar el confort y la satisfacción de todos. Nuestro equipo de cocina también se encargará de deleitarte con una experiencia excepcional.</p>
-                <p>Únete a nosotros en esta emocionante aventura y déjanos hacer tus sueños realidad. ¡Reserva tu evento en Violet Skies hoy mismo y prepárate para vivir momentos inolvidables que te acompañarán toda la vida!</p>
-            </div>
-        </div> 
+                </a>
+            </li>
+        </ul>
     </div>
+</div>
+<div class="main-container mt-4">
+    <h1 class="text-center">Somos Violet Skies</h1>
+    <h5 class="text-center">Ofreciéndote experiencias inolvidables</h5>
+    <div class="row two-part mt-5 p-3">
+        <div class="col-sm-5">
+            <img id="mountain" class="img-fluid max-width-100" src="/html/about-us/imgs/mountain.png" alt="Mountain">
+        </div>
+        <div class="col-sm-7 p-3">
+            <p>Nuestro equipo de profesionales dedicados se esfuerza por hacer realidad tus sueños. Ya sea que estés planificando una boda de ensueño, una conferencia importante o una fiesta de celebración, estamos aquí para atender cada detalle y asegurarnos de que cada momento sea inolvidable.</p>
+            <p>En Violet Skies, la calidad y la excelencia son nuestras prioridades. Nuestros salones están equipados con tecnología de última generación y un diseño elegante para garantizar el confort y la satisfacción de todos. Nuestro equipo de cocina también se encargará de deleitarte con una experiencia excepcional.</p>
+            <p>Únete a nosotros en esta emocionante aventura y déjanos hacer tus sueños realidad. ¡Reserva tu evento en Violet Skies hoy mismo y prepárate para vivir momentos inolvidables que te acompañarán toda la vida!</p>
+        </div>
+    </div>
+</div>
+
     
 
 
-
+    <script src="/js/navbarMovil.js"></script>
 </body>
 
 </html>

@@ -3,12 +3,16 @@ include_once "../dataBase.php";
 $conexion = new Database();
 $conexion->conectarBD();
 
-/* Mostrar solo a los empleados que sean cocineros */
-$consulta = "SELECT E.ID, C.NOMBRE, C.AP_PATERNO, C.AP_MATERNO, E.RFC, C.TELEFONO, C.CORREO, E.TIPO, E.CUENTA
-                 FROM EMPLEADOS E
-                 INNER JOIN CUENTAS C ON E.CUENTA = C.ID
-                 WHERE E.TIPO = 'COCINA'
-                 AND C.ESTADO = 'ACTIVO'";
+/* Mostrar las cuentas que fueron registradas como empleados, estan activas pero no han sido dadas de alta*/
+$consulta = "SELECT CUENTAS.ID AS CUENTA, CUENTAS.NOMBRE, CUENTAS.AP_PATERNO, CUENTAS.AP_MATERNO, CUENTAS.CORREO, CUENTAS.TELEFONO 
+FROM CUENTAS 
+WHERE CUENTAS.TIPO_CUENTA = 'EMPLEADO' 
+AND CUENTAS.ESTADO = 'ACTIVO' 
+AND NOT EXISTS (
+    SELECT 1
+    FROM EMPLEADOS
+    WHERE EMPLEADOS.CUENTA = CUENTAS.ID
+);";
 
 $tabla = $conexion->seleccionar($consulta);
 
@@ -19,10 +23,8 @@ echo '<tr>';
 echo '<th>Nombre</th>';
 echo '<th>Ape. Paterno</th>';
 echo '<th>Ape. Materno</th>';
-echo '<th>RFC</th>';
 echo '<th>Teléfono</th>';
 echo '<th>Correo</th>';
-echo '<th>Tipo</th>';
 echo '<th style="text-align: center;"></th>';
 echo '</tr>';
 echo '</thead>';
@@ -33,22 +35,17 @@ foreach ($tabla as $registro) {
     echo "<td> $registro->NOMBRE </td>";
     echo "<td> $registro->AP_PATERNO </td>";
     echo "<td> $registro->AP_MATERNO </td>";
-    echo "<td> $registro->RFC </td>";
     echo "<td> $registro->TELEFONO </td>";
     echo "<td> $registro->CORREO </td>";
-    echo "<td> $registro->TIPO</td>";
     // Generar el botón de opciones con el menú desplegable
     echo "<td class='text-center'>";
     echo '<div class="dropdown">';
     echo '<button class="btn btn-secondary dropdown-toggle custom-dropdown" type="button" data-bs-toggle="dropdown" aria-expanded="false">';
     echo '</button>';
     echo '<ul class="dropdown-menu custom-drop-menu">';
-    echo '<li><a class="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#mainModal" data-bs-whatever="@editarEmpleado" 
+    echo '<li><a class="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#mainModal" data-bs-whatever="@verSolicitud" 
     data-id="' . $registro->CUENTA . '">
-    <i class="fa-solid fa-pencil me-2" style="color: #ffffff;"></i>Editar</a></li>';
-    echo '<li><a class="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#mainModal" data-bs-whatever="@eliminarEmpleado" 
-    data-id="' . $registro->CUENTA . '">
-    <i class="fa-solid fa-user-slash me-2" style="color: #ffffff;"></i>Eliminar</a></li>';
+    <i class="fa-solid fa-eye me-2" style="color: #ffffff;"></i>Ver Solicitud</a></li>';
     echo '</ul>';
     echo '</div>';
     echo "</td>";
