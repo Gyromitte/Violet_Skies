@@ -281,6 +281,19 @@ nav{
     .btn-options{
         margin-bottom: 10px;
     }
+    .search-container {
+        flex-direction: column; /* Stack the elements vertically */
+      }
+    
+      /* Adjust the width and margin for the filter and search components to fit the mobile layout */
+      .search-container .filter {
+        width: 100%; /* Full width for the filter */
+        margin-bottom: 10px; /* Add some space between filter and search */
+      }
+    
+      .search-container .search {
+        width: 100%; /* Full width for the search */
+      }
 }
 
 @media (max-width: 576px) {
