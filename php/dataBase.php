@@ -78,7 +78,8 @@
             try
             {
                 $statement = $this->PDO_local->prepare($consulta);
-                $statement->execute($parametros);
+                $result = $statement->execute($parametros);
+                return $result; // Agregar esta línea para devolver el resultado de la ejecución
             }
             catch(PDOException $e)
             {

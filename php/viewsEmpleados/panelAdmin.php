@@ -222,6 +222,10 @@
                         <i class="fa-solid fa-bell-concierge" style="color: #ffffff;"></i>
                         Ver Meseros
                     </button>
+                    <button id="verSolicitudes" data-url="verSolicitudes.php" type="button" class="btn-options ver-empleados btn btn-primary border-2 btn-outline-light rounded-5" data-bs-target="#mainModal">
+                        <i class="fa-solid fa-business-time" style="color: #ffffff;"></i>
+                        Ver Solicitudes
+                    </button>
                 </div>
                 <!--Barra de Busqueda-->
                 <div class="input-group mb-3 search-bar">
@@ -235,8 +239,20 @@
             <!--Container para tablas-->
             <div class="cont-table">
                 <!--Contenido Default-->
-                <div class="col-md-5">
-                        <canvas id="proporcionEmpleados2"></canvas>
+                <div class="container-fluid">
+                    <div class="row">
+                        <!-- Contenido de la izquierda -->
+                        <div class="col-md-5">
+                            <div class="info-card mb-2" style="height: 25px;">Solicitudes pendientes:</div>
+                            <div class="col-md-12">
+                                <canvas id="proporcionEmpleados2" style="height: 40px"></canvas>
+                            </div>
+                        </div>
+                        <!-- Canvas a la derecha -->
+                        <div class="info-card col-md-7">
+                        
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
