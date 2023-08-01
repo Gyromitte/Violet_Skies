@@ -37,13 +37,33 @@ document.addEventListener('DOMContentLoaded', function() {
         xhr.send();
       } else {
         if(buttonId == "verGraficos")
-        {
+        { 
+          contTable.innerHTML = '';
           //Re-insertar el grafico
-          contTable.innerHTML = `<div class="col-md-5">
-          <canvas id="proporcionEmpleados2"></canvas>
-          </div>`;
+          contTable.innerHTML = `
+          <div class="container-fluid">
+                <div class="row">
+                    <div class="col-md-5">
+                        <div class="info-card mb-2" style="height: 20px;">Solicitudes pendientes:</div>
+                        <div class="col-md-12">
+                            <canvas id="proporcionEmpleados2" style="height: 200px;"></canvas>
+                        </div>
+                    </div>
+                    <div class="info-card col-md-7">
+                       
+                    </div>
+                </div>
+            </div>
+          `;
           //Volver a ejecutar el codigo de la grafica para actualizar datos:
           recargarGraficos(); //Llamado desde chart.js
+          // Manejar el redimensionamiento del canvas
+          const canvas = document.getElementById("proporcionEmpleados2");
+          if (canvas) {
+            const context = canvas.getContext("2d");
+            context.canvas.width = canvas.offsetWidth;
+            context.canvas.height = canvas.offsetHeight;
+          }
           tableInfo.innerHTML = '';
         }else{
           var xhr = new XMLHttpRequest();

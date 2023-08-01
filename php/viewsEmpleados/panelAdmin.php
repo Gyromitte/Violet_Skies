@@ -153,7 +153,6 @@
                             <option value="CANCELADO">Cancelado</option>;
                         </select>
                     </div>
-
                 </form>
             </div>
             <br>
@@ -203,8 +202,20 @@
             <!--Container para tablas-->
             <div class="cont-table">
                 <!--Contenido Default-->
-                <div class="col-md-5">
-                        <canvas id="proporcionEmpleados2"></canvas>
+                <div class="container-fluid">
+                    <div class="row">
+                        <!-- Contenido de la izquierda -->
+                        <div class="col-md-5">
+                            <div class="info-card mb-2" style="height: 25px;">Solicitudes pendientes:</div>
+                            <div class="col-md-12">
+                                <canvas id="proporcionEmpleados2" style="height: 40px"></canvas>
+                            </div>
+                        </div>
+                        <!-- Canvas a la derecha -->
+                        <div class="info-card col-md-7">
+                        
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
