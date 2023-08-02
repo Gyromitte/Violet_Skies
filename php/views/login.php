@@ -27,6 +27,12 @@
     </style>
 </head>
 <body>
+    <?php
+         session_start();
+         if(isset($_SESSION["logged_in"])){
+             header("../scripts/access.php");
+         }
+    ?>
 <!-- Navbar -->
 <nav class="navbar navbar-default row">
     <div class="companySection col-sm-auto">

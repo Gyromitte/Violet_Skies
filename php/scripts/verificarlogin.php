@@ -15,6 +15,12 @@
             animation: anim-glow 2s ease infinite;
             font-size: 70px;
         }
+        h4{
+            text-align: center;
+            color:rgb(131, 103, 199);
+            animation: anim-glow 2s ease infinite;
+            font-size: 40px;
+        }
         @keyframes anim-glow {
 	        0% {
 		        box-shadow: 0 0 rgba(188, 44, 201, 1);
@@ -27,7 +33,7 @@
         div .container{
             height: 100%;
             width: 100%;
-            padding-top: 300px;
+            padding-top: 250px;
         }
     </style>
 </head>

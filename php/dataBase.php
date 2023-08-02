@@ -109,7 +109,7 @@
                 if($ver){
                     if($estado=="INACTIVO"){
                         echo"<div class=' container'>";
-                        echo"<h1 align='center'>Parece que tu cuenta fue desactivada..</h1>";
+                        echo"<h1 align='center'>Parece que tu cuenta fue desactivada..</h1><br>";
                         echo"<h4 align='center'>Comunicase con un Administrador para volver 
                         a activarlo.</h4>";
                         echo "</div>";
