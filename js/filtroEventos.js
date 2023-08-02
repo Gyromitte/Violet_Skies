@@ -1,7 +1,13 @@
-// Obtener el formulario y el div de la tabla de resultados
+// Variables para controlar el tiempo de espera en la búsqueda en tiempo real
+var typingTimer;
+var doneTypingInterval = 50; // Tiempo de espera en milisegundos antes de realizar la búsqueda
+
+// Obtener el formulario, el campo de búsqueda y el div de la tabla de resultados
 var form = document.getElementById('filtroForm');
 var tablaResultados = document.getElementById('tablaResultados');
 var estadoSelect = document.getElementById('estadoSelect');
+var searchInput = document.getElementById('searchInput');
+var searchButton = document.getElementById('searchButton');
 
 // Ejecutar la función de filtrado al cargar la página
 filtrarEventos();
@@ -9,11 +15,23 @@ filtrarEventos();
 // Escuchar el evento change del campo de selección de estado
 estadoSelect.addEventListener('change', filtrarEventos);
 
+// Escuchar el evento input del campo de búsqueda
+searchInput.addEventListener('input', function() {
+    clearTimeout(typingTimer);
+    typingTimer = setTimeout(filtrarEventos, doneTypingInterval);
+});
+
+// Escuchar el evento click del botón de búsqueda
+searchButton.addEventListener('click', function() {
+    filtrarEventos();
+});
+
 // Función para filtrar los eventos
 function filtrarEventos() {
     // Obtener los datos del formulario
     var formData = new FormData(form);
     formData.append('depa', estadoSelect.value);
+    formData.append('search', searchInput.value.trim());
 
     // Crear una instancia de XMLHttpRequest
     var xhr = new XMLHttpRequest();

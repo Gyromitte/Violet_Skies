@@ -21,6 +21,7 @@
                 echo $e->getMessage(); 
             }
         }
+
     function desconectarBD()
     {
         try
@@ -86,6 +87,10 @@
             }
         }
 
+        public function getPDO() {
+            return $this->PDO_local;
+        }
+        
         function Login($usu,$pass){
             try{
                 $ver = false;
@@ -98,10 +103,6 @@
                         $ID=$renglon['ID'];
                         $NOMBRE = $renglon['NOMBRE'];
                         $tipo = $renglon['TIPO_CUENTA'];
-                        $ap_paterno=$renglon['AP_PATERNO'];
-                        $ap_materno=$renglon['AP_MATERNO'];
-                        $telefono=$renglon['TELEFONO'];
-                        $correo=$renglon['CORREO'];
                     }
                 }
                 if($ver){

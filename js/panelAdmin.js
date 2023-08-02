@@ -6,8 +6,11 @@ const main = document.getElementById('main');
 
 // Función para abrir o cerrar el dashboard
 function toggleDashboard() {
-  dashboard.classList.toggle('dashboard-open');
-  main.classList.toggle('main-dash-open');
+  const modal = document.querySelector('.modal.show');
+  if (!modal) { // Si no hay ningún modal abierto
+    dashboard.classList.toggle('dashboard-open');
+    main.classList.toggle('main-dash-open');
+  }
 }
 
 // Asignar evento de clic al botón para abrir/cerrar la dashboard
@@ -96,14 +99,14 @@ modal.addEventListener("show.bs.modal", function (event) {
   // Obtener el tipo de formulario correspondiente al botón
   var formType = button.getAttribute("data-bs-whatever");
   var idEmpleado = button.getAttribute("data-id");
+  var idEvento = button.getAttribute("data-event-id");
   // Actualizar el contenido del formulario
-  updateModalContent(formType, idEmpleado);
+  updateModalContent(formType, idEmpleado, idEvento);
 });
 
 
-
 // Función para actualizar el contenido del modal según el tipo de formulario
-function updateModalContent(formType, idEmpleado) {
+function updateModalContent(formType, idEmpleado, idEvento) {
   var formContent = "";
   var modalTitle = document.querySelector('#mainModal .modal-title');
   var form;
@@ -455,40 +458,356 @@ function updateModalContent(formType, idEmpleado) {
         xhr.open("GET", "obtenerSolicitud.php?id=" + idEmpleado, true);
         xhr.send();
         // Ver cual es la tabla activa para refrescar cualquier cambio
+        //console.log("hola");
+        modalTitle.textContent ="Editar Datos"
+        formContent=`<form id="formularioEditarDatos" method="post" action="pruebaComprobación.php">
+        <div class="form-group">
+            <label for="nombreInput">Nombre:</label>
+            <input type="text" class="form-control" name="nombre" id="nombreInput" required>
+        </div>
+        <div class="form-group">
+            <label for="ap_paternoInput">Apellido Paterno:</label>
+            <input type="text" class="form-control" name="ap_paterno" id="ap_paternoInput" required>
+        </div>
+        <div class="form-group">
+            <label for="ap_maternoInput">Apellido Materno:</label>
+            <input type="text" class="form-control" name="ap_materno" id="ap_maternoInput" required>
+        </div>
+        <div class="form-group">
+            <label for="telefonoInput">Teléfono:</label>
+            <input type="tel" class="form-control" name="telefono" id="telefonoInput" required>
+        </div>
+        <div class="form-group">
+            <label for="contrasenaActualInput">Contraseña Actual:</label>
+            <input type="password" class="form-control" name="contrasena_actual" id="contrasenaActualInput" required>
+        </div>
+
+        </div>
+        <br>
+        <input type="hidden" name="correo" id="correoInput">
+        <input type="hidden" name="tipo_cuenta" id="tipo_cuentaInput">
+        <button type="button" class="btn btn-primary" id="guardarCambios">Guardar Cambios</button>
+        </form>`;
+        modalForm.innerHTML = formContent;
+        //Ver cual es la tabla activa para refrescar cualquier cambio
         checkCurrentTable(currentTable);
         break;
-  }
-}
 
-// Función para eliminar al empleado
-function eliminarEmpleado(id) {
-  var xhrEliminar = new XMLHttpRequest();
-  xhrEliminar.onreadystatechange = function () {
-    if (xhrEliminar.readyState === XMLHttpRequest.DONE) {
-      if (xhrEliminar.status === 200) {
-        // Manejo de la respuesta:
-        var respuesta = xhrEliminar.responseText;
-        document.getElementById('mensajeDiv').innerHTML = respuesta; // Mostrar el mensaje de respuesta en el div 'mensajeDiv'
+    case "@verDetallesEvento":
+      modalTitle.textContent = "Detalles del Evento";
+      var xhrDetalles = new XMLHttpRequest();
+      xhrDetalles.onreadystatechange = function() {
+        if (xhrDetalles.readyState === XMLHttpRequest.DONE) {
+          if (xhrDetalles.status === 200) {
+            var detallesEvento = JSON.parse(xhrDetalles.responseText);
+            // Realizar una solicitud AJAX para obtener la lista de salones disponibles
+            var xhrSalones = new XMLHttpRequest();
+            xhrSalones.onreadystatechange = function() {
+              if (xhrSalones.readyState === XMLHttpRequest.DONE) {
+                if (xhrSalones.status === 200) {
+                  var salones = JSON.parse(xhrSalones.responseText);
+                  var selectSalon = document.getElementById('salon');
+                  selectSalon.innerHTML = "";
+                  var optionSeleccionar = document.createElement('option');
+                  optionSeleccionar.value = ""; // Asignar un valor vacío o el que corresponda
+                  optionSeleccionar.textContent = "-Seleccionar salón-"; // Texto a mostrar en la opción predeterminada
+                  selectSalon.appendChild(optionSeleccionar);
+                  var salonEncontrado = false;
+                    salones.forEach(function(salon) {
+                    var option = document.createElement('option');
+                    option.value = salon.ID; // Asignar el valor del ID del salón
+                    option.textContent = salon.NOMBRE; // Asignar el nombre del salón
+                    selectSalon.appendChild(option);
+                    // Verificar si el nombre del salón del evento coincide con el salón actual en el bucle
+                    if (salon.NOMBRE === detallesEvento.SALON) {
+                      // Si se encuentra el salón del evento, seleccionarlo en el select y marcarlo como encontrado
+                      option.selected = true;
+                      salonEncontrado = true;
+                    }
+                  });
+                  if (!salonEncontrado) {
+                    console.error("El salón del evento no se encuentra en la lista de salones disponibles:", detallesEvento.SALON);
+                  }
+                } else {
+                  console.error("Error AJAX al obtener la lista de salones");
+                }
+              }
+            };
+            // Hacer la solicitud al script PHP "obtenerSalones.php" para obtener la lista de salones
+            xhrSalones.open("GET", "../viewsEventos/obtenerSalones.php", true);
+            xhrSalones.send();
 
-        // Cerrar el modal después de eliminar al empleado después de 1.5 segundos
-        setTimeout(function () {
-          // Simular clic en el botón "Cancelar" para cerrar el modal
-          var cancelButton = document.querySelector('#mainModal .btn-modal[data-bs-dismiss="modal"]');
-          cancelButton.click();
+            var xhrComida = new XMLHttpRequest();
+            xhrComida.onreadystatechange = function() {
+              if (xhrComida.readyState === XMLHttpRequest.DONE) {
+                if (xhrComida.status === 200) {
+                  var menu = JSON.parse(xhrComida.responseText);
+                  var selectMenu = document.getElementById('comida');
+                  selectMenu.innerHTML = "";
+                  var optionSeleccionar = document.createElement('option');
+                  optionSeleccionar.value = ""; // Asignar un valor vacío o el que corresponda
+                  optionSeleccionar.textContent = "-Seleccionar menú-"; // Texto a mostrar en la opción predeterminada
+                  selectMenu.appendChild(optionSeleccionar);
+                  var menuEncontrado = false;
+                  // Crear una opción para cada menú en la lista de menu disponibles
+                  menu.forEach(function(comida) {
+                    var option = document.createElement('option');
+                    option.value = comida.ID; // Asignar el valor del ID del menú
+                    option.textContent = comida.NOMBRE; // Asignar el nombre del menú
+                    selectMenu.appendChild(option);
+                    if (comida.NOMBRE === detallesEvento.COMIDA) {
+                      // Si se encuentra el menú del evento, seleccionarlo en el select y marcarlo como encontrado
+                      option.selected = true;
+                      menuEncontrado = true;
+                    }
+                  });
+                  if (!menuEncontrado) {
+                    console.error("El menú del evento no se encuentra en la lista de menu disponibles:", detallesEvento.COMIDA);
+                  }
+                } else {
+                  console.error("Error AJAX al obtener la lista de menu");
+                }
+              }
+            };
+            xhrComida.open("GET", "../viewsEventos/obtenerComida.php", true);
+            xhrComida.send();
 
-          document.getElementById('modalForm').innerHTML = formContent;
-        }, 1500); //(1.5 segundos)
+            formContent = `
+            <form>
+              <h4 align='center'>${detallesEvento.NOMBRE}</h4>
+              <h5 align='center'>${detallesEvento.CLIENTE}</h5><br>
+              <table align='center' cellspacing="20" cellpadding="5">
+                <tr>
+                  <td><h6>Fecha</h6></td>
+                  <td><input class="form-control" type="text" placeholder="Fecha y hora" id="fechaEvento" value="${detallesEvento.F_EVENTO}" disabled></td>
+                </tr>
+                <tr>
+                  <td><h6>Salón</h6></td>
+                  <td><select class="form-control" id="salon" disabled></select></td>
+                </tr>
+                <tr>
+                  <td><h6>Invitados</h6></td>
+                  <td><input class="form-control" type="text" placeholder="Invitados" id="invitados" value="${detallesEvento.INVITADOS}" disabled></td>
+                </tr>
+                <tr>
+                  <td><h6>Menú</h6></td>
+                  <td><select class="form-control" id="comida" disabled></select></td>
+                </tr>
+                <tr id="trMeseros" style="display: ${detallesEvento.ESTADO === 'EN PROCESO' ? 'table-row' : 'none'}">
+                  <td><h6>Meseros</h6></td>
+                  <td><input class="form-control" type="number" placeholder="Meseros requeridos" id="meserosRequeridos" value="${detallesEvento.MESEROS || ''}" disabled></td>
+                </tr>
+                <tr id="trCocineros" style="display: ${detallesEvento.ESTADO === 'EN PROCESO' ? 'table-row' : 'none'}">
+                  <td><h6>Cocineros</h6></td>
+                  <td><input class="form-control" type="number" placeholder="Cocineros requeridos" id="cocinerosRequeridos" value="${detallesEvento.COCINEROS || ''}" disabled></td>
+                </tr>
+                <tr>
+                  <td><h6>Estado</h6></td>
+                  <td>${detallesEvento.ESTADO}</td>
+                </tr>
+              </table>
+              <br>
+              <div align="center">
+                <button type="button" class="btn btn-success" id="btnAceptarEvento" 
+                  ${detallesEvento.ESTADO === 'PENDIENTE' ? '' : 'style="display: none;"'}>
+                  <i class="fa-solid fa-check me-2" style="color: #ffffff;"></i>Aceptar Evento</button>
+                <button type="button" class="btn btn-primary" id="btnModify"
+                  ${detallesEvento.ESTADO === 'CANCELADO' || detallesEvento.ESTADO === 'FINALIZADO' ? 'style="display: none;"' : ''}>
+                  <i class="fa-solid fa-pencil me-2" style="color: #ffffff;"></i>Modificar Detalles</button>
+                <button type="button" class="btn btn-primary" id="btnSaveChanges" style="display: none;">
+                <i class="fa-solid fa-floppy-disk me-2" style="color: #ffffff;"></i>Guardar</button>            
+                <button type="button" class="btn btn-danger" id="btnCancelarEvento" 
+                  ${detallesEvento.ESTADO === 'CANCELADO' || detallesEvento.ESTADO === 'FINALIZADO' ? 'style="display: none;"' : ''}>
+                  <i class="fa-solid fa-ban me-2" style="color: #ffffff;"></i>Cancelar Evento</button>            
+                <button type="button" class="btn btn-info" id="btnEmpleadosRegistrados"
+                  ${detallesEvento.ESTADO === 'CANCELADO' || detallesEvento.ESTADO === 'PENDIENTE' ? 'style="display: none;"' : ''}>
+                  <i class="fa-solid fa-briefcase me-2" style="color: #ffffff;"></i>Empleados</button>
+              </form>
+              <div id="empleadosTable"></div>
+            `;              
+            
+            modalForm.innerHTML = formContent;
+            $(document).ready(function() {
+              $('#fechaEvento').datetimepicker({
+                format: 'Y-m-d H:i:s', // Formato deseado para la fecha y hora
+                step: 15, // Intervalo de minutos para seleccionar la hora
+                disabledTimeIntervals: [
+                   [21, 6], // deshabilita desde la medianoche hasta las 8:00 am
+                ]
+              });
+            });
 
-      } else {
-        console.error("Error al eliminar al empleado");
-      }
+            var tablaVisible = false;
+            var btnEmpleadosRegistrados = document.getElementById('btnEmpleadosRegistrados');
+            btnEmpleadosRegistrados.addEventListener('click', function() {
+              if (!tablaVisible) {
+                $.ajax({
+                  type: "GET",
+                  url: `../viewsEventos/verEmpleadosRegistrados.php?id=${idEvento}`,
+                  success: function (response) {
+                    $("#empleadosTable").html(response);
+                    tablaVisible = true; // La tabla está visible
+                  },
+                  error: function () {
+                    console.error(error);
+                  },
+                });
+              } else {
+                // Si la tabla está visible, ocultarla
+                $("#empleadosTable").html("");
+                tablaVisible = false; // La tabla está oculta
+              }
+            });
+
+
+            var btnModificar = document.getElementById('btnModify');
+            btnModificar.addEventListener('click', function() {
+              var inputs = modalForm.querySelectorAll('input, select');
+              for (var i = 0; i < inputs.length; i++) {
+                inputs[i].removeAttribute('disabled');
+              }
+              btnModificar.style.display = "none";
+              btnModificarGuardar.style.display = "";
+            });
+
+            var btnModificarGuardar = document.getElementById('btnSaveChanges');
+            btnModificarGuardar.addEventListener('click', function() {
+              
+              var fecha = document.getElementById('fechaEvento').value;
+              var invitados = document.getElementById('invitados').value;
+              var salon = document.getElementById('salon').value;
+              var comida = document.getElementById('comida').value;
+              var meserosRequeridos = document.getElementById('meserosRequeridos').value;
+              var cocinerosRequeridos = document.getElementById('cocinerosRequeridos').value;
+  
+              if (!fecha || !salon || !comida) {
+                alert('Por favor, llene todos los campos correctamente');
+                return;
+              }
+              if (!invitados || isNaN(invitados) || parseInt(invitados) <= 0) {
+                alert('Por favor, llene los campos correctamente\nInvitados debe ser un número válido');
+                return;
+              }
+
+              var xhrGuardarCambios = new XMLHttpRequest();
+              xhrGuardarCambios.onreadystatechange = function() {
+                if (xhrGuardarCambios.readyState === XMLHttpRequest.DONE) {
+                  if (xhrGuardarCambios.status === 200) {
+                    var response = JSON.parse(xhrGuardarCambios.responseText);
+                    if (response.success) {
+                      formContent += `<br><div class="alert alert-success" role="alert" align='center'>Evento modificado exitosamente</div>`;
+                      setTimeout(() => {
+                        updateModalContent(formType, idEmpleado, idEvento);
+                      }, 1000); // Actualizar el modal después de 2000 milisegundos (2 segundos)
+                      filtrarEventos();
+                      modalForm.innerHTML = formContent;
+                    } else {
+                      console.error("Error en el servidor:", response.message);
+                    }
+                  } else {
+                    console.error("Error AJAX al guardar cambios en el evento. Código de estado:", xhrGuardarCambios.status);
+                  }
+                }
+              };
+              var urlEditarEvento = `../viewsEventos/editarDetalles.php?id=${idEvento}&F_EVENTO=${fecha}&INVITADOS=${invitados}&SALON=${salon}&COMIDA=${comida}&MESEROS=${meserosRequeridos}&COCINEROS=${cocinerosRequeridos}`;
+              xhrGuardarCambios.open("GET", urlEditarEvento, true);
+              xhrGuardarCambios.send();
+            });
+
+            var btnCancelarEvento = document.getElementById('btnCancelarEvento');
+            btnCancelarEvento.addEventListener('click', function() {
+              // Mostrar el modal de confirmación
+              var confirmarCancelacion = window.confirm("¿Estás seguro que deseas cancelar este evento?");
+              if (confirmarCancelacion) {
+                var xhrCancelarEvento = new XMLHttpRequest();
+                xhrCancelarEvento.onreadystatechange = function() {
+                  if (xhrCancelarEvento.readyState === XMLHttpRequest.DONE) {
+                    if (xhrCancelarEvento.status === 200) {
+                      formContent += `<br><div class="alert alert-success" role="alert" align='center'>
+                        Evento cancelado</div>`;
+                      setTimeout(() => {
+                        updateModalContent(formType, idEmpleado, idEvento);
+                      }, 500); // Actualizar el modal después de 2000 milisegundos (2 segundos)  
+                      filtrarEventos();
+                      modalForm.innerHTML = formContent;
+                    } else {
+                      console.error("Error AJAX para cancelar el evento");
+                    }
+                  }
+                };
+                // Hacer la solicitud al script PHP y pasar el ID del evento para cancelar
+                xhrCancelarEvento.open("GET", "../viewsEventos/cancelarEvento.php?id=" + idEvento, true);
+                xhrCancelarEvento.send();
+              } else {
+                // Si el usuario hace clic en "Cancelar", no se realiza ninguna acción
+                console.log("Cancelación del evento cancelada por el usuario");
+              }
+            });
+
+            var btnAceptarEvento = document.getElementById('btnAceptarEvento');
+            btnAceptarEvento.addEventListener('click', function() {
+              var confirmarAceptar = window.confirm("¿Estás seguro que deseas aceptar este evento?");
+              if (confirmarAceptar) {
+                var xhrAceptarEvento = new XMLHttpRequest();
+                xhrAceptarEvento.onreadystatechange = function() {
+                  if (xhrAceptarEvento.readyState === XMLHttpRequest.DONE) {
+                    if (xhrAceptarEvento.status === 200) {
+                      formContent += `<br><div class="alert alert-success" role="alert" align='center'>Evento aceptado</div>`;
+                      setTimeout(() => {updateModalContent(formType, idEmpleado, idEvento);}, 500); // Actualizar el modal después de 2000 milisegundos (2 segundos)  
+                      filtrarEventos();
+                      modalForm.innerHTML = formContent;
+                    } else {
+                      console.error("Error AJAX para aceptar el evento");
+                    }
+                  }
+                };
+                xhrAceptarEvento.open("GET", "../viewsEventos/aceptarEvento.php?id=" + idEvento, true);
+                xhrAceptarEvento.send();
+              } else {
+                console.log("Aceptación del evento cancelada por el usuario");
+              }
+            });
+            
+          } else {
+            console.error("Error en la solicitud AJAX");
+          }
+        }
+      };
+      xhrDetalles.open("GET", "../viewsEventos/verDetalles.php?id=" + idEvento, true);
+      xhrDetalles.send();
+      break;
     }
-  };
-  xhrEliminar.open("POST", "eliminarEmpleado.php", true);
-  xhrEliminar.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-  xhrEliminar.send("id=" + id); // Asegurarse de que el ID se pase correctamente en la solicitud AJAX
-  //Ver cual es la tabla activa para refrescar cualquier cambio
-  checkCurrentTable(currentTable);
-  // Retornar false para evitar que el formulario se recargue la página
-  return false;
-}
+  }
+  
+  // Función para eliminar al empleado
+  function eliminarEmpleado(id) {
+    var xhrEliminar = new XMLHttpRequest();
+    xhrEliminar.onreadystatechange = function () {
+      if (xhrEliminar.readyState === XMLHttpRequest.DONE) {
+        if (xhrEliminar.status === 200) {
+          // Manejo de la respuesta:
+          var respuesta = xhrEliminar.responseText;
+          document.getElementById('mensajeDiv').innerHTML = respuesta; // Mostrar el mensaje de respuesta en el div 'mensajeDiv'
+  
+          // Cerrar el modal después de eliminar al empleado después de 1.5 segundos
+          setTimeout(function () {
+            // Simular clic en el botón "Cancelar" para cerrar el modal
+            var cancelButton = document.querySelector('#mainModal .btn-modal[data-bs-dismiss="modal"]');
+            cancelButton.click();
+  
+            document.getElementById('modalForm').innerHTML = formContent;
+          }, 1500); //(1.5 segundos)
+  
+        } else {
+          console.error("Error al eliminar al empleado");
+        }
+      }
+    };
+    xhrEliminar.open("POST", "eliminarEmpleado.php", true);
+    xhrEliminar.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+    xhrEliminar.send("id=" + id); // Asegurarse de que el ID se pase correctamente en la solicitud AJAX
+    //Ver cual es la tabla activa para refrescar cualquier cambio
+    checkCurrentTable(currentTable);
+    // Retornar false para evitar que el formulario se recargue la página
+    return false;
+  }
