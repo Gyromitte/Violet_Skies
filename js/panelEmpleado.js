@@ -78,6 +78,7 @@ modal.addEventListener("show.bs.modal", function (event) {
   
   // Función para actualizar el contenido del modal según el tipo de formulario
   function updateModalContent(formType, idEvento) {
+    console.log();
     var formContent = "";
     var modalTitle = document.querySelector('#empModal .modal-title');
     var form;
@@ -120,7 +121,7 @@ modal.addEventListener("show.bs.modal", function (event) {
             }
           }
         };
-        xhr.open("GET", "obtenerEvento.php?id=" + idEvento, true);
+        xhr.open("GET", "../viewsEventos/obtenerEvento.php?id=" + idEvento, true);
         xhr.send();
         //Ver cual es la tabla activa para refrescar cualquier cambio
       break;
@@ -159,7 +160,7 @@ modal.addEventListener("show.bs.modal", function (event) {
             }
           }
         };
-        xhr.open("GET", "obtenerEvento.php?id=" + idEvento, true);
+        xhr.open("GET", "../viewsEventos/obtenerEvento.php?id=" + idEvento, true);
         xhr.send();
         //Ver cual es la tabla activa para refrescar cualquier cambio
         checkCurrentTable(currentTable);
