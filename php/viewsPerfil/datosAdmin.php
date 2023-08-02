@@ -63,10 +63,13 @@ if (isset($_SESSION["ID"])) {
                     </div>
                     <input type="hidden" name="id" value="<?php echo $_SESSION["ID"]; ?>">
                     <div class="d-flex justify-content-end">
-                      <button class="btn btn-primary" onclick="habilitarEdicion()" id="btnEditarDatosPersonales">Modificar datos</button>
+                      <button class="btn btn-primary" onclick="habilitarEdicion()" id="btnEditarDatosPersonales">
+                      <i class="fa-solid fa-pencil me-2" style="color: #ffffff;"></i>Modificar datos</button>
                       <div class="d-flex justify-content-end">
-                        <button class="btn btn-success d-none" id="btnGuardarCambios" onclick="guardarCambios()">Guardar cambios</button>
-                        <button class="btn btn-danger d-none" id="btnCancelarCambios" onclick="cancelarCambios()">Cancelar</button>
+                        <button class="btn btn-success d-none" id="btnGuardarCambios" onclick="guardarCambios()">
+                        <i class="fa-solid fa-floppy-disk me-2" style="color: #ffffff;"></i>Guardar cambios</button>
+                        <button class="btn btn-danger d-none" id="btnCancelarCambios" onclick="cancelarCambios()">
+                        <i class="fa-solid fa-ban me-2" style="color: #ffffff;"></i>Cancelar</button>
                       </div>
                     </div>
                     <div id="mensajeModificar"></div>
@@ -77,7 +80,7 @@ if (isset($_SESSION["ID"])) {
             <div class="accordion-item">
               <h2 class="accordion-header">
               <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
-                Registrar nuevo administrador
+              <i class="fa-solid fa-address-card me-2" style="color: #ffffff;"></i>Registrar nuevo administrador
               </button>
               </h2>
               <div id="collapseTwo" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
@@ -121,7 +124,8 @@ if (isset($_SESSION["ID"])) {
                   </div>
                 </div>
                 <div class="d-flex justify-content-end">
-                  <button class="btn btn-primary" onclick="nuevoAdmin()" id="nuevoAdmin">Registrar administrador</button>
+                  <button class="btn btn-primary" onclick="nuevoAdmin()" id="nuevoAdmin">
+                  <i class="fa-solid fa-address-card me-2" style="color: #ffffff;"></i>Registrar administrador</button>
                 </div>
                 <div id="mensaje"></div>
               </div>

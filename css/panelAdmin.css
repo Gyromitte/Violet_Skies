@@ -179,12 +179,12 @@ nav{
 }
 
 #btnEmpleadosRegistrados, #btnAceptarEvento, #btnModify, #btnSaveChanges,
-#btnEditarDatosPersonales, #nuevoAdmin{
+#btnEditarDatosPersonales, #nuevoAdmin, #btnGuardarCambios{
     color: white;
     background-color: #b14aed;
     border: 2px solid white;
 }
-#btnCancelarEvento{
+#btnCancelarEvento, #btnCancelarCambios{
     border: 2px solid white;
 }
 
