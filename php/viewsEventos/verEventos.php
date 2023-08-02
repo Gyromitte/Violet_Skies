@@ -39,9 +39,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             echo "<td> $registro->F_CREACION</td>";
             echo "<td> $registro->F_EVENTO</td>";
             echo "<td> $registro->CLIENTE</td>";
-            echo "<td>
-                <button type='button' class='btn btn-info' data-bs-toggle='modal' data-bs-target='#mainModal' data-bs-whatever='@verDetallesEvento' data-event-id='$registro->ID'>Ver más</button>
-            </td>";
+
+            // Generar el botón de opciones con el menú desplegable
+            echo "<td class='text-center'>";
+            echo '<div class="dropdown">';
+            echo "<button class='btn btn-secondary dropdown-toggle custom-dropdown' type='button' data-bs-toggle='modal' data-bs-target='#mainModal'
+            data-bs-whatever='@verDetallesEvento' data-event-id='$registro->ID' >";
+            echo '</button>';
+            echo '</div>';
+            echo "</td>";
             echo "</tr>";
         }
         echo "</tbody>
