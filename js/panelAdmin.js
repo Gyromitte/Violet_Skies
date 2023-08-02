@@ -458,7 +458,7 @@ function updateModalContent(formType, idEmpleado, idEvento) {
         xhr.open("GET", "obtenerSolicitud.php?id=" + idEmpleado, true);
         xhr.send();
         // Ver cual es la tabla activa para refrescar cualquier cambio
-        console.log("hola");
+        //console.log("hola");
         modalTitle.textContent ="Editar Datos"
         formContent=`<form id="formularioEditarDatos" method="post" action="pruebaComprobación.php">
         <div class="form-group">
@@ -609,14 +609,19 @@ function updateModalContent(formType, idEmpleado, idEvento) {
               <br>
               <div align="center">
                 <button type="button" class="btn btn-success" id="btnAceptarEvento" 
-                  ${detallesEvento.ESTADO === 'PENDIENTE' ? '' : 'style="display: none;"'}>Aceptar Evento</button>
+                  ${detallesEvento.ESTADO === 'PENDIENTE' ? '' : 'style="display: none;"'}>
+                  <i class="fa-solid fa-check me-2" style="color: #ffffff;"></i>Aceptar Evento</button>
                 <button type="button" class="btn btn-primary" id="btnModify"
-                  ${detallesEvento.ESTADO === 'CANCELADO' || detallesEvento.ESTADO === 'FINALIZADO' ? 'style="display: none;"' : ''}>Modificar Detalles</button>
-                <button type="button" class="btn btn-primary" id="btnSaveChanges" style="display: none;">Guardar</button>            
+                  ${detallesEvento.ESTADO === 'CANCELADO' || detallesEvento.ESTADO === 'FINALIZADO' ? 'style="display: none;"' : ''}>
+                  <i class="fa-solid fa-pencil me-2" style="color: #ffffff;"></i>Modificar Detalles</button>
+                <button type="button" class="btn btn-primary" id="btnSaveChanges" style="display: none;">
+                <i class="fa-solid fa-floppy-disk me-2" style="color: #ffffff;"></i>Guardar</button>            
                 <button type="button" class="btn btn-danger" id="btnCancelarEvento" 
-                  ${detallesEvento.ESTADO === 'CANCELADO' || detallesEvento.ESTADO === 'FINALIZADO' ? 'style="display: none;"' : ''}>Cancelar Evento</button>            
+                  ${detallesEvento.ESTADO === 'CANCELADO' || detallesEvento.ESTADO === 'FINALIZADO' ? 'style="display: none;"' : ''}>
+                  <i class="fa-solid fa-ban me-2" style="color: #ffffff;"></i>Cancelar Evento</button>            
                 <button type="button" class="btn btn-info" id="btnEmpleadosRegistrados"
-                  ${detallesEvento.ESTADO === 'CANCELADO' || detallesEvento.ESTADO === 'PENDIENTE' ? 'style="display: none;"' : ''}>Empleados</button>
+                  ${detallesEvento.ESTADO === 'CANCELADO' || detallesEvento.ESTADO === 'PENDIENTE' ? 'style="display: none;"' : ''}>
+                  <i class="fa-solid fa-briefcase me-2" style="color: #ffffff;"></i>Empleados</button>
               </form>
               <div id="empleadosTable"></div>
             `;              

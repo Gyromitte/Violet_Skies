@@ -152,10 +152,15 @@
                     <div class="filter">
                         <div class="btn-group">
                             <label class="control-label">Estado:</label>
-                            <select id="estadoSelect" name="estado" class="form-select">
+                            <select id="estadoSelect" name="estado" class="form-select form-select-custom">
                                 <option value="todo" selected>Todos</option>
-                                <option value="PENDIENTE">Pendiente</option>
-                                <option value="EN PROCESO">En proceso</option>
+                                <option value="PENDIENTE">
+                                <i class="fa-solid fa-list-check" style="color: #ffffff;"></i>
+                                    Pendiente</option>
+                                <option value="EN PROCESO">
+                                    En proceso
+                                    <i class="fa-solid fa-bars-progress" style="color: #ffffff;"></i>
+                                </option>
                                 <option value="FINALIZADO">Finalizado</option>
                                 <option value="CANCELADO">Cancelado</option>
                             </select>
