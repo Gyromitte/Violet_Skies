@@ -261,7 +261,7 @@
                         </div>
                         <!-- Canvas a la derecha -->
                         <div class="info-card col-md-7">
-                        
+                            <canvas id="participacionEmpleados"></canvas>
                         </div>
                     </div>
                 </div>

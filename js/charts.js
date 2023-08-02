@@ -109,6 +109,68 @@ var doughnutChart = new Chart(ctxProporcion, {
   }
 });
 
+// Obtener el elemento canvas y crear el contexto para la gráfica de barras
+const ctx = document.getElementById("participacionEmpleados").getContext("2d");
+
+// Crear la gráfica de barras
+const myBarChart = new Chart(ctx, {
+  type: "bar",
+  data: {
+    labels: [], // Nombres de los empleados en el eje X (se actualizará)
+    datasets: [
+      {
+        label: "Participaciones",
+        data: [], // Cantidades de participación en el eje Y (se actualizará)
+        backgroundColor: "#454ade", // Color de fondo de las barras
+        borderColor: "white", // Color del borde de las barras
+        borderWidth: 2, // Ancho del borde de las barras
+      },
+    ],
+  },
+  options: {
+    plugins: {
+      legend: {
+        labels: {
+          color: "white", // Cambiar el color del texto de la leyenda a blanco
+        },
+      },
+    },
+    scales: {
+      x: {
+        ticks: {
+          color: "white", // Cambiar el color del texto del eje X a blanco
+        },
+      },
+      y: {
+        ticks: {
+          color: "white", // Cambiar el color del texto del eje Y a blanco
+        },
+        beginAtZero: true, // Empezar el eje Y en cero
+      },
+    },
+    responsive: true,
+    maintainAspectRatio: false,
+  },
+});
+
+// Realizar la solicitud AJAX para obtener los datos del ranking de empleados
+fetch('/php/viewsCharts/rankingEmpleados.php') 
+  .then(response => response.json())
+  .then(data => {
+    // data contiene los datos del ranking de empleados
+    console.log(data); // Agregar esta línea para verificar la respuesta
+
+    // Extraer los nombres de los empleados y las cantidades de participación
+    const nombres = data.map(empleado => empleado.NOMBRE_EMPLEADO);
+    const cantidades = data.map(empleado => empleado.CANTIDAD_EVENTOS_PARTICIPADOS);
+
+    // Actualizar los datos de la gráfica de barras con los empleados del ranking
+    myBarChart.data.labels = nombres;
+    myBarChart.data.datasets[0].data = cantidades;
+    myBarChart.update();
+  })
+  .catch(error => console.error('Error al obtener el ranking de empleados:', error));
+
 /* Functionality */
 function actualizarGraficoDoughnut(countCocina, countMesero) {
   // Actualizar el gráfico de "doughnut" con los nuevos datos
@@ -118,57 +180,57 @@ function actualizarGraficoDoughnut(countCocina, countMesero) {
 
 function recargarGraficos(){
   // JavaScript para la segunda instancia de gráficas
-var ctxProporcion2 = document.getElementById('proporcionEmpleados2').getContext('2d');
-var doughnutChart2 = new Chart(ctxProporcion2, {
-  type: 'doughnut',
-  data: {
-    labels: ['Cocineros', 'Meseros'],
-    datasets: [{
-      data: [], // Sin datos iniciales
-      backgroundColor: ['#5603ad', '#8367c7'], // Colores de las secciones
-      borderColor: ['white', 'white'], // Colores de los bordes de las secciones
-      borderWidth: 1,
-    }]
-  },
-  options: {
-    responsive: true,
-    maintainAspectRatio: false,
-    plugins: {
-      legend: {
+  var ctxProporcion2 = document.getElementById('proporcionEmpleados2').getContext('2d');
+  var doughnutChart2 = new Chart(ctxProporcion2, {
+    type: 'doughnut',
+    data: {
+      labels: ['Cocineros', 'Meseros'],
+      datasets: [{
+        data: [], // Sin datos iniciales
+        backgroundColor: ['#5603ad', '#8367c7'], // Colores de las secciones
+        borderColor: ['white', 'white'], // Colores de los bordes de las secciones
+        borderWidth: 1,
+      }]
+    },
+    options: {
+      responsive: true,
+      maintainAspectRatio: false,
+      plugins: {
+        legend: {
           display: true,
           position: 'bottom',
-          labels:{
-              fontColor: 'white'
+          labels: {
+            fontColor: 'white'
           },
-      },
+        },
+      }
     }
+  });
+
+  /* Functionality para la segunda instancia */
+  function actualizarGraficoDoughnut2(countCocina, countMesero) {
+    // Actualizar el gráfico de "doughnut" con los nuevos datos
+    doughnutChart2.data.datasets[0].data = [countCocina, countMesero];
+    doughnutChart2.update();
   }
-});
 
-/* Functionality para la segunda instancia */
-function actualizarGraficoDoughnut2(countCocina, countMesero) {
-  // Actualizar el gráfico de "doughnut" con los nuevos datos
-  doughnutChart2.data.datasets[0].data = [countCocina, countMesero];
-  doughnutChart2.update();
-}
+  // Realizar la solicitud AJAX para obtener los conteos de empleados
+  fetch('/php/viewsCharts/countEmpleados.php') // Ruta de la consulta PHP
+    .then(response => response.json())
+    .then(data => {
+      // data contiene los conteos de empleados de cada tipo
+      console.log(data); // Agregar esta línea para verificar la respuesta
 
-// Realizar la solicitud AJAX para obtener los conteos de empleados
-fetch('/php/viewsCharts/countEmpleados.php') // Ruta de la consulta PHP
-  .then(response => response.json())
-  .then(data => {
-    // data contiene los conteos de empleados de cada tipo
-    console.log(data); // Agregar esta línea para verificar la respuesta
+      const countCocina = data.count_cocina;
+      const countMesero = data.count_mesero;
 
-    const countCocina = data.count_cocina;
-    const countMesero = data.count_mesero;
+      // Llamar a la función para actualizar el gráfico de "doughnut" para la primera instancia
+      actualizarGraficoDoughnut(countCocina, countMesero);
 
-    // Llamar a la función para actualizar el gráfico de "doughnut" para la primera instancia
-    actualizarGraficoDoughnut(countCocina, countMesero);
-
-    // Llamar a la función para actualizar el gráfico de "doughnut" para la segunda instancia
-    actualizarGraficoDoughnut2(countCocina, countMesero);
-  })
-  .catch(error => console.error('Error al obtener los conteos de empleados:', error));
+      // Llamar a la función para actualizar el gráfico de "doughnut" para la segunda instancia
+      actualizarGraficoDoughnut2(countCocina, countMesero);
+    })
+    .catch(error => console.error('Error al obtener los conteos de empleados:', error));
 }
 
 //Cargar el segundo grafico una vez al principio del load de la pagina
