@@ -20,7 +20,7 @@
     else if(strlen($cel) !== 10){
         echo "<div class='alert alert-danger'>Error: Numero de celular de 10</div>";
     }
-    else if($nom=="" || $ap==""||$am==""||$usu==""||$pass==""||$confirm==""||$cell==""){
+    else if($nom=="" || $ap==""||$am==""||$usu==""||$pass==""||$confirm==""||$cel==""){
         echo "<div class='alert alert-danger'>Error: Registros vacios, favor de llenar</div>";
     }
     else{

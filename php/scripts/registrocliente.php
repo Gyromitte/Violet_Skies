@@ -19,10 +19,10 @@ error_reporting(E_ALL);
         // If the phone number contains a letter, it is invalid
         echo "<div class='alert alert-danger'>Error: No utilizar letras en tu numero de Celular</div>";
     }
-    else if(!(strlen($cel) >= 10) && !(strlen($cel)<=15)){
+    else if(!(strlen($cel) >= 10 && strlen($cel)<=15)){
         echo "<div class='alert alert-danger'>Error: Numero de celular de de 10 a 15</div>";
     }
-    else if($nom=="" || $ap==""||$am==""||$usu==""||$pass==""||$confirm==""||$cell==""){
+    else if($nom=="" || $ap==""||$am==""||$usu==""||$pass==""||$confirm==""||$cel==""){
         echo "<div class='alert alert-danger'>Error: Registros vacios, favor de llenar</div>";
     }
     else{
