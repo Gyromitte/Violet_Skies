@@ -103,6 +103,7 @@
                         $ID=$renglon['ID'];
                         $NOMBRE = $renglon['NOMBRE'];
                         $tipo = $renglon['TIPO_CUENTA'];
+                        $estado=$renglon['ESTADO'];
                     }
                 }
                 if($ver){

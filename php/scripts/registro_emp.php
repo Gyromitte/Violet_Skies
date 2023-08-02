@@ -12,6 +12,14 @@
     $cel = $_POST['cel'];
     $tipo="EMPLEADO";
 
+    // Use a regular expression to check if the phone number contains any letter
+    if (preg_match("/[a-zA-Z]/", $cel)) {
+        // If the phone number contains a letter, it is invalid
+        echo "<div class='alert alert-danger'>Error: No utilizar letras en tu numero de Celular</div>";
+    }
+    else{
+
     $db->Register($nom,$ap,$am,$usu,$pass,$confirm,$cel,$tipo);
+    }
     $db->desconectarBD();
 ?>
