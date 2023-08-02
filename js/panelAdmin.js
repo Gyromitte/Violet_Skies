@@ -459,7 +459,7 @@ function updateModalContent(formType, idEmpleado, idEvento) {
         xhr.send();
         // Ver cual es la tabla activa para refrescar cualquier cambio
         //console.log("hola");
-        modalTitle.textContent ="Editar Datos"
+        modalTitle.textContent ="Manejar Solicitud"
         formContent=`<form id="formularioEditarDatos" method="post" action="pruebaComprobación.php">
         <div class="form-group">
             <label for="nombreInput">Nombre:</label>
