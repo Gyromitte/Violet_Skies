@@ -17,9 +17,14 @@
         // If the phone number contains a letter, it is invalid
         echo "<div class='alert alert-danger'>Error: No utilizar letras en tu numero de Celular</div>";
     }
+    else if(strlen($cel) !== 10){
+        echo "<div class='alert alert-danger'>Error: Numero de celular de 10</div>";
+    }
+    else if($nom=="" || $ap==""||$am==""||$usu==""||$pass==""||$confirm==""||$cell==""){
+        echo "<div class='alert alert-danger'>Error: Registros vacios, favor de llenar</div>";
+    }
     else{
-
-    $db->Register($nom,$ap,$am,$usu,$pass,$confirm,$cel,$tipo);
+        $db->Register($nom,$ap,$am,$usu,$pass,$confirm,$cel,$tipo);
     }
     $db->desconectarBD();
 ?>
