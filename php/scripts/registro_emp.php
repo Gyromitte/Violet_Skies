@@ -12,22 +12,23 @@
     $cel = $_POST['cel'];
     $tipo="EMPLEADO";
 
+    $pattern = '/[0-9\p{P}\p{S}&&[^ñ]]/u';
     // Use a regular expression to check if the phone number contains any letter
     if (preg_match("/[a-zA-Z]/", $cel)) {
         // If the phone number contains a letter, it is invalid
         echo "<div class='alert alert-danger'>Error: No utilizar letras en tu numero de Celular</div>";
     }
-    else if (preg_match("/[0-9\W]/", $nom)) {
+    else if (preg_match("$pattern", $nom)) {
         // The input text contains numbers or special characters
         echo"<div class='alert alert-danger'>Error: No poner numeros o caracteres especiales en 
         los nombres</div>";
     }
-    else if (preg_match("/[0-9\W]/", $ap)) {
+    else if (preg_match("$pattern", $ap)) {
         // The input text contains numbers or special characters
         echo"<div class='alert alert-danger'>Error: No poner numeros o caracteres especiales en 
         los nombres</div>";
     }
-    else if (preg_match("/[0-9\W]/", $am)) {
+    else if (preg_match("$pattern", $am)) {
         // The input text contains numbers or special characters
         echo"<div class='alert alert-danger'>Error: No poner numeros o caracteres especiales en 
         los nombres</div>";
