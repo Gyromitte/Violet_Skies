@@ -21,6 +21,7 @@
                 echo $e->getMessage(); 
             }
         }
+
     function desconectarBD()
     {
         try
@@ -77,7 +78,8 @@
             try
             {
                 $statement = $this->PDO_local->prepare($consulta);
-                $statement->execute($parametros);
+                $result = $statement->execute($parametros);
+                return $result; // Agregar esta línea para devolver el resultado de la ejecución
             }
             catch(PDOException $e)
             {
@@ -85,7 +87,9 @@
             }
         }
 
-        
+        public function getPDO() {
+            return $this->PDO_local;
+        }
         
         function Login($usu,$pass){
             try{
@@ -99,11 +103,6 @@
                         $ID=$renglon['ID'];
                         $NOMBRE = $renglon['NOMBRE'];
                         $tipo = $renglon['TIPO_CUENTA'];
-                        $ap_paterno=$renglon['AP_PATERNO'];
-                        $ap_materno=$renglon['AP_MATERNO'];
-                        $telefono=$renglon['TELEFONO'];
-                        $correo=$renglon['CORREO'];
-                        $estado=$renglon['ESTADO'];
                     }
                 }
                 if($ver){

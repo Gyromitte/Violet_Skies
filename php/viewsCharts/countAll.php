@@ -5,7 +5,8 @@ $conexion->conectarBD();
 
 /* Consulta para contar cuentas de clientes */
 $consultaClientes = "SELECT COUNT(*) AS count_clientes FROM CUENTAS C
-WHERE TIPO_CUENTA = 'CLIENTE'";
+WHERE TIPO_CUENTA = 'CLIENTE'
+AND C.ESTADO = 'ACTIVO'";
 $resultadoClientes = $conexion->seleccionar($consultaClientes);
 $countClientes = $resultadoClientes[0]->count_clientes;
 
