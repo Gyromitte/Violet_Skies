@@ -165,7 +165,9 @@
                     <div class="search">
                         <div class="input-group">
                             <input type="text" class="form-control" id="searchInput" placeholder="Buscar evento por nombre o cliente">
-                            <button type="button" class="btn btn-primary" id="searchButton">Buscar</button>
+                            
+                            <button id="searchButton" type ="button" class="ver-empleados btn btn-outline-primary">
+                            <i class="fa-solid fa-magnifying-glass" style="color: #1f71ff;"></i></button>
                         </div>
                     </div>
                 </div>
@@ -215,7 +217,6 @@
                     <i class="fa-solid fa-magnifying-glass" style="color: #1f71ff;"></i></button>
                 </div>
             </div>
-            <br>
             <br>
             <!--Opciones de Vistas-->
             <div class="view-options">
