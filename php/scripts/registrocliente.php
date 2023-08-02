@@ -19,6 +19,21 @@ error_reporting(E_ALL);
         // If the phone number contains a letter, it is invalid
         echo "<div class='alert alert-danger'>Error: No utilizar letras en tu numero de Celular</div>";
     }
+    else if (preg_match("/[0-9\W]/", $nom)) {
+        // The input text contains numbers or special characters
+        echo"<div class='alert alert-danger'>Error: No poner numeros o caracteres especiales en 
+        los nombres</div>";
+    }
+    else if (preg_match("/[0-9\W]/", $ap)) {
+        // The input text contains numbers or special characters
+        echo"<div class='alert alert-danger'>Error: No poner numeros o caracteres especiales en 
+        los nombres</div>";
+    }
+    else if (preg_match("/[0-9\W]/", $am)) {
+        // The input text contains numbers or special characters
+        echo"<div class='alert alert-danger'>Error: No poner numeros o caracteres especiales en 
+        los nombres</div>";
+    }
     else if(!(strlen($cel) >= 10 && strlen($cel)<=15)){
         echo "<div class='alert alert-danger'>Error: Numero de celular de de 10 a 15</div>";
     }
