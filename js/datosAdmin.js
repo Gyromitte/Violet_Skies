@@ -49,7 +49,11 @@
 
   function habilitarEdicion() {
     const inputs = document.querySelectorAll('.personal-info input[disabled]');
-    inputs.forEach(input => input.removeAttribute('disabled'));
+    inputs.forEach(input => {
+        if (input.name !== 'correo') {
+            input.removeAttribute('disabled');
+        }
+    });
     
     const btnEditarDatosPersonales = document.getElementById('btnEditarDatosPersonales');
     const btnGuardarCambios = document.getElementById('btnGuardarCambios');
