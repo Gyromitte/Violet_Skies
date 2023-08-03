@@ -85,7 +85,7 @@ if (isset($_SESSION["ID"])) {
               </h2>
               <div id="collapseTwo" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
                 <div class="accordion-body">
-                <strong>Considera que el registrar un nuevo administrador estás otorgando permisos para manejar los eventos futuros</strong>
+                <strong>Considera que el registrar un nuevo administrador estás otorgando permisos para manejar información sensible</strong>
                 <div><br></div>
                 <div class="mb-3 row">
                   <label class="col-sm-2 col-form-label">Nombre:</label>
