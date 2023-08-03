@@ -697,6 +697,10 @@ function updateModalContent(formType, idEmpleado, idEvento) {
                 alert('Por favor, llene los campos correctamente\nInvitados debe ser un número válido');
                 return;
               }
+              if (parseInt(cocinerosRequeridos) < 0 || parseInt(meserosRequeridos) < 0) {
+                alert('Por favor, llene los campos correctamente\nInserte valores válidos');
+                return;
+              }
 
               var xhrGuardarCambios = new XMLHttpRequest();
               xhrGuardarCambios.onreadystatechange = function() {
