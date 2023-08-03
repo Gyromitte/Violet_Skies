@@ -44,13 +44,19 @@ document.addEventListener('DOMContentLoaded', function() {
           <div class="container-fluid">
                 <div class="row">
                     <div class="col-md-5">
-                        <div class="info-card mb-2" style="height: 20px;">Solicitudes pendientes:</div>
+                      <div class="info-card mb-2" style="height: 25px; display: flex; align-items: center;">
+                        <h3 class="me-2">
+                          <i class="fa-solid fa-business-time" style="color: #ffffff;"></i>
+                              Solicitudes Pendientes: 
+                        </h3>
+                        <h2 id="solicitudesCard"></h2>
+                      </div>
                         <div class="col-md-12">
                             <canvas id="proporcionEmpleados2" style="height: 200px;"></canvas>
                         </div>
                     </div>
                     <div class="info-card col-md-7">
-                       
+                      <canvas id="participacionEmpleados"></canvas>
                     </div>
                 </div>
             </div>
