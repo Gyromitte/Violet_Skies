@@ -74,7 +74,6 @@ modal.addEventListener("show.bs.modal", function (event) {
   
   // Función para actualizar el contenido del modal según el tipo de formulario
   function updateModalContent(formType, idEvento) {
-    console.log();
     var formContent = "";
     var modalTitle = document.querySelector('#empModal .modal-title');
     //Conseguir el modal header para cambiarle el color
@@ -89,14 +88,23 @@ modal.addEventListener("show.bs.modal", function (event) {
           if (xhr.readyState === XMLHttpRequest.DONE) {
             if (xhr.status === 200) {
               // Parsear la respuesta JSON
+              var evento = JSON.parse(xhr.responseText);
               // Actualizar el contenido del formulario con los datos obtenido
               formContent = `
                 <form>
                   <div id="mensajeDiv" method="POST"></div> 
+                  <div>
                     <div class="d-flex justify-content-center">
                       <h4>
-  
+                      ${evento.NOMBRE}
                       </h4>
+                      <br>
+                      <h6>
+                      Fecha de evento: ${evento.F_EVENTO}
+                      </h6>
+                      </div>
+                      <br>
+                    <div class="d-flex justify-content-center">
                       <button type="submit" id="asist" class="btn btn-primary btn-modal-warning me-2">
                         <i class="fa-solid fa-user me-2" style="color: #ffffff;">
                             Asistir
@@ -142,6 +150,7 @@ modal.addEventListener("show.bs.modal", function (event) {
             }
           }
         };
+
         xhr.open("GET", "../viewsEventos/obtenerEvento.php?id=" + idEvento, true);
         xhr.send();
         //Ver cual es la tabla activa para refrescar cualquier cambio
@@ -160,10 +169,13 @@ modal.addEventListener("show.bs.modal", function (event) {
                 <form onsubmit="return cancelarAsistir(${idEvento})">
                   <div id="mensajeDiv" method="POST"></div> 
                     <div class="d-flex justify-content-center">
+                    <br>
                       <h4>
                         ${evento.NOMBRE}
                       </h4>
+                      </div>
                       <br>
+                      <div class="d-flex justify-content-center">
                       <button type="submit" class="btn btn-primary btn-modal-warning me-2">
                         <i class="fa-solid fa-user me-2" style="color: #ffffff;">
                             Asistir

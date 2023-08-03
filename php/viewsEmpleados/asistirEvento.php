@@ -7,6 +7,7 @@
     $tipo=$_SESSION["tipo"];
     $eventoId = $_GET['id'];
 
+
     if($emp=="MESERO"){
         $cant="SELECT DE.MESEROS FROM DETALLE_EVENTO DE WHERE ID='$eventoId'";
     }
@@ -20,6 +21,7 @@
         echo"<div class='alert alert-danger'>Cupo lleno</div>";
     }
     else{
+        $consulta="SELECT E.F_EVENTO FROM EVENTO";
         $enter="INSERT INTO EVENTO_EMPLEADO(EVENTO,EMPLEADOS) VALUES('$eventoId','$emp')";
         echo"<div class='alert alert-success'>Asistiendo!</div>";
     }

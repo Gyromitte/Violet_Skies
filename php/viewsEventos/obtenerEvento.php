@@ -3,20 +3,19 @@
     $conexion = new Database();
     $conexion->conectarBD();
 
-    $evento = $_GET['ID'];
+    $evento = $_GET['id'];
 
-    $consulta = "SELECT E.ID, E.NOMBRE FROM EVENTO E WHERE E.ID = '$evento'";
+    $consulta = "SELECT E.ID, E.NOMBRE,E.F_EVENTO FROM EVENTO E WHERE E.ID = '$evento'";
 
     $tabla = $conexion->seleccionar($consulta);
 
     if (count($tabla) > 0) {
         $evento = (array) $tabla[0];
-        header('Content-Type: application/json');
         echo json_encode($evento);
     }
     else {
-        header('Content-Type: application/json');
-        echo json_encode(null);
+        echo json_encode(array('error' => 'Evento no encontrado'));
     }
+    header('Content-Type: application/json');
     $conexion->desconectarBD();
 ?>
