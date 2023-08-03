@@ -118,6 +118,9 @@ function actualizarGraficoDoughnut(countCocina, countMesero) {
 }
 
 function recargarGraficos(){
+  //Recargar datos de info cards
+  xhttp.open("GET", "/php/viewsCharts/countAll.php", true);
+  xhttp.send();
   // JavaScript para la segunda instancia de gráficas
   var ctxProporcion2 = document.getElementById('proporcionEmpleados2').getContext('2d');
   var doughnutChart2 = new Chart(ctxProporcion2, {
@@ -167,7 +170,7 @@ function recargarGraficos(){
     .then(response => response.json())
     .then(data => {
       // data contiene los conteos de empleados de cada tipo
-      console.log(data); // Agregar esta línea para verificar la respuesta
+      //console.log(data); // Agregar esta línea para verificar la respuesta
 
       const countCocina = data.count_cocina;
       const countMesero = data.count_mesero;
@@ -237,7 +240,7 @@ function recargarGraficos(){
       .then(response => response.json())
       .then(data => {
         // data contiene los datos del ranking de empleados
-        console.log(data); //Verificar la respuesta
+        //console.log(data); //Verificar la respuesta
 
         // Extraer los nombres de los empleados y las cantidades de participación
         const nombres = data.map(empleado => empleado.NOMBRE_EMPLEADO);
