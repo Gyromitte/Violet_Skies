@@ -21,12 +21,12 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     VALUES ('$nombre', '$ap_paterno', '$ap_materno', '$telefono', '$correo', '$passHash', 'ADMINISTRADOR')";
 
 
-$resultado = $conexion->ejecutarSQL($sql);
+    $resultado = $conexion->ejecutarSQL($sql);
     // Ejecutar la consulta y verificar si se realizó correctamente
     if ($resultado === TRUE) {
         echo "El administrador se registró correctamente";
     } else {
-        echo "Error al registrar al administrador" ;
+        echo "Error al registrar al administrador" . mysqli_error();
     }
 
     // Cerrar la conexión a la base de datos
