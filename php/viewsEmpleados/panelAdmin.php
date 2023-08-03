@@ -224,7 +224,7 @@
             </div>
             <br>
             <!--Opciones de Vistas-->
-            <div class="view-options">
+            <div class="view-options mb-2">
                 <div>
                     <button id="verGraficos" data-url="" type="button" class="btn-options ver-empleados btn btn-primary border-2 btn-outline-light rounded-5" data-bs-target="#mainModal">
                         <i class="fa-solid fa-chart-pie" style="color: #ffffff;"></i>

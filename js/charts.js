@@ -109,56 +109,14 @@ var doughnutChart = new Chart(ctxProporcion, {
   }
 });
 
-// Obtener el elemento canvas y crear el contexto para la gráfica de barras
-const ctx = document.getElementById("participacionEmpleados").getContext("2d");
 
-// Crear la gráfica de barras
-const myBarChart = new Chart(ctx, {
-  type: "bar",
-  data: {
-    labels: [], // Nombres de los empleados en el eje X (se actualizará)
-    datasets: [
-      {
-        label: "Participaciones",
-        data: [], // Cantidades de participación en el eje Y (se actualizará)
-        backgroundColor: "#454ade", // Color de fondo de las barras
-        borderColor: "white", // Color del borde de las barras
-        borderWidth: 2, // Ancho del borde de las barras
-      },
-    ],
-  },
-  options: {
-    plugins: {
-      legend: {
-        labels: {
-          color: "white", // Cambiar el color del texto de la leyenda a blanco
-        },
-      },
-    },
-    scales: {
-      x: {
-        ticks: {
-          color: "white", // Cambiar el color del texto del eje X a blanco
-        },
-      },
-      y: {
-        ticks: {
-          color: "white", // Cambiar el color del texto del eje Y a blanco
-        },
-        beginAtZero: true, // Empezar el eje Y en cero
-      },
-    },
-    responsive: true,
-    maintainAspectRatio: false,
-  },
-});
 
 // Realizar la solicitud AJAX para obtener los datos del ranking de empleados
 fetch('/php/viewsCharts/rankingEmpleados.php') 
   .then(response => response.json())
   .then(data => {
     // data contiene los datos del ranking de empleados
-    console.log(data); // Agregar esta línea para verificar la respuesta
+    //console.log(data); // Agregar esta línea para verificar la respuesta
 
     // Extraer los nombres de los empleados y las cantidades de participación
     const nombres = data.map(empleado => empleado.NOMBRE_EMPLEADO);
@@ -207,11 +165,20 @@ function recargarGraficos(){
     }
   });
 
+
   /* Functionality para la segunda instancia */
   function actualizarGraficoDoughnut2(countCocina, countMesero) {
     // Actualizar el gráfico de "doughnut" con los nuevos datos
     doughnutChart2.data.datasets[0].data = [countCocina, countMesero];
     doughnutChart2.update();
+  }
+
+  // Función para actualizar el gráfico de barras
+  function actualizarGraficoBarras(nombres, cantidades) {
+  // Actualizar los datos de la gráfica de barras con los empleados del ranking
+  myBarChart.data.labels = nombres;
+  myBarChart.data.datasets[0].data = cantidades;
+  myBarChart.update();
   }
 
   // Realizar la solicitud AJAX para obtener los conteos de empleados
@@ -231,6 +198,65 @@ function recargarGraficos(){
       actualizarGraficoDoughnut2(countCocina, countMesero);
     })
     .catch(error => console.error('Error al obtener los conteos de empleados:', error));
+
+    // Obtener el elemento canvas y crear el contexto para la gráfica de barras
+    const ctx = document.getElementById("participacionEmpleados").getContext("2d");
+    // Crear la gráfica de barras
+    const myBarChart = new Chart(ctx, {
+      type: "bar",
+      data: {
+        labels: [], // Nombres de los empleados en el eje X (se actualizará)
+        datasets: [
+          {
+            label: "Participaciones",
+            data: [], // Cantidades de participación en el eje Y (se actualizará)
+            backgroundColor: "#454ade", // Color de fondo de las barras
+            borderColor: "white", // Color del borde de las barras
+            borderWidth: 2, // Ancho del borde de las barras
+          },
+        ],
+      },
+      options: {
+        plugins: {
+          legend: {
+            labels: {
+              color: "white", // Cambiar el color del texto de la leyenda a blanco
+            },
+          },
+        },
+        scales: {
+          x: {
+            ticks: {
+              color: "white", // Cambiar el color del texto del eje X a blanco
+            },
+          },
+          y: {
+            ticks: {
+              color: "white", // Cambiar el color del texto del eje Y a blanco
+            },
+            beginAtZero: true, // Empezar el eje Y en cero
+          },
+        },
+        responsive: true,
+        maintainAspectRatio: false,
+      },
+    });
+
+    // Realizar la solicitud AJAX para obtener los datos del ranking de empleados y los conteos de empleados
+    fetch('/php/viewsCharts/rankingEmpleados.php') 
+      .then(response => response.json())
+      .then(data => {
+        // data contiene los datos del ranking de empleados
+        console.log(data); //Verificar la respuesta
+
+        // Extraer los nombres de los empleados y las cantidades de participación
+        const nombres = data.map(empleado => empleado.NOMBRE_EMPLEADO);
+        const cantidades = data.map(empleado => empleado.CANTIDAD_EVENTOS_PARTICIPADOS);
+
+        // Actualizar el gráfico de barras con los empleados del ranking
+        actualizarGraficoBarras(nombres, cantidades);
+      })
+      .catch(error => console.error('Error al obtener los datos:', error));
 }
 
 //Cargar el segundo grafico una vez al principio del load de la pagina

@@ -50,7 +50,7 @@ document.addEventListener('DOMContentLoaded', function() {
                         </div>
                     </div>
                     <div class="info-card col-md-7">
-                       
+                      <canvas id="participacionEmpleados"></canvas>
                     </div>
                 </div>
             </div>
