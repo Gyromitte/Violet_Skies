@@ -9,7 +9,7 @@
 
     $tabla = $conexion->seleccionar($consulta);
 
-    if (is_countable($tabla) && count($tabla) > 0) {
+    if (count($tabla) > 0) {
         $evento = (array) $tabla[0];
         header('Content-Type: application/json');
         echo json_encode($evento);

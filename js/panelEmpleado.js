@@ -3,29 +3,26 @@
 const toggleDashboardBtn = document.getElementById('nav-button');
 const dashboard = document.getElementById('dash-board');
 const main = document.getElementById('main');
-var currentTable = "";
 
-// Función para abrir o cerrar el dashboard
+
 function toggleDashboard() {
   dashboard.classList.toggle('dashboard-open');
   main.classList.toggle('main-dash-open')
 }
-// Asignar evento de clic al botón
+
 toggleDashboardBtn.addEventListener('click', toggleDashboard);
 document.addEventListener('click', function (event) {
   const targetElement = event.target;
   if (!targetElement.closest('#dash-board') && !targetElement.closest('#nav-button')) {
-    // Si el clic no es dentro del dashboard ni en el botón de la navbar, cerrar el dashboard
     dashboard.classList.remove('dashboard-open');
     main.classList.remove('main-dash-open');
   }
 });
 
 /*Main content*/
-// Obtener las pestañas y el contenido 
 var tabs = document.querySelectorAll('.dash-button');
 var tabContents = document.querySelectorAll('.tab-content');
-//Asignar evento de click a cada boton y relacionarlo con el id del contenido
+
 tabs.forEach(function (tab) {
   tab.addEventListener('click', function () {
     var tabId = this.getAttribute('data-tab');
@@ -61,18 +58,17 @@ var btnPend = document.getElementById('verPend');
 var btnFin = document.getElementById('verFin');
 
 /*Modal functionality*/
-// Obtener el modal y el formulario
 var modal = document.getElementById("empModal");
 var modalForm = document.getElementById("modal-form");
 
 modal.addEventListener("show.bs.modal", function (event) {
-    // Botón que activó el modal
     var button = event.relatedTarget;
   
-    // Obtener el tipo de formulario correspondiente al botón
+    
     var formType = button.getAttribute("data-bs-whatever");
     var idEvento = button.getAttribute("data-id");
-    // Actualizar el contenido del formulario
+
+    
     updateModalContent(formType, idEvento);
   });
   
@@ -81,30 +77,27 @@ modal.addEventListener("show.bs.modal", function (event) {
     console.log();
     var formContent = "";
     var modalTitle = document.querySelector('#empModal .modal-title');
-    var form;
     //Conseguir el modal header para cambiarle el color
     var modalHeader = document.querySelector('.modal-header');
   
     switch (formType) {
       case "@asist":
         modalTitle.textContent = "Trabajar en este evento?";
-        modalHeader.classList.add('modal-header-warning');
+        modalHeader.classList.remove('modal-header-warning');
         var xhr = new XMLHttpRequest();
         xhr.onreadystatechange = function() {
           if (xhr.readyState === XMLHttpRequest.DONE) {
             if (xhr.status === 200) {
               // Parsear la respuesta JSON
-              var evento = JSON.parse(xhr.responseText);
               // Actualizar el contenido del formulario con los datos obtenido
               formContent = `
-                <form onsubmit="return asistirEvento(${idEvento})">
+                <form>
                   <div id="mensajeDiv" method="POST"></div> 
                     <div class="d-flex justify-content-center">
                       <h4>
-                        ${evento.NOMBRE}
+  
                       </h4>
-                      <br>
-                      <button type="submit" class="btn btn-primary btn-modal-warning me-2">
+                      <button type="submit" id="asist" class="btn btn-primary btn-modal-warning me-2">
                         <i class="fa-solid fa-user me-2" style="color: #ffffff;">
                             Asistir
                         </i>
@@ -115,6 +108,34 @@ modal.addEventListener("show.bs.modal", function (event) {
                 </form>
               `;
               modalForm.innerHTML = formContent;
+              var asistir = document.getElementById("asist");
+
+              asistir.addEventListener("click", function (event) {
+                event.preventDefault(); 
+
+                var evento = evento.NOMBRE; 
+      
+                var xhrAceptar = new XMLHttpRequest();
+                xhrAceptar.onreadystatechange = function () {
+                  if (xhrAceptar.readyState === XMLHttpRequest.DONE) {
+                    if (xhrAceptar.status === 200) {
+                      // Mostrar la respuesta del servidor en el modal
+                      document.getElementById("mensajeDiv").innerHTML = xhrAceptar.responseText;
+                      //Ver cual es la tabla activa para refrescar cualquier cambio
+                      checkCurrentTable(currentTable);
+                    } else {
+                      //Ver cual es la tabla activa para refrescar cualquier cambio
+                      checkCurrentTable(currentTable);
+                      console.error("Error en la solicitud AJAX de Aceptar");
+                    }
+                  }
+                };
+      
+                xhrAceptar.open("POST", "asistirEvento.php", true);
+                xhrAceptar.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+                xhrAceptar.send(formData);
+                checkCurrentTable(currentTable);
+              });
             }
             else {
               console.error("Error en la solicitud AJAX");
@@ -127,7 +148,7 @@ modal.addEventListener("show.bs.modal", function (event) {
       break;
       case "@cancelar":
         modalTitle.textContent = "No asistir este evento?";
-        modalHeader.classList.add('modal-header-warning');
+        modalHeader.classList.remove('modal-header-warning');
         var xhr = new XMLHttpRequest();
         xhr.onreadystatechange = function() {
           if (xhr.readyState === XMLHttpRequest.DONE) {
@@ -165,5 +186,12 @@ modal.addEventListener("show.bs.modal", function (event) {
         //Ver cual es la tabla activa para refrescar cualquier cambio
         checkCurrentTable(currentTable);
       break;
+      default:
+        formContent = `
+          <!-- Replace this with a default content in case formType is not recognized -->
+          <h4>Default Form Content</h4>
+        `;
+        break;
     };
+    modalForm.innerHTML = formContent;
   }

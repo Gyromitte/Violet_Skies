@@ -39,7 +39,6 @@
             }
 		</style>
     <!--Scripts que necesitan ejecutarse primero-->
-    <script src="/js/panelEmpleado.js" async defer></script>
 </head>
 <body>
     <!--[if lt IE 7]>
@@ -103,7 +102,7 @@
             <p class="test">Yo soy, home</p>
         </div>
         <div id="eventos" class="tab-content">
-        <h3 class="test" style="text-align:center; ">
+            <h3 class="test" style="text-align:center; ">
                 Eventos Disponibles
                 <i class="fa-solid fa-briefcase" style="color: #ffffff;"></i>
             </h3>
@@ -164,7 +163,7 @@
                     
                     <h3 id='table-info'></h3>
 
-                    <div class='cont-table'>";
+                    <div class='cont-table'></div>";
                 }
             ?>
         </div>
@@ -192,6 +191,7 @@
         </div>
     </div>
     <!--Scripts que necesitan ejecutarse hasta el final-->
+    <script src="/js/panelEmpleado.js" async defer></script>
     <script src="/js/EventoAsist.js"></script>
     <script src="/js/EventosDisp.js"></script>
     <script src="/bootstrap/js/bootstrap.min.js"></script>

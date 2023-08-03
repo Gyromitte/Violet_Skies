@@ -33,11 +33,15 @@
     <!--NavBar-->    
     <?php
         session_start();
-        if (!isset($_SESSION["access"]) || $_SESSION["access"] !== 1) {
-            echo"No tienes acceso a esta pagina";
-            header("refresh:2;/index.html");
+        $access=1;
+        if(isset($_SESSION["logged_in"])){
+            if($_SESSION["access"]!==$access){
+                header("Location:../scripts/access.php");
+            }
         }
-        
+        else if(!isset($_SESSION["logged_in"])){
+            header("Location:../views/login.php");
+        }
     ?>
     <nav>
         <div class="nav-menu">
