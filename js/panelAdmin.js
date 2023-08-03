@@ -628,11 +628,20 @@ function updateModalContent(formType, idEmpleado, idEvento) {
             
             modalForm.innerHTML = formContent;
             $(document).ready(function() {
+              // Obtenemos la fecha actual
+              var currentDate = new Date();
+            
+              // Calculamos la fecha 1 semana después de la actual
+              var oneWeekLater = new Date();
+              oneWeekLater.setDate(currentDate.getDate() + 6);
+            
               $('#fechaEvento').datetimepicker({
                 format: 'Y-m-d H:i:s', // Formato deseado para la fecha y hora
                 step: 15, // Intervalo de minutos para seleccionar la hora
-                disabledTimeIntervals: [
-                   [21, 6], // deshabilita desde la medianoche hasta las 8:00 am
+                minDate: oneWeekLater.toISOString().slice(0, 19).replace('T', ' '), // Fecha mínima: una semana después de la actual
+                allowTimes: [
+                  '05:00','06:00','07:00','08:00', '09:00', '10:00', '11:00', '12:00', '13:00', // Ejemplo de horas permitidas
+                  '14:00', '15:00', '16:00', '17:00', '18:00', '19:00', '20:00', '21:00','22:00' // Puedes agregar más horas aquí
                 ]
               });
             });
