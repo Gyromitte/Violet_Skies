@@ -14,8 +14,8 @@
     else{
         $cant="SELECT DE.COCINEROS FROM DETALLE_EVENTO DE WHERE ID='$eventoId'";
     }
-    $num= "SELECT COUNT(EE.ID) FROM EVENTO_EMPLEADOS JOIN EMPLEADOS EMP ON EE.EMPLEADOS=EMP.ID
-    WHERE EVENTO='$eventoId' AND EMP.TIPO='$tipo'";
+    $num= "SELECT COUNT(EE.ID) FROM EVENTO_EMPLEADOS EE JOIN EMPLEADOS EMP ON EE.EMPLEADOS=EMP.ID
+    WHERE EE.EVENTO='$eventoId' AND EMP.TIPO='$tipo'";
 
     if($num==$cant){
         echo"<div class='alert alert-danger'>Cupo lleno</div>";
