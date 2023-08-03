@@ -8,6 +8,7 @@
     document.getElementById("clientesCard").innerHTML = data.count_clientes;
     document.getElementById("empleadosCard").innerHTML = data.count_empleados;
     document.getElementById("eventosCard").innerHTML = data.count_eventos;
+    document.getElementById("solicitudesCard").innerHTML = data.count_solicitudes;
   }
 }
 xhttp.open("GET", "/php/viewsCharts/countAll.php", true);
@@ -108,26 +109,6 @@ var doughnutChart = new Chart(ctxProporcion, {
     }
   }
 });
-
-
-
-// Realizar la solicitud AJAX para obtener los datos del ranking de empleados
-fetch('/php/viewsCharts/rankingEmpleados.php') 
-  .then(response => response.json())
-  .then(data => {
-    // data contiene los datos del ranking de empleados
-    //console.log(data); // Agregar esta línea para verificar la respuesta
-
-    // Extraer los nombres de los empleados y las cantidades de participación
-    const nombres = data.map(empleado => empleado.NOMBRE_EMPLEADO);
-    const cantidades = data.map(empleado => empleado.CANTIDAD_EVENTOS_PARTICIPADOS);
-
-    // Actualizar los datos de la gráfica de barras con los empleados del ranking
-    myBarChart.data.labels = nombres;
-    myBarChart.data.datasets[0].data = cantidades;
-    myBarChart.update();
-  })
-  .catch(error => console.error('Error al obtener el ranking de empleados:', error));
 
 /* Functionality */
 function actualizarGraficoDoughnut(countCocina, countMesero) {
@@ -239,6 +220,15 @@ function recargarGraficos(){
         },
         responsive: true,
         maintainAspectRatio: false,
+        plugins: {
+          legend: {
+            display: true,
+            position: 'bottom',
+            labels: {
+              fontColor: 'white'
+            },
+          },
+        }
       },
     });
 
