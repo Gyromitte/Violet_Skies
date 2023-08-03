@@ -117,12 +117,6 @@ if (isset($_SESSION["ID"])) {
                     <input class="form-control" type="email" name="correoNEW">
                   </div>
                 </div>
-                <div class="mb-3 row">
-                  <label class="col-sm-2 col-form-label">RFC:</label>
-                  <div class="col-sm-10">
-                    <input class="form-control" type="text" name="rfcNEW">
-                  </div>
-                </div>
                 <div class="d-flex justify-content-end">
                   <button class="btn btn-primary" onclick="nuevoAdmin()" id="nuevoAdmin">
                   <i class="fa-solid fa-address-card me-2" style="color: #ffffff;"></i>Registrar administrador</button>

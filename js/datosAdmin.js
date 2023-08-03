@@ -125,12 +125,11 @@
     const ap_materno = $('input[name="ap_maternoNEW"]').val();
     const telefono = $('input[name="telefonoNEW"]').val();
     const correo = $('input[name="correoNEW"]').val();
-    const rfc = $('input[name="rfcNEW"]').val();
-    if (!nombre || !ap_paterno || !ap_materno || !telefono || !correo || !rfc) {
+    if (!nombre || !ap_paterno || !ap_materno || !telefono || !correo) {
       alert("Por favor, complete todos los campos requeridos");
       return; // Detener la ejecución de la función si hay campos vacíos
     }
-    const mensajeConfirmacion = `¿Seguro que desea registrar un administrador con los siguientes datos?\n\nNombre: ${nombre}\nApellido Paterno: ${ap_paterno}\nApellido Materno: ${ap_materno}\nTeléfono: ${telefono}\nCorreo: ${correo}\nRFC: ${rfc}`;
+    const mensajeConfirmacion = `¿Seguro que desea registrar un administrador con los siguientes datos?\n\nNombre: ${nombre}\nApellido Paterno: ${ap_paterno}\nApellido Materno: ${ap_materno}\nTeléfono: ${telefono}\nCorreo: ${correo}`;
     if (window.confirm(mensajeConfirmacion)) {
       // Si el usuario acepta, enviar los datos a registrarAdmin.php mediante una solicitud AJAX
       $.ajax({
@@ -141,8 +140,7 @@
           ap_paterno,
           ap_materno,
           telefono,
-          correo,
-          rfc
+          correo
         },
         success: function () {
           $("#mensaje").text("Administrador registrado correctamente");
@@ -154,7 +152,6 @@
             $('input[name="ap_maternoNEW"]').val('');
             $('input[name="telefonoNEW"]').val('');
             $('input[name="correoNEW"]').val('');
-            $('input[name="rfcNEW"]').val('');
             $("#mensaje").hide();
           }, 3000);
         },

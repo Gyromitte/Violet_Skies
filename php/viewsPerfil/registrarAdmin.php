@@ -9,7 +9,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     $telefono = $_POST["telefono"];
     $correo = $_POST["correo"];
     //contraseña
-    $contraseña = $_POST["rfc"];
+    $contraseña = $nombre . rand(1000, 99999);
     $passHash = password_hash($contraseña, PASSWORD_DEFAULT);
     //tipo_cuenta
 
