@@ -5,6 +5,7 @@ const dashboard = document.getElementById('dash-board');
 const main = document.getElementById('main');
 
 
+
 function toggleDashboard() {
   dashboard.classList.toggle('dashboard-open');
   main.classList.toggle('main-dash-open')
@@ -207,3 +208,12 @@ modal.addEventListener("show.bs.modal", function (event) {
     };
     modalForm.innerHTML = formContent;
   }
+
+  function toggleTooltip() {
+    var tooltip = document.querySelector(".tooltiptext");
+    tooltip.style.display = tooltip.style.display === "block" ? "none" : "block";
+  }
+
+
+// Add a click event listener to the paragraph
+
