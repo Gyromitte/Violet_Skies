@@ -608,12 +608,12 @@ function updateModalContent(formType, idEmpleado, idEvento) {
               </table>
               <br>
               <div align="center">
+              <button type="button" class="btn btn-primary" id="btnModify"
+                  ${detallesEvento.ESTADO === 'CANCELADO' || detallesEvento.ESTADO === 'FINALIZADO' ? 'style="display: none;"' : ''}>
+                  <i class="fa-solid fa-pencil me-2" style="color: #ffffff;"></i>Modificar Detalles</button>
                 <button type="button" class="btn btn-success" id="btnAceptarEvento" 
                   ${detallesEvento.ESTADO === 'PENDIENTE' ? '' : 'style="display: none;"'}>
                   <i class="fa-solid fa-check me-2" style="color: #ffffff;"></i>Aceptar Evento</button>
-                <button type="button" class="btn btn-primary" id="btnModify"
-                  ${detallesEvento.ESTADO === 'CANCELADO' || detallesEvento.ESTADO === 'FINALIZADO' ? 'style="display: none;"' : ''}>
-                  <i class="fa-solid fa-pencil me-2" style="color: #ffffff;"></i>Modificar Detalles</button>
                 <button type="button" class="btn btn-primary" id="btnSaveChanges" style="display: none;">
                 <i class="fa-solid fa-floppy-disk me-2" style="color: #ffffff;"></i>Guardar</button>            
                 <button type="button" class="btn btn-danger" id="btnCancelarEvento" 
