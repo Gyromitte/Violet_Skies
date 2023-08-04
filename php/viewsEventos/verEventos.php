@@ -15,31 +15,38 @@
 
           $tabla = $conexion->seleccionar($consulta);
 
-            echo "<table class='table table-hover'>
-            <thead class='thead-purple'>
-            <tr>
-            <th>Nombre</th>
-            <th>estado</th>
-            <th>creacion</th>
-            <th>fecha</th>
-            <th>cliente</th>
-            </tr>
-            </thead>
-            <tbody>";
+    if (count($tabla) > 0) {
+        echo '<div class="table-responsive">';
+        echo "<table class='table table-hover'>
+                <thead class='thead-purple'>
+                    <tr>
+                        <th>Nombre</th>
+                        <th>Estado</th>
+                        <th>Creación</th>
+                        <th>Fecha</th>
+                        <th>Cliente</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>";
+        foreach ($tabla as $registro) {
+            echo "<tr>";
+            echo "<td> $registro->NOMBRE</td>";
+            echo "<td> $registro->ESTADO</td>";
+            echo "<td> $registro->F_CREACION</td>";
+            echo "<td> $registro->F_EVENTO</td>";
+            echo "<td> $registro->CLIENTE</td>";
 
-            foreach($tabla as $registro)
-            {
-                echo "<tr>";
-                echo "<td> $registro->NOMBRE</td>";
-                echo "<td> $registro->ESTADO</td>";
-                echo "<td> $registro->F_CREACION</td>";
-                echo "<td> $registro->F_EVENTO</td>";
-                echo "<td> $registro->CLIENTE</td>";
-                echo "</tr>";
-            }
-
-            echo "</tbody>
-            </table>";
-            $conexion->desconectarBD();
+            // Generar el botón de opciones con el menú desplegable
+            echo "<td class='text-center'>";
+            echo '<div class="dropdown">';
+            echo "<button class='btn btn-secondary dropdown-toggle custom-dropdown' type='button' data-bs-toggle='modal' data-bs-target='#mainModal'
+            data-bs-whatever='@verDetallesEvento' data-event-id='$registro->ID' >";
+            echo '</button>';
+            echo '</div>';
+            echo "</td>";
+            echo "</tr>";
         }
+    }
+}
 ?>

@@ -178,6 +178,16 @@ nav{
     border: 2px solid white;
 }
 
+#btnEmpleadosRegistrados, #btnAceptarEvento, #btnModify, #btnSaveChanges,
+#btnEditarDatosPersonales, #nuevoAdmin, #btnGuardarCambios{
+    color: white;
+    background-color: #b14aed;
+    border: 2px solid white;
+}
+#btnCancelarEvento, #btnCancelarCambios{
+    border: 2px solid white;
+}
+
 /*View options*/
 .view-options{
     display: flex;
@@ -203,6 +213,17 @@ nav{
   .event-history {
     flex: 1;
   }
+
+.form-select-custom{
+    background-color: #5603ad;
+    color: white;
+    border: 2px solid white;
+}
+
+#estadoSelect option:hover {
+    background-color: #b14aed;
+}
+  
 /*Charts and info*/
 #eventosAño, #proporcionEmpleados{
     background-image: linear-gradient(135deg, #5603ad, #f58cd6);

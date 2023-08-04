@@ -2,18 +2,20 @@
 <!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
 <!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
 <!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
-<!--[if gt IE 8]>      <html class="no-js"> <!--<![endif]-->
+<!--[if gt IE 8]>      <html class="no-js"> <!-<![endif]-->
 <html>
 
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title></title>
+    <title>Violet skies - Panel de Empleado</title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!--StyleSheets-->
     <link rel="stylesheet" href="/bootstrap/css/bootstrap.min.css">
     <link rel="stylesheet" href="/css/panelAdmin.css">
+
+    <link rel="icon" type="image/x-icon" href="./images/company_logo.png">
     <!--Referencias a fuentes-->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -26,15 +28,41 @@
     <style>
 			#cuadroEvento{
 				border: 3px solid darkblue;
-				background-color: violet;
+				background-image: linear-gradient(145deg, #5603ad, #f58cd6);
 				color: white;
 				padding: 5px; 
 				margin: 5px;
 				float: left;
 			}
+            .tooltip-paragraph {
+                cursor: pointer;
+            }
+
+            .tooltip {
+                display: none;
+                position: absolute;
+                background-color: #f9f9f9;
+                border: 1px solid #ccc;
+                border-radius: 4px;
+                padding: 10px;
+                z-index: 9999999999;
+            }
+
+            .tooltip.active {
+                display: block;
+            }
+            .cutebox{
+                background-color: #5603ad;
+                border-radius: 5em;
+                padding: 10px;
+                width: 100%;
+                height: 100%;
+                align-items: center;
+                justify-content: center;
+            }
+
 		</style>
     <!--Scripts que necesitan ejecutarse primero-->
-    <script src="/js/panelEmpleado.js" async defer></script>
 </head>
 <body>
     <!--[if lt IE 7]>
@@ -63,11 +91,8 @@
             <img id="company-logo" class="img-fluid" src="/images/company_logo.png" alt="companyLogo" style="height:1.5em; margin-right: 10px;">
             Violet Skies
         </div>
-        <h2><span id="fecha"></span></h2>
         <div class="nav-user">
-            <i class="fa-solid fa-bell" style="color: #ffffff;"></i>
-            <div id="nav-photo-user"></div>
-            <?php 
+            <?php
                 echo $_SESSION["name"];
             ?>
         </div>
@@ -75,63 +100,124 @@
     <!--DashBoard-->
     <div id="dash-board">
         <div id="dash-board-content">
-            <div id="dash-photo-user"></div>
             <?php
                 echo $_SESSION["name"];
             ?>
             <br>
-            <?php
-                echo $_SESSION["tipo"];
-            ?>
-            <br><br>
+            <?php 
+                if($_SESSION["access"]==1.5){
+                    echo"Ninguno";
+                }
+                else{
+                echo $_SESSION["tipo"]; 
+                }
+            ?><br><br>
             <button data-tab="home" class="dash-button"><i class="fa-solid fa-house" style="color: #ffffff;"></i><br>Home</button>
             <button data-tab="eventos" class="dash-button"><i class="fa-solid fa-calendar-days" style="color: #ffffff;"></i><br>Eventos Disponibles</button>
-            <button data-tab="empleados" class="dash-button"><i class="fa-solid fa-calendar-days" style="color: #ffffff;"></i><br>Eventos Asistiendo</button>
+            <button data-tab="empleados" class="dash-button"><i class="fa-solid fa-briefcase" style="color: #ffffff;"></i><br>Eventos Asistiendo</button>
             <button data-tab="perfil" class="dash-button"><i class="fa-solid fa-user" style="color: #ffffff;"></i><br>Perfil</button>
-            <a href="../scripts/CerrarSesion.php"><button data-tab="logout" class="dash-button"><i class="fa-solid fa-gear" style="color: #ffffff;"></i><br>Logout</button></a>
+            <a style="text-decoration: none;" data-tab="logout" class="dash-button" href="../scripts/CerrarSesion.php">
+                <i class="fa-solid fa-door-open" style="color: #ffffff; padding-top: 10px;"></i><br>Logout</a>
         </div>
     </div>
     <!--Main Content-->
     <div id="main">
         <div id="home" class="tab-content active">
-            <p class="test">Yo soy, home</p>
+            <?php
+            if($_SESSION["access"]==1.5){
+                echo"<div class='container'>";
+                echo"<div class='cutebox'>";
+                echo"<h1>Gracias por buscar trabajo con nosotros!</h1>";
+                echo"</div>";
+                echo"</div>";
+                echo"<br>";
+                echo"<div class='container'>";
+                echo"<div class='test'>";
+                echo"<h4>Su solicitud ha sido enviado.</h4>";
+                echo"</div>";
+                echo"</div>";
+                echo"<br>";
+                echo"<div class='container'>";
+                echo"<div class='test'>";
+                echo"<div>Un administrador se pondra en contact con usted proximamente.</div>";
+                echo"</div>";
+                echo"</div>";
+            }
+            else{
+
+            }
+            ?>
         </div>
         <div id="eventos" class="tab-content">
-        <h3 class="test" style="text-align:center; ">
+            <h3 class="test" style="text-align:center; ">
                 Eventos Disponibles
                 <i class="fa-solid fa-briefcase" style="color: #ffffff;"></i>
             </h3>
-            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#empModal" data-bs-whatever="@fat" >Open modal for @fat</button>
-            <div class="container">
-            <form id="EmpDisp" action="<?php echo $_SERVER['PHP_SELF']; ?>" method="POST">
+            <?php
+            if($_SESSION["access"]==1.5){
+                echo"<h1>El Administrador aun no confirma tu cuenta</h1></div>";
+            }
+            else{
+            echo"
+            <div class='container'>
+            <form id='EmpDisp' action=".$_SERVER['PHP_SELF']." method='POST'>
                 <br>
-                <div class="btn-group">
-                    <label class="control-label">Orden: </label>
-                    <select id="tipoorden" name="orden" class="form-select">;
-                        <option value="porcreacion" selected>Recientemente Creadas</option>;
-                        <option value="lejanoevento">Eventos Lejanos</option>;
-                        <option value="cercasevento">Eventos Cercanos</option>;
+                <div class='btn-group'>
+                    <label class='control-label'>Orden: </label>
+                    <select id='tipoorden' name='orden' class='form-select'>;
+                        <option value='' selected>-Seleccionar un Orden-</option>
+                        <option value='porcreacion'>Recientemente Creadas</option>;
+                        <option value='lejanoevento'>Eventos Lejanos</option>;
+                        <option value='cercasevento'>Eventos Cercanos</option>;
                     </select>
                 </div>
             </form>
             </div>
             <br>
-            <div id="tablaResultados"></div>
-        </div>
+            <div id='tablaResultados'></div>
+        </div>";
+        }
+        ?>
         <div id="empleados" class="tab-content">
             <h3 class="test" style="text-align:center; ">
                 Eventos Asistiendo
                 <i class="fa-solid fa-briefcase" style="color: #ffffff;"></i>
             </h3>
-            <br>
-            <!--Informacion de la tabla-->
-            <h3 id="table-info"></h3>
-            <!--Container para tablas-->
-            <div class="cont-table">
-            </div>
+            <?php
+                if($_SESSION["access"]==1.5){
+                    echo"<h1>El Administrador aun no confirma tu cuenta</h1>";
+                }
+                else{
+                    echo"
+                    <br>
+                    <div class='view-options'>
+                        <div>
+                        <button id='verPend' data-url='../viewsEventos/viewEventosAtendiendo.php' type='button'
+                        class='btn-options ver-eventos btn btn-primary border-2 btn-outline-light rounded-5'
+                        data-bs-target='#Main'>
+                            <i class='fa-solid fa-calendar-days' style='color: #ffffff;'></i>
+                            Eventos Pendientes
+                        </button>
+                        <button id='verFin' data-url='../viewsEventos/verFinalizados.php' type='button' 
+                        class='btn-options ver-eventos btn btn-primary border-2 btn-outline-light rounded-5'
+                        data-bs-target='#Main'>
+                            <i class='fa-solid fa-bell-concierge' style='color: #ffffff;'></i>
+                            Historial
+                        </button>
+                        </div>
+                    </div>
+                    <br>
+                    
+                    <h3 id='table-info'></h3>
+
+                    <div class='cont-table'></div>";
+                }
+            ?>
         </div>
         <div id="perfil" class="tab-content">
-            <p class="test">Yo soy, perfiles.</p>
+            <div class="container">
+                <?php include "../viewsPerfil/datosEmp.php" ?>
+            </div>
         </div>
 
         <!--Modal-->
@@ -151,8 +237,9 @@
         </div>
     </div>
     <!--Scripts que necesitan ejecutarse hasta el final-->
+    <script src="/js/panelEmpleado.js" async defer></script>
+    <script src="/js/EventoAsist.js"></script>
     <script src="/js/EventosDisp.js"></script>
-    <script src="/js/dinamicTable.js"></script>
     <script src="/bootstrap/js/bootstrap.min.js"></script>
     <script src="/bootstrap/js/bootstrap.bundle.min.js"></script>
 </body>

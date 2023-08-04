@@ -71,9 +71,27 @@
             height: 80vh;
             overflow-y: scroll;
         }
+
+        .clientsImages{
+            height: 300px;
+        }
+        @media screen and (max-width: 768px) {
+        .clientsImages{
+            height: 200px; /* Altura para pantallas con ancho máximo de 768px */
+            width: 100%; /* Ancho ocupando todo el espacio disponible en la pantalla */
+            max-width: 400px;
+            
+        }
+    }
     </style>
 </head>
 <body>
+<?php
+         session_start();
+         if(isset($_SESSION["logged_in"])){
+             header("Location:../scripts/logintrue.php");
+         }
+    ?>
   
    <!-- Desktop Navbar -->
    <div class=" desktop-nav fixed-top">
@@ -118,15 +136,17 @@
         <div class="row">
             <div class="split left" data-bs-toggle="modal" data-bs-target="#Empleado">
                 <div class="centered">
+                    <br>
                     <h1>Registrate como Empleado!</h1>
-                    <img src="/images/waiter.jpg" style="height: 400px;">
+                    <img class="clientsImages" src="/images/waiter.jpg">
                 </div>
             </div>
 
             <div class="split right" data-bs-toggle="modal" data-bs-target="#Cliente">
                 <div class="centered">
+                    <br>
                     <h1>Registrate como Cliente!</h1>
-                    <img src="/images/customers.jpg" style="height: 400px;">
+                    <img class="clientsImages" src="/images/customers.jpg">
                 </div>
             </div>
         </div>

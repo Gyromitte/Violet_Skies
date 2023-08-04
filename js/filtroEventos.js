@@ -9,6 +9,24 @@ filtrarEventos();
 // Escuchar el evento change del campo de selección de estado
 estadoSelect.addEventListener('change', filtrarEventos);
 
+// Escuchar el evento input del campo de búsqueda
+searchInput.addEventListener('input', function() {
+    clearTimeout(typingTimer);
+    typingTimer = setTimeout(filtrarEventos, doneTypingInterval);
+});
+
+searchInput.addEventListener('keydown', function(event) {
+    if (event.keyCode === 13) {
+        event.preventDefault();
+        filtrarEventos();
+    }
+});
+
+// Escuchar el evento click del botón de búsqueda
+searchButton.addEventListener('click', function() {
+    filtrarEventos();
+});
+
 // Función para filtrar los eventos
 function filtrarEventos() {
     // Obtener los datos del formulario

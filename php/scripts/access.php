@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../../bootstrap/css/bootstrap.min.css">
-    <title>Login</title>
+    <title>Acceso</title>
     <style>
         .redirect div{
             background-color: rgb(27, 31, 59);
@@ -46,11 +46,21 @@
 <body class="redirect">
     <div>
         <?php
-            echo"<div class=' container'>";
+            session_start();
+            echo"<div class='container'>";
             echo"<h1 align='center'>No tienes acceso a esta pagina</h1><br>";
             echo"<h3 align='center'>Redirigiendo...</h3>";
             echo "</div>";
-            header("refresh:4;/index.html");
+
+            if($_SESSION["access"]===1){
+                header("refresh:4;../viewsClientes/panelClientes.php");
+            }
+            else if($_SESSION["access"]===2){
+                header("refresh:4;../viewsEmpleados/panelEmpleado.php");
+            }
+            else if($_SESSION["access"]===3){
+                header("refresh:4;../viewsEmpleados/panelAdmin.php");
+            }
         ?>
     </div>
 </body>

@@ -70,24 +70,16 @@
         <![endif]-->
     <!--NavBar-->
     <?php
-    /*session_start();
+        session_start();
+        $access=3;
         if(isset($_SESSION["logged_in"])){
-            if(isset($_SESSION["access"])==2){
-                echo "<div class='redirect'>";
-                echo"<div class=' container'>";
-                echo"<h1 align='center'>No tienes acceso a esta pagina</h1><br>";
-                echo"<h3 align='center'>Redirigiendo...</h3>";
-                echo "</div>";
-                echo "</div>";
-                header("refresh:4;/index.html");
-            }
-            else if(isset($_SESSION["access"])==1){
-                include'../scripts/access.php';
+            if($_SESSION["access"]!==$access){
+                header("Location:../scripts/access.php");
             }
         }
         else if(!isset($_SESSION["logged_in"])){
             header("Location:../views/login.php");
-        } */
+        } 
     ?>
 
     <nav>
@@ -190,24 +182,38 @@
                 Panel de Eventos
                 <i class="fa-solid fa-briefcase" style="color: #ffffff;"></i>
             </h3>
-            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#mainModal" data-bs-whatever="@fat">Open modal for @fat</button>
-
-            <div class="container">
-                <form id="filtroForm" action="<?php echo $_SERVER['PHP_SELF']; ?>" method="POST">
-                    <br>
-                    <div class="btn-group">
-                        <label class="control-label">Estado:</label>
-                        <select id="estadoSelect" name="estado" class="form-select">;
-                            <option value="todo" selected>Todos</option>;
-                            <option value="PENDIENTE">Pendiente</option>;
-                            <option value="FINALIZADO">Finalizado</option>;
-                            <option value="EN PROCESO">En proceso</option>;
-                            <option value="CANCELADO">Cancelado</option>;
-                        </select>
+        </div><br>
+            <form id="filtroForm" action="<?php echo $_SERVER['PHP_SELF']; ?>" method="POST">
+                <div class="search-container">
+                    <!-- Filtro de estado - A la izquierda -->
+                    <div class="filter">
+                        <div class="btn-group">
+                            <label class="control-label">Estado:</label>
+                            <select id="estadoSelect" name="estado" class="form-select form-select-custom">
+                                <option value="todo" selected>Todos</option>
+                                <option value="PENDIENTE">
+                                <i class="fa-solid fa-list-check" style="color: #ffffff;"></i>
+                                    Pendiente</option>
+                                <option value="EN PROCESO">
+                                    En proceso
+                                    <i class="fa-solid fa-bars-progress" style="color: #ffffff;"></i>
+                                </option>
+                                <option value="FINALIZADO">Finalizado</option>
+                                <option value="CANCELADO">Cancelado</option>
+                            </select>
+                        </div>
                     </div>
-
-                </form>
-            </div>
+                    <!-- Buscador - A la derecha -->
+                    <div class="search">
+                        <div class="input-group">
+                            <input type="text" class="form-control" id="searchInput" placeholder="Buscar evento por nombre o cliente">
+                            
+                            <button id="searchButton" type ="button" class="ver-empleados btn btn-outline-primary">
+                            <i class="fa-solid fa-magnifying-glass" style="color: #1f71ff;"></i></button>
+                        </div>
+                    </div>
+                </div>
+            </form>
             <br>
             <div id="tablaResultados"></div>
         </div>
@@ -217,14 +223,23 @@
                 <i class="fa-solid fa-briefcase" style="color: #ffffff;"></i>
             </h3>
             <br>
-            <button type="button" class="btn btn-success border-2 btn-outline-light rounded-5 btn-options" data-bs-toggle="modal" data-bs-target="#mainModal" data-bs-whatever="@registrarEmpleado">
-                <i class="fa-solid fa-address-card" style="color: #ffffff;"></i>
-                Registrar
-            </button>
-            <br>
+            <div class="search-container">
+                <div class="filter">
+                    <button type="button" class="btn btn-success border-2 btn-outline-light rounded-5 btn-options" data-bs-toggle="modal" data-bs-target="#mainModal" data-bs-whatever="@registrarEmpleado">
+                        <i class="fa-solid fa-address-card" style="color: #ffffff;"></i>
+                        Registrar
+                    </button>
+                </div>
+                <!--Barra de Busqueda-->
+                <div class="input-group mb-3 search-bar" id="search">
+                    <input type="text" id="busqueda" class="form-control" placeholder="Buscar a un empleado" aria-label="" aria-describedby="button-addon2">
+                    <button id="buscarEmpleado" data-url="buscarEmpleado.php" class="ver-empleados btn btn-outline-primary" type="button" id="button-addon2">
+                    <i class="fa-solid fa-magnifying-glass" style="color: #1f71ff;"></i></button>
+                </div>
+            </div>
             <br>
             <!--Opciones de Vistas-->
-            <div class="view-options">
+            <div class="view-options mb-2">
                 <div>
                     <button id="verCocineros" data-url="verCocineros.php" type="button" class="btn-options ver-empleados btn btn-primary border-2 btn-outline-light rounded-5" data-bs-target="#mainModal">
                         <i class="fa-solid fa-utensils" style="color: #ffffff;"></i>
@@ -247,6 +262,27 @@
             <!--Container para tablas-->
             <div class="cont-table">
                 <!--Contenido Default-->
+                <div class="container-fluid">
+                    <div class="row">
+                        <!-- Contenido de la izquierda -->
+                        <div class="col-md-5">
+                        <div class="info-card mb-2" style="height: 25px; display: flex; align-items: center;">
+                            <h3 class="me-2">
+                            <i class="fa-solid fa-business-time" style="color: #ffffff;"></i>
+                                Solicitudes Pendientes: 
+                            </h3>
+                            <h2 id="solicitudesCard"></h2>
+                        </div>
+                            <div class="col-md-12">
+                                <canvas id="proporcionEmpleados2" style="height: 40px"></canvas>
+                            </div>
+                        </div>
+                        <!-- Canvas a la derecha -->
+                        <div class="info-card col-md-7">
+                            <canvas id="participacionEmpleados"></canvas>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
         <div id="perfil" class="tab-content">

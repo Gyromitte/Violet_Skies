@@ -10,7 +10,7 @@ tipoorden.addEventListener('change', VerDisp);
 function VerDisp() {
 
     var formData = new FormData(form);
-    formData.append('tipo', tipoorden.value);
+    formData.append('tipo', tipoorden.value); 
 
     var xhr = new XMLHttpRequest();
 
@@ -31,7 +31,3 @@ function VerDisp() {
     var params = new URLSearchParams(formData);
     history.replaceState(null, '', '?' + params.toString());
 }
-window.addEventListener('load', function() {
-    var params = new URLSearchParams(window.location.search);
-    estadoSelect.value = params.get('tipo') || 'porcreacion';
-});

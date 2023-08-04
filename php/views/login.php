@@ -20,6 +20,13 @@
 
 </head>
 <body>
+    <?php
+         session_start();
+         if(isset($_SESSION["logged_in"])){
+             header("Location:../scripts/logintrue.php");
+         }
+    ?>
+<!-- Navbar -->
 <nav class="navbar navbar-default row">
             <div class="companySection col-sm-auto">
                 <!--Company Logo-->
