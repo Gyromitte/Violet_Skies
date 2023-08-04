@@ -13,7 +13,7 @@ window.addEventListener('scroll', function() {
     }
     
     //Mostrar el valor de yPos en la consola
-    //console.log("Valor de yPos: ", yPos);
+    console.log("Valor de yPos: ", yPos);
 
     parallaxSection.style.backgroundPosition = '50% ' + yPos + 'px';
   }

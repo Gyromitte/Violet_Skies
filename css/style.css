@@ -457,73 +457,7 @@ h1 {
 }
 
 /* Estilos para dispositivos moviles */
-.drop-mobile{
-  visibility: hidden;
-}
-.dropdown-btn-custom, .dropdown-menu-costum{
-  background-color: #5603ad !important;
-  border: 2px solid white;
-}
-.dropdown-item{
-  border: 1px solid white;
-}
-.dropdown-item:hover{
-  background-color: #b14aed;
-}
-
-.dropdown-backdrop {
-  position: static;
-}
-
-/*DashBoard*/
-/* Estilo para el dashboard lateral */
-#dash-board {
-  position: fixed;
-  left: -350px;
-  width: 300px;
-  height: 100vh;
-  background-image: linear-gradient(to bottom, #5503adfd, #8f27f5);
-  transition: left 0.1s ease;
-  z-index: 1;
-}
-/* Estilo para abrir el dashboard */
-#dash-board.dashboard-open {
-  left: 0;
-}
-#dash-board-content{
-  display: flex;
-  flex-direction: column;
-  padding-top: 15px;
-  padding-left: 10px;
-  font-family: 'Lexend', sans-serif;
-  font-weight: bolder;
-}
 @media (max-width: 767px) {
-    /*Navbar*/
-    .drop-mobile{
-      visibility: visible; /*Mostrar el menu*/
-    }
-    .navbar .companySection,
-    .navbar .login-section,
-    .navbar-header {
-        text-align: center; /* Centra los elementos en dispositivos móviles */
-        border-right: none;
-    }
-    /*Estos elementos estaran en el dropdown*/
-    .navbar .companySection ul  {
-        display: none; /* Oculta los enlaces de navegación en dispositivos móviles */
-    }
-    /* Agrega estilos específicos para los botones o elementos en dispositivos móviles */
-    .navbar .login-section .loginButton, #company-logo {
-    display: none;
-    }
-    .navbar .navbar-header,
-    .navbar .collapse.navbar-collapse {
-        width: 100%; /* Asegura que los elementos ocupen toda la anchura */
-    }
-
-
-
   .heroContainer {
     flex-direction: column;
     /* Cambia la dirección de los elementos a columna */

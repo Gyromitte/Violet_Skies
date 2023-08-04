@@ -12,11 +12,3 @@ h5 {
 #mountain{
     height: 450px;
 }
-@media (max-width: 767px) {
-    .max-width-100 {
-        max-width: 100%;
-    }
-    #mountain{
-        height: 250px;
-    }
-}

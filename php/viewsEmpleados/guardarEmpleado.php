@@ -8,7 +8,7 @@ $rfc = $_POST['rfc'];
 $correo = $_POST['correo'];
 $tipo = filter_input(INPUT_POST, 'tipoUsuario', FILTER_SANITIZE_FULL_SPECIAL_CHARS);
 
-// Checar si la cuenta  ya esta registrada en la tabla EMPLEADOS
+// Checar si el empleado ya está registrado en la tabla EMPLEADOS
 $consultaEmpleado = "SELECT * FROM EMPLEADOS WHERE CUENTA IN 
     (SELECT ID FROM CUENTAS WHERE CORREO = :correo AND TIPO_CUENTA = 'EMPLEADO')";
 $parametrosEmpleado = array(':correo' => $correo);
@@ -17,7 +17,7 @@ $resultadoEmpleado = $db->seleccionarPreparado($consultaEmpleado, $parametrosEmp
 if ($resultadoEmpleado) {
     echo "<div class='alert alert-danger'>El empleado ya ha sido dado de alta.</div>";
 } else {
-    // Si el solicitante no ha sido dado de alta, insertarlo en la tabla EMPLEADOS
+    // Si el empleado no ha sido dado de alta, insertarlo en la tabla EMPLEADOS
 
     // ID de la cuenta asociada al correo con estado ACTIVO
     $consultaCuenta = "SELECT ID FROM CUENTAS WHERE CORREO = :correo AND TIPO_CUENTA = 'EMPLEADO' AND ESTADO = 'ACTIVO'";

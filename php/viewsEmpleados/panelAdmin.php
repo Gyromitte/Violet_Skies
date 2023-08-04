@@ -1,4 +1,3 @@
-<!DOCTYPE html>
 <!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
 <!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
 <!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
@@ -25,14 +24,44 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&display=swap" rel="stylesheet">
     <script src="https://kit.fontawesome.com/b60c246061.js" crossorigin="anonymous"></script>
-    <!-- Incluir jQuery -->
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-
-    <!-- Incluir datetimepicker -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-datetimepicker/2.5.20/jquery.datetimepicker.min.css">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-datetimepicker/2.5.20/jquery.datetimepicker.full.min.js"></script>
     <!--Chart.js-->
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <!--Scripts que necesitan ejecutarse primero-->
+    <script src="/js/panelAdmin.js" async defer></script>
+    <!--<style>
+        .redirect div{
+            background-color: rgb(27, 31, 59);
+            background-blend-mode: overlay;
+        }
+        .redirect h1{
+            text-align: center;
+            color:rgb(131, 103, 199);
+            animation: anim-glow 2s ease infinite;
+            font-size: 70px;
+        }
+        .redirect h3{
+            text-align: center;
+            color:rgb(131, 103, 199);
+            animation: anim-glow 2s ease infinite;
+            font-size: 40px;
+        }
+        @keyframes anim-glow {
+	        0% {
+		        box-shadow: 0 0 rgba(188, 44, 201, 1);
+	        }
+	        100% {
+		        box-shadow: 0 0 10px 8px transparent;
+		        border-width: 2px;
+	        }
+        }
+        .redirect div .container{
+            background-color: rgb(27, 31, 59);
+            height: 100%;
+            width: 100%;
+            padding-top: 300px;
+        }
+    </style>
+    -->
 </head>
 
 <body>
@@ -41,19 +70,26 @@
         <![endif]-->
     <!--NavBar-->
     <?php
-        session_start();
+    /*session_start();
         if(isset($_SESSION["logged_in"])){
-            if($_SESSION["access"]===2){
-                header("Location:../scripts/access.php");
+            if(isset($_SESSION["access"])==2){
+                echo "<div class='redirect'>";
+                echo"<div class=' container'>";
+                echo"<h1 align='center'>No tienes acceso a esta pagina</h1><br>";
+                echo"<h3 align='center'>Redirigiendo...</h3>";
+                echo "</div>";
+                echo "</div>";
+                header("refresh:4;/index.html");
             }
-            else if($_SESSION["access"]===1){
-                header("Location:../scripts/access.php");
+            else if(isset($_SESSION["access"])==1){
+                include'../scripts/access.php';
             }
         }
         else if(!isset($_SESSION["logged_in"])){
             header("Location:../views/login.php");
-        }
+        } */
     ?>
+
     <nav>
         <div class="nav-menu">
             <button id="nav-button">
@@ -62,9 +98,16 @@
             <img id="company-logo" class="img-fluid" src="/images/company_logo.png" alt="companyLogo" style="height:1.5em; margin-right: 10px;">
             Violet Skies
         </div>
+        <h2><span id="fecha"></span></h2>
         <div class="nav-user">
             <?php
-                echo $_SESSION["name"];
+            if (isset($_SESSION["logged_in"])) {
+                if (isset($_SESSION["access"]) == 3) {
+                    echo $_SESSION["name"];
+                }
+            } else {
+                echo "Username";
+            }
             ?>
         </div>
     </nav>
@@ -72,10 +115,14 @@
     <div id="dash-board">
         <div id="dash-board-content">
             <?php
-                echo $_SESSION["name"];
+            if (isset($_SESSION["logged_in"])) {
+                if (isset($_SESSION["access"]) == 3) {
+                    echo $_SESSION["name"];
+                }
+            } else {
+                echo "Username";
+            }
             ?>
-            <br>
-            Admin<br><br>
             <button data-tab="home" class="dash-button"><i class="fa-solid fa-house" style="color: #ffffff;"></i><br>Home</button>
             <button data-tab="eventos" class="dash-button"><i class="fa-solid fa-calendar-days" style="color: #ffffff;"></i><br>Eventos</button>
             <button data-tab="empleados" class="dash-button"><i class="fa-solid fa-briefcase" style="color: #ffffff;"></i><br>Empleados</button>
@@ -126,7 +173,6 @@
                     </div>
                 </div>
             </div>
-
             <!--Charts-->
             <div class="container-fluid">
                 <div class="row">
@@ -140,90 +186,46 @@
             </div>
         </div>
         <div id="eventos" class="tab-content">
-        <div class="panel-header">  
-            <h3 class="test">
+            <h3 class="test" style="text-align:center; ">
                 Panel de Eventos
-                <i class="fa-solid fa-calendar-days" style="color: #ffffff;"></i>
+                <i class="fa-solid fa-briefcase" style="color: #ffffff;"></i>
             </h3>
-        </div><br>
-            <form id="filtroForm" action="<?php echo $_SERVER['PHP_SELF']; ?>" method="POST">
-                <div class="search-container">
-                    <!-- Filtro de estado - A la izquierda -->
-                    <div class="filter">
-                        <div class="btn-group">
-                            <label class="control-label">Estado:</label>
-                            <select id="estadoSelect" name="estado" class="form-select">
-                                <option value="todo" selected>Todos</option>
-                                <option value="PENDIENTE">Pendiente</option>
-                                <option value="EN PROCESO">En proceso</option>
-                                <option value="FINALIZADO">Finalizado</option>
-                                <option value="CANCELADO">Cancelado</option>
-                            </select>
-                        </div>
+            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#mainModal" data-bs-whatever="@fat">Open modal for @fat</button>
+
+            <div class="container">
+                <form id="filtroForm" action="<?php echo $_SERVER['PHP_SELF']; ?>" method="POST">
+                    <br>
+                    <div class="btn-group">
+                        <label class="control-label">Estado:</label>
+                        <select id="estadoSelect" name="estado" class="form-select">;
+                            <option value="todo" selected>Todos</option>;
+                            <option value="PENDIENTE">Pendiente</option>;
+                            <option value="FINALIZADO">Finalizado</option>;
+                            <option value="EN PROCESO">En proceso</option>;
+                            <option value="CANCELADO">Cancelado</option>;
+                        </select>
                     </div>
-                    <!-- Buscador - A la derecha -->
-                    <div class="search">
-                        <div class="input-group">
-                            <input type="text" class="form-control" id="searchInput" placeholder="Buscar evento por nombre o cliente">
-                            <button type="button" class="btn btn-primary" id="searchButton">Buscar</button>
-                        </div>
-                    </div>
-                </div>
-            </form>
+
+                </form>
+            </div>
             <br>
             <div id="tablaResultados"></div>
-
-            <!-- Modal de Confirmación -->
-            <div class="modal fade" id="modalConfirmacion" tabindex="-1" role="dialog" aria-labelledby="modalConfirmacionLabel" aria-hidden="true">
-                <div class="modal-dialog" role="document">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h5 class="modal-title" id="modalConfirmacionLabel">Confirmar acción</h5>
-                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                <span aria-hidden="true">&times;</span>
-                            </button>
-                        </div>
-                        <div class="modal-body">
-                            ¿Estás seguro de que deseas cancelar este evento?
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-dismiss="modal" id="btnCancelModal">No</button>
-                            <button type="button" class="btn btn-danger" id="btnAceptarCancelar" data-dismiss="modal" tabindex="-1";>Sí</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
         </div>
-        
         <div id="empleados" class="tab-content">
             <h3 class="test" style="text-align:center; ">
                 Panel de Empleados
                 <i class="fa-solid fa-briefcase" style="color: #ffffff;"></i>
             </h3>
             <br>
-            <div class="search-container">
-                <div class="filter">
-                    <button type="button" class="btn btn-success border-2 btn-outline-light rounded-5 btn-options" data-bs-toggle="modal" data-bs-target="#mainModal" data-bs-whatever="@registrarEmpleado">
-                        <i class="fa-solid fa-address-card" style="color: #ffffff;"></i>
-                        Registrar
-                    </button>
-                </div>
-                <!--Barra de Busqueda-->
-                <div class="input-group mb-3 search-bar" id="search">
-                    <input type="text" class="form-control" placeholder="Buscar a un empleado" aria-label="" aria-describedby="button-addon2">
-                    <button id="buscarEmpleado" data-url="buscarEmpleado.php" class="ver-empleados btn btn-outline-primary" type="button" id="button-addon2">
-                    <i class="fa-solid fa-magnifying-glass" style="color: #1f71ff;"></i></button>
-                </div>
-            </div>
+            <button type="button" class="btn btn-success border-2 btn-outline-light rounded-5 btn-options" data-bs-toggle="modal" data-bs-target="#mainModal" data-bs-whatever="@registrarEmpleado">
+                <i class="fa-solid fa-address-card" style="color: #ffffff;"></i>
+                Registrar
+            </button>
             <br>
             <br>
             <!--Opciones de Vistas-->
             <div class="view-options">
                 <div>
-                    <button id="verGraficos" data-url="" type="button" class="btn-options ver-empleados btn btn-primary border-2 btn-outline-light rounded-5" data-bs-target="#mainModal">
-                        <i class="fa-solid fa-chart-pie" style="color: #ffffff;"></i>
-                        Ver Graficos
-                    </button>
                     <button id="verCocineros" data-url="verCocineros.php" type="button" class="btn-options ver-empleados btn btn-primary border-2 btn-outline-light rounded-5" data-bs-target="#mainModal">
                         <i class="fa-solid fa-utensils" style="color: #ffffff;"></i>
                         Ver Cocineros
@@ -232,44 +234,31 @@
                         <i class="fa-solid fa-bell-concierge" style="color: #ffffff;"></i>
                         Ver Meseros
                     </button>
-                    <button id="verSolicitudes" data-url="verSolicitudes.php" type="button" class="btn-options ver-empleados btn btn-primary border-2 btn-outline-light rounded-5" data-bs-target="#mainModal">
-                        <i class="fa-solid fa-business-time" style="color: #ffffff;"></i>
-                        Ver Solicitudes
-                    </button>
                 </div>
-                
+                <!--Barra de Busqueda-->
+                <div class="input-group mb-3 search-bar">
+                    <input type="text" id="busqueda" class="form-control" placeholder="Buscar a un empleado" aria-label="" aria-describedby="button-addon2">
+                    <button id="buscarEmpleado" data-url="buscarEmpleado.php" class="ver-empleados btn btn-outline-primary" type="button" id="button-addon2">
+                        <i class="fa-solid fa-magnifying-glass" style="color: #1f71ff;"></i></button>
+                </div>
             </div>
             <!--Informacion de la tabla-->
             <h3 id="table-info"></h3>
             <!--Container para tablas-->
             <div class="cont-table">
                 <!--Contenido Default-->
-                <div class="container-fluid">
-                    <div class="row">
-                        <!-- Contenido de la izquierda -->
-                        <div class="col-md-5">
-                            <div class="info-card mb-2" style="height: 25px;">Solicitudes pendientes:</div>
-                            <div class="col-md-12">
-                                <canvas id="proporcionEmpleados2" style="height: 40px"></canvas>
-                            </div>
-                        </div>
-                        <!-- Canvas a la derecha -->
-                        <div class="info-card col-md-7">
-                        
-                        </div>
-                    </div>
-                </div>
             </div>
         </div>
         <div id="perfil" class="tab-content">
-                <h3 class="test" style="text-align:center";>
-                    Perfil
-                    <i class="fa-solid fa-user" style="color: #ffffff;"></i>
-                </h3>
-                <br>
-                <?php include "../viewsPerfil/datosAdmin.php"?>
+            <h3 class="test" style="text-align:center";>
+                PERFIL
+                <i class="fa-solid fa-briefcase" style="color: #ffffff;"></i>
+            </h3>
+            <?php include "../viewsPerfil/verPerfil.php"?>
         </div>
-
+        <div id="configuracion" class="tab-content">
+            <p class="test">Yo soy, configuracion.</p>
+        </div>
         <!--Modal-->
         <div class="modal fade" id="mainModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div class="modal-dialog">
@@ -287,13 +276,11 @@
         </div>
     </div>
     <!--Scripts que necesitan ejecutarse hasta el final-->
-    <script src="/js/panelAdmin.js" async defer></script>
     <script src="/js/charts.js"></script>
     <script src="/js/dinamicTable.js"></script>
     <script src="/bootstrap/js/bootstrap.min.js"></script>
     <script src="/bootstrap/js/bootstrap.bundle.min.js"></script>
     <script src="/js/filtroEventos.js"></script>
-    <script src="/js/datosAdmin.js"></script>
 </body>
 
 </html>

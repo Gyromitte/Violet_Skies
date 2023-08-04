@@ -1,12 +1,11 @@
 form {
     display: flex;
     flex-direction: column;
-    max-width: 500px;
-    margin: 0 auto;
 }
 
 label, input {
     margin-bottom: 10px;
+    width: 600px;
 }
 
 button {
@@ -24,4 +23,8 @@ button:hover {
 #eventos-list {
     max-width: 300px;
     margin: 20px auto;
+}
+.ui-datepicker {
+    position: absolute;
+    z-index: 9999;
 }

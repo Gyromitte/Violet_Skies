@@ -47,15 +47,16 @@
                     <option value=15>Celebración 4</option>
                     <option value=16>Celebración 5</option>
                     <option value=17>Esencial</option>
-                    <option value=18>Dulce mañana</option>
-                    <option value=19>Mexicano</option>
-                    <option value=20>Natural</option>
-                    <option value=21>Energético</option>
-                    <option value=22>Barra</option>
-                    <option value=23>Nacional</option>
-                    <option value=24>Premium</option>
-                    <option value=25>Celebración</option>
-                    <option value=26>Hamburguesas</option>
+                    <option value=18>Saludable</option>
+                    <option value=19>Dulce mañana</option>
+                    <option value=20>Mexicano</option>
+                    <option value=21>Natural</option>
+                    <option value=22>Energético</option>
+                    <option value=23>Barra</option>
+                    <option value=24>Nacional</option>
+                    <option value=25>Premium</option>
+                    <option value=26>Celebración</option>
+                    <option value=27>Hamburguesas</option>
                 </select>
             </div>
             <div class="form-group">
