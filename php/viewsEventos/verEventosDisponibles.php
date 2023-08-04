@@ -66,13 +66,13 @@
                     echo"<h1> No hay eventos pendientes al momento</h1>";
                     exit;
                 }
-                if($emp=="MESERO"){
+                if($_SESSION["tipo"]=="MESERO"){
                     if($cantm == $registro['MESEROS']){
                         echo"<h1> No hay eventos pendientes al momento</h1>";
                         exit;
                     }
                 }
-                else if($emp=="COCINA"){
+                else if($_SESSION["tipo"]=="COCINERO"){
                     if($cantc == $registro['COCINEROS']){
                         echo"<h1> No hay eventos pendientes al momento</h1>";
                         exit;
