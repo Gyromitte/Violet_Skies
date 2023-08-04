@@ -21,6 +21,13 @@ searchInput.addEventListener('input', function() {
     typingTimer = setTimeout(filtrarEventos, doneTypingInterval);
 });
 
+searchInput.addEventListener('keydown', function(event) {
+    if (event.keyCode === 13) {
+        event.preventDefault();
+        filtrarEventos();
+    }
+});
+
 // Escuchar el evento click del botón de búsqueda
 searchButton.addEventListener('click', function() {
     filtrarEventos();

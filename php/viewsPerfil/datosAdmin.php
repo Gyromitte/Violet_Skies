@@ -46,7 +46,7 @@ if (isset($_SESSION["ID"])) {
                     <div class="mb-3 row">
                       <label class="col-sm-2 col-form-label">Teléfono:</label>
                       <div class="col-sm-10">
-                        <input class="form-control" type="text" value="<?php echo $result[0]->TELEFONO; ?>" name="telefono" disabled>
+                        <input class="form-control" type="tel" pattern="^[0-9]{10}$" value="<?php echo $result[0]->TELEFONO; ?>" name="telefono" disabled>
                       </div>
                     </div>
                     <div class="mb-3 row">
@@ -85,7 +85,7 @@ if (isset($_SESSION["ID"])) {
               </h2>
               <div id="collapseTwo" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
                 <div class="accordion-body">
-                <strong>Considera que el registrar un nuevo administrador estás otorgando permisos para manejar los eventos futuros</strong>
+                <strong>Considera que el registrar un nuevo administrador estás otorgando permisos para manejar información sensible</strong>
                 <div><br></div>
                 <div class="mb-3 row">
                   <label class="col-sm-2 col-form-label">Nombre:</label>
@@ -108,19 +108,13 @@ if (isset($_SESSION["ID"])) {
                 <div class="mb-3 row">
                   <label class="col-sm-2 col-form-label">Teléfono:</label>
                   <div class="col-sm-10">
-                    <input class="form-control" type="text" name="telefonoNEW">
+                    <input class="form-control" type="tel" pattern="^[0-9]{10}$" name="telefonoNEW">
                   </div>
                 </div>
                 <div class="mb-3 row">
                   <label class="col-sm-2 col-form-label">Correo:</label>
                   <div class="col-sm-10">
                     <input class="form-control" type="email" name="correoNEW">
-                  </div>
-                </div>
-                <div class="mb-3 row">
-                  <label class="col-sm-2 col-form-label">RFC:</label>
-                  <div class="col-sm-10">
-                    <input class="form-control" type="text" name="rfcNEW">
                   </div>
                 </div>
                 <div class="d-flex justify-content-end">

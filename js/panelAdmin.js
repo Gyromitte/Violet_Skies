@@ -587,7 +587,7 @@ function updateModalContent(formType, idEmpleado, idEvento) {
                 </tr>
                 <tr>
                   <td><h6>Invitados</h6></td>
-                  <td><input class="form-control" type="text" placeholder="Invitados" id="invitados" value="${detallesEvento.INVITADOS}" disabled></td>
+                  <td><input class="form-control" type="number" placeholder="Invitados" id="invitados" value="${detallesEvento.INVITADOS}" disabled></td>
                 </tr>
                 <tr>
                   <td><h6>Menú</h6></td>
@@ -608,12 +608,12 @@ function updateModalContent(formType, idEmpleado, idEvento) {
               </table>
               <br>
               <div align="center">
+              <button type="button" class="btn btn-primary" id="btnModify"
+                  ${detallesEvento.ESTADO === 'CANCELADO' || detallesEvento.ESTADO === 'FINALIZADO' ? 'style="display: none;"' : ''}>
+                  <i class="fa-solid fa-pencil me-2" style="color: #ffffff;"></i>Modificar Detalles</button>
                 <button type="button" class="btn btn-success" id="btnAceptarEvento" 
                   ${detallesEvento.ESTADO === 'PENDIENTE' ? '' : 'style="display: none;"'}>
                   <i class="fa-solid fa-check me-2" style="color: #ffffff;"></i>Aceptar Evento</button>
-                <button type="button" class="btn btn-primary" id="btnModify"
-                  ${detallesEvento.ESTADO === 'CANCELADO' || detallesEvento.ESTADO === 'FINALIZADO' ? 'style="display: none;"' : ''}>
-                  <i class="fa-solid fa-pencil me-2" style="color: #ffffff;"></i>Modificar Detalles</button>
                 <button type="button" class="btn btn-primary" id="btnSaveChanges" style="display: none;">
                 <i class="fa-solid fa-floppy-disk me-2" style="color: #ffffff;"></i>Guardar</button>            
                 <button type="button" class="btn btn-danger" id="btnCancelarEvento" 
@@ -628,11 +628,20 @@ function updateModalContent(formType, idEmpleado, idEvento) {
             
             modalForm.innerHTML = formContent;
             $(document).ready(function() {
+              // Obtenemos la fecha actual
+              var currentDate = new Date();
+            
+              // Calculamos la fecha 1 semana después de la actual
+              var oneWeekLater = new Date();
+              oneWeekLater.setDate(currentDate.getDate() + 6);
+            
               $('#fechaEvento').datetimepicker({
                 format: 'Y-m-d H:i:s', // Formato deseado para la fecha y hora
                 step: 15, // Intervalo de minutos para seleccionar la hora
-                disabledTimeIntervals: [
-                   [21, 6], // deshabilita desde la medianoche hasta las 8:00 am
+                minDate: oneWeekLater.toISOString().slice(0, 19).replace('T', ' '), // Fecha mínima: una semana después de la actual
+                allowTimes: [
+                  '05:00','06:00','07:00','08:00', '09:00', '10:00', '11:00', '12:00', '13:00', // Ejemplo de horas permitidas
+                  '14:00', '15:00', '16:00', '17:00', '18:00', '19:00', '20:00', '21:00','22:00' // Puedes agregar más horas aquí
                 ]
               });
             });
@@ -667,6 +676,7 @@ function updateModalContent(formType, idEmpleado, idEvento) {
                 inputs[i].removeAttribute('disabled');
               }
               btnModificar.style.display = "none";
+              btnAceptarEvento.style.display = "none";
               btnModificarGuardar.style.display = "";
             });
 
@@ -681,11 +691,15 @@ function updateModalContent(formType, idEmpleado, idEvento) {
               var cocinerosRequeridos = document.getElementById('cocinerosRequeridos').value;
   
               if (!fecha || !salon || !comida) {
-                alert('Por favor, llene todos los campos correctamente');
+                alert('Por favor, llene los campos correctamente');
                 return;
               }
-              if (!invitados || isNaN(invitados) || parseInt(invitados) <= 0) {
-                alert('Por favor, llene los campos correctamente\nInvitados debe ser un número válido');
+              if (!invitados || isNaN(invitados) || parseInt(invitados) < 10) {
+                alert('Por favor, llene los campos correctamente\nEl mínimo para invitados son 10');
+                return;
+              }
+              if (parseInt(cocinerosRequeridos) < 0 || parseInt(meserosRequeridos) < 0) {
+                alert('Por favor, llene los campos correctamente\nInserte valores válidos');
                 return;
               }
 
@@ -702,9 +716,11 @@ function updateModalContent(formType, idEmpleado, idEvento) {
                       filtrarEventos();
                       modalForm.innerHTML = formContent;
                     } else {
+                      alert('ERRRORRRRRESSSSSS');
                       console.error("Error en el servidor:", response.message);
                     }
                   } else {
+                    alert('No existen suficientes empleados registrados y/o disponibles para cubrir la solicitud en esa fecha');
                     console.error("Error AJAX al guardar cambios en el evento. Código de estado:", xhrGuardarCambios.status);
                   }
                 }
