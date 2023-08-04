@@ -29,4 +29,7 @@ body{
     .left-one{
         padding-top: 50px;
     }
+    .clientsImages{
+        height: 100px;
+    }
 }
