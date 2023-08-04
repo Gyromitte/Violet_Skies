@@ -8,10 +8,10 @@
     $eventoId = $_GET['id'];
     echo"hello";
 
-    if($emp=="MESERO"){
+    if($_SESSION["tipo"]=="MESERO"){
         $cant="SELECT DE.MESEROS FROM DETALLE_EVENTO DE WHERE ID='$eventoId'";
     }
-    else if($emp=="COCINERO"){
+    else if($_SESSION["tipo"]=="COCINERO"){
         $cant="SELECT DE.COCINEROS FROM DETALLE_EVENTO DE WHERE ID='$eventoId'";
     }
     $num= "SELECT COUNT(EE.ID) FROM EVENTO_EMPLEADOS EE JOIN EMPLEADOS EMP ON EE.EMPLEADOS=EMP.ID

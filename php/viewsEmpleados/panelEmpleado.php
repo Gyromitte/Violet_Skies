@@ -51,6 +51,15 @@
             .tooltip.active {
                 display: block;
             }
+            .cutebox{
+                background-color: #5603ad;
+                border-radius: 5em;
+                padding: 10px;
+                width: 100%;
+                height: 100%;
+                align-items: center;
+                justify-content: center;
+            }
 
 		</style>
     <!--Scripts que necesitan ejecutarse primero-->
@@ -114,7 +123,30 @@
     <!--Main Content-->
     <div id="main">
         <div id="home" class="tab-content active">
-            <p class="test">Yo soy, home</p>
+            <?php
+            if($_SESSION["access"]==1.5){
+                echo"<div class='container'>";
+                echo"<div class='cutebox'>";
+                echo"<h1>Gracias por buscar trabajo con nosotros!</h1>";
+                echo"</div>";
+                echo"</div>";
+                echo"<br>";
+                echo"<div class='container'>";
+                echo"<div class='test'>";
+                echo"<h4>Su solicitud ha sido enviado.</h4>";
+                echo"</div>";
+                echo"</div>";
+                echo"<br>";
+                echo"<div class='container'>";
+                echo"<div class='test'>";
+                echo"<div>Un administrador se pondra en contact con usted proximamente.</div>";
+                echo"</div>";
+                echo"</div>";
+            }
+            else{
+
+            }
+            ?>
         </div>
         <div id="eventos" class="tab-content">
             <h3 class="test" style="text-align:center; ">
