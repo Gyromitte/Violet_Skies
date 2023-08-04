@@ -19,7 +19,7 @@ fetch('/php/viewsCharts/eventosMeses.php') // Ruta de la consulta PHP
   .then(response => response.json())
   .then(data => {
     // data contiene los conteos de eventos finalizados por mes
-    console.log(data); // Agregar esta línea para verificar la respuesta
+    //console.log(data); // Agregar esta línea para verificar la respuesta
 
     // Llamar a la función para actualizar el gráfico de puntos
     actualizarGraficoPuntos(data);
