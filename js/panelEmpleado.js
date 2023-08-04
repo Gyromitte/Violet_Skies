@@ -120,21 +120,16 @@ modal.addEventListener("show.bs.modal", function (event) {
               var asistir = document.getElementById("asist");
 
               asistir.addEventListener("click", function (event) {
-                event.preventDefault(); 
-
-                var evento = evento.NOMBRE; 
+                event.preventDefault();  
       
                 var xhrAceptar = new XMLHttpRequest();
                 xhrAceptar.onreadystatechange = function () {
-                  if (xhrAceptar.readyState === XMLHttpRequest.DONE) {
+                  if (xhrAceptar.readyState === 4) {
                     if (xhrAceptar.status === 200) {
-                      // Mostrar la respuesta del servidor en el modal
+                      
                       document.getElementById("mensajeDiv").innerHTML = xhrAceptar.responseText;
-                      //Ver cual es la tabla activa para refrescar cualquier cambio
-                      checkCurrentTable(currentTable);
-                    } else {
-                      //Ver cual es la tabla activa para refrescar cualquier cambio
-                      checkCurrentTable(currentTable);
+                    } 
+                    else {
                       console.error("Error en la solicitud AJAX de Aceptar");
                     }
                   }
@@ -142,7 +137,6 @@ modal.addEventListener("show.bs.modal", function (event) {
       
                 xhrAceptar.open("POST", "asistirEvento.php", true);
                 xhrAceptar.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
-                xhrAceptar.send(formData);
                 checkCurrentTable(currentTable);
               });
             }

@@ -35,6 +35,9 @@
             (SELECT 1 FROM EVENTO_EMPLEADOS EE
             WHERE EE.EVENTO = E.ID AND EE.EMPLEADOS = '$emp') ORDER BY E.F_EVENTO ASC";
         }
+        else{
+            exit;
+        }
         
         $tabla = $conexion->seleccionar($consulta);
         $num=count($tabla);

@@ -50,7 +50,7 @@
     border-radius: 6px;
     padding: 5px;
     position: absolute;
-    z-index: 1;
+    z-index: 999;
     bottom: 125%;
     left: 50%;
     transform: translateX(-50%);
@@ -144,7 +144,8 @@
                 <div class='btn-group'>
                     <label class='control-label'>Orden: </label>
                     <select id='tipoorden' name='orden' class='form-select'>;
-                        <option value='porcreacion' selected>Recientemente Creadas</option>;
+                        <option value='' selected>-Seleccionar un Orden-</option>
+                        <option value='porcreacion'>Recientemente Creadas</option>;
                         <option value='lejanoevento'>Eventos Lejanos</option>;
                         <option value='cercasevento'>Eventos Cercanos</option>;
                     </select>
@@ -195,7 +196,7 @@
         <div id="perfil" class="tab-content">
             <p class="test">Tu Perfil</p>
             <div class="container">
-                
+                <?php include "../viewsPerfil/datosEmp.php" ?>
             </div>
         </div>
 

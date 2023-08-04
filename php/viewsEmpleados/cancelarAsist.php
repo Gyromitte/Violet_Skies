@@ -6,7 +6,26 @@
     $emp=$_SESSION["trabajo"];
     $tipo=$_SESSION["tipo"];
     $eventoId = $_GET['id'];
-    echo"hello";
+
+    $currentDate = date('Y-m-d');
+
+
+    $currentDateTime = new DateTime($currentDate);
+
+
+    $threeMonthsAgo = $currentDateTime->modify('-3 months');
+
+    $currentDateStr = $currentDateTime->format('Y-m-d');
+    $threeMonthsAgoStr = $threeMonthsAgo->format('Y-m-d');
+
+    $consulta="SELECT E.F_EVENTO FROM EVENTO E WHERE E.ID= '$eventoID'";
+    
+if ($currentDate > $threeMonthsAgoStr) {
+    echo "The current date is after 3 months ago.";
+} else {
+    echo "The current date is on or before 3 months ago.";
+}
+
 
     if($emp=="MESERO"){
         $cant="SELECT DE.MESEROS FROM DETALLE_EVENTO DE WHERE ID='$eventoId'";
@@ -26,4 +45,5 @@
         echo"<div class='alert alert-success'>Asistiendo!</div>";
     }
 ?>
-    
+   
+
