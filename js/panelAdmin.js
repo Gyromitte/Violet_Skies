@@ -719,7 +719,7 @@ function updateModalContent(formType, idEmpleado, idEvento) {
                       console.error("Error en el servidor:", response.message);
                     }
                   } else {
-                    alert('No existen suficientes empleados para cubrir la solicitud');
+                    alert('No existen suficientes empleados registrados y/o disponibles para cubrir la solicitud en esa fecha');
                     console.error("Error AJAX al guardar cambios en el evento. Código de estado:", xhrGuardarCambios.status);
                   }
                 }
