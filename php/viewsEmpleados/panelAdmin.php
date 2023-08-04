@@ -224,7 +224,7 @@
             </div>
             <br>
             <!--Opciones de Vistas-->
-            <div class="view-options">
+            <div class="view-options mb-2">
                 <div>
                     <button id="verGraficos" data-url="" type="button" class="btn-options ver-empleados btn btn-primary border-2 btn-outline-light rounded-5" data-bs-target="#mainModal">
                         <i class="fa-solid fa-chart-pie" style="color: #ffffff;"></i>
@@ -254,14 +254,20 @@
                     <div class="row">
                         <!-- Contenido de la izquierda -->
                         <div class="col-md-5">
-                            <div class="info-card mb-2" style="height: 25px;">Solicitudes pendientes:</div>
+                        <div class="info-card mb-2" style="height: 25px; display: flex; align-items: center;">
+                            <h3 class="me-2">
+                            <i class="fa-solid fa-business-time" style="color: #ffffff;"></i>
+                                Solicitudes Pendientes: 
+                            </h3>
+                            <h2 id="solicitudesCard"></h2>
+                        </div>
                             <div class="col-md-12">
                                 <canvas id="proporcionEmpleados2" style="height: 40px"></canvas>
                             </div>
                         </div>
                         <!-- Canvas a la derecha -->
                         <div class="info-card col-md-7">
-                        
+                            <canvas id="participacionEmpleados"></canvas>
                         </div>
                     </div>
                 </div>
