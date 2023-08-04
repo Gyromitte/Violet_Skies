@@ -587,7 +587,7 @@ function updateModalContent(formType, idEmpleado, idEvento) {
                 </tr>
                 <tr>
                   <td><h6>Invitados</h6></td>
-                  <td><input class="form-control" type="text" placeholder="Invitados" id="invitados" value="${detallesEvento.INVITADOS}" disabled></td>
+                  <td><input class="form-control" type="number" placeholder="Invitados" id="invitados" value="${detallesEvento.INVITADOS}" disabled></td>
                 </tr>
                 <tr>
                   <td><h6>Menú</h6></td>
@@ -690,7 +690,7 @@ function updateModalContent(formType, idEmpleado, idEvento) {
               var cocinerosRequeridos = document.getElementById('cocinerosRequeridos').value;
   
               if (!fecha || !salon || !comida) {
-                alert('Por favor, llene todos los campos correctamente');
+                alert('Por favor, llene los campos correctamente');
                 return;
               }
               if (!invitados || isNaN(invitados) || parseInt(invitados) <= 0) {
@@ -715,9 +715,11 @@ function updateModalContent(formType, idEmpleado, idEvento) {
                       filtrarEventos();
                       modalForm.innerHTML = formContent;
                     } else {
+                      alert('ERRRORRRRRESSSSSS');
                       console.error("Error en el servidor:", response.message);
                     }
                   } else {
+                    alert('No existen suficientes empleados para cubrir la solicitud');
                     console.error("Error AJAX al guardar cambios en el evento. Código de estado:", xhrGuardarCambios.status);
                   }
                 }
