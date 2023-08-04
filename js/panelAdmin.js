@@ -693,8 +693,8 @@ function updateModalContent(formType, idEmpleado, idEvento) {
                 alert('Por favor, llene los campos correctamente');
                 return;
               }
-              if (!invitados || isNaN(invitados) || parseInt(invitados) <= 0) {
-                alert('Por favor, llene los campos correctamente\nInvitados debe ser un número válido');
+              if (!invitados || isNaN(invitados) || parseInt(invitados) < 10) {
+                alert('Por favor, llene los campos correctamente\nEl mínimo para invitados son 10');
                 return;
               }
               if (parseInt(cocinerosRequeridos) < 0 || parseInt(meserosRequeridos) < 0) {
