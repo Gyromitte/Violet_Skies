@@ -716,7 +716,6 @@ function updateModalContent(formType, idEmpleado, idEvento) {
                       filtrarEventos();
                       modalForm.innerHTML = formContent;
                     } else {
-                      alert('ERRRORRRRRESSSSSS');
                       console.error("Error en el servidor:", response.message);
                     }
                   } else {
