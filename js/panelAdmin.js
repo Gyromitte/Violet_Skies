@@ -676,6 +676,7 @@ function updateModalContent(formType, idEmpleado, idEvento) {
                 inputs[i].removeAttribute('disabled');
               }
               btnModificar.style.display = "none";
+              btnAceptarEvento.style.display = "none";
               btnModificarGuardar.style.display = "";
             });
 
