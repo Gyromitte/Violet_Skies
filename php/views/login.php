@@ -30,7 +30,7 @@
     <?php
          session_start();
          if(isset($_SESSION["logged_in"])){
-             header("../scripts/access.php");
+             header("Location:../scripts/logintrue.php");
          }
     ?>
 <!-- Navbar -->

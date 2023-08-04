@@ -156,7 +156,7 @@
                                     echo"<div class=' container'>";
                                     echo"<h1 align='center'>Bienvenido ".$_SESSION["name"]."</h1>";
                                     echo "</div>";
-                                    header("refresh:10;../viewsEmpleados/panelEmpleado.php");
+                                    header("refresh:4;../viewsEmpleados/panelEmpleado.php");
                                 }
                                 else{
                                     $_SESSION["tipo"]="COCINERO";
