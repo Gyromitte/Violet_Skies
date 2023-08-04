@@ -103,8 +103,8 @@ modal.addEventListener("show.bs.modal", function (event) {
                       <h6>
                       Fecha de evento: ${evento.F_EVENTO}
                       </h6>
-                      </div>
-                      <br>
+                    </div>
+                    <br>
                     <div class="d-flex justify-content-center">
                       <button type="submit" id="asist" class="btn btn-primary btn-modal-warning me-2">
                         <i class="fa-solid fa-user me-2" style="color: #ffffff;">
@@ -126,17 +126,18 @@ modal.addEventListener("show.bs.modal", function (event) {
                 xhrAceptar.onreadystatechange = function () {
                   if (xhrAceptar.readyState === XMLHttpRequest.DONE) {
                     if (xhrAceptar.status === 200) {
-                      formContent += `<br><div class="alert alert-success" role="alert" align='center'>Evento aceptado</div>`;
-
+                      document.getElementById("mensajeDiv").innerHTML = xhrAceptar.responseText;
                     } 
                     else {
                       console.error("Error en la solicitud AJAX de Aceptar");
                     }
                   }
                 };
+                var data = "eventoId=" + encodeURIComponent(idEvento);
       
                 xhrAceptar.open("POST", "../viewsEmpleados/asistirEvento.php", true);
                 xhrAceptar.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+                xhrAceptar.send(data);
               });
             }
             else {
