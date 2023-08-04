@@ -45,7 +45,7 @@
         <?php
             session_start();
             echo"<div class='container'>";
-            echo"<h1 align='center'>No tienes acceso a esta pagina</h1><br>";
+            echo"<h1 align='center'>Ya estas dentro de tu cuenta</h1><br>";
             echo"<h3 align='center'>Redirigiendo...</h3>";
             echo "</div>";
 
