@@ -87,8 +87,8 @@
             echo "<p><b>Cliente: </b> $registro->CLIENTE</p>";
             echo "<p><b>Cantidad de invitados: </b> $registro->INVITADOS</p>";
             echo "<p><b>Salon: </b> $registro->SALON</p>";
-            echo "<p class='tooltip-paragraph' onclick='toggleTooltip($registro->ID)'><b>Comida: </b> $registro->COMIDA</p>";
-            echo "<div class='tooltip' id='tooltipDiv$registro->ID'>$registro->DESCRIPCION</div>";
+            echo "<p data-bs-toggle='tooltip' data-bs-title='$registro->DESCRIPCION'>
+            <b>Comida: </b> $registro->COMIDA</p>";
             echo "<p><b>Meseros Necesarios: </b>$cantm / $registro->MESEROS</p>";
             echo "<p><b>Cocineros Necesarios: </b>$cantc / $registro->COCINEROS</p>";
                 echo "<div class='text-center'>";
