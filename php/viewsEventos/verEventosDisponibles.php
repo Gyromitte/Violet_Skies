@@ -10,7 +10,8 @@
         if($orden=="porcreacion"){
             $consulta = "SELECT E.ID,E.NOMBRE, E.F_CREACION, E.F_EVENTO, 
             CONCAT(CU.NOMBRE, ' ', CU.AP_PATERNO, ' ', CU.AP_MATERNO) AS CLIENTE,
-            DE.INVITADOS, S.NOMBRE AS SALON,COM.NOMBRE AS COMIDA,COM.DESCRIPCION, DE.MESEROS, DE.COCINEROS
+            DE.INVITADOS, S.NOMBRE AS SALON,COM.NOMBRE AS COMIDA,COM.DESCRIPCION, DE.MESEROS,
+            DE.COCINEROS, DE.ESTADO
             FROM EVENTO E JOIN CUENTAS CU ON E.CLIENTE=CU.ID JOIN DETALLE_EVENTO DE ON
             DE.ID=E.ID JOIN SALONES S ON S.ID=DE.SALON JOIN COMIDAS COM ON COM.ID=DE.COMIDA
             WHERE E.ESTADO='EN PROCESO' AND NOT EXISTS 
@@ -19,7 +20,8 @@
         }
         else if($orden=="lejanoevento"){
             $consulta = "SELECT E.ID,E.NOMBRE, E.F_CREACION, E.F_EVENTO, CONCAT(CU.NOMBRE, ' ', CU.AP_PATERNO, ' ', CU.AP_MATERNO) AS CLIENTE,
-            DE.INVITADOS, S.NOMBRE AS SALON,COM.NOMBRE AS COMIDA, DE.MESEROS, DE.COCINEROS
+            DE.INVITADOS, S.NOMBRE AS SALON,COM.NOMBRE AS COMIDA,COM.DESCRIPCION,
+             DE.MESEROS, DE.COCINEROS, DE.ESTADO
             FROM EVENTO E JOIN CUENTAS CU ON E.CLIENTE=CU.ID JOIN DETALLE_EVENTO DE ON
             DE.ID=E.ID JOIN SALONES S ON S.ID=DE.SALON  JOIN COMIDAS COM ON COM.ID=DE.COMIDA
              WHERE E.ESTADO='EN PROCESO' AND NOT EXISTS
@@ -28,7 +30,8 @@
         }
         else if($orden=="cercasevento"){
             $consulta = "SELECT E.ID,E.NOMBRE, E.F_CREACION, E.F_EVENTO, CONCAT(CU.NOMBRE, ' ', CU.AP_PATERNO, ' ', CU.AP_MATERNO) AS CLIENTE,
-            DE.INVITADOS, S.NOMBRE AS SALON,COM.NOMBRE AS COMIDA, DE.MESEROS, DE.COCINEROS
+            DE.INVITADOS, S.NOMBRE AS SALON,COM.NOMBRE AS COMIDA,COM.DESCRIPCION,
+             DE.MESEROS, DE.COCINEROS, DE.ESTADO
             FROM EVENTO E JOIN CUENTAS CU ON E.CLIENTE=CU.ID JOIN DETALLE_EVENTO DE ON
             DE.ID=E.ID JOIN SALONES S ON S.ID=DE.SALON  JOIN COMIDAS COM ON COM.ID=DE.COMIDA
               WHERE E.ESTADO='EN PROCESO' AND NOT EXISTS
@@ -55,10 +58,27 @@
 
                 $cocineros="SELECT COUNT(EE.EMPLEADOS) FROM EVENTO_EMPLEADOS EE JOIN EVENTO E 
                 ON E.ID=EE.EVENTO JOIN EMPLEADOS EMP ON EMP.ID=EE.EMPLEADOS WHERE
-                E.ID='$evento' AND EMP.TIPO='COCINERO'";
+                E.ID='$evento' AND EMP.TIPO='COCINA'";
                 $verc=$conexion->seleccionar($cocineros);
                 $cantc=count($verc);
-            
+
+                if($registro->ESTADO=="LLENO"){
+                    echo"<h1> No hay eventos pendientes al momento</h1>";
+                    exit;
+                }
+                if($emp=="MESERO"){
+                    if($cantm == $registro['MESEROS']){
+                        echo"<h1> No hay eventos pendientes al momento</h1>";
+                        exit;
+                    }
+                }
+                else if($emp=="COCINA"){
+                    if($cantc == $registro['COCINEROS']){
+                        echo"<h1> No hay eventos pendientes al momento</h1>";
+                        exit;
+                    }
+                }
+            else{
             echo"<div class='container-fluid'";
             echo"<div class=' card-group col-lg-5 col-mb-5 col-sm-12  d-flex '>";
             echo "<div class='card' id='cuadroEvento'>";
@@ -68,8 +88,8 @@
             echo "<p><b>Cliente: </b> $registro->CLIENTE</p>";
             echo "<p><b>Cantidad de invitados: </b> $registro->INVITADOS</p>";
             echo "<p><b>Salon: </b> $registro->SALON</p>";
-            echo "<p class='tooltip'onclick='toggleTooltip()><b>Comida: </b> $registro->COMIDA</p>";
-            echo" <p class='tooltiptext'>$registro->DESCRIPCION</p>";
+            echo "<p class='tooltip-paragraph' onclick='toggleTooltip($registro->ID)'><b>Comida: </b> $registro->COMIDA</p>";
+            echo "<div class='tooltip' id='tooltipDiv$registro->ID'>$registro->DESCRIPCION</div>";
             echo "<p><b>Meseros Necesarios: </b>$cantm / $registro->MESEROS</p>";
             echo "<p><b>Cocineros Necesarios: </b>$cantc / $registro->COCINEROS</p>";
                 echo "<div class='text-center'>";
@@ -91,6 +111,7 @@
                 echo"</div>";
             echo "</div>";
             echo"</div>";
+            }
             }
         
          $conexion->desconectarBD();

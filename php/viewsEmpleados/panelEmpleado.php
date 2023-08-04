@@ -34,34 +34,24 @@
 				margin: 5px;
 				float: left;
 			}
-            #cuadroEvent:hover{
-                background-color: rgb(140, 39, 140);
+            .tooltip-paragraph {
+                cursor: pointer;
             }
+
             .tooltip {
-    position: relative;
-    display: inline-block;
-    cursor: pointer;
-}
+                display: none;
+                position: absolute;
+                background-color: #f9f9f9;
+                border: 1px solid #ccc;
+                border-radius: 4px;
+                padding: 10px;
+                z-index: 9999999999;
+            }
 
-.tooltip .tooltiptext {
-    visibility: hidden;
-    width: 120px;
-    text-align: center;
-    border-radius: 6px;
-    padding: 5px;
-    position: absolute;
-    z-index: 999;
-    bottom: 125%;
-    left: 50%;
-    transform: translateX(-50%);
-    opacity: 0;
-    transition: opacity 0.3s;
-}
+            .tooltip.active {
+                display: block;
+            }
 
-.tooltip:hover .tooltiptext {
-    visibility: visible;
-    opacity: 1;
-}
 		</style>
     <!--Scripts que necesitan ejecutarse primero-->
 </head>
@@ -131,7 +121,6 @@
                 Eventos Disponibles
                 <i class="fa-solid fa-briefcase" style="color: #ffffff;"></i>
             </h3>
-            <button type="button" class="btn btn-primary" data-bs-toggle="modal"  data-bs-target="#empModal" data-bs-whatever="@fat">Open modal for @fat</button>
             <?php
             if($_SESSION["access"]==1.5){
                 echo"<h1>El Administrador aun no confirma tu cuenta</h1></div>";

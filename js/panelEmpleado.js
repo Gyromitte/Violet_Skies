@@ -203,11 +203,10 @@ modal.addEventListener("show.bs.modal", function (event) {
     modalForm.innerHTML = formContent;
   }
 
-  function toggleTooltip() {
-    var tooltip = document.querySelector(".tooltiptext");
-    tooltip.style.display = tooltip.style.display === "block" ? "none" : "block";
+  function toggleTooltip(eventId) {
+    var tooltip = document.getElementById('tooltipDiv' + eventId);
+    tooltip.classList.toggle('show');
   }
-
 
 // Add a click event listener to the paragraph
 

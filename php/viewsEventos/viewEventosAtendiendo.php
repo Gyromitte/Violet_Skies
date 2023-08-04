@@ -30,7 +30,7 @@
 
                 $cocineros="SELECT COUNT(EE.EMPLEADOS) FROM EVENTO_EMPLEADOS EE JOIN EVENTO E 
                 ON E.ID=EE.EVENTO JOIN EMPLEADOS EMP ON EMP.ID=EE.EMPLEADOS WHERE
-                E.ID='$evento' AND EMP.TIPO='COCINERO'";
+                E.ID='$evento' AND EMP.TIPO='COCINA'";
                 $verc=$conexion->seleccionar($cocineros);
                 $cantc=count($verc);
             
