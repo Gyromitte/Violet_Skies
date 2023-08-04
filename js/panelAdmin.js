@@ -137,7 +137,7 @@ function updateModalContent(formType, idEmpleado, idEvento) {
           </div>
           <div class="d-flex justify-content-center">
           <button type="submit" class="btn btn-primary btn-modal me-2"><i class="fa-solid fa-address-card me-2" style="color: #ffffff;"></i>Registrar</button>
-          <button type="button" class="btn btn-primary btn-modal" data-bs-dismiss="modal">Cancelar</button>
+          <button type="button" class="btn btn-primary btn-modal" data-bs-dismiss="modal">Cerrar</button>
           </div>
         </form>
       `;
@@ -310,7 +310,7 @@ function updateModalContent(formType, idEmpleado, idEvento) {
       //Ver cual es la tabla activa para refrescar cualquier cambio
       checkCurrentTable(currentTable);
       break;
-      case "@verSolicitud":
+    case "@verSolicitud":
         modalTitle.textContent = "Manejar solicitud";
         modalHeader.classList.remove('modal-header-warning');
         // Obtener los datos de la solicitud con una solicitud AJAX
@@ -791,6 +791,57 @@ function updateModalContent(formType, idEmpleado, idEvento) {
       xhrDetalles.open("GET", "../viewsEventos/verDetalles.php?id=" + idEvento, true);
       xhrDetalles.send();
       break;
+      case "@verHistorial":
+  modalTitle.textContent = "Historial de empleado";
+  // Obtener los datos del empleado con una solicitud AJAX
+  var xhr = new XMLHttpRequest();
+  xhr.onreadystatechange = function () {
+    if (xhr.readyState === XMLHttpRequest.DONE) {
+      if (xhr.status === 200) {
+        // Parsear la respuesta JSON del primer AJAX
+        var empleado = JSON.parse(xhr.responseText);
+        // Actualizar el contenido del formulario con los datos obtenidos
+        formContent = `
+          <form">
+            <div id="mensajeDiv" method="POST"></div>
+            <h5>Empleado:  </h5>
+            <h6 class="mb-3">${empleado.NOMBRE} ${empleado.AP_PATERNO} ${empleado.AP_MATERNO}</h6> 
+            <!-- Div para mostrar el historial de eventos -->
+            <div id="historialDiv"></div>
+            <div class="d-flex justify-content-center">
+              <button type="button" class="btn btn-primary btn-modal" data-bs-dismiss="modal">Cerrar</button>
+            </div>
+          </form>
+        `;
+        // Asignar el contenido al formulario del modal
+        modalForm.innerHTML = formContent;
+
+        // Realizar la segunda solicitud AJAX para obtener el historial de eventos del empleado
+        var xhrHistorial = new XMLHttpRequest();
+        xhrHistorial.onreadystatechange = function () {
+          if (xhrHistorial.readyState === XMLHttpRequest.DONE) {
+            if (xhrHistorial.status === 200) {
+              // No es necesario parsear la respuesta como JSON, ya que es HTML
+              // Mostrar la tabla con el historial en el div correspondiente
+              document.getElementById("historialDiv").innerHTML = xhrHistorial.responseText;
+            } else {
+              console.error("Error en la solicitud AJAX para obtener el historial");
+            }
+          }
+        };
+        // Hacer la segunda solicitud al script PHP para obtener el historial
+        xhrHistorial.open("GET", "verHistorial.php?id=" + idEmpleado, true);
+        xhrHistorial.send();
+      } else {
+        console.error("Error en la solicitud AJAX");
+      }
+    }
+  };
+  // Hacer la solicitud al script PHP y pasar el ID del empleado
+  xhr.open("GET", "obtenerEmpleado.php?id=" + idEmpleado, true);
+  xhr.send();
+  break;
+
     }
   }
   
