@@ -46,7 +46,7 @@ if (isset($_SESSION["ID"])) {
                     <div class="mb-3 row">
                       <label class="col-sm-2 col-form-label">Teléfono:</label>
                       <div class="col-sm-10">
-                        <input class="form-control" type="text" value="<?php echo $result[0]->TELEFONO; ?>" name="telefono" disabled>
+                        <input class="form-control" type="tel" pattern="^[0-9]{10}$" value="<?php echo $result[0]->TELEFONO; ?>" name="telefono" disabled>
                       </div>
                     </div>
                     <div class="mb-3 row">
@@ -108,7 +108,7 @@ if (isset($_SESSION["ID"])) {
                 <div class="mb-3 row">
                   <label class="col-sm-2 col-form-label">Teléfono:</label>
                   <div class="col-sm-10">
-                    <input class="form-control" type="text" name="telefonoNEW">
+                    <input class="form-control" type="tel" pattern="^[0-9]{10}$" name="telefonoNEW">
                   </div>
                 </div>
                 <div class="mb-3 row">
