@@ -11,12 +11,14 @@ include "../dataBase.php";
     $cuenta=$db->seleccionar($query);
     if ($cuenta) {
 ?>
+<div>
     <div class="container">
     <h2>Datos personales</h2>
     <br>
     </div>
+    <br>
     <div class="container">
-    <div class="mb-3 row">
+    <div class="mb-4 row">
         <label class="col-sm-2 col-form-label">Nombre:</label>
         <div class="col-sm-10">
             <input class="form-control" type="text" value="<?php echo $cuenta[0]->NOMBRE; ?>" name="nombre" disabled>
@@ -24,11 +26,13 @@ include "../dataBase.php";
     </div>
     </div>
     <br>
+    <div class="container">
     <div class="mb-3 row">
         <label class="col-sm-2 col-form-label">Apellido paterno:</label>
         <div class="col-sm-10">
             <input class="form-control" type="text" value="<?php echo $cuenta[0]->AP_PATERNO; ?>" name="ap_paterno" disabled>
         </div>
+    </div>
     </div>
     <br>
     <div class="mb-3 row">
@@ -65,6 +69,7 @@ include "../dataBase.php";
     </div>
     </div>
     <div id="mensajeModificar"></div>
+    </div>
 
     <div class="modal fade" id="modalCambiarContrasena" tabindex="-1" aria-labelledby="modalCambiarContrasenaLabel" aria-hidden="true">
         <div class="modal-dialog">

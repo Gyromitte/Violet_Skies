@@ -11,7 +11,7 @@
             $consulta = "SELECT E.ID,E.NOMBRE, E.F_CREACION, E.F_EVENTO, 
             CONCAT(CU.NOMBRE, ' ', CU.AP_PATERNO, ' ', CU.AP_MATERNO) AS CLIENTE,
             DE.INVITADOS, S.NOMBRE AS SALON,COM.NOMBRE AS COMIDA,COM.DESCRIPCION, DE.MESEROS,
-            DE.COCINEROS, DE.ESTADO
+            DE.COCINEROS, DE.ESTADO AS CANT
             FROM EVENTO E JOIN CUENTAS CU ON E.CLIENTE=CU.ID JOIN DETALLE_EVENTO DE ON
             DE.ID=E.ID JOIN SALONES S ON S.ID=DE.SALON JOIN COMIDAS COM ON COM.ID=DE.COMIDA
             WHERE E.ESTADO='EN PROCESO' AND NOT EXISTS 
@@ -21,7 +21,7 @@
         else if($orden=="lejanoevento"){
             $consulta = "SELECT E.ID,E.NOMBRE, E.F_CREACION, E.F_EVENTO, CONCAT(CU.NOMBRE, ' ', CU.AP_PATERNO, ' ', CU.AP_MATERNO) AS CLIENTE,
             DE.INVITADOS, S.NOMBRE AS SALON,COM.NOMBRE AS COMIDA,COM.DESCRIPCION,
-             DE.MESEROS, DE.COCINEROS, DE.ESTADO
+             DE.MESEROS, DE.COCINEROS, DE.ESTADO AS CANT
             FROM EVENTO E JOIN CUENTAS CU ON E.CLIENTE=CU.ID JOIN DETALLE_EVENTO DE ON
             DE.ID=E.ID JOIN SALONES S ON S.ID=DE.SALON  JOIN COMIDAS COM ON COM.ID=DE.COMIDA
              WHERE E.ESTADO='EN PROCESO' AND NOT EXISTS
@@ -31,7 +31,7 @@
         else if($orden=="cercasevento"){
             $consulta = "SELECT E.ID,E.NOMBRE, E.F_CREACION, E.F_EVENTO, CONCAT(CU.NOMBRE, ' ', CU.AP_PATERNO, ' ', CU.AP_MATERNO) AS CLIENTE,
             DE.INVITADOS, S.NOMBRE AS SALON,COM.NOMBRE AS COMIDA,COM.DESCRIPCION,
-             DE.MESEROS, DE.COCINEROS, DE.ESTADO
+             DE.MESEROS, DE.COCINEROS, DE.ESTADO AS CANT
             FROM EVENTO E JOIN CUENTAS CU ON E.CLIENTE=CU.ID JOIN DETALLE_EVENTO DE ON
             DE.ID=E.ID JOIN SALONES S ON S.ID=DE.SALON  JOIN COMIDAS COM ON COM.ID=DE.COMIDA
               WHERE E.ESTADO='EN PROCESO' AND NOT EXISTS
@@ -50,35 +50,34 @@
         foreach($tabla as $registro){
             $evento=$registro->ID;
 
-                $meseros="SELECT COUNT(EE.EMPLEADOS) FROM EVENTO_EMPLEADOS EE JOIN EVENTO E 
-                ON E.ID=EE.EVENTO JOIN EMPLEADOS EMP ON EMP.ID=EE.EMPLEADOS WHERE
-                E.ID='$evento' AND EMP.TIPO='MESERO'";
-                $verm=$conexion->seleccionar($meseros);
-                $cantm=count($verm);
+            $meseros_query = "SELECT COUNT(*) AS cant_meseros FROM EVENTO_EMPLEADOS WHERE EVENTO
+             = '$evento' AND EMPLEADOS IN (SELECT ID FROM EMPLEADOS WHERE TIPO='MESERO')";
 
-                $cocineros="SELECT COUNT(EE.EMPLEADOS) FROM EVENTO_EMPLEADOS EE JOIN EVENTO E 
-                ON E.ID=EE.EVENTO JOIN EMPLEADOS EMP ON EMP.ID=EE.EMPLEADOS WHERE
-                E.ID='$evento' AND EMP.TIPO='COCINA'";
-                $verc=$conexion->seleccionar($cocineros);
-                $cantc=count($verc);
+            $cocineros_query = "SELECT COUNT(*) AS cant_cocineros FROM EVENTO_EMPLEADOS WHERE EVENTO
+             = '$evento' AND EMPLEADOS IN (SELECT ID FROM EMPLEADOS WHERE TIPO='COCINA')";
 
-                if($registro->ESTADO=="LLENO"){
-                    echo"<h1> No hay eventos pendientes al momento</h1>";
-                    exit;
+            $meseros_result = $conexion->seleccionar($meseros_query);
+            $cantm = $meseros_result[0]->cant_meseros;
+
+            $cocineros_result = $conexion->seleccionar($cocineros_query);
+            $cantc = $cocineros_result[0]->cant_cocineros;
+
+
+            if($registro->CANT==='LLENO'){
+                continue;       
+            }
+            if($_SESSION["tipo"]=='MESERO'){
+                if($cantm==$registro->MESEROS){
+                    continue;
                 }
-                if($_SESSION["tipo"]=="MESERO"){
-                    if($cantm == $registro['MESEROS']){
-                        echo"<h1> No hay eventos pendientes al momento</h1>";
-                        exit;
-                    }
+            }
+            if($_SESSION["tipo"]=='COCINERO'){
+                if($cantc==$registro->COCINEROS){
+                    continue;
                 }
-                else if($_SESSION["tipo"]=="COCINERO"){
-                    if($cantc == $registro['COCINEROS']){
-                        echo"<h1> No hay eventos pendientes al momento</h1>";
-                        exit;
-                    }
-                }
-            else{
+            }
+                  
+                
             echo"<div class='container-fluid'";
             echo"<div class=' card-group col-lg-5 col-mb-5 col-sm-12  d-flex '>";
             echo "<div class='card' id='cuadroEvento'>";
@@ -114,7 +113,8 @@
             }
             }
         
+        
          $conexion->desconectarBD();
-        }
+        
         
 ?>

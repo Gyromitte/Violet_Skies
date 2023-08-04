@@ -215,7 +215,6 @@
             ?>
         </div>
         <div id="perfil" class="tab-content">
-            <p class="test">Tu Perfil</p>
             <div class="container">
                 <?php include "../viewsPerfil/datosEmp.php" ?>
             </div>
