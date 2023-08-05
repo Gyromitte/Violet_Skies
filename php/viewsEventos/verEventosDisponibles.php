@@ -57,10 +57,10 @@
                             WHERE EVENTO = '$evento' AND EMPLEADOS IN (SELECT ID FROM EMPLEADOS WHERE TIPO='COCINA')) AS cant_cocineros
                     FROM DUAL";
 
-    $result = $conexion->seleccionar($count_query);
+                $result = $conexion->seleccionar($count_query);
 
-    $cantm = $result[0]->cant_meseros;
-    $cantc = $result[0]->cant_cocineros;
+                $cantm = $result[0]->cant_meseros;
+                $cantc = $result[0]->cant_cocineros;
 
 
             if($registro->CANT==='LLENO'){

@@ -120,13 +120,22 @@ modal.addEventListener("show.bs.modal", function (event) {
               var asistir = document.getElementById("asist");
 
               asistir.addEventListener("click", function (event) {
-                event.preventDefault();  
+                event.preventDefault();
+                
+                if (alreadyAssigned) {
+                  // Show a message indicating that the user is already assigned
+                  document.getElementById("mensajeDiv").innerHTML = "You are already assigned to this event!";
+                  return;
+                }
       
                 var xhrAceptar = new XMLHttpRequest();
                 xhrAceptar.onreadystatechange = function () {
                   if (xhrAceptar.readyState === XMLHttpRequest.DONE) {
                     if (xhrAceptar.status === 200) {
                       document.getElementById("mensajeDiv").innerHTML = xhrAceptar.responseText;
+                      if (xhrAceptar.responseText === "<div class='alert alert-success'>Asistiendo!</div>") {
+                        alreadyAssigned = true;
+                      }
                     } 
                     else {
                       console.error("Error en la solicitud AJAX de Aceptar");
@@ -162,51 +171,55 @@ modal.addEventListener("show.bs.modal", function (event) {
               var evento = JSON.parse(xhr.responseText);
               // Actualizar el contenido del formulario con los datos obtenido
               formContent = `
-                <form>
-                  <div id="mensajeDiv" method="POST"></div> 
-                  <div>
-                    <div class="d-flex justify-content-center">
-                      <h4>
-                      ${evento.NOMBRE}
-                      </h4>
-                      <br>
-                      <h6>
-                      Fecha de evento: ${evento.F_EVENTO}
-                      </h6>
-                      </div>
-                      <br>
-                    <div class="d-flex justify-content-center">
-                      <button type="submit" id="asist" class="btn btn-primary btn-modal-warning me-2">
-                        <i class="fa-solid fa-user me-2" style="color: #ffffff;">
-                            Cancelar Asistencia
-                        </i>
-                      </button>
-                      <br>
-                    </div>
-                  </div>
-                </form>
+              <form>
+              <div id="mensajeDiv" method="POST"></div> 
+              <div>
+                <div class="d-flex justify-content-center">
+                  <h4>
+                  ${evento.NOMBRE}
+                  </h4>
+                  <br>
+                  <h6>
+                  Fecha de evento: ${evento.F_EVENTO}
+                  </h6>
+                </div>
+                <br>
+                <div class="d-flex justify-content-center">
+                  <button type="submit" id="cancelar" class="btn btn-primary btn-modal-warning me-2">
+                    <i class="fa-solid fa-user me-2" style="color: #ffffff;">
+                        Cancelar Asistencia
+                    </i>
+                  </button>
+                  <br>
+                </div>
+              </div>
+            </form>
               `;
               modalForm.innerHTML = formContent;
-              var asistir = document.getElementById("asist");
+              var cancel = document.getElementById("cancelar");
 
-              asistir.addEventListener("click", function (event) {
+              cancel.addEventListener("click", function (event) {
                 event.preventDefault();  
       
-                var xhrAceptar = new XMLHttpRequest();
-                xhrAceptar.onreadystatechange = function () {
-                  if (xhrAceptar.readyState === XMLHttpRequest.DONE) {
-                    if (xhrAceptar.status === 200) {
-                      formContent += `<br><div class="alert alert-success" role="alert" align='center'>Evento aceptado</div>`;
-
+                
+      
+                var xhrCan = new XMLHttpRequest();
+                xhrCan.onreadystatechange = function () {
+                  if (xhrCan.readyState === XMLHttpRequest.DONE) {
+                    if (xhrCan.status === 200) {
+                      document.getElementById("mensajeDiv").innerHTML = xhrCan.responseText;
+                      
                     } 
                     else {
                       console.error("Error en la solicitud AJAX de Aceptar");
                     }
                   }
                 };
+                var data = "eventoId=" + encodeURIComponent(idEvento);
       
-                xhrAceptar.open("POST", "../viewsEmpleados/asistirEvento.php", true);
-                xhrAceptar.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+                xhrCan.open("POST", "../viewsEmpleados/cancelarAsist.php", true);
+                xhrCan.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+                xhrCan.send(data);
               });
             }
             else {

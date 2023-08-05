@@ -5,7 +5,8 @@
     session_start();
     $emp=$_SESSION["trabajo"];
     $tipo=$_SESSION["tipo"];
-    $eventoId = $_GET['id'];
+    $eventoId = $_POST['eventoId'];
+    $cantResult = null;
 
     $currentDate = date('Y-m-d');
 
@@ -27,12 +28,16 @@ if ($currentDate > $threeMonthsAgoStr) {
 }
 
 
-    if($emp=="MESERO"){
-        $cant="SELECT DE.MESEROS FROM DETALLE_EVENTO DE WHERE ID='$eventoId'";
-    }
-    else{
-        $cant="SELECT DE.COCINEROS FROM DETALLE_EVENTO DE WHERE ID='$eventoId'";
-    }
+if($tipo=="MESERO"){
+    $cant="SELECT DE.MESEROS FROM DETALLE_EVENTO DE WHERE ID='$eventoId'";
+    $type=$tipo;
+}
+else if($tipo=="COCINERO"){
+    $cant="SELECT DE.COCINEROS FROM DETALLE_EVENTO DE WHERE ID='$eventoId'";
+    $type='COCINA';
+}
+$cantResult=$db->seleccionar($cant);
+    
     $num= "SELECT COUNT(EE.ID) FROM EVENTO_EMPLEADOS EE JOIN EMPLEADOS EMP ON EE.EMPLEADOS=EMP.ID
     WHERE EE.EVENTO='$eventoId' AND EMP.TIPO='$tipo'";
 
@@ -41,7 +46,8 @@ if ($currentDate > $threeMonthsAgoStr) {
     }
     else{
         $consulta="SELECT E.F_EVENTO FROM EVENTO";
-        $enter="INSERT INTO EVENTO_EMPLEADO(EVENTO,EMPLEADOS) VALUES('$eventoId','$emp')";
+        $enter="DELETE FROM EVENTO_EMPLEADOS WHERE EVENTO='$eventoID' AND 
+        EMPLEADO='$emp'";
         echo"<div class='alert alert-success'>Asistiendo!</div>";
     }
 ?>
