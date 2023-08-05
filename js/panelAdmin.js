@@ -122,7 +122,9 @@ function updateModalContent(formType, idEmpleado, idEvento) {
         <form id="formularioEmpleado">
           <div class="mb-3">
             <label class="control-label">RFC</label>
-            <input type="text" name="RFC" placeholder="Ingresa el RFC" class="form-control" required>
+            <input type="text" name="RFC" placeholder="Ingresa el RFC" class="form-control" 
+            required oninput="this.value = this.value.toUpperCase()"
+            required>
           </div>
           <div class="mb-3">
             <label class="control-label">E-mail</label>
@@ -245,7 +247,9 @@ function updateModalContent(formType, idEmpleado, idEvento) {
                     <h6 class="mb-3">${empleado.CORREO}</h6>
                     <div class="mb-3">
                       <label class="control-label">RFC</label>
-                      <input type="text" name="rfc" placeholder="Ingresa el RFC" class="form-control" required value="${empleado.RFC}">
+                      <input type="text" name="rfc" placeholder="Ingresa el RFC" class="form-control" 
+                      required oninput="this.value = this.value.toUpperCase()"
+                      required value="${empleado.RFC}">
                     </div>
                     <div class="form-group mb-3">
                       <label for="tipoUsuario">Tipo de Trabajador</label>
@@ -332,7 +336,8 @@ function updateModalContent(formType, idEmpleado, idEvento) {
                   <h6 class="mb-3">${solicitud.CORREO}</h6>
                   <div class="mb-3">
                     <label class="control-label">RFC</label>
-                    <input type="text" name="RFC" placeholder="Ingresa el RFC" class="form-control" required>
+                    <input required oninput="this.value = this.value.toUpperCase()"
+                    type="text" name="RFC" placeholder="Ingresa el RFC" class="form-control" required>
                   </div>
                   <div class="form-group mb-3">
                     <label for="tipoUsuario">Tipo de Trabajador</label>

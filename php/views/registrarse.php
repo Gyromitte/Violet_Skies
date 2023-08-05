@@ -88,6 +88,12 @@
     <script src="/js/registro.js" async defer></script>
 </head>
 <body>
+<?php
+         session_start();
+         if(isset($_SESSION["logged_in"])){
+             header("Location:../scripts/logintrue.php");
+         }
+    ?>
   
    <!-- Desktop Navbar -->
    <div class=" desktop-nav fixed-top">

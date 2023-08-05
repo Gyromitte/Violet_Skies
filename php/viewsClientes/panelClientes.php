@@ -33,11 +33,15 @@
     <!--NavBar-->    
     <?php
         session_start();
-        if (!isset($_SESSION["access"]) || $_SESSION["access"] !== 1) {
-            echo"No tienes acceso a esta pagina";
-            header("refresh:2;/index.html");
+        $access=1;
+        if(isset($_SESSION["logged_in"])){
+            if($_SESSION["access"]!==$access){
+                header("Location:../scripts/access.php");
+            }
         }
-        
+        else if(!isset($_SESSION["logged_in"])){
+            header("Location:../views/login.php");
+        }
     ?>
     <nav>
         <div class="nav-menu">
@@ -61,7 +65,8 @@
             Position<br><br>
             <button data-tab="home" class="dash-button"><i class="fa-solid fa-house" style="color: #ffffff;"></i><br>Mis eventos</button>
             <button data-tab="perfil" class="dash-button"><i class="fa-solid fa-user" style="color: #ffffff;"></i><br>Perfil</button>
-            <button data-tab="configuracion" class="dash-button"><i class="fa-solid fa-gear" style="color: #ffffff;"></i><br>Configuracion</button>
+            <a style="text-decoration: none;" data-tab="logout" class="dash-button" href="../scripts/CerrarSesion.php">
+                <i class="fa-solid fa-door-open" style="color: #ffffff; padding-top: 10px;"></i><br>Logout</a>
         </div>
     </div>
     <!--Main Content-->
