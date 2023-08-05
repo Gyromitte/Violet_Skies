@@ -393,6 +393,12 @@ function updateModalContent(formType, idEmpleado, idEvento) {
                     if (xhrAceptar.status === 200) {
                       // Mostrar la respuesta del servidor en el modal
                       document.getElementById("mensajeDiv").innerHTML = xhrAceptar.responseText;
+                      console.log(document.getElementById("mensajeDiv").innerHTML);
+                      //Si el mensaje es de exito desactivar el boton de rechazar
+                      if(document.getElementById("mensajeDiv").innerHTML === '<div class="alert alert-success">Empleado Registrado!</div>')
+                      {
+                        btnRechazarSolicitud.disabled = true;
+                      }
                       //Ver cual es la tabla activa para refrescar cualquier cambio
                       checkCurrentTable(currentTable);
                     } else {
@@ -432,6 +438,9 @@ function updateModalContent(formType, idEmpleado, idEvento) {
                     if (xhrRechazar.status === 200) {
                       // Mostrar la respuesta del servidor en el modal
                       document.getElementById("mensajeDiv").innerHTML = xhrRechazar.responseText;
+                      //Desactivar los botones
+                      btnAceptarSolicitud.disabled = true;
+                      btnRechazarSolicitud.disabled = true;
                       // Ver cual es la tabla activa para refrescar cualquier cambio
                       checkCurrentTable(currentTable);
                     } else {
