@@ -66,17 +66,22 @@
 
   function guardarCambios() {
     const inputs = document.querySelectorAll('.personal-info input:not([disabled])');
-    const newData = {}; // Objeto para almacenar los nuevos datos editados.
+    const newData = {};
 
     inputs.forEach(input => {
-      newData[input.name] = input.value; // Almacena el nuevo valor en el objeto newData con el nombre del campo como clave.
-      input.setAttribute('disabled', 'true'); // Deshabilitar los inputs nuevamente después de guardar los cambios.
+      newData[input.name] = input.value;
     });
-    // Aquí usaremos AJAX para enviar newData al archivo guardarCambios.php
+    const telefonoValue = newData['telefono'];
+    const telefonoPattern = /^[0-9]{10}$/;
+    if (!telefonoPattern.test(telefonoValue)) {
+      alert("Ingresa un número de teléfono válido");
+      return false;
+    }
+    
     const xhttp = new XMLHttpRequest();
     xhttp.onreadystatechange = function() {
       if (this.readyState === 4 && this.status === 200) {
-        // La respuesta del servidor ha sido recibida correctamente
+
         const response = JSON.parse(this.responseText);
         if (response.success) {
           $("#mensajeModificar").text("Cambios guardados correctamente");
@@ -85,6 +90,9 @@
             $("#mensajeModificar").hide();
           }, 3000);
           console.log(response.message);
+          inputs.forEach(input => {
+            input.setAttribute('disabled', 'true');
+          });
         } else {
           $("#mensajeModificar").text("Error al intentar hacer los cambios");
           $("#mensajeModificar").show();
@@ -131,14 +139,22 @@
     const correo = $('input[name="correoNEW"]').val();
     if (!nombre || !ap_paterno || !ap_materno || !telefono || !correo) {
       alert("Por favor, complete todos los campos requeridos");
-      return; // Detener la ejecución de la función si hay campos vacíos
+      return;
+    }
+    if (!/^[0-9]{10}$/.test(telefono)) {
+      alert("Ingresa un número de teléfono válido");
+      return false;
+    }
+    if (!/^[\w.-]+@[a-zA-Z\d.-]+\.[a-zA-Z]{2,}$/.test(correo)) {
+
+      alert("Ingresa una dirección de correo electrónico válida");
+      return;
     }
     const mensajeConfirmacion = `¿Seguro que desea registrar un administrador con los siguientes datos?\n\nNombre: ${nombre}\nApellido Paterno: ${ap_paterno}\nApellido Materno: ${ap_materno}\nTeléfono: ${telefono}\nCorreo: ${correo}`;
     if (window.confirm(mensajeConfirmacion)) {
-      // Si el usuario acepta, enviar los datos a registrarAdmin.php mediante una solicitud AJAX
       $.ajax({
-        type: "POST", // O el método que utilices para enviar los datos
-        url: "../viewsPerfil/registrarAdmin.php", // Archivo PHP que procesará los datos y los agregará a la base de datos
+        type: "POST", 
+        url: "../viewsPerfil/registrarAdmin.php", 
         data: {
           nombre,
           ap_paterno,
@@ -170,7 +186,6 @@
       });
     }
   }
-  // Manejo del clic en el botón "Registrar administrador"
   $(document).ready(function () {
     $('#registrarAdmin').click(nuevoAdmin);
   });
