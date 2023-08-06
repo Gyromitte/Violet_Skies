@@ -181,6 +181,59 @@ function updateModalContent(formType, idEmpleado, idEvento) {
         }, 500); // 0.5 segundos, si la funcion se ejecuta muy rapido no reflejara los cambios
       });
       break;
+      case "@re-incorporarEmpleado":
+        modalTitle.textContent = "Re-incorporar a un empleado";
+        modalHeader.classList.remove('modal-header-warning');
+        formContent = `
+          <div id="mensajeDiv" method="POST"></div>
+          <form id="formularioEmpleado">
+            <div class="mb-3">
+              Aqui puedes volver a integrar al sistema a un empleado que fue dado de baja.
+              <br>
+              Ingresa el correo electronico que pertenecia a la cuenta del empleado:
+            </div>
+            <div class="mb-3">
+              <label class="control-label">E-mail</label>
+              <input type="email" name="CORREO" placeholder="Ingresa el E-mail" class="form-control" required>
+            </div>
+            <div class="d-flex justify-content-center">
+            <button type="submit" class="btn btn-primary btn-modal me-2"><i class="fa-solid fa-address-card me-2" style="color: #ffffff;"></i>Registrar</button>
+            <button type="button" class="btn btn-primary btn-modal" data-bs-dismiss="modal">Cerrar</button>
+            </div>
+          </form>
+        `;
+        //Asignar el contenido al formulario del modal
+        modalForm.innerHTML = formContent;
+  
+        //Obtener el formulario después de haberlo asignado al DOM
+        form = document.querySelector('#formularioEmpleado');
+        
+        //Agregar evento de envio al formulario
+        form.addEventListener('submit', function (event) {
+        event.preventDefault(); //Para que la pagina no de refresh al dar submit
+        
+        //Solicitud AJAX
+        var xhr = new XMLHttpRequest();
+        //Configurar la solicitud
+        xhr.open("POST", "re-incorporar.php", true);
+        xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+        //Obtener los datos del formulario
+        var correo = form.elements['CORREO'].value;
+        //Como se va enviar la solicitud: un string
+        var formData = 'correo=' + (correo);
+        xhr.onreadystatechange = function () {
+        if (xhr.readyState === XMLHttpRequest.DONE && xhr.status === 200) {
+        //Manejo de la respuesta:
+        var respuesta = xhr.responseText;
+        document.getElementById('mensajeDiv').innerHTML = respuesta;
+          }
+        };
+        //Enviar el formulario
+        xhr.send(formData);
+        //Ver cual es la tabla activa para refrescar cualquier cambio
+        checkCurrentTable(currentTable);
+        });
+      break;
     case "@eliminarEmpleado":
       modalTitle.textContent = "Eliminar a un Empleado";
       modalHeader.classList.add('modal-header-warning');

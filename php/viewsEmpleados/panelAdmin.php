@@ -212,6 +212,10 @@
                         <i class="fa-solid fa-address-card" style="color: #ffffff;"></i>
                         Registrar
                     </button>
+                    <button type="button" class="btn btn-success border-2 btn-outline-light rounded-5 btn-options" data-bs-toggle="modal" data-bs-target="#mainModal" data-bs-whatever="@re-incorporarEmpleado">
+                        <i class="fa-solid fa-person-walking-arrow-loop-left" style="color: #ffffff;"></i>
+                        Re-incorporar
+                    </button>
                 </div>
                 <!--Barra de Busqueda-->
                 <div class="input-group mb-3 search-bar" id="search">
