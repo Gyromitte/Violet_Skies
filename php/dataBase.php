@@ -103,6 +103,10 @@
                         $ID=$renglon['ID'];
                         $NOMBRE = $renglon['NOMBRE'];
                         $tipo = $renglon['TIPO_CUENTA'];
+                        $ap_paterno=$renglon['AP_PATERNO'];
+                        $ap_materno=$renglon['AP_MATERNO'];
+                        $telefono=$renglon['TELEFONO'];
+                        $correo=$renglon['CORREO'];                       
                         $estado=$renglon['ESTADO'];
                     }
                 }
@@ -119,6 +123,11 @@
                         session_start();
                         $_SESSION["ID"] = $ID; 
                         $_SESSION["name"] = $NOMBRE;
+                        $_SESSION["tipo"] = $tipo;
+                        $_SESSION["telefono"] = $telefono;
+                        $_SESSION["ap_paterno"] = $ap_paterno;
+                        $_SESSION["ap_materno"] = $ap_materno;
+                        $_SESSION["correo"] = $correo;
                         $_SESSION["logged_in"]=true;
                         if($tipo==='CLIENTE'){
                         $_SESSION["access"]=1;
