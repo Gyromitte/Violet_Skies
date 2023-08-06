@@ -183,6 +183,13 @@ nav{
     border: 2px solid white;
 }
 
+.custom-ver-historial{
+    background-color: #b14aed;
+    border: 2px solid white;
+    color: white;
+    border-radius: 10px;
+}
+
 #btnEmpleadosRegistrados, #btnAceptarEvento, #btnModify, #btnSaveChanges,
 #btnEditarDatosPersonales, #nuevoAdmin, #btnGuardarCambios, #btnpassword{
     color: white;

@@ -40,10 +40,10 @@ if (is_countable($tabla) && count($tabla) > 0) {
     echo "<td> $evento->FECHA_DEL_EVENTO </td>";
     echo "<td>";
     echo '<div class="dropdown">';
-    echo "<button class='btn-ver-historial btn-secondary dropdown-toggle custom-dropdown' 
+    echo "<button class='btn-ver-historial btn-secondary custom-ver-historial' 
     type='button'
     data-bs-whatever='@verDetallesEvento' data-event-id='$evento->ID_EVENTO' >";
-    echo '<i class="fa-solid fa-eye"></i> Ver Detalles';
+    echo '<i class="fa-solid fa-eye"></i>';
     echo '</button>';
 
     echo '</div>';
