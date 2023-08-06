@@ -350,3 +350,8 @@ nav{
     height: auto;
     margin: 0 auto;
 }
+.personal-info input[disabled] {
+    background-color: transparent;
+    border-color: transparent;
+    font-style: oblique;
+  }
