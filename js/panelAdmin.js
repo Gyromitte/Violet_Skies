@@ -91,6 +91,7 @@ var btnCocineros = document.getElementById('verCocineros');
 var btnMeseros = document.getElementById('verMeseros');
 var btnBusqueda = document.getElementById('buscarEmpleado');
 var btnSolicitud = document.getElementById('verSolicitudes');
+
 // Evento para los botones
 modal.addEventListener("show.bs.modal", function (event) {
   // Botón que activó el modal
@@ -508,6 +509,7 @@ function updateModalContent(formType, idEmpleado, idEvento) {
         break;
 
     case "@verDetallesEvento":
+      console.log("Sup man! miss me?");
       modalTitle.textContent = "Detalles del Evento";
       var xhrDetalles = new XMLHttpRequest();
       xhrDetalles.onreadystatechange = function() {
@@ -806,31 +808,31 @@ function updateModalContent(formType, idEmpleado, idEvento) {
       xhrDetalles.send();
       break;
       case "@verHistorial":
-  modalTitle.textContent = "Historial de empleado";
-  // Obtener los datos del empleado con una solicitud AJAX
-  var xhr = new XMLHttpRequest();
-  xhr.onreadystatechange = function () {
-    if (xhr.readyState === XMLHttpRequest.DONE) {
-      if (xhr.status === 200) {
-        // Parsear la respuesta JSON del primer AJAX
-        var empleado = JSON.parse(xhr.responseText);
-        // Actualizar el contenido del formulario con los datos obtenidos
-        formContent = `
-          <form">
-            <div id="mensajeDiv" method="POST"></div>
-            <h5>Empleado:  </h5>
-            <h6 class="mb-3">${empleado.NOMBRE} ${empleado.AP_PATERNO} ${empleado.AP_MATERNO}</h6> 
-            <!-- Div para mostrar el historial de eventos -->
-            <div id="historialDiv"></div>
-            <div class="d-flex justify-content-center">
-              <button type="button" class="btn btn-primary btn-modal" data-bs-dismiss="modal">Cerrar</button>
-            </div>
-          </form>
-        `;
+      modalTitle.textContent = "Historial de empleado";
+      // Obtener los datos del empleado con una solicitud AJAX
+      var xhr = new XMLHttpRequest();
+      xhr.onreadystatechange = function () {
+        if (xhr.readyState === XMLHttpRequest.DONE) {
+          if (xhr.status === 200) {
+            // Parsear la respuesta JSON del primer AJAX
+            var empleado = JSON.parse(xhr.responseText);
+            // Actualizar el contenido del formulario con los datos obtenidos
+            formContent = `
+              <form">
+                <div id="mensajeDiv" method="POST"></div>
+                <h5>Empleado:  </h5>
+                <h6 class="mb-3">${empleado.NOMBRE} ${empleado.AP_PATERNO} ${empleado.AP_MATERNO}</h6> 
+                <!-- Div para mostrar el historial de eventos -->
+                <div id="historialDiv"></div>
+                <div class="d-flex justify-content-center">
+                  <button type="button" class="btn btn-primary btn-modal" data-bs-dismiss="modal">Cerrar</button>
+                </div>
+              </form>
+            `;
         // Asignar el contenido al formulario del modal
         modalForm.innerHTML = formContent;
 
-        // Realizar la segunda solicitud AJAX para obtener el historial de eventos del empleado
+        // Realizar la segunda solicitud AJAX para obtener los datos del empleado
         var xhrHistorial = new XMLHttpRequest();
         xhrHistorial.onreadystatechange = function () {
           if (xhrHistorial.readyState === XMLHttpRequest.DONE) {
@@ -846,6 +848,29 @@ function updateModalContent(formType, idEmpleado, idEvento) {
         // Hacer la segunda solicitud al script PHP para obtener el historial
         xhrHistorial.open("GET", "verHistorial.php?id=" + idEmpleado, true);
         xhrHistorial.send();
+        
+        // Asignar el contenido al formulario del modal
+        modalForm.innerHTML = formContent;
+        // Esperar a que el modal cargue
+        setTimeout(function () {
+          // Conseguir todos los botones para ver el historial
+          var botonesHistorial = document.querySelectorAll('.btn-ver-historial');
+          
+          // Agregar el event listener a cada botón
+          botonesHistorial.forEach(function (btn) {
+            // Obtener el tipo de formulario correspondiente al botón
+            var formType = btn.getAttribute("data-bs-whatever");
+            var idEmpleado = btn.getAttribute("data-id");
+            var idEvento = btn.getAttribute("data-event-id");
+
+            // Agregar el event listener al botón
+            btn.addEventListener("click", function () {
+              // Código a ejecutar cuando se hace clic en el botón
+              console.log("Se hizo clic en el botón");
+              updateModalContent(formType, idEmpleado, idEvento);
+            });
+          });
+        }, 500);
       } else {
         console.error("Error en la solicitud AJAX");
       }

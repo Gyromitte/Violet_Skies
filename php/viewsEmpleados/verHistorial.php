@@ -39,10 +39,14 @@ if (is_countable($tabla) && count($tabla) > 0) {
     echo "<td> $evento->NAME_EVENTO </td>";
     echo "<td> $evento->FECHA_DEL_EVENTO </td>";
     echo "<td>";
-    echo "<button class='btn btn-secondary' type='button' data-bs-toggle='modal' data-bs-target='#mainModal'
-    data-bs-whatever='verDetallesEvento' data-event-id='$evento->ID_EVENTO' >";
-    echo "<i class='fa-solid fa-eye' style='color: #ffffff;'></i>";
+    echo '<div class="dropdown">';
+    echo "<button class='btn-ver-historial btn-secondary dropdown-toggle custom-dropdown' 
+    type='button'
+    data-bs-whatever='@verDetallesEvento' data-event-id='$evento->ID_EVENTO' >";
+    echo '<i class="fa-solid fa-eye"></i> Ver Detalles';
     echo '</button>';
+
+    echo '</div>';
     echo "</td>";
     echo "</tr>";
   }
