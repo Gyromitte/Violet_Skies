@@ -46,7 +46,7 @@ if (isset($_GET['id'])) {
     if (isset($_GET['MESEROS']) && $_GET['MESEROS'] !== "") {
         if (isset($_GET['MESEROS']) && intval($_GET['MESEROS']) > $dispMeseros)
         {
-            $response = array('success' => false, 'message' => 'No hay suficientes meseros registrados');
+            $response = array('success' => false, 'message' => 'No hay suficientes meseros disponibles');
             header('Content-Type: application/json');
             http_response_code(400);
             echo json_encode($response);
@@ -70,7 +70,7 @@ if (isset($_GET['id'])) {
     if (isset($_GET['COCINEROS']) && $_GET['COCINEROS'] !== "") {
         if (isset($_GET['COCINEROS']) && intval($_GET['COCINEROS']) > $dispCocina)
         {
-            $response = array('success' => false, 'message' => 'No hay suficientes cocineros registrados');
+            $response = array('success' => false, 'message' => 'No hay suficientes cocineros disponibles');
             header('Content-Type: application/json');
             http_response_code(400);
             echo json_encode($response);
