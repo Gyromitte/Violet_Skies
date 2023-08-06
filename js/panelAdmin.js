@@ -851,6 +851,7 @@ function updateModalContent(formType, idEmpleado, idEvento) {
       }
     }
   };
+  //console.log(idEmpleado);
   // Hacer la solicitud al script PHP y pasar el ID del empleado
   xhr.open("GET", "obtenerEmpleado.php?id=" + idEmpleado, true);
   xhr.send();

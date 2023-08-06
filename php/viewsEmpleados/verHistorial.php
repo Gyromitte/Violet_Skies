@@ -7,7 +7,8 @@ $conexion->conectarBD();
 $employeeId = $_GET['id'];
 
 // Realizar la consulta para obtener el historial de eventos del empleado según el ID
-$consulta = "SELECT NAME_EVENTO, FECHA_DEL_EVENTO FROM EVENTO_EMPLEADO_FINALIZADOS WHERE ID_EMPLEADO = $employeeId";
+$consulta = "SELECT ev.NAME_EVENTO, ev.FECHA_DEL_EVENTO, ev.ID_EVENTO FROM EVENTO_EMPLEADO_FINALIZADOS AS ev
+JOIN EMPLEADOS AS emp ON ev.ID_EMPLEADO = emp.ID WHERE emp.CUENTA = $employeeId";
 
 $tabla = $conexion->seleccionar($consulta);
 
@@ -28,6 +29,7 @@ if (is_countable($tabla) && count($tabla) > 0) {
   echo '<tr>';
   echo '<th>Nombre del Evento</th>';
   echo '<th>Fecha del Evento</th>';
+  echo '<th></th>';
   echo '</tr>';
   echo '</thead>';
   echo '<tbody>';
@@ -36,6 +38,12 @@ if (is_countable($tabla) && count($tabla) > 0) {
     echo "<tr>";
     echo "<td> $evento->NAME_EVENTO </td>";
     echo "<td> $evento->FECHA_DEL_EVENTO </td>";
+    echo "<td>";
+    echo "<button class='btn btn-secondary' type='button' data-bs-toggle='modal' data-bs-target='#mainModal'
+    data-bs-whatever='verDetallesEvento' data-event-id='$evento->ID_EVENTO' >";
+    echo "<i class='fa-solid fa-eye' style='color: #ffffff;'></i>";
+    echo '</button>';
+    echo "</td>";
     echo "</tr>";
   }
 
