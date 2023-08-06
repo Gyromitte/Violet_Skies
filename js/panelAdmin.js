@@ -703,16 +703,16 @@ function updateModalContent(formType, idEmpleado, idEvento) {
                 alert('Por favor, llene los campos correctamente\nEl mínimo para invitados son 10');
                 return;
               }
-              if (parseInt(cocinerosRequeridos) < 0 || parseInt(meserosRequeridos) < 0) {
+              if (!cocinerosRequeridos || !meserosRequeridos || parseInt(cocinerosRequeridos) < 0 || parseInt(meserosRequeridos) < 0) {
                 alert('Por favor, llene los campos correctamente\nInserte valores válidos');
                 return;
               }
 
               var xhrGuardarCambios = new XMLHttpRequest();
-              xhrGuardarCambios.onreadystatechange = function() {
+              xhrGuardarCambios.onreadystatechange = function(response) {
                 if (xhrGuardarCambios.readyState === XMLHttpRequest.DONE) {
+                  var response = JSON.parse(xhrGuardarCambios.responseText);
                   if (xhrGuardarCambios.status === 200) {
-                    var response = JSON.parse(xhrGuardarCambios.responseText);
                     if (response.success) {
                       formContent += `<br><div class="alert alert-success" role="alert" align='center'>Evento modificado exitosamente</div>`;
                       setTimeout(() => {
@@ -721,10 +721,11 @@ function updateModalContent(formType, idEmpleado, idEvento) {
                       filtrarEventos();
                       modalForm.innerHTML = formContent;
                     } else {
+                      alert('Algo salió mal\nInténtelo de nuevo');
                       console.error("Error en el servidor:", response.message);
                     }
                   } else {
-                    alert('No existen suficientes empleados registrados y/o disponibles para cubrir la solicitud en esa fecha');
+                    alert(response.message);
                     console.error("Error AJAX al guardar cambios en el evento. Código de estado:", xhrGuardarCambios.status);
                   }
                 }
