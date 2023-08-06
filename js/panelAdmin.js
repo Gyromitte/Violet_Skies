@@ -694,7 +694,10 @@ function updateModalContent(formType, idEmpleado, idEvento) {
               var comida = document.getElementById('comida').value;
               var meserosRequeridos = document.getElementById('meserosRequeridos').value;
               var cocinerosRequeridos = document.getElementById('cocinerosRequeridos').value;
-  
+              var meserosNecesarios;
+              if (invitados === 10) {meserosNecesarios = 2;} 
+              else {meserosNecesarios = Math.floor(invitados / 15);}
+              
               if (!fecha || !salon || !comida) {
                 alert('Por favor, llene los campos correctamente');
                 return;
@@ -730,7 +733,7 @@ function updateModalContent(formType, idEmpleado, idEvento) {
                   }
                 }
               };
-              var urlEditarEvento = `../viewsEventos/editarDetalles.php?id=${idEvento}&F_EVENTO=${fecha}&INVITADOS=${invitados}&SALON=${salon}&COMIDA=${comida}&MESEROS=${meserosRequeridos}&COCINEROS=${cocinerosRequeridos}`;
+              var urlEditarEvento = `../viewsEventos/editarDetalles.php?id=${idEvento}&F_EVENTO=${fecha}&INVITADOS=${invitados}&SALON=${salon}&COMIDA=${comida}&MESEROS=${meserosRequeridos}&COCINEROS=${cocinerosRequeridos}&meserosNecesarios=${meserosNecesarios}`;
               xhrGuardarCambios.open("GET", urlEditarEvento, true);
               xhrGuardarCambios.send();
             });

@@ -8,6 +8,7 @@ if (isset($_GET['id'])) {
     $database->conectarBD();
     $dispMeseros = 0;
     $dispCocina=0;
+    $meserosNecesarios = $_GET['meserosNecesarios'];
     $consulta = "UPDATE EVENTO E INNER JOIN DETALLE_EVENTO D ON E.ID=D.ID SET ";
     $parametros = array();
 
@@ -21,6 +22,11 @@ if (isset($_GET['id'])) {
         $invitados = $_GET['INVITADOS'];
         $consulta .= "D.INVITADOS = :invitados, ";
         $parametros[':invitados'] = $invitados;
+        if($invitados < 15){
+            $meserosNecesarios=1;
+        } else {
+            $meserosNecesarios = ceil($invitados / 15);
+        }
     }    
 
     $consultaEmpleados = "SELECT E.TIPO, COUNT(E.TIPO) AS CANT FROM EMPLEADOS E JOIN CUENTAS C ON E.CUENTA = C.ID WHERE C.ESTADO = 'ACTIVO'
@@ -44,27 +50,27 @@ if (isset($_GET['id'])) {
     }
 
     if (isset($_GET['MESEROS']) && $_GET['MESEROS'] !== "") {
-        if (isset($_GET['MESEROS']) && intval($_GET['MESEROS']) > $dispMeseros)
+        if (intval($_GET['MESEROS']) > $meserosNecesarios)
         {
-            $response = array('success' => false, 'message' => 'No hay suficientes meseros disponibles');
+            $response = array('success' => false, 'message' => 'El número máximo de meseros para ' . $invitados . ' invitados son ' . $meserosNecesarios);
             header('Content-Type: application/json');
             http_response_code(400);
             echo json_encode($response);
             exit;
         } else {
-            $meseros = $_GET['MESEROS'];
-            $consulta .= "D.MESEROS = :meseros, ";
-            $parametros[':meseros'] = $meseros;
+            if (isset($_GET['MESEROS']) && intval($_GET['MESEROS']) > $dispMeseros)
+            {
+                $response = array('success' => false, 'message' => 'No hay suficientes meseros disponibles');
+                header('Content-Type: application/json');
+                http_response_code(400);
+                echo json_encode($response);
+                exit;
+            } else {
+                $meseros = $_GET['MESEROS'];
+                $consulta .= "D.MESEROS = :meseros, ";
+                $parametros[':meseros'] = $meseros;
+            }
         }
-    } else {
-        if (isset($_GET['INVITADOS']) && is_numeric($_GET['INVITADOS'])) {
-            $invitados = $_GET['INVITADOS'];
-            $meseros = floor($invitados / 15);
-        } else {
-            $meseros = 0;
-        }
-        $consulta .= "D.MESEROS = :meseros, ";
-        $parametros[':meseros'] = $meseros;
     }
 
     if (isset($_GET['COCINEROS']) && $_GET['COCINEROS'] !== "") {
@@ -80,9 +86,6 @@ if (isset($_GET['id'])) {
             $consulta .= "D.COCINEROS = :cocineros, ";
             $parametros[':cocineros'] = $cocineros;
         }
-    } else {
-        $consulta .= "D.COCINEROS = :cocineros, ";
-        $parametros[':cocineros'] = 0;
     }
 
     if (isset($_GET['SALON'])) {
