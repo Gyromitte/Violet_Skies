@@ -68,15 +68,15 @@ if (isset($_SESSION["ID"])) {
                     <input type="hidden" name="id" value="<?php echo $_SESSION["ID"]; ?>">
                     <div class="d-flex justify-content-end">
                       <button class="btn btn-primary" onclick="habilitarEdicion()" id="btnEditarDatosPersonales">
-                      <i class="fa-solid fa-pencil me-2" style="color: #ffffff;"></i>Modificar datos</button>
-                      <div class="d-flex justify-content-end">
-                        <button class="btn btn-success d-none" id="btnGuardarCambios" onclick="guardarCambios()">
-                        <i class="fa-solid fa-floppy-disk me-2" style="color: #ffffff;"></i>Guardar cambios</button>
-                        <button class="btn btn-danger d-none" id="btnCancelarCambios" onclick="cancelarCambios()">
-                        <i class="fa-solid fa-ban me-2" style="color: #ffffff;"></i>Cancelar</button>
-                      </div>
-                    </div>
-                    <div id="mensajeModificar"></div>
+                        <i class="fa-solid fa-pencil me-2" style="color: #ffffff;"></i>Modificar datos</button>
+                        <div class="d-flex justify-content-end">
+                          <button class="btn btn-success d-none" id="btnGuardarCambios" onclick="guardarCambios()">
+                            <i class="fa-solid fa-floppy-disk me-2" style="color: #ffffff;"></i>Guardar cambios</button>
+                            <button class="btn btn-danger d-none" id="btnCancelarCambios" onclick="cancelarCambios()">
+                              <i class="fa-solid fa-ban me-2" style="color: #ffffff;"></i>Cancelar</button>
+                            </div>
+                          </div>
+                          <div id="mensajeModificar" class="alert alert-success" role="alert"></div>
                   </div>
                 </div>
               </div>
