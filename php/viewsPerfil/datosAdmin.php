@@ -17,8 +17,10 @@ if (isset($_SESSION["ID"])) {
       ?>
         <div class="accordion" id="accordionExample">
           <div class="accordion-item">
-            <h2 class="accordion-header">
-            <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+            <h2 class="accordion-header custom-accordion-header">
+            <button class="accordion-button custom-accordion-header" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne"
+            style="color: white;">
+            <i class="fa-solid fa-user me-2" style="color: #ffffff;"></i>
             Datos personales
             </button>
             </h2>
@@ -58,7 +60,9 @@ if (isset($_SESSION["ID"])) {
                     <div class="mb-3 row">
                       <label class="col-sm-2 col-form-label">Contraseña:</label>
                       <div class="col-sm-10">
-                        <button class="btn btn-light" type="button" data-bs-toggle="modal" data-bs-target="#modalCambiarContrasena">Cambiar contraseña</button>
+                        <button class="btn btn-light" id="btnpassword" type="button" data-bs-toggle="modal" data-bs-target="#modalCambiarContrasena">
+                          <i class="fa-solid fa-lock me-2" style="color: #ffffff;"></i>
+                          Cambiar contraseña</button>
                       </div>
                     </div>
                     <input type="hidden" name="id" value="<?php echo $_SESSION["ID"]; ?>">
@@ -79,7 +83,7 @@ if (isset($_SESSION["ID"])) {
             </div>
             <div class="accordion-item">
               <h2 class="accordion-header">
-              <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+              <button class="accordion-button collapsed custom-accordion-header" style="color: white;" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
               <i class="fa-solid fa-address-card me-2" style="color: #ffffff;"></i>Registrar nuevo administrador
               </button>
               </h2>

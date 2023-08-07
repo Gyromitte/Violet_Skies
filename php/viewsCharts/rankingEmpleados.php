@@ -20,6 +20,7 @@ FROM (
         EVENTO_EMPLEADOS EE ON e.ID = EE.EMPLEADOS
     WHERE
         c.ESTADO = 'ACTIVO'
+    AND TRIM(c.NOMBRE) != ''
     GROUP BY
         e.ID, c.NOMBRE
 ) AS empleados_ranking

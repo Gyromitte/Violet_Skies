@@ -1,5 +1,5 @@
 <?php
-include "../dataBase.php";
+include_once "../dataBase.php";
 $db = new Database();
 $db->conectarBD();
 
