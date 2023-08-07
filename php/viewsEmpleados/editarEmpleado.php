@@ -5,20 +5,45 @@ $conexion->conectarBD();
 
 // Verificar si se recibieron los datos de RFC y tipo
 if (isset($_POST['rfc']) && isset($_POST['tipoUsuario']) && isset($_POST['id'])) {
-  // Obtener los datos del empleado desde la solicitud
-  $employeeId = $_POST['id'];
-  $rfc = $_POST['rfc'];
-  $tipoUsuario = $_POST['tipoUsuario'];
+    // Obtener los datos del empleado desde la solicitud
+    $employeeId = $_POST['id'];
+    $rfc = strtoupper($_POST['rfc']); // Convertir a mayúsculas para homogeneizar
+    $tipoUsuario = $_POST['tipoUsuario'];
 
-  // Realizar la consulta para actualizar los datos del empleado
-  $actualizar = "UPDATE EMPLEADOS SET RFC='$rfc', TIPO='$tipoUsuario' WHERE CUENTA='$employeeId'"; //Este id debería ser el de la cuenta
-  $conexion->ejecutarSQL($actualizar);
+    // Variable para almacenar el mensaje de error
+    $errorMessage = "";
 
-  //Respuesta de exito
-echo "<div class='alert alert-success'>Cambios aplicados exitosamente!</div>";
+    // Verificar longitud
+    if (strlen($rfc) < 13) {
+        $errorMessage = "El RFC es demasiado -corto- debe tener exactamente 13 caracteres.";
+    } elseif (strlen($rfc) > 13) {
+        $errorMessage = "El RFC es demasiado -largo- debe tener exactamente 13 caracteres.";
+    } else {
+        // Verificar caracteres inválidos
+        if (!preg_match('/^[A-Z0-9]+$/', $rfc)) {
+            $errorMessage = "El RFC solo puede contener letras mayúsculas y dígitos numéricos.";
+        } else {
+            // Verificar formato
+            if (!preg_match('/^[A-Z]{4}\d{6}[A-Z0-9]{3}$/', $rfc)) {
+                $errorMessage = "El formato del RFC es inválido. Debe ser del tipo AAAA123456XXX, donde AAAA son las primeras cuatro letras del apellido, 123456 representa la fecha de nacimiento (YYMMDD) y XXX es la homoclave.";
+            }
+        }
+    }
+
+    // Mostrar el mensaje de error si existe
+    if (!empty($errorMessage)) {
+        echo "<div class='alert alert-danger'>$errorMessage</div>";
+    } else {
+        // El RFC tiene el formato correcto, realizar la consulta para actualizar los datos del empleado
+        $actualizar = "UPDATE EMPLEADOS SET RFC='$rfc', TIPO='$tipoUsuario' WHERE CUENTA='$employeeId'"; //Este id debería ser el de la cuenta
+        $conexion->ejecutarSQL($actualizar);
+
+        //Respuesta de exito
+        echo "<div class='alert alert-success'>Cambios aplicados exitosamente!</div>";
+    }
 } else {
-  //Nambre mijo no valemos...
-  echo "<div class='alert alert-danger'>Algo salio mal (?)</div>";
+    // Faltan datos en la solicitud
+    echo "<div class='alert alert-danger'>Falta información en la solicitud.</div>";
 }
 
 $conexion->desconectarBD();

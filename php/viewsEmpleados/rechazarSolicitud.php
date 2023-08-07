@@ -20,7 +20,7 @@ $resultadoActualizar = $db->ejecutarPreparado($consultaActualizar, $parametrosAc
 //var_dump($resultadoActualizar);
 
 if ($resultadoActualizar) {
-    echo "<div class='alert alert-success'>Cuenta de empleado rechazada. Estado cambiado a INACTIVO.</div>";
+    echo "<div class='alert alert-success'>Solicitud rechazada correctamente</div>";
 } else {
     echo "<div class='alert alert-danger'>Error al rechazar la cuenta de empleado.</div>";
 }

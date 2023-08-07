@@ -93,6 +93,7 @@ var btnCocineros = document.getElementById('verCocineros');
 var btnMeseros = document.getElementById('verMeseros');
 var btnBusqueda = document.getElementById('buscarEmpleado');
 var btnSolicitud = document.getElementById('verSolicitudes');
+
 // Evento para los botones
 modal.addEventListener("show.bs.modal", function (event) {
   // Botón que activó el modal
@@ -124,7 +125,9 @@ function updateModalContent(formType, idEmpleado, idEvento) {
         <form id="formularioEmpleado">
           <div class="mb-3">
             <label class="control-label">RFC</label>
-            <input type="text" name="RFC" placeholder="Ingresa el RFC" class="form-control" required>
+            <input type="text" name="RFC" placeholder="Ingresa el RFC" class="form-control" 
+            required oninput="this.value = this.value.toUpperCase()"
+            required>
           </div>
           <div class="mb-3">
             <label class="control-label">E-mail</label>
@@ -179,6 +182,59 @@ function updateModalContent(formType, idEmpleado, idEvento) {
           checkCurrentTable(currentTable);
         }, 500); // 0.5 segundos, si la funcion se ejecuta muy rapido no reflejara los cambios
       });
+      break;
+      case "@re-incorporarEmpleado":
+        modalTitle.textContent = "Re-incorporar a un empleado";
+        modalHeader.classList.remove('modal-header-warning');
+        formContent = `
+          <div id="mensajeDiv" method="POST"></div>
+          <form id="formularioEmpleado">
+            <div class="mb-3">
+              Aqui puedes volver a integrar al sistema a un empleado que fue dado de baja.
+              <br>
+              Ingresa el correo electronico que pertenecia a la cuenta del empleado:
+            </div>
+            <div class="mb-3">
+              <label class="control-label">E-mail</label>
+              <input type="email" name="CORREO" placeholder="Ingresa el E-mail" class="form-control" required>
+            </div>
+            <div class="d-flex justify-content-center">
+            <button type="submit" class="btn btn-primary btn-modal me-2"><i class="fa-solid fa-address-card me-2" style="color: #ffffff;"></i>Registrar</button>
+            <button type="button" class="btn btn-primary btn-modal" data-bs-dismiss="modal">Cerrar</button>
+            </div>
+          </form>
+        `;
+        //Asignar el contenido al formulario del modal
+        modalForm.innerHTML = formContent;
+  
+        //Obtener el formulario después de haberlo asignado al DOM
+        form = document.querySelector('#formularioEmpleado');
+        
+        //Agregar evento de envio al formulario
+        form.addEventListener('submit', function (event) {
+        event.preventDefault(); //Para que la pagina no de refresh al dar submit
+        
+        //Solicitud AJAX
+        var xhr = new XMLHttpRequest();
+        //Configurar la solicitud
+        xhr.open("POST", "re-incorporar.php", true);
+        xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+        //Obtener los datos del formulario
+        var correo = form.elements['CORREO'].value;
+        //Como se va enviar la solicitud: un string
+        var formData = 'correo=' + (correo);
+        xhr.onreadystatechange = function () {
+        if (xhr.readyState === XMLHttpRequest.DONE && xhr.status === 200) {
+        //Manejo de la respuesta:
+        var respuesta = xhr.responseText;
+        document.getElementById('mensajeDiv').innerHTML = respuesta;
+          }
+        };
+        //Enviar el formulario
+        xhr.send(formData);
+        //Ver cual es la tabla activa para refrescar cualquier cambio
+        checkCurrentTable(currentTable);
+        });
       break;
     case "@eliminarEmpleado":
       modalTitle.textContent = "Eliminar a un Empleado";
@@ -247,7 +303,9 @@ function updateModalContent(formType, idEmpleado, idEvento) {
                     <h6 class="mb-3">${empleado.CORREO}</h6>
                     <div class="mb-3">
                       <label class="control-label">RFC</label>
-                      <input type="text" name="rfc" placeholder="Ingresa el RFC" class="form-control" required value="${empleado.RFC}">
+                      <input type="text" name="rfc" placeholder="Ingresa el RFC" class="form-control" 
+                      required oninput="this.value = this.value.toUpperCase()"
+                      required value="${empleado.RFC}">
                     </div>
                     <div class="form-group mb-3">
                       <label for="tipoUsuario">Tipo de Trabajador</label>
@@ -424,7 +482,8 @@ function updateModalContent(formType, idEmpleado, idEvento) {
                   <h6 class="mb-3">${solicitud.CORREO}</h6>
                   <div class="mb-3">
                     <label class="control-label">RFC</label>
-                    <input type="text" name="RFC" placeholder="Ingresa el RFC" class="form-control" required>
+                    <input required oninput="this.value = this.value.toUpperCase()"
+                    type="text" name="RFC" placeholder="Ingresa el RFC" class="form-control" required>
                   </div>
                   <div class="form-group mb-3">
                     <label for="tipoUsuario">Tipo de Trabajador</label>
@@ -480,6 +539,12 @@ function updateModalContent(formType, idEmpleado, idEvento) {
                     if (xhrAceptar.status === 200) {
                       // Mostrar la respuesta del servidor en el modal
                       document.getElementById("mensajeDiv").innerHTML = xhrAceptar.responseText;
+                      console.log(document.getElementById("mensajeDiv").innerHTML);
+                      //Si el mensaje es de exito desactivar el boton de rechazar
+                      if(document.getElementById("mensajeDiv").innerHTML === '<div class="alert alert-success">Empleado Registrado!</div>')
+                      {
+                        btnRechazarSolicitud.disabled = true;
+                      }
                       //Ver cual es la tabla activa para refrescar cualquier cambio
                       checkCurrentTable(currentTable);
                     } else {
@@ -519,6 +584,9 @@ function updateModalContent(formType, idEmpleado, idEvento) {
                     if (xhrRechazar.status === 200) {
                       // Mostrar la respuesta del servidor en el modal
                       document.getElementById("mensajeDiv").innerHTML = xhrRechazar.responseText;
+                      //Desactivar los botones
+                      btnAceptarSolicitud.disabled = true;
+                      btnRechazarSolicitud.disabled = true;
                       // Ver cual es la tabla activa para refrescar cualquier cambio
                       checkCurrentTable(currentTable);
                     } else {
@@ -586,6 +654,7 @@ function updateModalContent(formType, idEmpleado, idEvento) {
         break;
 
     case "@verDetallesEvento":
+      console.log("Sup man! miss me?");
       modalTitle.textContent = "Detalles del Evento";
       var xhrDetalles = new XMLHttpRequest();
       xhrDetalles.onreadystatechange = function() {
@@ -808,7 +877,6 @@ function updateModalContent(formType, idEmpleado, idEvento) {
                       filtrarEventos();
                       modalForm.innerHTML = formContent;
                     } else {
-                      alert('ERRRORRRRRESSSSSS');
                       console.error("Error en el servidor:", response.message);
                     }
                   } else {
@@ -885,31 +953,31 @@ function updateModalContent(formType, idEmpleado, idEvento) {
       xhrDetalles.send();
       break;
       case "@verHistorial":
-  modalTitle.textContent = "Historial de empleado";
-  // Obtener los datos del empleado con una solicitud AJAX
-  var xhr = new XMLHttpRequest();
-  xhr.onreadystatechange = function () {
-    if (xhr.readyState === XMLHttpRequest.DONE) {
-      if (xhr.status === 200) {
-        // Parsear la respuesta JSON del primer AJAX
-        var empleado = JSON.parse(xhr.responseText);
-        // Actualizar el contenido del formulario con los datos obtenidos
-        formContent = `
-          <form">
-            <div id="mensajeDiv" method="POST"></div>
-            <h5>Empleado:  </h5>
-            <h6 class="mb-3">${empleado.NOMBRE} ${empleado.AP_PATERNO} ${empleado.AP_MATERNO}</h6> 
-            <!-- Div para mostrar el historial de eventos -->
-            <div id="historialDiv"></div>
-            <div class="d-flex justify-content-center">
-              <button type="button" class="btn btn-primary btn-modal" data-bs-dismiss="modal">Cerrar</button>
-            </div>
-          </form>
-        `;
+      modalTitle.textContent = "Historial de empleado";
+      // Obtener los datos del empleado con una solicitud AJAX
+      var xhr = new XMLHttpRequest();
+      xhr.onreadystatechange = function () {
+        if (xhr.readyState === XMLHttpRequest.DONE) {
+          if (xhr.status === 200) {
+            // Parsear la respuesta JSON del primer AJAX
+            var empleado = JSON.parse(xhr.responseText);
+            // Actualizar el contenido del formulario con los datos obtenidos
+            formContent = `
+              <form">
+                <div id="mensajeDiv" method="POST"></div>
+                <h5>Empleado:  </h5>
+                <h6 class="mb-3">${empleado.NOMBRE} ${empleado.AP_PATERNO} ${empleado.AP_MATERNO}</h6> 
+                <!-- Div para mostrar el historial de eventos -->
+                <div id="historialDiv"></div>
+                <div class="d-flex justify-content-center">
+                  <button type="button" class="btn btn-primary btn-modal" data-bs-dismiss="modal">Cerrar</button>
+                </div>
+              </form>
+            `;
         // Asignar el contenido al formulario del modal
         modalForm.innerHTML = formContent;
 
-        // Realizar la segunda solicitud AJAX para obtener el historial de eventos del empleado
+        // Realizar la segunda solicitud AJAX para obtener los datos del empleado
         var xhrHistorial = new XMLHttpRequest();
         xhrHistorial.onreadystatechange = function () {
           if (xhrHistorial.readyState === XMLHttpRequest.DONE) {
@@ -925,11 +993,35 @@ function updateModalContent(formType, idEmpleado, idEvento) {
         // Hacer la segunda solicitud al script PHP para obtener el historial
         xhrHistorial.open("GET", "verHistorial.php?id=" + idEmpleado, true);
         xhrHistorial.send();
+        
+        // Asignar el contenido al formulario del modal
+        modalForm.innerHTML = formContent;
+        // Esperar a que el modal cargue
+        setTimeout(function () {
+          // Conseguir todos los botones para ver el historial
+          var botonesHistorial = document.querySelectorAll('.btn-ver-historial');
+          
+          // Agregar el event listener a cada botón
+          botonesHistorial.forEach(function (btn) {
+            // Obtener el tipo de formulario correspondiente al botón
+            var formType = btn.getAttribute("data-bs-whatever");
+            var idEmpleado = btn.getAttribute("data-id");
+            var idEvento = btn.getAttribute("data-event-id");
+
+            // Agregar el event listener al botón
+            btn.addEventListener("click", function () {
+              // Código a ejecutar cuando se hace clic en el botón
+              console.log("Se hizo clic en el botón");
+              updateModalContent(formType, idEmpleado, idEvento);
+            });
+          });
+        }, 500);
       } else {
         console.error("Error en la solicitud AJAX");
       }
     }
   };
+  //console.log(idEmpleado);
   // Hacer la solicitud al script PHP y pasar el ID del empleado
   xhr.open("GET", "obtenerEmpleado.php?id=" + idEmpleado, true);
   xhr.send();
