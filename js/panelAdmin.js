@@ -902,13 +902,10 @@ function updateModalContent(formType, idEmpleado, idEvento) {
         xhrHistorial.open("GET", "verHistorial.php?id=" + idEmpleado, true);
         xhrHistorial.send();
         
-        // Asignar el contenido al formulario del modal
-        modalForm.innerHTML = formContent;
         // Esperar a que el modal cargue
         setTimeout(function () {
           // Conseguir todos los botones para ver el historial
           var botonesHistorial = document.querySelectorAll('.btn-ver-historial');
-          
           // Agregar el event listener a cada botón
           botonesHistorial.forEach(function (btn) {
             // Obtener el tipo de formulario correspondiente al botón
@@ -923,7 +920,7 @@ function updateModalContent(formType, idEmpleado, idEvento) {
               updateModalContent(formType, idEmpleado, idEvento);
             });
           });
-        }, 500);
+        }, 700);
       } else {
         console.error("Error en la solicitud AJAX");
       }
