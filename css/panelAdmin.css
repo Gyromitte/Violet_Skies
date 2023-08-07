@@ -350,24 +350,11 @@ nav{
 .accordion-button {
     background: #ab8cf5;
 }
-.accordion-item:hover .accordion-button {     
-    font-weight: bold;
+.accordion-item:hover .accordion-button {
+    background-color: #5603ad;
+     color: white;
 }
 
 .detalles {
     max-width: 600px; /* Cambia este valor según sea necesario */
-  }
-
-#mensajeModificar
-{
-    text-align: center;
-    display: NONE;
-    width: 300px;
-    height: auto;
-    margin: 0 auto;
-}
-.personal-info input[disabled] {
-    background-color: transparent;
-    border-color: transparent;
-    font-style: oblique;
   }

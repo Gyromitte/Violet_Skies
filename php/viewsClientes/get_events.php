@@ -5,7 +5,7 @@ $username = "doadmin";
 $password = "AVNS_zPsBun59otEyJNJBtBv";
 $dbname = "VIOLET";
 
-$usuario_id = 6;
+$usuario_id = $_SESSION["ID"];
 $conn = new mysqli($servername, $username, $password, $dbname);
 
 if ($conn->connect_error) {
