@@ -263,13 +263,13 @@
                             </h3>
                             <h2 id="solicitudesCard"></h2>
                         </div>
-                            <div class="col-md-12">
+                            <div class="col-md-12 donut-container">
                                 <canvas id="proporcionEmpleados2" style="height: 40px"></canvas>
                             </div>
                         </div>
                         <!-- Canvas a la derecha -->
                         <div class="info-card col-md-7">
-                            <canvas id="participacionEmpleados"></canvas>
+                            <canvas id="participacionEmpleados" style="height: 70%; width: 100%;"></canvas>
                         </div>
                     </div>
                 </div>
