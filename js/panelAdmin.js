@@ -862,10 +862,7 @@ function updateModalContent(formType, idEmpleado, idEvento) {
                 alert('Por favor, llene los campos correctamente\nEl mínimo para invitados son 10');
                 return;
               }
-              if (!cocinerosRequeridos || !meserosRequeridos || parseInt(cocinerosRequeridos) < 0 || parseInt(meserosRequeridos) < 0) {
-                alert('Por favor, llene los campos correctamente\nInserte valores válidos');
-                return;
-              }
+              
 
               var xhrGuardarCambios = new XMLHttpRequest();
               xhrGuardarCambios.onreadystatechange = function(response) {

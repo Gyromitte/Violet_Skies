@@ -72,6 +72,11 @@ if (isset($_GET['id'])) {
             }
         }
     }
+    else {
+        $meseros = 1;
+                $consulta .= "D.MESEROS = :meseros, ";
+                $parametros[':meseros'] = $meseros;
+    }
 
     if (isset($_GET['COCINEROS']) && $_GET['COCINEROS'] !== "") {
         if (isset($_GET['COCINEROS']) && intval($_GET['COCINEROS']) > $dispCocina)
@@ -86,6 +91,10 @@ if (isset($_GET['id'])) {
             $consulta .= "D.COCINEROS = :cocineros, ";
             $parametros[':cocineros'] = $cocineros;
         }
+    }else {
+        $cocineros =0;
+            $consulta .= "D.COCINEROS = :cocineros, ";
+            $parametros[':cocineros'] = $cocineros;
     }
 
     if (isset($_GET['SALON'])) {
