@@ -72,7 +72,7 @@ if (isset($_SESSION["ID"])) {
                     <div id="mensajeModificar"></div>
                   </div>
                 </div>
-              </div>
+              </div> 
             </div>
             <div class="accordion-item">
               <h2 class="accordion-header">
