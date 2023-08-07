@@ -36,9 +36,9 @@ if (isset($_GET['id'])) {
         $tipo = $fila->TIPO;
         $cantidad = $fila->CANT;
     
-        if ($tipo === 'mesero') {
+        if ($tipo === 'MESERO') {
             $dispMeseros = $cantidad;
-        } elseif ($tipo === 'cocina') {
+        } elseif ($tipo === 'COCINA') {
             $dispCocina = $cantidad;
         }
     }
