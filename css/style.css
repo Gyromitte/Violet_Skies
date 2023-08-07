@@ -174,27 +174,16 @@ h1 {
 #company-name {
   padding-left: 1em;
   padding-right: 1em;
+  border-radius: 10px;
 }
 
 #company-name {
   position: relative;
+  transition: box-shadow 0.3s ease;
 }
 
-#company-name::after {
-  content: '';
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  width: 0;
-  height: 2px;
-  background-color: #fafafa;
-  /* Color del subrayado */
-  transition: width 0.3s ease;
-}
-
-#company-name:hover::after {
-  width: 100%;
-  /* Hacer que el subrayado aparezca gradualmente al pasar el mouse */
+#company-name:hover {
+  box-shadow: 0 0 10px 5px rgba(255, 255, 255, 0.8); /* Agregar un brillo al pasar el mouse */
 }
 
 .no-underline {
