@@ -72,12 +72,14 @@ modal.addEventListener("show.bs.modal", function (event) {
     
     updateModalContent(formType, idEvento);
   });
+
   
   // Función para actualizar el contenido del modal según el tipo de formulario
   function updateModalContent(formType, idEvento) {
     var formContent = "";
     var modalTitle = document.querySelector('#empModal .modal-title');
     //Conseguir el modal header para cambiarle el color
+    
     var modalHeader = document.querySelector('.modal-header');
   
     switch (formType) {
@@ -118,24 +120,17 @@ modal.addEventListener("show.bs.modal", function (event) {
               `;
               modalForm.innerHTML = formContent;
               var asistir = document.getElementById("asist");
+              
 
               asistir.addEventListener("click", function (event) {
                 event.preventDefault();
-                
-                if (alreadyAssigned) {
-                  // Show a message indicating that the user is already assigned
-                  document.getElementById("mensajeDiv").innerHTML = "You are already assigned to this event!";
-                  return;
-                }
       
                 var xhrAceptar = new XMLHttpRequest();
                 xhrAceptar.onreadystatechange = function () {
                   if (xhrAceptar.readyState === XMLHttpRequest.DONE) {
                     if (xhrAceptar.status === 200) {
                       document.getElementById("mensajeDiv").innerHTML = xhrAceptar.responseText;
-                      if (xhrAceptar.responseText === "<div class='alert alert-success'>Asistiendo!</div>") {
-                        alreadyAssigned = true;
-                      }
+
                     } 
                     else {
                       console.error("Error en la solicitud AJAX de Aceptar");

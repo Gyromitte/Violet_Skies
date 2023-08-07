@@ -49,11 +49,17 @@
         $consulta="SELECT E.F_EVENTO FROM EVENTO E WHERE E.ID='$eventoId'";
         $evendate=$db->seleccionar($consulta);
         $date = $evendate[0]->F_EVENTO;
+        $date=$date->format('Y-m-d');
+
+        $checkemp="SELECT * FROM EVENTO_EMPLEADOS EE WHERE EE.EVENTO='$eventoId'
+        AND EE.EMPLEADOS='$emp'";
+        $imin=$db->seleccionar($checkemp);
 
         $time = "SELECT F_EVENTO FROM EVENTO E JOIN EVENTO_EMPLEADOS EE ON E.ID = EE.EVENTO
         WHERE EE.EMPLEADOS = '$emp'";
 
         $attendedEvents = $db->seleccionar($time);
+        $attendedEvents=$attendedEvents->format('Y-m-d');
 
 // Check if the user has already attended an event on the same day as the event they want to attend
         $alreadyAttendedEvent = false;
@@ -63,14 +69,20 @@
                 break;
             }
         }
-        if ($alreadyAttendedEvent) {
+        echo $date;
+        if(count($imin) == 1){
+            echo "<div class='alert alert-danger'> Ya estas dentro de este evento</div>";
+            exit;
+        }
+        else if ($alreadyAttendedEvent) {
             echo "<div class='alert alert-danger'> Ya tienes evento dentro de este fecha</div>";
             exit;
         }
+        else{
         $enter="INSERT INTO EVENTO_EMPLEADOS(EVENTO,EMPLEADOS) VALUES('$eventoId','$emp')";
         $db->ejecutarSQL($enter);       
         echo"<div class='alert alert-success'>Asistiendo!</div>";
-
+        }
     }
 
 
