@@ -85,12 +85,12 @@ $(window).on('load', function() {
             if (jsonData && jsonData.disponibilidad === true) {
                 // Hubo un problema con la disponibilidad del salón o el número de invitados
                 // Muestra un mensaje de error en lugar de un mensaje de éxito
-                const mensajeDiv = document.getElementById('mensajeDiv');
-                mensajeDiv.innerHTML = `<div style="text-align:center;" class="alert alert-danger">Error: No se pudo agregar el evento.</div>`;
+                const msgDiv = document.getElementById('msgDiv');
+                msgDiv.innerHTML = `<div style="text-align:center;" class="alert alert-danger">Error: No se pudo agregar el evento.</div>`;
             } else {
                 // El evento se pudo agregar correctamente
-                const mensajeDiv = document.getElementById('mensajeDiv');
-                mensajeDiv.innerHTML = `<div style="text-align:center;" class="alert alert-success">Evento solicitado con éxito <br>espera a que los administradores lo confirmen</div>`;
+                const msgDiv = document.getElementById('msgDiv');
+                msgDiv.innerHTML = `<div style="text-align:center;" class="alert alert-success">Evento solicitado con éxito <br>espera a que los administradores lo confirmen</div>`;
             }
 
             // Ejemplo de cómo manejar la lista de eventos:
@@ -101,8 +101,8 @@ $(window).on('load', function() {
         } catch (error) {
             console.error('Error al analizar la respuesta JSON:', error);
             // Si ocurre un error al analizar la respuesta JSON, muestra un mensaje de error
-            const mensajeDiv = document.getElementById('mensajeDiv');
-            mensajeDiv.innerHTML = `<div style="text-align:center;" class="alert alert-danger">Error en la respuesta del servidor.</div>`;
+            const msgDiv = document.getElementById('msgDiv');
+            msgDiv.innerHTML = `<div style="text-align:center;" class="alert alert-danger">Error en la respuesta del servidor.</div>`;
         }
       })
       .catch(error => console.error('Error en la solicitud:', error));

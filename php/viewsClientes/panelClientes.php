@@ -111,7 +111,7 @@
             </div>
             <div class="container">
             <form id="evento-form" method="post">
-            <div id="mensajeDiv"></div>
+            <div id="msgDiv"></div>
                     <div class="form-group">
                         <label for="nombre_evento">Nombre del evento:</label>
                         <input type="text" class="form-control" id="nombre_evento" name="nombre_evento" required>
