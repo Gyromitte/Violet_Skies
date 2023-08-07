@@ -200,7 +200,7 @@
                     $cadena="INSERT INTO CUENTAS(NOMBRE, AP_PATERNO,AP_MATERNO, CORREO, CONTRASEÑA, 
                     TELEFONO,TIPO_CUENTA) VALUES('$nom','$ap','$am','$usu','$hash','$cel','$tipo')";
                     $this->PDO_local->query($cadena);
-                    echo"<div class='alert alert-success'>Usuario Registrado</div>";
+                    echo"<div class='alert alert-success'>Te has registrado exitosamente!</div>";
                     }
                     catch(PDOException $e){
                         $errorMessage = $e->getMessage();
