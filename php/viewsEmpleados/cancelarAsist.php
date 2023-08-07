@@ -19,16 +19,17 @@
     foreach($fechaevento as $fecha){
         $eventoDate= new datetime($fecha->FECHA);
 
-        $threeMonthsAgo = $eventoDate->modify('-3 months');
+        $threeMonthsAgo = $eventoDate->modify('-1 week');
         $currentDateStr = $currentDateTime->format('Y-m-d');
         $threeMonthsAgoStr = $threeMonthsAgo->format('Y-m-d');
     
         
     if ($currentDate > $threeMonthsAgoStr) {
-        echo"<div class='alert alert-danger'>No se puede cancelar, ya faltan menos de 3 meses para el evento</div>";
+        echo"<div class='alert alert-danger'>No se puede cancelar, ya faltan menos de 1 semana para el evento</div>";
     } 
     else {
         $enter="DELETE FROM EVENTO_EMPLEADOS WHERE EVENTO='$eventoId' AND EMPLEADOS='$emp'";
+        $db->ejecutarSQL($enter);
         echo"<div class='alert alert-success'>Cancelado!</div>";
     }
     }
