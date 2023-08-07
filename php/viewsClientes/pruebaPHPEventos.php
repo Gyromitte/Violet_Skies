@@ -51,7 +51,6 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     if ($conexion->connect_error) {
         die("Error en la conexión a la base de datos: " . $conexion->connect_error);
     }
-
     // Insertar los datos en la base de datos en dos pasos
     $sql1 = "INSERT INTO EVENTO (NOMBRE, F_EVENTO, CLIENTE) VALUES (?,?,?)";
     $stmt1 = $conexion->prepare($sql1);
@@ -82,17 +81,19 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     // Bind parameters
     $stmt2->bind_param("isss", $invitados, $salon, $comida, $evento_id);
 
-        // Execute second query
-        if ($stmt2->execute()) {
-            echo "Evento agregado exitosamente.";
-            // Puedes realizar alguna acción adicional aquí, como redirigir al usuario o mostrar un mensaje.
-        } else {
-            echo "Error al agregar el evento: " . $stmt2->error;
-            // Puedes realizar alguna acción adicional aquí, como redirigir al usuario o mostrar un mensaje.
-        }
-
-        // Cerrar la segunda consulta
-        $stmt2->close();
+    // Execute second query
+    if ($stmt2->execute()) {
+        $response = array("mensaje" => "Evento agregado exitosamente.");
+        echo json_encode($response);
+        // Puedes realizar alguna acción adicional aquí, como redirigir al usuario o mostrar un mensaje.
+    } else {
+        $response = array("error" => "Error al agregar el evento: " . $stmt2->error);
+        echo json_encode($response);
+        // Puedes realizar alguna acción adicional aquí, como redirigir al usuario o mostrar un mensaje.
+    }
+    
+    // Cerrar la segunda consulta
+    $stmt2->close();
     } else {
         echo "Error al agregar el evento: " . $stmt1->error;
         // Puedes realizar alguna acción adicional aquí, como redirigir al usuario o mostrar un mensaje.

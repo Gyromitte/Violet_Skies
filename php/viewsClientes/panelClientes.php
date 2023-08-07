@@ -13,7 +13,10 @@
     <!--StyleSheets-->
     <link rel="stylesheet" href="/bootstrap/css/bootstrap.min.css">
     <link rel="stylesheet" href="/css/panelAdmin.css">
-    
+    <link rel="stylesheet" href="/css/cards.css">
+    <link rel="stylesheet" href="../viewsClientes/pruebasCEventos/pruebaEventos.css">
+    <!-- Agrega la siguiente línea para cargar el CSS del complemento datetimepicker -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-datetimepicker/2.5.20/jquery.datetimepicker.min.css">
     <!--Referencias a fuentes-->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -23,7 +26,9 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&display=swap" rel="stylesheet">
     <script src="https://kit.fontawesome.com/b60c246061.js" crossorigin="anonymous"></script>
+    <script src="./pruebaJSEventos.js" async defer></script>
     <script src="/js/panelAdmin.js" async defer></script>
+
     
 </head>
 <body>
@@ -86,11 +91,19 @@
     <div id="main">
         <!-- Página de Eventos del cliente -->
         <div id="home" class="tab-content active">
-            <p class="test">Yo soy, home</p>
+            <div class="panel-header">
+                <h3 class="test" style="text-align: center;">
+                    Configura tu evento!
+                    <i class="fa-solid fa-calendar-days" style="color: #ffffff;"></i>
+                </h3>
+            </div>
+            <div id="event-cards" class="card-container">
+            <!-- Aquí se agregarán las tarjetas de eventos -->
+            </div>
         </div>
         <!-- Agendar Eventos -->
         <div id="eventos" class="tab-content">
-        <div class="panel-header">
+            <div class="panel-header">
                 <h3 class="test" style="text-align: center;">
                     Configura tu evento!
                     <i class="fa-solid fa-calendar-days" style="color: #ffffff;"></i>
@@ -154,7 +167,7 @@
                         <label for="fecha">Fecha y hora del evento:</label>
                         <input type="text" class="form-control" id="fechaEvento" name="fechaEvento"required>
                     </div>
-                    <button type="submit" class="btn btn-primary" >Agregar Evento</button>
+                    <button type="submit" class="btn btn-primary" >Solicitar Evento</button>
                 </form>
             </div>
         </div>
@@ -169,7 +182,7 @@
             <p><strong>Apellido Materno:</strong> <span id="ap_materno"><?php echo $_SESSION["ap_materno"]; ?></span></p>
             <p><strong>Teléfono:</strong> <span id="telefono"><?php echo $_SESSION["telefono"]; ?></span></p>
             <p><strong>Correo:</strong> <span id="correo"><?php echo $_SESSION["correo"]; ?></span></p>
-            <p><strong>Tipo de cuenta:</strong> <span id="tipo_cuenta">Cliente</span></p>
+            <p><strong>Tipo de cuenta:</strong> <span id="tipo_cuenta"><?php echo $_SESSION["tipo"]; ?></span></p>
             <button class="btn btn-primary" id="editarDatos" data-bs-toggle="modal" data-bs-target="#mainModal" data-bs-whatever="@editarPerfil">Editar Datos</button>
 
         </div>

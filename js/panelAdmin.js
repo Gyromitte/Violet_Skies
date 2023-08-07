@@ -309,8 +309,6 @@ function updateModalContent(formType, idEmpleado, idEvento) {
       checkCurrentTable(currentTable);
       break;
       case "@editarPerfil":
-        var datosUsuarioJSON= {};
-        var updatePerfilXHR = new XMLHttpRequest();
         modalTitle.textContent = "Editar Datos";
         formContent = `
           <form id="formularioEditarDatos">
