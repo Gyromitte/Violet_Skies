@@ -50,17 +50,17 @@
         foreach($tabla as $registro){
             $evento=$registro->ID;
 
-            $meseros_query = "SELECT COUNT(*) AS cant_meseros FROM EVENTO_EMPLEADOS WHERE EVENTO
-             = '$evento' AND EMPLEADOS IN (SELECT ID FROM EMPLEADOS WHERE TIPO='MESERO')";
+            $count_query = "SELECT 
+                        (SELECT COUNT(*) FROM EVENTO_EMPLEADOS 
+                            WHERE EVENTO = '$evento' AND EMPLEADOS IN (SELECT ID FROM EMPLEADOS WHERE TIPO='MESERO')) AS cant_meseros,
+                        (SELECT COUNT(*) FROM EVENTO_EMPLEADOS 
+                            WHERE EVENTO = '$evento' AND EMPLEADOS IN (SELECT ID FROM EMPLEADOS WHERE TIPO='COCINA')) AS cant_cocineros
+                    FROM DUAL";
 
-            $cocineros_query = "SELECT COUNT(*) AS cant_cocineros FROM EVENTO_EMPLEADOS WHERE EVENTO
-             = '$evento' AND EMPLEADOS IN (SELECT ID FROM EMPLEADOS WHERE TIPO='COCINA')";
+                $result = $conexion->seleccionar($count_query);
 
-            $meseros_result = $conexion->seleccionar($meseros_query);
-            $cantm = $meseros_result[0]->cant_meseros;
-
-            $cocineros_result = $conexion->seleccionar($cocineros_query);
-            $cantc = $cocineros_result[0]->cant_cocineros;
+                $cantm = $result[0]->cant_meseros;
+                $cantc = $result[0]->cant_cocineros;
 
 
             if($registro->CANT==='LLENO'){
