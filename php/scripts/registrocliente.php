@@ -42,8 +42,9 @@ error_reporting(E_ALL);
     else if(strlen($cel) > 15){
         echo "<div class='alert alert-danger'>Numero de celular demasiado grande</div>";
     }
-    else if(preg_match('/^\d+$/', $cel)){
-        echo "<div class='alert alert-danger'>No utilizar caracteres especiales</div>";
+    else if(!ctype_digit($cel)){
+        echo "<div class='alert alert-danger'>No utilizar caracteres especiales dentro del numero
+        de celular</div>";
     }
     else if($nom=="" || $ap==""||$am==""||$usu==""||$pass==""||$confirm==""||$cel==""){
         echo "<div class='alert alert-danger'>Registros vacios, favor de llenar</div>";
