@@ -94,7 +94,7 @@ function updateModalContent(formType) {
                   //Manejo de la respuesta:
                   var respuesta = xhr.responseText;
                   document.getElementById('mensajeDiv').innerHTML = respuesta;
-                  if(respuesta==="<div class='alert alert-success'>Usuario Registrado</div>"){
+                  if(respuesta==="<div class='alert alert-success'>Te has registrado exitosamente!</div>"){
                     setTimeout(function () {
                         window.location.href = "../views/login.php";
                       }, 2000);
@@ -185,7 +185,7 @@ function updateModalContent(formType) {
                 if (xhr.readyState === XMLHttpRequest.DONE && xhr.status === 200) {
                     var respuesta = xhr.responseText;
                     document.getElementById('mensajeDiv').innerHTML = respuesta;
-                    if(respuesta==="<div class='alert alert-success'>Usuario Registrado</div>"){
+                    if(respuesta==="<div class='alert alert-success'>Te has registrado exitosamente!</div>"){
                         setTimeout(function () {
                             window.location.href = "../views/login.php";
                           }, 2000);

@@ -50,7 +50,7 @@ error_reporting(E_ALL);
         echo "<div class='alert alert-danger'>Registros vacios, favor de llenar</div>";
     }
     else{
-    $db->Register($nom,$ap,$am,$usu,$pass,$confirm,$cel,$tipo);
+        $db->Register($nom,$ap,$am,$usu,$pass,$confirm,$cel,$tipo);
     }
     $db->desconectarBD();
 ?>
