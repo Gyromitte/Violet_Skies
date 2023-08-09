@@ -148,7 +148,6 @@
                 <div class='btn-group'>
                     <label class='control-label'>Orden: </label>
                     <select id='tipoorden' name='orden' class='form-select'>;
-                        <option value='' selected>-Seleccionar un Orden-</option>
                         <option value='porcreacion'>Recientemente Creadas</option>;
                         <option value='lejanoevento'>Eventos Lejanos</option>;
                         <option value='cercasevento'>Eventos Cercanos</option>;
