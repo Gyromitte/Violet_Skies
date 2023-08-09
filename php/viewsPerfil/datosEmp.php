@@ -162,13 +162,11 @@ include "../dataBase.php";
             } catch (PDOException $e) {
                 echo '<script>
                     document.getElementById("alertMessage").classList.remove("d-none");
-                    document.getElementById("alertMessage").innerHTML = "Error en la base de datos: " + ' . $e->getMessage() . ';
-                </script>';
+                    document.getElementById("alertMessage").innerHTML = "Error en la base de datos: " + ' . $e->getMessage() . '</script>';
             }
             $database->desconectarBD();
         }
     }
     
-
 ?>
 
