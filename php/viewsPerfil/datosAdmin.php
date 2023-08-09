@@ -1,3 +1,26 @@
+<style>
+  /* Estilos personalizados para el modal */
+  #modalAdminRegistrado .modal-dialog {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: calc(100vh - 120px); /* Ajusta el valor según tu diseño */
+  }
+
+  #modalAdminRegistrado .modal-content {
+    text-align: center;
+  }
+
+  /* Estilos para el contenido del mensaje */
+  #mensajeExito {
+    font-size: 18px;
+    padding: 20px;
+  }
+</style>
+</body>
+</html>
+
+
 <?php
 include_once "../dataBase.php";
 
@@ -158,6 +181,22 @@ if (isset($_SESSION["ID"])) {
                       <div class="alert d-none" role="alert" align="center" id="alertMessage">
                         </div>
                     </form>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+
+
+            <div class="modal fade" id="modalAdminRegistrado" tabindex="-1" aria-labelledby="modalAdminRegistradoLabel" aria-hidden="true">
+              <div class="modal-dialog">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h5 class="modal-title">Nuevo administrador registrado</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                  </div>
+                  <div class="modal-body">
+                    <div></div>
                   </div>
                 </div>
               </div>

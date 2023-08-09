@@ -162,8 +162,14 @@
         success: function (response) {
           const data = JSON.parse(response);
           if (data.mensaje) {
-
-            alert(`${data.mensaje}. Asegúrate de darle sus credenciales para ingresar a su cuenta\n\nCorreo: ${data.correo}\nContraseña: ${data.contraseña}`);
+            const mensajeExito = `${data.mensaje}. Asegúrate de darle sus credenciales para ingresar a su cuenta<p>Correo: ${data.correo}<\p><strong>Contraseña: ${data.contraseña}<\stron>`;
+          
+            // Actualiza el contenido del modalAdminRegistrado
+            $("#modalAdminRegistrado .modal-body").html(`<p>${mensajeExito}</p>`);
+            
+            // Muestra el modalAdminRegistrado
+            $("#modalAdminRegistrado").modal("show");
+  
             console.log("Se registró exitosamente");
             setTimeout(function () {
               $('input[name="nombreNEW"]').val("");
