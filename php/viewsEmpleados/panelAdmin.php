@@ -174,8 +174,8 @@
             <div class="container-fluid">
             <div id="contentRow" class="row">
                 <!-- Canvas a la izquierda -->
-	            <div class="info-card col-md-7">
-		            <canvas id="menuChart"></canvas>
+	            <div class="graficaEventos col-md-7" >
+                    <canvas id="menuChart"></canvas>
 	            </div>
 	            <!-- Contenido de la derecha -->
 	            <div class="col-md-5">

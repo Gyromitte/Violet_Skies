@@ -247,8 +247,13 @@ nav{
     height: 200px;
     width: 200px; 
 }
-.info-card{
+.info-card, .graficaEventos{
     background-image: linear-gradient(135deg, #5603ad, #ab8cf5);
+    border-radius: 20px;
+    padding: 50px;
+}
+.graficaEventos{
+    background-image: linear-gradient(135deg, #5603ad, #f58cd6);
     border-radius: 20px;
     padding: 50px;
 }
@@ -308,7 +313,7 @@ nav{
     .nav-user{
         display: none;
     }
-    .info-card, #proporcionEmpleados, #eventosAño{
+    .info-card, #proporcionEmpleados, #eventosAño, #graficaEventos{
         margin-bottom: 10px;
     }
     .btn-options{
