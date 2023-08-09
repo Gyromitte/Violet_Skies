@@ -33,23 +33,6 @@
 				padding: 5px; 
 				margin: 5px;
 				float: left;
-			}
-            .tooltip-paragraph {
-                cursor: pointer;
-            }
-
-            .tooltip {
-                display: none;
-                position: absolute;
-                background-color: #f9f9f9;
-                border: 1px solid #ccc;
-                border-radius: 4px;
-                padding: 10px;
-                z-index: 9999999999;
-            }
-
-            .tooltip.active {
-                display: block;
             }
             .cutebox{
                 background-color: #5603ad;
@@ -216,7 +199,7 @@
         </div>
         <div id="perfil" class="tab-content">
             <div class="container">
-                <?php include "../viewsPerfil/datosEmp.php" ?>
+                <!--?php include "../viewsPerfil/datosEmp.php" ?> -->
             </div>
         </div>
 
