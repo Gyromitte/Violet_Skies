@@ -87,8 +87,7 @@
             echo "<p><b>Cliente: </b> $registro->CLIENTE</p>";
             echo "<p><b>Cantidad de invitados: </b> $registro->INVITADOS</p>";
             echo "<p><b>Salon: </b> $registro->SALON</p>";
-            echo "<p data-bs-toggle='tooltip' data-bs-title='$registro->DESCRIPCION'>
-            <b>Comida: </b> $registro->COMIDA</p>";
+            echo "<p><b>Comida: </b> $registro->COMIDA</p>";
             echo "<p><b>Meseros Necesarios: </b>$cantm / $registro->MESEROS</p>";
             echo "<p><b>Cocineros Necesarios: </b>$cantc / $registro->COCINEROS</p>";
                 echo "<div class='text-center'>";
@@ -104,8 +103,25 @@
                                     <i class="fa-solid fa-pencil me-2" style="color: #ffffff;"></i>Asistir
                                 </a>
                                 </li>';
-                        echo '</ul>
-                        </div>';
+                        echo '</ul>';
+                        echo '</div><br>';
+                        echo '<div class="dropdown">';
+                        echo '<button class="btn btn-secondary dropdown-toggle custom-dropdown" type="button" 
+                        data-bs-toggle="dropdown" aria-expanded="false">Descripcion de Comida';
+                        echo '</button>';
+                        echo '<ul class="dropdown-menu custom-drop-menu">';
+                        if($registro->COMIDA=='No aplica'){
+                            echo '<li>
+                                    <p>No hay comida en este evento.</p>
+                                </li>';
+                        }
+                        else{
+                            echo '<li>
+                                    '.$registro->DESCRIPCION.'
+                                </li>';
+                        }
+                        echo '</ul>';
+                    echo '</div>';
                 echo "</div>";
                 echo"</div>";
             echo "</div>";
