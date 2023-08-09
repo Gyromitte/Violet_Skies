@@ -8,6 +8,13 @@ var tablaResultados = document.getElementById('tablaResultados');
 var estadoSelect = document.getElementById('estadoSelect');
 var searchInput = document.getElementById('searchInput');
 var searchButton = document.getElementById('searchButton');
+var eventosPendientes = document.getElementById("eventosPendientes");
+var eventosEnProceso = document.getElementById("eventosEnProceso");
+var eventosCancelados = document.getElementById("eventosCancelados");
+var eventosFin = document.getElementById("eventosFin");
+
+// Obtener el div que contiene el contenido de la clase row
+var contentRow = document.getElementById('contentRow');
 
 // Ejecutar la función de filtrado al cargar la página
 filtrarEventos();
@@ -26,6 +33,22 @@ searchInput.addEventListener('keydown', function(event) {
         event.preventDefault();
         filtrarEventos();
     }
+});
+eventosPendientes.addEventListener("click", function() {
+    estadoSelect.value = "PENDIENTE";
+    filtrarEventos();
+});
+eventosEnProceso.addEventListener("click", function() {
+    estadoSelect.value = "EN PROCESO";
+    filtrarEventos();
+});
+eventosCancelados.addEventListener("click", function() {
+    estadoSelect.value = "CANCELADO";
+    filtrarEventos();
+});
+eventosFin.addEventListener("click", function() {
+    estadoSelect.value = "FINALIZADO";
+    filtrarEventos();
 });
 
 // Escuchar el evento click del botón de búsqueda
@@ -55,7 +78,17 @@ function filtrarEventos() {
 
     // Enviar la solicitud AJAX con los datos del formulario
     xhr.send(formData);
-
+    if (estadoSelect.value === 'GRAFICOS') {
+                contentRow.style.display = 'flex';
+                tablaResultados.style.display = 'none';
+                searchInput.style.display = 'none';
+                searchButton.style.display = 'none';
+            } else {
+                contentRow.style.display = 'none';
+                tablaResultados.style.display = 'block';
+                searchInput.style.display = 'block'; 
+                searchButton.style.display = 'block'; 
+            }
     // Modificar la URL sin recargar la página
     var params = new URLSearchParams(formData);
     history.replaceState(null, '', '?' + params.toString());
