@@ -114,7 +114,7 @@
             ?><br><br>
             <button data-tab="home" class="dash-button"><i class="fa-solid fa-house" style="color: #ffffff;"></i><br>Home</button>
             <button data-tab="eventos" class="dash-button"><i class="fa-solid fa-calendar-days" style="color: #ffffff;"></i><br>Eventos Disponibles</button>
-            <button data-tab="empleados" class="dash-button"><i class="fa-solid fa-briefcase" style="color: #ffffff;"></i><br>Eventos Asistiendo</button>
+            <button data-tab="empleados" class="dash-button"><i class="fa-solid fa-briefcase" style="color: #ffffff;"></i><br>Eventos En Curso</button>
             <button data-tab="perfil" class="dash-button"><i class="fa-solid fa-user" style="color: #ffffff;"></i><br>Perfil</button>
             <a style="text-decoration: none;" data-tab="logout" class="dash-button" href="../scripts/CerrarSesion.php">
                 <i class="fa-solid fa-door-open" style="color: #ffffff; padding-top: 10px;"></i><br>Logout</a>
@@ -133,7 +133,7 @@
                 echo"<br>";
                 echo"<div class='container'>";
                 echo"<div class='test'>";
-                echo"<h4>Su solicitud ha sido enviado.</h4>";
+                echo"<h4>Su solicitud ha sido enviada.</h4>";
                 echo"</div>";
                 echo"</div>";
                 echo"<br>";
@@ -180,7 +180,7 @@
         ?>
         <div id="empleados" class="tab-content">
             <h3 class="test" style="text-align:center; ">
-                Eventos Asistiendo
+                Eventos En Curso
                 <i class="fa-solid fa-briefcase" style="color: #ffffff;"></i>
             </h3>
             <?php
