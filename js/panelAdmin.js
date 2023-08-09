@@ -654,7 +654,6 @@ function updateModalContent(formType, idEmpleado, idEvento) {
         break;
 
     case "@verDetallesEvento":
-      console.log("Sup man! miss me?");
       modalTitle.textContent = "Detalles del Evento";
       var xhrDetalles = new XMLHttpRequest();
       xhrDetalles.onreadystatechange = function() {
