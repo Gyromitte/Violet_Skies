@@ -14,7 +14,7 @@ $resultadoEmpleado = $db->seleccionarPreparado($consultaEmpleado, $parametrosEmp
 
 if (!$resultadoEmpleado) {
     echo "<div class='alert alert-danger'>El empleado ya ha sido dado de alta <br>";
-    echo "o dicho correo no pertenece a ningun empleado.";
+    echo "o dicho correo no pertenecio a ningun empleado.";
     echo  "</div>";
 } else {
     // Obtener el ID de la cuenta asociada al correo con estado INACTIVO

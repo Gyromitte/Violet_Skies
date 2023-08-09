@@ -167,7 +167,7 @@
                                     echo "</div>";
                                     header("refresh:4;../viewsEmpleados/panelEmpleado.php");
                                 }
-                                else{
+                                else if($trabajo['TIPO']=='COCINA'){
                                     $_SESSION["tipo"]="COCINERO";
                                     echo"<div class=' container'>";
                                     echo"<h1 align='center'>Bienvenido ".$_SESSION["name"]."</h1>";
@@ -209,7 +209,7 @@
                     $cadena="INSERT INTO CUENTAS(NOMBRE, AP_PATERNO,AP_MATERNO, CORREO, CONTRASEÑA, 
                     TELEFONO,TIPO_CUENTA) VALUES('$nom','$ap','$am','$usu','$hash','$cel','$tipo')";
                     $this->PDO_local->query($cadena);
-                    echo"<div class='alert alert-success'>Usuario Registrado</div>";
+                    echo"<div class='alert alert-success'>Te has registrado exitosamente!</div>";
                     }
                     catch(PDOException $e){
                         $errorMessage = $e->getMessage();
@@ -228,5 +228,23 @@
                 echo $e->getMessage();
             }
         }
+        function ejecutarInsert($consulta)
+    {
+        try
+        {
+            $this->PDO_local->query($consulta);
+            echo"<div class='alert alert-success'>Asistiendo!</div>";
+        }
+        catch(PDOException $e)
+        {
+            $errorMessage = $e->getMessage();
+
+            $startIndex = strpos($errorMessage, "1644") + 5;
+            $triggerMessage = substr($errorMessage, $startIndex);
+
+            echo "<div class='alert alert-danger'>" . $triggerMessage . "</div>";
+
+        }
+    }
     }
 ?>

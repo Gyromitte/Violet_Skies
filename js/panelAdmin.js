@@ -654,7 +654,6 @@ function updateModalContent(formType, idEmpleado, idEvento) {
         break;
 
     case "@verDetallesEvento":
-      console.log("Sup man! miss me?");
       modalTitle.textContent = "Detalles del Evento";
       var xhrDetalles = new XMLHttpRequest();
       xhrDetalles.onreadystatechange = function() {
@@ -862,10 +861,7 @@ function updateModalContent(formType, idEmpleado, idEvento) {
                 alert('Por favor, llene los campos correctamente\nEl mínimo para invitados son 10');
                 return;
               }
-              if (!cocinerosRequeridos || !meserosRequeridos || parseInt(cocinerosRequeridos) < 0 || parseInt(meserosRequeridos) < 0) {
-                alert('Por favor, llene los campos correctamente\nInserte valores válidos');
-                return;
-              }
+              
 
               var xhrGuardarCambios = new XMLHttpRequest();
               xhrGuardarCambios.onreadystatechange = function(response) {

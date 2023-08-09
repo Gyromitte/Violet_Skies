@@ -55,6 +55,9 @@
             else if($_SESSION["access"]===2){
                 header("refresh:4;../viewsEmpleados/panelEmpleado.php");
             }
+            else if($_SESSION["access"]===1.5){
+                header("refresh:4;../viewsEmpleados/panelEmpleado.php");
+            }
             else if($_SESSION["access"]===3){
                 header("refresh:4;../viewsEmpleados/panelAdmin.php");
             }

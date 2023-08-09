@@ -5,45 +5,35 @@
     session_start();
     $emp=$_SESSION["trabajo"];
     $tipo=$_SESSION["tipo"];
-    $eventoId = $_GET['id'];
+    $eventoId = $_POST['eventoId'];
+    $cantResult = null;
 
     $currentDate = date('Y-m-d');
 
-
     $currentDateTime = new DateTime($currentDate);
 
+    $consulta="SELECT DATE_FORMAT(E.F_EVENTO, '%Y-%m-%d') AS FECHA FROM EVENTO E WHERE 
+    E.ID= '$eventoId'";
+    $fechaevento=$db->seleccionar($consulta);
 
-    $threeMonthsAgo = $currentDateTime->modify('-3 months');
+    foreach($fechaevento as $fecha){
+        $eventoDate= new datetime($fecha->FECHA);
 
-    $currentDateStr = $currentDateTime->format('Y-m-d');
-    $threeMonthsAgoStr = $threeMonthsAgo->format('Y-m-d');
-
-    $consulta="SELECT E.F_EVENTO FROM EVENTO E WHERE E.ID= '$eventoID'";
+        $threeMonthsAgo = $eventoDate->modify('-1 week');
+        $currentDateStr = $currentDateTime->format('Y-m-d');
+        $threeMonthsAgoStr = $threeMonthsAgo->format('Y-m-d');
     
-if ($currentDate > $threeMonthsAgoStr) {
-    echo "The current date is after 3 months ago.";
-} else {
-    echo "The current date is on or before 3 months ago.";
-}
+        
+    if ($currentDate > $threeMonthsAgoStr) {
+        echo"<div class='alert alert-danger'>No se puede cancelar, ya faltan menos de 1 semana para el evento</div>";
+    } 
+    else {
+        $enter="DELETE FROM EVENTO_EMPLEADOS WHERE EVENTO='$eventoId' AND EMPLEADOS='$emp'";
+        $db->ejecutarSQL($enter);
+        echo"<div class='alert alert-success'>Cancelado!</div>";
+    }
+    }
 
+$db->desconectarBD();
 
-    if($emp=="MESERO"){
-        $cant="SELECT DE.MESEROS FROM DETALLE_EVENTO DE WHERE ID='$eventoId'";
-    }
-    else{
-        $cant="SELECT DE.COCINEROS FROM DETALLE_EVENTO DE WHERE ID='$eventoId'";
-    }
-    $num= "SELECT COUNT(EE.ID) FROM EVENTO_EMPLEADOS EE JOIN EMPLEADOS EMP ON EE.EMPLEADOS=EMP.ID
-    WHERE EE.EVENTO='$eventoId' AND EMP.TIPO='$tipo'";
-
-    if($num==$cant){
-        echo"<div class='alert alert-danger'>Cupo lleno</div>";
-    }
-    else{
-        $consulta="SELECT E.F_EVENTO FROM EVENTO";
-        $enter="INSERT INTO EVENTO_EMPLEADO(EVENTO,EMPLEADOS) VALUES('$eventoId','$emp')";
-        echo"<div class='alert alert-success'>Asistiendo!</div>";
-    }
-?>
-   
 

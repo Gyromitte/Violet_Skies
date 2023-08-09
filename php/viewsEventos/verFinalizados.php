@@ -22,17 +22,19 @@
         foreach($tabla as $registro){
             $evento=$registro->ID;
 
-                $meseros="SELECT COUNT(EE.EMPLEADOS) FROM EVENTO_EMPLEADOS EE JOIN EVENTO E 
-                ON E.ID=EE.EVENTO JOIN EMPLEADOS EMP ON EMP.ID=EE.EMPLEADOS WHERE
-                E.ID='$evento' AND EMP.TIPO='MESERO'";
-                $verm=$conexion->seleccionar($meseros);
-                $cantm=count($verm);
+            $meseros_query = "SELECT COUNT(*) AS cant_meseros FROM EVENTO_EMPLEADOS 
+            WHERE EVENTO = '$evento' AND EMPLEADOS IN (SELECT ID FROM EMPLEADOS 
+            WHERE TIPO='MESERO')";
 
-                $cocineros="SELECT COUNT(EE.EMPLEADOS) FROM EVENTO_EMPLEADOS EE JOIN EVENTO E 
-                ON E.ID=EE.EVENTO JOIN EMPLEADOS EMP ON EMP.ID=EE.EMPLEADOS WHERE
-                E.ID='$evento' AND EMP.TIPO='COCINERO'";
-                $verc=$conexion->seleccionar($cocineros);
-                $cantc=count($verc);
+            $cocineros_query = "SELECT COUNT(*) AS cant_cocineros FROM EVENTO_EMPLEADOS 
+              WHERE EVENTO = '$evento' AND EMPLEADOS IN (SELECT ID FROM EMPLEADOS 
+              WHERE TIPO='COCINA')";
+
+            $meseros_result = $conexion->seleccionar($meseros_query);
+            $cantm = $meseros_result[0]->cant_meseros;
+
+            $cocineros_result = $conexion->seleccionar($cocineros_query);
+            $cantc = $cocineros_result[0]->cant_cocineros;
             
             echo"<div class='container-fluid'";
             echo"<div class=' card-group col-lg-5 col-mb-5 col-sm-12  d-flex '>";
