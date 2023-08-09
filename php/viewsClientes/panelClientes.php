@@ -26,7 +26,8 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&display=swap" rel="stylesheet">
     <script src="https://kit.fontawesome.com/b60c246061.js" crossorigin="anonymous"></script>
-    <script src="filterEvents.js" async defer></script>
+    <script src="./pruebaJSEventos.js" async defer></script>
+    <script src="/js/panelAdmin.js" async defer></script>
 
     
 </head>
@@ -91,16 +92,10 @@
         <!-- Página de Eventos del cliente -->
         <div id="home" class="tab-content active">
             <div class="panel-header">
-                <h3 class="test" style="text-align: center; margin-top:2%">
-                    Mis eventos
+                <h3 class="test" style="text-align: center;">
+                    Configura tu evento!
                     <i class="fa-solid fa-calendar-days" style="color: #ffffff;"></i>
                 </h3>
-            </div>
-            <div class="filter-buttons">
-                <button class="btn-options ver-empleados btn btn-primary border-2 btn-outline-light rounded-5" onclick="filterEvents('PENDIENTE')">Pendiente</button>
-                <button class="btn-options ver-empleados btn btn-primary border-2 btn-outline-light rounded-5" onclick="filterEvents('EN PROCESO')">En Proceso</button>
-                <button class="btn-options ver-empleados btn btn-primary border-2 btn-outline-light rounded-5" onclick="filterEvents('FINALIZADO')">Finalizado</button>
-                <button class="btn-options ver-empleados btn btn-primary border-2 btn-outline-light rounded-5" onclick="filterEvents('CANCELADO')">Cancelado</button>
             </div>
             <div id="event-cards" class="card-container">
             <!-- Aquí se agregarán las tarjetas de eventos -->
@@ -109,7 +104,7 @@
         <!-- Agendar Eventos -->
         <div id="eventos" class="tab-content">
             <div class="panel-header">
-                <h3 class="test" style="text-align: center; margin-top:2%">
+                <h3 class="test" style="text-align: center;">
                     Configura tu evento!
                     <i class="fa-solid fa-calendar-days" style="color: #ffffff;"></i>
                 </h3>
@@ -180,36 +175,17 @@
         <div id="perfil" class="tab-content">
         <!-- Datos personales del usuario -->
         <div class="container mt-5">
-            <div style="padding-left: 5%; display: flex; flex-direction: column;">
-                <div class="accordion" id="accordionExample">
-                    <div class="accordion-item">
-                        <h2 class="accordion-header custom-accordion-header">
-                            <button class="accordion-button custom-accordion-header" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne"
-                            style="color: white;">
-                            <i class="fa-solid fa-user me-2" style="color: #ffffff;"></i>
-                            Datos personales
-                            </button>
-                        </h2>
-                    <div style="padding-left: 15%; padding-right:15%" id="collapseOne" class="accordion-collapse collapse show" data-bs-parent="#accordionExample">
-                        <div class="accordion-body">
-                            <div class="personal-info">
-                                <div class="mb-3 row">
-                                    <p><strong>Nombre:</strong> <span id="nombre"><?php echo $_SESSION["name"]; ?></span></p>
-                                    <p><strong>Apellido Paterno:</strong> <span id="ap_paterno"><?php echo $_SESSION["ap_paterno"]; ?></span></p>
-                                    <p><strong>Apellido Materno:</strong> <span id="ap_materno"><?php echo $_SESSION["ap_materno"]; ?></span></p>
-                                    <p><strong>Teléfono:</strong> <span id="telefono"><?php echo $_SESSION["telefono"]; ?></span></p>
-                                    <p><strong>Correo:</strong> <span id="correo"><?php echo $_SESSION["correo"]; ?></span></p>
-                                    <p><strong>Tipo de cuenta:</strong> <span id="tipo_cuenta"><?php echo $_SESSION["tipo"]; ?></span></p>
-                                    <button class="btn btn-primary" id="editarDatos" data-bs-toggle="modal" data-bs-target="#mainModal" data-bs-whatever="@editarPerfil">Editar Datos</button>
-                            </div>
-                        </div>
-                    </div>
-                </div> 
-            </div>
-        </div>
-    </div>
-    </div>
+        <div style="display: flex; flex-direction: column;">
+        <h1>Mis Datos Personales</h1>
+            <p><strong>Nombre:</strong> <span id="nombre"><?php echo $_SESSION["name"]; ?></span></p>
+            <p><strong>Apellido Paterno:</strong> <span id="ap_paterno"><?php echo $_SESSION["ap_paterno"]; ?></span></p>
+            <p><strong>Apellido Materno:</strong> <span id="ap_materno"><?php echo $_SESSION["ap_materno"]; ?></span></p>
+            <p><strong>Teléfono:</strong> <span id="telefono"><?php echo $_SESSION["telefono"]; ?></span></p>
+            <p><strong>Correo:</strong> <span id="correo"><?php echo $_SESSION["correo"]; ?></span></p>
+            <p><strong>Tipo de cuenta:</strong> <span id="tipo_cuenta"><?php echo $_SESSION["tipo"]; ?></span></p>
+            <button class="btn btn-primary" id="editarDatos" data-bs-toggle="modal" data-bs-target="#mainModal" data-bs-whatever="@editarPerfil">Editar Datos</button>
 
+        </div>
 
     </div>
         <!--Modal-->
@@ -245,8 +221,6 @@
     <span id="datosUsuarioJSON" style="display: none;"><?php echo $datosUsuarioJSON; ?></span>
     <!-- Agrega las siguientes líneas para cargar jQuery, el complemento datetimepicker y tu propio script.js -->
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-    <script src="/js/panelAdmin.js"></script>
-    <script src="./pruebaJSEventos.js"></script>
     <!-- Agrega la siguiente línea para cargar el complemento datetimepicker -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-datetimepicker/2.5.20/jquery.datetimepicker.full.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
