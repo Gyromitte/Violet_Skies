@@ -139,7 +139,7 @@
                 echo"<br>";
                 echo"<div class='container'>";
                 echo"<div class='test'>";
-                echo"<div>Un administrador se pondra en contact con usted proximamente.</div>";
+                echo"<div>Un administrador se pondra en contacto con usted proximamente.</div>";
                 echo"</div>";
                 echo"</div>";
             }
