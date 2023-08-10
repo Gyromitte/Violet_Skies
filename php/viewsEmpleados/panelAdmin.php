@@ -281,6 +281,12 @@
                             </button>
                         </li>
                         <li>
+                            <button id="verMeseros" data-url="verMeseros.php" type="button" class="btn-view-custom btn-options ver-empleados btn btn-primary border-2 btn-outline-light rounded-5" data-bs-target="#mainModal">
+                                <i class="fa-solid fa-bell-concierge" style="color: #ffffff;"></i>
+                                Ver Meseros
+                            </button>
+                        </li>
+                        <li>
                             <button id="verSolicitudes" data-url="verSolicitudes.php" type="button" class="btn-view-custom btn-options ver-empleados btn btn-primary border-2 btn-outline-light rounded-5" data-bs-target="#mainModal">
                                 <i class="fa-solid fa-business-time" style="color: #ffffff;"></i>
                                 Ver Solicitudes
