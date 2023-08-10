@@ -36,11 +36,36 @@ AND NOT EXISTS (
 $resultadoSolicitudes = $conexion->seleccionar($consultaSolicitudes);
 $countSolicitudes = $resultadoSolicitudes[0]->count_solicitudes;
 
+/* Consulta para contar eventos PENDIENTES */
+$eventosPendientes = "SELECT COUNT(*) AS eventos_pendientes FROM EVENTO WHERE ESTADO = 'PENDIENTE'";
+$resultadoPendientes = $conexion->seleccionar($eventosPendientes);
+$countPendientes = $resultadoPendientes[0]->eventos_pendientes;
+
+/* Consulta para contar eventos EN PROCESO */
+$eventosProceso = "SELECT COUNT(*) AS eventos_proceso FROM EVENTO WHERE ESTADO = 'EN PROCESO'";
+$resultadoProceso = $conexion->seleccionar($eventosProceso);
+$countProceso = $resultadoProceso[0]->eventos_proceso;
+
+/* Consulta para contar eventos CANCELADOS*/
+$eventosCancelado = "SELECT COUNT(*) AS eventos_cancelados FROM EVENTO WHERE ESTADO = 'CANCELADO'";
+$resultadoCancelado = $conexion->seleccionar($eventosCancelado);
+$countCancelado = $resultadoCancelado[0]->eventos_cancelados;
+
+/* Consulta para contar eventos FINALIZADOS*/
+$eventosFin = "SELECT COUNT(*) AS eventos_cancelados FROM EVENTO WHERE ESTADO = 'FINALIZADO'";
+$resultadoFin = $conexion->seleccionar($eventosFin);
+$countFin = $resultadoFin[0]->eventos_cancelados;
+
 // Retornar los resultados como JSON
 header('Content-Type: application/json');
 echo json_encode(array("count_clientes" => $countClientes,
-"count_empleados" => $countEmpleados, "count_eventos" => $countEventos,
-"count_solicitudes" => $countSolicitudes));
+"count_empleados" => $countEmpleados, 
+"count_eventos" => $countEventos,
+"count_solicitudes" => $countSolicitudes,
+"countPendientes" => $countPendientes,
+"countProceso" => $countProceso,
+"countCancelado" => $countCancelado,
+"countFin" => $countFin));
 
 $conexion->desconectarBD();
 ?>

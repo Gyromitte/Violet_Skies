@@ -9,6 +9,10 @@
     document.getElementById("empleadosCard").innerHTML = data.count_empleados;
     document.getElementById("eventosCard").innerHTML = data.count_eventos;
     document.getElementById("solicitudesCard").innerHTML = data.count_solicitudes;
+    document.getElementById("pendientesCard").innerHTML = data.countPendientes;
+    document.getElementById("procesoCard").innerHTML = data.countProceso;
+    document.getElementById("canceladoCard").innerHTML = data.countCancelado;
+    document.getElementById("finCard").innerHTML = data.countFin;
   }
 }
 xhttp.open("GET", "/php/viewsCharts/countAll.php", true);
@@ -19,8 +23,6 @@ fetch('/php/viewsCharts/eventosMeses.php') // Ruta de la consulta PHP
   .then(response => response.json())
   .then(data => {
     // data contiene los conteos de eventos finalizados por mes
-    //console.log(data); // Agregar esta línea para verificar la respuesta
-
     // Llamar a la función para actualizar el gráfico de puntos
     actualizarGraficoPuntos(data);
   })
@@ -170,7 +172,6 @@ function recargarGraficos(){
     .then(response => response.json())
     .then(data => {
       // data contiene los conteos de empleados de cada tipo
-      //console.log(data); // Agregar esta línea para verificar la respuesta
 
       const countCocina = data.count_cocina;
       const countMesero = data.count_mesero;
@@ -240,7 +241,6 @@ function recargarGraficos(){
       .then(response => response.json())
       .then(data => {
         // data contiene los datos del ranking de empleados
-        //console.log(data); //Verificar la respuesta
 
         // Extraer los nombres de los empleados y las cantidades de participación
         const nombres = data.map(empleado => empleado.NOMBRE_EMPLEADO);
@@ -250,6 +250,64 @@ function recargarGraficos(){
         actualizarGraficoBarras(nombres, cantidades);
       })
       .catch(error => console.error('Error al obtener los datos:', error));
+
+
+      // Obtener el contexto del canvas
+    var ctxMenu = document.getElementById('menuChart').getContext('2d');
+
+    // Realizar la solicitud AJAX a rankMenu.php
+    fetch('/php/viewsCharts/rankMenu.php') // Asegúrate de proporcionar la ruta correcta
+        .then(response => response.json())
+        .then(data => {
+            // Extraer los nombres de menú y las cantidades de pedidos
+            const nombres = data.map(menu => menu.Menu);
+            const cantidades = data.map(menu => menu.Pedidos);
+
+            // Crear la gráfica de barras
+            var menuChart = new Chart(ctxMenu, {
+                type: 'bar',
+                data: {
+                    labels: nombres,
+                    datasets: [{
+                        label: 'Menús más populares',
+                        data: cantidades,
+                        backgroundColor: '#454ade', // Color de fondo de las barras
+                        borderColor: 'white', // Color del borde de las barras
+                        borderWidth: 2, // Ancho del borde de las barras
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    scales: {
+                        x: {
+                            ticks: {
+                                color: 'white',
+                            },
+                        },
+                        y: {
+                            ticks: {
+                                color: 'white',
+                            },
+                            beginAtZero: true,
+                        },
+                    },
+                    plugins: {
+                        legend: {
+                            labels: {
+                                color: 'white',
+                            },
+                        },
+                    },
+                },
+            });
+        })
+        .catch(error => console.error('Error al obtener los datos:', error));
+
+
+
+
+
 }
 
 //Cargar el segundo grafico una vez al principio del load de la pagina

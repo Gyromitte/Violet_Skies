@@ -121,20 +121,35 @@ function updateModalContent(formType, idEmpleado, idEvento) {
       modalTitle.textContent = "Registrar un Empleado";
       modalHeader.classList.remove('modal-header-warning');
       formContent = `
-        <div id="mensajeDiv" method="POST"></div>
         <form id="formularioEmpleado">
           <div class="mb-3">
-            <label class="control-label">RFC</label>
+            <label class="control-label">Nombre:</label>
+            <input type="text" name="nombre" placeholder="Ingresa el nombre" class="form-control" required>
+          </div>
+          <div class="mb-3">
+            <label class="control-label">Apellido Paterno:</label>
+            <input type="text" name="ap_paterno" placeholder="Ingresa su Ap. Paterno" class="form-control" required>
+          </div>
+          <div class="mb-3">
+            <label class="control-label">Apellido Materno:</label>
+            <input type="text" name="ap_materno" placeholder="Ingresa su Ap. Materno" class="form-control" required>
+          </div>
+          <div class="mb-3">
+            <label class="control-label">Telefono:</label>
+            <input type="text" name="telefono" placeholder="Ingresa su telefono" class="form-control" required>
+          </div>
+          <div class="mb-3">
+            <label class="control-label">RFC:</label>
             <input type="text" name="RFC" placeholder="Ingresa el RFC" class="form-control" 
             required oninput="this.value = this.value.toUpperCase()"
             required>
           </div>
           <div class="mb-3">
-            <label class="control-label">E-mail</label>
-            <input type="email" name="CORREO" placeholder="Ingresa el E-mail" class="form-control" required>
+            <label class="control-label">Correo:</label>
+            <input type="email" name="CORREO" placeholder="Ingresa el correo" class="form-control" required>
           </div>
           <div class="form-group mb-3">
-            <label for="tipoUsuario">Tipo de Trabajador</label>
+            <label for="tipoUsuario">Tipo de Empleado:</label>
             <select name="tipoUsuario" class="form-control form-select" id="tipoUsuario">
               <option value="mesero">Mesero</option>
               <option value="cocina">Cocinero</option>
@@ -145,6 +160,7 @@ function updateModalContent(formType, idEmpleado, idEvento) {
           <button type="button" class="btn btn-primary btn-modal" data-bs-dismiss="modal">Cerrar</button>
           </div>
         </form>
+        <div id="mensajeDiv" class="mt-10" method="POST"></div>
       `;
       //Asignar el contenido al formulario del modal
       modalForm.innerHTML = formContent;
@@ -165,8 +181,17 @@ function updateModalContent(formType, idEmpleado, idEvento) {
         var rfc = form.elements['RFC'].value;
         var correo = form.elements['CORREO'].value;
         var tipoUsuario = form.elements['tipoUsuario'].value;
+
+        var nombre = form.elements['nombre'].value;
+        var ap_paterno = form.elements['ap_paterno'].value;
+        var ap_materno = form.elements['ap_materno'].value;
+        var telefono = form.elements['telefono'].value;
+
         //Como se va enviar la solicitud: un string
-        var formData = 'rfc=' + encodeURIComponent(rfc) + '&correo=' + (correo) + '&tipoUsuario=' + encodeURIComponent(tipoUsuario);
+        var formData = 'rfc=' + encodeURIComponent(rfc)
+         + '&correo=' + (correo) + '&tipoUsuario=' + encodeURIComponent(tipoUsuario)
+         + '&nombre=' + (nombre) + '&ap_paterno=' + (ap_paterno) + '&ap_materno=' + (ap_materno)
+         + '&telefono=' + (telefono);
         xhr.onreadystatechange = function () {
           if (xhr.readyState === XMLHttpRequest.DONE && xhr.status === 200) {
             //Manejo de la respuesta:
@@ -295,12 +320,28 @@ function updateModalContent(formType, idEmpleado, idEvento) {
             formContent = `
                   <form id="formularioEditarEmpleado">
                     <div id="mensajeDiv" method="POST"></div> <!-- Div para mensajes de respuesta -->
-                    <h5>Empleado: </h5>
-                    <h6 class="mb-3">${empleado.NOMBRE} ${empleado.AP_PATERNO} ${empleado.AP_MATERNO}</h6>
-                    <h5>Telefono: </h5>
-                    <h6 class="mb-3">${empleado.TELEFONO}</h6>
-                    <h5>Correo: </h5>
+                    <div class="mb-3">
+                    <h6>Correo: </h6>
                     <h6 class="mb-3">${empleado.CORREO}</h6>
+                    <label class="control-label">Nombre: </label>
+                    <input type="text" name="nombre" placeholder="" class="form-control" 
+                    required value="${empleado.NOMBRE}">
+                    </div>
+                    <div class="mb-3">
+                    <label class="control-label">Ap. Paterno: </label>
+                    <input type="text" name="ap_paterno" placeholder="" class="form-control" 
+                    required value="${empleado.AP_PATERNO}">
+                    </div>
+                    <div class="mb-3">
+                    <label class="control-label">Ap. Materno: </label>
+                    <input type="text" name="ap_materno" placeholder="" class="form-control" 
+                    required value="${empleado.AP_MATERNO}">
+                    </div>
+                    <div class="mb-3">
+                    <label class="control-label">Telefono: </label>
+                    <input type="text" name="telefono" placeholder="" class="form-control" 
+                    required value="${empleado.TELEFONO}">
+                    </div>
                     <div class="mb-3">
                       <label class="control-label">RFC</label>
                       <input type="text" name="rfc" placeholder="Ingresa el RFC" class="form-control" 
@@ -329,6 +370,10 @@ function updateModalContent(formType, idEmpleado, idEvento) {
               event.preventDefault(); // Evitar que el formulario se envíe por defecto
 
               // Obtener los valores del formulario
+              var nombre = formEditarEmpleado.elements.nombre.value;
+              var ap_paterno = formEditarEmpleado.elements.ap_paterno.value;
+              var ap_materno = formEditarEmpleado.elements.ap_materno.value;
+              var telefono = formEditarEmpleado.elements.telefono.value;
               var rfc = formEditarEmpleado.elements.rfc.value;
               var tipoUsuario = formEditarEmpleado.elements.tipoUsuario.value;
 
@@ -349,7 +394,9 @@ function updateModalContent(formType, idEmpleado, idEvento) {
               // Hacer la solicitud al script PHP para editar al empleado y pasar los datos actualizados
               updateXHR.open("POST", "editarEmpleado.php", true);
               updateXHR.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-              updateXHR.send(`id=${idEmpleado}&rfc=${rfc}&tipoUsuario=${tipoUsuario}`);
+              updateXHR.send(`id=${idEmpleado}&rfc=${rfc}&tipoUsuario=${tipoUsuario}
+              &nombre=${nombre}&ap_paterno=${ap_paterno}&ap_materno=${ap_materno}
+              &telefono=${telefono}`);
               //Ver cual es la tabla activa para refrescar cualquier cambio
               checkCurrentTable(currentTable);
             });

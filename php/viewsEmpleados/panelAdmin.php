@@ -149,16 +149,12 @@
                     <!-- Filtro de estado - A la izquierda -->
                     <div class="filter">
                         <div class="btn-group">
-                            <label class="control-label">Estado:</label>
+                            <label class="control-label">Mostrar:</label>
                             <select id="estadoSelect" name="estado" class="form-select form-select-custom">
-                                <option value="todo" selected>Todos</option>
-                                <option value="PENDIENTE">
-                                <i class="fa-solid fa-list-check" style="color: #ffffff;"></i>
-                                    Pendiente</option>
-                                <option value="EN PROCESO">
-                                    En proceso
-                                    <i class="fa-solid fa-bars-progress" style="color: #ffffff;"></i>
-                                </option>
+                                <option value="GRAFICOS" selected>Resumen</option>
+                                <option value="todo">Todos</option>
+                                <option value="PENDIENTE">Pendiente</option>
+                                <option value="EN PROCESO">En proceso</option>
                                 <option value="FINALIZADO">Finalizado</option>
                                 <option value="CANCELADO">Cancelado</option>
                             </select>
@@ -168,7 +164,6 @@
                     <div class="search">
                         <div class="input-group">
                             <input type="text" class="form-control" id="searchInput" placeholder="Buscar evento por nombre o cliente">
-                            
                             <button id="searchButton" type ="button" class="ver-empleados btn btn-outline-primary">
                             <i class="fa-solid fa-magnifying-glass" style="color: #1f71ff;"></i></button>
                         </div>
@@ -176,7 +171,45 @@
                 </div>
             </form>
             <br>
-            <div id="tablaResultados"></div>
+            <div class="container-fluid">
+            <div id="contentRow" class="row">
+                <!-- Canvas a la izquierda -->
+	            <div class="info-card col-md-7">
+		            <canvas id="menuChart"></canvas>
+	            </div>
+	            <!-- Contenido de la derecha -->
+	            <div class="col-md-5">
+		            <div id="eventosPendientes" class="info-card mb-2" style="height: 25px; display: flex; align-items: center;">
+                        <h3 class="me-2">
+                		    <i class="fa-solid fa-business-time" style="color: #ffffff;"></i>
+                                Eventos pendientes: 
+			            </h3>
+                        <h2 id="pendientesCard"></h2>
+		            </div>
+		            <div id="eventosEnProceso" class="info-card mb-2" style="height: 25px; display: flex; align-items: center;">
+                        <h3 class="me-2">
+                		    <i class="fa-solid fa-business-time" style="color: #ffffff;"></i>
+                                Eventos en proceso: 
+			            </h3>
+                        <h2 id="procesoCard"></h2>       
+		            </div>
+                    <div id="eventosFin" class="info-card mb-2" style="height: 25px; display: flex; align-items: center;">
+                        <h3 class="me-2">
+                		    <i class="fa-solid fa-business-time" style="color: #ffffff;"></i>
+                                Eventos finalizados: 
+			            </h3>
+                        <h2 id="finCard"></h2>       
+		            </div>
+                    <div id="eventosCancelados" class="info-card mb-2" style="height: 25px; display: flex; align-items: center;">
+                        <h3 class="me-2">
+                		    <i class="fa-solid fa-business-time" style="color: #ffffff;"></i>
+                                Eventos cancelados: 
+			            </h3>
+                        <h2 id="canceladoCard"></h2>       
+		            </div>
+	            </div>
+            </div>
+            <div id="tablaResultados"></div></div>
 
             <!-- Modal de Confirmación -->
             <div class="modal fade" id="modalConfirmacion" tabindex="-1" role="dialog" aria-labelledby="modalConfirmacionLabel" aria-hidden="true">
@@ -228,27 +261,35 @@
             </div>
             <br>
             <!--Opciones de Vistas-->
-            <div class="view-options mb-2">
-                <div>
-                    <button id="verGraficos" data-url="" type="button" class="btn-options ver-empleados btn btn-primary border-2 btn-outline-light rounded-5" data-bs-target="#mainModal">
-                        <i class="fa-solid fa-chart-pie" style="color: #ffffff;"></i>
-                        Ver Graficos
+        <div class="view-options mb-2">
+            <div>
+                <div class="dropdown form-select-custom">
+                    <button class="btn btn-secondary dropdown-toggle custom-dropdown" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        Vistas:
                     </button>
-                    <button id="verCocineros" data-url="verCocineros.php" type="button" class="btn-options ver-empleados btn btn-primary border-2 btn-outline-light rounded-5" data-bs-target="#mainModal">
-                        <i class="fa-solid fa-utensils" style="color: #ffffff;"></i>
-                        Ver Cocineros
-                    </button>
-                    <button id="verMeseros" data-url="verMeseros.php" type="button" class="btn-options ver-empleados btn btn-primary border-2 btn-outline-light rounded-5" data-bs-target="#mainModal">
-                        <i class="fa-solid fa-bell-concierge" style="color: #ffffff;"></i>
-                        Ver Meseros
-                    </button>
-                    <button id="verSolicitudes" data-url="verSolicitudes.php" type="button" class="btn-options ver-empleados btn btn-primary border-2 btn-outline-light rounded-5" data-bs-target="#mainModal">
-                        <i class="fa-solid fa-business-time" style="color: #ffffff;"></i>
-                        Ver Solicitudes
-                    </button>
+                    <ul class="dropdown-menu custom-drop-menu">
+                        <li>
+                            <button id="verGraficos" data-url="" type="button" class="btn-view-custom btn-options ver-empleados btn btn-primary border-2 btn-outline-light rounded-5" data-bs-target="#mainModal">
+                                <i class="fa-solid fa-chart-pie" style="color: #ffffff;"></i>
+                                Ver Graficos
+                            </button>
+                        </li>
+                        <li>
+                            <button id="verCocineros" data-url="verCocineros.php" type="button" class="btn-view-custom btn-options ver-empleados btn btn-primary border-2 btn-outline-light rounded-5" data-bs-target="#mainModal">
+                                <i class="fa-solid fa-utensils" style="color: #ffffff;"></i>
+                                Ver Cocineros
+                            </button>
+                        </li>
+                        <li>
+                            <button id="verSolicitudes" data-url="verSolicitudes.php" type="button" class="btn-view-custom btn-options ver-empleados btn btn-primary border-2 btn-outline-light rounded-5" data-bs-target="#mainModal">
+                                <i class="fa-solid fa-business-time" style="color: #ffffff;"></i>
+                                Ver Solicitudes
+                            </button>
+                        </li>
+                    </ul>
                 </div>
-                
-            </div>
+            </div> 
+        </div>
             <!--Informacion de la tabla-->
             <h3 id="table-info"></h3>
             <!--Container para tablas-->
@@ -257,7 +298,7 @@
                 <div class="container-fluid">
                     <div class="row">
                         <!-- Contenido de la izquierda -->
-                        <div class="col-md-5">
+                        <div class="col-md-5" style="padding-left: 0px !important;">
                         <div class="info-card mb-2" style="height: 25px; display: flex; align-items: center;">
                             <h3 class="me-2">
                             <i class="fa-solid fa-business-time" style="color: #ffffff;"></i>
