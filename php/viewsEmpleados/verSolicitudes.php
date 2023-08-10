@@ -4,15 +4,7 @@ $conexion = new Database();
 $conexion->conectarBD();
 
 /* Mostrar las cuentas que fueron registradas como empleados, estan activas pero no han sido dadas de alta*/
-$consulta = "SELECT CUENTAS.ID AS CUENTA, CUENTAS.NOMBRE, CUENTAS.AP_PATERNO, CUENTAS.AP_MATERNO, CUENTAS.CORREO, CUENTAS.TELEFONO 
-FROM CUENTAS 
-WHERE CUENTAS.TIPO_CUENTA = 'EMPLEADO' 
-AND CUENTAS.ESTADO = 'ACTIVO' 
-AND NOT EXISTS (
-    SELECT 1
-    FROM EMPLEADOS
-    WHERE EMPLEADOS.CUENTA = CUENTAS.ID
-);";
+$consulta = "CALL verSolicitudesEmp()";
 
 $tabla = $conexion->seleccionar($consulta);
 
