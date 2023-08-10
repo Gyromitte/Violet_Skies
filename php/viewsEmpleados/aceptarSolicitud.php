@@ -8,13 +8,25 @@ $rfc = filter_input(INPUT_POST, 'rfc', FILTER_SANITIZE_FULL_SPECIAL_CHARS);
 $correo = filter_input(INPUT_POST, 'correo', FILTER_SANITIZE_EMAIL);
 $tipoUsuario = filter_input(INPUT_POST, 'tipoUsuario', FILTER_SANITIZE_FULL_SPECIAL_CHARS);
 
-// Agregar mensajes de depuración para verificar los datos recibidos
-echo "<pre>";
-echo "Datos recibidos del formulario:\n";
-echo "RFC: " . $rfc . "\n";
-echo "Correo: " . $correo . "\n";
-echo "Tipo de Usuario: " . $tipoUsuario . "\n";
-echo "</pre>";
+// Función para mostrar mensajes de error
+function mostrarError($mensaje) {
+    echo "<div class='alert alert-danger'>$mensaje</div>";
+    global $db;
+    $db->desconectarBD();
+    exit;
+}
+
+// Verificar el formato del RFC
+$rfc = strtoupper($rfc); // Convertir a mayúsculas para homogeneizar
+if (strlen($rfc) < 13) {
+    mostrarError("El RFC es demasiado corto, debe tener exactamente 13 caracteres.");
+} elseif (strlen($rfc) > 13) {
+    mostrarError("El RFC es demasiado largo, debe tener exactamente 13 caracteres.");
+} elseif (!preg_match('/^[A-Z0-9]+$/', $rfc)) {
+    mostrarError("El RFC solo puede contener letras mayúsculas y dígitos numéricos.");
+} elseif (!preg_match('/^[A-Z]{4}\d{6}[A-Z0-9]{3}$/', $rfc)) {
+    mostrarError("El formato del RFC es inválido. Debe ser del tipo AAAA123456XXX, donde AAAA son las primeras cuatro letras del apellido, 123456 representa la fecha de nacimiento (YYMMDD) y XXX es la homoclave.");
+}
 
 // Checar si la cuenta ya está registrada en la tabla EMPLEADOS
 $consultaEmpleado = "SELECT * FROM EMPLEADOS WHERE CUENTA IN 
@@ -23,7 +35,7 @@ $parametrosEmpleado = array(':correo' => $correo);
 $resultadoEmpleado = $db->seleccionarPreparado($consultaEmpleado, $parametrosEmpleado);
 
 if ($resultadoEmpleado) {
-    echo "<div class='alert alert-danger'>El empleado ya ha sido dado de alta.</div>";
+    mostrarError("El empleado ya ha sido dado de alta.");
 } else {
     // Si el solicitante no ha sido dado de alta, insertarlo en la tabla EMPLEADOS
 

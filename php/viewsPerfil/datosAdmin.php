@@ -1,3 +1,26 @@
+<style>
+  /* Estilos personalizados para el modal */
+  #modalAdminRegistrado .modal-dialog {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: calc(100vh - 120px); /* Ajusta el valor según tu diseño */
+  }
+
+  #modalAdminRegistrado .modal-content {
+    text-align: center;
+  }
+
+  /* Estilos para el contenido del mensaje */
+  #mensajeExito {
+    font-size: 18px;
+    padding: 20px;
+  }
+</style>
+</body>
+</html>
+
+
 <?php
 include_once "../dataBase.php";
 
@@ -17,8 +40,10 @@ if (isset($_SESSION["ID"])) {
       ?>
         <div class="accordion" id="accordionExample">
           <div class="accordion-item">
-            <h2 class="accordion-header">
-            <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+            <h2 class="accordion-header custom-accordion-header">
+            <button class="accordion-button custom-accordion-header" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne"
+            style="color: white;">
+            <i class="fa-solid fa-user me-2" style="color: #ffffff;"></i>
             Datos personales
             </button>
             </h2>
@@ -46,7 +71,7 @@ if (isset($_SESSION["ID"])) {
                     <div class="mb-3 row">
                       <label class="col-sm-2 col-form-label">Teléfono:</label>
                       <div class="col-sm-10">
-                        <input class="form-control" type="text" value="<?php echo $result[0]->TELEFONO; ?>" name="telefono" disabled>
+                        <input class="form-control" type="tel" pattern="^[0-9]{10}$" value="<?php echo $result[0]->TELEFONO; ?>" name="telefono" disabled>
                       </div>
                     </div>
                     <div class="mb-3 row">
@@ -58,31 +83,36 @@ if (isset($_SESSION["ID"])) {
                     <div class="mb-3 row">
                       <label class="col-sm-2 col-form-label">Contraseña:</label>
                       <div class="col-sm-10">
-                        <button class="btn btn-light" type="button" data-bs-toggle="modal" data-bs-target="#modalCambiarContrasena">Cambiar contraseña</button>
+                        <button class="btn btn-light" id="btnpassword" type="button" data-bs-toggle="modal" data-bs-target="#modalCambiarContrasena">
+                          <i class="fa-solid fa-lock me-2" style="color: #ffffff;"></i>
+                          Cambiar contraseña</button>
                       </div>
                     </div>
                     <input type="hidden" name="id" value="<?php echo $_SESSION["ID"]; ?>">
                     <div class="d-flex justify-content-end">
-                      <button class="btn btn-primary" onclick="habilitarEdicion()" id="btnEditarDatosPersonales">Modificar datos</button>
-                      <div class="d-flex justify-content-end">
-                        <button class="btn btn-success d-none" id="btnGuardarCambios" onclick="guardarCambios()">Guardar cambios</button>
-                        <button class="btn btn-danger d-none" id="btnCancelarCambios" onclick="cancelarCambios()">Cancelar</button>
-                      </div>
-                    </div>
-                    <div id="mensajeModificar"></div>
+                      <button class="btn btn-primary" onclick="habilitarEdicion()" id="btnEditarDatosPersonales">
+                        <i class="fa-solid fa-pencil me-2" style="color: #ffffff;"></i>Modificar datos</button>
+                        <div class="d-flex justify-content-end">
+                          <button class="btn btn-success d-none" id="btnGuardarCambios" onclick="guardarCambios()">
+                            <i class="fa-solid fa-floppy-disk me-2" style="color: #ffffff;"></i>Guardar cambios</button>
+                            <button class="btn btn-danger d-none" id="btnCancelarCambios" onclick="cancelarCambios()">
+                              <i class="fa-solid fa-ban me-2" style="color: #ffffff;"></i>Cancelar</button>
+                            </div>
+                          </div>
+                          <div id="mensajeModificar" class="alert alert-success" role="alert"></div>
                   </div>
                 </div>
               </div> 
             </div>
             <div class="accordion-item">
               <h2 class="accordion-header">
-              <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
-                Registrar nuevo administrador
+              <button class="accordion-button collapsed custom-accordion-header" style="color: white;" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+              <i class="fa-solid fa-address-card me-2" style="color: #ffffff;"></i>Registrar nuevo administrador
               </button>
               </h2>
               <div id="collapseTwo" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
                 <div class="accordion-body">
-                <strong>Considera que el registrar un nuevo administrador estás otorgando permisos para manejar los eventos futuros</strong>
+                <strong>Considera que el registrar un nuevo administrador estás otorgando permisos para manejar información sensible</strong>
                 <div><br></div>
                 <div class="mb-3 row">
                   <label class="col-sm-2 col-form-label">Nombre:</label>
@@ -105,7 +135,7 @@ if (isset($_SESSION["ID"])) {
                 <div class="mb-3 row">
                   <label class="col-sm-2 col-form-label">Teléfono:</label>
                   <div class="col-sm-10">
-                    <input class="form-control" type="text" name="telefonoNEW">
+                    <input class="form-control" type="tel" pattern="^[0-9]{10}$" name="telefonoNEW">
                   </div>
                 </div>
                 <div class="mb-3 row">
@@ -114,14 +144,9 @@ if (isset($_SESSION["ID"])) {
                     <input class="form-control" type="email" name="correoNEW">
                   </div>
                 </div>
-                <div class="mb-3 row">
-                  <label class="col-sm-2 col-form-label">RFC:</label>
-                  <div class="col-sm-10">
-                    <input class="form-control" type="text" name="rfcNEW">
-                  </div>
-                </div>
                 <div class="d-flex justify-content-end">
-                  <button class="btn btn-primary" onclick="nuevoAdmin()" id="nuevoAdmin">Registrar administrador</button>
+                  <button class="btn btn-primary" onclick="nuevoAdmin()" id="nuevoAdmin">
+                  <i class="fa-solid fa-address-card me-2" style="color: #ffffff;"></i>Registrar administrador</button>
                 </div>
                 <div id="mensaje"></div>
               </div>
@@ -156,6 +181,22 @@ if (isset($_SESSION["ID"])) {
                       <div class="alert d-none" role="alert" align="center" id="alertMessage">
                         </div>
                     </form>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+
+
+            <div class="modal fade" id="modalAdminRegistrado" tabindex="-1" aria-labelledby="modalAdminRegistradoLabel" aria-hidden="true">
+              <div class="modal-dialog">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h5 class="modal-title">Nuevo administrador registrado</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                  </div>
+                  <div class="modal-body">
+                    <div></div>
                   </div>
                 </div>
               </div>

@@ -106,6 +106,11 @@ nav{
     width: 50%;
 }
 
+.custom-accordion-header{
+    background-color: #b14aed !important;
+    color: white;
+}
+
 .tab-content{
     display: none;
   }
@@ -178,6 +183,29 @@ nav{
     border: 2px solid white;
 }
 
+.btn-view-custom{
+    border: none;
+    width: 100%;
+    text-align: left;
+}
+
+.custom-ver-historial{
+    background-color: #b14aed;
+    border: 2px solid white;
+    color: white;
+    border-radius: 10px;
+}
+
+#btnEmpleadosRegistrados, #btnAceptarEvento, #btnModify, #btnSaveChanges,
+#btnEditarDatosPersonales, #nuevoAdmin, #btnGuardarCambios, #btnpassword{
+    color: white;
+    background-color: #b14aed;
+    border: 2px solid white;
+}
+#btnCancelarEvento, #btnCancelarCambios{
+    border: 2px solid white;
+}
+
 /*View options*/
 .view-options{
     display: flex;
@@ -203,6 +231,18 @@ nav{
   .event-history {
     flex: 1;
   }
+
+.form-select-custom{
+    background-color: #5603ad;
+    color: white;
+    border: 2px solid white;
+    border-radius: 10px;
+}
+
+#estadoSelect option:hover {
+    background-color: #b14aed;
+}
+  
 /*Charts and info*/
 #eventosAño, #proporcionEmpleados, #proporcionEmpleados2{
     background-image: linear-gradient(135deg, #5603ad, #f58cd6);
@@ -294,6 +334,10 @@ nav{
       .search-container .search {
         width: 100%; /* Full width for the search */
       }
+    .donut-container{
+       margin-bottom: 10px;
+       margin-right: 10px;
+    }  
 }
 
 @media (max-width: 576px) {
@@ -321,3 +365,16 @@ nav{
 .detalles {
     max-width: 600px; /* Cambia este valor según sea necesario */
   }
+
+  #mensajeModificar{
+    text-align: center;
+    display: none;
+    width: 300px;
+    height: auto;
+    margin: 0 auto;
+  }
+.personal-info input[disabled]{
+    background-color: transparent;
+    border-color: transparent;
+    font-style: oblique;
+}

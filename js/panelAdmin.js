@@ -1,3 +1,5 @@
+var datosUsuarioJSON = {};
+var updatePerfilXHR = new XMLHttpRequest();
 /*Funcionamiento de la dashboard*/
 // Obtener elementos
 const toggleDashboardBtn = document.getElementById('nav-button');
@@ -91,6 +93,7 @@ var btnCocineros = document.getElementById('verCocineros');
 var btnMeseros = document.getElementById('verMeseros');
 var btnBusqueda = document.getElementById('buscarEmpleado');
 var btnSolicitud = document.getElementById('verSolicitudes');
+
 // Evento para los botones
 modal.addEventListener("show.bs.modal", function (event) {
   // Botón que activó el modal
@@ -122,7 +125,9 @@ function updateModalContent(formType, idEmpleado, idEvento) {
         <form id="formularioEmpleado">
           <div class="mb-3">
             <label class="control-label">RFC</label>
-            <input type="text" name="RFC" placeholder="Ingresa el RFC" class="form-control" required>
+            <input type="text" name="RFC" placeholder="Ingresa el RFC" class="form-control" 
+            required oninput="this.value = this.value.toUpperCase()"
+            required>
           </div>
           <div class="mb-3">
             <label class="control-label">E-mail</label>
@@ -137,7 +142,7 @@ function updateModalContent(formType, idEmpleado, idEvento) {
           </div>
           <div class="d-flex justify-content-center">
           <button type="submit" class="btn btn-primary btn-modal me-2"><i class="fa-solid fa-address-card me-2" style="color: #ffffff;"></i>Registrar</button>
-          <button type="button" class="btn btn-primary btn-modal" data-bs-dismiss="modal">Cancelar</button>
+          <button type="button" class="btn btn-primary btn-modal" data-bs-dismiss="modal">Cerrar</button>
           </div>
         </form>
       `;
@@ -177,6 +182,59 @@ function updateModalContent(formType, idEmpleado, idEvento) {
           checkCurrentTable(currentTable);
         }, 500); // 0.5 segundos, si la funcion se ejecuta muy rapido no reflejara los cambios
       });
+      break;
+      case "@re-incorporarEmpleado":
+        modalTitle.textContent = "Re-incorporar a un empleado";
+        modalHeader.classList.remove('modal-header-warning');
+        formContent = `
+          <div id="mensajeDiv" method="POST"></div>
+          <form id="formularioEmpleado">
+            <div class="mb-3">
+              Aqui puedes volver a integrar al sistema a un empleado que fue dado de baja.
+              <br>
+              Ingresa el correo electronico que pertenecia a la cuenta del empleado:
+            </div>
+            <div class="mb-3">
+              <label class="control-label">E-mail</label>
+              <input type="email" name="CORREO" placeholder="Ingresa el E-mail" class="form-control" required>
+            </div>
+            <div class="d-flex justify-content-center">
+            <button type="submit" class="btn btn-primary btn-modal me-2"><i class="fa-solid fa-address-card me-2" style="color: #ffffff;"></i>Registrar</button>
+            <button type="button" class="btn btn-primary btn-modal" data-bs-dismiss="modal">Cerrar</button>
+            </div>
+          </form>
+        `;
+        //Asignar el contenido al formulario del modal
+        modalForm.innerHTML = formContent;
+  
+        //Obtener el formulario después de haberlo asignado al DOM
+        form = document.querySelector('#formularioEmpleado');
+        
+        //Agregar evento de envio al formulario
+        form.addEventListener('submit', function (event) {
+        event.preventDefault(); //Para que la pagina no de refresh al dar submit
+        
+        //Solicitud AJAX
+        var xhr = new XMLHttpRequest();
+        //Configurar la solicitud
+        xhr.open("POST", "re-incorporar.php", true);
+        xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+        //Obtener los datos del formulario
+        var correo = form.elements['CORREO'].value;
+        //Como se va enviar la solicitud: un string
+        var formData = 'correo=' + (correo);
+        xhr.onreadystatechange = function () {
+        if (xhr.readyState === XMLHttpRequest.DONE && xhr.status === 200) {
+        //Manejo de la respuesta:
+        var respuesta = xhr.responseText;
+        document.getElementById('mensajeDiv').innerHTML = respuesta;
+          }
+        };
+        //Enviar el formulario
+        xhr.send(formData);
+        //Ver cual es la tabla activa para refrescar cualquier cambio
+        checkCurrentTable(currentTable);
+        });
       break;
     case "@eliminarEmpleado":
       modalTitle.textContent = "Eliminar a un Empleado";
@@ -237,15 +295,33 @@ function updateModalContent(formType, idEmpleado, idEvento) {
             formContent = `
                   <form id="formularioEditarEmpleado">
                     <div id="mensajeDiv" method="POST"></div> <!-- Div para mensajes de respuesta -->
-                    <h5>Empleado: </h5>
-                    <h6 class="mb-3">${empleado.NOMBRE} ${empleado.AP_PATERNO} ${empleado.AP_MATERNO}</h6>
-                    <h5>Telefono: </h5>
-                    <h6 class="mb-3">${empleado.TELEFONO}</h6>
-                    <h5>Correo: </h5>
+                    <div class="mb-3">
+                    <h6>Correo: </h6>
                     <h6 class="mb-3">${empleado.CORREO}</h6>
+                    <label class="control-label">Nombre: </label>
+                    <input type="text" name="nombre" placeholder="" class="form-control" 
+                    required value="${empleado.NOMBRE}">
+                    </div>
+                    <div class="mb-3">
+                    <label class="control-label">Ap. Paterno: </label>
+                    <input type="text" name="ap_paterno" placeholder="" class="form-control" 
+                    required value="${empleado.AP_PATERNO}">
+                    </div>
+                    <div class="mb-3">
+                    <label class="control-label">Ap. Materno: </label>
+                    <input type="text" name="ap_materno" placeholder="" class="form-control" 
+                    required value="${empleado.AP_MATERNO}">
+                    </div>
+                    <div class="mb-3">
+                    <label class="control-label">Telefono: </label>
+                    <input type="text" name="telefono" placeholder="" class="form-control" 
+                    required value="${empleado.TELEFONO}">
+                    </div>
                     <div class="mb-3">
                       <label class="control-label">RFC</label>
-                      <input type="text" name="rfc" placeholder="Ingresa el RFC" class="form-control" required value="${empleado.RFC}">
+                      <input type="text" name="rfc" placeholder="Ingresa el RFC" class="form-control" 
+                      required oninput="this.value = this.value.toUpperCase()"
+                      required value="${empleado.RFC}">
                     </div>
                     <div class="form-group mb-3">
                       <label for="tipoUsuario">Tipo de Trabajador</label>
@@ -269,6 +345,10 @@ function updateModalContent(formType, idEmpleado, idEvento) {
               event.preventDefault(); // Evitar que el formulario se envíe por defecto
 
               // Obtener los valores del formulario
+              var nombre = formEditarEmpleado.elements.nombre.value;
+              var ap_paterno = formEditarEmpleado.elements.ap_paterno.value;
+              var ap_materno = formEditarEmpleado.elements.ap_materno.value;
+              var telefono = formEditarEmpleado.elements.telefono.value;
               var rfc = formEditarEmpleado.elements.rfc.value;
               var tipoUsuario = formEditarEmpleado.elements.tipoUsuario.value;
 
@@ -289,7 +369,9 @@ function updateModalContent(formType, idEmpleado, idEvento) {
               // Hacer la solicitud al script PHP para editar al empleado y pasar los datos actualizados
               updateXHR.open("POST", "editarEmpleado.php", true);
               updateXHR.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-              updateXHR.send(`id=${idEmpleado}&rfc=${rfc}&tipoUsuario=${tipoUsuario}`);
+              updateXHR.send(`id=${idEmpleado}&rfc=${rfc}&tipoUsuario=${tipoUsuario}
+              &nombre=${nombre}&ap_paterno=${ap_paterno}&ap_materno=${ap_materno}
+              &telefono=${telefono}`);
               //Ver cual es la tabla activa para refrescar cualquier cambio
               checkCurrentTable(currentTable);
             });
@@ -306,11 +388,110 @@ function updateModalContent(formType, idEmpleado, idEvento) {
       //Ver cual es la tabla activa para refrescar cualquier cambio
       checkCurrentTable(currentTable);
       break;
-    case "@editarPerfil":
-      //Ver cual es la tabla activa para refrescar cualquier cambio
-      checkCurrentTable(currentTable);
-      break;
-      case "@verSolicitud":
+      case "@editarPerfil":
+        modalTitle.textContent = "Editar Datos";
+        formContent = `
+            <form id="formularioEditarDatos">
+                <div id="mensajeDiv"></div>
+                <div class="form-group">
+                    <label for="nombreInput">Nombre:</label>
+                    <input type="text" class="form-control" name="nombre" id="nombreInput" required value="${datosUsuario.nombre}">
+                </div>
+                <div class="form-group">
+                    <label for="ap_paternoInput">Apellido Paterno:</label>
+                    <input type="text" class="form-control" name="ap_paterno" id="ap_paternoInput" required value="${datosUsuario.ap_paterno}">
+                </div>
+                <div class="form-group">
+                    <label for="ap_maternoInput">Apellido Materno:</label>
+                    <input type="text" class="form-control" name="ap_materno" id="ap_maternoInput" required value="${datosUsuario.ap_materno}">
+                </div>
+                <div class="form-group">
+                    <label for="telefonoInput">Teléfono:</label>
+                    <input type="text" class="form-control" name="telefono" id="telefonoInput" required value="${datosUsuario.telefono}">
+                </div>
+                <div class="form-group">
+                    <label for="contrasenaActualInput">Contraseña Actual:</label>
+                    <input type="password" class="form-control" name="contrasena_actual" id="contrasenaActualInput" required>
+                </div>
+                <input type="hidden" name="correo" id="correoInput" value="${datosUsuario.correo}">
+                <input type="hidden" name="tipo_cuenta" id="tipo_cuentaInput"><br>
+                <button type="button" class="btn btn-primary" id="guardarCambios">Guardar Cambios</button>
+            </form>`;
+        modalForm.innerHTML = formContent;
+    
+        var formEditarDatos = document.getElementById("formularioEditarDatos");
+        var guardarCambiosBtn = document.getElementById("guardarCambios");
+    
+        guardarCambiosBtn.addEventListener("click", function () {
+            var telefonoInput = document.getElementById("telefonoInput");
+            var telefonoValue = telefonoInput.value.trim();
+    
+            if (!esNumero(telefonoValue)) {
+              document.getElementById('mensajeDiv').innerHTML = `<div style="text-align:center;"class="alert alert-success">solo puedes ingresar valores numericos</div>`;
+                telefonoInput.focus();
+                return;
+            }
+    
+            var updatePerfilXHR = new XMLHttpRequest();
+            updatePerfilXHR.onreadystatechange = function () {if (updatePerfilXHR.readyState === XMLHttpRequest.DONE) {
+                if (updatePerfilXHR.status === 200) {
+                    console.log(updatePerfilXHR.responseText); // Agregar esta línea para imprimir la respuesta
+                    try {
+                        var respuesta = JSON.parse(updatePerfilXHR.responseText);
+                        if (respuesta.success) {
+                            // Los datos se actualizaron con éxito
+                            document.getElementById('mensajeDiv').innerHTML = `<div style="text-align:center;"class="alert alert-success">Cambios guardados exitosamente<br>Tienes que volver a iniciar sesión</div>`;
+                            // Actualizar la sesión del usuario con los nuevos datos
+                            datosUsuario = respuesta.usuario;
+                            // Cerrar sesión y redirigir al usuario a la página index.html después de 1.5 segundos
+                            setTimeout(function () {
+                                // Hacer la solicitud de cierre de sesión
+                                var logoutXHR = new XMLHttpRequest();
+                                logoutXHR.onreadystatechange = function () {
+                                    if (logoutXHR.readyState === XMLHttpRequest.DONE) {
+                                        if (logoutXHR.status === 200) {
+                                            // Redirigir al usuario a la página index.html
+                                            window.location.href = "/index.html";
+                                        } else {
+                                            console.error("Error al cerrar sesión");
+                                        }
+                                    }
+                                };
+                                logoutXHR.open("GET", "logout.php", true);
+                                logoutXHR.send();
+                            }, 5000);
+                        } else if (respuesta.error === 'badPass') {
+                            document.getElementById('mensajeDiv').innerHTML = `<div class="alert alert-danger">Contraseña incorrecta</div>`;
+                        } else {
+                            // Hubo un error al actualizar los datos
+                            document.getElementById('mensajeDiv').innerHTML = `<div style="text-align:center;" class="alert alert-danger">Error al actualizar los datos<br>Contraseña incorrecta</div>`;
+                        }
+                    } catch (error) {
+                        // Si la respuesta no es un JSON válido, manejar el error aquí
+                        console.error("Error al analizar la respuesta JSON: " + error.message);
+                    }
+                } else {
+                    console.error("Error en la solicitud AJAX de actualización");
+                }
+            }
+                
+            };
+    
+            var formData = new FormData(formEditarDatos);
+            formData.append('tipo_cuenta', datosUsuario.tipo_cuenta);
+    
+            updatePerfilXHR.open("POST", "/php/viewsClientes/pruebaComprobación.php", true);
+            updatePerfilXHR.send(formData);
+        });
+    
+        function esNumero(valor) {
+            return !isNaN(valor) && !isNaN(parseFloat(valor));
+        }
+    
+        console.log(formType);
+        break;
+      
+    case "@verSolicitud":
         modalTitle.textContent = "Manejar solicitud";
         modalHeader.classList.remove('modal-header-warning');
         // Obtener los datos de la solicitud con una solicitud AJAX
@@ -332,7 +513,8 @@ function updateModalContent(formType, idEmpleado, idEvento) {
                   <h6 class="mb-3">${solicitud.CORREO}</h6>
                   <div class="mb-3">
                     <label class="control-label">RFC</label>
-                    <input type="text" name="RFC" placeholder="Ingresa el RFC" class="form-control" required>
+                    <input required oninput="this.value = this.value.toUpperCase()"
+                    type="text" name="RFC" placeholder="Ingresa el RFC" class="form-control" required>
                   </div>
                   <div class="form-group mb-3">
                     <label for="tipoUsuario">Tipo de Trabajador</label>
@@ -388,6 +570,12 @@ function updateModalContent(formType, idEmpleado, idEvento) {
                     if (xhrAceptar.status === 200) {
                       // Mostrar la respuesta del servidor en el modal
                       document.getElementById("mensajeDiv").innerHTML = xhrAceptar.responseText;
+                      console.log(document.getElementById("mensajeDiv").innerHTML);
+                      //Si el mensaje es de exito desactivar el boton de rechazar
+                      if(document.getElementById("mensajeDiv").innerHTML === '<div class="alert alert-success">Empleado Registrado!</div>')
+                      {
+                        btnRechazarSolicitud.disabled = true;
+                      }
                       //Ver cual es la tabla activa para refrescar cualquier cambio
                       checkCurrentTable(currentTable);
                     } else {
@@ -427,6 +615,9 @@ function updateModalContent(formType, idEmpleado, idEvento) {
                     if (xhrRechazar.status === 200) {
                       // Mostrar la respuesta del servidor en el modal
                       document.getElementById("mensajeDiv").innerHTML = xhrRechazar.responseText;
+                      //Desactivar los botones
+                      btnAceptarSolicitud.disabled = true;
+                      btnRechazarSolicitud.disabled = true;
                       // Ver cual es la tabla activa para refrescar cualquier cambio
                       checkCurrentTable(currentTable);
                     } else {
@@ -458,8 +649,8 @@ function updateModalContent(formType, idEmpleado, idEvento) {
         xhr.open("GET", "obtenerSolicitud.php?id=" + idEmpleado, true);
         xhr.send();
         // Ver cual es la tabla activa para refrescar cualquier cambio
-        console.log("hola");
-        modalTitle.textContent ="Editar Datos"
+        //console.log("hola");
+        modalTitle.textContent ="Manejar Solicitud"
         formContent=`<form id="formularioEditarDatos" method="post" action="pruebaComprobación.php">
         <div class="form-group">
             <label for="nombreInput">Nombre:</label>
@@ -587,7 +778,7 @@ function updateModalContent(formType, idEmpleado, idEvento) {
                 </tr>
                 <tr>
                   <td><h6>Invitados</h6></td>
-                  <td><input class="form-control" type="text" placeholder="Invitados" id="invitados" value="${detallesEvento.INVITADOS}" disabled></td>
+                  <td><input class="form-control" type="number" placeholder="Invitados" id="invitados" value="${detallesEvento.INVITADOS}" disabled></td>
                 </tr>
                 <tr>
                   <td><h6>Menú</h6></td>
@@ -608,26 +799,40 @@ function updateModalContent(formType, idEmpleado, idEvento) {
               </table>
               <br>
               <div align="center">
+              <button type="button" class="btn btn-primary" id="btnModify"
+                  ${detallesEvento.ESTADO === 'CANCELADO' || detallesEvento.ESTADO === 'FINALIZADO' ? 'style="display: none;"' : ''}>
+                  <i class="fa-solid fa-pencil me-2" style="color: #ffffff;"></i>Modificar Detalles</button>
                 <button type="button" class="btn btn-success" id="btnAceptarEvento" 
-                  ${detallesEvento.ESTADO === 'PENDIENTE' ? '' : 'style="display: none;"'}>Aceptar Evento</button>
-                <button type="button" class="btn btn-primary" id="btnModify"
-                  ${detallesEvento.ESTADO === 'CANCELADO' || detallesEvento.ESTADO === 'FINALIZADO' ? 'style="display: none;"' : ''}>Modificar Detalles</button>
-                <button type="button" class="btn btn-primary" id="btnSaveChanges" style="display: none;">Guardar</button>            
+                  ${detallesEvento.ESTADO === 'PENDIENTE' ? '' : 'style="display: none;"'}>
+                  <i class="fa-solid fa-check me-2" style="color: #ffffff;"></i>Aceptar Evento</button>
+                <button type="button" class="btn btn-primary" id="btnSaveChanges" style="display: none;">
+                <i class="fa-solid fa-floppy-disk me-2" style="color: #ffffff;"></i>Guardar</button>            
                 <button type="button" class="btn btn-danger" id="btnCancelarEvento" 
-                  ${detallesEvento.ESTADO === 'CANCELADO' || detallesEvento.ESTADO === 'FINALIZADO' ? 'style="display: none;"' : ''}>Cancelar Evento</button>            
+                  ${detallesEvento.ESTADO === 'CANCELADO' || detallesEvento.ESTADO === 'FINALIZADO' ? 'style="display: none;"' : ''}>
+                  <i class="fa-solid fa-ban me-2" style="color: #ffffff;"></i>Cancelar Evento</button>            
                 <button type="button" class="btn btn-info" id="btnEmpleadosRegistrados"
-                  ${detallesEvento.ESTADO === 'CANCELADO' || detallesEvento.ESTADO === 'PENDIENTE' ? 'style="display: none;"' : ''}>Empleados</button>
+                  ${detallesEvento.ESTADO === 'CANCELADO' || detallesEvento.ESTADO === 'PENDIENTE' ? 'style="display: none;"' : ''}>
+                  <i class="fa-solid fa-briefcase me-2" style="color: #ffffff;"></i>Empleados</button>
               </form>
               <div id="empleadosTable"></div>
             `;              
             
             modalForm.innerHTML = formContent;
             $(document).ready(function() {
+              // Obtenemos la fecha actual
+              var currentDate = new Date();
+            
+              // Calculamos la fecha 1 semana después de la actual
+              var oneWeekLater = new Date();
+              oneWeekLater.setDate(currentDate.getDate() + 6);
+            
               $('#fechaEvento').datetimepicker({
                 format: 'Y-m-d H:i:s', // Formato deseado para la fecha y hora
                 step: 15, // Intervalo de minutos para seleccionar la hora
-                disabledTimeIntervals: [
-                   [21, 6], // deshabilita desde la medianoche hasta las 8:00 am
+                minDate: oneWeekLater.toISOString().slice(0, 19).replace('T', ' '), // Fecha mínima: una semana después de la actual
+                allowTimes: [
+                  '05:00','06:00','07:00','08:00', '09:00', '10:00', '11:00', '12:00', '13:00', // Ejemplo de horas permitidas
+                  '14:00', '15:00', '16:00', '17:00', '18:00', '19:00', '20:00', '21:00','22:00' // Puedes agregar más horas aquí
                 ]
               });
             });
@@ -662,6 +867,7 @@ function updateModalContent(formType, idEmpleado, idEvento) {
                 inputs[i].removeAttribute('disabled');
               }
               btnModificar.style.display = "none";
+              btnAceptarEvento.style.display = "none";
               btnModificarGuardar.style.display = "";
             });
 
@@ -674,21 +880,25 @@ function updateModalContent(formType, idEmpleado, idEvento) {
               var comida = document.getElementById('comida').value;
               var meserosRequeridos = document.getElementById('meserosRequeridos').value;
               var cocinerosRequeridos = document.getElementById('cocinerosRequeridos').value;
-  
+              var meserosNecesarios;
+              if (invitados === 10) {meserosNecesarios = 2;} 
+              else {meserosNecesarios = Math.floor(invitados / 15);}
+              
               if (!fecha || !salon || !comida) {
-                alert('Por favor, llene todos los campos correctamente');
+                alert('Por favor, llene los campos correctamente');
                 return;
               }
-              if (!invitados || isNaN(invitados) || parseInt(invitados) <= 0) {
-                alert('Por favor, llene los campos correctamente\nInvitados debe ser un número válido');
+              if (!invitados || isNaN(invitados) || parseInt(invitados) < 10) {
+                alert('Por favor, llene los campos correctamente\nEl mínimo para invitados son 10');
                 return;
               }
+              
 
               var xhrGuardarCambios = new XMLHttpRequest();
-              xhrGuardarCambios.onreadystatechange = function() {
+              xhrGuardarCambios.onreadystatechange = function(response) {
                 if (xhrGuardarCambios.readyState === XMLHttpRequest.DONE) {
+                  var response = JSON.parse(xhrGuardarCambios.responseText);
                   if (xhrGuardarCambios.status === 200) {
-                    var response = JSON.parse(xhrGuardarCambios.responseText);
                     if (response.success) {
                       formContent += `<br><div class="alert alert-success" role="alert" align='center'>Evento modificado exitosamente</div>`;
                       setTimeout(() => {
@@ -697,14 +907,16 @@ function updateModalContent(formType, idEmpleado, idEvento) {
                       filtrarEventos();
                       modalForm.innerHTML = formContent;
                     } else {
+                      alert('Algo salió mal\nInténtelo de nuevo');
                       console.error("Error en el servidor:", response.message);
                     }
                   } else {
+                    alert(response.message);
                     console.error("Error AJAX al guardar cambios en el evento. Código de estado:", xhrGuardarCambios.status);
                   }
                 }
               };
-              var urlEditarEvento = `../viewsEventos/editarDetalles.php?id=${idEvento}&F_EVENTO=${fecha}&INVITADOS=${invitados}&SALON=${salon}&COMIDA=${comida}&MESEROS=${meserosRequeridos}&COCINEROS=${cocinerosRequeridos}`;
+              var urlEditarEvento = `../viewsEventos/editarDetalles.php?id=${idEvento}&F_EVENTO=${fecha}&INVITADOS=${invitados}&SALON=${salon}&COMIDA=${comida}&MESEROS=${meserosRequeridos}&COCINEROS=${cocinerosRequeridos}&meserosNecesarios=${meserosNecesarios}`;
               xhrGuardarCambios.open("GET", urlEditarEvento, true);
               xhrGuardarCambios.send();
             });
@@ -771,6 +983,78 @@ function updateModalContent(formType, idEmpleado, idEvento) {
       xhrDetalles.open("GET", "../viewsEventos/verDetalles.php?id=" + idEvento, true);
       xhrDetalles.send();
       break;
+      case "@verHistorial":
+      modalTitle.textContent = "Historial de empleado";
+      // Obtener los datos del empleado con una solicitud AJAX
+      var xhr = new XMLHttpRequest();
+      xhr.onreadystatechange = function () {
+        if (xhr.readyState === XMLHttpRequest.DONE) {
+          if (xhr.status === 200) {
+            // Parsear la respuesta JSON del primer AJAX
+            var empleado = JSON.parse(xhr.responseText);
+            // Actualizar el contenido del formulario con los datos obtenidos
+            formContent = `
+              <form">
+                <div id="mensajeDiv" method="POST"></div>
+                <h5>Empleado:  </h5>
+                <h6 class="mb-3">${empleado.NOMBRE} ${empleado.AP_PATERNO} ${empleado.AP_MATERNO}</h6> 
+                <!-- Div para mostrar el historial de eventos -->
+                <div id="historialDiv"></div>
+                <div class="d-flex justify-content-center">
+                  <button type="button" class="btn btn-primary btn-modal" data-bs-dismiss="modal">Cerrar</button>
+                </div>
+              </form>
+            `;
+        // Asignar el contenido al formulario del modal
+        modalForm.innerHTML = formContent;
+
+        // Realizar la segunda solicitud AJAX para obtener los datos del empleado
+        var xhrHistorial = new XMLHttpRequest();
+        xhrHistorial.onreadystatechange = function () {
+          if (xhrHistorial.readyState === XMLHttpRequest.DONE) {
+            if (xhrHistorial.status === 200) {
+              // No es necesario parsear la respuesta como JSON, ya que es HTML
+              // Mostrar la tabla con el historial en el div correspondiente
+              document.getElementById("historialDiv").innerHTML = xhrHistorial.responseText;
+            } else {
+              console.error("Error en la solicitud AJAX para obtener el historial");
+            }
+          }
+        };
+        // Hacer la segunda solicitud al script PHP para obtener el historial
+        xhrHistorial.open("GET", "verHistorial.php?id=" + idEmpleado, true);
+        xhrHistorial.send();
+        
+        // Esperar a que el modal cargue
+        setTimeout(function () {
+          // Conseguir todos los botones para ver el historial
+          var botonesHistorial = document.querySelectorAll('.btn-ver-historial');
+          // Agregar el event listener a cada botón
+          botonesHistorial.forEach(function (btn) {
+            // Obtener el tipo de formulario correspondiente al botón
+            var formType = btn.getAttribute("data-bs-whatever");
+            var idEmpleado = btn.getAttribute("data-id");
+            var idEvento = btn.getAttribute("data-event-id");
+
+            // Agregar el event listener al botón
+            btn.addEventListener("click", function () {
+              // Código a ejecutar cuando se hace clic en el botón
+              console.log("Se hizo clic en el botón");
+              updateModalContent(formType, idEmpleado, idEvento);
+            });
+          });
+        }, 700);
+      } else {
+        console.error("Error en la solicitud AJAX");
+      }
+    }
+  };
+  //console.log(idEmpleado);
+  // Hacer la solicitud al script PHP y pasar el ID del empleado
+  xhr.open("GET", "obtenerEmpleado.php?id=" + idEmpleado, true);
+  xhr.send();
+  break;
+
     }
   }
   

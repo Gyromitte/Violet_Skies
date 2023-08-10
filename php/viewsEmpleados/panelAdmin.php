@@ -149,9 +149,10 @@
                     <!-- Filtro de estado - A la izquierda -->
                     <div class="filter">
                         <div class="btn-group">
-                            <label class="control-label">Estado:</label>
-                            <select id="estadoSelect" name="estado" class="form-select">
-                                <option value="todo" selected>Todos</option>
+                            <label class="control-label">Mostrar:</label>
+                            <select id="estadoSelect" name="estado" class="form-select form-select-custom">
+                                <option value="GRAFICOS" selected>Resumen</option>
+                                <option value="todo">Todos</option>
                                 <option value="PENDIENTE">Pendiente</option>
                                 <option value="EN PROCESO">En proceso</option>
                                 <option value="FINALIZADO">Finalizado</option>
@@ -163,13 +164,52 @@
                     <div class="search">
                         <div class="input-group">
                             <input type="text" class="form-control" id="searchInput" placeholder="Buscar evento por nombre o cliente">
-                            <button type="button" class="btn btn-primary" id="searchButton">Buscar</button>
+                            <button id="searchButton" type ="button" class="ver-empleados btn btn-outline-primary">
+                            <i class="fa-solid fa-magnifying-glass" style="color: #1f71ff;"></i></button>
                         </div>
                     </div>
                 </div>
             </form>
             <br>
-            <div id="tablaResultados"></div>
+            <div class="container-fluid">
+            <div id="contentRow" class="row">
+                <!-- Canvas a la izquierda -->
+	            <div class="info-card col-md-7">
+		            <canvas id="menuChart"></canvas>
+	            </div>
+	            <!-- Contenido de la derecha -->
+	            <div class="col-md-5">
+		            <div id="eventosPendientes" class="info-card mb-2" style="height: 25px; display: flex; align-items: center;">
+                        <h3 class="me-2">
+                		    <i class="fa-solid fa-business-time" style="color: #ffffff;"></i>
+                                Eventos pendientes: 
+			            </h3>
+                        <h2 id="pendientesCard"></h2>
+		            </div>
+		            <div id="eventosEnProceso" class="info-card mb-2" style="height: 25px; display: flex; align-items: center;">
+                        <h3 class="me-2">
+                		    <i class="fa-solid fa-business-time" style="color: #ffffff;"></i>
+                                Eventos en proceso: 
+			            </h3>
+                        <h2 id="procesoCard"></h2>       
+		            </div>
+                    <div id="eventosFin" class="info-card mb-2" style="height: 25px; display: flex; align-items: center;">
+                        <h3 class="me-2">
+                		    <i class="fa-solid fa-business-time" style="color: #ffffff;"></i>
+                                Eventos finalizados: 
+			            </h3>
+                        <h2 id="finCard"></h2>       
+		            </div>
+                    <div id="eventosCancelados" class="info-card mb-2" style="height: 25px; display: flex; align-items: center;">
+                        <h3 class="me-2">
+                		    <i class="fa-solid fa-business-time" style="color: #ffffff;"></i>
+                                Eventos cancelados: 
+			            </h3>
+                        <h2 id="canceladoCard"></h2>       
+		            </div>
+	            </div>
+            </div>
+            <div id="tablaResultados"></div></div>
 
             <!-- Modal de Confirmación -->
             <div class="modal fade" id="modalConfirmacion" tabindex="-1" role="dialog" aria-labelledby="modalConfirmacionLabel" aria-hidden="true">
@@ -205,38 +245,51 @@
                         <i class="fa-solid fa-address-card" style="color: #ffffff;"></i>
                         Registrar
                     </button>
+                    <button type="button" class="btn btn-success border-2 btn-outline-light rounded-5 btn-options" data-bs-toggle="modal" data-bs-target="#mainModal" data-bs-whatever="@re-incorporarEmpleado">
+                        <i class="fa-solid fa-person-walking-arrow-loop-left" style="color: #ffffff;"></i>
+                        Re-incorporar
+                    </button>
                 </div>
                 <!--Barra de Busqueda-->
                 <div class="input-group mb-3 search-bar" id="search">
-                    <input type="text" class="form-control" placeholder="Buscar a un empleado" aria-label="" aria-describedby="button-addon2">
+                    <input type="text" id="busqueda" class="form-control" placeholder="Buscar a un empleado"
+                        onkeyup="searchEmployee()"
+                     aria-label="" aria-describedby="button-addon2">
                     <button id="buscarEmpleado" data-url="buscarEmpleado.php" class="ver-empleados btn btn-outline-primary" type="button" id="button-addon2">
                     <i class="fa-solid fa-magnifying-glass" style="color: #1f71ff;"></i></button>
                 </div>
             </div>
             <br>
-            <br>
             <!--Opciones de Vistas-->
-            <div class="view-options">
-                <div>
-                    <button id="verGraficos" data-url="" type="button" class="btn-options ver-empleados btn btn-primary border-2 btn-outline-light rounded-5" data-bs-target="#mainModal">
-                        <i class="fa-solid fa-chart-pie" style="color: #ffffff;"></i>
-                        Ver Graficos
+        <div class="view-options mb-2">
+            <div>
+                <div class="dropdown form-select-custom">
+                    <button class="btn btn-secondary dropdown-toggle custom-dropdown" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        Vistas:
                     </button>
-                    <button id="verCocineros" data-url="verCocineros.php" type="button" class="btn-options ver-empleados btn btn-primary border-2 btn-outline-light rounded-5" data-bs-target="#mainModal">
-                        <i class="fa-solid fa-utensils" style="color: #ffffff;"></i>
-                        Ver Cocineros
-                    </button>
-                    <button id="verMeseros" data-url="verMeseros.php" type="button" class="btn-options ver-empleados btn btn-primary border-2 btn-outline-light rounded-5" data-bs-target="#mainModal">
-                        <i class="fa-solid fa-bell-concierge" style="color: #ffffff;"></i>
-                        Ver Meseros
-                    </button>
-                    <button id="verSolicitudes" data-url="verSolicitudes.php" type="button" class="btn-options ver-empleados btn btn-primary border-2 btn-outline-light rounded-5" data-bs-target="#mainModal">
-                        <i class="fa-solid fa-business-time" style="color: #ffffff;"></i>
-                        Ver Solicitudes
-                    </button>
+                    <ul class="dropdown-menu custom-drop-menu">
+                        <li>
+                            <button id="verGraficos" data-url="" type="button" class="btn-view-custom btn-options ver-empleados btn btn-primary border-2 btn-outline-light rounded-5" data-bs-target="#mainModal">
+                                <i class="fa-solid fa-chart-pie" style="color: #ffffff;"></i>
+                                Ver Graficos
+                            </button>
+                        </li>
+                        <li>
+                            <button id="verCocineros" data-url="verCocineros.php" type="button" class="btn-view-custom btn-options ver-empleados btn btn-primary border-2 btn-outline-light rounded-5" data-bs-target="#mainModal">
+                                <i class="fa-solid fa-utensils" style="color: #ffffff;"></i>
+                                Ver Cocineros
+                            </button>
+                        </li>
+                        <li>
+                            <button id="verSolicitudes" data-url="verSolicitudes.php" type="button" class="btn-view-custom btn-options ver-empleados btn btn-primary border-2 btn-outline-light rounded-5" data-bs-target="#mainModal">
+                                <i class="fa-solid fa-business-time" style="color: #ffffff;"></i>
+                                Ver Solicitudes
+                            </button>
+                        </li>
+                    </ul>
                 </div>
-                
-            </div>
+            </div> 
+        </div>
             <!--Informacion de la tabla-->
             <h3 id="table-info"></h3>
             <!--Container para tablas-->
@@ -245,15 +298,21 @@
                 <div class="container-fluid">
                     <div class="row">
                         <!-- Contenido de la izquierda -->
-                        <div class="col-md-5">
-                            <div class="info-card mb-2" style="height: 25px;">Solicitudes pendientes:</div>
-                            <div class="col-md-12">
+                        <div class="col-md-5" style="padding-left: 0px !important;">
+                        <div class="info-card mb-2" style="height: 25px; display: flex; align-items: center;">
+                            <h3 class="me-2">
+                            <i class="fa-solid fa-business-time" style="color: #ffffff;"></i>
+                                Solicitudes Pendientes: 
+                            </h3>
+                            <h2 id="solicitudesCard"></h2>
+                        </div>
+                            <div class="col-md-12 donut-container">
                                 <canvas id="proporcionEmpleados2" style="height: 40px"></canvas>
                             </div>
                         </div>
                         <!-- Canvas a la derecha -->
                         <div class="info-card col-md-7">
-                        
+                            <canvas id="participacionEmpleados" style="height: 70%; width: 100%;"></canvas>
                         </div>
                     </div>
                 </div>
@@ -292,6 +351,7 @@
     <script src="/bootstrap/js/bootstrap.bundle.min.js"></script>
     <script src="/js/filtroEventos.js"></script>
     <script src="/js/datosAdmin.js"></script>
+    <script src="/js/buscarEmpleado.js"></script>
 </body>
 
 </html>

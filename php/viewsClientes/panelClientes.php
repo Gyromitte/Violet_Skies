@@ -13,7 +13,10 @@
     <!--StyleSheets-->
     <link rel="stylesheet" href="/bootstrap/css/bootstrap.min.css">
     <link rel="stylesheet" href="/css/panelAdmin.css">
-    
+    <link rel="stylesheet" href="/css/cards.css">
+    <link rel="stylesheet" href="../viewsClientes/pruebasCEventos/pruebaEventos.css">
+    <!-- Agrega la siguiente línea para cargar el CSS del complemento datetimepicker -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-datetimepicker/2.5.20/jquery.datetimepicker.min.css">
     <!--Referencias a fuentes-->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -23,7 +26,8 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&display=swap" rel="stylesheet">
     <script src="https://kit.fontawesome.com/b60c246061.js" crossorigin="anonymous"></script>
-    <script src="/js/panelAdmin.js" async defer></script>
+    <script src="filterEvents.js" async defer></script>
+
     
 </head>
 <body>
@@ -37,23 +41,35 @@
         if(isset($_SESSION["logged_in"])){
             if($_SESSION["access"]!==$access){
                 header("Location:../scripts/access.php");
+                
             }
+
         }
         else if(!isset($_SESSION["logged_in"])){
             header("Location:../views/login.php");
         }
+        $datosUsuario = array(
+            "id" => $_SESSION["ID"],
+            "nombre" => $_SESSION["name"],
+            "tipo" => $_SESSION["tipo"],
+            "ap_paterno" => $_SESSION["ap_paterno"],
+            "ap_materno" => $_SESSION["ap_materno"],
+            "telefono" => $_SESSION["telefono"],
+            "correo" => $_SESSION["correo"]
+        );
+        
+    // Convertir el array de datos del usuario en formato JSON para poder pasarlo a JavaScript
+    $datosUsuarioJSON = json_encode($datosUsuario);
     ?>
     <nav>
         <div class="nav-menu">
             <button id="nav-button">
                 <i class="fa-solid fa-bars" style="color: #ffffff;"></i>
             </button>
-            Hoteleria
+            <img id="company-logo" class="img-fluid" src="/images/company_logo.png" alt="companyLogo" style="height:1.5em; margin-right: 10px;">
+            Violet Skies
         </div>
-        <h2><span id="fecha"></span></h2>
         <div class="nav-user">
-            <i class="fa-solid fa-bell" style="color: #ffffff;"></i>
-            <div id="nav-photo-user"></div>
             <?php echo $_SESSION["name"];?>
         </div>
     </nav>
@@ -61,9 +77,10 @@
     <div id="dash-board">
         <div id="dash-board-content">
             <div id="dash-photo-user"></div>
-            Username<br>
-            Position<br><br>
+            <?php echo $_SESSION["name"];?><br>
+            <?php echo $_SESSION["tipo"];?><br><br>
             <button data-tab="home" class="dash-button"><i class="fa-solid fa-house" style="color: #ffffff;"></i><br>Mis eventos</button>
+            <button data-tab="eventos" class="dash-button"><i class="fa-solid fa-user" style="color: #ffffff;"></i><br>Agendar Evento</button>
             <button data-tab="perfil" class="dash-button"><i class="fa-solid fa-user" style="color: #ffffff;"></i><br>Perfil</button>
             <a style="text-decoration: none;" data-tab="logout" class="dash-button" href="../scripts/CerrarSesion.php">
                 <i class="fa-solid fa-door-open" style="color: #ffffff; padding-top: 10px;"></i><br>Logout</a>
@@ -73,23 +90,126 @@
     <div id="main">
         <!-- Página de Eventos del cliente -->
         <div id="home" class="tab-content active">
-            <p class="test">Yo soy, home</p>
+            <div class="panel-header">
+                <h3 class="test" style="text-align: center; margin-top:2%">
+                    Mis eventos
+                    <i class="fa-solid fa-calendar-days" style="color: #ffffff;"></i>
+                </h3>
+            </div>
+            <div class="filter-buttons">
+                <button class="btn-options ver-empleados btn btn-primary border-2 btn-outline-light rounded-5" onclick="filterEvents('PENDIENTE')">Pendiente</button>
+                <button class="btn-options ver-empleados btn btn-primary border-2 btn-outline-light rounded-5" onclick="filterEvents('EN PROCESO')">En Proceso</button>
+                <button class="btn-options ver-empleados btn btn-primary border-2 btn-outline-light rounded-5" onclick="filterEvents('FINALIZADO')">Finalizado</button>
+                <button class="btn-options ver-empleados btn btn-primary border-2 btn-outline-light rounded-5" onclick="filterEvents('CANCELADO')">Cancelado</button>
+            </div>
+            <div id="event-cards" class="card-container">
+            <!-- Aquí se agregarán las tarjetas de eventos -->
+            </div>
+        </div>
+        <!-- Agendar Eventos -->
+        <div id="eventos" class="tab-content">
+            <div class="panel-header">
+                <h3 class="test" style="text-align: center; margin-top:2%">
+                    Configura tu evento!
+                    <i class="fa-solid fa-calendar-days" style="color: #ffffff;"></i>
+                </h3>
+            </div>
+            <div class="container">
+            <form id="evento-form" method="post">
+            <div id="msgDiv"></div>
+                    <div class="form-group">
+                        <label for="nombre_evento">Nombre del evento:</label>
+                        <input type="text" class="form-control" id="nombre_evento" name="nombre_evento" required>
+                    </div>
+                        <div class="form-group">
+                            <label for="salon">Salón:</label>
+                            <select class="form-control" id="salon" name="salon" required>
+                                <option value="">Seleccione un salón</option>
+                                <option value=1>Cuatrociénegas</option>
+                                <option value=2>Torreón</option>
+                                <option value=3>Saltillo</option>
+                                <option value=4>Coahuila</option>
+                            </select>
+                        </div>
+                    <div class="form-group">
+                        <label for="comida">Menú del evento:</label>
+                        <select class="form-control" id="comida" name="comida" required>
+                        <option value="">Seleccione una comida del menú</option>
+                        <option value=1>Americano</option>
+                        <option value=2>Continental</option>
+                        <option value=3>Original</option>
+                        <option value=4>Saludable</option>
+                        <option value=5>El Santuario</option>
+                        <option value=6>Mexicano</option>
+                        <option value=7>Montaña</option>
+                        <option value=8>Sabor de Valle</option>
+                        <option value=9>Mediterráneo</option>
+                        <option value=10>Sabor y Energía</option>
+                        <option value=11>Mar y Tierra</option>
+                        <option value=12>Celebración 1</option>
+                        <option value=13>Celebración 2</option>
+                        <option value=14>Celebración 3</option>
+                        <option value=15>Celebración 4</option>
+                        <option value=16>Celebración 5</option>
+                        <option value=17>Esencial</option>
+                        <option value=18>Saludable</option>
+                        <option value=19>Dulce mañana</option>
+                        <option value=20>Mexicano</option>
+                        <option value=21>Natural</option>
+                        <option value=22>Energético</option>
+                        <option value=23>Barra</option>
+                        <option value=24>Nacional</option>
+                        <option value=25>Premium</option>
+                        <option value=26>Celebración</option>
+                        <option value=27>Hamburguesas</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="invitados">Cantidad de invitados:</label>
+                        <input type="text" class="form-control" id="invitados" name="invitados" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="fecha">Fecha y hora del evento:</label>
+                        <input type="text" class="form-control" id="fechaEvento" name="fechaEvento"required>
+                    </div>
+                    <button type="submit" class="btn btn-primary" >Solicitar Evento</button>
+                </form>
+            </div>
         </div>
         <!-- Página de Perfil del cliente -->
         <div id="perfil" class="tab-content">
         <!-- Datos personales del usuario -->
         <div class="container mt-5">
-        <div style="display: flex; flex-direction: column;">
-        <h1>Mis Datos Personales</h1>
-            <p><strong>Nombre:</strong> <span id="nombre"><?php echo $_SESSION["name"]; ?></span></p>
-            <p><strong>Apellido Paterno:</strong> <span id="ap_paterno"><?php echo $_SESSION["ap_paterno"]; ?></span></p>
-            <p><strong>Apellido Materno:</strong> <span id="ap_materno"><?php echo $_SESSION["ap_materno"]; ?></span></p>
-            <p><strong>Teléfono:</strong> <span id="telefono"><?php echo $_SESSION["telefono"]; ?></span></p>
-            <p><strong>Correo:</strong> <span id="correo"><?php echo $_SESSION["correo"]; ?></span></p>
-            <p><strong>Tipo de cuenta:</strong> <span id="tipo_cuenta">Cliente</span></p>
-            <button class="btn btn-primary" id="editarDatos" data-bs-toggle="modal" data-bs-target="#mainModal" data-bs-whatever="@editarPerfil">Editar Datos</button>
-
+            <div style="padding-left: 5%; display: flex; flex-direction: column;">
+                <div class="accordion" id="accordionExample">
+                    <div class="accordion-item">
+                        <h2 class="accordion-header custom-accordion-header">
+                            <button class="accordion-button custom-accordion-header" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne"
+                            style="color: white;">
+                            <i class="fa-solid fa-user me-2" style="color: #ffffff;"></i>
+                            Datos personales
+                            </button>
+                        </h2>
+                    <div style="padding-left: 15%; padding-right:15%" id="collapseOne" class="accordion-collapse collapse show" data-bs-parent="#accordionExample">
+                        <div class="accordion-body">
+                            <div class="personal-info">
+                                <div class="mb-3 row">
+                                    <p><strong>Nombre:</strong> <span id="nombre"><?php echo $_SESSION["name"]; ?></span></p>
+                                    <p><strong>Apellido Paterno:</strong> <span id="ap_paterno"><?php echo $_SESSION["ap_paterno"]; ?></span></p>
+                                    <p><strong>Apellido Materno:</strong> <span id="ap_materno"><?php echo $_SESSION["ap_materno"]; ?></span></p>
+                                    <p><strong>Teléfono:</strong> <span id="telefono"><?php echo $_SESSION["telefono"]; ?></span></p>
+                                    <p><strong>Correo:</strong> <span id="correo"><?php echo $_SESSION["correo"]; ?></span></p>
+                                    <p><strong>Tipo de cuenta:</strong> <span id="tipo_cuenta"><?php echo $_SESSION["tipo"]; ?></span></p>
+                                    <button class="btn btn-primary" id="editarDatos" data-bs-toggle="modal" data-bs-target="#mainModal" data-bs-whatever="@editarPerfil">Editar Datos</button>
+                            </div>
+                        </div>
+                    </div>
+                </div> 
+            </div>
         </div>
+    </div>
+    </div>
+
 
     </div>
         <!--Modal-->
@@ -115,9 +235,20 @@
 
 
     <!--Scripts que necesitan ejecutarse hasta el final-->
+    <script>
+    // Definir una variable global en JavaScript para almacenar los datos del usuario
+    var datosUsuario = <?php echo $datosUsuarioJSON; ?>;
+    </script>
     <script src="/js/dinamicTable.js"></script>
     <script src="/bootstrap/js/bootstrap.min.js"></script>
     <script src="/bootstrap/js/bootstrap.bundle.min.js"></script>
-    <script src="/js/filtroEventos.js"></script>
+    <span id="datosUsuarioJSON" style="display: none;"><?php echo $datosUsuarioJSON; ?></span>
+    <!-- Agrega las siguientes líneas para cargar jQuery, el complemento datetimepicker y tu propio script.js -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="/js/panelAdmin.js"></script>
+    <script src="./pruebaJSEventos.js"></script>
+    <!-- Agrega la siguiente línea para cargar el complemento datetimepicker -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-datetimepicker/2.5.20/jquery.datetimepicker.full.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </body>
 </html>
