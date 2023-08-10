@@ -60,11 +60,17 @@ if (!empty($errorMessage)) {
         $parametrosChecarCuenta = array(':correo' => $correo);
         $resultadosChecarCuenta = $db->seleccionarPreparado($verificarCuenta, $parametrosChecarCuenta);
 
+        //Checar si la cuenta no esta en EMPLEADOS
         $verificarAlta = "SELECT * FROM EMPLEADOS WHERE CUENTA IN 
         (SELECT ID FROM CUENTAS WHERE CORREO = :correo AND TIPO_CUENTA = 'EMPLEADO')";
+        $parametrosAlta = array(':correo' => $correo);
+        $resultadoVerificarAlta = $db->seleccionarPreparado($verificarAlta, $parametrosAlta);
         
+        //var_dump($resultadosChecarCuenta);
+        //var_dump(!empty($resultadosChecarCuenta));
+        //var_dump(empty($resultadoVerificarAlta));
         //Si tiene cuenta y no esta dado de alta en empleados:
-        if($verificarCuenta && empty($resultadoVerificarAlta))
+        if(!empty($resultadosChecarCuenta) && empty($resultadoVerificarAlta))
         {   
             //Sacar el id de la cuenta que se acaba de dar de alta atraves del correo
             $consultaCuenta = "SELECT ID FROM CUENTAS WHERE CORREO = :correo AND TIPO_CUENTA = 'EMPLEADO' AND ESTADO = 'ACTIVO'";

@@ -122,31 +122,31 @@ function updateModalContent(formType, idEmpleado, idEvento) {
       modalHeader.classList.remove('modal-header-warning');
       formContent = `
         <form id="formularioEmpleado">
-          <div class="mb-3">
-            <label class="control-label">Nombre:</label>
-            <input type="text" name="nombre" placeholder="Ingresa el nombre" class="form-control" required>
-          </div>
-          <div class="mb-3">
-            <label class="control-label">Apellido Paterno:</label>
-            <input type="text" name="ap_paterno" placeholder="Ingresa su Ap. Paterno" class="form-control" required>
-          </div>
-          <div class="mb-3">
-            <label class="control-label">Apellido Materno:</label>
-            <input type="text" name="ap_materno" placeholder="Ingresa su Ap. Materno" class="form-control" required>
-          </div>
-          <div class="mb-3">
+        <div class="mb-3">
+          <label class="control-label">Nombre:</label>
+          <input type="text" name="nombre" placeholder="Ingresa el nombre" class="form-control" maxlength="30" required>
+        </div>
+        <div class="mb-3">
+          <label class="control-label">Apellido Paterno:</label>
+          <input type="text" name="ap_paterno" placeholder="Ingresa su Ap. Paterno" class="form-control" maxlength="30" required>
+        </div>
+        <div class="mb-3">
+          <label class="control-label">Apellido Materno:</label>
+          <input type="text" name="ap_materno" placeholder="Ingresa su Ap. Materno" class="form-control" maxlength="30" required>
+        </div>
+        <div class="mb-3">
             <label class="control-label">Telefono:</label>
-            <input type="text" name="telefono" placeholder="Ingresa su telefono" class="form-control" required>
-          </div>
+            <input type="text" name="telefono" placeholder="Ingresa su telefono" class="form-control" maxlength="10" required>
+        </div>
           <div class="mb-3">
             <label class="control-label">RFC:</label>
-            <input type="text" name="RFC" placeholder="Ingresa el RFC" class="form-control" 
+            <input type="text" maxlength="13" name="RFC" placeholder="Ingresa el RFC" class="form-control" 
             required oninput="this.value = this.value.toUpperCase()"
             required>
           </div>
           <div class="mb-3">
             <label class="control-label">Correo:</label>
-            <input type="email" name="CORREO" placeholder="Ingresa el correo" class="form-control" required>
+            <input type="email" maxlength="30"  name="CORREO" placeholder="Ingresa el correo" class="form-control" required>
           </div>
           <div class="form-group mb-3">
             <label for="tipoUsuario">Tipo de Empleado:</label>
