@@ -7,18 +7,19 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     extract($_POST);
 
     $search = isset($_POST['search']) ? $_POST['search'] : '';
-    $fecha = isset($_POST['fecha']) ? $_POST['fecha'] : '';
+    $fechaInicio = isset($_POST['fecha_inicio']) ? $_POST['fecha_inicio'] : '';
+    $fechaFin = isset($_POST['fecha_fin']) ? $_POST['fecha_fin'] : '';
 
     if ($estado === "todo") {
         $consulta = "SELECT E.ID, E.NOMBRE, E.ESTADO, E.F_CREACION, F_EVENTO, CONCAT(C.NOMBRE, ' ', C.AP_PATERNO, ' ', C.AP_MATERNO) AS CLIENTE
-              FROM EVENTO E INNER JOIN CUENTAS C ON E.CLIENTE=C.ID WHERE (E.NOMBRE LIKE '%$search%' OR CONCAT(C.NOMBRE, ' ', C.AP_PATERNO, ' ', C.AP_MATERNO) LIKE '%$search%')";
+          FROM EVENTO E INNER JOIN CUENTAS C ON E.CLIENTE=C.ID WHERE (E.NOMBRE LIKE '%$search%' OR CONCAT(C.NOMBRE, ' ', C.AP_PATERNO, ' ', C.AP_MATERNO) LIKE '%$search%')";
     } else {
         $consulta = "SELECT E.ID, E.NOMBRE, E.ESTADO, E.F_CREACION, F_EVENTO, CONCAT(C.NOMBRE, ' ', C.AP_PATERNO, ' ', C.AP_MATERNO) AS CLIENTE
-              FROM EVENTO E INNER JOIN CUENTAS C ON E.CLIENTE=C.ID WHERE E.ESTADO='$estado' AND (E.NOMBRE LIKE '%$search%' OR CONCAT(C.NOMBRE, ' ', C.AP_PATERNO, ' ', C.AP_MATERNO) LIKE '%$search%')";
+          FROM EVENTO E INNER JOIN CUENTAS C ON E.CLIENTE=C.ID WHERE E.ESTADO='$estado' AND (E.NOMBRE LIKE '%$search%' OR CONCAT(C.NOMBRE, ' ', C.AP_PATERNO, ' ', C.AP_MATERNO) LIKE '%$search%')";
     }
 
-    if (!empty($fecha)) {
-        $consulta .= " AND DATE(E.F_EVENTO) = '$fecha'";
+    if (!empty($fechaInicio) && !empty($fechaFin)) {
+        $consulta .= " AND DATE(E.F_EVENTO) BETWEEN '$fechaInicio' AND '$fechaFin'";
     }
 
     $consulta .= " ORDER BY F_EVENTO ASC";

@@ -1,7 +1,8 @@
+// Variables para controlar el tiempo de espera en la búsqueda en tiempo real
 var typingTimer;
-var doneTypingInterval = 50; 
+var doneTypingInterval = 50; // Tiempo de espera en milisegundos antes de realizar la búsqueda
 
-var fechaInput = document.getElementById('fechaInput');
+// Obtener los elementos del DOM
 var form = document.getElementById('filtroForm');
 var tablaResultados = document.getElementById('tablaResultados');
 var estadoSelect = document.getElementById('estadoSelect');
@@ -11,21 +12,20 @@ var eventosPendientes = document.getElementById("eventosPendientes");
 var eventosEnProceso = document.getElementById("eventosEnProceso");
 var eventosCancelados = document.getElementById("eventosCancelados");
 var eventosFin = document.getElementById("eventosFin");
+var fechaInicioInput = document.getElementById('fechaInicioInput');
+var fechaFinInput = document.getElementById('fechaFinInput');
 
-fechaInput.addEventListener('change', filtrarEventos);
-
+// Obtener el div que contiene el contenido de la clase row
 var contentRow = document.getElementById('contentRow');
 
+// Ejecutar la función de filtrado al cargar la página
 filtrarEventos();
 
 estadoSelect.addEventListener('change', filtrarEventos);
-
-// Escuchar el evento input del campo de búsqueda
 searchInput.addEventListener('input', function() {
     clearTimeout(typingTimer);
     typingTimer = setTimeout(filtrarEventos, doneTypingInterval);
 });
-
 searchInput.addEventListener('keydown', function(event) {
     if (event.keyCode === 13) {
         event.preventDefault();
@@ -48,55 +48,53 @@ eventosFin.addEventListener("click", function() {
     estadoSelect.value = "FINALIZADO";
     filtrarEventos();
 });
-
-// Escuchar el evento click del botón de búsqueda
 searchButton.addEventListener('click', function() {
     filtrarEventos();
 });
 
-// Función para filtrar los eventos
+// Escuchar eventos de cambio en las fechas
+fechaInicioInput.addEventListener('change', filtrarEventos);
+fechaFinInput.addEventListener('change', filtrarEventos);
+
 function filtrarEventos() {
-    // Obtener los datos del formulario
     var formData = new FormData(form);
     formData.append('depa', estadoSelect.value);
     formData.append('search', searchInput.value.trim());
+    formData.append('fecha_inicio', fechaInicioInput.value);
+    formData.append('fecha_fin', fechaFinInput.value);
 
-    // Crear una instancia de XMLHttpRequest
     var xhr = new XMLHttpRequest();
-
-    // Configurar la solicitud AJAX
     xhr.open('POST', '../viewsEventos/verEventos.php', true);
-
-    // Configurar la función de callback cuando se reciba la respuesta
     xhr.onload = function() {
         if (xhr.status === 200) {
-            tablaResultados.innerHTML = xhr.responseText; // Actualizar la tabla de resultados con la respuesta
+            tablaResultados.innerHTML = xhr.responseText;
         }
     };
-
-    // Enviar la solicitud AJAX con los datos del formulario
     xhr.send(formData);
+
     if (estadoSelect.value === 'GRAFICOS') {
-                contentRow.style.display = 'flex';
-                tablaResultados.style.display = 'none';
-                searchInput.style.display = 'none';
-                fechaInput.style.display = 'none';
-                searchButton.style.display = 'none';
-            } else {
-                contentRow.style.display = 'none';
-                tablaResultados.style.display = 'block';
-                searchInput.style.display = 'block'; 
-                fechaInput.style.display = 'block'; 
-                searchButton.style.display = 'block'; 
-            }
-    // Modificar la URL sin recargar la página
+        contentRow.style.display = 'flex';
+        tablaResultados.style.display = 'none';
+        searchInput.style.display = 'none';
+        searchButton.style.display = 'none';
+        fechaInicioInput.style.display = 'none';
+        fechaFinInput.style.display = 'none';
+    } else {
+        contentRow.style.display = 'none';
+        tablaResultados.style.display = 'block';
+        searchInput.style.display = 'block'; 
+        searchButton.style.display = 'block'; 
+        fechaInicioInput.style.display = 'block'; 
+        fechaFinInput.style.display = 'block'; 
+    }
+
     var params = new URLSearchParams(formData);
     history.replaceState(null, '', '?' + params.toString());
 }
 
-// Restaurar el estado del formulario al cargar la página
 window.addEventListener('load', function() {
     var params = new URLSearchParams(window.location.search);
     estadoSelect.value = params.get('depa') || 'todo';
-    fechaInput.value = params.get('fecha') || ''; // Restaurar el valor de la fecha
+    fechaInicioInput.value = params.get('fecha_inicio') || '';
+    fechaFinInput.value = params.get('fecha_fin') || '';
 });

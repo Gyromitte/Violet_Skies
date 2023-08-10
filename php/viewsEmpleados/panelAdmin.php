@@ -163,10 +163,12 @@
                     <!-- Buscador - A la derecha -->
                     <div class="search">
                         <div class="input-group">
-                            <input type="text" class="form-control" id="searchInput" placeholder="Buscar evento por nombre o cliente">
-                             <input type="date" class="form-control" id="fechaInput" name="fecha">
-                            <button id="searchButton" type ="button" class="ver-empleados btn btn-outline-primary">
-                            <i class="fa-solid fa-magnifying-glass" style="color: #1f71ff;"></i></button>
+                        <input type="text" class="form-control" id="searchInput" placeholder="Buscar evento por nombre o cliente">
+                        <input type="date" class="form-control" id="fechaInicioInput" name="fecha_inicio">
+                        <input type="date" class="form-control" id="fechaFinInput" name="fecha_fin">
+                        <button id="searchButton" type="button" class="ver-empleados btn btn-outline-primary">
+                            <i class="fa-solid fa-magnifying-glass" style="color: #1f71ff;"></i>
+                        </button>
                         </div>
                     </div>
                 </div>
