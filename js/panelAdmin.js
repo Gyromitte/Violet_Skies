@@ -36,7 +36,6 @@ document.addEventListener('scroll', function () {
   }
 });
 
-
 /*Main content*/
 // Obtener las pestañas y el contenido 
 var tabs = document.querySelectorAll('.dash-button');

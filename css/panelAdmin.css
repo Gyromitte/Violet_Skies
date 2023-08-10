@@ -286,28 +286,37 @@ nav{
     z-index: 3000;
   }
 
-  .alert {
+.alert {
     /* Estilo común para todas las alertas */
     padding: 10px;
     border-radius: 5px;
     margin-bottom: 10px;
   }
   
-  .alert-success {
+.alert-success {
     /* Estilo para alerta de éxito */
     color: #155724;
     background-color: #d4edda;
     border-color: #c3e6cb;
   }
   
-  .alert-danger {
+.alert-danger {
     /* Estilo para alerta de error */
     color: #721c24;
     background-color: #f8d7da;
     border-color: #f5c6cb;
   }
+
+.content-blur {
+  filter: blur(5px); /* Ajusta el valor de blur según tus preferencias */
+  transition: filter 0.3s ease; /* Agrega una transición suave */
+}
+
 @media (max-width: 768px) {
-    /* Adjust the width and font-size for smaller screens */
+    .main-dash-open {
+        margin-left: 00px;
+        transition: margin-left  0.3s ease; /* Agrega una transición suave para una animación fluida */
+    }
     #nav-button {
         width: 80px;
         font-size: 0.9em;
