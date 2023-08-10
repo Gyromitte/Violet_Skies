@@ -32,74 +32,74 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
             break;
     }
 
-    // Verificar el cupo del salón
     if ($invitados > $cupo_maximo) {
-        echo "El salón $salon solo tiene cupo para $cupo_maximo invitados.";
-        // Puedes realizar alguna acción adicional aquí, como redirigir al usuario o mostrar un mensaje.
+        $response = array(
+            "cupoMaximoExcedido" => true,
+            "mensaje" => "La cantidad de invitados supera el cupo máximo del salón. Este salón solo tiene cupo para $cupo_maximo invitados."
+        );
+        echo json_encode($response);
         exit;
     }
 
     // Conectar a la base de datos (Asegúrate de reemplazar los datos de conexión con los correctos)
     $host = "db-mysql-nyc1-69612-do-user-14325582-0.b.db.ondigitalocean.com:25060";
-    $usuario = "doadmin";
-    $contrasena = "AVNS_zPsBun59otEyJNJBtBv";
-    $nombre_base_datos = "VIOLET";
+    $username = "doadmin";
+    $password = "AVNS_zPsBun59otEyJNJBtBv";
+    $dbname = "VIOLET";
 
-    $conexion = new mysqli($host, $usuario, $contrasena, $nombre_base_datos);
+    try {
+        // Establecer la conexión
+        $pdo = new PDO("mysql:host=$host;dbname=$dbname", $username, $password);
+        $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
-    // Verificar si la conexión fue exitosa
-    if ($conexion->connect_error) {
-        die("Error en la conexión a la base de datos: " . $conexion->connect_error);
+        // Insertar los datos en la base de datos en dos pasos
+        $sql1 = "INSERT INTO EVENTO (NOMBRE, F_EVENTO, CLIENTE) VALUES (?, ?, ?)";
+        $stmt1 = $pdo->prepare($sql1);
+
+        if (!$stmt1) {
+            die("Error al preparar la primera consulta: " . $pdo->errorInfo()[2]);
+        }
+
+        // Bind parameters
+        $stmt1->bindParam(1, $nombre_evento);
+        $stmt1->bindParam(2, $fecha_evento);
+        $stmt1->bindParam(3, $usuario_id);
+
+        // Execute first query
+        if ($stmt1->execute()) {
+            // Obtener el ID del evento recién insertado
+            $evento_id = $pdo->lastInsertId();
+
+            // Realizar la segunda actualización en la tabla DETALLE_EVENTO con el ID del evento
+            $sql2 = "UPDATE DETALLE_EVENTO SET INVITADOS = ?, SALON = ?, COMIDA = ? WHERE ID = ?";
+            $stmt2 = $pdo->prepare($sql2);
+
+            if (!$stmt2) {
+                die("Error al preparar la segunda consulta: " . $pdo->errorInfo()[2]);
+            }
+
+            // Bind parameters
+            $stmt2->bindParam(1, $invitados);
+            $stmt2->bindParam(2, $salon);
+            $stmt2->bindParam(3, $comida);
+            $stmt2->bindParam(4, $evento_id);
+
+            // Execute second query
+            if ($stmt2->execute()) {
+                $response = array("mensaje" => "Evento agregado exitosamente.");
+                echo json_encode($response);
+                // Puedes realizar alguna acción adicional aquí, como redirigir al usuario o mostrar un mensaje.
+            } else {
+                $response = array("error" => "Error al agregar el evento: " . $stmt2->errorInfo()[2]);
+                echo json_encode($response);
+                // Puedes realizar alguna acción adicional aquí, como redirigir al usuario o mostrar un mensaje.
+            }
+        } else {
+            echo "Error al agregar el evento: " . $stmt1->errorInfo()[2];
+            // Puedes realizar alguna acción adicional aquí, como redirigir al usuario o mostrar un mensaje.
+        }
+    } catch (PDOException $e) {
+        echo "Error en la conexión a la base de datos: " . $e->getMessage();
     }
-    // Insertar los datos en la base de datos en dos pasos
-    $sql1 = "INSERT INTO EVENTO (NOMBRE, F_EVENTO, CLIENTE) VALUES (?,?,?)";
-    $stmt1 = $conexion->prepare($sql1);
-
-    if (!$stmt1) {
-        die("Error al preparar la primera consulta: " . $conexion->error);
-    }
-
-    // Bind parameters
-    $stmt1->bind_param('ssi',$nombre_evento, $fecha_evento, $usuario_id);
-
-    // Execute first query
-    if ($stmt1->execute()) {
-        // Obtener el ID del evento recién insertado
-        $evento_id = $stmt1->insert_id;
-
-        // Cerrar la primera consulta
-        $stmt1->close();
-
-        // Realizar la segunda actualización en la tabla DETALLE_EVENTO con el ID del evento
-    $sql2 = "UPDATE DETALLE_EVENTO SET INVITADOS = ?, SALON = ?, COMIDA = ? WHERE ID = ?";
-    $stmt2 = $conexion->prepare($sql2);
-
-    if (!$stmt2) {
-        die("Error al preparar la segunda consulta: " . $conexion->error);
-    }
-
-    // Bind parameters
-    $stmt2->bind_param("isss", $invitados, $salon, $comida, $evento_id);
-
-    // Execute second query
-    if ($stmt2->execute()) {
-        $response = array("mensaje" => "Evento agregado exitosamente.");
-        echo json_encode($response);
-        // Puedes realizar alguna acción adicional aquí, como redirigir al usuario o mostrar un mensaje.
-    } else {
-        $response = array("error" => "Error al agregar el evento: " . $stmt2->error);
-        echo json_encode($response);
-        // Puedes realizar alguna acción adicional aquí, como redirigir al usuario o mostrar un mensaje.
-    }
-    
-    // Cerrar la segunda consulta
-    $stmt2->close();
-    } else {
-        echo "Error al agregar el evento: " . $stmt1->error;
-        // Puedes realizar alguna acción adicional aquí, como redirigir al usuario o mostrar un mensaje.
-    }
-
-    // Cerrar la conexión
-    $conexion->close();
 }
 ?>

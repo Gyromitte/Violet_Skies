@@ -231,5 +231,8 @@ modal.addEventListener("show.bs.modal", function (event) {
     modalForm.innerHTML = formContent;
   }
 
+  const tooltipTriggerList = document.querySelectorAll('[data-bs-toggle="tooltip"]');
+  const tooltipList = [...tooltipTriggerList].map(tooltipTriggerEl => new bootstrap.Tooltip(tooltipTriggerEl));
+
 // Add a click event listener to the paragraph
 

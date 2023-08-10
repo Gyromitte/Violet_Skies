@@ -17,28 +17,35 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $port = 25060;
     $database = "VIOLET";
 
-    // Establecer la conexión
-    $conn = new mysqli($servername, $username, $password, $database, $port);
+    try {
+        // Establecer la conexión
+        $pdo = new PDO("mysql:host=$servername;port=$port;dbname=$database", $username, $password);
+        $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
-    // Verificar la conexión
-    if ($conn->connect_error) {
-        die("Error al conectar con la base de datos: " . $conn->connect_error);
-    }
+        // Obtener el hash de la contraseña actual del usuario desde la base de datos
+        $sql = "SELECT CONTRASEÑA FROM CUENTAS WHERE CORREO=:correo";
+        $stmt = $pdo->prepare($sql);
+        $stmt->bindParam(':correo', $correo);
+        $stmt->execute();
 
-    // Obtener el hash de la contraseña actual del usuario desde la base de datos
-    $sql = "SELECT CONTRASEÑA FROM CUENTAS WHERE CORREO='$correo'";
-    $result = $conn->query($sql);
-    if ($result->num_rows > 0) {
-        $row = $result->fetch_assoc();
-        $hashed_password = $row["CONTRASEÑA"];
+        if ($stmt->rowCount() > 0) {
+            $row = $stmt->fetch(PDO::FETCH_ASSOC);
+            $hashed_password = $row["CONTRASEÑA"];
 
-        // Verificar la contraseña actual utilizando password_verify
-        if (password_verify($contrasena_actual, $hashed_password)) {
-            // La contraseña es válida, proceder con la actualización de datos
-            $sql = "UPDATE CUENTAS SET NOMBRE='$nombre', AP_PATERNO='$apPaterno', AP_MATERNO='$apMaterno', TELEFONO='$telefono' WHERE CORREO='$correo'";
+            // Verificar la contraseña actual utilizando password_verify
+            if (password_verify($contrasena_actual, $hashed_password)) {
+                // La contraseña es válida, proceder con la actualización de datos
+                $sql = "UPDATE CUENTAS SET NOMBRE=:nombre, AP_PATERNO=:apPaterno, AP_MATERNO=:apMaterno, TELEFONO=:telefono WHERE CORREO=:correo";
 
-            // Ejecuta la consulta
-            if ($conn->query($sql) === TRUE) {
+                // Ejecuta la consulta
+                $stmt = $pdo->prepare($sql);
+                $stmt->bindParam(':nombre', $nombre);
+                $stmt->bindParam(':apPaterno', $apPaterno);
+                $stmt->bindParam(':apMaterno', $apMaterno);
+                $stmt->bindParam(':telefono', $telefono);
+                $stmt->bindParam(':correo', $correo);
+                $stmt->execute();
+
                 // Actualización exitosa, cerrar la sesión del usuario y redirigirlo a la página de inicio
                 session_unset();
                 $nuevosDatosUsuario = [
@@ -54,35 +61,30 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 echo json_encode($response);
                 exit();
             } else {
-                // Error al actualizar los datos
-                $response = ['success' => false, 'badPass' => 'Error al actualizar los datos: ' . $conn->error];
+                // La contraseña es incorrecta, no se puede realizar la actualización
+                $response = ['success' => false, 'badPass' => 'Contraseña incorrecta, no se puede actualizar los datos'];
                 header('Content-Type: application/json');
                 echo json_encode($response);
                 exit();
             }
         } else {
-            // La contraseña es incorrecta, no se puede realizar la actualización
-            $response = ['success' => false, 'badPass' => 'Contraseña incorrecta, no se puede actualizar los datos'];
+            // No se encontró el usuario con el correo especificado
+            $response = ['success' => false, 'error' => 'No se encontró el usuario con el correo especificado'];
             header('Content-Type: application/json');
             echo json_encode($response);
             exit();
         }
-    } else {
-        // No se encontró el usuario con el correo especificado
-        $response = ['success' => false, 'error' => 'No se encontró el usuario con el correo especificado'];
+    } catch (PDOException $e) {
+        $response = ['success' => false, 'error' => 'Error al conectar con la base de datos: ' . $e->getMessage()];
         header('Content-Type: application/json');
         echo json_encode($response);
         exit();
     }
-
-    $conn->close();
-    exit(); // Salir para evitar que se envíe contenido adicional
-
 } else {
     // Si no se ha enviado un formulario POST, devolver un mensaje de error JSON
     $response = ['success' => false, 'error' => 'No se recibieron datos del formulario'];
     header('Content-Type: application/json');
     echo json_encode($response);
-    exit(); // Salir para evitar que se envíe contenido adicional
+    exit(); 
 }
 ?>

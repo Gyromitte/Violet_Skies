@@ -114,7 +114,7 @@
                     <i class="fa-solid fa-calendar-days" style="color: #ffffff;"></i>
                 </h3>
             </div>
-            <div class="container">
+            <div style="padding-left: 1%; margin-right: 3%; " class="container-fluid">
             <form id="evento-form" method="post">
             <div id="msgDiv"></div>
                     <div class="form-group">

@@ -57,6 +57,11 @@ $(window).on('load', function() {
                 const msgDiv = document.getElementById('msgDiv');
                 msgDiv.innerHTML = `<div style="text-align:center;" class="alert alert-success">Evento solicitado con éxito <br>espera a que los administradores lo confirmen</div>`;
             }
+            if (jsonData && jsonData.cupoMaximoExcedido) {
+                // Mostrar un mensaje de error en lugar del mensaje de éxito
+                const msgDiv = document.getElementById('msgDiv');
+                msgDiv.innerHTML = `<div style="text-align:center;" class="alert alert-danger">${jsonData.mensaje}</div>`;
+            }
 
             // Ejemplo de cómo manejar la lista de eventos:
             if (jsonData && jsonData.eventos) {
@@ -67,7 +72,7 @@ $(window).on('load', function() {
             console.error('Error al analizar la respuesta JSON:', error);
             // Si ocurre un error al analizar la respuesta JSON, muestra un mensaje de error
             const msgDiv = document.getElementById('msgDiv');
-            msgDiv.innerHTML = `<div style="text-align:center;" class="alert alert-danger">Error en la respuesta del servidor.</div>`;
+            msgDiv.innerHTML = `<div style="text-align:center;" class="alert alert-danger">Lo siento, esa fecha ya está apartada</div>`;
         }
       })
       .catch(error => console.error('Error en la solicitud:', error));
