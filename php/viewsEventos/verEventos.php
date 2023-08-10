@@ -7,14 +7,21 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     extract($_POST);
 
     $search = isset($_POST['search']) ? $_POST['search'] : '';
+    $fecha = isset($_POST['fecha']) ? $_POST['fecha'] : '';
 
     if ($estado === "todo") {
         $consulta = "SELECT E.ID, E.NOMBRE, E.ESTADO, E.F_CREACION, F_EVENTO, CONCAT(C.NOMBRE, ' ', C.AP_PATERNO, ' ', C.AP_MATERNO) AS CLIENTE
-              FROM EVENTO E INNER JOIN CUENTAS C ON E.CLIENTE=C.ID WHERE (E.NOMBRE LIKE '%$search%' OR CONCAT(C.NOMBRE, ' ', C.AP_PATERNO, ' ', C.AP_MATERNO) LIKE '%$search%') ORDER BY F_EVENTO ASC";
+              FROM EVENTO E INNER JOIN CUENTAS C ON E.CLIENTE=C.ID WHERE (E.NOMBRE LIKE '%$search%' OR CONCAT(C.NOMBRE, ' ', C.AP_PATERNO, ' ', C.AP_MATERNO) LIKE '%$search%')";
     } else {
         $consulta = "SELECT E.ID, E.NOMBRE, E.ESTADO, E.F_CREACION, F_EVENTO, CONCAT(C.NOMBRE, ' ', C.AP_PATERNO, ' ', C.AP_MATERNO) AS CLIENTE
-              FROM EVENTO E INNER JOIN CUENTAS C ON E.CLIENTE=C.ID WHERE E.ESTADO='$estado' AND (E.NOMBRE LIKE '%$search%' OR CONCAT(C.NOMBRE, ' ', C.AP_PATERNO, ' ', C.AP_MATERNO) LIKE '%$search%') ORDER BY F_EVENTO ASC";
+              FROM EVENTO E INNER JOIN CUENTAS C ON E.CLIENTE=C.ID WHERE E.ESTADO='$estado' AND (E.NOMBRE LIKE '%$search%' OR CONCAT(C.NOMBRE, ' ', C.AP_PATERNO, ' ', C.AP_MATERNO) LIKE '%$search%')";
     }
+
+    if (!empty($fecha)) {
+        $consulta .= " AND DATE(E.F_EVENTO) = '$fecha'";
+    }
+
+    $consulta .= " ORDER BY F_EVENTO ASC";
 
     $tabla = $conexion->seleccionar($consulta);
 
@@ -40,7 +47,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             echo "<td> $registro->F_EVENTO</td>";
             echo "<td> $registro->CLIENTE</td>";
 
-            // Generar el botón de opciones con el menú desplegable
             echo "<td class='text-center'>";
             echo '<div class="dropdown">';
             echo "<button class='btn btn-secondary dropdown-toggle custom-dropdown' type='button' data-bs-toggle='modal' data-bs-target='#mainModal'

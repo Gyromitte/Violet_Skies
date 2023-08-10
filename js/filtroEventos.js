@@ -1,8 +1,7 @@
-// Variables para controlar el tiempo de espera en la búsqueda en tiempo real
 var typingTimer;
-var doneTypingInterval = 50; // Tiempo de espera en milisegundos antes de realizar la búsqueda
+var doneTypingInterval = 50; 
 
-// Obtener el formulario, el campo de búsqueda y el div de la tabla de resultados
+var fechaInput = document.getElementById('fechaInput');
 var form = document.getElementById('filtroForm');
 var tablaResultados = document.getElementById('tablaResultados');
 var estadoSelect = document.getElementById('estadoSelect');
@@ -13,13 +12,12 @@ var eventosEnProceso = document.getElementById("eventosEnProceso");
 var eventosCancelados = document.getElementById("eventosCancelados");
 var eventosFin = document.getElementById("eventosFin");
 
-// Obtener el div que contiene el contenido de la clase row
+fechaInput.addEventListener('change', filtrarEventos);
+
 var contentRow = document.getElementById('contentRow');
 
-// Ejecutar la función de filtrado al cargar la página
 filtrarEventos();
 
-// Escuchar el evento change del campo de selección de estado
 estadoSelect.addEventListener('change', filtrarEventos);
 
 // Escuchar el evento input del campo de búsqueda
@@ -82,11 +80,13 @@ function filtrarEventos() {
                 contentRow.style.display = 'flex';
                 tablaResultados.style.display = 'none';
                 searchInput.style.display = 'none';
+                fechaInput.style.display = 'none';
                 searchButton.style.display = 'none';
             } else {
                 contentRow.style.display = 'none';
                 tablaResultados.style.display = 'block';
                 searchInput.style.display = 'block'; 
+                fechaInput.style.display = 'block'; 
                 searchButton.style.display = 'block'; 
             }
     // Modificar la URL sin recargar la página
@@ -98,4 +98,5 @@ function filtrarEventos() {
 window.addEventListener('load', function() {
     var params = new URLSearchParams(window.location.search);
     estadoSelect.value = params.get('depa') || 'todo';
+    fechaInput.value = params.get('fecha') || ''; // Restaurar el valor de la fecha
 });
