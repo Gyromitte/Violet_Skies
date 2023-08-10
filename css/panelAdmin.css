@@ -183,6 +183,12 @@ nav{
     border: 2px solid white;
 }
 
+.btn-view-custom{
+    border: none;
+    width: 100%;
+    text-align: left;
+}
+
 .custom-ver-historial{
     background-color: #b14aed;
     border: 2px solid white;
@@ -230,6 +236,7 @@ nav{
     background-color: #5603ad;
     color: white;
     border: 2px solid white;
+    border-radius: 10px;
 }
 
 #estadoSelect option:hover {

@@ -261,27 +261,35 @@
             </div>
             <br>
             <!--Opciones de Vistas-->
-            <div class="view-options mb-2">
-                <div>
-                    <button id="verGraficos" data-url="" type="button" class="btn-options ver-empleados btn btn-primary border-2 btn-outline-light rounded-5" data-bs-target="#mainModal">
-                        <i class="fa-solid fa-chart-pie" style="color: #ffffff;"></i>
-                        Ver Graficos
+        <div class="view-options mb-2">
+            <div>
+                <div class="dropdown form-select-custom">
+                    <button class="btn btn-secondary dropdown-toggle custom-dropdown" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        Vistas:
                     </button>
-                    <button id="verCocineros" data-url="verCocineros.php" type="button" class="btn-options ver-empleados btn btn-primary border-2 btn-outline-light rounded-5" data-bs-target="#mainModal">
-                        <i class="fa-solid fa-utensils" style="color: #ffffff;"></i>
-                        Ver Cocineros
-                    </button>
-                    <button id="verMeseros" data-url="verMeseros.php" type="button" class="btn-options ver-empleados btn btn-primary border-2 btn-outline-light rounded-5" data-bs-target="#mainModal">
-                        <i class="fa-solid fa-bell-concierge" style="color: #ffffff;"></i>
-                        Ver Meseros
-                    </button>
-                    <button id="verSolicitudes" data-url="verSolicitudes.php" type="button" class="btn-options ver-empleados btn btn-primary border-2 btn-outline-light rounded-5" data-bs-target="#mainModal">
-                        <i class="fa-solid fa-business-time" style="color: #ffffff;"></i>
-                        Ver Solicitudes
-                    </button>
+                    <ul class="dropdown-menu custom-drop-menu">
+                        <li>
+                            <button id="verGraficos" data-url="" type="button" class="btn-view-custom btn-options ver-empleados btn btn-primary border-2 btn-outline-light rounded-5" data-bs-target="#mainModal">
+                                <i class="fa-solid fa-chart-pie" style="color: #ffffff;"></i>
+                                Ver Graficos
+                            </button>
+                        </li>
+                        <li>
+                            <button id="verCocineros" data-url="verCocineros.php" type="button" class="btn-view-custom btn-options ver-empleados btn btn-primary border-2 btn-outline-light rounded-5" data-bs-target="#mainModal">
+                                <i class="fa-solid fa-utensils" style="color: #ffffff;"></i>
+                                Ver Cocineros
+                            </button>
+                        </li>
+                        <li>
+                            <button id="verSolicitudes" data-url="verSolicitudes.php" type="button" class="btn-view-custom btn-options ver-empleados btn btn-primary border-2 btn-outline-light rounded-5" data-bs-target="#mainModal">
+                                <i class="fa-solid fa-business-time" style="color: #ffffff;"></i>
+                                Ver Solicitudes
+                            </button>
+                        </li>
+                    </ul>
                 </div>
-                
-            </div>
+            </div> 
+        </div>
             <!--Informacion de la tabla-->
             <h3 id="table-info"></h3>
             <!--Container para tablas-->
@@ -290,7 +298,7 @@
                 <div class="container-fluid">
                     <div class="row">
                         <!-- Contenido de la izquierda -->
-                        <div class="col-md-5">
+                        <div class="col-md-5" style="padding-left: 0px !important;">
                         <div class="info-card mb-2" style="height: 25px; display: flex; align-items: center;">
                             <h3 class="me-2">
                             <i class="fa-solid fa-business-time" style="color: #ffffff;"></i>
