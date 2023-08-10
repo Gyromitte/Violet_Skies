@@ -295,12 +295,28 @@ function updateModalContent(formType, idEmpleado, idEvento) {
             formContent = `
                   <form id="formularioEditarEmpleado">
                     <div id="mensajeDiv" method="POST"></div> <!-- Div para mensajes de respuesta -->
-                    <h5>Empleado: </h5>
-                    <h6 class="mb-3">${empleado.NOMBRE} ${empleado.AP_PATERNO} ${empleado.AP_MATERNO}</h6>
-                    <h5>Telefono: </h5>
-                    <h6 class="mb-3">${empleado.TELEFONO}</h6>
-                    <h5>Correo: </h5>
+                    <div class="mb-3">
+                    <h6>Correo: </h6>
                     <h6 class="mb-3">${empleado.CORREO}</h6>
+                    <label class="control-label">Nombre: </label>
+                    <input type="text" name="nombre" placeholder="" class="form-control" 
+                    required value="${empleado.NOMBRE}">
+                    </div>
+                    <div class="mb-3">
+                    <label class="control-label">Ap. Paterno: </label>
+                    <input type="text" name="ap_paterno" placeholder="" class="form-control" 
+                    required value="${empleado.AP_PATERNO}">
+                    </div>
+                    <div class="mb-3">
+                    <label class="control-label">Ap. Materno: </label>
+                    <input type="text" name="ap_materno" placeholder="" class="form-control" 
+                    required value="${empleado.AP_MATERNO}">
+                    </div>
+                    <div class="mb-3">
+                    <label class="control-label">Telefono: </label>
+                    <input type="text" name="telefono" placeholder="" class="form-control" 
+                    required value="${empleado.TELEFONO}">
+                    </div>
                     <div class="mb-3">
                       <label class="control-label">RFC</label>
                       <input type="text" name="rfc" placeholder="Ingresa el RFC" class="form-control" 
@@ -329,6 +345,10 @@ function updateModalContent(formType, idEmpleado, idEvento) {
               event.preventDefault(); // Evitar que el formulario se envíe por defecto
 
               // Obtener los valores del formulario
+              var nombre = formEditarEmpleado.elements.nombre.value;
+              var ap_paterno = formEditarEmpleado.elements.ap_paterno.value;
+              var ap_materno = formEditarEmpleado.elements.ap_materno.value;
+              var telefono = formEditarEmpleado.elements.telefono.value;
               var rfc = formEditarEmpleado.elements.rfc.value;
               var tipoUsuario = formEditarEmpleado.elements.tipoUsuario.value;
 
@@ -349,7 +369,9 @@ function updateModalContent(formType, idEmpleado, idEvento) {
               // Hacer la solicitud al script PHP para editar al empleado y pasar los datos actualizados
               updateXHR.open("POST", "editarEmpleado.php", true);
               updateXHR.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-              updateXHR.send(`id=${idEmpleado}&rfc=${rfc}&tipoUsuario=${tipoUsuario}`);
+              updateXHR.send(`id=${idEmpleado}&rfc=${rfc}&tipoUsuario=${tipoUsuario}
+              &nombre=${nombre}&ap_paterno=${ap_paterno}&ap_materno=${ap_materno}
+              &telefono=${telefono}`);
               //Ver cual es la tabla activa para refrescar cualquier cambio
               checkCurrentTable(currentTable);
             });

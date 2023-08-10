@@ -358,3 +358,16 @@ nav{
 .detalles {
     max-width: 600px; /* Cambia este valor según sea necesario */
   }
+
+  #mensajeModificar{
+    text-align: center;
+    display: none;
+    width: 300px;
+    height: auto;
+    margin: 0 auto;
+  }
+.personal-info input[disabled]{
+    background-color: transparent;
+    border-color: transparent;
+    font-style: oblique;
+}

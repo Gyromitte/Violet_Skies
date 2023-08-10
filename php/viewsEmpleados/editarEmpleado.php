@@ -4,11 +4,26 @@ $conexion = new Database();
 $conexion->conectarBD();
 
 // Verificar si se recibieron los datos de RFC y tipo
-if (isset($_POST['rfc']) && isset($_POST['tipoUsuario']) && isset($_POST['id'])) {
+if (isset($_POST['rfc']) && isset($_POST['id'])
+    && isset($_POST['nombre']) && isset($_POST['ap_paterno']) && isset($_POST['ap_materno'])
+    && isset($_POST['telefono']) && isset($_POST['tipoUsuario'])) {
     // Obtener los datos del empleado desde la solicitud
+    $nombre = $_POST['nombre'];
+    $ap_paterno = $_POST['ap_paterno'];
+    $ap_materno = $_POST['ap_materno'];
+    $telefono = $_POST['telefono'];
     $employeeId = $_POST['id'];
     $rfc = strtoupper($_POST['rfc']); // Convertir a mayúsculas para homogeneizar
-    $tipoUsuario = $_POST['tipoUsuario'];
+    $tipoUsuario = trim($_POST['tipoUsuario']);
+
+    echo "<div class='alert alert-danger'>$tipoUsuario</div>";
+    echo "<div class='alert alert-danger'>$nombre</div>";
+    echo "<div class='alert alert-danger'>$ap_paterno</div>";
+    echo "<div class='alert alert-danger'>$ap_materno</div>";
+    echo "<div class='alert alert-danger'>$telefono</div>";
+    echo "<div class='alert alert-danger'>$rfc</div>";
+
+    var_dump($tipoUsuario);
 
     // Variable para almacenar el mensaje de error
     $errorMessage = "";
@@ -25,7 +40,9 @@ if (isset($_POST['rfc']) && isset($_POST['tipoUsuario']) && isset($_POST['id']))
         } else {
             // Verificar formato
             if (!preg_match('/^[A-Z]{4}\d{6}[A-Z0-9]{3}$/', $rfc)) {
-                $errorMessage = "El formato del RFC es inválido. Debe ser del tipo AAAA123456XXX, donde AAAA son las primeras cuatro letras del apellido, 123456 representa la fecha de nacimiento (YYMMDD) y XXX es la homoclave.";
+                $errorMessage = "El formato del RFC es inválido. Debe ser del tipo AAAA123456XXX, 
+                donde AAAA son las primeras cuatro letras del apellido, 123456 representa la fecha de nacimiento (YYMMDD)
+                y XXX es la homoclave.";
             }
         }
     }
@@ -35,9 +52,13 @@ if (isset($_POST['rfc']) && isset($_POST['tipoUsuario']) && isset($_POST['id']))
         echo "<div class='alert alert-danger'>$errorMessage</div>";
     } else {
         // El RFC tiene el formato correcto, realizar la consulta para actualizar los datos del empleado
-        $actualizar = "UPDATE EMPLEADOS SET RFC='$rfc', TIPO='$tipoUsuario' WHERE CUENTA='$employeeId'"; //Este id debería ser el de la cuenta
+        $actualizar =  "UPDATE EMPLEADOS AS E
+        INNER JOIN CUENTAS AS C ON E.CUENTA = C.ID
+        SET E.RFC = '$rfc', E.TIPO = '$tipoUsuario',
+            C.NOMBRE = '$nombre', C.AP_PATERNO = '$ap_paterno', C.AP_MATERNO = '$ap_materno', C.TELEFONO = '$telefono'
+        WHERE E.CUENTA = '$employeeId'"; //Este id debería ser el de la cuenta
         $conexion->ejecutarSQL($actualizar);
-
+        echo "<div class='alert alert-danger'>$tipoUsuario</div>";
         //Respuesta de exito
         echo "<div class='alert alert-success'>Cambios aplicados exitosamente!</div>";
     }
