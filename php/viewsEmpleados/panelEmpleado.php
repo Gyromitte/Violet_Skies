@@ -240,7 +240,9 @@
         </div>
         <div id="perfil" class="tab-content">
             <div class="container">
-                <!--?php include "../viewsPerfil/datosEmp.php" ?> -->
+                <?php echo" <div class='container'>";
+                include "../viewsPerfil/datosEmp.php";
+                echo" </div>"; ?>
             </div>
         </div>
 
@@ -263,8 +265,9 @@
     <!--Scripts que necesitan ejecutarse hasta el final-->
     <script src="/js/panelEmpleado.js" async defer></script>
     <script src="/js/EventoAsist.js"></script>
-    <script src="/js/EventosDisp.js"></script>
     <script src="/js/chartsemp.js"></script>
+    <script src="/js/EventosDisp.js"></script>
+    <script src="/js/datosempleado.js"></script>
     <script src="/bootstrap/js/bootstrap.min.js"></script>
     <script src="/bootstrap/js/bootstrap.bundle.min.js"></script>
 </body>
