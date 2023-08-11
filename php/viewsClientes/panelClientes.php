@@ -28,7 +28,6 @@
     <script src="https://kit.fontawesome.com/b60c246061.js" crossorigin="anonymous"></script>
     <script src="filterEvents.js" async defer></script>
 
-    
 </head>
 <body>
     <!--[if lt IE 7]>
@@ -61,7 +60,7 @@
     // Convertir el array de datos del usuario en formato JSON para poder pasarlo a JavaScript
     $datosUsuarioJSON = json_encode($datosUsuario);
     ?>
-    <nav>
+   <nav>
         <div class="nav-menu">
             <button id="nav-button">
                 <i class="fa-solid fa-bars" style="color: #ffffff;"></i>
@@ -70,7 +69,9 @@
             Violet Skies
         </div>
         <div class="nav-user">
-            <?php echo $_SESSION["name"];?>
+            <?php
+                echo $_SESSION["name"];
+            ?>
         </div>
     </nav>
     <!--DashBoard-->
@@ -114,7 +115,7 @@
                     <i class="fa-solid fa-calendar-days" style="color: #ffffff;"></i>
                 </h3>
             </div>
-            <div style="padding-left: 1%; margin-right: 3%; " class="container-fluid">
+            <div style="padding-left: 1%; margin-right: 52%; " class="container-flex">
             <form id="evento-form" method="post">
             <div id="msgDiv"></div>
                     <div class="form-group">
@@ -228,6 +229,27 @@
             </div>
         </div>
     </div>
+    <div id="cancelModal" class="modal">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content ">
+            <div class="modal-header">
+                <h5 class="modal-title">Cancelar evento</h5>
+                <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">&times;</button>
+            </div>
+            <div class="modal-body">
+                <form id="cancelForm">
+                    <p id="cancelMessage"></p>
+                    <label>¿Estás seguro de que quieres cancelar el evento?</label>
+                    <input type="hidden" id="eventIDInput" name="eventID">
+                    <label for="password">Contraseña:</label>
+                    <input type="password" id="password" name="password" required>
+                    <button type="submit">Cancelar evento</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
 
 
 
