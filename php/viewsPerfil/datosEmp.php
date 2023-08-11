@@ -4,7 +4,6 @@ include "../dataBase.php";
     $emp = $_SESSION["ID"];
     $trab=$_SESSION["trabajo"];
     $db = new DataBase();
-
     $db->conectarBD();
       
     $query = "SELECT * FROM CUENTAS WHERE ID = '$emp'";
@@ -100,73 +99,8 @@ include "../dataBase.php";
           
           <?php
     }
-    if (isset($_POST['currentPassword']) && isset($_POST['newPassword']) && isset($_POST['confirmPassword'])) {
-        // Obtener los valores del formulario
-        $currentPassword = $_POST['currentPassword'];
-        $newPassword = $_POST['newPassword'];
-        $confirmPassword = $_POST['confirmPassword'];
-        $cuenta = $_POST['cuenta'];
-    
-        if ($newPassword !== $confirmPassword) {
-            echo '<script>
-                document.getElementById("alertMessage").classList.remove("d-none");
-                document.getElementById("alertMessage").innerHTML = "Las contraseñas no coinciden";
-            </script>';
-        } else {
-            try {
-                $database = new Database();
-                $database->conectarBD();
-    
-                // Obtener la contraseña actual almacenada en la base de datos para el usuario
-                $consulta = "SELECT CONTRASEÑA FROM CUENTAS WHERE ID = :cuenta";
-                $parametros = array(':cuenta' => $cuenta);
-                $resultados = $database->seleccionarPreparado($consulta, $parametros);
-    
-                if (!empty($resultados)) {
-                    $contraseñaActual = $resultados[0]->CONTRASEÑA;
-    
-                    // Verificar si la contraseña actual ingresada coincide con la almacenada en la base de datos
-                    if (!password_verify($currentPassword, $contraseñaActual)) {
-                        echo '<script>
-                            document.getElementById("alertMessage").classList.remove("d-none");
-                            document.getElementById("alertMessage").innerHTML = "La contraseña actual es incorrecta";
-                        </script>';
-                    } else {
-                        // Actualizar la contraseña en la base de datos
-                        $hashNuevaContraseña = password_hash($newPassword, PASSWORD_DEFAULT); // Hashear la nueva contraseña
-                        $consulta = "UPDATE CUENTAS SET CONTRASEÑA = :newPassword WHERE ID = :cuenta";
-                        $actualizar = $database->getPDO()->prepare($consulta);
-                        $actualizar->bindParam(':newPassword', $hashNuevaContraseña);
-                        $actualizar->bindParam(':cuenta', $cuenta);
-                        $actualizar->execute();
-    
-                        if ($actualizar->rowCount() === 0) {
-                            echo '<script>
-                                document.getElementById("alertMessage").classList.remove("d-none");
-                                document.getElementById("alertMessage").innerHTML = "Error al actualizar la contraseña";
-                            </script>';
-                        } else {
-                            echo '<script>
-                                document.getElementById("alertMessage").classList.add("d-none");
-                                document.getElementById("modalCambiarContrasena").modal("hide");
-                                alert("Contraseña actualizada exitosamente");
-                            </script>';
-                        }
-                    }
-                } else {
-                    echo '<script>
-                        document.getElementById("alertMessage").classList.remove("d-none");
-                        document.getElementById("alertMessage").innerHTML = "No se encontró el usuario";
-                    </script>';
-                }
-            } catch (PDOException $e) {
-                echo '<script>
-                    document.getElementById("alertMessage").classList.remove("d-none");
-                    document.getElementById("alertMessage").innerHTML = "Error en la base de datos: " + ' . $e->getMessage() . '</script>';
-            }
-            $database->desconectarBD();
-        }
-    }
-    
+        $db->desconectarBD();
+
+
 ?>
 
