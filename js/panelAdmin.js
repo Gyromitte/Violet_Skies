@@ -1089,6 +1089,7 @@ function updateModalContent(formType, idEmpleado, idEvento) {
           //Actualizar el contenido del formulario con los datos obtenidos
           formContent = `
             <form id="formularioMenu">
+              <div id="mensajeDiv" method="POST"></div> <!-- Div para mensajes de respuesta -->
               <div class="mb-3">
                 <label class="control-label">Nombre: </label>
                 <input type="text" name="nombre" placeholder="Nombre del menu" class="form-control" maxlength="45" required
@@ -1121,7 +1122,7 @@ function updateModalContent(formType, idEmpleado, idEvento) {
           // Asignar el contenido al formulario del modal
           modalForm.innerHTML = formContent;
           // Obtener el formulario después de haberlo asignado al DOM
-          var formEditarMenu = document.querySelector('#formularioMenu');
+          var formEditarMenu = document.getElementById('formularioMenu');
           // Agregar evento de envío al formulario de edición
           formEditarMenu.addEventListener('submit', function (event) {
             event.preventDefault(); // Evitar que el formulario se envíe por defecto
@@ -1146,15 +1147,13 @@ function updateModalContent(formType, idEmpleado, idEvento) {
               }
             };
             // Hacer la solicitud al script PHP para editar al empleado y pasar los datos actualizados
-            updateXHR.open("POST", "editarMenu.php", true);
+            updateXHR.open("POST", "/php/viewsMenus/editarMenu.php", true);
             updateXHR.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-            updateXHR.send(`id=${idEmpleado}&rfc=${rfc}&tipoUsuario=${tipoUsuario}
-            &nombre=${nombre}&ap_paterno=${ap_paterno}&ap_materno=${ap_materno}
-            &telefono=${telefono}`);
+            updateXHR.send(`id=${idEmpleado}&tipoMenu=${tipoMenu}
+            &nombre=${nombre}&descripcion=${descripcion}`);
             //Ver cual es la tabla activa para refrescar cualquier cambio
-            checkCurrentTable(currentTable);
+            //checkCurrentTable(currentTable);
           });
-
         } else {
           console.error("Error en la solicitud AJAX");
         }
@@ -1165,7 +1164,7 @@ function updateModalContent(formType, idEmpleado, idEvento) {
     console.log(idEmpleado);
     xhr.send();
     //Ver cual es la tabla activa para refrescar cualquier cambio
-    checkCurrentTable(currentTable);
+    //checkCurrentTable(currentTable);
     break;
 
     }
