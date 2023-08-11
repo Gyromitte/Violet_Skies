@@ -207,6 +207,12 @@
                             <i class='fa-solid fa-bell-concierge' style='color: #ffffff;'></i>
                             Historial
                         </button>
+                        <button id='verSolic' data-url='../viewsEventos/verSolicAsist.php' type='button' 
+                        class='btn-options ver-eventos btn btn-primary border-2 btn-outline-light rounded-5'
+                        data-bs-target='#Main'>
+                            <i class='fa-solid fa-bell-concierge' style='color: #ffffff;'></i>
+                            Solicitudes de Asistencia
+                        </button>
                         </div>
                     </div>
                     <br>

@@ -233,7 +233,7 @@
         try
         {
             $this->PDO_local->query($consulta);
-            echo"<div class='alert alert-success'>Asistiendo!</div>";
+            echo"<div class='alert alert-success'>Solicitud Enviada!</div>";
         }
         catch(PDOException $e)
         {

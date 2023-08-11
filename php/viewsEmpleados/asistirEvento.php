@@ -47,8 +47,8 @@ $evendate = $db->seleccionar($consulta);
 foreach ($evendate as $evendates) {
     $date = $evendates->FECHA;
 
-    $checkemp = "SELECT * FROM EVENTO_EMPLEADOS EE WHERE EE.EVENTO='$eventoId'
-    AND EE.EMPLEADOS='$emp'";
+    $checkemp = "SELECT * FROM SOLICITUDES_EMPLEADO EE WHERE EE.EVENTO='$eventoId'
+    AND EE.EMPLEADO='$emp'";
     $imin = $db->seleccionar($checkemp);
 
     $time = "SELECT DATE_FORMAT(E.F_EVENTO, '%Y-%m-%d') as FECHA FROM EVENTO E JOIN 
@@ -66,7 +66,7 @@ foreach ($evendate as $evendates) {
         }
     }
     if (count($imin) == 1) {
-        echo "<div class='alert alert-danger'> Ya estas dentro de este evento</div>";
+        echo "<div class='alert alert-danger'> Ya mandaste solicitud para este evento</div>";
         $db->desconectarBD();
         exit;
     } else if ($alreadyAttendedEvent) {
@@ -74,7 +74,7 @@ foreach ($evendate as $evendates) {
         $db->desconectarBD();
         exit;
     } else {
-        $enter = "INSERT INTO EVENTO_EMPLEADOS(EVENTO,EMPLEADOS) VALUES('$eventoId','$emp')";
+        $enter = "INSERT INTO SOLICITUDES_EMPLEADO(EVENTO,EMPLEADO) VALUES('$eventoId','$emp')";
         $db->ejecutarInsert($enter);
     }
 }
