@@ -351,8 +351,8 @@
                 </div>
                 <!--Barra de Busqueda-->
                 <div class="input-group mb-3 search-bar" id="search">
-                    <input type="text" id="busqueda" class="form-control" placeholder="Buscar a un empleado"
-                        onkeyup="searchEmployee()"
+                    <input type="text" id="busquedaMenu" class="form-control" placeholder="Buscar un menú"
+                        onkeyup="searchMenu()"
                      aria-label="" aria-describedby="button-addon2">
                     <button id="buscarEmpleado" data-url="buscarEmpleado.php" class="ver-empleados btn btn-outline-primary" type="button" id="button-addon2">
                     <i class="fa-solid fa-magnifying-glass" style="color: #1f71ff;"></i></button>
@@ -555,6 +555,7 @@
     <script src="/js/filtroEventos.js"></script>
     <script src="/js/datosAdmin.js"></script>
     <script src="/js/buscarEmpleado.js"></script>
+    <script src="/js/panelMenu/buscarMenu.js"></script>
 </body>
 
 </html>

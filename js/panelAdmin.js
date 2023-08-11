@@ -1097,7 +1097,7 @@ function updateModalContent(formType, idEmpleado, idEvento) {
               </div>
               <div class="mb-3">
               <label class="control-label">Descripcion:</label>
-              <textarea name="descripcion" placeholder="En que consiste el menu" class="form-control descripcion-input" rows="4" maxlength="200" required>
+              <textarea name="descripcion" placeholder="En que consiste el menu" class="form-control descripcion-input" rows="4" maxlength="500" required>
               ${menu.DESCRIPCION}
               </textarea>
               </div>
