@@ -84,7 +84,7 @@
             Empleados
             </button>
             <button data-tab="comidas" class="dash-button"><i class="fa-solid fa-burger" style="color: #ffffff;"></i><br>
-            Menus
+            Menús
             </button>
             <button data-tab="perfil" class="dash-button"><i class="fa-solid fa-user" style="color: #ffffff;"></i><br>
             Perfil
@@ -282,7 +282,7 @@
                         <li>
                             <button id="verGraficos" data-url="" type="button" class="btn-view-custom btn-options ver-empleados btn btn-primary border-2 btn-outline-light rounded-5" data-bs-target="#mainModal">
                                 <i class="fa-solid fa-chart-pie" style="color: #ffffff;"></i>
-                                Ver Graficos
+                                Ver Gráficos
                             </button>
                         </li>
                         <li>
@@ -338,7 +338,7 @@
         
         <div id="comidas" class="tab-content">
             <h3 class="test" style="text-align:center; ">
-                Panel de Menus
+                Panel de Menús
                 <i class="fa-solid fa-burger" style="color: #ffffff;"></i>
             </h3>
             <br>
@@ -346,7 +346,7 @@
             <div class="filter">
                     <button type="button" class="btn btn-success border-2 btn-outline-light rounded-5 btn-options" data-bs-toggle="modal" data-bs-target="#modalComida" data-bs-whatever="">
                         <i class="fa-solid fa-circle-plus" style="color: #ffffff;"></i>
-                        Agregar Menu
+                        Agregar Menú
                     </button>
                 </div>
                 <!--Barra de Busqueda-->
@@ -371,7 +371,7 @@
                         <li>
                             <button id="verGraficosMenus" data-url="" type="button" class="btn-view-custom btn-options ver-empleados btn btn-primary border-2 btn-outline-light rounded-5" data-bs-target="#mainModal">
                                 <i class="fa-solid fa-chart-pie" style="color: #ffffff;"></i>
-                                Ver Graficos
+                                Ver Gráficos
                             </button>
                         </li>
                         <li>
