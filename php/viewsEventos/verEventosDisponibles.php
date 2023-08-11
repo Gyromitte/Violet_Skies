@@ -39,22 +39,15 @@
             echo "<p><b>Meseros Necesarios: </b>$registro->MESEROS</p>";
             echo "<p><b>Cocineros Necesarios: </b>$registro->COCINEROS</p>";
                 echo "<div class='text-center'>";
-                    echo '<div class="dropdown">';
-                        echo '<button class="btn btn-secondary dropdown-toggle custom-dropdown" type="button" 
-                        data-bs-toggle="dropdown" aria-expanded="false">Asistir';
-                        echo '</button>';
-                        echo '<ul class="dropdown-menu custom-drop-menu">';
-                            echo '<li>
-                                <a class="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#empModal" 
-                                data-bs-whatever="@asist" 
-                                data-id="'.$registro->ID.'">
-                                    <i class="fa-solid fa-pencil me-2" style="color: #ffffff;"></i>Asistir
-                                </a>
-                                </li>';
-                        echo '</ul>';
-                        echo '</div><br>';
+                echo"<div>";
+                        echo '<button class="col-12 btn btn-options btn-primary border-2 btn-outline-light rounded-5" type="button" 
+                        href="#" data-bs-toggle="modal" data-bs-target="#empModal" 
+                        data-bs-whatever="@asist" 
+                        data-id="'.$registro->ID.'">Asistir';
+                    echo"</div>";
+                        echo '</button><br>';
                         echo '<div class="dropdown">';
-                        echo '<button class="btn btn-secondary dropdown-toggle custom-dropdown" type="button" 
+                        echo '<button class="btn btn-secondary dropdown-toggle custom-dropdown btn-outline-light rounded-5" type="button" 
                         data-bs-toggle="dropdown" aria-expanded="false">Descripcion de Comida';
                         echo '</button>';
                         echo '<ul class="dropdown-menu custom-drop-menu">';
