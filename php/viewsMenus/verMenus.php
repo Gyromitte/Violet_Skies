@@ -17,7 +17,7 @@ echo '<div class="table-responsive">';
 echo '<table class="table table-hover mt-3">';
 echo '<thead class="thead-purple">';
 echo '<tr>';
-echo '<th>Menu</th>';
+echo '<th>Menú</th>';
 echo '<th>Descripcion</th>';;
 echo '<th>Tipo</th>';
 echo '<th style="text-align: center;"></th>';
@@ -39,7 +39,7 @@ foreach ($tabla as $registro) {
     echo '<li><a class="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#mainModal" data-bs-whatever="@editarMenu" 
     data-id="' . $registro->ID . '">
     <i class="fa-solid fa-pencil me-2" style="color: #ffffff;"></i>Editar</a></li>';
-    echo '<li><a class="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#mainModal" data-bs-whatever="@" 
+    echo '<li><a class="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#mainModal" data-bs-whatever="@descontinuarMenu" 
     data-id="' . $registro->ID . '">
     <i class="fa-solid fa-circle-minus me-2" style="color: #ffffff;"></i>Descontinuar</a></li>';
     echo '</ul>';
