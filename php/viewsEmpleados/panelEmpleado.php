@@ -106,6 +106,10 @@
     <!--Main Content-->
     <div id="main">
         <div id="home" class="tab-content active">
+        <h3 class="test" style="text-align:center; ">
+                Home
+                <i class="fa-solid fa-house" style="color: #ffffff;"></i>
+            </h3>
             <?php
             if($_SESSION["access"]==1.5){
                 echo"<div class='container'>";
@@ -163,19 +167,21 @@
             }
             else{
             echo"
-            <div class='container'>
             <form id='EmpDisp' action=".$_SERVER['PHP_SELF']." method='POST'>
                 <br>
+                <div class='search-container'>
+                <div class='filter'>
                 <div class='btn-group'>
-                    <label class='control-label'>Orden: </label>
-                    <select id='tipoorden' name='orden' class='form-select'>;
+                    <label class='control-label'style='margin-right: 8px;'>Orden:</label>
+                    <select id='tipoorden' name='orden' class='form-select form-select-custom'>;
                         <option value='porcreacion'>Recientemente Creadas</option>;
                         <option value='lejanoevento'>Eventos Lejanos</option>;
                         <option value='cercasevento'>Eventos Cercanos</option>;
                     </select>
                 </div>
+                </div>
+                </div>
             </form>
-            </div>
             <br>
             <div id='tablaResultados'></div>
         </div>";

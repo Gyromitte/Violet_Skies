@@ -182,7 +182,7 @@
                 }
                 else{
                     echo"<div class='container'>";
-                    echo"<h1 align='center'>Usuario o Password Incorrecto</h1>";
+                    echo"<h1 align='center'>Usuario o Contraseña Incorrecto</h1>";
                     echo"</div>";
                     header("refresh:2;../views/login.php");
                 }
