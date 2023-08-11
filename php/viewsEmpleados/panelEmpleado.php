@@ -127,7 +127,28 @@
                 echo"</div>";
             }
             else{
-
+                echo"<div class='container-fluid mt-4'>
+                <div class='row'>
+                    <div class='col-md-4 mb-4'>
+                        <div class='info-card d-flex align-items-center justify-content-between'>
+                            <div class='info d-flex flex-column align-items-center mb-2'>
+                                <h3 id='DispCard'></h3>
+                                <h5>Eventos Disponibles</h5>
+                            </div>
+                            <i class='fa-solid fa-briefcase fa-5x' style='color: #ffffff;'></i>
+                        </div>
+                    </div>
+                    <div class='col-md-4'>
+                        <div class='info-card d-flex align-items-center justify-content-between'>
+                            <div class='info d-flex flex-column align-items-center mb-2'>
+                                <h3 id='AsistCard'></h3>
+                                <h5>Eventos Atendiendo</h5>
+                            </div>
+                            <i class='fa-solid fa-briefcase fa-5x' style='color: #ffffff;'></i>
+                        </div>
+                    </div>
+                    </div>
+                    </div>";
             }
             ?>
         </div>
