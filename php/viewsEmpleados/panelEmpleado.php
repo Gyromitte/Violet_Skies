@@ -151,6 +151,15 @@
                             <i class='fa-solid fa-briefcase fa-5x' style='color: #ffffff;'></i>
                         </div>
                     </div>
+                    <div class='col-md-4 mb-4'>
+                        <div class='info-card d-flex align-items-center justify-content-between'>
+                            <div class='info d-flex flex-column align-items-center mb-2'>
+                                <h3 id='SolicCard'></h3>
+                                <h5>Solicitudes Enviadas</h5>
+                            </div>
+                            <i class='fa-solid fa-briefcase fa-5x' style='color: #ffffff;'></i>
+                        </div>
+                    </div>
                     </div>
                     </div>";
             }

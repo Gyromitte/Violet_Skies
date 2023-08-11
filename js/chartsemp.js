@@ -7,6 +7,7 @@ var data = JSON.parse(this.responseText);
 // Actualizar el contenido de las cards con los datos recibidos
 document.getElementById("DispCard").innerHTML = data.count_disp;
 document.getElementById("AsistCard").innerHTML = data.count_atend;
+document.getElementById("SolicCard").innerHTML = data.count_solic;
 }
 }
 xhttp.open("GET", "/php/viewsCharts/countingemp.php", true);
