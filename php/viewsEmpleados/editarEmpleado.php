@@ -16,15 +16,6 @@ if (isset($_POST['rfc']) && isset($_POST['id'])
     $rfc = strtoupper($_POST['rfc']); // Convertir a mayúsculas para homogeneizar
     $tipoUsuario = trim($_POST['tipoUsuario']);
 
-    echo "<div class='alert alert-danger'>$tipoUsuario</div>";
-    echo "<div class='alert alert-danger'>$nombre</div>";
-    echo "<div class='alert alert-danger'>$ap_paterno</div>";
-    echo "<div class='alert alert-danger'>$ap_materno</div>";
-    echo "<div class='alert alert-danger'>$telefono</div>";
-    echo "<div class='alert alert-danger'>$rfc</div>";
-
-    var_dump($tipoUsuario);
-
     // Variable para almacenar el mensaje de error
     $errorMessage = "";
 
@@ -58,7 +49,6 @@ if (isset($_POST['rfc']) && isset($_POST['id'])
             C.NOMBRE = '$nombre', C.AP_PATERNO = '$ap_paterno', C.AP_MATERNO = '$ap_materno', C.TELEFONO = '$telefono'
         WHERE E.CUENTA = '$employeeId'"; //Este id debería ser el de la cuenta
         $conexion->ejecutarSQL($actualizar);
-        echo "<div class='alert alert-danger'>$tipoUsuario</div>";
         //Respuesta de exito
         echo "<div class='alert alert-success'>Cambios aplicados exitosamente!</div>";
     }
