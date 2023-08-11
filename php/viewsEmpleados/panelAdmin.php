@@ -519,7 +519,7 @@
 
 <script>
     document.addEventListener("DOMContentLoaded", function() {
-        var formulario = document.getElementById("formularioEmpleado");
+        var formulario = document.getElementById("formularioMenu");
         var mensajeDiv = document.getElementById("mensajeDiv");
 
         formulario.addEventListener("submit", function(e) {

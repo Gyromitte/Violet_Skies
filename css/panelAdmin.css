@@ -349,7 +349,12 @@ nav{
     .donut-container{
        margin-bottom: 10px;
        margin-right: 10px;
-    }  
+    }
+    /*Graficos*/
+    #participacionEmpleados{
+        height: 200px !important;
+    }
+  
 }
 
 #buscarEmpleado{
