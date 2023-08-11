@@ -708,6 +708,10 @@ function updateModalContent(formType, idEmpleado, idEvento) {
         //Ver cual es la tabla activa para refrescar cualquier cambio
         checkCurrentTable(currentTable);
         break;
+        case "@cancelarEvento":
+
+        
+          break;
 
     case "@verDetallesEvento":
       modalTitle.textContent = "Detalles del Evento";

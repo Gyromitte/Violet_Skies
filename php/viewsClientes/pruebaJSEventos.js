@@ -16,7 +16,7 @@ $(window).on('load', function() {
 
   $('#evento-form').submit(function(event) {
       event.preventDefault();
-
+      
       const nombreEvento = $('#nombre_evento').val();
       const salon = $('#salon').val();
       const comida = $('#comida').val();
@@ -52,15 +52,24 @@ $(window).on('load', function() {
                 // Muestra un mensaje de error en lugar de un mensaje de éxito
                 const msgDiv = document.getElementById('msgDiv');
                 msgDiv.innerHTML = `<div style="text-align:center;" class="alert alert-danger">Error: No se pudo agregar el evento.</div>`;
+                setTimeout(() => {
+                    msgDiv.innerHTML = ''; 
+                }, 3000);
             } else {
                 // El evento se pudo agregar correctamente
                 const msgDiv = document.getElementById('msgDiv');
                 msgDiv.innerHTML = `<div style="text-align:center;" class="alert alert-success">Evento solicitado con éxito <br>espera a que los administradores lo confirmen</div>`;
+                setTimeout(() => {
+                    msgDiv.innerHTML = ''; 
+                }, 3000);
             }
             if (jsonData && jsonData.cupoMaximoExcedido) {
                 // Mostrar un mensaje de error en lugar del mensaje de éxito
                 const msgDiv = document.getElementById('msgDiv');
                 msgDiv.innerHTML = `<div style="text-align:center;" class="alert alert-danger">${jsonData.mensaje}</div>`;
+                setTimeout(() => {
+                    msgDiv.innerHTML = ''; 
+                }, 3000);
             }
 
             // Ejemplo de cómo manejar la lista de eventos:
