@@ -17,7 +17,7 @@ echo '<div class="table-responsive">';
 echo '<table class="table table-hover mt-3">';
 echo '<thead class="thead-purple">';
 echo '<tr>';
-echo '<th>Nombre Menu</th>';
+echo '<th>Menu</th>';
 echo '<th>Descripcion</th>';;
 echo '<th>Tipo</th>';
 echo '<th style="text-align: center;"></th>';
