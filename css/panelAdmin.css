@@ -317,6 +317,9 @@ nav{
         margin-left: 00px;
         transition: margin-left  0.3s ease; /* Agrega una transición suave para una animación fluida */
     }
+    .dash-button{
+        height: 40px;
+    }
     #nav-button {
         width: 80px;
         font-size: 0.9em;
