@@ -369,27 +369,51 @@
                     </button>
                     <ul class="dropdown-menu custom-drop-menu">
                         <li>
-                            <button id="verGraficos" data-url="" type="button" class="btn-view-custom btn-options ver-empleados btn btn-primary border-2 btn-outline-light rounded-5" data-bs-target="#mainModal">
+                            <button id="verGraficosMenus" data-url="" type="button" class="btn-view-custom btn-options ver-empleados btn btn-primary border-2 btn-outline-light rounded-5" data-bs-target="#mainModal">
                                 <i class="fa-solid fa-chart-pie" style="color: #ffffff;"></i>
                                 Ver Graficos
                             </button>
                         </li>
                         <li>
-                            <button id="verCocineros" data-url="verCocineros.php" type="button" class="btn-view-custom btn-options ver-empleados btn btn-primary border-2 btn-outline-light rounded-5" data-bs-target="#mainModal">
-                                <i class="fa-solid fa-utensils" style="color: #ffffff;"></i>
-                                Ver Cocineros
+                            <button id="verBebidas" data-vista="1" data-url="verCocineros.php" type="button" class="btn-view-custom btn-options ver-menus btn btn-primary border-2 btn-outline-light rounded-5" data-bs-target="#mainModal">
+                                <i class="fa-solid fa-wine-glass" style="color: #ffffff;"></i>
+                                Bebidas
                             </button>
                         </li>
                         <li>
-                            <button id="verMeseros" data-url="verMeseros.php" type="button" class="btn-view-custom btn-options ver-empleados btn btn-primary border-2 btn-outline-light rounded-5" data-bs-target="#mainModal">
-                                <i class="fa-solid fa-bell-concierge" style="color: #ffffff;"></i>
-                                Ver Meseros
+                            <button id="verDesayuno" data-vista="2" data-url="/php/viewsMenus/verMenus.php" type="button" class="btn-view-custom btn-options ver-menus btn btn-primary border-2 btn-outline-light rounded-5" data-bs-target="#mainModal">
+                                <i class="fa-solid fa-egg" style="color: #ffffff;"></i>
+                                Desayuno
                             </button>
                         </li>
                         <li>
-                            <button id="verSolicitudes" data-url="verSolicitudes.php" type="button" class="btn-view-custom btn-options ver-empleados btn btn-primary border-2 btn-outline-light rounded-5" data-bs-target="#mainModal">
-                                <i class="fa-solid fa-business-time" style="color: #ffffff;"></i>
-                                Ver Solicitudes
+                            <button id="verDesBuffet" data-vista="3" data-url="/php/viewsMenus/verMenus.php" type="button" class="btn-view-custom btn-options ver-menus btn btn-primary border-2 btn-outline-light rounded-5" data-bs-target="#mainModal">
+                                <i class="fa-solid fa-bacon" style="color: #ffffff;"></i>
+                                Des. Buffet
+                            </button>
+                        </li>
+                        <li>
+                            <button id="verComida" data-vista="4" data-url="/php/viewsMenus/verMenus.php" type="button" class="btn-view-custom btn-options ver-menus btn btn-primary border-2 btn-outline-light rounded-5" data-bs-target="#mainModal">
+                                <i class="fa-solid fa-burger" style="color: #ffffff;"></i>
+                                Comida
+                            </button>
+                        </li>
+                        <li>
+                            <button id="verComidaBuffet" data-vista="5" data-url="/php/viewsMenus/verMenus.php" type="button" class="btn-view-custom btn-options ver-menus btn btn-primary border-2 btn-outline-light rounded-5" data-bs-target="#mainModal">
+                                <i class="fa-solid fa-drumstick-bite" style="color: #ffffff;"></i>
+                                Comida Buffet
+                            </button>
+                        </li>
+                        <li>
+                            <button id="verCoffee" data-vista="6" data-url="/php/viewsMenus/verMenus.php" type="button" class="btn-view-custom btn-options ver-menus btn btn-primary border-2 btn-outline-light rounded-5" data-bs-target="#mainModal">
+                                <i class="fa-solid fa-mug-saucer" style="color: #ffffff;"></i>
+                                Coffee break
+                            </button>
+                        </li>
+                        <li>
+                            <button id="verDescontinuado" data-vista="8" data-url="/php/viewsMenus/verMenus.php" type="button" class="btn-view-custom btn-options ver-menus btn btn-primary border-2 btn-outline-light rounded-5" data-bs-target="#mainModal">
+                                <i class="fa-solid fa-circle-minus" style="color: #ffffff;"></i>
+                                Descontinuado
                             </button>
                         </li>
                     </ul>
@@ -397,9 +421,9 @@
             </div> 
         </div>
             <!--Informacion de la tabla-->
-            <h3 id="table-info"></h3>
+            <h3 id="table-info-menus"></h3>
             <!--Container para tablas-->
-            <div class="cont-table">
+            <div id="cont-table-menus">
                 <!--Contenido Default-->
                 <div class="container-fluid">
                     <div class="row">
