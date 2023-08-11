@@ -346,7 +346,7 @@
             <div class="filter">
                     <button type="button" class="btn btn-success border-2 btn-outline-light rounded-5 btn-options" data-bs-toggle="modal" data-bs-target="#modalComida" data-bs-whatever="">
                         <i class="fa-solid fa-circle-plus" style="color: #ffffff;"></i>
-                        Agregar
+                        Agregar Menu
                     </button>
                 </div>
                 <!--Barra de Busqueda-->
@@ -485,7 +485,7 @@
                     </div>
                     <div class="modal-body" id="modal-form">
                         <p>Aqui puedes agregar un nuevo menu al sistema</p>
-                        <form id="formularioEmpleado">
+                        <form id="formularioMenu">
                             <div class="mb-3">
                                 <label class="control-label">Nombre del nuevo menu:</label>
                                 <input type="text" name="nombre" placeholder="Nombre del menu" class="form-control" maxlength="45" required>
