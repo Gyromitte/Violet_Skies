@@ -272,9 +272,18 @@ nav{
     display: flex;
     justify-content: flex-end;
   }
+  .searchFechas {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+  .search-row {
+    margin-bottom: 5px;
+}
   .panel-header {
     text-align: center;
 }
+
 
 #estadoSelect {
     width: 300px;
@@ -324,7 +333,8 @@ nav{
       }
     
       /* Adjust the width and margin for the filter and search components to fit the mobile layout */
-      .search-container .filter {
+      .search-container .filter 
+      {
         width: 100%; /* Full width for the filter */
         margin-bottom: 10px; /* Add some space between filter and search */
       }

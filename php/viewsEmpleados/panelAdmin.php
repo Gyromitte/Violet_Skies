@@ -162,13 +162,17 @@
                     </div>
                     <!-- Buscador - A la derecha -->
                     <div class="search">
-                        <div class="input-group">
-                        <input type="text" class="form-control" id="searchInput" placeholder="Buscar evento por nombre o cliente">
-                        <input type="date" class="form-control" id="fechaInicioInput" name="fecha_inicio">
-                        <input type="date" class="form-control" id="fechaFinInput" name="fecha_fin">
-                        <button id="searchButton" type="button" class="ver-empleados btn btn-outline-primary">
-                            <i class="fa-solid fa-magnifying-glass" style="color: #1f71ff;"></i>
-                        </button>
+                        <div class="searchFechas">
+                            <div class="input-group search-row">
+                                <input type="text" class="form-control" id="searchInput" placeholder="Buscar evento por nombre o cliente">
+                                <button id="searchButton" type="button" class="ver-empleados btn btn-outline-primary">
+                                    <i class="fa-solid fa-magnifying-glass" style="color: #1f71ff;"></i>
+                                </button>
+                            </div>
+                            <div class="input-group search-row">
+                                <input type="date" class="form-control" id="fechaInicioInput" name="fecha_inicio">
+                                <input type="date" class="form-control" id="fechaFinInput" name="fecha_fin">
+                            </div>
                         </div>
                     </div>
                 </div>
