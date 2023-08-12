@@ -1,5 +1,6 @@
 <?php
 include "../dataBase.php";
+
 $emp = $_SESSION["ID"];
 $trab = $_SESSION["trabajo"];
 $db = new DataBase();
@@ -9,53 +10,55 @@ $query = "SELECT * FROM CUENTAS WHERE ID = '$emp'";
 $cuenta = $db->seleccionar($query);
 if ($cuenta) {
 ?>
-<div>
-    <div class="container">
-        <h2>
+<div class="container text-center" style="margin-top: 100px;">
+    <div class="accordion-item w-75 mx-auto rounded">
+        <h2 class="accordion-header custom-accordion-header text-start"">
+            <i class="fa-solid fa-user me-2" style="color: #ffffff;"></i>
             Datos personales
         </h2>
         <div>
-            <div class="personal-info">
-                <div class="mb-3 row">
-                    <label class="col-sm-3 col-form-label">Nombre:</label>
-                    <div class="col-sm-9">
-                        <input class="form-control" type="text" value="<?php echo $cuenta[0]->NOMBRE; ?>" name="nombre" disabled>
-                    </div>
+        <div class="personal-info accordion" id="accordionExample" style="color: black;">
+            <div class="mb-3 row">
+                <label class="col-sm-3 col-form-label">Nombre:</label>
+                <div class="col-sm-9 accordion-header">
+                    <input class="form-control" type="text" value="<?php echo $cuenta[0]->NOMBRE; ?>" name="nombre" disabled>
                 </div>
-                <div class="mb-3 row">
-                    <label class="col-sm-3 col-form-label">Apellido paterno:</label>
-                    <div class="col-sm-9">
-                        <input class="form-control" type="text" value="<?php echo $cuenta[0]->AP_PATERNO; ?>" name="ap_paterno" disabled>
-                    </div>
-                </div>
-                <div class="mb-3 row">
-                    <label class="col-sm-3 col-form-label">Apellido materno:</label>
-                    <div class="col-sm-9">
-                        <input class="form-control" type="text" value="<?php echo $cuenta[0]->AP_MATERNO; ?>" name="ap_materno" disabled>
-                    </div>
-                </div>
-                <div class="mb-3 row">
-                    <label class="col-sm-3 col-form-label">Teléfono:</label>
-                    <div class="col-sm-9">
-                        <input class="form-control" type="text" value="<?php echo $cuenta[0]->TELEFONO; ?>" name="telefono" disabled>
-                    </div>
-                </div>
-                <div class="mb-3 row">
-                    <label class="col-sm-3 col-form-label">Correo:</label>
-                    <div class="col-sm-9">
-                        <input class="form-control" type="text" value="<?php echo $cuenta[0]->CORREO; ?>" name="correo" disabled>
-                    </div>
-                </div>
-                <div class="mb-3 row">
-                    <label class="col-sm-3 col-form-label">Contraseña:</label>
-                    <div class="col-sm-9">
-                        <button class="btn btn-light" type="button" data-bs-toggle="modal" data-bs-target="#modalCambiarContrasena">Cambiar contraseña</button>
-                    </div>
-                </div>
-                <input type="hidden" name="id" value="<?php echo $_SESSION["ID"]; ?>">
             </div>
+            <div class="mb-3 row ">
+                <label class="col-sm-3 col-form-label">Apellido paterno:</label>
+                <div class="col-sm-9 accordion-header">
+                    <input class="form-control" type="text" value="<?php echo $cuenta[0]->AP_PATERNO; ?>" name="ap_paterno" disabled>
+                </div>
+            </div>
+            <div class="mb-3 row">
+                <label class="col-sm-3 col-form-label">Apellido materno:</label>
+                <div class="col-sm-9 accordion-header">
+                    <input class="form-control" type="text" value="<?php echo $cuenta[0]->AP_MATERNO; ?>" name="ap_materno" disabled>
+                </div>
+            </div>
+            <div class="mb-3 row ">
+                <label class="col-sm-3 col-form-label">Teléfono:</label>
+                <div class="col-sm-9 accordion-header">
+                    <input class="form-control" type="text" value="<?php echo $cuenta[0]->TELEFONO; ?>" name="telefono" disabled>
+                </div>
+            </div>
+            <div class="mb-3 row ">
+                <label class="col-sm-3 col-form-label">Correo:</label>
+                <div class="col-sm-9 accordion-header">
+                    <input class="form-control" type="text" value="<?php echo $cuenta[0]->CORREO; ?>" name="correo" disabled>
+                </div>
+            </div>
+            <div class="mb-3 row ">
+                <label class="col-sm-3 col-form-label">Contraseña:</label>
+                <div class="col-sm-9 accordion-header">
+                <button class="btn btn-light" id="btnpassword" type="button"  data-bs-toggle="modal" data-bs-target="#modalCambiarContrasena">
+                          <i class="fa-solid fa-lock me-2" style="color: #ffffff;"></i>
+                          Cambiar contraseña</button>                </div>
+            </div>
+            <input type="hidden" name="id" value="<?php echo $_SESSION["ID"]; ?>">
         </div>
     </div>
+</div>
 </div>
 <div id="mensajeModificar"></div>
 
