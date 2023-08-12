@@ -1,11 +1,10 @@
-<!-- Tu código PHP -->
 <?php
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     include_once "../dataBase.php";
     $conexion = new Database();
     $conexion->conectarBD();
 
-    $consulta = "SELECT VED.NOMBRE_EVENTO, VED.F_EVENTO, (DE.MESEROS-VED.NUMERO_MESEROS) AS FALTAN_MESEROS,
+    $consulta = "SELECT VED.EventoID, VED.NOMBRE_EVENTO, VED.F_EVENTO, (DE.MESEROS-VED.NUMERO_MESEROS) AS FALTAN_MESEROS,
     (DE.COCINEROS-NUMERO_COCINEROS) AS FALTAN_COCINA, S.SOLICITUDES
     FROM Vista_Evento_Detalles VED JOIN DETALLE_EVENTO DE ON VED.EventoID=DE.ID JOIN 
     (
@@ -31,7 +30,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 <p class="card-text">Faltan meseros: <?php echo $fila['FALTAN_MESEROS']; ?></p>
                 <p class="card-text">Faltan cocineros: <?php echo $fila['FALTAN_COCINA']; ?></p>
                 <p class="card-text">Solicitudes: <?php echo $fila['SOLICITUDES']; ?></p>
-                <a href="#" class="btn btn-primary">Ver solicitudes</a>
+                <a href="#" class="btn btn-primary" onclick="verSolicitudes(<?php echo $fila['EventoID']; ?>, '<?php echo $fila['NOMBRE_EVENTO']; ?>')">Ver solicitudes</a>
             </div>
         </div>
     <?php } ?>

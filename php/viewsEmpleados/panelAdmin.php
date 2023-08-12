@@ -227,7 +227,6 @@
             <div class="table-responsive">
                 <div id="tablaResultados"></div>
                 <div id="peticionesResult"></div>
-
             </div>
         </div>
 
