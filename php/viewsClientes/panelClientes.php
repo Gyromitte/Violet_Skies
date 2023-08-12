@@ -103,7 +103,11 @@
                 <button class="btn-options ver-empleados btn btn-primary border-2 btn-outline-light rounded-5" onclick="filterEvents('EN PROCESO')">En Proceso</button>
                 <button class="btn-options ver-empleados btn btn-primary border-2 btn-outline-light rounded-5" onclick="filterEvents('FINALIZADO')">Finalizado</button>
                 <button class="btn-options ver-empleados btn btn-primary border-2 btn-outline-light rounded-5" onclick="filterEvents('CANCELADO')">Cancelado</button>
+                <a href="https://wa.me/528715659629?text=¡Hola! Quiero hablar con la persona a cargo" target="_blank" style="display: inline-block; background-color: green; color: white; padding: 10px 20px; text-decoration: none; border-radius: 20px;">
+                        <i class="fa-brands fa-whatsapp me-1" style="color: #ffffff;"></i><b>WhatsApp</b>
+                    </a>  
             </div>
+
             <div id="event-cards" class="card-container">
             <!-- Aquí se agregarán las tarjetas de eventos -->
             </div>

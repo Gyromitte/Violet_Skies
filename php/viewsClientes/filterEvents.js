@@ -46,14 +46,33 @@ function createEventCard(event) {
 
     const cancelButton = document.createElement("button");
     cancelButton.textContent = "Cancelar Evento";
+
+    //Timer que desactiva el botón de cancelar si falta una semana.
+    const eventDateParts = event['FECHA DEL EVENTO'].split(' ')[0].split('-');
+    const eventDate = new Date(
+        parseInt(eventDateParts[0]),
+        parseInt(eventDateParts[1]) - 1,
+        parseInt(eventDateParts[2])
+    );
+
+    const currentDate = new Date();
+    const timeDifferenceInMilliseconds = eventDate.getTime() - currentDate.getTime();
+
+    const ONE_WEEK_IN_MILLISECONDS = 7 * 24 * 60 * 60 * 1000;
+
     if (event.ESTADO !== "FINALIZADO" && event.ESTADO !== "CANCELADO") {
         cancelButton.classList.add("btn-modal-warning");
-        cancelButton.addEventListener("click", () => openCancelModal(event.ID_EVENTO));
-        card.appendChild(cancelButton);
+        cancelButton.addEventListener("click", () => {
+            if (timeDifferenceInMilliseconds <= ONE_WEEK_IN_MILLISECONDS) {
+                // Mostrar un mensaje de alerta
+                window.alert("Para cancelar el evento, por favor póngase en contacto con un administrador.");
+            } else {
+                openCancelModal(event.ID_EVENTO);
+            }
+        });
     } else {
-        cancelButton.style.display = "none"; 
+        cancelButton.style.display = "none";
     }
-
     card.appendChild(eventId);
     card.appendChild(title);
     card.appendChild(date);
