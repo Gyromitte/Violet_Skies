@@ -116,8 +116,8 @@ modal.addEventListener("show.bs.modal", function (event) {
                     <div class="d-flex justify-content-center">
                       <button type="submit" id="asist" class="btn btn-primary btn-modal-warning me-2">
                         <i class="fa-solid fa-user me-2" style="color: #ffffff;">
-                            Asistir
                         </i>
+                        Asistir
                       </button>
                       <br>
                     </div>
@@ -136,6 +136,9 @@ modal.addEventListener("show.bs.modal", function (event) {
                   if (xhrAceptar.readyState === XMLHttpRequest.DONE) {
                     if (xhrAceptar.status === 200) {
                       document.getElementById("mensajeDiv").innerHTML = xhrAceptar.responseText;
+                      VerDisp();
+                      checkCurrentTable('pend');
+                      checkCurrentTable('soli');
 
                     } 
                     else {
@@ -188,8 +191,8 @@ modal.addEventListener("show.bs.modal", function (event) {
                 <div class="d-flex justify-content-center">
                   <button type="submit" id="cancelar" class="btn btn-primary btn-modal-warning me-2">
                     <i class="fa-solid fa-user me-2" style="color: #ffffff;">
-                        Cancelar Asistencia
                     </i>
+                    Cancelar Asistencia
                   </button>
                   <br>
                 </div>
@@ -209,9 +212,12 @@ modal.addEventListener("show.bs.modal", function (event) {
                   if (xhrCan.readyState === XMLHttpRequest.DONE) {
                     if (xhrCan.status === 200) {
                       document.getElementById("mensajeDiv").innerHTML = xhrCan.responseText;
+                      checkCurrentTable(currentTable);
+                      VerDisp();
                       
                     } 
                     else {
+                      checkCurrentTable(currentTable);
                       console.error("Error en la solicitud AJAX de Aceptar");
                     }
                   }
@@ -260,8 +266,8 @@ modal.addEventListener("show.bs.modal", function (event) {
                 <div class="d-flex justify-content-center">
                   <button type="submit" id="cancelar" class="btn btn-primary btn-modal-warning me-2">
                     <i class="fa-solid fa-user me-2" style="color: #ffffff;">
-                        Cancelar Solicitud
                     </i>
+                    Cancelar Solicitud
                   </button>
                   <br>
                 </div>
@@ -281,9 +287,11 @@ modal.addEventListener("show.bs.modal", function (event) {
                   if (xhrCan.readyState === XMLHttpRequest.DONE) {
                     if (xhrCan.status === 200) {
                       document.getElementById("mensajeDiv").innerHTML = xhrCan.responseText;
-                      
+                      checkCurrentTable(currentTable);
+                      VerDisp();
                     } 
                     else {
+                      checkCurrentTable(currentTable);
                       console.error("Error en la solicitud AJAX de Aceptar");
                     }
                   }
@@ -308,7 +316,26 @@ modal.addEventListener("show.bs.modal", function (event) {
     
     };
     modalForm.innerHTML = formContent;
+    checkCurrentTable(currentTable);
   }
-
+  function updateTable() {
+    // Fetch updated table content using AJAX and replace the existing table content
+    var xhrTable = new XMLHttpRequest();
+    xhrTable.onreadystatechange = function() {
+      if (xhrTable.readyState === XMLHttpRequest.DONE) {
+        if (xhrTable.status === 200) {
+          var updatedTableContent = xhrTable.responseText;
+          // Replace the table content with the updated content
+          document.getElementById("yourTableId").innerHTML = updatedTableContent;
+        } else {
+          console.error("Error updating table content");
+        }
+      }
+    };
+  
+    // Send a GET request to fetch updated table content
+    xhrTable.open("GET", "your_table_update_script.php", true);
+    xhrTable.send();
+  }
 // Add a click event listener to the paragraph
 
