@@ -228,6 +228,45 @@
                 echo $e->getMessage();
             }
         }
+        function RegisterEmp($nom,$ap,$am,$usu,$pass,$confirm,$cel,$tipo,$empleado){
+            try{
+                if($pass!==$confirm){
+                    echo"<div class='alert alert-warning'>
+                    Contrasenas no concuerdan</div>";
+                }
+                else{
+                    try{
+                    $hash=password_hash($pass,PASSWORD_DEFAULT);
+                    $cadena="INSERT INTO CUENTAS(NOMBRE, AP_PATERNO,AP_MATERNO, CORREO, CONTRASEÑA, 
+                    TELEFONO,TIPO_CUENTA) VALUES('$nom','$ap','$am','$usu','$hash','$cel','$tipo')";
+                    $this->PDO_local->query($cadena);
+                    $cadena="SELECT CU.ID FROM CUENTAS CU WHERE CORREO='$usu'";
+                    $resultado = $this->PDO_local->query($cadena);
+                    while($trabajo = $resultado->fetch(PDO::FETCH_ASSOC)){
+                        $modo=$trabajo['ID'];
+                        $consulta="INSERT INTO EMPLEADOS(TIPO,CUENTA) VALUES('$empleado','$modo')";
+                        $this->PDO_local->query($consulta);
+                        echo"<div class='alert alert-success'>Te has registrado exitosamente!</div>";
+                    }
+                    }
+                    catch(PDOException $e){
+                        $errorMessage = $e->getMessage();
+
+                        // Extract the relevant part of the error message
+                        // Assuming the error message format is "SQLSTATE[45000]: <>: 1644 Your trigger message"
+                        $startIndex = strpos($errorMessage, "1644") + 5;
+                        $triggerMessage = substr($errorMessage, $startIndex);
+
+                        // Display the trigger message without the unwanted part
+                        echo "<div class='alert alert-danger'>" . $triggerMessage . "</div>";
+                    }
+                }
+            }
+            catch(PDOException $e){
+                echo $e->getMessage();
+            }
+        }
+
         function ejecutarInsert($consulta)
     {
         try
