@@ -1161,6 +1161,80 @@ function updateModalContent(formType, idEmpleado, idEvento) {
     };
     //Hacer la solicitud al script PHP y pasar el ID del empleado
     xhr.open("GET", "/php/viewsMenus/obtenerMenu.php?id=" + idEmpleado, true);
+    xhr.send();
+    //Ver cual es la tabla activa para refrescar cualquier cambio
+    //checkCurrentTable(currentTable);
+    break;
+    case "@descontinuarMenu":
+    modalTitle.textContent = "Descontinuar menu";
+    //Realizar una solicitud AJAX para obtener los datos del menu
+    var xhr = new XMLHttpRequest();
+    xhr.onreadystatechange = function () {
+      if (xhr.readyState === XMLHttpRequest.DONE) {
+        if (xhr.status === 200) {
+          //Parsear la respuesta JSON
+          var menu = JSON.parse(xhr.responseText);
+          console.log(menu);
+          //Actualizar el contenido del formulario con los datos obtenidos
+          formContent = `
+            <form id="formularioMenu">
+              <div id="mensajeDiv" method="POST"></div> <!-- Div para mensajes de respuesta -->
+              <div class="mb-3">
+                <h5>Nombre del menú: </h5>
+                <h6 class="mb-3">${menu.NOMBRE}</h6>
+              </div>
+              <div class="mb-3">
+                <h5>Descripción: </h5>
+                <h6 class="mb-3">${menu.DESCRIPCION}</h6>
+              </div>
+              <div class="mb-3">
+              <div class="form-group mb-3">
+                <h5>Tipo de menú: </h5>
+                <h6 class="mb-3">${menu.TIPO}</h6>
+              </div>
+              <div class="d-flex justify-content-center">
+                  <button type="submit" class="btn btn-primary btn-modal-warning me-2"><i class="fa-solid fa-circle-minus me-2" style="color: #ffffff;"></i>Descontinuar</button>
+                  <button type="button" class="btn btn-primary btn-modal" data-bs-dismiss="modal">Cancelar</button>
+              </div>
+            </form>
+              `;
+          // Asignar el contenido al formulario del modal
+          modalForm.innerHTML = formContent;
+          
+          // Obtener el formulario después de haberlo asignado al DOM
+          var formEditarMenu = document.getElementById('formularioMenu');
+          // Agregar evento de envío al formulario de edición
+          formEditarMenu.addEventListener('submit', function (event) {
+            event.preventDefault(); // Evitar que el formulario se envíe por defecto
+            
+            //El id de la tupla es la variable idEmpleado
+            // Realizar una solicitud AJAX para descontinuar el menú
+            var xhrDescontinuar = new XMLHttpRequest();
+            xhrDescontinuar.onreadystatechange = function () {
+              if (xhrDescontinuar.readyState === XMLHttpRequest.DONE) {
+                if (xhrDescontinuar.status === 200) {
+                  // Actualizar el mensaje de respuesta en el formulario
+                  var mensajeDiv = document.getElementById('mensajeDiv');
+                  mensajeDiv.innerHTML = xhrDescontinuar.responseText;
+                } else {
+                  console.error("Error en la solicitud AJAX para descontinuar el menú");
+                }
+              }
+            };
+            console.log(idEmpleado);
+            // Hacer la solicitud al script PHP para descontinuar el menú y pasar el ID del menú
+            xhrDescontinuar.open("POST", "/php/viewsMenus/descontinuarMenu.php", true);
+            xhrDescontinuar.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+            var parametros = "id=" + encodeURIComponent(idEmpleado);
+            xhrDescontinuar.send(parametros);
+          });
+        } else {
+          console.error("Error en la solicitud AJAX");
+        }
+      }
+    };
+    //Hacer la solicitud al script PHP y pasar el ID del empleado
+    xhr.open("GET", "/php/viewsMenus/obtenerMenu.php?id=" + idEmpleado, true);
     console.log(idEmpleado);
     xhr.send();
     //Ver cual es la tabla activa para refrescar cualquier cambio
