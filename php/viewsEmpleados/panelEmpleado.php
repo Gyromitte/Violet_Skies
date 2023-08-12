@@ -43,6 +43,23 @@
                 align-items: center;
                 justify-content: center;
             }
+            .calendar {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    grid-gap: 5px;
+    width: 70%;
+    margin: auto;
+}
+
+.day {
+    border: 1px solid #ddd;
+    padding: 5px;
+    text-align: center;
+}
+
+.special-date {
+    background-color: #f0ad4e;
+}
 
 		</style>
     <!--Scripts que necesitan ejecutarse primero-->
@@ -161,6 +178,10 @@
                         </div>
                     </div>
                     </div>
+                    <div>
+                    <div id='calendar'>
+                    </div>
+                    </div>
                     </div>";
             }
             ?>
@@ -264,6 +285,7 @@
     </div>
     <!--Scripts que necesitan ejecutarse hasta el final-->
     <script src="/js/panelEmpleado.js" async defer></script>
+    <script src='https://cdn.jsdelivr.net/npm/fullcalendar@6.1.8/index.global.min.js'></script>
     <script src="/js/EventoAsist.js"></script>
     <script src="/js/chartsemp.js"></script>
     <script src="/js/EventosDisp.js"></script>
