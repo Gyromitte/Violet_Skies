@@ -157,6 +157,7 @@
                                 <option value="EN PROCESO">En proceso</option>
                                 <option value="FINALIZADO">Finalizado</option>
                                 <option value="CANCELADO">Cancelado</option>
+                                <option value="PETICIONES">Peticiones</option>
                             </select>
                         </div>
                     </div>
@@ -214,9 +215,21 @@
 			            </h3>
                         <h2 id="canceladoCard"></h2>       
 		            </div>
+                    <div id="peticiones" class="info-card mb-2" style="height: 25px; display: flex; align-items: center;">
+                        <h3 class="me-2">
+                            <i class="fa-regular fa-calendar-xmark"></i>
+                             Peticiones:
+			            </h3>
+                        <h2 id="peticionesCard"></h2>       
+		            </div>
 	            </div>
             </div>
-            <div id="tablaResultados"></div></div>
+            <div class="table-responsive">
+                <div id="tablaResultados"></div>
+                <div id="peticionesResult"></div>
+
+            </div>
+        </div>
 
             <!-- Modal de Confirmación -->
             <div class="modal fade" id="modalConfirmacion" tabindex="-1" role="dialog" aria-labelledby="modalConfirmacionLabel" aria-hidden="true">
