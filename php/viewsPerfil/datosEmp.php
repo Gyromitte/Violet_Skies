@@ -12,7 +12,7 @@ if ($cuenta) {
 ?>
 <div class="container text-center" style="margin-top: 100px;">
     <div class="accordion-item w-75 mx-auto rounded">
-        <h2 class="accordion-header custom-accordion-header">
+        <h2 class="accordion-header custom-accordion-header text-start"">
             <i class="fa-solid fa-user me-2" style="color: #ffffff;"></i>
             Datos personales
         </h2>
@@ -51,7 +51,7 @@ if ($cuenta) {
             <div class="mb-3 row ">
                 <label class="col-sm-3 col-form-label">Contraseña:</label>
                 <div class="col-sm-9 accordion-header">
-                <button class="btn btn-light" id="btnpassword" type="button" data-bs-toggle="modal" data-bs-target="#modalCambiarContrasena">
+                <button class="btn btn-light" id="btnpassword" type="button"  data-bs-toggle="modal" data-bs-target="#modalCambiarContrasena">
                           <i class="fa-solid fa-lock me-2" style="color: #ffffff;"></i>
                           Cambiar contraseña</button>                </div>
             </div>
