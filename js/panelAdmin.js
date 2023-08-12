@@ -84,7 +84,42 @@ function checkCurrentTable(currentTable) {
       setTimeout(function () {
           btnSolicitud.click();
       }, 100);
-      break;  
+      break;
+    case 'desayuno':
+      setTimeout(function () {
+        btnDesayuno.click();
+      }, 100);
+      break;
+    case 'bebidas':
+      setTimeout(function () {
+        btnBebidas.click();
+      }, 100);
+      break;
+    case 'desBuffet':
+      setTimeout(function () {
+        btnDesBuffet.click();
+      }, 100);
+      break;
+    case 'comida':
+      setTimeout(function () {
+        btnComida.click();
+      }, 100);
+      break;
+    case 'comidaBuffet':
+      setTimeout(function () {
+        btnComidaBuffet.click();
+      }, 100);
+      break;
+    case 'coffee':
+      setTimeout(function () {
+        btnCoffee.click();
+      }, 100);
+      break;
+    case 'descontinuado':
+      setTimeout(function () {
+        btnDescontinuado.click();
+      }, 100);
+      break;     
   }
 }
 //Obtener botones para refrescar vistas
@@ -92,6 +127,15 @@ var btnCocineros = document.getElementById('verCocineros');
 var btnMeseros = document.getElementById('verMeseros');
 var btnBusqueda = document.getElementById('buscarEmpleado');
 var btnSolicitud = document.getElementById('verSolicitudes');
+
+var btnBebidas = document.getElementById('verBebidas');
+var btnDesayuno = document.getElementById('verDesayuno');
+var btnDesBuffet = document.getElementById('verDesBuffet');
+var btnComida = document.getElementById('verComida');
+var btnComidaBuffet = document.getElementById('verComidaBuffet');
+var btnCoffee = document.getElementById('verCoffee');
+var btnDescontinuado = document.getElementById('verDescontinuado');
+
 
 // Evento para los botones
 modal.addEventListener("show.bs.modal", function (event) {
@@ -1152,7 +1196,7 @@ function updateModalContent(formType, idEmpleado, idEvento) {
             updateXHR.send(`id=${idEmpleado}&tipoMenu=${tipoMenu}
             &nombre=${nombre}&descripcion=${descripcion}`);
             //Ver cual es la tabla activa para refrescar cualquier cambio
-            //checkCurrentTable(currentTable);
+            checkCurrentTable(currentTable);
           });
         } else {
           console.error("Error en la solicitud AJAX");
@@ -1163,7 +1207,7 @@ function updateModalContent(formType, idEmpleado, idEvento) {
     xhr.open("GET", "/php/viewsMenus/obtenerMenu.php?id=" + idEmpleado, true);
     xhr.send();
     //Ver cual es la tabla activa para refrescar cualquier cambio
-    //checkCurrentTable(currentTable);
+    checkCurrentTable(currentTable);
     break;
     case "@descontinuarMenu":
     modalTitle.textContent = "Descontinuar menu";
@@ -1238,7 +1282,7 @@ function updateModalContent(formType, idEmpleado, idEvento) {
     console.log(idEmpleado);
     xhr.send();
     //Ver cual es la tabla activa para refrescar cualquier cambio
-    //checkCurrentTable(currentTable);
+    checkCurrentTable(currentTable);
     break;
 
     }

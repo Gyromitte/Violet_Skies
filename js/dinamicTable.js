@@ -193,18 +193,25 @@ function getMessageByButtonId(buttonId) {
       currentTable = 'solicitud';
       return 'Éstas son tus solicitudes pendientes: <i class="fa-solid fa-business-time" style="color: #ffffff;"></i>';
     case 'verBebidas':
+      currentTable = 'bebidas';
       return 'Menús del tipo bebidas: <i class="fa-solid fa-wine-glass" style="color: #ffffff;"></i>';
     case 'verDesayuno':
+      currentTable = 'desayuno';
       return 'Menús del tipo desayuno: <i class="fa-solid fa-egg" style="color: #ffffff;"></i>';  
     case 'verDesBuffet':
+      currentTable = 'desBuffet';
       return 'Menús del tipo desayuno buffet: <i class="fa-solid fa-bacon" style="color: #ffffff;"></i>';
     case 'verComida':
+      currentTable = 'comida';
       return 'Menús del tipo comida: <i class="fa-solid fa-burger" style="color: #ffffff;"></i>';
     case 'verComidaBuffet':
+      currentTable = 'comidaBuffet';
       return 'Menús del tipo comida buffet: <i class="fa-solid fa-drumstick-bite" style="color: #ffffff;"></i>';
     case 'verCoffee':
+      currentTable = 'coffee';
       return 'Menús del tipo coffee break: <i class="fa-solid fa-mug-saucer" style="color: #ffffff;"></i>';
     case 'verDescontinuado':
+      currentTable = 'descontinuado';
       return 'Menús que han sido descontinuados: <i class="fa-solid fa-circle-minus" style="color: #ffffff;"></i>';
     default:
       return 'Mostrando información:';
