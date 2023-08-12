@@ -28,13 +28,7 @@ document.addEventListener('click', function (event) {
   }
 });
 
-// Agregar evento de scroll al documento para cerrar el dashboard cuando se haga scroll
-document.addEventListener('scroll', function () {
-  if (dashboard.classList.contains('dashboard-open')) {
-    dashboard.classList.remove('dashboard-open');
-    main.classList.remove('main-dash-open');
-  }
-});
+
 
 /*Main content*/
 // Obtener las pestañas y el contenido 
