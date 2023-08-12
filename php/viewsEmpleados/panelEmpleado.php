@@ -38,7 +38,7 @@
                 background-color: #5603ad;
                 border-radius: 5em;
                 padding: 10px;
-                width: 100%;
+                width: 80%;
                 height: 100%;
                 align-items: center;
                 justify-content: center;
@@ -129,22 +129,16 @@
             </h3>
             <?php
             if($_SESSION["access"]==1.5){
-                echo"<div class='container'>";
                 echo"<div class='cutebox'>";
                 echo"<h1>Gracias por buscar trabajo con nosotros!</h1>";
                 echo"</div>";
-                echo"</div>";
                 echo"<br>";
-                echo"<div class='container'>";
                 echo"<div class='test'>";
                 echo"<h4>Su solicitud ha sido enviada.</h4>";
                 echo"</div>";
-                echo"</div>";
                 echo"<br>";
-                echo"<div class='container'>";
                 echo"<div class='test'>";
                 echo"<div>Un administrador se pondra en contacto con usted proximamente.</div>";
-                echo"</div>";
                 echo"</div>";
             }
             else{
