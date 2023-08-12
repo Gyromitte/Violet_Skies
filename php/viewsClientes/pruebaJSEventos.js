@@ -40,31 +40,26 @@ $(window).on('load', function() {
       .then(data => {
         console.log('Respuesta del servidor:', data);
 
-        // Intentar analizar la respuesta como JSON
         try {
             const jsonData = JSON.parse(data);
-            // Aquí puedes realizar las acciones necesarias con la respuesta JSON
             console.log('Datos JSON:', jsonData);
 
-            // Ejemplo de cómo manejar la disponibilidad:
+            // cómo manejar la disponibilidad:
             if (jsonData && jsonData.disponibilidad === true) {
-                // Hubo un problema con la disponibilidad del salón o el número de invitados
-                // Muestra un mensaje de error en lugar de un mensaje de éxito
                 const msgDiv = document.getElementById('msgDiv');
                 msgDiv.innerHTML = `<div style="text-align:center;" class="alert alert-danger">Error: No se pudo agregar el evento.</div>`;
                 setTimeout(() => {
                     msgDiv.innerHTML = ''; 
                 }, 3000);
             } else {
-                // El evento se pudo agregar correctamente
                 const msgDiv = document.getElementById('msgDiv');
                 msgDiv.innerHTML = `<div style="text-align:center;" class="alert alert-success">Evento solicitado con éxito <br>espera a que los administradores lo confirmen</div>`;
                 setTimeout(() => {
                     msgDiv.innerHTML = ''; 
+                    location.reload();
                 }, 3000);
             }
             if (jsonData && jsonData.cupoMaximoExcedido) {
-                // Mostrar un mensaje de error en lugar del mensaje de éxito
                 const msgDiv = document.getElementById('msgDiv');
                 msgDiv.innerHTML = `<div style="text-align:center;" class="alert alert-danger">${jsonData.mensaje}</div>`;
                 setTimeout(() => {
@@ -72,9 +67,7 @@ $(window).on('load', function() {
                 }, 3000);
             }
 
-            // Ejemplo de cómo manejar la lista de eventos:
             if (jsonData && jsonData.eventos) {
-                // Actualizar la lista de eventos en la página con los datos del servidor
                 console.log('Lista de eventos actualizada:', jsonData.eventos);
             }
         } catch (error) {

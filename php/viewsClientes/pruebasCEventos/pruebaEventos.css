@@ -5,17 +5,17 @@ form {
 
 label, select, input {
     margin-bottom: 10px;
-    width: 100%; 
+    width: 80%; 
     box-sizing: border-box; 
 }
 
-@media (max-width: 600px) {
+@media (max-width: 400px) {
     form {
         padding: 20px; 
     }
 
-    label, select, input {
-        max-width: none; 
+    label, select, input, button{
+        max-width: 300px; 
     }
 }
 

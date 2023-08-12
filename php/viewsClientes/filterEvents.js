@@ -1,17 +1,17 @@
 const eventCardsContainer = document.getElementById("event-cards");
 
 const salonImageUrls = {
-    1: '/images/salones/salon1.jpg',
-    2: '/images/salones/salon1.jpg',
-    3: '/images/salones/salon2.jpg',
-    4: '/images/salones/salon2.jpg',
-    5: '/images/salones/salon2.jpg',
-    6: '/images/salones/salon3.jpg',
-    7: '/images/salones/salon3.jpg',
-    8: '/images/salones/salon3.jpg',
-    9: '/images/salones/salon3.jpg',
-    10: '/images/salones/salon5.jpg',
-    11: '/images/salones/salon5.jpg'
+    1: '/images/salones/salon2.jpg',
+    2: '/images/salones/salon2.jpg',
+    3: '/images/salones/salon5.jpg',
+    4: '/images/salones/salon5.jpg',
+    5: '/images/salones/salon5.jpg',
+    6: '/images/salones/salon1.jpg',
+    7: '/images/salones/salon1.jpg',
+    8: '/images/salones/salon1.jpg',
+    9: '/images/salones/salon1.jpg',
+    10: '/images/salones/salon3.jpg',
+    11: '/images/salones/salon3.jpg'
 }
 
 function createEventCard(event) {
@@ -27,7 +27,7 @@ function createEventCard(event) {
 
     const eventId = document.createElement("p");
     eventId.textContent = `ID del evento: ${event.ID_EVENTO}`;
-    eventId.classList.add("hidden"); // Agregar una clase para ocultar el elemento
+    eventId.classList.add("hidden"); 
 
     const title = document.createElement("h2");
     title.textContent = event['NOMBRE DEL EVENTO'];
@@ -51,7 +51,7 @@ function createEventCard(event) {
         cancelButton.addEventListener("click", () => openCancelModal(event.ID_EVENTO));
         card.appendChild(cancelButton);
     } else {
-        cancelButton.style.display = "none"; // Ocultar el botón en caso de estados "FINALIZADO" o "CANCELADO"
+        cancelButton.style.display = "none"; 
     }
 
     card.appendChild(eventId);
@@ -86,10 +86,20 @@ function filterEvents(state) {
     fetch(`get_events.php?estado=${state}`)
         .then(response => response.json())
         .then(events => {
-            events.forEach(event => {
-                const card = createEventCard(event);
-                eventCardsContainer.appendChild(card);
-            });
+            if (events.length === 0) {
+                const noEventsMessage = document.createElement("p");
+                noEventsMessage.textContent = "No hay eventos para mostrar";
+                noEventsMessage.style.fontSize = "80px"; 
+                noEventsMessage.style.fontWeight = "bold"; 
+                noEventsMessage.style.marginTop = "50px";
+                noEventsMessage.style.alignContent= "center";
+                eventCardsContainer.appendChild(noEventsMessage);
+            } else {
+                events.forEach(event => {
+                    const card = createEventCard(event);
+                    eventCardsContainer.appendChild(card);
+                });
+            }
         })
         .catch(error => console.error('Error al obtener los eventos:', error));
 }
@@ -114,7 +124,7 @@ document.getElementById("cancelForm").addEventListener("submit", function(event)
             setTimeout(() => {
                 modal.style.display = "none"; 
                 location.reload();
-            }, 3000);
+            }, 2000);
         }
     })
     .catch(error => {

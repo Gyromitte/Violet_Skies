@@ -36,6 +36,8 @@
     <!--NavBar-->    
     <?php
         session_start();
+        include_once 'menu.php';
+        include_once 'salones.php';
         $access=1;
         if(isset($_SESSION["logged_in"])){
             if($_SESSION["access"]!==$access){
@@ -77,13 +79,12 @@
     <!--DashBoard-->
     <div id="dash-board">
         <div id="dash-board-content">
-            <div id="dash-photo-user"></div>
-            <?php echo $_SESSION["name"];?><br>
-            <?php echo $_SESSION["tipo"];?><br><br>
-            <button data-tab="home" class="dash-button"><i class="fa-solid fa-house" style="color: #ffffff;"></i><br>Mis eventos</button>
-            <button data-tab="eventos" class="dash-button"><i class="fa-solid fa-user" style="color: #ffffff;"></i><br>Agendar Evento</button>
-            <button data-tab="perfil" class="dash-button"><i class="fa-solid fa-user" style="color: #ffffff;"></i><br>Perfil</button>
-            <a style="text-decoration: none;" data-tab="logout" class="dash-button" href="../scripts/CerrarSesion.php">
+            <div style="margin-top: 20%;" > <?php echo $_SESSION["name"];?></div>
+            <div><?php echo $_SESSION["tipo"];?><br><br></div>
+            <button style="height: max-content;" data-tab="home" class="dash-button"><i class="fa-solid fa-house" style="color: #ffffff;"></i><br>Mis eventos</button>
+            <button style="height: max-content;" data-tab="eventos" class="dash-button"><i class="fa-solid fa-user" style="color: #ffffff;"></i><br>Agendar Evento</button>
+            <button style="height: max-content;" data-tab="perfil" class="dash-button"><i class="fa-solid fa-user" style="color: #ffffff;"></i><br>Perfil</button>
+            <a style="text-decoration: none; height: max-content;" data-tab="logout" class="dash-button" href="../scripts/CerrarSesion.php">
                 <i class="fa-solid fa-door-open" style="color: #ffffff; padding-top: 10px;"></i><br>Logout</a>
         </div>
     </div>
@@ -108,73 +109,56 @@
             </div>
         </div>
         <!-- Agendar Eventos -->
-        <div id="eventos" class="tab-content">
-            <div class="panel-header">
+        <div id="eventos" class="tab-content colspan">
+            <div width="600px">
+                <div class="panel-header">
                 <h3 class="test" style="text-align: center; margin-top:2%">
                     Configura tu evento!
                     <i class="fa-solid fa-calendar-days" style="color: #ffffff;"></i>
                 </h3>
             </div>
-            <div style="padding-left: 1%; margin-right: 52%; " class="container-flex">
-            <form id="evento-form" method="post">
-            <div id="msgDiv"></div>
-                    <div class="form-group">
-                        <label for="nombre_evento">Nombre del evento:</label>
-                        <input type="text" class="form-control" id="nombre_evento" name="nombre_evento" required>
-                    </div>
+            <div  class="container">
+                <form style="width: 600px;"  id="evento-form" method="post">
+                <div id="msgDiv"></div>
+                        <div class="form-group">
+                            <label for="nombre_evento">Nombre del evento:</label>
+                            <input type="text" class="form-control" id="nombre_evento" name="nombre_evento" required>
+                        </div>
                         <div class="form-group">
                             <label for="salon">Salón:</label>
                             <select class="form-control" id="salon" name="salon" required>
                                 <option value="">Seleccione un salón</option>
-                                <option value=1>Cuatrociénegas</option>
-                                <option value=2>Torreón</option>
-                                <option value=3>Saltillo</option>
-                                <option value=4>Coahuila</option>
+                                <?php
+                                foreach ($salonItems as $salonItem) {
+                                    echo '<option value="' . $salonItem['ID'] . '">' . $salonItem['NOMBRE'] .'</option>';
+                                }
+                                ?>
                             </select>
                         </div>
-                    <div class="form-group">
-                        <label for="comida">Menú del evento:</label>
-                        <select class="form-control" id="comida" name="comida" required>
-                        <option value="">Seleccione una comida del menú</option>
-                        <option value=1>Americano</option>
-                        <option value=2>Continental</option>
-                        <option value=3>Original</option>
-                        <option value=4>Saludable</option>
-                        <option value=5>El Santuario</option>
-                        <option value=6>Mexicano</option>
-                        <option value=7>Montaña</option>
-                        <option value=8>Sabor de Valle</option>
-                        <option value=9>Mediterráneo</option>
-                        <option value=10>Sabor y Energía</option>
-                        <option value=11>Mar y Tierra</option>
-                        <option value=12>Celebración 1</option>
-                        <option value=13>Celebración 2</option>
-                        <option value=14>Celebración 3</option>
-                        <option value=15>Celebración 4</option>
-                        <option value=16>Celebración 5</option>
-                        <option value=17>Esencial</option>
-                        <option value=18>Saludable</option>
-                        <option value=19>Dulce mañana</option>
-                        <option value=20>Mexicano</option>
-                        <option value=21>Natural</option>
-                        <option value=22>Energético</option>
-                        <option value=23>Barra</option>
-                        <option value=24>Nacional</option>
-                        <option value=25>Premium</option>
-                        <option value=26>Celebración</option>
-                        <option value=27>Hamburguesas</option>
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <label for="invitados">Cantidad de invitados:</label>
-                        <input type="text" class="form-control" id="invitados" name="invitados" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="fecha">Fecha y hora del evento:</label>
-                        <input type="text" class="form-control" id="fechaEvento" name="fechaEvento"required>
-                    </div>
-                    <button type="submit" class="btn btn-primary" >Solicitar Evento</button>
-                </form>
+                        <div class="form-group">
+                            <label for="comida">Menú del evento:</label>
+                            <select class="form-control" id="comida" name="comida" required>
+                                    <option value="">Seleccione una comida del menú</option>
+                                
+                                    <?php
+                                    foreach ($menuItems as $menuItem) {
+                                        echo '<option value="' . $menuItem['ID'] . '">' . $menuItem['NOMBRE'] . '</option>';
+                                    }
+                                    ?>
+                                
+                                </select>
+                            </div>
+                        <div class="form-group">
+                            <label for="invitados">Cantidad de invitados:</label>
+                            <input type="text" class="form-control" id="invitados" name="invitados" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="fecha">Fecha y hora del evento:</label>
+                            <input type="text" class="form-control" id="fechaEvento" name="fechaEvento"required>
+                        </div>
+                        <button type="submit" class="btn btn-primary" >Solicitar Evento</button>
+                    </form>
+                </div>
             </div>
         </div>
         <!-- Página de Perfil del cliente -->
