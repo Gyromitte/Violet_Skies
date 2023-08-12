@@ -1,5 +1,6 @@
 <?php
 include "../dataBase.php";
+
 $emp = $_SESSION["ID"];
 $trab = $_SESSION["trabajo"];
 $db = new DataBase();
@@ -9,7 +10,7 @@ $query = "SELECT * FROM CUENTAS WHERE ID = '$emp'";
 $cuenta = $db->seleccionar($query);
 if ($cuenta) {
 ?>
-<div class="container text-center " style="margin-top: 100px;">
+<div class="container text-center" style="margin-top: 100px;">
     <div class="accordion-item w-75 mx-auto rounded">
         <h2 class="accordion-header custom-accordion-header">
             <i class="fa-solid fa-user me-2" style="color: #ffffff;"></i>
@@ -48,12 +49,11 @@ if ($cuenta) {
                 </div>
             </div>
             <div class="mb-3 row ">
-               <label class="col-sm-3 col-form-label">Contraseña:</label>
-                    <div class="col-sm-9 accordion-header">
-                        <button class="btn btn-light" id="btnpassword" type="button" data-bs-toggle="modal" data-bs-target="#modalCambiarContrasena">
-                            <i class="fa-solid fa-lock me-2" style="color: black;"></i>
-                            Cambiar contraseña
-                        </button>
+                <label class="col-sm-3 col-form-label">Contraseña:</label>
+                <div class="col-sm-9 accordion-header">
+                <button class="btn btn-light" id="btnpassword" type="button" data-bs-toggle="modal" data-bs-target="#modalCambiarContrasena">
+                          <i class="fa-solid fa-lock me-2" style="color: #ffffff;"></i>
+                          Cambiar contraseña</button>                </div>
             </div>
             <input type="hidden" name="id" value="<?php echo $_SESSION["ID"]; ?>">
         </div>
