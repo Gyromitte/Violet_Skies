@@ -84,7 +84,42 @@ function checkCurrentTable(currentTable) {
       setTimeout(function () {
           btnSolicitud.click();
       }, 100);
-      break;  
+      break;
+    case 'desayuno':
+      setTimeout(function () {
+        btnDesayuno.click();
+      }, 100);
+      break;
+    case 'bebidas':
+      setTimeout(function () {
+        btnBebidas.click();
+      }, 100);
+      break;
+    case 'desBuffet':
+      setTimeout(function () {
+        btnDesBuffet.click();
+      }, 100);
+      break;
+    case 'comida':
+      setTimeout(function () {
+        btnComida.click();
+      }, 100);
+      break;
+    case 'comidaBuffet':
+      setTimeout(function () {
+        btnComidaBuffet.click();
+      }, 100);
+      break;
+    case 'coffee':
+      setTimeout(function () {
+        btnCoffee.click();
+      }, 100);
+      break;
+    case 'descontinuado':
+      setTimeout(function () {
+        btnDescontinuado.click();
+      }, 100);
+      break;     
   }
 }
 //Obtener botones para refrescar vistas
@@ -92,6 +127,15 @@ var btnCocineros = document.getElementById('verCocineros');
 var btnMeseros = document.getElementById('verMeseros');
 var btnBusqueda = document.getElementById('buscarEmpleado');
 var btnSolicitud = document.getElementById('verSolicitudes');
+
+var btnBebidas = document.getElementById('verBebidas');
+var btnDesayuno = document.getElementById('verDesayuno');
+var btnDesBuffet = document.getElementById('verDesBuffet');
+var btnComida = document.getElementById('verComida');
+var btnComidaBuffet = document.getElementById('verComidaBuffet');
+var btnCoffee = document.getElementById('verCoffee');
+var btnDescontinuado = document.getElementById('verDescontinuado');
+
 
 // Evento para los botones
 modal.addEventListener("show.bs.modal", function (event) {
@@ -1103,7 +1147,7 @@ function updateModalContent(formType, idEmpleado, idEvento) {
               </div>
               <div class="mb-3">
               <label class="control-label">Descripcion:</label>
-              <textarea name="descripcion" placeholder="En que consiste el menu" class="form-control descripcion-input" rows="4" maxlength="200" required>
+              <textarea name="descripcion" placeholder="En que consiste el menu" class="form-control descripcion-input" rows="4" maxlength="500" required>
               ${menu.DESCRIPCION}
               </textarea>
               </div>
@@ -1158,7 +1202,81 @@ function updateModalContent(formType, idEmpleado, idEvento) {
             updateXHR.send(`id=${idEmpleado}&tipoMenu=${tipoMenu}
             &nombre=${nombre}&descripcion=${descripcion}`);
             //Ver cual es la tabla activa para refrescar cualquier cambio
-            //checkCurrentTable(currentTable);
+            checkCurrentTable(currentTable);
+          });
+        } else {
+          console.error("Error en la solicitud AJAX");
+        }
+      }
+    };
+    //Hacer la solicitud al script PHP y pasar el ID del empleado
+    xhr.open("GET", "/php/viewsMenus/obtenerMenu.php?id=" + idEmpleado, true);
+    xhr.send();
+    //Ver cual es la tabla activa para refrescar cualquier cambio
+    checkCurrentTable(currentTable);
+    break;
+    case "@descontinuarMenu":
+    modalTitle.textContent = "Descontinuar menu";
+    //Realizar una solicitud AJAX para obtener los datos del menu
+    var xhr = new XMLHttpRequest();
+    xhr.onreadystatechange = function () {
+      if (xhr.readyState === XMLHttpRequest.DONE) {
+        if (xhr.status === 200) {
+          //Parsear la respuesta JSON
+          var menu = JSON.parse(xhr.responseText);
+          console.log(menu);
+          //Actualizar el contenido del formulario con los datos obtenidos
+          formContent = `
+            <form id="formularioMenu">
+              <div id="mensajeDiv" method="POST"></div> <!-- Div para mensajes de respuesta -->
+              <div class="mb-3">
+                <h5>Nombre del menú: </h5>
+                <h6 class="mb-3">${menu.NOMBRE}</h6>
+              </div>
+              <div class="mb-3">
+                <h5>Descripción: </h5>
+                <h6 class="mb-3">${menu.DESCRIPCION}</h6>
+              </div>
+              <div class="mb-3">
+              <div class="form-group mb-3">
+                <h5>Tipo de menú: </h5>
+                <h6 class="mb-3">${menu.TIPO}</h6>
+              </div>
+              <div class="d-flex justify-content-center">
+                  <button type="submit" class="btn btn-primary btn-modal-warning me-2"><i class="fa-solid fa-circle-minus me-2" style="color: #ffffff;"></i>Descontinuar</button>
+                  <button type="button" class="btn btn-primary btn-modal" data-bs-dismiss="modal">Cancelar</button>
+              </div>
+            </form>
+              `;
+          // Asignar el contenido al formulario del modal
+          modalForm.innerHTML = formContent;
+          
+          // Obtener el formulario después de haberlo asignado al DOM
+          var formEditarMenu = document.getElementById('formularioMenu');
+          // Agregar evento de envío al formulario de edición
+          formEditarMenu.addEventListener('submit', function (event) {
+            event.preventDefault(); // Evitar que el formulario se envíe por defecto
+            
+            //El id de la tupla es la variable idEmpleado
+            // Realizar una solicitud AJAX para descontinuar el menú
+            var xhrDescontinuar = new XMLHttpRequest();
+            xhrDescontinuar.onreadystatechange = function () {
+              if (xhrDescontinuar.readyState === XMLHttpRequest.DONE) {
+                if (xhrDescontinuar.status === 200) {
+                  // Actualizar el mensaje de respuesta en el formulario
+                  var mensajeDiv = document.getElementById('mensajeDiv');
+                  mensajeDiv.innerHTML = xhrDescontinuar.responseText;
+                } else {
+                  console.error("Error en la solicitud AJAX para descontinuar el menú");
+                }
+              }
+            };
+            console.log(idEmpleado);
+            // Hacer la solicitud al script PHP para descontinuar el menú y pasar el ID del menú
+            xhrDescontinuar.open("POST", "/php/viewsMenus/descontinuarMenu.php", true);
+            xhrDescontinuar.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+            var parametros = "id=" + encodeURIComponent(idEmpleado);
+            xhrDescontinuar.send(parametros);
           });
         } else {
           console.error("Error en la solicitud AJAX");
@@ -1170,7 +1288,7 @@ function updateModalContent(formType, idEmpleado, idEvento) {
     console.log(idEmpleado);
     xhr.send();
     //Ver cual es la tabla activa para refrescar cualquier cambio
-    //checkCurrentTable(currentTable);
+    checkCurrentTable(currentTable);
     break;
 
     }
