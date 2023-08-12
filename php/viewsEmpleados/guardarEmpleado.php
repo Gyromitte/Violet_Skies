@@ -4,9 +4,16 @@ $db = new Database();
 $db->conectarBD();
 
 // Obtener los datos del formulario
+$nombre = $_POST['nombre'];
+$ap_paterno = $_POST['ap_paterno'];
+$ap_materno = $_POST['ap_materno'];
+$telefono = $_POST['telefono'];
+
 $rfc = $_POST['rfc'];
 $correo = $_POST['correo'];
 $tipo = filter_input(INPUT_POST, 'tipoUsuario', FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+
+
 
 // Variable para almacenar el mensaje de error
 $errorMessage = "";
@@ -43,28 +50,76 @@ if (!empty($errorMessage)) {
         echo "<div class='alert alert-danger'>El empleado ya ha sido dado de alta.</div>";
     } else {
         // Si el solicitante no ha sido dado de alta, insertarlo en la tabla EMPLEADOS
+        //Generar contrasena temporal
+        $contraseña = $nombre . rand(1000, 99999);
+        $passHash = password_hash($contraseña, PASSWORD_DEFAULT);
+        
+        //Checar si la CUENTA ya existe
+        $verificarCuenta = "SELECT * FROM CUENTAS WHERE ID IN
+            (SELECT ID FROM CUENTAS WHERE CORREO = :correo AND TIPO_CUENTA = 'EMPLEADO')";
+        $parametrosChecarCuenta = array(':correo' => $correo);
+        $resultadosChecarCuenta = $db->seleccionarPreparado($verificarCuenta, $parametrosChecarCuenta);
 
-        // ID de la cuenta asociada al correo con estado ACTIVO
+        //Checar si la cuenta no esta en EMPLEADOS
+        $verificarAlta = "SELECT * FROM EMPLEADOS WHERE CUENTA IN 
+        (SELECT ID FROM CUENTAS WHERE CORREO = :correo AND TIPO_CUENTA = 'EMPLEADO')";
+        $parametrosAlta = array(':correo' => $correo);
+        $resultadoVerificarAlta = $db->seleccionarPreparado($verificarAlta, $parametrosAlta);
+        
+        //var_dump($resultadosChecarCuenta);
+        //var_dump(!empty($resultadosChecarCuenta));
+        //var_dump(empty($resultadoVerificarAlta));
+        //Si tiene cuenta y no esta dado de alta en empleados:
+        if(!empty($resultadosChecarCuenta) && empty($resultadoVerificarAlta))
+        {   
+            //Sacar el id de la cuenta que se acaba de dar de alta atraves del correo
+            $consultaCuenta = "SELECT ID FROM CUENTAS WHERE CORREO = :correo AND TIPO_CUENTA = 'EMPLEADO' AND ESTADO = 'ACTIVO'";
+            $parametrosCuenta = array(':correo' => $correo);
+            $resultadoCuenta = $db->seleccionarPreparado($consultaCuenta, $parametrosCuenta);
+            $idCuenta = $resultadoCuenta[0]->ID;
+            //Insertar el nuevo registro en la tabla EMPLEADOS
+            //Solo en la tabla de empleados puesto que sus datos ya estan en su CUENTA
+            $cadena = "INSERT INTO EMPLEADOS (RFC, TIPO, CUENTA) VALUES (:rfc, :tipo, :idCuenta)";
+            $parametrosInsercion = array(
+            ':rfc' => $rfc,
+            ':tipo' => $tipo,
+            ':idCuenta' => $idCuenta
+            );
+            $db->ejecutarPreparado($cadena, $parametrosInsercion);
+            echo "<div class='alert alert-success mt-10'>Este empleado ya se habia regitrado</div>";
+            echo "<div class='alert alert-success mt-10'>Su solicitud ahora ha sido aceptada</div>";
+        }
+        //Si no tiene ni cuenta y no esta dado de alta
+        else{
+        $cadena = "INSERT INTO CUENTAS (NOMBRE, AP_PATERNO, AP_MATERNO, TELEFONO, CORREO, CONTRASEÑA, TIPO_CUENTA)
+        VALUES (:nombre, :ap_paterno, :ap_materno, :telefono, :correo, '$passHash', 'EMPLEADO')";
+        $parametrosInsercion = array(
+        ':nombre' => $nombre,
+        ':ap_paterno' => $ap_paterno,
+        ':ap_materno' => $ap_materno,
+        ':telefono' => $telefono,
+        ':correo' => $correo,
+        );
+        $db->ejecutarPreparado($cadena, $parametrosInsercion);
+
+        //Sacar el id de la cuenta que se acaba de dar de alta atraves del correo
         $consultaCuenta = "SELECT ID FROM CUENTAS WHERE CORREO = :correo AND TIPO_CUENTA = 'EMPLEADO' AND ESTADO = 'ACTIVO'";
         $parametrosCuenta = array(':correo' => $correo);
         $resultadoCuenta = $db->seleccionarPreparado($consultaCuenta, $parametrosCuenta);
+        $idCuenta = $resultadoCuenta[0]->ID;
 
-        if ($resultadoCuenta) {
-            $idCuenta = $resultadoCuenta[0]->ID;
-
-            // Insertar el nuevo registro en la tabla EMPLEADOS
-            $cadena = "INSERT INTO EMPLEADOS (RFC, TIPO, CUENTA) VALUES (:rfc, :tipo, :idCuenta)";
-            $parametrosInsercion = array(
-                ':rfc' => $rfc,
-                ':tipo' => $tipo,
-                ':idCuenta' => $idCuenta
-            );
-            $db->ejecutarPreparado($cadena, $parametrosInsercion);
-
-            echo "<div class='alert alert-success'>Empleado Registrado!</div>";
-        } else {
-            echo "<div class='alert alert-danger'>No se encontró una cuenta de tipo empleado activa con ese correo electrónico.</div>";
+        // Insertar el nuevo registro en la tabla EMPLEADOS
+        $cadena = "INSERT INTO EMPLEADOS (RFC, TIPO, CUENTA) VALUES (:rfc, :tipo, :idCuenta)";
+        $parametrosInsercion = array(
+        ':rfc' => $rfc,
+        ':tipo' => $tipo,
+        ':idCuenta' => $idCuenta
+        );
+        $db->ejecutarPreparado($cadena, $parametrosInsercion);
+        echo "<div class='alert alert-success mt-10'>Empleado Registrado!</div>";
+        echo "<div class='alert alert-success mt-10'>La contraseña provisional de este empleado es: $contraseña</div>";
         }
+
     }
 }
 

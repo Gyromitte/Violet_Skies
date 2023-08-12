@@ -36,7 +36,6 @@ document.addEventListener('scroll', function () {
   }
 });
 
-
 /*Main content*/
 // Obtener las pestañas y el contenido 
 var tabs = document.querySelectorAll('.dash-button');
@@ -69,23 +68,58 @@ function checkCurrentTable(currentTable) {
     case 'cocineros':
       setTimeout(function () {
         btnCocineros.click();
-      }, 100);
+      }, 300);
       break;
     case 'meseros':
       setTimeout(function () {
         btnMeseros.click();
-      }, 100);
+      }, 300);
       break;
     case 'busqueda':
       setTimeout(function () {
         btnBusqueda.click();
-      }, 100);
+      }, 300);
       break;
     case 'solicitud':
       setTimeout(function () {
           btnSolicitud.click();
-      }, 100);
-      break;  
+      }, 300);
+      break;
+    case 'desayuno':
+      setTimeout(function () {
+        btnDesayuno.click();
+      }, 300);
+      break;
+    case 'bebidas':
+      setTimeout(function () {
+        btnBebidas.click();
+      }, 300);
+      break;
+    case 'desBuffet':
+      setTimeout(function () {
+        btnDesBuffet.click();
+      }, 300);
+      break;
+    case 'comida':
+      setTimeout(function () {
+        btnComida.click();
+      }, 300);
+      break;
+    case 'comidaBuffet':
+      setTimeout(function () {
+        btnComidaBuffet.click();
+      }, 300);
+      break;
+    case 'coffee':
+      setTimeout(function () {
+        btnCoffee.click();
+      }, 300);
+      break;
+    case 'descontinuado':
+      setTimeout(function () {
+        btnDescontinuado.click();
+      }, 300);
+      break;     
   }
 }
 //Obtener botones para refrescar vistas
@@ -93,6 +127,15 @@ var btnCocineros = document.getElementById('verCocineros');
 var btnMeseros = document.getElementById('verMeseros');
 var btnBusqueda = document.getElementById('buscarEmpleado');
 var btnSolicitud = document.getElementById('verSolicitudes');
+
+var btnBebidas = document.getElementById('verBebidas');
+var btnDesayuno = document.getElementById('verDesayuno');
+var btnDesBuffet = document.getElementById('verDesBuffet');
+var btnComida = document.getElementById('verComida');
+var btnComidaBuffet = document.getElementById('verComidaBuffet');
+var btnCoffee = document.getElementById('verCoffee');
+var btnDescontinuado = document.getElementById('verDescontinuado');
+
 
 // Evento para los botones
 modal.addEventListener("show.bs.modal", function (event) {
@@ -121,20 +164,35 @@ function updateModalContent(formType, idEmpleado, idEvento) {
       modalTitle.textContent = "Registrar un Empleado";
       modalHeader.classList.remove('modal-header-warning');
       formContent = `
-        <div id="mensajeDiv" method="POST"></div>
         <form id="formularioEmpleado">
+        <div class="mb-3">
+          <label class="control-label">Nombre:</label>
+          <input type="text" name="nombre" placeholder="Ingresa el nombre" class="form-control" maxlength="30" required>
+        </div>
+        <div class="mb-3">
+          <label class="control-label">Apellido Paterno:</label>
+          <input type="text" name="ap_paterno" placeholder="Ingresa su Ap. Paterno" class="form-control" maxlength="30" required>
+        </div>
+        <div class="mb-3">
+          <label class="control-label">Apellido Materno:</label>
+          <input type="text" name="ap_materno" placeholder="Ingresa su Ap. Materno" class="form-control" maxlength="30" required>
+        </div>
+        <div class="mb-3">
+            <label class="control-label">Telefono:</label>
+            <input type="text" name="telefono" placeholder="Ingresa su telefono" class="form-control" maxlength="10" required>
+        </div>
           <div class="mb-3">
-            <label class="control-label">RFC</label>
-            <input type="text" name="RFC" placeholder="Ingresa el RFC" class="form-control" 
+            <label class="control-label">RFC:</label>
+            <input type="text" maxlength="13" name="RFC" placeholder="Ingresa el RFC" class="form-control" 
             required oninput="this.value = this.value.toUpperCase()"
             required>
           </div>
           <div class="mb-3">
-            <label class="control-label">E-mail</label>
-            <input type="email" name="CORREO" placeholder="Ingresa el E-mail" class="form-control" required>
+            <label class="control-label">Correo:</label>
+            <input type="email" maxlength="30"  name="CORREO" placeholder="Ingresa el correo" class="form-control" required>
           </div>
           <div class="form-group mb-3">
-            <label for="tipoUsuario">Tipo de Trabajador</label>
+            <label for="tipoUsuario">Tipo de Empleado:</label>
             <select name="tipoUsuario" class="form-control form-select" id="tipoUsuario">
               <option value="mesero">Mesero</option>
               <option value="cocina">Cocinero</option>
@@ -145,6 +203,7 @@ function updateModalContent(formType, idEmpleado, idEvento) {
           <button type="button" class="btn btn-primary btn-modal" data-bs-dismiss="modal">Cerrar</button>
           </div>
         </form>
+        <div id="mensajeDiv" class="mt-10" method="POST"></div>
       `;
       //Asignar el contenido al formulario del modal
       modalForm.innerHTML = formContent;
@@ -165,8 +224,17 @@ function updateModalContent(formType, idEmpleado, idEvento) {
         var rfc = form.elements['RFC'].value;
         var correo = form.elements['CORREO'].value;
         var tipoUsuario = form.elements['tipoUsuario'].value;
+
+        var nombre = form.elements['nombre'].value;
+        var ap_paterno = form.elements['ap_paterno'].value;
+        var ap_materno = form.elements['ap_materno'].value;
+        var telefono = form.elements['telefono'].value;
+
         //Como se va enviar la solicitud: un string
-        var formData = 'rfc=' + encodeURIComponent(rfc) + '&correo=' + (correo) + '&tipoUsuario=' + encodeURIComponent(tipoUsuario);
+        var formData = 'rfc=' + encodeURIComponent(rfc)
+         + '&correo=' + (correo) + '&tipoUsuario=' + encodeURIComponent(tipoUsuario)
+         + '&nombre=' + (nombre) + '&ap_paterno=' + (ap_paterno) + '&ap_materno=' + (ap_materno)
+         + '&telefono=' + (telefono);
         xhr.onreadystatechange = function () {
           if (xhr.readyState === XMLHttpRequest.DONE && xhr.status === 200) {
             //Manejo de la respuesta:
@@ -295,12 +363,28 @@ function updateModalContent(formType, idEmpleado, idEvento) {
             formContent = `
                   <form id="formularioEditarEmpleado">
                     <div id="mensajeDiv" method="POST"></div> <!-- Div para mensajes de respuesta -->
-                    <h5>Empleado: </h5>
-                    <h6 class="mb-3">${empleado.NOMBRE} ${empleado.AP_PATERNO} ${empleado.AP_MATERNO}</h6>
-                    <h5>Telefono: </h5>
-                    <h6 class="mb-3">${empleado.TELEFONO}</h6>
-                    <h5>Correo: </h5>
+                    <div class="mb-3">
+                    <h6>Correo: </h6>
                     <h6 class="mb-3">${empleado.CORREO}</h6>
+                    <label class="control-label">Nombre: </label>
+                    <input type="text" name="nombre" placeholder="" class="form-control" 
+                    required value="${empleado.NOMBRE}">
+                    </div>
+                    <div class="mb-3">
+                    <label class="control-label">Ap. Paterno: </label>
+                    <input type="text" name="ap_paterno" placeholder="" class="form-control" 
+                    required value="${empleado.AP_PATERNO}">
+                    </div>
+                    <div class="mb-3">
+                    <label class="control-label">Ap. Materno: </label>
+                    <input type="text" name="ap_materno" placeholder="" class="form-control" 
+                    required value="${empleado.AP_MATERNO}">
+                    </div>
+                    <div class="mb-3">
+                    <label class="control-label">Telefono: </label>
+                    <input type="text" name="telefono" placeholder="" class="form-control" 
+                    required value="${empleado.TELEFONO}">
+                    </div>
                     <div class="mb-3">
                       <label class="control-label">RFC</label>
                       <input type="text" name="rfc" placeholder="Ingresa el RFC" class="form-control" 
@@ -329,6 +413,10 @@ function updateModalContent(formType, idEmpleado, idEvento) {
               event.preventDefault(); // Evitar que el formulario se envíe por defecto
 
               // Obtener los valores del formulario
+              var nombre = formEditarEmpleado.elements.nombre.value;
+              var ap_paterno = formEditarEmpleado.elements.ap_paterno.value;
+              var ap_materno = formEditarEmpleado.elements.ap_materno.value;
+              var telefono = formEditarEmpleado.elements.telefono.value;
               var rfc = formEditarEmpleado.elements.rfc.value;
               var tipoUsuario = formEditarEmpleado.elements.tipoUsuario.value;
 
@@ -349,7 +437,9 @@ function updateModalContent(formType, idEmpleado, idEvento) {
               // Hacer la solicitud al script PHP para editar al empleado y pasar los datos actualizados
               updateXHR.open("POST", "editarEmpleado.php", true);
               updateXHR.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-              updateXHR.send(`id=${idEmpleado}&rfc=${rfc}&tipoUsuario=${tipoUsuario}`);
+              updateXHR.send(`id=${idEmpleado}&rfc=${rfc}&tipoUsuario=${tipoUsuario}
+              &nombre=${nombre}&ap_paterno=${ap_paterno}&ap_materno=${ap_materno}
+              &telefono=${telefono}`);
               //Ver cual es la tabla activa para refrescar cualquier cambio
               checkCurrentTable(currentTable);
             });
@@ -465,10 +555,8 @@ function updateModalContent(formType, idEmpleado, idEvento) {
         function esNumero(valor) {
             return !isNaN(valor) && !isNaN(parseFloat(valor));
         }
-    
-        console.log(formType);
-        break;
-      
+        //console.log(formType);
+        break;  
     case "@verSolicitud":
         modalTitle.textContent = "Manejar solicitud";
         modalHeader.classList.remove('modal-header-warning');
@@ -661,7 +749,6 @@ function updateModalContent(formType, idEmpleado, idEvento) {
         //Ver cual es la tabla activa para refrescar cualquier cambio
         checkCurrentTable(currentTable);
         break;
-
     case "@verDetallesEvento":
       modalTitle.textContent = "Detalles del Evento";
       var xhrDetalles = new XMLHttpRequest();
@@ -1032,6 +1119,171 @@ function updateModalContent(formType, idEmpleado, idEvento) {
   xhr.open("GET", "obtenerEmpleado.php?id=" + idEmpleado, true);
   xhr.send();
   break;
+  case "@editarMenu":
+    modalTitle.textContent = "Modificar menu";
+    modalHeader.classList.remove('modal-header-warning');
+    //Realizar una solicitud AJAX para obtener los datos del empleado
+    var xhr = new XMLHttpRequest();
+    xhr.onreadystatechange = function () {
+      if (xhr.readyState === XMLHttpRequest.DONE) {
+        if (xhr.status === 200) {
+          //Parsear la respuesta JSON
+          var menu = JSON.parse(xhr.responseText);
+          console.log(menu);
+          //Actualizar el contenido del formulario con los datos obtenidos
+          formContent = `
+            <form id="formularioMenu">
+              <div id="mensajeDiv" method="POST"></div> <!-- Div para mensajes de respuesta -->
+              <div class="mb-3">
+                <label class="control-label">Nombre: </label>
+                <input type="text" name="nombre" placeholder="Nombre del menu" class="form-control" maxlength="45" required
+                value='${menu.NOMBRE}'>
+              </div>
+              <div class="mb-3">
+              <label class="control-label">Descripcion:</label>
+              <textarea name="descripcion" placeholder="En que consiste el menu" class="form-control descripcion-input" rows="4" maxlength="500" required>
+              ${menu.DESCRIPCION}
+              </textarea>
+              </div>
+              <div class="mb-3">
+              <div class="form-group mb-3">
+                  <label for="tipoMenu">Tipo de menu:</label>
+                  <select name="tipoMenu" class="form-control form-select">
+                      <option value="1"${menu.TIPO === 'BEBIDAS' ? 'selected' : ''}>Bebidas</option>
+                      <option value="2"${menu.TIPO === 'DESAYUNO' ? 'selected' : ''}>Desayuno</option>
+                      <option value="3"${menu.TIPO === 'DESAYUNO BUFFET' ? 'selected' : ''}>Desayuno Buffet</option>
+                      <option value="4"${menu.TIPO === 'COMIDA' ? 'selected' : ''}>Comida</option>
+                      <option value="5"${menu.TIPO === 'COMIDA BUFFET' ? 'selected' : ''}>Comida Buffet</option>
+                      <option value="6"${menu.TIPO === 'COFFEE BREAK' ? 'selected' : ''}>Coffee Break</option>
+                  </select>
+              </div>
+              <div class="d-flex justify-content-center">
+                  <button type="submit" class="btn btn-primary btn-modal me-2"><i class="fa-solid fa-pencil me-2" style="color: #ffffff;"></i>Modificar</button>
+                  <button type="button" class="btn btn-primary btn-modal" data-bs-dismiss="modal">Cancelar</button>
+              </div>
+            </form>
+              `;
+          // Asignar el contenido al formulario del modal
+          modalForm.innerHTML = formContent;
+          // Obtener el formulario después de haberlo asignado al DOM
+          var formEditarMenu = document.getElementById('formularioMenu');
+          // Agregar evento de envío al formulario de edición
+          formEditarMenu.addEventListener('submit', function (event) {
+            event.preventDefault(); // Evitar que el formulario se envíe por defecto
+
+            // Obtener los valores del formulario
+            var nombre = formEditarMenu.elements.nombre.value;
+            var descripcion = formEditarMenu.elements.descripcion.value;
+            var tipoMenu = formEditarMenu.elements.tipoMenu.value;
+
+            // Realizar una nueva solicitud AJAX para actualizar los datos
+            var updateXHR = new XMLHttpRequest();
+            updateXHR.onreadystatechange = function () {
+              if (updateXHR.readyState === XMLHttpRequest.DONE) {
+                if (updateXHR.status === 200) {
+                  // Estilos al div de mensajes según la respuesta
+                  var respuesta = updateXHR.responseText;
+                  document.getElementById('mensajeDiv').innerHTML = respuesta;
+
+                } else {
+                  console.error("Error en la solicitud AJAX de actualización");
+                }
+              }
+            };
+            // Hacer la solicitud al script PHP para editar al empleado y pasar los datos actualizados
+            updateXHR.open("POST", "/php/viewsMenus/editarMenu.php", true);
+            updateXHR.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+            updateXHR.send(`id=${idEmpleado}&tipoMenu=${tipoMenu}
+            &nombre=${nombre}&descripcion=${descripcion}`);
+            //Ver cual es la tabla activa para refrescar cualquier cambio
+            checkCurrentTable(currentTable);
+          });
+        } else {
+          console.error("Error en la solicitud AJAX");
+        }
+      }
+    };
+    //Hacer la solicitud al script PHP y pasar el ID del empleado
+    xhr.open("GET", "/php/viewsMenus/obtenerMenu.php?id=" + idEmpleado, true);
+    xhr.send();
+    //Ver cual es la tabla activa para refrescar cualquier cambio
+    checkCurrentTable(currentTable);
+    break;
+    case "@descontinuarMenu":
+    modalTitle.textContent = "Descontinuar menu";
+    //Realizar una solicitud AJAX para obtener los datos del menu
+    var xhr = new XMLHttpRequest();
+    xhr.onreadystatechange = function () {
+      if (xhr.readyState === XMLHttpRequest.DONE) {
+        if (xhr.status === 200) {
+          //Parsear la respuesta JSON
+          var menu = JSON.parse(xhr.responseText);
+          console.log(menu);
+          //Actualizar el contenido del formulario con los datos obtenidos
+          formContent = `
+            <form id="formularioMenu">
+              <div id="mensajeDiv" method="POST"></div> <!-- Div para mensajes de respuesta -->
+              <div class="mb-3">
+                <h5>Nombre del menú: </h5>
+                <h6 class="mb-3">${menu.NOMBRE}</h6>
+              </div>
+              <div class="mb-3">
+                <h5>Descripción: </h5>
+                <h6 class="mb-3">${menu.DESCRIPCION}</h6>
+              </div>
+              <div class="mb-3">
+              <div class="form-group mb-3">
+                <h5>Tipo de menú: </h5>
+                <h6 class="mb-3">${menu.TIPO}</h6>
+              </div>
+              <div class="d-flex justify-content-center">
+                  <button type="submit" class="btn btn-primary btn-modal-warning me-2"><i class="fa-solid fa-circle-minus me-2" style="color: #ffffff;"></i>Descontinuar</button>
+                  <button type="button" class="btn btn-primary btn-modal" data-bs-dismiss="modal">Cancelar</button>
+              </div>
+            </form>
+              `;
+          // Asignar el contenido al formulario del modal
+          modalForm.innerHTML = formContent;
+          
+          // Obtener el formulario después de haberlo asignado al DOM
+          var formEditarMenu = document.getElementById('formularioMenu');
+          // Agregar evento de envío al formulario de edición
+          formEditarMenu.addEventListener('submit', function (event) {
+            event.preventDefault(); // Evitar que el formulario se envíe por defecto
+            
+            //El id de la tupla es la variable idEmpleado
+            // Realizar una solicitud AJAX para descontinuar el menú
+            var xhrDescontinuar = new XMLHttpRequest();
+            xhrDescontinuar.onreadystatechange = function () {
+              if (xhrDescontinuar.readyState === XMLHttpRequest.DONE) {
+                if (xhrDescontinuar.status === 200) {
+                  // Actualizar el mensaje de respuesta en el formulario
+                  var mensajeDiv = document.getElementById('mensajeDiv');
+                  mensajeDiv.innerHTML = xhrDescontinuar.responseText;
+                } else {
+                  console.error("Error en la solicitud AJAX para descontinuar el menú");
+                }
+              }
+            };
+            console.log(idEmpleado);
+            // Hacer la solicitud al script PHP para descontinuar el menú y pasar el ID del menú
+            xhrDescontinuar.open("POST", "/php/viewsMenus/descontinuarMenu.php", true);
+            xhrDescontinuar.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+            var parametros = "id=" + encodeURIComponent(idEmpleado);
+            xhrDescontinuar.send(parametros);
+          });
+        } else {
+          console.error("Error en la solicitud AJAX");
+        }
+      }
+    };
+    //Hacer la solicitud al script PHP y pasar el ID del empleado
+    xhr.open("GET", "/php/viewsMenus/obtenerMenu.php?id=" + idEmpleado, true);
+    console.log(idEmpleado);
+    xhr.send();
+    //Ver cual es la tabla activa para refrescar cualquier cambio
+    checkCurrentTable(currentTable);
+    break;
 
     }
   }
