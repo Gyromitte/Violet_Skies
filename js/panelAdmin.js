@@ -68,57 +68,57 @@ function checkCurrentTable(currentTable) {
     case 'cocineros':
       setTimeout(function () {
         btnCocineros.click();
-      }, 100);
+      }, 300);
       break;
     case 'meseros':
       setTimeout(function () {
         btnMeseros.click();
-      }, 100);
+      }, 300);
       break;
     case 'busqueda':
       setTimeout(function () {
         btnBusqueda.click();
-      }, 100);
+      }, 300);
       break;
     case 'solicitud':
       setTimeout(function () {
           btnSolicitud.click();
-      }, 100);
+      }, 300);
       break;
     case 'desayuno':
       setTimeout(function () {
         btnDesayuno.click();
-      }, 100);
+      }, 300);
       break;
     case 'bebidas':
       setTimeout(function () {
         btnBebidas.click();
-      }, 100);
+      }, 300);
       break;
     case 'desBuffet':
       setTimeout(function () {
         btnDesBuffet.click();
-      }, 100);
+      }, 300);
       break;
     case 'comida':
       setTimeout(function () {
         btnComida.click();
-      }, 100);
+      }, 300);
       break;
     case 'comidaBuffet':
       setTimeout(function () {
         btnComidaBuffet.click();
-      }, 100);
+      }, 300);
       break;
     case 'coffee':
       setTimeout(function () {
         btnCoffee.click();
-      }, 100);
+      }, 300);
       break;
     case 'descontinuado':
       setTimeout(function () {
         btnDescontinuado.click();
-      }, 100);
+      }, 300);
       break;     
   }
 }
