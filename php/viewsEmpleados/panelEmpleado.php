@@ -38,11 +38,28 @@
                 background-color: #5603ad;
                 border-radius: 5em;
                 padding: 10px;
-                width: 100%;
+                width: 80%;
                 height: 100%;
                 align-items: center;
                 justify-content: center;
             }
+            .calendar {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    grid-gap: 5px;
+    width: 70%;
+    margin: auto;
+}
+
+.day {
+    border: 1px solid #ddd;
+    padding: 5px;
+    text-align: center;
+}
+
+.special-date {
+    background-color: #f0ad4e;
+}
 
 		</style>
     <!--Scripts que necesitan ejecutarse primero-->
@@ -96,8 +113,8 @@
                 }
             ?><br><br>
             <button data-tab="home" class="dash-button"><i class="fa-solid fa-house" style="color: #ffffff;"></i><br>Home</button>
-            <button data-tab="eventos" class="dash-button"><i class="fa-solid fa-calendar-days" style="color: #ffffff;"></i><br>Eventos Disponibles</button>
-            <button data-tab="empleados" class="dash-button"><i class="fa-solid fa-briefcase" style="color: #ffffff;"></i><br>Eventos En Curso</button>
+            <button data-tab="eventos" class="dash-button"><i class="fa-solid fa-briefcase" style="color: #ffffff;"></i><br>Eventos Disponibles</button>
+            <button data-tab="empleados" class="dash-button"><i class="fa-solid fa-business-time" style="color: #ffffff;"></i><br>Eventos En Curso</button>
             <button data-tab="perfil" class="dash-button"><i class="fa-solid fa-user" style="color: #ffffff;"></i><br>Perfil</button>
             <a style="text-decoration: none;" data-tab="logout" class="dash-button" href="../scripts/CerrarSesion.php">
                 <i class="fa-solid fa-door-open" style="color: #ffffff; padding-top: 10px;"></i><br>Logout</a>
@@ -106,28 +123,72 @@
     <!--Main Content-->
     <div id="main">
         <div id="home" class="tab-content active">
+        <h3 class="test" style="text-align:center; ">
+                Home
+                <i class="fa-solid fa-house" style="color: #ffffff;"></i>
+            </h3>
             <?php
             if($_SESSION["access"]==1.5){
-                echo"<div class='container'>";
                 echo"<div class='cutebox'>";
                 echo"<h1>Gracias por buscar trabajo con nosotros!</h1>";
                 echo"</div>";
-                echo"</div>";
                 echo"<br>";
-                echo"<div class='container'>";
                 echo"<div class='test'>";
                 echo"<h4>Su solicitud ha sido enviada.</h4>";
                 echo"</div>";
-                echo"</div>";
                 echo"<br>";
-                echo"<div class='container'>";
                 echo"<div class='test'>";
                 echo"<div>Un administrador se pondra en contacto con usted proximamente.</div>";
                 echo"</div>";
-                echo"</div>";
             }
             else{
-
+                echo"<div class='container-fluid mt-4'>
+                <div class='row'>
+                    <div class='col-md-4 mb-4'>
+                        <div class='info-card d-flex align-items-center justify-content-between'>
+                            <div class='info d-flex flex-column align-items-center mb-2'>
+                                <h3 id='DispCard'></h3>
+                                <h5>Eventos Disponibles</h5>
+                            </div>
+                            <i class='fa-solid fa-briefcase fa-5x' style='color: #ffffff;'></i>
+                        </div>
+                    </div>
+                    <div class='col-md-4'>
+                        <div class='info-card d-flex align-items-center justify-content-between'>
+                            <div class='info d-flex flex-column align-items-center mb-2'>
+                                <h3 id='AsistCard'></h3>
+                                <h5>Eventos Atendiendo</h5>
+                            </div>
+                            <i class='fa-solid fa-business-time fa-5x' style='color: #ffffff;'></i>
+                        </div>
+                    </div>
+                    <div class='col-md-4 mb-4'>
+                        <div class='info-card d-flex align-items-center justify-content-between'>
+                            <div class='info d-flex flex-column align-items-center mb-2'>
+                                <h3 id='SolicCard'></h3>
+                                <h5>Solicitudes Enviadas</h5>
+                            </div>
+                            <i class='fa-solid fa-envelope fa-5x' style='color: #ffffff;'></i>
+                        </div>
+                    </div>
+                    </div>
+                    <div>
+                    <div class='row'>
+                        <div class='col-md-6 mb-6'>
+                            <div class='info-card d-flex align-items-center justify-content-between'>
+                                <div class='info d-flex flex-column align-items-center mb-2'>
+                                    <h2>Proximo Evento</h2>
+                                    <i class='fa-solid fa-calendar-days fa-5x' style='color: #ffffff;'></i>
+                                </div>
+                                <h3 id='FechaCard'></h3>
+                            </div>
+                        </div>
+                        <div class='col-md-4 mb-4'>
+                            <canvas id='EventosFinaliz'></canvas>
+                        </div>
+                    </div>
+                    </div>
+                    </div>";
             }
             ?>
         </div>
@@ -142,20 +203,21 @@
             }
             else{
             echo"
-            <div class='container'>
             <form id='EmpDisp' action=".$_SERVER['PHP_SELF']." method='POST'>
                 <br>
+                <div class='search-container'>
+                <div class='filter'>
                 <div class='btn-group'>
-                    <label class='control-label'>Orden: </label>
-                    <select id='tipoorden' name='orden' class='form-select'>;
-                        <option value='' selected>-Seleccionar un Orden-</option>
+                    <label class='control-label'style='margin-right: 8px;'>Orden:</label>
+                    <select id='tipoorden' name='orden' class='form-select form-select-custom'>;
                         <option value='porcreacion'>Recientemente Creadas</option>;
                         <option value='lejanoevento'>Eventos Lejanos</option>;
                         <option value='cercasevento'>Eventos Cercanos</option>;
                     </select>
                 </div>
+                </div>
+                </div>
             </form>
-            </div>
             <br>
             <div id='tablaResultados'></div>
         </div>";
@@ -164,7 +226,7 @@
         <div id="empleados" class="tab-content">
             <h3 class="test" style="text-align:center; ">
                 Eventos En Curso
-                <i class="fa-solid fa-briefcase" style="color: #ffffff;"></i>
+                <i class="fa-solid fa-business-time" style="color: #ffffff;"></i>
             </h3>
             <?php
                 if($_SESSION["access"]==1.5){
@@ -184,8 +246,14 @@
                         <button id='verFin' data-url='../viewsEventos/verFinalizados.php' type='button' 
                         class='btn-options ver-eventos btn btn-primary border-2 btn-outline-light rounded-5'
                         data-bs-target='#Main'>
-                            <i class='fa-solid fa-bell-concierge' style='color: #ffffff;'></i>
+                            <i class='fa-solid fa-clock' style='color: #ffffff;'></i>
                             Historial
+                        </button>
+                        <button id='verSolic' data-url='../viewsEventos/verSolicAsist.php' type='button' 
+                        class='btn-options ver-eventos btn btn-primary border-2 btn-outline-light rounded-5'
+                        data-bs-target='#Main'>
+                            <i class='fa-solid fa-envelope' style='color: #ffffff;'></i>
+                            Solicitudes de Asistencia
                         </button>
                         </div>
                     </div>
@@ -199,7 +267,9 @@
         </div>
         <div id="perfil" class="tab-content">
             <div class="container">
-                <!--?php include "../viewsPerfil/datosEmp.php" ?> -->
+                <?php echo" <div class='container'>";
+                include "../viewsPerfil/datosEmp.php";
+                echo" </div>"; ?>
             </div>
         </div>
 
@@ -221,8 +291,11 @@
     </div>
     <!--Scripts que necesitan ejecutarse hasta el final-->
     <script src="/js/panelEmpleado.js" async defer></script>
+    <script src='https://cdn.jsdelivr.net/npm/fullcalendar@6.1.8/index.global.min.js'></script>
     <script src="/js/EventoAsist.js"></script>
+    <script src="/js/chartsemp.js"></script>
     <script src="/js/EventosDisp.js"></script>
+    <script src="/js/datosempleado.js"></script>
     <script src="/bootstrap/js/bootstrap.min.js"></script>
     <script src="/bootstrap/js/bootstrap.bundle.min.js"></script>
 </body>

@@ -168,15 +168,23 @@
                                 <option value="EN PROCESO">En proceso</option>
                                 <option value="FINALIZADO">Finalizado</option>
                                 <option value="CANCELADO">Cancelado</option>
+                                <option value="PETICIONES">Peticiones</option>
                             </select>
                         </div>
                     </div>
                     <!-- Buscador - A la derecha -->
                     <div class="search">
-                        <div class="input-group">
-                            <input type="text" class="form-control" id="searchInput" placeholder="Buscar evento por nombre o cliente">
-                            <button id="searchButton" type ="button" class="ver-empleados btn btn-outline-primary">
-                            <i class="fa-solid fa-magnifying-glass" style="color: #1f71ff;"></i></button>
+                        <div class="searchFechas">
+                            <div class="input-group search-row">
+                                <input type="text" class="form-control" id="searchInput" placeholder="Buscar evento por nombre o cliente">
+                                <button id="searchButton" type="button" class="ver-empleados btn btn-outline-primary">
+                                    <i class="fa-solid fa-magnifying-glass" style="color: #1f71ff;"></i>
+                                </button>
+                            </div>
+                            <div class="input-group search-row">
+                                <input type="date" class="form-control" id="fechaInicioInput" name="fecha_inicio">
+                                <input type="date" class="form-control" id="fechaFinInput" name="fecha_fin">
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -185,42 +193,53 @@
             <div class="container-fluid">
             <div id="contentRow" class="row">
                 <!-- Canvas a la izquierda -->
-	            <div class="info-card col-md-7">
-		            <canvas id="menuChart"></canvas>
+	            <div class="graficaEventos col-md-7" >
+                    <canvas id="menuChart"></canvas>
 	            </div>
 	            <!-- Contenido de la derecha -->
 	            <div class="col-md-5">
 		            <div id="eventosPendientes" class="info-card mb-2" style="height: 25px; display: flex; align-items: center;">
                         <h3 class="me-2">
                 		    <i class="fa-solid fa-business-time" style="color: #ffffff;"></i>
-                                Eventos pendientes: 
+                            Eventos pendientes: 
 			            </h3>
                         <h2 id="pendientesCard"></h2>
 		            </div>
 		            <div id="eventosEnProceso" class="info-card mb-2" style="height: 25px; display: flex; align-items: center;">
                         <h3 class="me-2">
-                		    <i class="fa-solid fa-business-time" style="color: #ffffff;"></i>
-                                Eventos en proceso: 
+                            <i class="fa-regular fa-calendar-days"></i>
+                            Eventos en proceso: 
 			            </h3>
                         <h2 id="procesoCard"></h2>       
 		            </div>
                     <div id="eventosFin" class="info-card mb-2" style="height: 25px; display: flex; align-items: center;">
                         <h3 class="me-2">
-                		    <i class="fa-solid fa-business-time" style="color: #ffffff;"></i>
-                                Eventos finalizados: 
+                            <i class="fa-regular fa-calendar-check"></i>
+                             Eventos finalizados: 
 			            </h3>
                         <h2 id="finCard"></h2>       
 		            </div>
                     <div id="eventosCancelados" class="info-card mb-2" style="height: 25px; display: flex; align-items: center;">
                         <h3 class="me-2">
-                		    <i class="fa-solid fa-business-time" style="color: #ffffff;"></i>
-                                Eventos cancelados: 
+                            <i class="fa-regular fa-calendar-xmark"></i>
+                            Eventos cancelados: 
 			            </h3>
                         <h2 id="canceladoCard"></h2>       
 		            </div>
+                    <div id="peticiones" class="info-card mb-2" style="height: 25px; display: flex; align-items: center;">
+                        <h3 class="me-2">
+                            <i class="fa-regular fa-calendar-xmark"></i>
+                             Peticiones:
+			            </h3>
+                        <h2 id="peticionesCard"></h2>       
+		            </div>
 	            </div>
             </div>
-            <div id="tablaResultados"></div></div>
+            <div class="table-responsive">
+                <div id="tablaResultados"></div>
+                <div id="peticionesResult"></div>
+            </div>
+        </div>
 
             <!-- Modal de Confirmación -->
             <div class="modal fade" id="modalConfirmacion" tabindex="-1" role="dialog" aria-labelledby="modalConfirmacionLabel" aria-hidden="true">
@@ -507,8 +526,8 @@
                                 </select>
                             </div>
                             <div class="d-flex justify-content-center">
-                                <button type="submit" class="btn btn-primary btn-modal me-2"><i class="fa-solid fa-circle-plus" style="color: #ffffff;"></i>Agregar</button>
-                                <button type="button" class="btn btn-primary btn-modal" data-bs-dismiss="modal">Cerrar</button>
+                                <button id="aceptarMenu" type="submit" class="btn btn-primary btn-modal me-2"><i class="fa-solid fa-circle-plus" style="color: #ffffff;"></i>Agregar</button>
+                                <button id="cerrarAltaMenu" type="button" class="btn btn-primary btn-modal" data-bs-dismiss="modal">Cerrar</button>
                             </div>
                         </form>
                         <div id="mensajeDiv" class="mt-10" method="POST"></div>
@@ -521,6 +540,9 @@
     document.addEventListener("DOMContentLoaded", function() {
         var formulario = document.getElementById("formularioMenu");
         var mensajeDiv = document.getElementById("mensajeDiv");
+        var modalMenu = document.getElementById("modalComida");
+        var cerrarModal = document.getElementById("cerrarAltaMenu");
+        var aceptarMenu = document.getElementById("aceptarMenu");
 
         formulario.addEventListener("submit", function(e) {
         e.preventDefault(); // Evita el envío tradicional del formulario
@@ -534,6 +556,15 @@
         if (xhr.readyState === 4) {
             if (xhr.status === 200) {
                 mensajeDiv.innerHTML = xhr.responseText;
+                if(xhr.responseText == "<div class='alert alert-success mt-4'>Menu agregado exitosamente</div>")
+                {   
+                    //Cerrar modal simulando un click
+                    setTimeout(function() {
+                        cerrarModal.click();
+                    }, 1500);
+                    //Limpiar el formulario
+                    formulario.reset();
+                }
                 } else {
                     mensajeDiv.innerHTML = "Hubo un error en la solicitud.";
                 }

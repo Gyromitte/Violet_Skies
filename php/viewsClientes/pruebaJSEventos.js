@@ -1,4 +1,39 @@
 $(window).on('load', function() {
+  const eventCardsContainer = document.getElementById("event-cards");
+
+  function createEventCard(event) {
+      const card = document.createElement("div");
+      card.classList.add("card");
+
+      const title = document.createElement("h2");
+      title.textContent = event.NOMBRE;
+
+      const date = document.createElement("p");
+      date.textContent = `Fecha: ${event.F_EVENTO}`;
+
+      const place = document.createElement("p");
+      place.textContent = `Invitados: ${event.INVITADOS}`;
+
+      const description = document.createElement("p");
+      description.textContent = event.DESCRIPCION;
+
+      card.appendChild(title);
+      card.appendChild(date);
+      card.appendChild(place);
+      card.appendChild(description);
+
+      return card;
+  }
+
+  fetch('get_events.php')
+  .then(response => response.json())
+  .then(events => {
+      events.forEach(event => {
+          const card = createEventCard(event);
+          eventCardsContainer.appendChild(card);
+      });
+  })
+  .catch(error => console.error('Error al obtener los eventos:', error));
 
 var currentDate = new Date();
 var oneWeekLater = new Date();

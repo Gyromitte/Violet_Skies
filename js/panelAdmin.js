@@ -28,13 +28,6 @@ document.addEventListener('click', function (event) {
   }
 });
 
-// Agregar evento de scroll al documento para cerrar el dashboard cuando se haga scroll
-document.addEventListener('scroll', function () {
-  if (dashboard.classList.contains('dashboard-open')) {
-    dashboard.classList.remove('dashboard-open');
-    main.classList.remove('main-dash-open');
-  }
-});
 
 /*Main content*/
 // Obtener las pestañas y el contenido 
@@ -68,57 +61,57 @@ function checkCurrentTable(currentTable) {
     case 'cocineros':
       setTimeout(function () {
         btnCocineros.click();
-      }, 100);
+      }, 300);
       break;
     case 'meseros':
       setTimeout(function () {
         btnMeseros.click();
-      }, 100);
+      }, 300);
       break;
     case 'busqueda':
       setTimeout(function () {
         btnBusqueda.click();
-      }, 100);
+      }, 300);
       break;
     case 'solicitud':
       setTimeout(function () {
           btnSolicitud.click();
-      }, 100);
+      }, 300);
       break;
     case 'desayuno':
       setTimeout(function () {
         btnDesayuno.click();
-      }, 100);
+      }, 300);
       break;
     case 'bebidas':
       setTimeout(function () {
         btnBebidas.click();
-      }, 100);
+      }, 300);
       break;
     case 'desBuffet':
       setTimeout(function () {
         btnDesBuffet.click();
-      }, 100);
+      }, 300);
       break;
     case 'comida':
       setTimeout(function () {
         btnComida.click();
-      }, 100);
+      }, 300);
       break;
     case 'comidaBuffet':
       setTimeout(function () {
         btnComidaBuffet.click();
-      }, 100);
+      }, 300);
       break;
     case 'coffee':
       setTimeout(function () {
         btnCoffee.click();
-      }, 100);
+      }, 300);
       break;
     case 'descontinuado':
       setTimeout(function () {
         btnDescontinuado.click();
-      }, 100);
+      }, 300);
       break;     
   }
 }
@@ -189,7 +182,7 @@ function updateModalContent(formType, idEmpleado, idEvento) {
           </div>
           <div class="mb-3">
             <label class="control-label">Correo:</label>
-            <input type="email" maxlength="30"  name="CORREO" placeholder="Ingresa el correo" class="form-control" required>
+            <input type="email" maxlength="35"  name="CORREO" placeholder="Ingresa el correo" class="form-control" required>
           </div>
           <div class="form-group mb-3">
             <label for="tipoUsuario">Tipo de Empleado:</label>
@@ -264,7 +257,7 @@ function updateModalContent(formType, idEmpleado, idEvento) {
             </div>
             <div class="mb-3">
               <label class="control-label">E-mail</label>
-              <input type="email" name="CORREO" placeholder="Ingresa el E-mail" class="form-control" required>
+              <input type="email" maxlength="50" name="CORREO" placeholder="Ingresa el E-mail" class="form-control" required>
             </div>
             <div class="d-flex justify-content-center">
             <button type="submit" class="btn btn-primary btn-modal me-2"><i class="fa-solid fa-address-card me-2" style="color: #ffffff;"></i>Registrar</button>
@@ -367,27 +360,27 @@ function updateModalContent(formType, idEmpleado, idEvento) {
                     <h6>Correo: </h6>
                     <h6 class="mb-3">${empleado.CORREO}</h6>
                     <label class="control-label">Nombre: </label>
-                    <input type="text" name="nombre" placeholder="" class="form-control" 
+                    <input type="text" maxlength="35" name="nombre" placeholder="" class="form-control" 
                     required value="${empleado.NOMBRE}">
                     </div>
                     <div class="mb-3">
                     <label class="control-label">Ap. Paterno: </label>
-                    <input type="text" name="ap_paterno" placeholder="" class="form-control" 
+                    <input type="text" maxlength="40" name="ap_paterno" placeholder="" class="form-control" 
                     required value="${empleado.AP_PATERNO}">
                     </div>
                     <div class="mb-3">
                     <label class="control-label">Ap. Materno: </label>
-                    <input type="text" name="ap_materno" placeholder="" class="form-control" 
+                    <input type="text" maxlength="40" name="ap_materno" placeholder="" class="form-control" 
                     required value="${empleado.AP_MATERNO}">
                     </div>
                     <div class="mb-3">
                     <label class="control-label">Telefono: </label>
-                    <input type="text" name="telefono" placeholder="" class="form-control" 
+                    <input type="text" maxlength="15" name="telefono" placeholder="" class="form-control" 
                     required value="${empleado.TELEFONO}">
                     </div>
                     <div class="mb-3">
                       <label class="control-label">RFC</label>
-                      <input type="text" name="rfc" placeholder="Ingresa el RFC" class="form-control" 
+                      <input type="text" maxlength="13" name="rfc" placeholder="Ingresa el RFC" class="form-control" 
                       required oninput="this.value = this.value.toUpperCase()"
                       required value="${empleado.RFC}">
                     </div>
@@ -579,7 +572,7 @@ function updateModalContent(formType, idEmpleado, idEvento) {
                   <h6 class="mb-3">${solicitud.CORREO}</h6>
                   <div class="mb-3">
                     <label class="control-label">RFC</label>
-                    <input required oninput="this.value = this.value.toUpperCase()"
+                    <input maxlength="13" required oninput="this.value = this.value.toUpperCase()"
                     type="text" name="RFC" placeholder="Ingresa el RFC" class="form-control" required>
                   </div>
                   <div class="form-group mb-3">
@@ -750,8 +743,6 @@ function updateModalContent(formType, idEmpleado, idEvento) {
         checkCurrentTable(currentTable);
         break;
         case "@cancelarEvento":
-
-        
           break;
 
     case "@verDetallesEvento":
@@ -901,8 +892,8 @@ function updateModalContent(formType, idEmpleado, idEvento) {
                 step: 15, // Intervalo de minutos para seleccionar la hora
                 minDate: oneWeekLater.toISOString().slice(0, 19).replace('T', ' '), // Fecha mínima: una semana después de la actual
                 allowTimes: [
-                  '05:00','06:00','07:00','08:00', '09:00', '10:00', '11:00', '12:00', '13:00', // Ejemplo de horas permitidas
-                  '14:00', '15:00', '16:00', '17:00', '18:00', '19:00', '20:00', '21:00','22:00' // Puedes agregar más horas aquí
+                  '05:00','06:00','07:00','08:00', '09:00', '10:00', '11:00', '12:00', '13:00',
+                  '14:00', '15:00', '16:00', '17:00', '18:00', '19:00', '20:00', '21:00','22:00' 
                 ]
               });
             });
