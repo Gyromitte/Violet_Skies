@@ -1,6 +1,6 @@
 // Variables para controlar el tiempo de espera en la búsqueda en tiempo real
 var typingTimer;
-var doneTypingInterval = 50; // Tiempo de espera en milisegundos antes de realizar la búsqueda
+var doneTypingInterval = 50;
 
 // Obtener los elementos del DOM
 var form = document.getElementById('filtroForm');
@@ -132,8 +132,6 @@ function peticionesFuncion() {
     history.replaceState(null, '', '?' + params.toString());
 }
 function verSolicitudes(eventoId, nombreEvento) {
-    var solicitudDiv = document.getElementById("solicitudes");
-    
     var xhr = new XMLHttpRequest();
     xhr.open('GET', '../viewsEventos/solicitudes.php?evento_id=' + eventoId + '&nombre_evento=' + encodeURIComponent(nombreEvento), true);
     xhr.onload = function() {

@@ -22,18 +22,18 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 ?>
 
 <div class="card-grid">
-    <?php foreach ($tabla as $fila) { ?>
-        <div class="card" style="width: 18rem;">
-            <div class="card-body">
-                <h5 class="card-title"><?php echo $fila['NOMBRE_EVENTO']; ?></h5>
-                <p class="card-text"><?php echo $fila['F_EVENTO']; ?></p>
-                <p class="card-text">Faltan meseros: <?php echo $fila['FALTAN_MESEROS']; ?></p>
-                <p class="card-text">Faltan cocineros: <?php echo $fila['FALTAN_COCINA']; ?></p>
-                <p class="card-text">Solicitudes: <?php echo $fila['SOLICITUDES']; ?></p>
-                <a href="#" class="btn btn-primary" onclick="verSolicitudes(<?php echo $fila['EventoID']; ?>, '<?php echo $fila['NOMBRE_EVENTO']; ?>')">Ver solicitudes</a>
-            </div>
-        </div>
-    <?php } ?>
+  <?php foreach ($tabla as $fila) { ?>
+    <div class="card" style="width: 18rem;">
+      <div class="card-body">
+        <h5 class="card-title"><?php echo $fila['NOMBRE_EVENTO']; ?></h5>
+        <p class="card-text"><?php echo $fila['F_EVENTO']; ?></p>
+        <p class="card-text">Faltan meseros: <?php echo $fila['FALTAN_MESEROS']; ?></p>
+        <p class="card-text">Faltan cocineros: <?php echo $fila['FALTAN_COCINA']; ?></p>
+        <p class="card-text">Solicitudes: <?php echo $fila['SOLICITUDES']; ?></p>
+        <a href="#" class="btn btn-primary" onclick="verSolicitudes(<?php echo $fila['EventoID']; ?>, '<?php echo $fila['NOMBRE_EVENTO']; ?>')">Ver solicitudes</a>
+      </div>
+    </div>
+  <?php } ?>
 </div>
 
 <style>
@@ -43,7 +43,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         gap: 1rem;
     }
     .card {
-        /* Cambia el color de fondo y el color del texto según tus preferencias */
         background-image: linear-gradient(135deg, white, #f58cd6);
         color: #333;
     }
