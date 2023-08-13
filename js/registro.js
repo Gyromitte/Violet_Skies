@@ -54,13 +54,6 @@ function updateModalContent(formType) {
                     <input class="form-control" type="password" name="ckpass"
                     placeholder="Comprobar Contraseña" required><br>
                 </div>
-                <div class="mb-3">
-                    <label class="control-label">Tipo de Empleado: </label>
-                    <select name="empleado">
-                        <option value='MESERO'>Mesero</option>
-                        <option value='COCINA'>Cocinero</option>
-                    </select><br>
-                </div>
                 <div id="mensajeDiv" method="POST"></div>
                 <div class="d-flex justify-content-center">
                     <button class="loginButton" type="submit">Registrarse</button>
@@ -89,15 +82,13 @@ function updateModalContent(formType) {
               var cel = form.elements['cel'].value;
               var pass = form.elements['pass'].value;
               var ckpass = form.elements['ckpass'].value;
-              var empleado = form.elements['empleado'].value;
               //Como se va enviar la solicitud: un string
               var formData = 'nom=' + encodeURIComponent(nombre) + '&ap=' + (ap) + 
               '&am=' + encodeURIComponent(am) + 
               '&usu=' + encodeURIComponent(usu) + 
               '&cel=' + encodeURIComponent(cel) + 
               '&pass=' + encodeURIComponent(pass) + 
-              '&ckpass=' + encodeURIComponent(ckpass)+
-              '&empleado=' + encodeURIComponent(empleado);
+              '&ckpass=' + encodeURIComponent(ckpass);
               xhr.onreadystatechange = function () {
                 if (xhr.readyState === XMLHttpRequest.DONE && xhr.status === 200) {
                   //Manejo de la respuesta:
