@@ -361,6 +361,10 @@ nav{
     z-index: 0;
 }
 
+#buscarEmpleado{
+    z-index: 0;
+}
+
 @media (max-width: 576px) {
     /* Further adjustments for even smaller screens */
     #nav-button {

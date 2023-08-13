@@ -38,11 +38,28 @@
                 background-color: #5603ad;
                 border-radius: 5em;
                 padding: 10px;
-                width: 100%;
+                width: 80%;
                 height: 100%;
                 align-items: center;
                 justify-content: center;
             }
+            .calendar {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    grid-gap: 5px;
+    width: 70%;
+    margin: auto;
+}
+
+.day {
+    border: 1px solid #ddd;
+    padding: 5px;
+    text-align: center;
+}
+
+.special-date {
+    background-color: #f0ad4e;
+}
 
 		</style>
     <!--Scripts que necesitan ejecutarse primero-->
@@ -106,28 +123,60 @@
     <!--Main Content-->
     <div id="main">
         <div id="home" class="tab-content active">
+        <h3 class="test" style="text-align:center; ">
+                Home
+                <i class="fa-solid fa-house" style="color: #ffffff;"></i>
+            </h3>
             <?php
             if($_SESSION["access"]==1.5){
-                echo"<div class='container'>";
                 echo"<div class='cutebox'>";
                 echo"<h1>Gracias por buscar trabajo con nosotros!</h1>";
                 echo"</div>";
-                echo"</div>";
                 echo"<br>";
-                echo"<div class='container'>";
                 echo"<div class='test'>";
                 echo"<h4>Su solicitud ha sido enviada.</h4>";
                 echo"</div>";
-                echo"</div>";
                 echo"<br>";
-                echo"<div class='container'>";
                 echo"<div class='test'>";
                 echo"<div>Un administrador se pondra en contacto con usted proximamente.</div>";
                 echo"</div>";
-                echo"</div>";
             }
             else{
-
+                echo"<div class='container-fluid mt-4'>
+                <div class='row'>
+                    <div class='col-md-4 mb-4'>
+                        <div class='info-card d-flex align-items-center justify-content-between'>
+                            <div class='info d-flex flex-column align-items-center mb-2'>
+                                <h3 id='DispCard'></h3>
+                                <h5>Eventos Disponibles</h5>
+                            </div>
+                            <i class='fa-solid fa-briefcase fa-5x' style='color: #ffffff;'></i>
+                        </div>
+                    </div>
+                    <div class='col-md-4'>
+                        <div class='info-card d-flex align-items-center justify-content-between'>
+                            <div class='info d-flex flex-column align-items-center mb-2'>
+                                <h3 id='AsistCard'></h3>
+                                <h5>Eventos Atendiendo</h5>
+                            </div>
+                            <i class='fa-solid fa-briefcase fa-5x' style='color: #ffffff;'></i>
+                        </div>
+                    </div>
+                    <div class='col-md-4 mb-4'>
+                        <div class='info-card d-flex align-items-center justify-content-between'>
+                            <div class='info d-flex flex-column align-items-center mb-2'>
+                                <h3 id='SolicCard'></h3>
+                                <h5>Solicitudes Enviadas</h5>
+                            </div>
+                            <i class='fa-solid fa-briefcase fa-5x' style='color: #ffffff;'></i>
+                        </div>
+                    </div>
+                    </div>
+                    <div>
+                    <div id='calendar'>
+                    </div>
+                    </div>
+                    </div>";
             }
             ?>
         </div>
@@ -142,20 +191,21 @@
             }
             else{
             echo"
-            <div class='container'>
             <form id='EmpDisp' action=".$_SERVER['PHP_SELF']." method='POST'>
                 <br>
+                <div class='search-container'>
+                <div class='filter'>
                 <div class='btn-group'>
-                    <label class='control-label'>Orden: </label>
-                    <select id='tipoorden' name='orden' class='form-select'>;
-                        <option value='' selected>-Seleccionar un Orden-</option>
+                    <label class='control-label'style='margin-right: 8px;'>Orden:</label>
+                    <select id='tipoorden' name='orden' class='form-select form-select-custom'>;
                         <option value='porcreacion'>Recientemente Creadas</option>;
                         <option value='lejanoevento'>Eventos Lejanos</option>;
                         <option value='cercasevento'>Eventos Cercanos</option>;
                     </select>
                 </div>
+                </div>
+                </div>
             </form>
-            </div>
             <br>
             <div id='tablaResultados'></div>
         </div>";
@@ -187,6 +237,12 @@
                             <i class='fa-solid fa-bell-concierge' style='color: #ffffff;'></i>
                             Historial
                         </button>
+                        <button id='verSolic' data-url='../viewsEventos/verSolicAsist.php' type='button' 
+                        class='btn-options ver-eventos btn btn-primary border-2 btn-outline-light rounded-5'
+                        data-bs-target='#Main'>
+                            <i class='fa-solid fa-bell-concierge' style='color: #ffffff;'></i>
+                            Solicitudes de Asistencia
+                        </button>
                         </div>
                     </div>
                     <br>
@@ -199,7 +255,9 @@
         </div>
         <div id="perfil" class="tab-content">
             <div class="container">
-                <!--?php include "../viewsPerfil/datosEmp.php" ?> -->
+                <?php echo" <div class='container'>";
+                include "../viewsPerfil/datosEmp.php";
+                echo" </div>"; ?>
             </div>
         </div>
 
@@ -221,8 +279,11 @@
     </div>
     <!--Scripts que necesitan ejecutarse hasta el final-->
     <script src="/js/panelEmpleado.js" async defer></script>
+    <script src='https://cdn.jsdelivr.net/npm/fullcalendar@6.1.8/index.global.min.js'></script>
     <script src="/js/EventoAsist.js"></script>
+    <script src="/js/chartsemp.js"></script>
     <script src="/js/EventosDisp.js"></script>
+    <script src="/js/datosempleado.js"></script>
     <script src="/bootstrap/js/bootstrap.min.js"></script>
     <script src="/bootstrap/js/bootstrap.bundle.min.js"></script>
 </body>

@@ -29,7 +29,6 @@ document.addEventListener('click', function (event) {
 });
 
 
-
 /*Main content*/
 // Obtener las pestañas y el contenido 
 var tabs = document.querySelectorAll('.dash-button');
