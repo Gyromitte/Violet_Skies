@@ -82,7 +82,29 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         $response = array("mensaje" => "Evento solicitado exitosamente.");
         echo json_encode($response);
     } catch (PDOException $e) {
-        echo "Error en la conexión a la base de datos: " . $e->getMessage();
+        // Capturar y mostrar mensajes de error del procedimiento almacenado
+        $errorMessage = $e->getMessage();
+        
+        if (strpos($errorMessage, "Ya tienes 5 eventos pendientes") !== false) {
+            $response = array(
+                "error" => true,
+                "cupoMaximoExcedido" => true,
+                "mensaje" => $errorMessage
+            );
+        } elseif (strpos($errorMessage, "Lo siento, esta fecha y salón ya están ocupados por otro evento.") !== false) {
+            $response = array(
+                "error" => true,
+                "fechaOcupada" => true,
+                "mensaje" => $errorMessage
+            );
+        } else {
+            $response = array(
+                "error" => true,
+                "mensaje" => $errorMessage
+            );
+        }
+        
+        echo json_encode($response);
     }
 }
 ?>

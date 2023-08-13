@@ -65,7 +65,7 @@ function createEventCard(event) {
         cancelButton.addEventListener("click", () => {
             if (timeDifferenceInMilliseconds <= ONE_WEEK_IN_MILLISECONDS) {
                 // Mostrar un mensaje de alerta
-                window.alert("Para cancelar el evento, por favor póngase en contacto con un administrador.");
+                window.alert("Para cancelar el evento, por favor póngase en contacto con un administrador mediante el botón de WhatsApp.");
             } else {
                 openCancelModal(event.ID_EVENTO);
             }
