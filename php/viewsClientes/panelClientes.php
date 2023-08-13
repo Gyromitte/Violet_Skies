@@ -243,15 +243,15 @@
         <div class="modal-content ">
             <div class="modal-header">
                 <h5 class="modal-title">Cancelar evento</h5>
-                <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">&times;</button>
+                <button type="button" class="close btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
                 <form id="cancelForm">
                     <p id="cancelMessage"></p>
                     <label>¿Estás seguro de que quieres cancelar el evento?</label>
                     <input type="hidden" id="eventIDInput" name="eventID">
-                    <label for="password">Contraseña:</label>
-                    <input type="password" id="password" name="password" required>
+                    <label class="form-label" for="password">Contraseña:</label>
+                    <input class="form-control" type="password" id="password" name="password" required>
                     <button type="submit">Cancelar evento</button>
                 </form>
             </div>
