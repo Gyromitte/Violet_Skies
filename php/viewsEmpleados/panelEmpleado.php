@@ -113,8 +113,8 @@
                 }
             ?><br><br>
             <button data-tab="home" class="dash-button"><i class="fa-solid fa-house" style="color: #ffffff;"></i><br>Home</button>
-            <button data-tab="eventos" class="dash-button"><i class="fa-solid fa-calendar-days" style="color: #ffffff;"></i><br>Eventos Disponibles</button>
-            <button data-tab="empleados" class="dash-button"><i class="fa-solid fa-briefcase" style="color: #ffffff;"></i><br>Eventos En Curso</button>
+            <button data-tab="eventos" class="dash-button"><i class="fa-solid fa-briefcase" style="color: #ffffff;"></i><br>Eventos Disponibles</button>
+            <button data-tab="empleados" class="dash-button"><i class="fa-solid fa-business-time" style="color: #ffffff;"></i><br>Eventos En Curso</button>
             <button data-tab="perfil" class="dash-button"><i class="fa-solid fa-user" style="color: #ffffff;"></i><br>Perfil</button>
             <a style="text-decoration: none;" data-tab="logout" class="dash-button" href="../scripts/CerrarSesion.php">
                 <i class="fa-solid fa-door-open" style="color: #ffffff; padding-top: 10px;"></i><br>Logout</a>
@@ -159,7 +159,7 @@
                                 <h3 id='AsistCard'></h3>
                                 <h5>Eventos Atendiendo</h5>
                             </div>
-                            <i class='fa-solid fa-briefcase fa-5x' style='color: #ffffff;'></i>
+                            <i class='fa-solid fa-business-time fa-5x' style='color: #ffffff;'></i>
                         </div>
                     </div>
                     <div class='col-md-4 mb-4'>
@@ -168,12 +168,24 @@
                                 <h3 id='SolicCard'></h3>
                                 <h5>Solicitudes Enviadas</h5>
                             </div>
-                            <i class='fa-solid fa-briefcase fa-5x' style='color: #ffffff;'></i>
+                            <i class='fa-solid fa-envelope fa-5x' style='color: #ffffff;'></i>
                         </div>
                     </div>
                     </div>
                     <div>
-                    <div id='calendar'>
+                    <div class='row'>
+                        <div class='col-md-6 mb-6'>
+                            <div class='info-card d-flex align-items-center justify-content-between'>
+                                <div class='info d-flex flex-column align-items-center mb-2'>
+                                    <h2>Proximo Evento</h2>
+                                    <i class='fa-solid fa-calendar-days fa-5x' style='color: #ffffff;'></i>
+                                </div>
+                                <h3 id='FechaCard'></h3>
+                            </div>
+                        </div>
+                        <div class='col-md-4 mb-4'>
+                            <canvas id='EventosFinaliz'></canvas>
+                        </div>
                     </div>
                     </div>
                     </div>";
@@ -214,7 +226,7 @@
         <div id="empleados" class="tab-content">
             <h3 class="test" style="text-align:center; ">
                 Eventos En Curso
-                <i class="fa-solid fa-briefcase" style="color: #ffffff;"></i>
+                <i class="fa-solid fa-business-time" style="color: #ffffff;"></i>
             </h3>
             <?php
                 if($_SESSION["access"]==1.5){
@@ -234,13 +246,13 @@
                         <button id='verFin' data-url='../viewsEventos/verFinalizados.php' type='button' 
                         class='btn-options ver-eventos btn btn-primary border-2 btn-outline-light rounded-5'
                         data-bs-target='#Main'>
-                            <i class='fa-solid fa-bell-concierge' style='color: #ffffff;'></i>
+                            <i class='fa-solid fa-clock' style='color: #ffffff;'></i>
                             Historial
                         </button>
                         <button id='verSolic' data-url='../viewsEventos/verSolicAsist.php' type='button' 
                         class='btn-options ver-eventos btn btn-primary border-2 btn-outline-light rounded-5'
                         data-bs-target='#Main'>
-                            <i class='fa-solid fa-bell-concierge' style='color: #ffffff;'></i>
+                            <i class='fa-solid fa-envelope' style='color: #ffffff;'></i>
                             Solicitudes de Asistencia
                         </button>
                         </div>
