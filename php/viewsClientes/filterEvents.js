@@ -92,15 +92,23 @@ function createEventCard(event) {
 function openCancelModal(eventId) {
     const modal = document.getElementById("cancelModal");
     const eventIDInput = document.getElementById("eventIDInput");
+    const passwordInput = document.getElementById("password"); 
+    const cancelMessage = document.getElementById("cancelMessage");
 
+    cancelMessage.style.visibility = "hidden";
     eventIDInput.value = eventId;
     modal.style.display = "block";
     passwordInput.value = "";
 }
 document.querySelector(".close").addEventListener("click", () => {
     const modal = document.getElementById("cancelModal");
+    const passwordInput = document.getElementById("password");
+    const cancelMessage = document.getElementById("cancelMessage");
+
+    cancelMessage.style.visibility = "hidden";
     modal.style.display = "none";
-    
+    passwordInput.value = "";
+    cancelMessage.textContent = "";
 });
 
 function filterEvents(state) {
@@ -139,13 +147,18 @@ document.getElementById("cancelForm").addEventListener("submit", function(event)
     .then(response => response.text())
     .then(message => {
         const cancelMessage = document.getElementById("cancelMessage");
-        cancelMessage.textContent = message;
-
+        const passwordInput = document.getElementById("password"); // Agregamos esto
         const modal = document.getElementById("cancelModal");
+        cancelMessage.style.visibility = "visible";
 
+        cancelMessage.textContent = message;
+        cancelMessage.classList.add("alert", "alert-success", "d-flex", "justify-content-center");
+        
         if (message.includes("cancelado correctamente")) {
             setTimeout(() => {
                 modal.style.display = "none"; 
+                passwordInput.value = "";
+                cancelMessage.textContent = ""; 
                 filterEvents("PENDIENTE");
             }, 1500);
         }
