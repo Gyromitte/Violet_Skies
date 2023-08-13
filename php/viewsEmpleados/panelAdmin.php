@@ -448,20 +448,11 @@
                     <div class="row">
                         <!-- Contenido de la izquierda -->
                         <div class="col-md-5" style="padding-left: 0px !important;">
-                        <div class="info-card mb-2" style="height: 25px; display: flex; align-items: center;">
-                            <h3 class="me-2">
-                            <i class="fa-solid fa-business-time" style="color: #ffffff;"></i>
-                                Solicitudes Pendientes: 
-                            </h3>
-                            <h2 id="solicitudesCard"></h2>
-                        </div>
-                            <div class="col-md-12 donut-container">
-                                <canvas id="proporcionEmpleados2" style="height: 40px"></canvas>
-                            </div>
+                            <canvas id="pieTipoMenus" style="height: 60%; width: 100%;"></canvas>
                         </div>
                         <!-- Canvas a la derecha -->
                         <div class="info-card col-md-7">
-                            <canvas id="participacionEmpleados" style="height: 70%; width: 100%;"></canvas>
+                            <canvas id="stackedMenusMes" style="height: 70%; width: 100%;"></canvas>
                         </div>
                     </div>
                 </div>

@@ -151,7 +151,7 @@ document.addEventListener('DOMContentLoaded', function() {
             </div>
           `;
           //Volver a ejecutar el codigo de la grafica para actualizar datos:
-          recargarGraficos(); //Llamado desde chart.js
+          //recargarGraficos(); //Llamado desde chart.js
           // Manejar el redimensionamiento del canvas
           const canvas = document.getElementById("proporcionEmpleados2");
           if (canvas) {
