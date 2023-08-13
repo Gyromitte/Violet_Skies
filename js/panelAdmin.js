@@ -464,15 +464,15 @@ function updateModalContent(formType, idEmpleado, idEvento) {
                 <div id="mensajeDiv"></div>
                 <div class="form-group">
                     <label for="nombreInput">Nombre:</label>
-                    <input type="text" class="form-control" name="nombre" id="nombreInput" required value="${datosUsuario.nombre}">
+                    <input type="text" class="form-control" name="nombre" id="nombreInput" required value="${datosUsuario.nombre}" disabled>
                 </div>
                 <div class="form-group">
                     <label for="ap_paternoInput">Apellido Paterno:</label>
-                    <input type="text" class="form-control" name="ap_paterno" id="ap_paternoInput" required value="${datosUsuario.ap_paterno}">
+                    <input type="text" class="form-control" name="ap_paterno" id="ap_paternoInput" required value="${datosUsuario.ap_paterno}" disabled>
                 </div>
                 <div class="form-group">
                     <label for="ap_maternoInput">Apellido Materno:</label>
-                    <input type="text" class="form-control" name="ap_materno" id="ap_maternoInput" required value="${datosUsuario.ap_materno}">
+                    <input type="text" class="form-control" name="ap_materno" id="ap_maternoInput" required value="${datosUsuario.ap_materno}" disabled>
                 </div>
                 <div class="form-group">
                     <label for="telefonoInput">Teléfono:</label>
@@ -543,8 +543,7 @@ function updateModalContent(formType, idEmpleado, idEvento) {
                 } else {
                     console.error("Error en la solicitud AJAX de actualización");
                 }
-            }
-                
+              }   
             };
     
             var formData = new FormData(formEditarDatos);

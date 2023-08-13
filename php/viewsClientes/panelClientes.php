@@ -15,6 +15,7 @@
     <link rel="stylesheet" href="/css/panelAdmin.css">
     <link rel="stylesheet" href="/css/cards.css">
     <link rel="stylesheet" href="../viewsClientes/pruebasCEventos/pruebaEventos.css">
+    <link rel="stylesheet" href="/css/agendarEvento.css">
     <!-- Agrega la siguiente línea para cargar el CSS del complemento datetimepicker -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-datetimepicker/2.5.20/jquery.datetimepicker.min.css">
     <!--Referencias a fuentes-->
@@ -97,6 +98,13 @@
                     Mis eventos
                     <i class="fa-solid fa-calendar-days" style="color: #ffffff;"></i>
                 </h3>
+                <div style=" width:fit-content; margin: 0 auto;"  class="custom-card">
+                <h3 style=" padding-right:5%; padding-left:5%; text-align: center;">Aquí puedes ver tus eventos.</h3>
+                    <p style=" padding-right:5%; padding-left:5%; text-align: center;">
+                        
+                        <b>Si deseas realizar cambios debes contactarte con un administrador para aclarar detalles.</b>
+                    </p>
+                </div>
             </div>
             <div class="filter-buttons">
                 <button class="btn-options ver-empleados btn btn-primary border-2 btn-outline-light rounded-5" onclick="filterEvents('PENDIENTE')">Pendiente</button>
@@ -158,18 +166,22 @@
                         </div>
                         <div class="form-group">
                             <label for="fecha">Fecha y hora del evento:</label>
-                            <input type="text" class="form-control" id="fechaEvento" name="fechaEvento"required>
+                            <input type="text" class="form-control" id="fechaEvento" name="fechaEvento"required readonly>
                         </div>
                         <button type="submit" class="btn btn-primary">Solicitar Evento</button>
                     </form>
                 </div>
+
             </div>
         </div>
         <!-- Página de Perfil del cliente -->
         <div id="perfil" class="tab-content">
         <!-- Datos personales del usuario -->
         <div class="container mt-5">
-            <div style="padding-left: 5%; display: flex; flex-direction: column;">
+            <div style="display: flex; flex-direction: column;">
+                <h3 style="text-align: center; margin-right: 5%" class="alert alert-primary">
+                    Tendrás que volver a iniciar sesión después de editar tus datos
+                </h3>
                 <div class="accordion" id="accordionExample">
                     <div class="accordion-item">
                         <h2 class="accordion-header custom-accordion-header">
@@ -179,7 +191,7 @@
                             Datos personales
                             </button>
                         </h2>
-                    <div style="padding-left: 15%; padding-right:15%" id="collapseOne" class="accordion-collapse collapse show" data-bs-parent="#accordionExample">
+                    <div style="padding-left: 10%; padding-right:10%" id="collapseOne" class="accordion-collapse collapse show" data-bs-parent="#accordionExample">
                         <div class="accordion-body">
                             <div class="personal-info">
                                 <div class="mb-3 row">

@@ -47,17 +47,14 @@ $('#fechaEvento').datetimepicker({
         
             if (jsonData && jsonData.disponibilidad === true) {
                 const msgDiv = document.getElementById('msgDiv');
-                const errorMessage = jsonData.mensaje;
-                const errorMessageWithoutJson = errorMessage.split(':')[2].trim();  
-                msgDiv.innerHTML = `<div style="text-align:center;" class="alert alert-danger">${errorMessageWithoutJson}</div>`;
+                const errorMessage = "Ya tienes 5 eventos pendientes.<br> No puedes agregar más por el momento.";
+                msgDiv.innerHTML = `<div style="text-align:center;" class="alert alert-danger">${errorMessage}</div>`;
                 setTimeout(() => {
                     msgDiv.innerHTML = ''; 
                 }, 3000);
-        
             } else if (jsonData && jsonData.cupoMaximoExcedido) {
                 const msgDiv = document.getElementById('msgDiv');
-                const errorMessage = "Ya tienes 5 eventos pendientes.<br> No puedes agregar más por el momento.";
-                msgDiv.innerHTML = `<div style="text-align:center;" class="alert alert-danger">${errorMessage}</div>`;
+                msgDiv.innerHTML = `<div style="text-align:center;" class="alert alert-danger">${jsonData.mensaje}</div>`;
                 setTimeout(() => {
                     msgDiv.innerHTML = ''; 
                 }, 3000);
