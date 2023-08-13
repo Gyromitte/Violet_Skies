@@ -526,8 +526,8 @@
                                 </select>
                             </div>
                             <div class="d-flex justify-content-center">
-                                <button type="submit" class="btn btn-primary btn-modal me-2"><i class="fa-solid fa-circle-plus" style="color: #ffffff;"></i>Agregar</button>
-                                <button type="button" class="btn btn-primary btn-modal" data-bs-dismiss="modal">Cerrar</button>
+                                <button id="aceptarMenu" type="submit" class="btn btn-primary btn-modal me-2"><i class="fa-solid fa-circle-plus" style="color: #ffffff;"></i>Agregar</button>
+                                <button id="cerrarAltaMenu" type="button" class="btn btn-primary btn-modal" data-bs-dismiss="modal">Cerrar</button>
                             </div>
                         </form>
                         <div id="mensajeDiv" class="mt-10" method="POST"></div>
@@ -540,6 +540,9 @@
     document.addEventListener("DOMContentLoaded", function() {
         var formulario = document.getElementById("formularioMenu");
         var mensajeDiv = document.getElementById("mensajeDiv");
+        var modalMenu = document.getElementById("modalComida");
+        var cerrarModal = document.getElementById("cerrarAltaMenu");
+        var aceptarMenu = document.getElementById("aceptarMenu");
 
         formulario.addEventListener("submit", function(e) {
         e.preventDefault(); // Evita el envío tradicional del formulario
@@ -553,6 +556,15 @@
         if (xhr.readyState === 4) {
             if (xhr.status === 200) {
                 mensajeDiv.innerHTML = xhr.responseText;
+                if(xhr.responseText == "<div class='alert alert-success mt-4'>Menu agregado exitosamente</div>")
+                {   
+                    //Cerrar modal simulando un click
+                    setTimeout(function() {
+                        cerrarModal.click();
+                    }, 1500);
+                    //Limpiar el formulario
+                    formulario.reset();
+                }
                 } else {
                     mensajeDiv.innerHTML = "Hubo un error en la solicitud.";
                 }
