@@ -447,12 +447,12 @@
                 <div class="container-fluid">
                     <div class="row">
                         <!-- Contenido de la izquierda -->
-                        <div class="col-md-5" style="padding-left: 0px !important;">
-                            <canvas id="pieTipoMenus" style="height: 60%; width: 100%;"></canvas>
+                        <div class="col-md-5 pieMenus">
+                            <canvas id="pieTipoMenus" style="height: 60%; width: 100%; margin-right: 0px !important;"></canvas>
                         </div>
                         <!-- Canvas a la derecha -->
-                        <div class="info-card col-md-7">
-                            <canvas id="stackedMenusMes" style="height: 70%; width: 100%;"></canvas>
+                        <div class="info-card col-md-7" style="margin-right: 0px !important;">
+                            <canvas id="menuChart2" style="height: 70%; width: 100%;"></canvas>
                         </div>
                     </div>
                 </div>

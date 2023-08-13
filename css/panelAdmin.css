@@ -241,10 +241,11 @@ nav{
 
 #estadoSelect option:hover {
     background-color: #b14aed;
+    
 }
   
 /*Charts and info*/
-#eventosAño, #proporcionEmpleados, #proporcionEmpleados2{
+#eventosAño, #proporcionEmpleados, #proporcionEmpleados2, #pieTipoMenus{
     background-image: linear-gradient(135deg, #5603ad, #f58cd6);
     color: white;
     border-radius: 20px;
@@ -341,7 +342,7 @@ nav{
     .nav-user{
         display: none;
     }
-    .info-card, #proporcionEmpleados, #eventosAño, #graficaEventos{
+    .info-card, #proporcionEmpleados, #eventosAño, #graficaEventos, #pieTipoMenus{
         margin-bottom: 10px;
     }
     .btn-options{
