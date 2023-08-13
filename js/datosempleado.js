@@ -1,8 +1,8 @@
 const btnEditarDatosPersonales = document.getElementById('btnEditarDatosPersonales');
-  const btnGuardarCambios = document.getElementById('btnGuardarCambios');
-  const btnCancelarCambios = document.getElementById('btnCancelarCambios');
-  const successDiv = document.getElementById('alertMessage');
-
+const btnGuardarCambios = document.getElementById('btnGuardarCambios');
+const btnCancelarCambios = document.getElementById('btnCancelarCambios');
+const successDiv = document.getElementById('mensajeModificar');
+  
 function cambiarContraseña() {
     const formu = document.getElementById('formCambiarContrasena');
       const formCambiarPass = new FormData(formu);
@@ -44,3 +44,75 @@ function cambiarContraseña() {
     event.preventDefault();
     cambiarContraseña();
   });
+ 
+  function habilitarEdicion() {
+    const inputs = document.querySelectorAll('.personal-info input[disabled]');
+    inputs.forEach(input => {
+        if (input.name === 'telefono') { 
+            input.removeAttribute('disabled');
+        }
+    });
+
+    btnEditarDatosPersonales.classList.add('d-none');
+    btnGuardarCambios.classList.remove('d-none');
+    btnCancelarCambios.classList.remove('d-none');
+}
+
+
+function guardarCambios() {
+    const inputs = document.querySelectorAll('.personal-info input:not([disabled])');
+    const newData = {};
+
+    inputs.forEach(input => {
+        newData[input.name] = input.value;
+    });
+    const telefonoValue = newData['telefono'];
+    const telefonoPattern = /^[0-9]{10}$/;
+    if (!telefonoPattern.test(telefonoValue)) {
+        alert("Ingresa un número de teléfono válido");
+        return false;
+    }
+
+    const xhttp = new XMLHttpRequest();
+    xhttp.onreadystatechange = function() {
+        if (this.readyState === 4 && this.status === 200) {
+            const response = JSON.parse(this.responseText);
+            if (response.success) {
+                successDiv.textContent = "Cambios guardados correctamente";
+                successDiv.classList.remove('d-none');
+                setTimeout(function () {
+                    successDiv.classList.add('d-none');
+                }, 3000);
+
+                inputs.forEach(input => {
+                    input.setAttribute('disabled', 'true');
+                });
+            } else {
+                successDiv.textContent = "Error al intentar hacer los cambios";
+                successDiv.classList.remove('d-none');
+                setTimeout(function () {
+                    successDiv.classList.add('d-none');
+                }, 3000);
+            }
+
+            btnEditarDatosPersonales.classList.remove('d-none');
+            btnGuardarCambios.classList.add('d-none');
+            btnCancelarCambios.classList.add('d-none');
+        }
+    };
+    xhttp.open("POST", "../viewsPerfil/guardarDatos.php", true);
+    xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+    xhttp.send("data=" + JSON.stringify(newData));
+}
+
+function cancelarCambios() {
+    const inputs = document.querySelectorAll('.personal-info input:not([disabled])');
+    inputs.forEach(input => {
+        input.setAttribute('disabled', 'true');
+        input.value = input.defaultValue;
+    });
+
+    btnEditarDatosPersonales.classList.remove('d-none');
+    btnGuardarCambios.classList.add('d-none');
+    btnCancelarCambios.classList.add('d-none');
+}

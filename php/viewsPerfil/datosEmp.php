@@ -55,6 +55,16 @@ if ($cuenta) {
                           <i class="fa-solid fa-lock me-2" style="color: #ffffff;"></i>
                           Cambiar contraseña</button>                </div>
             </div>
+            <div class="mb-3 row">
+                <div class="col-sm-12 text-center">
+                    <button class="btn btn-primary" id="btnEditarDatosPersonales" onclick="habilitarEdicion()">
+                        <i class="fa-solid fa-pencil me-2" style="color: #ffffff;"></i>Editar Datos</button>
+                    <button class="btn btn-success d-none" id="btnGuardarCambios" onclick="guardarCambios()">
+                        <i class="fa-solid fa-floppy-disk me-2" style="color: #ffffff;"></i>Guardar Cambios</button>
+                    <button class="btn btn-danger d-none" id="btnCancelarCambios" onclick="cancelarCambios()">
+                        <i class="fa-solid fa-ban me-2" style="color: #ffffff;"></i>Cancelar Cambios</button>
+                </div>
+            </div>
             <input type="hidden" name="id" value="<?php echo $_SESSION["ID"]; ?>">
         </div>
     </div>
