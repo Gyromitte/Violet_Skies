@@ -114,7 +114,7 @@ modal.addEventListener("show.bs.modal", function (event) {
                     </div>
                     <br>
                     <div class="d-flex justify-content-center">
-                      <button type="submit" id="asist" class="btn btn-primary btn-modal-warning me-2">
+                      <button type="submit" id="asist" class="btn btn-primary btn-modal me-2">
                         <i class="fa-solid fa-user me-2" style="color: #ffffff;">
                         </i>
                         Asistir
