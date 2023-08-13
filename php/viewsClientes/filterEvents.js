@@ -146,8 +146,8 @@ document.getElementById("cancelForm").addEventListener("submit", function(event)
         if (message.includes("cancelado correctamente")) {
             setTimeout(() => {
                 modal.style.display = "none"; 
-                location.reload();
-            }, 2000);
+                filterEvents("PENDIENTE");
+            }, 1500);
         }
     })
     .catch(error => {
