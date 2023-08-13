@@ -303,12 +303,30 @@ function recargarGraficos(){
             });
         })
         .catch(error => console.error('Error al obtener los datos:', error));
-
-
-
-
-
 }
+
+//Pie tipos de menus
+var tiposMenus = ["Bebidas", "Desayuno", "Desayuno Buffet", "Comida", "Comida Buffet", "Coffee Break"];
+        var cantidades = [25, 15, 30, 10, 20, 20, ];
+
+        // Obtener el contexto del canvas
+        var ctx = document.getElementById('pieTipoMenus').getContext('2d');
+
+        // Crear la gráfica de pie
+        var pieChart = new Chart(ctx, {
+            type: 'pie',
+            data: {
+                labels: tiposMenus,
+                datasets: [{
+                    data: cantidades,
+                    backgroundColor: ['#8A2BE2', '#9370DB', '#BA55D3', '#DA70D6', '#FF69B4', '#FFB6C1'] // Colores de fondo para las secciones
+                }]
+            },
+            options: {
+                // Opciones adicionales aquí
+            }
+        });
+
 
 //Cargar el segundo grafico una vez al principio del load de la pagina
 recargarGraficos();

@@ -124,9 +124,10 @@ document.addEventListener('DOMContentLoaded', function() {
         xhr.open('GET', "buscarEmpleado.php?busqueda=" + busquedaValor, true);
         xhr.send();
       } else {
-        if(buttonId == "verGraficos")
+        if(buttonId == "verGraficosMenus")
         { 
           contTable.innerHTML = '';
+          tableInfo.innerHTML = '';
           //Re-insertar el grafico
           contTable.innerHTML = `
           <div class="container-fluid">
@@ -150,7 +151,7 @@ document.addEventListener('DOMContentLoaded', function() {
             </div>
           `;
           //Volver a ejecutar el codigo de la grafica para actualizar datos:
-          recargarGraficos(); //Llamado desde chart.js
+          //recargarGraficos(); //Llamado desde chart.js
           // Manejar el redimensionamiento del canvas
           const canvas = document.getElementById("proporcionEmpleados2");
           if (canvas) {

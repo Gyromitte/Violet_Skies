@@ -46,12 +46,50 @@ button:hover {
     padding: 5px; 
     margin: 1.5%;
     float: left;
-    }
+}
     
-    .card-container {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: left;
-      padding-left: 3%;
+.card-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: left;
+    padding-left: 3%;
+}
+.rounded-div {
+    width: 200px;
+    height: 150px;
+    background-color: #3498db;
+    clip-path: polygon(0 20px, 20px 0, calc(100% - 20px) 0, 100% 20px, 100% calc(100% - 20px), calc(100% - 20px) 100%, 20px 100%, 0 calc(100% - 20px));
+}
+.container {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+#evento-form {
+    flex-basis: calc(50% - 10px); 
+    margin-right: 20px; 
+    max-width: 600px;
+}
+
+#descripcionComida {
+    flex-basis: calc(50% - 10px);
+    height: fit-content;
+    padding-top: 1%;
+    margin-top: 20px; 
+    padding-bottom: 1%;
+    padding-left: 2%;
+    padding-right: 1%;
+}
+
+/* Media Query para dispositivos móviles */
+
+@media (max-width: 768px) {
+    .container {
+        flex-direction: column; 
     }
-    
+
+    #evento-form, #descripcionComida {
+        flex-basis: 100%; 
+        margin: 0; 
+    }
+}

@@ -38,11 +38,16 @@ function createEventCard(event) {
     const menu = document.createElement("p");
     menu.textContent = `Menú: ${event['MENÚ']}`;
 
+    const invitados = document.createElement("p");
+    invitados.textContent = `Invitados: ${event['INVITADOS']}`;
+
     const client = document.createElement("p");
     client.textContent = `Cliente: ${event['NOMBRE DEL CLIENTE']}`;
+    client.classList.add("hidden"); 
 
     const state = document.createElement("p");
     state.textContent = `Estado: ${event.ESTADO}`;
+    state.classList.add("hidden"); 
 
     const cancelButton = document.createElement("button");
     cancelButton.textContent = "Cancelar Evento";
@@ -77,8 +82,7 @@ function createEventCard(event) {
     card.appendChild(title);
     card.appendChild(date);
     card.appendChild(menu);
-    card.appendChild(client);
-    card.appendChild(state);
+    card.appendChild(invitados);
     card.appendChild(cancelButton);
 
 
@@ -142,8 +146,8 @@ document.getElementById("cancelForm").addEventListener("submit", function(event)
         if (message.includes("cancelado correctamente")) {
             setTimeout(() => {
                 modal.style.display = "none"; 
-                location.reload();
-            }, 2000);
+                filterEvents("PENDIENTE");
+            }, 1500);
         }
     })
     .catch(error => {

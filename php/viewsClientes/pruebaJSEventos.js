@@ -1,39 +1,4 @@
 $(window).on('load', function() {
-  const eventCardsContainer = document.getElementById("event-cards");
-
-  function createEventCard(event) {
-      const card = document.createElement("div");
-      card.classList.add("card");
-
-      const title = document.createElement("h2");
-      title.textContent = event.NOMBRE;
-
-      const date = document.createElement("p");
-      date.textContent = `Fecha: ${event.F_EVENTO}`;
-
-      const place = document.createElement("p");
-      place.textContent = `Invitados: ${event.INVITADOS}`;
-
-      const description = document.createElement("p");
-      description.textContent = event.DESCRIPCION;
-
-      card.appendChild(title);
-      card.appendChild(date);
-      card.appendChild(place);
-      card.appendChild(description);
-
-      return card;
-  }
-
-  fetch('get_events.php')
-  .then(response => response.json())
-  .then(events => {
-      events.forEach(event => {
-          const card = createEventCard(event);
-          eventCardsContainer.appendChild(card);
-      });
-  })
-  .catch(error => console.error('Error al obtener los eventos:', error));
 
 var currentDate = new Date();
 var oneWeekLater = new Date();
@@ -82,17 +47,14 @@ $('#fechaEvento').datetimepicker({
         
             if (jsonData && jsonData.disponibilidad === true) {
                 const msgDiv = document.getElementById('msgDiv');
-                const errorMessage = jsonData.mensaje;
-                const errorMessageWithoutJson = errorMessage.split(':')[2].trim();  
-                msgDiv.innerHTML = `<div style="text-align:center;" class="alert alert-danger">${errorMessageWithoutJson}</div>`;
+                const errorMessage = "Ya tienes 5 eventos pendientes.<br> No puedes agregar más por el momento.";
+                msgDiv.innerHTML = `<div style="text-align:center;" class="alert alert-danger">${errorMessage}</div>`;
                 setTimeout(() => {
                     msgDiv.innerHTML = ''; 
                 }, 3000);
-        
             } else if (jsonData && jsonData.cupoMaximoExcedido) {
                 const msgDiv = document.getElementById('msgDiv');
-                const errorMessage = "Ya tienes 5 eventos pendientes.<br> No puedes agregar más por el momento.";
-                msgDiv.innerHTML = `<div style="text-align:center;" class="alert alert-danger">${errorMessage}</div>`;
+                msgDiv.innerHTML = `<div style="text-align:center;" class="alert alert-danger">${jsonData.mensaje}</div>`;
                 setTimeout(() => {
                     msgDiv.innerHTML = ''; 
                 }, 3000);
@@ -109,9 +71,13 @@ $('#fechaEvento').datetimepicker({
                 msgDiv.innerHTML = `<div style="text-align:center;" class="alert alert-success">Evento solicitado con éxito <br>espera a que los administradores lo confirmen</div>`;
                 setTimeout(() => {
                     msgDiv.innerHTML = ''; 
-                    resetInputs();
                     location.reload();
                 }, 3000);
+                const btnSolicitarEvento = document.getElementById("solicitarEventoBtn");
+
+                btnSolicitarEvento.addEventListener("click", function() {
+                btnSolicitarEvento.disabled = true;
+                });
             }
         
             if (jsonData && jsonData.eventos) {
@@ -122,8 +88,8 @@ $('#fechaEvento').datetimepicker({
             // Si ocurre un error al analizar la respuesta JSON, muestra un mensaje de error
             const msgDiv = document.getElementById('msgDiv');
             msgDiv.innerHTML = `<div style="text-align:center;" class="alert alert-danger">Lo siento, esta fecha ya está apartada.</div>`;
-        }
-      })
+        }      
+    })
       .catch(error => console.error('Error en la solicitud:', error));
   });
 });

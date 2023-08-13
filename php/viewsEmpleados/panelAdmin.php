@@ -388,7 +388,7 @@
                     </button>
                     <ul class="dropdown-menu custom-drop-menu">
                         <li>
-                            <button id="verGraficosMenus" data-url="" type="button" class="btn-view-custom btn-options ver-empleados btn btn-primary border-2 btn-outline-light rounded-5" data-bs-target="#mainModal">
+                            <button id="verGraficosMenus" data-url="" type="button" class="btn-view-custom btn-options ver-menus btn btn-primary border-2 btn-outline-light rounded-5" data-bs-target="#mainModal">
                                 <i class="fa-solid fa-chart-pie" style="color: #ffffff;"></i>
                                 Ver Gráficos
                             </button>
@@ -448,20 +448,11 @@
                     <div class="row">
                         <!-- Contenido de la izquierda -->
                         <div class="col-md-5" style="padding-left: 0px !important;">
-                        <div class="info-card mb-2" style="height: 25px; display: flex; align-items: center;">
-                            <h3 class="me-2">
-                            <i class="fa-solid fa-business-time" style="color: #ffffff;"></i>
-                                Solicitudes Pendientes: 
-                            </h3>
-                            <h2 id="solicitudesCard"></h2>
-                        </div>
-                            <div class="col-md-12 donut-container">
-                                <canvas id="proporcionEmpleados2" style="height: 40px"></canvas>
-                            </div>
+                            <canvas id="pieTipoMenus" style="height: 60%; width: 100%;"></canvas>
                         </div>
                         <!-- Canvas a la derecha -->
                         <div class="info-card col-md-7">
-                            <canvas id="participacionEmpleados" style="height: 70%; width: 100%;"></canvas>
+                            <canvas id="stackedMenusMes" style="height: 70%; width: 100%;"></canvas>
                         </div>
                     </div>
                 </div>
@@ -526,8 +517,8 @@
                                 </select>
                             </div>
                             <div class="d-flex justify-content-center">
-                                <button type="submit" class="btn btn-primary btn-modal me-2"><i class="fa-solid fa-circle-plus" style="color: #ffffff;"></i>Agregar</button>
-                                <button type="button" class="btn btn-primary btn-modal" data-bs-dismiss="modal">Cerrar</button>
+                                <button id="aceptarMenu" type="submit" class="btn btn-primary btn-modal me-2"><i class="fa-solid fa-circle-plus" style="color: #ffffff;"></i>Agregar</button>
+                                <button id="cerrarAltaMenu" type="button" class="btn btn-primary btn-modal" data-bs-dismiss="modal">Cerrar</button>
                             </div>
                         </form>
                         <div id="mensajeDiv" class="mt-10" method="POST"></div>
@@ -540,6 +531,9 @@
     document.addEventListener("DOMContentLoaded", function() {
         var formulario = document.getElementById("formularioMenu");
         var mensajeDiv = document.getElementById("mensajeDiv");
+        var modalMenu = document.getElementById("modalComida");
+        var cerrarModal = document.getElementById("cerrarAltaMenu");
+        var aceptarMenu = document.getElementById("aceptarMenu");
 
         formulario.addEventListener("submit", function(e) {
         e.preventDefault(); // Evita el envío tradicional del formulario
@@ -553,6 +547,15 @@
         if (xhr.readyState === 4) {
             if (xhr.status === 200) {
                 mensajeDiv.innerHTML = xhr.responseText;
+                if(xhr.responseText == "<div class='alert alert-success mt-4'>Menu agregado exitosamente</div>")
+                {   
+                    //Cerrar modal simulando un click
+                    setTimeout(function() {
+                        cerrarModal.click();
+                    }, 1500);
+                    //Limpiar el formulario
+                    formulario.reset();
+                }
                 } else {
                     mensajeDiv.innerHTML = "Hubo un error en la solicitud.";
                 }
