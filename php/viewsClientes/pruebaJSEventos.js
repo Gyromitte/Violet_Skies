@@ -73,6 +73,11 @@ $('#fechaEvento').datetimepicker({
                     msgDiv.innerHTML = ''; 
                     location.reload();
                 }, 3000);
+                const btnSolicitarEvento = document.getElementById("solicitarEventoBtn");
+
+                btnSolicitarEvento.addEventListener("click", function() {
+                btnSolicitarEvento.disabled = true;
+                });
             }
         
             if (jsonData && jsonData.eventos) {

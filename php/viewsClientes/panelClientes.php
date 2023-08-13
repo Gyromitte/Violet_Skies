@@ -98,12 +98,9 @@
                     Mis eventos
                     <i class="fa-solid fa-calendar-days" style="color: #ffffff;"></i>
                 </h3>
-                <div style=" width:fit-content; margin: 0 auto;"  class="custom-card">
-                <h3 style=" padding-right:5%; padding-left:5%; text-align: center;">Aquí puedes ver tus eventos.</h3>
-                    <p style=" padding-right:5%; padding-left:5%; text-align: center;">
-                        
-                        <b>Si deseas realizar cambios debes contactarte con un administrador para aclarar detalles.</b>
-                    </p>
+                <div  style=" width:fit-content;"  class="custom-card rounded-5">
+                    <h3 style=" padding-right:5%; padding-left:5%; text-align: center;">Aquí puedes ver tus eventos.</h3>
+                        <p style=" padding-right:5%; padding-left:5%; text-align: center;"><b>Si deseas realizar cambios debes contactarte con nosotros para aclarar detalles.</b></p>
                 </div>
             </div>
             <div class="filter-buttons">
@@ -128,48 +125,54 @@
                     Configura tu evento!
                     <i class="fa-solid fa-calendar-days" style="color: #ffffff;"></i>
                 </h3>
+                <div  style=" width:fit-content;"  class="custom-card rounded-5">
+                    <h3 style=" padding-right:5%; padding-left:5%; text-align: center;">Aquí puedes configurar tu evento</h3>
+                        <p style=" padding-right:5%; padding-left:5%; text-align: center;"><b>Verifica que hayas configurado bien tu evento,<br>de lo contrario solo podrás realizar cambios contactando con nosotros</b></p>
+                    </div>
             </div>
-            <div  class="container">
-                <form style="width: 600px;"  id="evento-form" method="post">
-                <div id="msgDiv"></div>
-                        <div class="form-group">
-                            <label for="nombre_evento">Nombre del evento:</label>
-                            <input type="text" class="form-control" id="nombre_evento" name="nombre_evento" required maxlength="50">
-                        </div>
-                        <div class="form-group">
-                            <label for="salon">Salón:</label>
-                            <select class="form-control" id="salon" name="salon" required>
-                                <option value="">Seleccione un salón</option>
-                                <?php
-                                foreach ($salonItems as $salonItem) {
-                                    echo '<option value="' . $salonItem['ID'] . '">' . $salonItem['NOMBRE'] ." Cupo: ".  $salonItem["CUPO"] . '</option>';
-                                }
-                                ?>
-                            </select>
-                        </div>
-                        <div class="form-group">
-                            <label for="comida">Menú del evento:</label>
-                            <select class="form-control" id="comida" name="comida" required>
-                                    <option value="">Seleccione una comida del menú</option>
-                                
+                <div  class="container">
+                        <form style="width: 600px;"  id="evento-form" method="post">
+                            <div id="msgDiv"></div>
+                            <div class="form-group">
+                                <label for="nombre_evento">Nombre del evento:</label>
+                                <input type="text" class="form-control" id="nombre_evento" name="nombre_evento" required maxlength="50">
+                            </div>
+                            <div class="form-group">
+                                <label for="salon">Salón:</label>
+                                <select class="form-control" id="salon" name="salon" required>
+                                    <option value="">Seleccione un salón</option>
                                     <?php
-                                    foreach ($menuItems as $menuItem) {
-                                        echo '<option value="' . $menuItem['ID'] . '">' . $menuItem['NOMBRE'] . '</option>';
+                                    foreach ($salonItems as $salonItem) {
+                                        echo '<option value="' . $salonItem['ID'] . '">' . $salonItem['NOMBRE'] ." Cupo: ".  $salonItem["CUPO"] . '</option>';
                                     }
                                     ?>
-                                
                                 </select>
                             </div>
-                        <div class="form-group">
-                            <label for="invitados">Cantidad de invitados:</label>
-                            <input type="text" class="form-control" id="invitados" name="invitados" required pattern="[0-9a-zA-Z]{1,3}" maxlength="3">
-                        </div>
-                        <div class="form-group">
-                            <label for="fecha">Fecha y hora del evento:</label>
-                            <input type="text" class="form-control" id="fechaEvento" name="fechaEvento"required readonly>
-                        </div>
-                        <button type="submit" class="btn btn-primary">Solicitar Evento</button>
-                    </form>
+                            <div class="form-group">
+                                <label for="comida">Menú del evento:</label>
+                                <select class="form-control" id="comida" name="comida" required>
+                                    <option value="">Seleccione una comida del menú</option>
+                                    <?php
+                                    foreach ($menuItems as $menuItem) {
+                                        echo '<option value="' . $menuItem['ID'] . '" data-descripcion="' . $menuItem['DESCRIPCION'] . '">' . $menuItem['NOMBRE'] . '</option>';
+                                    }
+                                    ?>
+                                </select>
+
+                                </div>
+                            <div class="form-group">
+                                <label for="invitados">Cantidad de invitados:</label>
+                                <input type="text" class="form-control" id="invitados" name="invitados" required pattern="[0-9a-zA-Z]{1,3}" maxlength="3">
+                            </div>
+                            <div class="form-group">
+                                <label for="fecha">Fecha y hora del evento:</label>
+                                <input type="text" class="form-control" id="fechaEvento" name="fechaEvento"required readonly>
+                            </div>
+                            <button type="submit" class="btn btn-primary" id="solicitarEventoBtn">Solicitar Evento</button>
+                        </form>
+                    <div style=" align-content:center; justify-content: center;" class="container custom-item rounded-5" id="descripcionComida">
+                        <!-- Aquí van las comidas -->
+                    </div>
                 </div>
 
             </div>
@@ -293,6 +296,20 @@
     <script>
     // Definir una variable global en JavaScript para almacenar los datos del usuario
     var datosUsuario = <?php echo $datosUsuarioJSON; ?>;
+    document.addEventListener('DOMContentLoaded', function () {
+        const comidaSelect = document.getElementById('comida');
+        const descripcionComidaDiv = document.getElementById('descripcionComida');
+        
+        comidaSelect.addEventListener('change', function () {
+            const selectedOption = comidaSelect.options[comidaSelect.selectedIndex];
+            const descripcion = selectedOption.getAttribute('data-descripcion');
+            
+            descripcionComidaDiv.innerHTML = descripcion;
+        });
+
+    });
+    
+
     </script>
     <script src="/js/dinamicTable.js"></script>
     <script src="/bootstrap/js/bootstrap.min.js"></script>
