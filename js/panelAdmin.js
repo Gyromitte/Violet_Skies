@@ -1233,7 +1233,7 @@ function updateModalContent(formType, idEmpleado, idEvento) {
                 <h6 class="mb-3">${menu.TIPO}</h6>
               </div>
               <div class="d-flex justify-content-center">
-                  <button type="submit" class="btn btn-primary btn-modal-warning me-2"><i class="fa-solid fa-circle-minus me-2" style="color: #ffffff;"></i>Descontinuar</button>
+                  <button id="btnDescMenu" type="submit" class="btn btn-primary btn-modal-warning me-2"><i class="fa-solid fa-circle-minus me-2" style="color: #ffffff;"></i>Descontinuar</button>
                   <button type="button" class="btn btn-primary btn-modal" data-bs-dismiss="modal">Cancelar</button>
               </div>
             </form>
@@ -1243,6 +1243,7 @@ function updateModalContent(formType, idEmpleado, idEvento) {
           
           // Obtener el formulario después de haberlo asignado al DOM
           var formEditarMenu = document.getElementById('formularioMenu');
+          var btnDescMenu = document.getElementById('btnDescMenu');
           // Agregar evento de envío al formulario de edición
           formEditarMenu.addEventListener('submit', function (event) {
             event.preventDefault(); // Evitar que el formulario se envíe por defecto
@@ -1256,6 +1257,11 @@ function updateModalContent(formType, idEmpleado, idEvento) {
                   // Actualizar el mensaje de respuesta en el formulario
                   var mensajeDiv = document.getElementById('mensajeDiv');
                   mensajeDiv.innerHTML = xhrDescontinuar.responseText;
+                  if(xhrDescontinuar.responseText == "<div class='alert alert-success'>Menú descontinuado con exito!</div>")
+                  {
+                    //Desactivar el boton de descontinuar 
+                    btnDescMenu.disabled = true;
+                  }
                 } else {
                   console.error("Error en la solicitud AJAX para descontinuar el menú");
                 }
