@@ -2,7 +2,6 @@
 include "../dataBase.php";
 
 $emp = $_SESSION["ID"];
-$trab = $_SESSION["trabajo"];
 $db = new DataBase();
 $db->conectarBD();
 
