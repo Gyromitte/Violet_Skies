@@ -40,7 +40,7 @@ foreach ($tabla as $registro) {
         echo '<button class="btn btn-secondary dropdown-toggle custom-dropdown" type="button" data-bs-toggle="dropdown" aria-expanded="false">';
         echo '</button>';
         echo '<ul class="dropdown-menu custom-drop-menu">';
-        echo '<li><a class="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#mainModal" data-bs-whatever="@editarMenu" 
+        echo '<li><a class="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#mainModal" data-bs-whatever="@reincorporarMenu" 
         data-id="' . $registro->ID . '">
         <i class="fa-solid fa-rotate-left me-2" style="color: #ffffff;"></i>Re-Incorporar</a></li>';
         echo '</ul>';
