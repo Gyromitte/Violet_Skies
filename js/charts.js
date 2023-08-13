@@ -252,7 +252,7 @@ function recargarGraficos(){
       .catch(error => console.error('Error al obtener los datos:', error));
 
 
-      // Obtener el contexto del canvas
+    // Obtener el contexto del canvas
     var ctxMenu = document.getElementById('menuChart').getContext('2d');
 
     // Realizar la solicitud AJAX a rankMenu.php
@@ -303,29 +303,98 @@ function recargarGraficos(){
             });
         })
         .catch(error => console.error('Error al obtener los datos:', error));
+  
+
+        //Charts de menus
+        
+        
 }
 
-//Pie tipos de menus
+// Pie tipos de menus
 var tiposMenus = ["Bebidas", "Desayuno", "Desayuno Buffet", "Comida", "Comida Buffet", "Coffee Break"];
-        var cantidades = [25, 15, 30, 10, 20, 20, ];
 
-        // Obtener el contexto del canvas
-        var ctx = document.getElementById('pieTipoMenus').getContext('2d');
+// Obtener el contexto del canvas
+var ctx = document.getElementById('pieTipoMenus').getContext('2d');
 
-        // Crear la gráfica de pie
-        var pieChart = new Chart(ctx, {
-            type: 'pie',
-            data: {
-                labels: tiposMenus,
-                datasets: [{
-                    data: cantidades,
-                    backgroundColor: ['#8A2BE2', '#9370DB', '#BA55D3', '#DA70D6', '#FF69B4', '#FFB6C1'] // Colores de fondo para las secciones
-                }]
-            },
-            options: {
-                // Opciones adicionales aquí
-            }
-        });
+// Crear la gráfica de pie (sin los datos aún)
+var pieChart = new Chart(ctx, {
+    type: 'pie',
+    data: {
+        labels: tiposMenus,
+        datasets: [{
+            data: [],
+            backgroundColor: ['#8A2BE2', '#9370DB', '#BA55D3', '#DA70D6', '#FF69B4', '#FFB6C1']
+        }]
+    },
+    options: {
+      responsive: true,
+      maintainAspectRatio: false,
+    }
+});
+
+    // Obtener el contexto del canvas
+    var ctxMenu = document.getElementById('menuChart2').getContext('2d');
+
+    // Realizar la solicitud AJAX a rankMenu.php
+    fetch('/php/viewsCharts/rankMenu.php') // Asegúrate de proporcionar la ruta correcta
+        .then(response => response.json())
+        .then(data => {
+            // Extraer los nombres de menú y las cantidades de pedidos
+            const nombres = data.map(menu => menu.Menu);
+            const cantidades = data.map(menu => menu.Pedidos);
+
+            // Crear la gráfica de barras
+            var menuChart = new Chart(ctxMenu, {
+                type: 'bar',
+                data: {
+                    labels: nombres,
+                    datasets: [{
+                        label: 'Menús más populares',
+                        data: cantidades,
+                        backgroundColor: '#d43bda', // Color de fondo de las barras
+                        borderColor: 'white', // Color del borde de las barras
+                        borderWidth: 2, // Ancho del borde de las barras
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    scales: {
+                        x: {
+                            ticks: {
+                                color: 'white',
+                            },
+                        },
+                        y: {
+                            ticks: {
+                                color: 'white',
+                            },
+                            beginAtZero: true,
+                        },
+                    },
+                    plugins: {
+                        legend: {
+                            labels: {
+                                color: 'white',
+                            },
+                        },
+                    },
+                },
+            });
+        })
+        .catch(error => console.error('Error al obtener los datos:', error));
+
+// Realizar una petición Fetch para obtener los datos desde el archivo PHP
+fetch('/php/viewsCharts/pieMenus.php')
+    .then(response => response.json())
+    .then(data => {
+        // Llenar los datos en el dataset de la gráfica de pie
+        pieChart.data.datasets[0].data = data;
+        // Actualizar la gráfica
+        pieChart.update();
+    })
+    .catch(error => console.error('Error en la petición Fetch:', error));
+
 
 
 //Cargar el segundo grafico una vez al principio del load de la pagina

@@ -88,6 +88,8 @@ document.addEventListener('DOMContentLoaded', function() {
   });
 });
 
+
+
 //Funcion para las vistas de menus
 document.addEventListener('DOMContentLoaded', function() {
   var buttons = document.querySelectorAll('.ver-menus');
@@ -130,28 +132,24 @@ document.addEventListener('DOMContentLoaded', function() {
           tableInfo.innerHTML = '';
           //Re-insertar el grafico
           contTable.innerHTML = `
-          <div class="container-fluid">
+          <div id="cont-table-menus">
+          <!--Contenido Default-->
+            <div class="container-fluid">
                 <div class="row">
-                    <div class="col-md-5">
-                      <div class="info-card mb-2" style="height: 25px; display: flex; align-items: center;">
-                        <h3 class="me-2">
-                          <i class="fa-solid fa-business-time" style="color: #ffffff;"></i>
-                              Solicitudes Pendientes: 
-                        </h3>
-                        <h2 id="solicitudesCard"></h2>
-                      </div>
-                        <div class="col-md-12">
-                            <canvas id="proporcionEmpleados2" style="height: 200px;"></canvas>
-                        </div>
+                    <!-- Contenido de la izquierda -->
+                    <div class="col-md-5 pieMenus">
+                        <canvas id="pieTipoMenus" style="height: 60%; width: 100%; margin-right: 0px !important;"></canvas>
                     </div>
-                    <div class="info-card col-md-7">
-                      <canvas id="participacionEmpleados"></canvas>
+                    <!-- Canvas a la derecha -->
+                    <div class="info-card col-md-7" style="margin-right: 0px !important;">
+                        <canvas id="menuChart2" style="height: 70%; width: 100%;"></canvas>
                     </div>
                 </div>
             </div>
+          </div>
           `;
           //Volver a ejecutar el codigo de la grafica para actualizar datos:
-          //recargarGraficos(); //Llamado desde chart.js
+          recargarGraficos(); //Llamado desde chart.js
           // Manejar el redimensionamiento del canvas
           const canvas = document.getElementById("proporcionEmpleados2");
           if (canvas) {
