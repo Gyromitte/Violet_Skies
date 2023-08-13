@@ -15,6 +15,7 @@
     <link rel="stylesheet" href="/css/panelAdmin.css">
     <link rel="stylesheet" href="/css/cards.css">
     <link rel="stylesheet" href="../viewsClientes/pruebasCEventos/pruebaEventos.css">
+    <link rel="stylesheet" href="/css/agendarEvento.css">
     <!-- Agrega la siguiente línea para cargar el CSS del complemento datetimepicker -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-datetimepicker/2.5.20/jquery.datetimepicker.min.css">
     <!--Referencias a fuentes-->
@@ -97,6 +98,10 @@
                     Mis eventos
                     <i class="fa-solid fa-calendar-days" style="color: #ffffff;"></i>
                 </h3>
+                <div  style=" width:fit-content;"  class="custom-card rounded-5">
+                    <h3 style=" padding-right:5%; padding-left:5%; text-align: center;">Aquí puedes ver tus eventos.</h3>
+                        <p style=" padding-right:5%; padding-left:5%; text-align: center;"><b>Si deseas realizar cambios debes contactarte con nosotros para aclarar detalles.</b></p>
+                </div>
             </div>
             <div class="filter-buttons">
                 <button class="btn-options ver-empleados btn btn-primary border-2 btn-outline-light rounded-5" onclick="filterEvents('PENDIENTE')">Pendiente</button>
@@ -120,56 +125,66 @@
                     Configura tu evento!
                     <i class="fa-solid fa-calendar-days" style="color: #ffffff;"></i>
                 </h3>
+                <div  style=" width:fit-content;"  class="custom-card rounded-5">
+                    <h3 style=" padding-right:5%; padding-left:5%; text-align: center;">Aquí puedes configurar tu evento</h3>
+                        <p style=" padding-right:5%; padding-left:5%; text-align: center;"><b>Verifica que hayas configurado bien tu evento,<br>de lo contrario solo podrás realizar cambios contactando con nosotros</b></p>
+                    </div>
             </div>
-            <div  class="container">
-                <form style="width: 600px;"  id="evento-form" method="post">
-                <div id="msgDiv"></div>
-                        <div class="form-group">
-                            <label for="nombre_evento">Nombre del evento:</label>
-                            <input type="text" class="form-control" id="nombre_evento" name="nombre_evento" required maxlength="50">
-                        </div>
-                        <div class="form-group">
-                            <label for="salon">Salón:</label>
-                            <select class="form-control" id="salon" name="salon" required>
-                                <option value="">Seleccione un salón</option>
-                                <?php
-                                foreach ($salonItems as $salonItem) {
-                                    echo '<option value="' . $salonItem['ID'] . '">' . $salonItem['NOMBRE'] ." Cupo: ".  $salonItem["CUPO"] . '</option>';
-                                }
-                                ?>
-                            </select>
-                        </div>
-                        <div class="form-group">
-                            <label for="comida">Menú del evento:</label>
-                            <select class="form-control" id="comida" name="comida" required>
-                                    <option value="">Seleccione una comida del menú</option>
-                                
+                <div  class="container">
+                        <form style="width: 600px;"  id="evento-form" method="post">
+                            <div id="msgDiv"></div>
+                            <div class="form-group">
+                                <label for="nombre_evento">Nombre del evento:</label>
+                                <input type="text" class="form-control" id="nombre_evento" name="nombre_evento" required maxlength="50">
+                            </div>
+                            <div class="form-group">
+                                <label for="salon">Salón:</label>
+                                <select class="form-control" id="salon" name="salon" required>
+                                    <option value="">Seleccione un salón</option>
                                     <?php
-                                    foreach ($menuItems as $menuItem) {
-                                        echo '<option value="' . $menuItem['ID'] . '">' . $menuItem['NOMBRE'] . '</option>';
+                                    foreach ($salonItems as $salonItem) {
+                                        echo '<option value="' . $salonItem['ID'] . '">' . $salonItem['NOMBRE'] ." Cupo: ".  $salonItem["CUPO"] . '</option>';
                                     }
                                     ?>
-                                
                                 </select>
                             </div>
-                        <div class="form-group">
-                            <label for="invitados">Cantidad de invitados:</label>
-                            <input type="text" class="form-control" id="invitados" name="invitados" required pattern="[0-9a-zA-Z]{1,3}" maxlength="3">
-                        </div>
-                        <div class="form-group">
-                            <label for="fecha">Fecha y hora del evento:</label>
-                            <input type="text" class="form-control" id="fechaEvento" name="fechaEvento"required>
-                        </div>
-                        <button type="submit" class="btn btn-primary">Solicitar Evento</button>
-                    </form>
+                            <div class="form-group">
+                                <label for="comida">Menú del evento:</label>
+                                <select class="form-control" id="comida" name="comida" required>
+                                    <option value="">Seleccione una comida del menú</option>
+                                    <?php
+                                    foreach ($menuItems as $menuItem) {
+                                        echo '<option value="' . $menuItem['ID'] . '" data-descripcion="' . $menuItem['DESCRIPCION'] . '">' . $menuItem['NOMBRE'] . '</option>';
+                                    }
+                                    ?>
+                                </select>
+
+                                </div>
+                            <div class="form-group">
+                                <label for="invitados">Cantidad de invitados:</label>
+                                <input type="text" class="form-control" id="invitados" name="invitados" required pattern="[0-9a-zA-Z]{1,3}" maxlength="3">
+                            </div>
+                            <div class="form-group">
+                                <label for="fecha">Fecha y hora del evento:</label>
+                                <input type="text" class="form-control" id="fechaEvento" name="fechaEvento"required readonly>
+                            </div>
+                            <button type="submit" class="btn btn-primary" id="solicitarEventoBtn">Solicitar Evento</button>
+                        </form>
+                    <div style=" align-content:center; justify-content: center;" class="container custom-item rounded-5" id="descripcionComida">
+                        <!-- Aquí van las comidas -->
+                    </div>
                 </div>
+
             </div>
         </div>
         <!-- Página de Perfil del cliente -->
         <div id="perfil" class="tab-content">
         <!-- Datos personales del usuario -->
         <div class="container mt-5">
-            <div style="padding-left: 5%; display: flex; flex-direction: column;">
+            <div style="display: flex; flex-direction: column;">
+                <h3 style="text-align: center; margin-right: 5%" class="alert alert-primary">
+                    Tendrás que volver a iniciar sesión después de editar tus datos
+                </h3>
                 <div class="accordion" id="accordionExample">
                     <div class="accordion-item">
                         <h2 class="accordion-header custom-accordion-header">
@@ -179,7 +194,7 @@
                             Datos personales
                             </button>
                         </h2>
-                    <div style="padding-left: 15%; padding-right:15%" id="collapseOne" class="accordion-collapse collapse show" data-bs-parent="#accordionExample">
+                    <div style="padding-left: 10%; padding-right:10%" id="collapseOne" class="accordion-collapse collapse show" data-bs-parent="#accordionExample">
                         <div class="accordion-body">
                             <div class="personal-info">
                                 <div class="mb-3 row">
@@ -281,6 +296,20 @@
     <script>
     // Definir una variable global en JavaScript para almacenar los datos del usuario
     var datosUsuario = <?php echo $datosUsuarioJSON; ?>;
+    document.addEventListener('DOMContentLoaded', function () {
+        const comidaSelect = document.getElementById('comida');
+        const descripcionComidaDiv = document.getElementById('descripcionComida');
+        
+        comidaSelect.addEventListener('change', function () {
+            const selectedOption = comidaSelect.options[comidaSelect.selectedIndex];
+            const descripcion = selectedOption.getAttribute('data-descripcion');
+            
+            descripcionComidaDiv.innerHTML = descripcion;
+        });
+
+    });
+    
+
     </script>
     <script src="/js/dinamicTable.js"></script>
     <script src="/bootstrap/js/bootstrap.min.js"></script>
