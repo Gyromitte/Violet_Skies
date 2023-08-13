@@ -103,7 +103,7 @@
                 <button class="btn-options ver-empleados btn btn-primary border-2 btn-outline-light rounded-5" onclick="filterEvents('EN PROCESO')">En Proceso</button>
                 <button class="btn-options ver-empleados btn btn-primary border-2 btn-outline-light rounded-5" onclick="filterEvents('FINALIZADO')">Finalizado</button>
                 <button class="btn-options ver-empleados btn btn-primary border-2 btn-outline-light rounded-5" onclick="filterEvents('CANCELADO')">Cancelado</button>
-                <a href="https://wa.me/528715659629?text=¡Hola! Quiero hablar con la persona a cargo" target="_blank" style="display: inline-block; background-color: green; color: white; padding: 10px 20px; text-decoration: none; border-radius: 20px;">
+                <a href="https://wa.me/528715659629?text=¡Hola! Quiero hablar con la persona a cargo" target="_blank" style="border:5px;  display: inline-block; background-color: green; color: white; padding: 10px 20px; text-decoration: none; border-radius: 20px;">
                         <i class="fa-brands fa-whatsapp me-1" style="color: #ffffff;"></i><b>WhatsApp</b>
                     </a>  
             </div>
@@ -126,7 +126,7 @@
                 <div id="msgDiv"></div>
                         <div class="form-group">
                             <label for="nombre_evento">Nombre del evento:</label>
-                            <input type="text" class="form-control" id="nombre_evento" name="nombre_evento" required>
+                            <input type="text" class="form-control" id="nombre_evento" name="nombre_evento" required maxlength="50">
                         </div>
                         <div class="form-group">
                             <label for="salon">Salón:</label>
@@ -134,7 +134,7 @@
                                 <option value="">Seleccione un salón</option>
                                 <?php
                                 foreach ($salonItems as $salonItem) {
-                                    echo '<option value="' . $salonItem['ID'] . '">' . $salonItem['NOMBRE'] .'</option>';
+                                    echo '<option value="' . $salonItem['ID'] . '">' . $salonItem['NOMBRE'] ." Cupo: ".  $salonItem["CUPO"] . '</option>';
                                 }
                                 ?>
                             </select>
@@ -154,13 +154,13 @@
                             </div>
                         <div class="form-group">
                             <label for="invitados">Cantidad de invitados:</label>
-                            <input type="text" class="form-control" id="invitados" name="invitados" required>
+                            <input type="text" class="form-control" id="invitados" name="invitados" required pattern="[0-9a-zA-Z]{1,3}" maxlength="3">
                         </div>
                         <div class="form-group">
                             <label for="fecha">Fecha y hora del evento:</label>
                             <input type="text" class="form-control" id="fechaEvento" name="fechaEvento"required>
                         </div>
-                        <button type="submit" class="btn btn-primary" >Solicitar Evento</button>
+                        <button type="submit" class="btn btn-primary">Solicitar Evento</button>
                     </form>
                 </div>
             </div>
@@ -189,7 +189,10 @@
                                     <p><strong>Teléfono:</strong> <span id="telefono"><?php echo $_SESSION["telefono"]; ?></span></p>
                                     <p><strong>Correo:</strong> <span id="correo"><?php echo $_SESSION["correo"]; ?></span></p>
                                     <p><strong>Tipo de cuenta:</strong> <span id="tipo_cuenta"><?php echo $_SESSION["tipo"]; ?></span></p>
-                                    <button class="btn btn-primary" id="editarDatos" data-bs-toggle="modal" data-bs-target="#mainModal" data-bs-whatever="@editarPerfil">Editar Datos</button>
+                                    <button type="button" class="btn btn-light" id="editarDatos" data-bs-toggle="modal" data-bs-target="#mainModal" data-bs-whatever="@editarPerfil">Editar Datos</button>
+                                    <button class="btn btn-light" id="btnpassword" type="button" data-bs-toggle="modal" data-bs-target="#modalCambiarContrasena">
+                                    <i class="fa-solid fa-lock me-2" style="color: #ffffff;"></i>
+                                    Cambiar contraseña</button>
                             </div>
                         </div>
                     </div>
@@ -238,7 +241,37 @@
     </div>
 </div>
 
-
+    <div class="modal fade" id="modalCambiarContrasena" tabindex="-1" aria-labelledby="modalCambiarContrasenaLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Cambiar contraseña</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                  </div>
+                  <div class="modal-body">
+                    <form id="formCambiarContrasena" method="POST">
+                      <div class="mb-3">
+                        <label class="form-label">Contraseña actual:</label>
+                        <input type="password" class="form-control" id="currentPassword" name="currentPassword" required>
+                      </div>
+                      <div class="mb-3">
+                        <label class="form-label">Nueva contraseña:</label>
+                        <input type="password" class="form-control" id="newPassword" name="newPassword" required>
+                      </div>
+                      <div class="mb-3">
+                        <label class="form-label">Confirmar contraseña:</label>
+                        <input type="password" class="form-control" id="confirmPassword" name="confirmPassword" required>
+                      </div>
+                      <input type="hidden" name="cuenta" value="<?php echo $_SESSION["ID"]; ?>">
+                      <button type="submit" class="btn btn-primary">Cambiar</button>
+                      <div><br></div>
+                      <div class="alert d-none" role="alert" align="center" id="alertMessage">
+                        </div>
+                    </form>
+                  </div>
+                </div>
+              </div>
+            </div>
 
 
 
@@ -257,6 +290,7 @@
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="/js/panelAdmin.js"></script>
     <script src="./pruebaJSEventos.js"></script>
+    <script src="/js/datosAdmin.js"></script>
     <!-- Agrega la siguiente línea para cargar el complemento datetimepicker -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-datetimepicker/2.5.20/jquery.datetimepicker.full.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
