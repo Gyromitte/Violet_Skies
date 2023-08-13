@@ -10,7 +10,9 @@
     $pass = $_POST['pass'];
     $confirm = $_POST['ckpass'];
     $cel = $_POST['cel'];
+    $empleado=$_POST['empleado'];
     $tipo="EMPLEADO";
+
 
     $pattern = '/[0-9\p{P}\p{S}&&[^ñ]]/u';
     // Use a regular expression to check if the phone number contains any letter
@@ -47,7 +49,7 @@
         echo "<div class='alert alert-danger'>Registros vacios, favor de llenar</div>";
     }
     else{
-        $db->Register($nom,$ap,$am,$usu,$pass,$confirm,$cel,$tipo);
+        $db->RegisterEmp($nom,$ap,$am,$usu,$pass,$confirm,$cel,$tipo,$empleado);
     }
     $db->desconectarBD();
 ?>

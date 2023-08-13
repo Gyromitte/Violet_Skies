@@ -31,3 +31,7 @@ function VerDisp() {
     var params = new URLSearchParams(formData);
     history.replaceState(null, '', '?' + params.toString());
 }
+window.addEventListener('load', function() {
+    var params = new URLSearchParams(window.location.search);
+    tipoorden.value = params.get('tipo') || 'porcreacion';
+});

@@ -33,7 +33,9 @@ document.addEventListener('DOMContentLoaded', function() {
       case 'verPend':
         currentTable = 'pend';
         return 'Pendientes: '; 
-        
+        case 'verSolic':
+        currentTable = 'soli';
+        return 'Solicitudes de Asistencia: '; 
       case 'verFin':
         currentTable = 'fin';
         return 'Historial: ';

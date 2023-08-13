@@ -147,17 +147,18 @@
                         $query="SELECT EMP.ID, EMP.RFC,EMP.TIPO, EMP.CUENTA FROM EMPLEADOS EMP 
                         JOIN CUENTAS ON CUENTAS.ID=EMP.CUENTA WHERE CUENTAS.ID='$ID'";
                         $empleados=$this->PDO_local->query($query);
-                        if($empleados->rowCount()===0){
-                            $_SESSION["access"]=1.5;
-                            echo"<div class=' container'>";
-                            echo"<h1 align='center'>Bienvenido ".$_SESSION["name"]."</h1>";
-                            echo "</div>";
-                            header("refresh:4;../viewsEmpleados/panelEmpleado.php");
-                        }
-                        else{
                             while($trabajo = $empleados->fetch(PDO::FETCH_ASSOC)){
                                 $idemp=$trabajo['ID'];
                                 $_SESSION["trabajo"]=$idemp;
+                                if($trabajo['RFC']==''){
+                                    $_SESSION["access"]=1.5;
+
+                                    echo"<div class=' container'>";
+                                    echo"<h1 align='center'>Bienvenido ".$_SESSION["name"]."</h1>";
+                                    echo "</div>";
+                                    header("refresh:4;../viewsEmpleados/panelEmpleado.php");
+                                }
+                                else{
 
                                 $_SESSION["access"]=2;
                                 if($trabajo['TIPO']=='MESERO'){
@@ -182,7 +183,7 @@
                 }
                 else{
                     echo"<div class='container'>";
-                    echo"<h1 align='center'>Usuario o Password Incorrecto</h1>";
+                    echo"<h1 align='center'>Usuario o Contraseña Incorrecto</h1>";
                     echo"</div>";
                     header("refresh:2;../views/login.php");
                 }
@@ -228,12 +229,51 @@
                 echo $e->getMessage();
             }
         }
+        function RegisterEmp($nom,$ap,$am,$usu,$pass,$confirm,$cel,$tipo,$empleado){
+            try{
+                if($pass!==$confirm){
+                    echo"<div class='alert alert-warning'>
+                    Contrasenas no concuerdan</div>";
+                }
+                else{
+                    try{
+                    $hash=password_hash($pass,PASSWORD_DEFAULT);
+                    $cadena="INSERT INTO CUENTAS(NOMBRE, AP_PATERNO,AP_MATERNO, CORREO, CONTRASEÑA, 
+                    TELEFONO,TIPO_CUENTA) VALUES('$nom','$ap','$am','$usu','$hash','$cel','$tipo')";
+                    $this->PDO_local->query($cadena);
+                    $cadena="SELECT CU.ID FROM CUENTAS CU WHERE CORREO='$usu'";
+                    $resultado = $this->PDO_local->query($cadena);
+                    while($trabajo = $resultado->fetch(PDO::FETCH_ASSOC)){
+                        $modo=$trabajo['ID'];
+                        $consulta="INSERT INTO EMPLEADOS(TIPO,CUENTA) VALUES('$empleado','$modo')";
+                        $this->PDO_local->query($consulta);
+                        echo"<div class='alert alert-success'>Te has registrado exitosamente!</div>";
+                    }
+                    }
+                    catch(PDOException $e){
+                        $errorMessage = $e->getMessage();
+
+                        // Extract the relevant part of the error message
+                        // Assuming the error message format is "SQLSTATE[45000]: <>: 1644 Your trigger message"
+                        $startIndex = strpos($errorMessage, "1644") + 5;
+                        $triggerMessage = substr($errorMessage, $startIndex);
+
+                        // Display the trigger message without the unwanted part
+                        echo "<div class='alert alert-danger'>" . $triggerMessage . "</div>";
+                    }
+                }
+            }
+            catch(PDOException $e){
+                echo $e->getMessage();
+            }
+        }
+
         function ejecutarInsert($consulta)
     {
         try
         {
             $this->PDO_local->query($consulta);
-            echo"<div class='alert alert-success'>Asistiendo!</div>";
+            echo"<div class='alert alert-success'>Solicitud Enviada!</div>";
         }
         catch(PDOException $e)
         {

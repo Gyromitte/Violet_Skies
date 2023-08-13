@@ -28,13 +28,6 @@ document.addEventListener('click', function (event) {
   }
 });
 
-// Agregar evento de scroll al documento para cerrar el dashboard cuando se haga scroll
-document.addEventListener('scroll', function () {
-  if (dashboard.classList.contains('dashboard-open')) {
-    dashboard.classList.remove('dashboard-open');
-    main.classList.remove('main-dash-open');
-  }
-});
 
 /*Main content*/
 // Obtener las pestañas y el contenido 
@@ -456,6 +449,7 @@ function updateModalContent(formType, idEmpleado, idEvento) {
       //Ver cual es la tabla activa para refrescar cualquier cambio
       checkCurrentTable(currentTable);
       break;
+
       case "@editarPerfil":
         modalTitle.textContent = "Editar Datos";
         formContent = `
@@ -503,22 +497,17 @@ function updateModalContent(formType, idEmpleado, idEvento) {
             var updatePerfilXHR = new XMLHttpRequest();
             updatePerfilXHR.onreadystatechange = function () {if (updatePerfilXHR.readyState === XMLHttpRequest.DONE) {
                 if (updatePerfilXHR.status === 200) {
-                    console.log(updatePerfilXHR.responseText); // Agregar esta línea para imprimir la respuesta
+                    console.log(updatePerfilXHR.responseText); 
                     try {
                         var respuesta = JSON.parse(updatePerfilXHR.responseText);
                         if (respuesta.success) {
-                            // Los datos se actualizaron con éxito
                             document.getElementById('mensajeDiv').innerHTML = `<div style="text-align:center;"class="alert alert-success">Cambios guardados exitosamente<br>Tienes que volver a iniciar sesión</div>`;
-                            // Actualizar la sesión del usuario con los nuevos datos
                             datosUsuario = respuesta.usuario;
-                            // Cerrar sesión y redirigir al usuario a la página index.html después de 1.5 segundos
                             setTimeout(function () {
-                                // Hacer la solicitud de cierre de sesión
                                 var logoutXHR = new XMLHttpRequest();
                                 logoutXHR.onreadystatechange = function () {
                                     if (logoutXHR.readyState === XMLHttpRequest.DONE) {
                                         if (logoutXHR.status === 200) {
-                                            // Redirigir al usuario a la página index.html
                                             window.location.href = "/index.html";
                                         } else {
                                             console.error("Error al cerrar sesión");
@@ -527,22 +516,27 @@ function updateModalContent(formType, idEmpleado, idEvento) {
                                 };
                                 logoutXHR.open("GET", "logout.php", true);
                                 logoutXHR.send();
-                            }, 5000);
-                        } else if (respuesta.error === 'badPass') {
-                            document.getElementById('mensajeDiv').innerHTML = `<div class="alert alert-danger">Contraseña incorrecta</div>`;
-                        } else {
-                            // Hubo un error al actualizar los datos
-                            document.getElementById('mensajeDiv').innerHTML = `<div style="text-align:center;" class="alert alert-danger">Error al actualizar los datos<br>Contraseña incorrecta</div>`;
-                        }
+                            }, 2500);
+                        }else if (respuesta.error === 'badPass') {
+                          document.getElementById('mensajeDiv').innerHTML = `<div class="alert alert-danger">Contraseña incorrecta, vuelve a ingresarla por favor</div>`;
+                          
+                          setTimeout(() => {
+                              document.getElementById('mensajeDiv').innerHTML = '';
+                          }, 1500); 
+                      } else {
+                          document.getElementById('mensajeDiv').innerHTML = `<div class="alert alert-danger">Contraseña incorrecta, vuelve a ingresarla por favor</div>`;
+                          
+                          setTimeout(() => {
+                              document.getElementById('mensajeDiv').innerHTML = '';
+                          }, 1500); 
+                      }
                     } catch (error) {
-                        // Si la respuesta no es un JSON válido, manejar el error aquí
                         console.error("Error al analizar la respuesta JSON: " + error.message);
                     }
                 } else {
                     console.error("Error en la solicitud AJAX de actualización");
                 }
-            }
-                
+              }   
             };
     
             var formData = new FormData(formEditarDatos);
@@ -555,7 +549,6 @@ function updateModalContent(formType, idEmpleado, idEvento) {
         function esNumero(valor) {
             return !isNaN(valor) && !isNaN(parseFloat(valor));
         }
-        //console.log(formType);
         break;  
     case "@verSolicitud":
         modalTitle.textContent = "Manejar solicitud";
@@ -749,6 +742,11 @@ function updateModalContent(formType, idEmpleado, idEvento) {
         //Ver cual es la tabla activa para refrescar cualquier cambio
         checkCurrentTable(currentTable);
         break;
+        case "@cancelarEvento":
+
+        
+          break;
+
     case "@verDetallesEvento":
       modalTitle.textContent = "Detalles del Evento";
       var xhrDetalles = new XMLHttpRequest();
