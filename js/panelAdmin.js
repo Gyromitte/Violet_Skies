@@ -536,8 +536,7 @@ function updateModalContent(formType, idEmpleado, idEvento) {
                 } else {
                     console.error("Error en la solicitud AJAX de actualización");
                 }
-            }
-                
+              }   
             };
     
             var formData = new FormData(formEditarDatos);
