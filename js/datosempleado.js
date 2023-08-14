@@ -85,25 +85,29 @@ function guardarCambios() {
   }
 
   const xhttp = new XMLHttpRequest();
-  xhttp.onreadystatechange = function() {
-      if (this.readyState === 4 && this.status === 200) {
-          const response = JSON.parse(this.responseText);
-          if (response.success) {
+    xhttp.onreadystatechange = function() {
+        if (this.readyState === 4 && this.status === 200) {
+            const response = JSON.parse(this.responseText);
+            if (response.success) {
               const telefonoSuccess = document.getElementById('telefonoSuccess');
               telefonoSuccess.style.display = "block";
               telefonoSuccess.innerHTML = "Teléfono guardado correctamente.";
               setTimeout(function() {
                   telefonoSuccess.style.display = "none";
-              }, 2500);
+              }, 2000);
               
-              // Reload the page 
+              // Reload the page with anchor tag
               setTimeout(function() {
-                  location.reload();
-              }, 2020); // Adjust the delay (in milliseconds)
-
+                location.reload(); // Recargar la página
+                const linkElement = document.querySelector('a[data-tab="perfil"]');
+                linkElement.click(); // Simular el clic en el enlace
+            }, 1500);
+            
+            
               inputs.forEach(input => {
                   input.setAttribute('disabled', 'true');
               });
+              
           } else {
                 successDiv.textContent = "Error al intentar hacer los cambios";
                 successDiv.classList.remove('d-none');

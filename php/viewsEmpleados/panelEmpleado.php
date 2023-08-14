@@ -266,11 +266,13 @@
             ?>
         </div>
         <div id="perfil" class="tab-content">
+        <div id="datosEmp">
             <div class="container">
                 <?php echo" <div class='container'>";
                 include "../viewsPerfil/datosEmp.php";
                 echo" </div>"; ?>
             </div>
+        </div>
         </div>
 
         <!--Modal-->
