@@ -115,7 +115,7 @@
             ?><br><br>
             <button data-tab="home" class="dash-button"><i class="fa-solid fa-house" style="color: #ffffff;"></i><br>Home</button>
             <button data-tab="eventos" class="dash-button"><i class="fa-solid fa-briefcase" style="color: #ffffff;"></i><br>Eventos Disponibles</button>
-            <button data-tab="empleados" class="dash-button"><i class="fa-solid fa-business-time" style="color: #ffffff;"></i><br>Eventos En Curso</button>
+            <button data-tab="empleados" data-access="<?php echo $_SESSION["access"]?>" class="dash-button"><i class="fa-solid fa-business-time" style="color: #ffffff;"></i><br>Eventos En Curso</button>
             <button data-tab="perfil" class="dash-button"><i class="fa-solid fa-user" style="color: #ffffff;"></i><br>Perfil</button>
             <a style="text-decoration: none;" data-tab="logout" class="dash-button" href="../scripts/CerrarSesion.php">
                 <i class="fa-solid fa-door-open" style="color: #ffffff; padding-top: 10px;"></i><br>Logout</a>
