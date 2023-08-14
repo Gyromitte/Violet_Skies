@@ -175,7 +175,7 @@
                     </div>
                     <div>
                     <div class='row'>
-                        <div class='col-md-6 mb-6>
+                        <div class='col-md-6 mb-6'>
                             <canvas id='EventosFinaliz' class='info-card d-flex align-items-center
                              justify-content-between'></canvas>
                         </div>
