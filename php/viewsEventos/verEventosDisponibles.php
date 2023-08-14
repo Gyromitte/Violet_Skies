@@ -22,8 +22,18 @@
             $evento=$registro->ID;
             $eventoDate= new datetime($registro->F_CREACION);
             $fecha = $eventoDate->format('Y-m-d');
+            if($modo=='MESERO'){
+                if($registro->MESEROS=="0/0"){
+                    continue;
+                }
+            }
+            else if($modo=='COCINERO'){
+                if($registro->COCINEROS=="0/0"){
+                    continue;
+                }
+            }
 
-            if($registro->CANT==='LLENO'){
+            if($registro->MESEROS=='' && $registro->COCINEROS==''){
                 continue;
             }
             else if($registro->MESEROS=='' && $registro->COCINEROS==''){

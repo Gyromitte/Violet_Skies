@@ -4,6 +4,7 @@ $conexion = new Database();
 $conexion->conectarBD();
 session_start();
 $emp=$_SESSION["trabajo"];
+$modo=$_SESSION['tipo'];
 
 
 $consulta = "CALL verEventosDisponibles(?,?)";
@@ -14,6 +15,16 @@ $numdisp=count($tabla);
 foreach($tabla as $registro){
 if($registro->MESEROS=='' && $registro->COCINEROS==''){
     $numdisp--;
+}
+if($modo=='MESERO'){
+    if($registro->MESEROS=="0/0"){
+        $numdisp--;
+    }
+}
+else if($modo=='COCINERO'){
+    if($registro->COCINEROS=="0/0"){
+        $numdisp--;
+    }
 }
 }
 
