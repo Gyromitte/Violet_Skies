@@ -831,7 +831,7 @@ function updateModalContent(formType, idEmpleado, idEvento) {
               <table align='center' cellspacing="20" cellpadding="5">
                 <tr>
                   <td><h6>Fecha</h6></td>
-                  <td><input class="form-control" type="text" placeholder="Fecha y hora" id="fechaEvento" value="${detallesEvento.F_EVENTO}" disabled></td>
+                  <td>${detallesEvento.F_EVENTO}</td>
                 </tr>
                 <tr>
                   <td><h6>Salón</h6></td>
