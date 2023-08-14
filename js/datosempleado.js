@@ -1,7 +1,7 @@
 const btnEditarDatosPersonales = document.getElementById('btnEditarDatosPersonales');
 const btnGuardarCambios = document.getElementById('btnGuardarCambios');
 const btnCancelarCambios = document.getElementById('btnCancelarCambios');
-const successDiv = document.getElementById('mensajeModificar');
+const successDiv = document.getElementById('alertMessage');
   
 function cambiarContraseña() {
     const formu = document.getElementById('formCambiarContrasena');
@@ -21,7 +21,7 @@ function cambiarContraseña() {
 
           setTimeout(function() {
             location.reload();
-          }, 3000);
+          }, 2500);
 
         } else {
           alertDiv.classList.add('alert-danger');
@@ -47,9 +47,12 @@ function cambiarContraseña() {
  
   function habilitarEdicion() {
     const inputs = document.querySelectorAll('.personal-info input[disabled]');
+    const telefonoError = document.getElementById('telefonoError'); 
+
     inputs.forEach(input => {
         if (input.name === 'telefono') { 
             input.removeAttribute('disabled');
+            telefonoError.textContent = ''; // Clear the error message
         }
     });
 
@@ -60,34 +63,52 @@ function cambiarContraseña() {
 
 
 function guardarCambios() {
-    const inputs = document.querySelectorAll('.personal-info input:not([disabled])');
-    const newData = {};
+  const inputs = document.querySelectorAll('.personal-info input:not([disabled])');
+  const newData = {};
 
-    inputs.forEach(input => {
-        newData[input.name] = input.value;
-    });
-    const telefonoValue = newData['telefono'];
-    const telefonoPattern = /^[0-9]{10}$/;
-    if (!telefonoPattern.test(telefonoValue)) {
-        alert("Ingresa un número de teléfono válido");
-        return false;
-    }
+  inputs.forEach(input => {
+      newData[input.name] = input.value;
+  });
+  
+  const telefonoValue = newData['telefono'];
+  const telefonoPattern = /^[0-9]{10}$/;
 
-    const xhttp = new XMLHttpRequest();
+  if (!telefonoPattern.test(telefonoValue)) {
+      const telefonoError = document.getElementById('telefonoError');
+      telefonoError.textContent = "Ingresa un número de teléfono válido (10 dígitos numéricos)";
+
+      setTimeout(function () {
+          telefonoError.textContent = '';
+      }, 4000);
+
+      return false;
+  }
+
+  const xhttp = new XMLHttpRequest();
     xhttp.onreadystatechange = function() {
         if (this.readyState === 4 && this.status === 200) {
             const response = JSON.parse(this.responseText);
             if (response.success) {
-                successDiv.textContent = "Cambios guardados correctamente";
-                successDiv.classList.remove('d-none');
-                setTimeout(function () {
-                    successDiv.classList.add('d-none');
-                }, 3000);
-
-                inputs.forEach(input => {
-                    input.setAttribute('disabled', 'true');
-                });
-            } else {
+              const telefonoSuccess = document.getElementById('telefonoSuccess');
+              telefonoSuccess.style.display = "block";
+              telefonoSuccess.innerHTML = "Teléfono guardado correctamente.";
+              setTimeout(function() {
+                  telefonoSuccess.style.display = "none";
+              }, 2000);
+              
+              // Reload the page with anchor tag
+              setTimeout(function() {
+                location.reload(); // Recargar la página
+                const linkElement = document.querySelector('a[data-tab="perfil"]');
+                linkElement.click(); // Simular el clic en el enlace
+            }, 1500);
+            
+            
+              inputs.forEach(input => {
+                  input.setAttribute('disabled', 'true');
+              });
+              
+          } else {
                 successDiv.textContent = "Error al intentar hacer los cambios";
                 successDiv.classList.remove('d-none');
                 setTimeout(function () {
@@ -104,6 +125,7 @@ function guardarCambios() {
     xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
     xhttp.send("data=" + JSON.stringify(newData));
 }
+
 
 function cancelarCambios() {
     const inputs = document.querySelectorAll('.personal-info input:not([disabled])');

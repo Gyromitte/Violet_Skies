@@ -66,6 +66,8 @@ if ($cuenta) {
             </div>
             <input type="hidden" name="id" value="<?php echo $_SESSION["ID"]; ?>">
         </div>
+        <div id="telefonoError" class="text-danger"></div> 
+        <div id="telefonoSuccess" class="text-success"></div>
     </div>
 </div>
 </div>
