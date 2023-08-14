@@ -1,7 +1,7 @@
 const btnEditarDatosPersonales = document.getElementById('btnEditarDatosPersonales');
 const btnGuardarCambios = document.getElementById('btnGuardarCambios');
 const btnCancelarCambios = document.getElementById('btnCancelarCambios');
-const successDiv = document.getElementById('mensajeModificar');
+const successDiv = document.getElementById('alertMessage');
   
 function cambiarContraseña() {
     const formu = document.getElementById('formCambiarContrasena');
