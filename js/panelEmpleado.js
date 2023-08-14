@@ -33,10 +33,14 @@ tabs.forEach(function (tab) {
     });
     tabContents.forEach(function (content) {
       content.classList.remove('active');
+      if (tabId === 'empleados') {
+        btnPend.click();
+      }
     });
 
     this.classList.add('active');
     document.getElementById(tabId).classList.add('active');
+
   });
 });
 
