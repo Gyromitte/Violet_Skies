@@ -6,6 +6,7 @@
         $conexion->conectarBD();
         session_start();
         $emp=$_SESSION["trabajo"];
+        $modo=$_SESSION["tipo"];
         extract($_POST);
   
         $consulta = "CALL verEventosDisponibles(?,?)";
@@ -23,10 +24,12 @@
             $fecha = $eventoDate->format('Y-m-d');
 
             if($registro->CANT==='LLENO'){
-                continue;       
+                continue;
             }
-                  
-                
+            else if($registro->MESEROS=='' && $registro->COCINEROS==''){
+                continue;
+            }
+  
             echo"<div class='container-fluid'";
             echo"<div class=' card-group col-lg-5 col-mb-5 col-sm-12  d-flex '>";
             echo "<div class='card' id='cuadroEvento'>";
