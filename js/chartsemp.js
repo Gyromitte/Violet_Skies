@@ -34,7 +34,7 @@ function EventosFinales(eventosPorMes) {
         {
           label: 'Finalizados',
           data: eventosPorMes.map((cantidad, mes) => ({ x: obtenerNombreMes(mes + 1), y: cantidad })),
-          backgroundColor: 'transparent',
+          backgroundColor: '#4240b8',
           borderColor: 'white',
           borderWidth: 2,
         },
@@ -45,7 +45,6 @@ function EventosFinales(eventosPorMes) {
         x: {
           beginAtZero: true,
           title: {
-            size:14,
             display: true,
             text: 'Meses',
             color: 'white',
