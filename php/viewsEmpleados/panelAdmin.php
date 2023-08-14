@@ -84,7 +84,7 @@
             Empleados
             </button>
             <button data-tab="comidas" class="dash-button"><i class="fa-solid fa-burger" style="color: #ffffff;"></i><br>
-            Menus
+            Menús
             </button>
             <button data-tab="perfil" class="dash-button"><i class="fa-solid fa-user" style="color: #ffffff;"></i><br>
             Perfil
@@ -168,15 +168,23 @@
                                 <option value="EN PROCESO">En proceso</option>
                                 <option value="FINALIZADO">Finalizado</option>
                                 <option value="CANCELADO">Cancelado</option>
+                                <option value="PETICIONES">Peticiones</option>
                             </select>
                         </div>
                     </div>
                     <!-- Buscador - A la derecha -->
                     <div class="search">
-                        <div class="input-group">
-                            <input type="text" class="form-control" id="searchInput" placeholder="Buscar evento por nombre o cliente">
-                            <button id="searchButton" type ="button" class="ver-empleados btn btn-outline-primary">
-                            <i class="fa-solid fa-magnifying-glass" style="color: #1f71ff;"></i></button>
+                        <div class="searchFechas">
+                            <div class="input-group search-row">
+                                <input type="text" class="form-control" id="searchInput" placeholder="Buscar evento por nombre o cliente">
+                                <button id="searchButton" type="button" class="ver-empleados btn btn-outline-primary">
+                                    <i class="fa-solid fa-magnifying-glass" style="color: #1f71ff;"></i>
+                                </button>
+                            </div>
+                            <div class="input-group search-row">
+                                <input type="date" class="form-control" id="fechaInicioInput" name="fecha_inicio">
+                                <input type="date" class="form-control" id="fechaFinInput" name="fecha_fin">
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -185,42 +193,53 @@
             <div class="container-fluid">
             <div id="contentRow" class="row">
                 <!-- Canvas a la izquierda -->
-	            <div class="info-card col-md-7">
-		            <canvas id="menuChart"></canvas>
+	            <div class="graficaEventos col-md-7" >
+                    <canvas id="menuChart"></canvas>
 	            </div>
 	            <!-- Contenido de la derecha -->
 	            <div class="col-md-5">
 		            <div id="eventosPendientes" class="info-card mb-2" style="height: 25px; display: flex; align-items: center;">
                         <h3 class="me-2">
                 		    <i class="fa-solid fa-business-time" style="color: #ffffff;"></i>
-                                Eventos pendientes: 
+                            Eventos pendientes: 
 			            </h3>
                         <h2 id="pendientesCard"></h2>
 		            </div>
 		            <div id="eventosEnProceso" class="info-card mb-2" style="height: 25px; display: flex; align-items: center;">
                         <h3 class="me-2">
-                		    <i class="fa-solid fa-business-time" style="color: #ffffff;"></i>
-                                Eventos en proceso: 
+                            <i class="fa-regular fa-calendar-days"></i>
+                            Eventos en proceso: 
 			            </h3>
                         <h2 id="procesoCard"></h2>       
 		            </div>
                     <div id="eventosFin" class="info-card mb-2" style="height: 25px; display: flex; align-items: center;">
                         <h3 class="me-2">
-                		    <i class="fa-solid fa-business-time" style="color: #ffffff;"></i>
-                                Eventos finalizados: 
+                            <i class="fa-regular fa-calendar-check"></i>
+                             Eventos finalizados: 
 			            </h3>
                         <h2 id="finCard"></h2>       
 		            </div>
                     <div id="eventosCancelados" class="info-card mb-2" style="height: 25px; display: flex; align-items: center;">
                         <h3 class="me-2">
-                		    <i class="fa-solid fa-business-time" style="color: #ffffff;"></i>
-                                Eventos cancelados: 
+                            <i class="fa-regular fa-calendar-xmark"></i>
+                            Eventos cancelados: 
 			            </h3>
                         <h2 id="canceladoCard"></h2>       
 		            </div>
+                    <div id="peticiones" class="info-card mb-2" style="height: 25px; display: flex; align-items: center;">
+                        <h3 class="me-2">
+                            <i class="fa-regular fa-calendar-xmark"></i>
+                             Peticiones:
+			            </h3>
+                        <h2 id="peticionesCard"></h2>       
+		            </div>
 	            </div>
             </div>
-            <div id="tablaResultados"></div></div>
+            <div class="table-responsive">
+                <div id="tablaResultados"></div>
+                <div id="peticionesResult"></div>
+            </div>
+        </div>
 
             <!-- Modal de Confirmación -->
             <div class="modal fade" id="modalConfirmacion" tabindex="-1" role="dialog" aria-labelledby="modalConfirmacionLabel" aria-hidden="true">
@@ -282,7 +301,7 @@
                         <li>
                             <button id="verGraficos" data-url="" type="button" class="btn-view-custom btn-options ver-empleados btn btn-primary border-2 btn-outline-light rounded-5" data-bs-target="#mainModal">
                                 <i class="fa-solid fa-chart-pie" style="color: #ffffff;"></i>
-                                Ver Graficos
+                                Ver Gráficos
                             </button>
                         </li>
                         <li>
@@ -338,7 +357,7 @@
         
         <div id="comidas" class="tab-content">
             <h3 class="test" style="text-align:center; ">
-                Panel de Menus
+                Panel de Menús
                 <i class="fa-solid fa-burger" style="color: #ffffff;"></i>
             </h3>
             <br>
@@ -346,13 +365,13 @@
             <div class="filter">
                     <button type="button" class="btn btn-success border-2 btn-outline-light rounded-5 btn-options" data-bs-toggle="modal" data-bs-target="#modalComida" data-bs-whatever="">
                         <i class="fa-solid fa-circle-plus" style="color: #ffffff;"></i>
-                        Agregar
+                        Agregar Menú
                     </button>
                 </div>
                 <!--Barra de Busqueda-->
                 <div class="input-group mb-3 search-bar" id="search">
-                    <input type="text" id="busqueda" class="form-control" placeholder="Buscar a un empleado"
-                        onkeyup="searchEmployee()"
+                    <input type="text" id="busquedaMenu" class="form-control" placeholder="Buscar un menú"
+                        onkeyup="searchMenu()"
                      aria-label="" aria-describedby="button-addon2">
                     <button id="buscarEmpleado" data-url="buscarEmpleado.php" class="ver-empleados btn btn-outline-primary" type="button" id="button-addon2">
                     <i class="fa-solid fa-magnifying-glass" style="color: #1f71ff;"></i></button>
@@ -369,27 +388,45 @@
                     </button>
                     <ul class="dropdown-menu custom-drop-menu">
                         <li>
-                            <button id="verGraficos" data-url="" type="button" class="btn-view-custom btn-options ver-empleados btn btn-primary border-2 btn-outline-light rounded-5" data-bs-target="#mainModal">
-                                <i class="fa-solid fa-chart-pie" style="color: #ffffff;"></i>
-                                Ver Graficos
+                            <button id="verBebidas" data-vista="1" data-url="verCocineros.php" type="button" class="btn-view-custom btn-options ver-menus btn btn-primary border-2 btn-outline-light rounded-5" data-bs-target="#mainModal">
+                                <i class="fa-solid fa-wine-glass" style="color: #ffffff;"></i>
+                                Bebidas
                             </button>
                         </li>
                         <li>
-                            <button id="verCocineros" data-url="verCocineros.php" type="button" class="btn-view-custom btn-options ver-empleados btn btn-primary border-2 btn-outline-light rounded-5" data-bs-target="#mainModal">
-                                <i class="fa-solid fa-utensils" style="color: #ffffff;"></i>
-                                Ver Cocineros
+                            <button id="verDesayuno" data-vista="2" data-url="/php/viewsMenus/verMenus.php" type="button" class="btn-view-custom btn-options ver-menus btn btn-primary border-2 btn-outline-light rounded-5" data-bs-target="#mainModal">
+                                <i class="fa-solid fa-egg" style="color: #ffffff;"></i>
+                                Desayuno
                             </button>
                         </li>
                         <li>
-                            <button id="verMeseros" data-url="verMeseros.php" type="button" class="btn-view-custom btn-options ver-empleados btn btn-primary border-2 btn-outline-light rounded-5" data-bs-target="#mainModal">
-                                <i class="fa-solid fa-bell-concierge" style="color: #ffffff;"></i>
-                                Ver Meseros
+                            <button id="verDesBuffet" data-vista="3" data-url="/php/viewsMenus/verMenus.php" type="button" class="btn-view-custom btn-options ver-menus btn btn-primary border-2 btn-outline-light rounded-5" data-bs-target="#mainModal">
+                                <i class="fa-solid fa-bacon" style="color: #ffffff;"></i>
+                                Des. Buffet
                             </button>
                         </li>
                         <li>
-                            <button id="verSolicitudes" data-url="verSolicitudes.php" type="button" class="btn-view-custom btn-options ver-empleados btn btn-primary border-2 btn-outline-light rounded-5" data-bs-target="#mainModal">
-                                <i class="fa-solid fa-business-time" style="color: #ffffff;"></i>
-                                Ver Solicitudes
+                            <button id="verComida" data-vista="4" data-url="/php/viewsMenus/verMenus.php" type="button" class="btn-view-custom btn-options ver-menus btn btn-primary border-2 btn-outline-light rounded-5" data-bs-target="#mainModal">
+                                <i class="fa-solid fa-burger" style="color: #ffffff;"></i>
+                                Comida
+                            </button>
+                        </li>
+                        <li>
+                            <button id="verComidaBuffet" data-vista="5" data-url="/php/viewsMenus/verMenus.php" type="button" class="btn-view-custom btn-options ver-menus btn btn-primary border-2 btn-outline-light rounded-5" data-bs-target="#mainModal">
+                                <i class="fa-solid fa-drumstick-bite" style="color: #ffffff;"></i>
+                                Comida Buffet
+                            </button>
+                        </li>
+                        <li>
+                            <button id="verCoffee" data-vista="6" data-url="/php/viewsMenus/verMenus.php" type="button" class="btn-view-custom btn-options ver-menus btn btn-primary border-2 btn-outline-light rounded-5" data-bs-target="#mainModal">
+                                <i class="fa-solid fa-mug-saucer" style="color: #ffffff;"></i>
+                                Coffee break
+                            </button>
+                        </li>
+                        <li>
+                            <button id="verDescontinuado" data-vista="8" data-url="/php/viewsMenus/verMenus.php" type="button" class="btn-view-custom btn-options ver-menus btn btn-primary border-2 btn-outline-light rounded-5" data-bs-target="#mainModal">
+                                <i class="fa-solid fa-circle-minus" style="color: #ffffff;"></i>
+                                Descontinuado
                             </button>
                         </li>
                     </ul>
@@ -397,28 +434,19 @@
             </div> 
         </div>
             <!--Informacion de la tabla-->
-            <h3 id="table-info"></h3>
+            <h3 id="table-info-menus"></h3>
             <!--Container para tablas-->
-            <div class="cont-table">
+            <div id="cont-table-menus">
                 <!--Contenido Default-->
                 <div class="container-fluid">
                     <div class="row">
                         <!-- Contenido de la izquierda -->
-                        <div class="col-md-5" style="padding-left: 0px !important;">
-                        <div class="info-card mb-2" style="height: 25px; display: flex; align-items: center;">
-                            <h3 class="me-2">
-                            <i class="fa-solid fa-business-time" style="color: #ffffff;"></i>
-                                Solicitudes Pendientes: 
-                            </h3>
-                            <h2 id="solicitudesCard"></h2>
-                        </div>
-                            <div class="col-md-12 donut-container">
-                                <canvas id="proporcionEmpleados2" style="height: 40px"></canvas>
-                            </div>
+                        <div class="col-md-5 pieMenus">
+                            <canvas id="pieTipoMenus" style="height: 60%; width: 100%; margin-right: 0px !important;"></canvas>
                         </div>
                         <!-- Canvas a la derecha -->
-                        <div class="info-card col-md-7">
-                            <canvas id="participacionEmpleados" style="height: 70%; width: 100%;"></canvas>
+                        <div class="info-card col-md-7" style="margin-right: 0px !important;">
+                            <canvas id="menuChart2" style="height: 70%; width: 100%;"></canvas>
                         </div>
                     </div>
                 </div>
@@ -461,7 +489,7 @@
                     </div>
                     <div class="modal-body" id="modal-form">
                         <p>Aqui puedes agregar un nuevo menu al sistema</p>
-                        <form id="formularioEmpleado">
+                        <form id="formularioMenu">
                             <div class="mb-3">
                                 <label class="control-label">Nombre del nuevo menu:</label>
                                 <input type="text" name="nombre" placeholder="Nombre del menu" class="form-control" maxlength="45" required>
@@ -483,8 +511,8 @@
                                 </select>
                             </div>
                             <div class="d-flex justify-content-center">
-                                <button type="submit" class="btn btn-primary btn-modal me-2"><i class="fa-solid fa-circle-plus" style="color: #ffffff;"></i>Agregar</button>
-                                <button type="button" class="btn btn-primary btn-modal" data-bs-dismiss="modal">Cerrar</button>
+                                <button id="aceptarMenu" type="submit" class="btn btn-primary btn-modal me-2"><i class="fa-solid fa-circle-plus" style="color: #ffffff;"></i>Agregar</button>
+                                <button id="cerrarAltaMenu" type="button" class="btn btn-primary btn-modal" data-bs-dismiss="modal">Cerrar</button>
                             </div>
                         </form>
                         <div id="mensajeDiv" class="mt-10" method="POST"></div>
@@ -495,8 +523,11 @@
 
 <script>
     document.addEventListener("DOMContentLoaded", function() {
-        var formulario = document.getElementById("formularioEmpleado");
+        var formulario = document.getElementById("formularioMenu");
         var mensajeDiv = document.getElementById("mensajeDiv");
+        var modalMenu = document.getElementById("modalComida");
+        var cerrarModal = document.getElementById("cerrarAltaMenu");
+        var aceptarMenu = document.getElementById("aceptarMenu");
 
         formulario.addEventListener("submit", function(e) {
         e.preventDefault(); // Evita el envío tradicional del formulario
@@ -510,6 +541,15 @@
         if (xhr.readyState === 4) {
             if (xhr.status === 200) {
                 mensajeDiv.innerHTML = xhr.responseText;
+                if(xhr.responseText == "<div class='alert alert-success mt-4'>Menu agregado exitosamente</div>")
+                {   
+                    //Cerrar modal simulando un click
+                    setTimeout(function() {
+                        cerrarModal.click();
+                    }, 1500);
+                    //Limpiar el formulario
+                    formulario.reset();
+                }
                 } else {
                     mensajeDiv.innerHTML = "Hubo un error en la solicitud.";
                 }
@@ -531,6 +571,7 @@
     <script src="/js/filtroEventos.js"></script>
     <script src="/js/datosAdmin.js"></script>
     <script src="/js/buscarEmpleado.js"></script>
+    <script src="/js/panelMenu/buscarMenu.js"></script>
 </body>
 
 </html>

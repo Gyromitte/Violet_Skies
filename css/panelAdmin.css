@@ -241,10 +241,11 @@ nav{
 
 #estadoSelect option:hover {
     background-color: #b14aed;
+    
 }
   
 /*Charts and info*/
-#eventosAño, #proporcionEmpleados, #proporcionEmpleados2{
+#eventosAño, #proporcionEmpleados, #proporcionEmpleados2, #pieTipoMenus{
     background-image: linear-gradient(135deg, #5603ad, #f58cd6);
     color: white;
     border-radius: 20px;
@@ -256,6 +257,11 @@ nav{
 }
 .info-card{
     background-image: linear-gradient(135deg, #5603ad, #ab8cf5);
+    border-radius: 20px;
+    padding: 50px;
+}
+.graficaEventos{
+    background-image: linear-gradient(135deg, #5603ad, #f58cd6);
     border-radius: 20px;
     padding: 50px;
 }
@@ -274,9 +280,18 @@ nav{
     display: flex;
     justify-content: flex-end;
   }
+  .searchFechas {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+  .search-row {
+    margin-bottom: 5px;
+}
   .panel-header {
     text-align: center;
 }
+
 
 #estadoSelect {
     width: 300px;
@@ -327,7 +342,7 @@ nav{
     .nav-user{
         display: none;
     }
-    .info-card, #proporcionEmpleados, #eventosAño{
+    .info-card, #proporcionEmpleados, #eventosAño, #graficaEventos, #pieTipoMenus{
         margin-bottom: 10px;
     }
     .btn-options{
@@ -338,7 +353,8 @@ nav{
       }
     
       /* Adjust the width and margin for the filter and search components to fit the mobile layout */
-      .search-container .filter {
+      .search-container .filter 
+      {
         width: 100%; /* Full width for the filter */
         margin-bottom: 10px; /* Add some space between filter and search */
       }
@@ -349,7 +365,16 @@ nav{
     .donut-container{
        margin-bottom: 10px;
        margin-right: 10px;
-    }  
+    }
+    /*Graficos*/
+    #participacionEmpleados{
+        height: 200px !important;
+    }
+  
+}
+
+#buscarEmpleado{
+    z-index: 0;
 }
 
 #buscarEmpleado{
@@ -373,24 +398,24 @@ nav{
 .accordion-button {
     background: #ab8cf5;
 }
-.accordion-item:hover .accordion-button {
-    background-color: #5603ad;
-     color: white;
+.accordion-item:hover .accordion-button {     
+    font-weight: bold;
 }
 
 .detalles {
     max-width: 600px; /* Cambia este valor según sea necesario */
   }
 
-  #mensajeModificar{
+#mensajeModificar
+{
     text-align: center;
-    display: none;
+    display: NONE;
     width: 300px;
     height: auto;
     margin: 0 auto;
-  }
-.personal-info input[disabled]{
+}
+.personal-info input[disabled] {
     background-color: transparent;
     border-color: transparent;
     font-style: oblique;
-}
+  }

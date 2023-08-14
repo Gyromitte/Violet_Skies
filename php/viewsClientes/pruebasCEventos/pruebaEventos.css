@@ -3,13 +3,24 @@ form {
     flex-direction: column;
 }
 
-label, input {
+label, select, input {
     margin-bottom: 10px;
-    width: 600px;
+    width: 80%; 
+    box-sizing: border-box; 
+}
+
+@media (max-width: 400px) {
+    form {
+        padding: 20px; 
+    }
+
+    label, select, input, button{
+        max-width: 300px; 
+    }
 }
 
 button {
-    background-color: #4CAF50;
+    background-color: #3800d2;
     color: white;
     padding: 10px;
     border: none;
@@ -17,7 +28,7 @@ button {
 }
 
 button:hover {
-    background-color: #45a049;
+    background-color: #000647;
 }
 
 #eventos-list {
@@ -33,13 +44,52 @@ button:hover {
     background-image: linear-gradient(145deg, #5603ad, #f58cd6);
     color: white;
     padding: 5px; 
-    margin: 5px;
+    margin: 1.5%;
     float: left;
-    }
+}
     
-    .card-container {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
+.card-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: left;
+    padding-left: 3%;
+}
+.rounded-div {
+    width: 200px;
+    height: 150px;
+    background-color: #3498db;
+    clip-path: polygon(0 20px, 20px 0, calc(100% - 20px) 0, 100% 20px, 100% calc(100% - 20px), calc(100% - 20px) 100%, 20px 100%, 0 calc(100% - 20px));
+}
+.container {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+#evento-form {
+    flex-basis: calc(50% - 10px); 
+    margin-right: 20px; 
+    max-width: 600px;
+}
+
+#descripcionComida {
+    flex-basis: calc(50% - 10px);
+    height: fit-content;
+    padding-top: 1%;
+    margin-top: 20px; 
+    padding-bottom: 1%;
+    padding-left: 2%;
+    padding-right: 1%;
+}
+
+/* Media Query para dispositivos móviles */
+
+@media (max-width: 768px) {
+    .container {
+        flex-direction: column; 
     }
-    
+
+    #evento-form, #descripcionComida {
+        flex-basis: 100%; 
+        margin: 0; 
+    }
+}

@@ -43,6 +43,7 @@ if (isset($_POST['data'])) {
         $consulta .= "TELEFONO = :telefono, ";
         $parametros[':telefono'] = $telefono;
     }
+    
 
     // Verificar si se recibió el parámetro del correo
     if (isset($data['correo'])) {
