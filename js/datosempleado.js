@@ -21,7 +21,7 @@ function cambiarContraseña() {
 
           setTimeout(function() {
             location.reload();
-          }, 3000);
+          }, 2500);
 
         } else {
           alertDiv.classList.add('alert-danger');
