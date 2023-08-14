@@ -144,6 +144,7 @@ modal.addEventListener("show.bs.modal", function (event) {
                       VerDisp();
                       checkCurrentTable('pend');
                       checkCurrentTable('soli');
+                      recargarGraficos();
 
                     } 
                     else {
@@ -209,7 +210,7 @@ modal.addEventListener("show.bs.modal", function (event) {
 
               cancel.addEventListener("click", function (event) {
                 event.preventDefault();  
-      
+                recargarGraficos();
                 
       
                 var xhrCan = new XMLHttpRequest();
@@ -294,6 +295,7 @@ modal.addEventListener("show.bs.modal", function (event) {
                       document.getElementById("mensajeDiv").innerHTML = xhrCan.responseText;
                       checkCurrentTable(currentTable);
                       VerDisp();
+                      recargarGraficos();
                     } 
                     else {
                       checkCurrentTable(currentTable);
