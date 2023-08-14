@@ -25,6 +25,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&display=swap" rel="stylesheet">
     <script src="https://kit.fontawesome.com/b60c246061.js" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <style>
 			#cuadroEvento{
 				border: 3px solid darkblue;
@@ -153,7 +154,7 @@
                             <i class='fa-solid fa-briefcase fa-5x' style='color: #ffffff;'></i>
                         </div>
                     </div>
-                    <div class='col-md-4'>
+                    <div class='col-md-4 mb-4'>
                         <div class='info-card d-flex align-items-center justify-content-between'>
                             <div class='info d-flex flex-column align-items-center mb-2'>
                                 <h3 id='AsistCard'></h3>
@@ -175,6 +176,10 @@
                     <div>
                     <div class='row'>
                         <div class='col-md-6 mb-6'>
+                            <canvas id='EventosFinaliz' class='info-card d-flex align-items-center
+                             justify-content-between'></canvas>
+                        </div>
+                        <div class='col-md-6 mb-6'>
                             <div class='info-card d-flex align-items-center justify-content-between'>
                                 <div class='info d-flex flex-column align-items-center mb-2'>
                                     <h2>Proximo Evento</h2>
@@ -183,9 +188,7 @@
                                 <h3 id='FechaCard'></h3>
                             </div>
                         </div>
-                        <div class='col-md-4 mb-4'>
-                            <canvas id='EventosFinaliz'></canvas>
-                        </div>
+                    
                     </div>
                     </div>
                     </div>";
