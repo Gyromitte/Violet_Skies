@@ -2,7 +2,6 @@
 include "../dataBase.php";
 
 $emp = $_SESSION["ID"];
-$trab = $_SESSION["trabajo"];
 $db = new DataBase();
 $db->conectarBD();
 
@@ -10,9 +9,9 @@ $query = "SELECT * FROM CUENTAS WHERE ID = '$emp'";
 $cuenta = $db->seleccionar($query);
 if ($cuenta) {
 ?>
-<div class="container text-center" style="margin-top: 100px;">
-    <div class="accordion-item w-75 mx-auto rounded">
-        <h2 class="accordion-header custom-accordion-header text-start"">
+   <div class="container-fluid text-center" style="margin-top: 100px;">
+        <div class="accordion-item mx-auto rounded">
+        <h2 class="accordion-header custom-accordion-header text-start">
             <i class="fa-solid fa-user me-2" style="color: #ffffff;"></i>
             Datos personales
         </h2>
@@ -20,7 +19,7 @@ if ($cuenta) {
         <div class="personal-info accordion" id="accordionExample" style="color: black;">
             <div class="mb-3 row">
                 <label class="col-sm-3 col-form-label">Nombre:</label>
-                <div class="col-sm-9 accordion-header">
+                <div class="col-sm-9 accordion-header  text-center">
                     <input class="form-control" type="text" value="<?php echo $cuenta[0]->NOMBRE; ?>" name="nombre" disabled>
                 </div>
             </div>
@@ -50,13 +49,25 @@ if ($cuenta) {
             </div>
             <div class="mb-3 row ">
                 <label class="col-sm-3 col-form-label">Contraseña:</label>
-                <div class="col-sm-9 accordion-header">
+                <div class="col-sm-4 accordion-header">
                 <button class="btn btn-light" id="btnpassword" type="button"  data-bs-toggle="modal" data-bs-target="#modalCambiarContrasena">
                           <i class="fa-solid fa-lock me-2" style="color: #ffffff;"></i>
                           Cambiar contraseña</button>                </div>
             </div>
+            <div class="mb-3 row">
+                <div class="col-sm-12 text-center">
+                    <button class="btn btn-primary" id="btnEditarDatosPersonales" onclick="habilitarEdicion()">
+                        <i class="fa-solid fa-pencil me-2" style="color: #ffffff;"></i>Editar Datos</button>
+                    <button class="btn btn-success d-none" id="btnGuardarCambios" onclick="guardarCambios()">
+                        <i class="fa-solid fa-floppy-disk me-2" style="color: #ffffff;"></i>Guardar Cambios</button>
+                    <button class="btn btn-danger d-none" id="btnCancelarCambios" onclick="cancelarCambios()">
+                        <i class="fa-solid fa-ban me-2" style="color: #ffffff;"></i>Cancelar Cambios</button>
+                </div>
+            </div>
             <input type="hidden" name="id" value="<?php echo $_SESSION["ID"]; ?>">
         </div>
+        <div id="telefonoError" class="text-danger"></div> 
+        <div id="telefonoSuccess" class="text-success"></div>
     </div>
 </div>
 </div>

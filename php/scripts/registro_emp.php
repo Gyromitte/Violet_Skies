@@ -10,7 +10,6 @@
     $pass = $_POST['pass'];
     $confirm = $_POST['ckpass'];
     $cel = $_POST['cel'];
-    $empleado=$_POST['empleado'];
     $tipo="EMPLEADO";
 
 
@@ -49,7 +48,7 @@
         echo "<div class='alert alert-danger'>Registros vacios, favor de llenar</div>";
     }
     else{
-        $db->RegisterEmp($nom,$ap,$am,$usu,$pass,$confirm,$cel,$tipo,$empleado);
+        $db->Register($nom,$ap,$am,$usu,$pass,$confirm,$cel,$tipo);
     }
     $db->desconectarBD();
 ?>
