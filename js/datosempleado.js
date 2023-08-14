@@ -1,7 +1,7 @@
 const btnEditarDatosPersonales = document.getElementById('btnEditarDatosPersonales');
 const btnGuardarCambios = document.getElementById('btnGuardarCambios');
 const btnCancelarCambios = document.getElementById('btnCancelarCambios');
-const successDiv = document.getElementById('alertMessage');
+const successDiv = document.getElementById('mensajeModificar');
   
 function cambiarContraseña() {
     const formu = document.getElementById('formCambiarContrasena');
@@ -91,19 +91,16 @@ function guardarCambios() {
           if (response.success) {
               const telefonoSuccess = document.getElementById('telefonoSuccess');
               telefonoSuccess.style.display = "block";
-telefonoSuccess.innerHTML = "Teléfono guardado correctamente.";
-setTimeout(function() {
-    telefonoSuccess.style.display = "none";
-}, 4000);
+              telefonoSuccess.innerHTML = "Teléfono guardado correctamente.";
+              setTimeout(function() {
+                  telefonoSuccess.style.display = "none";
+              }, 2500);
+              
+              // Reload the page 
+              setTimeout(function() {
+                  location.reload();
+              }, 2020); // Adjust the delay (in milliseconds)
 
-// Get the top position of the perfilSection
-var perfilSectionTop = document.getElementById("perfilSection").offsetTop;
-
-// Reload the page after a brief delay
-setTimeout(function() {
-    window.scrollTo(0, perfilSectionTop); // Scroll to the perfilSection
-    location.reload();
-}, 4000);
               inputs.forEach(input => {
                   input.setAttribute('disabled', 'true');
               });
