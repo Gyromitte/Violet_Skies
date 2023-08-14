@@ -131,7 +131,7 @@
                     </div>
             </div>
                 <div  class="container">
-                        <form style="width: 600px;"  id="evento-form" method="post">
+                        <form id="evento-form" method="post">
                             <div id="msgDiv"></div>
                             <div class="form-group">
                                 <label for="nombre_evento">Nombre del evento:</label>
