@@ -10,8 +10,13 @@ $consulta = "CALL verEventosDisponibles(?,?)";
 $parametros = array($emp,'porcreacion');
 
 $tabla = $conexion->seleccionarPreparado($consulta, $parametros);
-
 $numdisp=count($tabla);
+foreach($tabla as $registro){
+if($registro->MESEROS=='' && $registro->COCINEROS==''){
+    $numdisp--;
+}
+}
+
 
 $consulta = "CALL verEmpAtendiendo(?)";
 $parametros = array($emp);
