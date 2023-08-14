@@ -131,9 +131,14 @@ function peticionesFuncion() {
     var params = new URLSearchParams(formData);
     history.replaceState(null, '', '?' + params.toString());
 }
-function verSolicitudes(eventoId, nombreEvento) {
+function verSolicitudes(eventoId, nombreEvento, faltanMeseros, faltanCocina) {
     var xhr = new XMLHttpRequest();
-    xhr.open('GET', '../viewsEventos/solicitudes.php?evento_id=' + eventoId + '&nombre_evento=' + encodeURIComponent(nombreEvento), true);
+    var url = '../viewsEventos/solicitudes.php?evento_id=' + eventoId +
+              '&nombre_evento=' + encodeURIComponent(nombreEvento) +
+              '&FALTAN_MESEROS=' + faltanMeseros +
+              '&FALTAN_COCINA=' + faltanCocina;
+
+    xhr.open('GET', url, true);
     xhr.onload = function() {
         if (xhr.status === 200) {
             peticionesResult.innerHTML = xhr.responseText;
@@ -141,6 +146,7 @@ function verSolicitudes(eventoId, nombreEvento) {
     };
     xhr.send();
 }
+
 
 window.addEventListener('load', function() {
     var params = new URLSearchParams(window.location.search);
