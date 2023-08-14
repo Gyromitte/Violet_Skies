@@ -388,12 +388,6 @@
                     </button>
                     <ul class="dropdown-menu custom-drop-menu">
                         <li>
-                            <button id="verGraficosMenus" data-url="" type="button" class="btn-view-custom btn-options ver-menus btn btn-primary border-2 btn-outline-light rounded-5" data-bs-target="#mainModal">
-                                <i class="fa-solid fa-chart-pie" style="color: #ffffff;"></i>
-                                Ver Gráficos
-                            </button>
-                        </li>
-                        <li>
                             <button id="verBebidas" data-vista="1" data-url="verCocineros.php" type="button" class="btn-view-custom btn-options ver-menus btn btn-primary border-2 btn-outline-light rounded-5" data-bs-target="#mainModal">
                                 <i class="fa-solid fa-wine-glass" style="color: #ffffff;"></i>
                                 Bebidas

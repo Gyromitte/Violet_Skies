@@ -3,7 +3,7 @@
 const toggleDashboardBtn = document.getElementById('nav-button');
 const dashboard = document.getElementById('dash-board');
 const main = document.getElementById('main');
-
+var tabs = document.querySelectorAll('.dash-button');
 
 
 function toggleDashboard() {
@@ -27,16 +27,21 @@ var tabContents = document.querySelectorAll('.tab-content');
 tabs.forEach(function (tab) {
   tab.addEventListener('click', function () {
     var tabId = this.getAttribute('data-tab');
+    var access =this.getAttribute('data-access');
 
     tabs.forEach(function (tab) {
       tab.classList.remove('active');
     });
     tabContents.forEach(function (content) {
       content.classList.remove('active');
+      if (tabId === 'empleados'&& access==='2') {
+        btnPend.click();
+      }
     });
 
     this.classList.add('active');
     document.getElementById(tabId).classList.add('active');
+
   });
 });
 
@@ -114,7 +119,7 @@ modal.addEventListener("show.bs.modal", function (event) {
                     </div>
                     <br>
                     <div class="d-flex justify-content-center">
-                      <button type="submit" id="asist" class="btn btn-primary btn-modal-warning me-2">
+                      <button type="submit" id="asist" class="btn btn-primary btn-modal me-2">
                         <i class="fa-solid fa-user me-2" style="color: #ffffff;">
                         </i>
                         Asistir

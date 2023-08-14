@@ -25,6 +25,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&display=swap" rel="stylesheet">
     <script src="https://kit.fontawesome.com/b60c246061.js" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <style>
 			#cuadroEvento{
 				border: 3px solid darkblue;
@@ -114,7 +115,7 @@
             ?><br><br>
             <button data-tab="home" class="dash-button"><i class="fa-solid fa-house" style="color: #ffffff;"></i><br>Home</button>
             <button data-tab="eventos" class="dash-button"><i class="fa-solid fa-briefcase" style="color: #ffffff;"></i><br>Eventos Disponibles</button>
-            <button data-tab="empleados" class="dash-button"><i class="fa-solid fa-business-time" style="color: #ffffff;"></i><br>Eventos En Curso</button>
+            <button data-tab="empleados" data-access="<?php echo $_SESSION["access"]?>" class="dash-button"><i class="fa-solid fa-business-time" style="color: #ffffff;"></i><br>Eventos En Curso</button>
             <button data-tab="perfil" class="dash-button"><i class="fa-solid fa-user" style="color: #ffffff;"></i><br>Perfil</button>
             <a style="text-decoration: none;" data-tab="logout" class="dash-button" href="../scripts/CerrarSesion.php">
                 <i class="fa-solid fa-door-open" style="color: #ffffff; padding-top: 10px;"></i><br>Logout</a>
@@ -153,7 +154,7 @@
                             <i class='fa-solid fa-briefcase fa-5x' style='color: #ffffff;'></i>
                         </div>
                     </div>
-                    <div class='col-md-4'>
+                    <div class='col-md-4 mb-4'>
                         <div class='info-card d-flex align-items-center justify-content-between'>
                             <div class='info d-flex flex-column align-items-center mb-2'>
                                 <h3 id='AsistCard'></h3>
@@ -175,6 +176,10 @@
                     <div>
                     <div class='row'>
                         <div class='col-md-6 mb-6'>
+                            <canvas id='EventosFinaliz' class='info-card d-flex align-items-center
+                             justify-content-between'></canvas>
+                        </div>
+                        <div class='col-md-6 mb-6'>
                             <div class='info-card d-flex align-items-center justify-content-between'>
                                 <div class='info d-flex flex-column align-items-center mb-2'>
                                     <h2>Proximo Evento</h2>
@@ -183,9 +188,7 @@
                                 <h3 id='FechaCard'></h3>
                             </div>
                         </div>
-                        <div class='col-md-4 mb-4'>
-                            <canvas id='EventosFinaliz'></canvas>
-                        </div>
+                    
                     </div>
                     </div>
                     </div>";
@@ -266,11 +269,13 @@
             ?>
         </div>
         <div id="perfil" class="tab-content">
+        <div id="datosEmp">
             <div class="container">
                 <?php echo" <div class='container'>";
                 include "../viewsPerfil/datosEmp.php";
                 echo" </div>"; ?>
             </div>
+        </div>
         </div>
 
         <!--Modal-->

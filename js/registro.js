@@ -26,15 +26,15 @@ function updateModalContent(formType) {
             <form id="EmpReg">
                 <div class="mb-3">
                     <label class="control-label">Nombre(s): </label> 
-                    <input class="form-control" type="text" name="nom" placeholder="Nombre" requiered><br>
+                    <input class="form-control" type="text" name="nom" maxlength="30" placeholder="Nombre" requiered><br>
                 </div>
                 <div class="mb-3">
                     <label class="control-label">Apellido Paterno: </label> 
-                    <input class="form-control" type="text" name="ap" placeholder="Apellido Paterno" requiered><br>
+                    <input class="form-control" type="text" name="ap" maxlength="40" placeholder="Apellido Paterno" requiered><br>
                 </div>
                 <div class="mb-3">
                     <label class="control-label">Apellido Materno: </label> 
-                    <input class="form-control" type="text" name="am" placeholder="Apellido Materno" requiered><br>
+                    <input class="form-control" type="text" name="am" maxlength="40" placeholder="Apellido Materno" requiered><br>
                 </div>
                 <div class="mb-3">
                     <label class="control-label">Correo: </label> 
@@ -42,7 +42,7 @@ function updateModalContent(formType) {
                 </div>
                 <div class="mb-3">
                     <label class="control-label">Numero de Celular: </label> 
-                    <input class="form-control" type="text" name="cel" placeholder="Telefono" requiered><br>
+                    <input class="form-control" type="text" name="cel" placeholder="Telefono" maxlength="10" requiered><br>
                 </div>
                 <div class="mb-3">
                     <label class="control-label">Contraseña: </label>
@@ -53,13 +53,6 @@ function updateModalContent(formType) {
                     <label class="control-label">Comprobar Contraseña: </label>
                     <input class="form-control" type="password" name="ckpass"
                     placeholder="Comprobar Contraseña" required><br>
-                </div>
-                <div class="mb-3">
-                    <label class="control-label">Tipo de Empleado: </label>
-                    <select name="empleado">
-                        <option value='MESERO'>Mesero</option>
-                        <option value='COCINA'>Cocinero</option>
-                    </select><br>
                 </div>
                 <div id="mensajeDiv" method="POST"></div>
                 <div class="d-flex justify-content-center">
@@ -89,15 +82,13 @@ function updateModalContent(formType) {
               var cel = form.elements['cel'].value;
               var pass = form.elements['pass'].value;
               var ckpass = form.elements['ckpass'].value;
-              var empleado = form.elements['empleado'].value;
               //Como se va enviar la solicitud: un string
               var formData = 'nom=' + encodeURIComponent(nombre) + '&ap=' + (ap) + 
               '&am=' + encodeURIComponent(am) + 
               '&usu=' + encodeURIComponent(usu) + 
               '&cel=' + encodeURIComponent(cel) + 
               '&pass=' + encodeURIComponent(pass) + 
-              '&ckpass=' + encodeURIComponent(ckpass)+
-              '&empleado=' + encodeURIComponent(empleado);
+              '&ckpass=' + encodeURIComponent(ckpass);
               xhr.onreadystatechange = function () {
                 if (xhr.readyState === XMLHttpRequest.DONE && xhr.status === 200) {
                   //Manejo de la respuesta:
@@ -126,15 +117,15 @@ function updateModalContent(formType) {
             <form id="CliReg">
                 <div class="mb-3">
                     <label class="control-label">Nombre(s): </label> 
-                    <input class="form-control" type="text" name="nom" placeholder="Nombre" requiered><br>
+                    <input class="form-control" type="text" name="nom" maxlength="30" placeholder="Nombre" requiered><br>
                 </div>
                 <div class="mb-3">
                     <label class="control-label">Apellido Paterno: </label> 
-                    <input class="form-control" type="text" name="ap" placeholder="Apellido Paterno" requiered><br>
+                    <input class="form-control" type="text" name="ap" maxlength="40" placeholder="Apellido Paterno" requiered><br>
                 </div>
                 <div class="mb-3">
                     <label class="control-label">Apellido Materno: </label> 
-                    <input class="form-control" type="text" name="am" placeholder="Apellido Materno" requiered><br>
+                    <input class="form-control" type="text" name="am" maxlength="40" placeholder="Apellido Materno" requiered><br>
                 </div>
                 <div class="mb-3">
                     <label class="control-label">Correo: </label> 
@@ -142,7 +133,7 @@ function updateModalContent(formType) {
                 </div>
                 <div class="mb-3">
                     <label class="control-label">Numero de Celular: </label> 
-                    <input class="form-control" type="text" name="cel" placeholder="Telefono" requiered><br>
+                    <input class="form-control" type="text" name="cel" maxlength="15" placeholder="Telefono" requiered><br>
                 </div>
                 <div class="mb-3">
                     <label class="control-label">Contraseña: </label>

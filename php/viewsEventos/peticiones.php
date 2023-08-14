@@ -4,16 +4,22 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $conexion = new Database();
     $conexion->conectarBD();
 
-    $consulta = "SELECT VED.EventoID, VED.NOMBRE_EVENTO, VED.F_EVENTO, (DE.MESEROS-VED.NUMERO_MESEROS) AS FALTAN_MESEROS,
-    (DE.COCINEROS-NUMERO_COCINEROS) AS FALTAN_COCINA, S.SOLICITUDES
-    FROM Vista_Evento_Detalles VED JOIN DETALLE_EVENTO DE ON VED.EventoID=DE.ID JOIN 
-    (
-    SELECT E.ID, E.NOMBRE, COUNT(SE.ACEPTADO) AS SOLICITUDES
-    FROM EVENTO E LEFT JOIN SOLICITUDES_EMPLEADO SE ON E.ID=SE.EVENTO
-    WHERE E.ESTADO='EN PROCESO'
-    GROUP BY E.ID, E.NOMBRE, E.F_EVENTO
-    ) AS S ON VED.EventoID=S.ID
-    WHERE (DE.MESEROS-VED.NUMERO_MESEROS) != 0 AND (DE.COCINEROS-NUMERO_COCINEROS) != 0";
+    $consulta = "SELECT VED.EventoID, VED.NOMBRE_EVENTO, VED.F_EVENTO, 
+    (DE.MESEROS - VED.NUMERO_MESEROS) AS FALTAN_MESEROS,
+    (DE.COCINEROS - NUMERO_COCINEROS) AS FALTAN_COCINA,
+    S.SOLICITUDES
+FROM Vista_Evento_Detalles VED
+JOIN DETALLE_EVENTO DE ON VED.EventoID = DE.ID
+JOIN (
+ SELECT E.ID, E.NOMBRE, 
+        SUM(CASE WHEN SE.ACEPTADO = 0 THEN 1 ELSE 0 END) AS SOLICITUDES
+ FROM EVENTO E
+ LEFT JOIN SOLICITUDES_EMPLEADO SE ON E.ID = SE.EVENTO AND SE.ACEPTADO = 0
+ WHERE E.ESTADO = 'EN PROCESO' 
+ GROUP BY E.ID, E.NOMBRE, E.F_EVENTO
+) AS S ON VED.EventoID = S.ID
+WHERE (DE.MESEROS - VED.NUMERO_MESEROS) != 0 
+AND (DE.COCINEROS - NUMERO_COCINEROS) != 0;";
 
     $tabla = $conexion->seleccionar($consulta);
     $conexion->desconectarBD();
@@ -30,7 +36,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         <p class="card-text">Faltan meseros: <?php echo $fila['FALTAN_MESEROS']; ?></p>
         <p class="card-text">Faltan cocineros: <?php echo $fila['FALTAN_COCINA']; ?></p>
         <p class="card-text">Solicitudes: <?php echo $fila['SOLICITUDES']; ?></p>
-        <a href="#" class="btn btn-primary" onclick="verSolicitudes(<?php echo $fila['EventoID']; ?>, '<?php echo $fila['NOMBRE_EVENTO']; ?>')">Ver solicitudes</a>
+        <a href="#" class="btn btn-primary"
+               onclick="verSolicitudes(<?php echo $fila['EventoID']; ?>, '<?php echo $fila['NOMBRE_EVENTO']; ?>', <?php echo $fila['FALTAN_MESEROS']; ?>, <?php echo $fila['FALTAN_COCINA']; ?>)">
+                Ver solicitudes
+            </a>
       </div>
     </div>
   <?php } ?>

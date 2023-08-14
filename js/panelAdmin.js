@@ -831,7 +831,7 @@ function updateModalContent(formType, idEmpleado, idEvento) {
               <table align='center' cellspacing="20" cellpadding="5">
                 <tr>
                   <td><h6>Fecha</h6></td>
-                  <td><input class="form-control" type="text" placeholder="Fecha y hora" id="fechaEvento" value="${detallesEvento.F_EVENTO}" disabled></td>
+                  <td>${detallesEvento.F_EVENTO}</td>
                 </tr>
                 <tr>
                   <td><h6>Salón</h6></td>
@@ -1331,6 +1331,7 @@ function updateModalContent(formType, idEmpleado, idEvento) {
           
           // Obtener el formulario después de haberlo asignado al DOM
           var formEditarMenu = document.getElementById('formularioMenu');
+          var btnReincorporar = document.getElementById('btnDescMenu');
 
           // Agregar evento de envío al formulario de edición
           formEditarMenu.addEventListener('submit', function (event) {
@@ -1347,6 +1348,11 @@ function updateModalContent(formType, idEmpleado, idEvento) {
                   // Actualizar el mensaje de respuesta en el formulario
                   var mensajeDiv = document.getElementById('mensajeDiv');
                   mensajeDiv.innerHTML = xhrReIncorporarMenu .responseText;
+                  //Desactivar boton en respuesta exitosa
+                  if(xhrReIncorporarMenu.responseText == "<div class='alert alert-success'>Menú re-incorporado con exito</div>")
+                  {
+                    btnReincorporar.disabled = true;
+                  }
                 } else {
                   console.error("Error en la solicitud AJAX para descontinuar el menú");
                 }
