@@ -95,8 +95,8 @@
     <!--Main Content-->
     <div id="main">
         <!-- Página de Eventos del cliente -->
-        <div id="home" class="tab-content active">
-            <div class="panel-header">
+        <div style="padding-left:10%;" id="home" class="tab-content active">
+            <div class="panel-header" style="display: flex; flex-direction: column; align-items: center;">
                 <h3 class="test" style="text-align: center; margin-top:2%">
                     Mis eventos
                     <i class="fa-solid fa-calendar-days" style="color: #ffffff;"></i>
@@ -123,7 +123,7 @@
         <!-- Agendar Eventos -->
         <div id="eventos" class="tab-content colspan">
             <div width="600px">
-                <div class="panel-header">
+                <div class="panel-header"  style="display: flex; flex-direction: column; align-items: center;">
                 <h3 class="test" style="text-align: center; margin-top:2%">
                     Configura tu evento!
                     <i class="fa-solid fa-calendar-days" style="color: #ffffff;"></i>
