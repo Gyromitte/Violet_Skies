@@ -16,7 +16,7 @@
     <link rel="stylesheet" href="/bootstrap/css/bootstrap.min.css">
     <link rel="stylesheet" href="/css/panelAdmin.css">
     <link rel="stylesheet" href="/css/cards.css">
-    <link rel="stylesheet" href="../viewsClientes/pruebasCEventos/pruebaEventos.css">
+  
     <link rel="stylesheet" href="/css/agendarEvento.css">
     <!-- Agrega la siguiente línea para cargar el CSS del complemento datetimepicker -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-datetimepicker/2.5.20/jquery.datetimepicker.min.css">
@@ -30,7 +30,9 @@
     <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&display=swap" rel="stylesheet">
     <script src="https://kit.fontawesome.com/b60c246061.js" crossorigin="anonymous"></script>
     <script src="filterEvents.js" async defer></script>
-    
+
+    <!--Libreria full calendar-->
+    <script src="/fullCalendar/fullcalendar.js"></script>
 
 </head>
 <body>
@@ -66,7 +68,7 @@
     // Convertir el array de datos del usuario en formato JSON para poder pasarlo a JavaScript
     $datosUsuarioJSON = json_encode($datosUsuario);
     ?>
-   <nav>
+    <nav>
         <div class="nav-menu">
             <button id="nav-button">
                 <i class="fa-solid fa-bars" style="color: #ffffff;"></i>
@@ -85,101 +87,48 @@
         <div id="dash-board-content">
             <div style="margin-top: 20%;" > <?php echo $_SESSION["name"];?></div>
             <div><?php echo $_SESSION["tipo"];?><br><br></div>
-            <button style="height: max-content;" data-tab="home" class="dash-button"><i class="fa-solid fa-house" style="color: #ffffff;"></i><br>Mis eventos</button>
-            <button style="height: max-content;" data-tab="eventos" class="dash-button"><i class="fa-solid fa-user" style="color: #ffffff;"></i><br>Agendar Evento</button>
+            <button style="height: max-content;" data-tab="home" class="dash-button"><i class="fa-solid fa-house" style="color: #ffffff;"></i><br>Agendar evento</button>
+            <button style="height: max-content;" data-tab="eventos" class="dash-button"><i class="fa-solid fa-user" style="color: #ffffff;"></i><br>Mis eventos</button>
             <button style="height: max-content;" data-tab="perfil" class="dash-button"><i class="fa-solid fa-user" style="color: #ffffff;"></i><br>Perfil</button>
             <a style="text-decoration: none; height: max-content;" data-tab="logout" class="dash-button" href="../scripts/CerrarSesion.php">
-                <i class="fa-solid fa-door-open" style="color: #ffffff; padding-top: 10px;"></i><br>Logout</a>
+            <i class="fa-solid fa-door-open" style="color: #ffffff; padding-top: 10px;"></i><br>Logout</a>
         </div>
     </div>
     <!--Main Content-->
     <div id="main">
         <!-- Página de Eventos del cliente -->
-        <div style="padding-left:10%;" id="home" class="tab-content active">
-            <div class="panel-header" style="display: flex; flex-direction: column; align-items: center;">
-                <h3 class="test" style="text-align: center; margin-top:2%">
-                    Mis eventos
-                    <i class="fa-solid fa-calendar-days" style="color: #ffffff;"></i>
-                </h3>
-                <div  style=" width:fit-content;"  class="custom-card rounded-5">
-                    <h3 style=" padding-right:5%; padding-left:5%; text-align: center;">Aquí puedes ver tus eventos.</h3>
-                        <p style=" padding-right:5%; padding-left:5%; text-align: center;"><b>Si deseas realizar cambios debes contactarte con nosotros para aclarar detalles.</b></p>
-                </div>
-            </div>
-            <div class="filter-buttons">
-                <button class="btn-options ver-empleados btn btn-primary border-2 btn-outline-light rounded-5" onclick="filterEvents('PENDIENTE')">Pendiente</button>
-                <button class="btn-options ver-empleados btn btn-primary border-2 btn-outline-light rounded-5" onclick="filterEvents('EN PROCESO')">En Proceso</button>
-                <button class="btn-options ver-empleados btn btn-primary border-2 btn-outline-light rounded-5" onclick="filterEvents('FINALIZADO')">Finalizado</button>
-                <button class="btn-options ver-empleados btn btn-primary border-2 btn-outline-light rounded-5" onclick="filterEvents('CANCELADO')">Cancelado</button>
-                <a href="https://wa.me/528715659629?text=¡Hola! Quiero hablar con la persona a cargo" target="_blank" style="border:5px;  display: inline-block; background-color: green; color: white; padding: 10px 20px; text-decoration: none; border-radius: 20px;">
-                        <i class="fa-brands fa-whatsapp me-1" style="color: #ffffff;"></i><b>WhatsApp</b>
-                    </a>  
-            </div>
-
-            <div id="event-cards" class="card-container">
-            <!-- Aquí se agregarán las tarjetas de eventos -->
-            </div>
+        <div id="home" class="tab-content active">
+            <!--Div que contiene el calendario-->
+            <div id="calendar"></div>
         </div>
+
         <!-- Agendar Eventos -->
         <div id="eventos" class="tab-content colspan">
-            <div width="600px">
-                <div class="panel-header"  style="display: flex; flex-direction: column; align-items: center;">
-                <h3 class="test" style="text-align: center; margin-top:2%">
-                    Configura tu evento!
-                    <i class="fa-solid fa-calendar-days" style="color: #ffffff;"></i>
-                </h3>
-                <div  style=" width:fit-content;"  class="custom-card rounded-5">
-                    <h3 style=" padding-right:5%; padding-left:5%; text-align: center;">Aquí puedes configurar tu evento</h3>
-                        <p style=" padding-right:5%; padding-left:5%; text-align: center;"><b>Verifica que hayas configurado bien tu evento,<br>de lo contrario solo podrás realizar cambios contactando con nosotros</b></p>
-                    </div>
-            </div>
-                <div  class="container">
-                        <form id="evento-form" method="post">
-                            <div id="msgDiv"></div>
-                            <div class="form-group">
-                                <label for="nombre_evento">Nombre del evento:</label>
-                                <input type="text" class="form-control" id="nombre_evento" name="nombre_evento" required maxlength="50">
-                            </div>
-                            <div class="form-group">
-                                <label for="salon">Salón:</label>
-                                <select class="form-control" id="salon" name="salon" required>
-                                    <option value="">Seleccione un salón</option>
-                                    <?php
-                                    foreach ($salonItems as $salonItem) {
-                                        echo '<option value="' . $salonItem['ID'] . '">' . $salonItem['NOMBRE'] ." Cupo: ".  $salonItem["CUPO"] . '</option>';
-                                    }
-                                    ?>
-                                </select>
-                            </div>
-                            <div class="form-group">
-                                <label for="comida">Menú del evento:</label>
-                                <select class="form-control" id="comida" name="comida" required>
-                                    <option value="">Seleccione una comida del menú</option>
-                                    <?php
-                                    foreach ($menuItems as $menuItem) {
-                                        echo '<option value="' . $menuItem['ID'] . '" data-descripcion="' . $menuItem['DESCRIPCION'] . '">' . $menuItem['NOMBRE'] . '</option>';
-                                    }
-                                    ?>
-                                </select>
-
-                                </div>
-                            <div class="form-group">
-                                <label for="invitados">Cantidad de invitados:</label>
-                                <input type="text" class="form-control" id="invitados" name="invitados" required pattern="[0-9a-zA-Z]{1,3}" maxlength="3">
-                            </div>
-                            <div class="form-group">
-                                <label for="fecha">Fecha y hora del evento:</label>
-                                <input type="text" class="form-control" id="fechaEvento" name="fechaEvento"required readonly>
-                            </div>
-                            <button type="submit" class="btn btn-primary" id="solicitarEventoBtn">Solicitar Evento</button>
-                        </form>
-                    <div style=" align-content:center; justify-content: center;" class="container custom-item rounded-5" id="descripcionComida">
-                        <!-- Aquí van las comidas -->
+            <div class="panel-header" style="display: flex; flex-direction: column; align-items: center;">
+                    <h3 class="test" style="text-align: center; margin-top:2%">
+                        Mis eventos
+                        <i class="fa-solid fa-calendar-days" style="color: #ffffff;"></i>
+                    </h3>
+                    <div  style=" width:fit-content;"  class="custom-card rounded-5">
+                        <h3 style=" padding-right:5%; padding-left:5%; text-align: center;">Aquí puedes ver tus eventos.</h3>
+                            <p style=" padding-right:5%; padding-left:5%; text-align: center;"><b>Si deseas realizar cambios debes contactarte con nosotros para aclarar detalles.</b></p>
                     </div>
                 </div>
+                <div class="filter-buttons">
+                    <button class="btn-options ver-empleados btn btn-primary border-2 btn-outline-light rounded-5" onclick="filterEvents('PENDIENTE')">Pendiente</button>
+                    <button class="btn-options ver-empleados btn btn-primary border-2 btn-outline-light rounded-5" onclick="filterEvents('EN PROCESO')">En Proceso</button>
+                    <button class="btn-options ver-empleados btn btn-primary border-2 btn-outline-light rounded-5" onclick="filterEvents('FINALIZADO')">Finalizado</button>
+                    <button class="btn-options ver-empleados btn btn-primary border-2 btn-outline-light rounded-5" onclick="filterEvents('CANCELADO')">Cancelado</button>
+                    <a href="https://wa.me/528715659629?text=¡Hola! Quiero hablar con la persona a cargo" target="_blank" style="border:5px;  display: inline-block; background-color: green; color: white; padding: 10px 20px; text-decoration: none; border-radius: 20px;">
+                            <i class="fa-brands fa-whatsapp me-1" style="color: #ffffff;"></i><b>WhatsApp</b>
+                        </a>  
+                </div>
 
-            </div>
+                <div id="event-cards" class="card-container">
+                <!-- Aquí se agregarán las tarjetas de eventos -->
+                </div>
         </div>
+
         <!-- Página de Perfil del cliente -->
         <div id="perfil" class="tab-content">
         <!-- Datos personales del usuario -->
@@ -326,5 +275,7 @@
     <!-- Agrega la siguiente línea para cargar el complemento datetimepicker -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-datetimepicker/2.5.20/jquery.datetimepicker.full.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+    <script src="/php/viewsClientes/viewsClientes/js/renderCalendar.js"></script>
 </body>
 </html>
