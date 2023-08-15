@@ -54,6 +54,10 @@ function updateModalContent(formType) {
                     <input class="form-control" type="password" name="ckpass"
                     placeholder="Comprobar Contraseña" required><br>
                 </div>
+                <div class="mb-3">
+                    <label class="control-label">Foto de INE: </label>
+                    <input class="form-control" type="file" name="imagen" accept="image/*" required><br>
+                </div>
                 <div id="mensajeDiv" method="POST"></div>
                 <div class="d-flex justify-content-center">
                     <button class="loginButton" type="submit">Registrarse</button>
