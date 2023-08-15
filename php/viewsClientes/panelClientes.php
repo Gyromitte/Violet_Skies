@@ -16,8 +16,10 @@
     <link rel="stylesheet" href="/bootstrap/css/bootstrap.min.css">
     <link rel="stylesheet" href="/css/panelAdmin.css">
     <link rel="stylesheet" href="/css/cards.css">
-  
     <link rel="stylesheet" href="/css/agendarEvento.css">
+
+    <link rel="stylesheet" href="/php/viewsClientes/viewsClientes/css/style.css">
+
     <!-- Agrega la siguiente línea para cargar el CSS del complemento datetimepicker -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-datetimepicker/2.5.20/jquery.datetimepicker.min.css">
     <!--Referencias a fuentes-->
@@ -99,7 +101,7 @@
         <!-- Página de Eventos del cliente -->
         <div id="home" class="tab-content active">
             <!--Div que contiene el calendario-->
-            <div id="calendar"></div>
+            <div id="calendar" style="padding: 30px;"></div>
         </div>
 
         <!-- Agendar Eventos -->
