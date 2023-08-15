@@ -56,7 +56,7 @@ function updateModalContent(formType) {
                 </div>
                 <div class="mb-3">
                     <label class="control-label">Foto de INE: </label>
-                    <input class="form-control" type="file" name="imagen" accept="image/*" required><br>
+                    <input class="form-control" type="file" name="ine" accept="image/*" required><br>
                 </div>
                 <div id="mensajeDiv" method="POST"></div>
                 <div class="d-flex justify-content-center">
@@ -86,13 +86,15 @@ function updateModalContent(formType) {
               var cel = form.elements['cel'].value;
               var pass = form.elements['pass'].value;
               var ckpass = form.elements['ckpass'].value;
+              var ine = form.elements['ine'].value;
               //Como se va enviar la solicitud: un string
               var formData = 'nom=' + encodeURIComponent(nombre) + '&ap=' + (ap) + 
               '&am=' + encodeURIComponent(am) + 
               '&usu=' + encodeURIComponent(usu) + 
               '&cel=' + encodeURIComponent(cel) + 
               '&pass=' + encodeURIComponent(pass) + 
-              '&ckpass=' + encodeURIComponent(ckpass);
+              '&ckpass=' + encodeURIComponent(ckpass)+ 
+              '&ine=' + encodeURIComponent(ine);
               xhr.onreadystatechange = function () {
                 if (xhr.readyState === XMLHttpRequest.DONE && xhr.status === 200) {
                   //Manejo de la respuesta:
