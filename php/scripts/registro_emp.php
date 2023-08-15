@@ -12,6 +12,7 @@
     $cel = $_POST['cel'];
     $tipo="EMPLEADO";
 
+
     $pattern = '/[0-9\p{P}\p{S}&&[^ñ]]/u';
     // Use a regular expression to check if the phone number contains any letter
     if (preg_match("/[a-zA-Z]/", $cel)) {

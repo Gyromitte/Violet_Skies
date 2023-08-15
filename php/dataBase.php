@@ -158,7 +158,6 @@
                             while($trabajo = $empleados->fetch(PDO::FETCH_ASSOC)){
                                 $idemp=$trabajo['ID'];
                                 $_SESSION["trabajo"]=$idemp;
-
                                 $_SESSION["access"]=2;
                                 if($trabajo['TIPO']=='MESERO'){
                                     $_SESSION["tipo"]="MESERO";
@@ -175,14 +174,15 @@
                                     header("refresh:4;../viewsEmpleados/panelEmpleado.php");
                                 }
                             }
-                        }
+                            }
                         }
                     }
+                    }
 
-                }
+                
                 else{
                     echo"<div class='container'>";
-                    echo"<h1 align='center'>Usuario o Password Incorrecto</h1>";
+                    echo"<h1 align='center'>Usuario o Contraseña Incorrecto</h1>";
                     echo"</div>";
                     header("refresh:2;../views/login.php");
                 }
@@ -233,7 +233,7 @@
         try
         {
             $this->PDO_local->query($consulta);
-            echo"<div class='alert alert-success'>Asistiendo!</div>";
+            echo"<div class='alert alert-success'>Solicitud Enviada!</div>";
         }
         catch(PDOException $e)
         {

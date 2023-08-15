@@ -28,14 +28,6 @@ document.addEventListener('click', function (event) {
   }
 });
 
-// Agregar evento de scroll al documento para cerrar el dashboard cuando se haga scroll
-document.addEventListener('scroll', function () {
-  if (dashboard.classList.contains('dashboard-open')) {
-    dashboard.classList.remove('dashboard-open');
-    main.classList.remove('main-dash-open');
-  }
-});
-
 
 /*Main content*/
 // Obtener las pestañas y el contenido 
@@ -69,23 +61,58 @@ function checkCurrentTable(currentTable) {
     case 'cocineros':
       setTimeout(function () {
         btnCocineros.click();
-      }, 100);
+      }, 300);
       break;
     case 'meseros':
       setTimeout(function () {
         btnMeseros.click();
-      }, 100);
+      }, 300);
       break;
     case 'busqueda':
       setTimeout(function () {
         btnBusqueda.click();
-      }, 100);
+      }, 300);
       break;
     case 'solicitud':
       setTimeout(function () {
           btnSolicitud.click();
-      }, 100);
-      break;  
+      }, 300);
+      break;
+    case 'desayuno':
+      setTimeout(function () {
+        btnDesayuno.click();
+      }, 300);
+      break;
+    case 'bebidas':
+      setTimeout(function () {
+        btnBebidas.click();
+      }, 300);
+      break;
+    case 'desBuffet':
+      setTimeout(function () {
+        btnDesBuffet.click();
+      }, 300);
+      break;
+    case 'comida':
+      setTimeout(function () {
+        btnComida.click();
+      }, 300);
+      break;
+    case 'comidaBuffet':
+      setTimeout(function () {
+        btnComidaBuffet.click();
+      }, 300);
+      break;
+    case 'coffee':
+      setTimeout(function () {
+        btnCoffee.click();
+      }, 300);
+      break;
+    case 'descontinuado':
+      setTimeout(function () {
+        btnDescontinuado.click();
+      }, 300);
+      break;     
   }
 }
 //Obtener botones para refrescar vistas
@@ -93,6 +120,15 @@ var btnCocineros = document.getElementById('verCocineros');
 var btnMeseros = document.getElementById('verMeseros');
 var btnBusqueda = document.getElementById('buscarEmpleado');
 var btnSolicitud = document.getElementById('verSolicitudes');
+
+var btnBebidas = document.getElementById('verBebidas');
+var btnDesayuno = document.getElementById('verDesayuno');
+var btnDesBuffet = document.getElementById('verDesBuffet');
+var btnComida = document.getElementById('verComida');
+var btnComidaBuffet = document.getElementById('verComidaBuffet');
+var btnCoffee = document.getElementById('verCoffee');
+var btnDescontinuado = document.getElementById('verDescontinuado');
+
 
 // Evento para los botones
 modal.addEventListener("show.bs.modal", function (event) {
@@ -121,20 +157,35 @@ function updateModalContent(formType, idEmpleado, idEvento) {
       modalTitle.textContent = "Registrar un Empleado";
       modalHeader.classList.remove('modal-header-warning');
       formContent = `
-        <div id="mensajeDiv" method="POST"></div>
         <form id="formularioEmpleado">
+        <div class="mb-3">
+          <label class="control-label">Nombre:</label>
+          <input type="text" name="nombre" placeholder="Ingresa el nombre" class="form-control" maxlength="30" required>
+        </div>
+        <div class="mb-3">
+          <label class="control-label">Apellido Paterno:</label>
+          <input type="text" name="ap_paterno" placeholder="Ingresa su Ap. Paterno" class="form-control" maxlength="30" required>
+        </div>
+        <div class="mb-3">
+          <label class="control-label">Apellido Materno:</label>
+          <input type="text" name="ap_materno" placeholder="Ingresa su Ap. Materno" class="form-control" maxlength="30" required>
+        </div>
+        <div class="mb-3">
+            <label class="control-label">Telefono:</label>
+            <input type="text" name="telefono" placeholder="Ingresa su telefono" class="form-control" maxlength="10" required>
+        </div>
           <div class="mb-3">
-            <label class="control-label">RFC</label>
-            <input type="text" name="RFC" placeholder="Ingresa el RFC" class="form-control" 
+            <label class="control-label">RFC:</label>
+            <input type="text" maxlength="13" name="RFC" placeholder="Ingresa el RFC" class="form-control" 
             required oninput="this.value = this.value.toUpperCase()"
             required>
           </div>
           <div class="mb-3">
-            <label class="control-label">E-mail</label>
-            <input type="email" name="CORREO" placeholder="Ingresa el E-mail" class="form-control" required>
+            <label class="control-label">Correo:</label>
+            <input type="email" maxlength="35"  name="CORREO" placeholder="Ingresa el correo" class="form-control" required>
           </div>
           <div class="form-group mb-3">
-            <label for="tipoUsuario">Tipo de Trabajador</label>
+            <label for="tipoUsuario">Tipo de Empleado:</label>
             <select name="tipoUsuario" class="form-control form-select" id="tipoUsuario">
               <option value="mesero">Mesero</option>
               <option value="cocina">Cocinero</option>
@@ -145,6 +196,7 @@ function updateModalContent(formType, idEmpleado, idEvento) {
           <button type="button" class="btn btn-primary btn-modal" data-bs-dismiss="modal">Cerrar</button>
           </div>
         </form>
+        <div id="mensajeDiv" class="mt-10" method="POST"></div>
       `;
       //Asignar el contenido al formulario del modal
       modalForm.innerHTML = formContent;
@@ -165,8 +217,17 @@ function updateModalContent(formType, idEmpleado, idEvento) {
         var rfc = form.elements['RFC'].value;
         var correo = form.elements['CORREO'].value;
         var tipoUsuario = form.elements['tipoUsuario'].value;
+
+        var nombre = form.elements['nombre'].value;
+        var ap_paterno = form.elements['ap_paterno'].value;
+        var ap_materno = form.elements['ap_materno'].value;
+        var telefono = form.elements['telefono'].value;
+
         //Como se va enviar la solicitud: un string
-        var formData = 'rfc=' + encodeURIComponent(rfc) + '&correo=' + (correo) + '&tipoUsuario=' + encodeURIComponent(tipoUsuario);
+        var formData = 'rfc=' + encodeURIComponent(rfc)
+         + '&correo=' + (correo) + '&tipoUsuario=' + encodeURIComponent(tipoUsuario)
+         + '&nombre=' + (nombre) + '&ap_paterno=' + (ap_paterno) + '&ap_materno=' + (ap_materno)
+         + '&telefono=' + (telefono);
         xhr.onreadystatechange = function () {
           if (xhr.readyState === XMLHttpRequest.DONE && xhr.status === 200) {
             //Manejo de la respuesta:
@@ -196,7 +257,7 @@ function updateModalContent(formType, idEmpleado, idEvento) {
             </div>
             <div class="mb-3">
               <label class="control-label">E-mail</label>
-              <input type="email" name="CORREO" placeholder="Ingresa el E-mail" class="form-control" required>
+              <input type="email" maxlength="50" name="CORREO" placeholder="Ingresa el E-mail" class="form-control" required>
             </div>
             <div class="d-flex justify-content-center">
             <button type="submit" class="btn btn-primary btn-modal me-2"><i class="fa-solid fa-address-card me-2" style="color: #ffffff;"></i>Registrar</button>
@@ -295,15 +356,31 @@ function updateModalContent(formType, idEmpleado, idEvento) {
             formContent = `
                   <form id="formularioEditarEmpleado">
                     <div id="mensajeDiv" method="POST"></div> <!-- Div para mensajes de respuesta -->
-                    <h5>Empleado: </h5>
-                    <h6 class="mb-3">${empleado.NOMBRE} ${empleado.AP_PATERNO} ${empleado.AP_MATERNO}</h6>
-                    <h5>Telefono: </h5>
-                    <h6 class="mb-3">${empleado.TELEFONO}</h6>
-                    <h5>Correo: </h5>
+                    <div class="mb-3">
+                    <h6>Correo: </h6>
                     <h6 class="mb-3">${empleado.CORREO}</h6>
+                    <label class="control-label">Nombre: </label>
+                    <input type="text" maxlength="35" name="nombre" placeholder="" class="form-control" 
+                    required value="${empleado.NOMBRE}">
+                    </div>
+                    <div class="mb-3">
+                    <label class="control-label">Ap. Paterno: </label>
+                    <input type="text" maxlength="40" name="ap_paterno" placeholder="" class="form-control" 
+                    required value="${empleado.AP_PATERNO}">
+                    </div>
+                    <div class="mb-3">
+                    <label class="control-label">Ap. Materno: </label>
+                    <input type="text" maxlength="40" name="ap_materno" placeholder="" class="form-control" 
+                    required value="${empleado.AP_MATERNO}">
+                    </div>
+                    <div class="mb-3">
+                    <label class="control-label">Telefono: </label>
+                    <input type="text" maxlength="15" name="telefono" placeholder="" class="form-control" 
+                    required value="${empleado.TELEFONO}">
+                    </div>
                     <div class="mb-3">
                       <label class="control-label">RFC</label>
-                      <input type="text" name="rfc" placeholder="Ingresa el RFC" class="form-control" 
+                      <input type="text" maxlength="13" name="rfc" placeholder="Ingresa el RFC" class="form-control" 
                       required oninput="this.value = this.value.toUpperCase()"
                       required value="${empleado.RFC}">
                     </div>
@@ -329,6 +406,10 @@ function updateModalContent(formType, idEmpleado, idEvento) {
               event.preventDefault(); // Evitar que el formulario se envíe por defecto
 
               // Obtener los valores del formulario
+              var nombre = formEditarEmpleado.elements.nombre.value;
+              var ap_paterno = formEditarEmpleado.elements.ap_paterno.value;
+              var ap_materno = formEditarEmpleado.elements.ap_materno.value;
+              var telefono = formEditarEmpleado.elements.telefono.value;
               var rfc = formEditarEmpleado.elements.rfc.value;
               var tipoUsuario = formEditarEmpleado.elements.tipoUsuario.value;
 
@@ -349,7 +430,9 @@ function updateModalContent(formType, idEmpleado, idEvento) {
               // Hacer la solicitud al script PHP para editar al empleado y pasar los datos actualizados
               updateXHR.open("POST", "editarEmpleado.php", true);
               updateXHR.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-              updateXHR.send(`id=${idEmpleado}&rfc=${rfc}&tipoUsuario=${tipoUsuario}`);
+              updateXHR.send(`id=${idEmpleado}&rfc=${rfc}&tipoUsuario=${tipoUsuario}
+              &nombre=${nombre}&ap_paterno=${ap_paterno}&ap_materno=${ap_materno}
+              &telefono=${telefono}`);
               //Ver cual es la tabla activa para refrescar cualquier cambio
               checkCurrentTable(currentTable);
             });
@@ -366,100 +449,107 @@ function updateModalContent(formType, idEmpleado, idEvento) {
       //Ver cual es la tabla activa para refrescar cualquier cambio
       checkCurrentTable(currentTable);
       break;
+
       case "@editarPerfil":
         modalTitle.textContent = "Editar Datos";
         formContent = `
-          <form id="formularioEditarDatos">
-          <div id="mensajeDiv"></div>
-              <div class="form-group">
-                  <label for="nombreInput">Nombre:</label>
-                  <input type="text" class="form-control" name="nombre" id="nombreInput" required value="${datosUsuario.nombre}">
-              </div>
-              <div class="form-group">
-                  <label for="ap_paternoInput">Apellido Paterno:</label>
-                  <input type="text" class="form-control" name="ap_paterno" id="ap_paternoInput" required value="${datosUsuario.ap_paterno}">
-              </div>
-              <div class="form-group">
-                  <label for="ap_maternoInput">Apellido Materno:</label>
-                  <input type="text" class="form-control" name="ap_materno" id="ap_maternoInput" required value="${datosUsuario.ap_materno}">
-              </div>
-              <div class="form-group">
-                  <label for="telefonoInput">Teléfono:</label>
-                  <input type="tel" class="form-control" name="telefono" id="telefonoInput" required value="${datosUsuario.telefono}">
-              </div>
-              <div class="form-group">
-                  <label for="contrasenaActualInput">Contraseña Actual:</label>
-                  <input type="password" class="form-control" name="contrasena_actual" id="contrasenaActualInput" required>
-              </div>
-              <input type="hidden" name="correo" id="correoInput" value="${datosUsuario.correo}">
-              <input type="hidden" name="tipo_cuenta" id="tipo_cuentaInput"><br>
-              <button type="button" class="btn btn-primary" id="guardarCambios">Guardar Cambios</button>
-          </form>`;
+            <form id="formularioEditarDatos">
+                <div id="mensajeDiv"></div>
+                <div class="form-group">
+                    <label for="nombreInput">Nombre:</label>
+                    <input type="text" class="form-control" name="nombre" id="nombreInput" required value="${datosUsuario.nombre}" readonly>
+                </div>
+                <div class="form-group">
+                    <label for="ap_paternoInput">Apellido Paterno:</label>
+                    <input type="text" class="form-control" name="ap_paterno" id="ap_paternoInput" required value="${datosUsuario.ap_paterno}" readonly>
+                </div>
+                <div class="form-group">
+                    <label for="ap_maternoInput">Apellido Materno:</label>
+                    <input type="text" class="form-control" name="ap_materno" id="ap_maternoInput" required value="${datosUsuario.ap_materno}" readonly>
+                </div>
+                <div class="form-group">
+                    <label for="telefonoInput">Teléfono:</label>
+                    <input type="text" class="form-control" name="telefono" id="telefonoInput" required value="${datosUsuario.telefono}" pattern="[0-9a-zA-Z]" maxlength="10">
+                </div>
+                <div class="form-group">
+                    <label for="contrasenaActualInput">Contraseña Actual:</label>
+                    <input type="password" class="form-control" name="contrasena_actual" id="contrasenaActualInput" required>
+                </div>
+                <input type="hidden" name="correo" id="correoInput" value="${datosUsuario.correo}">
+                <input type="hidden" name="tipo_cuenta" id="tipo_cuentaInput"><br>
+                <button type="button" class="btn btn-primary" id="guardarCambios">Guardar Cambios</button>
+            </form>`;
         modalForm.innerHTML = formContent;
     
-        // Obtener el formulario después de haberlo asignado al DOM
         var formEditarDatos = document.getElementById("formularioEditarDatos");
         var guardarCambiosBtn = document.getElementById("guardarCambios");
     
         guardarCambiosBtn.addEventListener("click", function () {
+            var telefonoInput = document.getElementById("telefonoInput");
+            var telefonoValue = telefonoInput.value.trim();
+    
+            if (!esNumero(telefonoValue)) {
+              document.getElementById('mensajeDiv').innerHTML = `<div style="text-align:center;"class="alert alert-success">solo puedes ingresar valores numericos</div>`;
+                telefonoInput.focus();
+                return;
+            }
+    
             var updatePerfilXHR = new XMLHttpRequest();
-            // Realizar una nueva solicitud AJAX para actualizar los datos del perfil
-            updatePerfilXHR.onreadystatechange = function () {
-                if (updatePerfilXHR.readyState === XMLHttpRequest.DONE) {
-                    if (updatePerfilXHR.status === 200) {
-                        console.log(updatePerfilXHR.responseText); // Agregar esta línea para imprimir la respuesta
-                        try {
-                            var respuesta = JSON.parse(updatePerfilXHR.responseText);
-                            if (respuesta.success) {
-                                // Los datos se actualizaron con éxito
-                                document.getElementById('mensajeDiv').innerHTML = `<div style="text-align:center;"class="alert alert-success">Cambios guardados exitosamente<br>Tienes que volver a iniciar sesión</div>`;
-                                // Actualizar la sesión del usuario con los nuevos datos
-                                datosUsuario = respuesta.usuario;
-                                // Cerrar sesión y redirigir al usuario a la página index.html después de 1.5 segundos
-                                setTimeout(function () {
-                                    // Hacer la solicitud de cierre de sesión
-                                    var logoutXHR = new XMLHttpRequest();
-                                    logoutXHR.onreadystatechange = function () {
-                                        if (logoutXHR.readyState === XMLHttpRequest.DONE) {
-                                            if (logoutXHR.status === 200) {
-                                                // Redirigir al usuario a la página index.html
-                                                window.location.href = "/index.html";
-                                            } else {
-                                                console.error("Error al cerrar sesión");
-                                            }
+            updatePerfilXHR.onreadystatechange = function () {if (updatePerfilXHR.readyState === XMLHttpRequest.DONE) {
+                if (updatePerfilXHR.status === 200) {
+                    console.log(updatePerfilXHR.responseText); 
+                    try {
+                        var respuesta = JSON.parse(updatePerfilXHR.responseText);
+                        if (respuesta.success) {
+                            document.getElementById('mensajeDiv').innerHTML = `<div style="text-align:center;"class="alert alert-success">Cambios guardados exitosamente<br>Tienes que volver a iniciar sesión</div>`;
+                            datosUsuario = respuesta.usuario;
+                            setTimeout(function () {
+                                var logoutXHR = new XMLHttpRequest();
+                                logoutXHR.onreadystatechange = function () {
+                                    if (logoutXHR.readyState === XMLHttpRequest.DONE) {
+                                        if (logoutXHR.status === 200) {
+                                            window.location.href = "/index.html";
+                                        } else {
+                                            console.error("Error al cerrar sesión");
                                         }
-                                    };
-                                    logoutXHR.open("GET", "logout.php", true);
-                                    logoutXHR.send();
-                                }, 5000);
-                            } else if (respuesta.error === 'badPass') {
-                                document.getElementById('mensajeDiv').innerHTML = `<div class="alert alert-danger">Contraseña incorrecta</div>`;
-                            } else {
-                                // Hubo un error al actualizar los datos
-                                document.getElementById('mensajeDiv').innerHTML = `<div style="text-align:center;" class="alert alert-danger">Error al actualizar los datos<br>Contraseña incorrecta</div>`;
-                            }
-                        } catch (error) {
-                            // Si la respuesta no es un JSON válido, manejar el error aquí
-                            console.error("Error al analizar la respuesta JSON: " + error.message);
-                        }
-                    } else {
-                        console.error("Error en la solicitud AJAX de actualización");
+                                    }
+                                };
+                                logoutXHR.open("GET", "logout.php", true);
+                                logoutXHR.send();
+                            }, 2500);
+                        }else if (respuesta.error === 'badPass') {
+                          document.getElementById('mensajeDiv').innerHTML = `<div class="alert alert-danger">Contraseña incorrecta, vuelve a ingresarla por favor</div>`;
+                          
+                          setTimeout(() => {
+                              document.getElementById('mensajeDiv').innerHTML = '';
+                          }, 1500); 
+                      } else {
+                          document.getElementById('mensajeDiv').innerHTML = `<div class="alert alert-danger">Contraseña incorrecta, vuelve a ingresarla por favor</div>`;
+                          
+                          setTimeout(() => {
+                              document.getElementById('mensajeDiv').innerHTML = '';
+                          }, 1500); 
+                      }
+                    } catch (error) {
+                        console.error("Error al analizar la respuesta JSON: " + error.message);
                     }
+                } else {
+                    console.error("Error en la solicitud AJAX de actualización");
                 }
+              }   
             };
     
-            // Obtener los valores del formulario
             var formData = new FormData(formEditarDatos);
-            // Agregar el campo tipo_cuenta al objeto formData
             formData.append('tipo_cuenta', datosUsuario.tipo_cuenta);
     
-            // Configurar la solicitud al script PHP para editar el perfil y pasar los datos actualizados
             updatePerfilXHR.open("POST", "/php/viewsClientes/pruebaComprobación.php", true);
             updatePerfilXHR.send(formData);
         });
-        console.log(formType);
-        break;
-      
+    
+        function esNumero(valor) {
+            return !isNaN(valor) && !isNaN(parseFloat(valor));
+        }
+        break;  
     case "@verSolicitud":
         modalTitle.textContent = "Manejar solicitud";
         modalHeader.classList.remove('modal-header-warning');
@@ -482,7 +572,7 @@ function updateModalContent(formType, idEmpleado, idEvento) {
                   <h6 class="mb-3">${solicitud.CORREO}</h6>
                   <div class="mb-3">
                     <label class="control-label">RFC</label>
-                    <input required oninput="this.value = this.value.toUpperCase()"
+                    <input maxlength="13" required oninput="this.value = this.value.toUpperCase()"
                     type="text" name="RFC" placeholder="Ingresa el RFC" class="form-control" required>
                   </div>
                   <div class="form-group mb-3">
@@ -652,6 +742,8 @@ function updateModalContent(formType, idEmpleado, idEvento) {
         //Ver cual es la tabla activa para refrescar cualquier cambio
         checkCurrentTable(currentTable);
         break;
+        case "@cancelarEvento":
+          break;
 
     case "@verDetallesEvento":
       modalTitle.textContent = "Detalles del Evento";
@@ -800,8 +892,8 @@ function updateModalContent(formType, idEmpleado, idEvento) {
                 step: 15, // Intervalo de minutos para seleccionar la hora
                 minDate: oneWeekLater.toISOString().slice(0, 19).replace('T', ' '), // Fecha mínima: una semana después de la actual
                 allowTimes: [
-                  '05:00','06:00','07:00','08:00', '09:00', '10:00', '11:00', '12:00', '13:00', // Ejemplo de horas permitidas
-                  '14:00', '15:00', '16:00', '17:00', '18:00', '19:00', '20:00', '21:00','22:00' // Puedes agregar más horas aquí
+                  '05:00','06:00','07:00','08:00', '09:00', '10:00', '11:00', '12:00', '13:00',
+                  '14:00', '15:00', '16:00', '17:00', '18:00', '19:00', '20:00', '21:00','22:00' 
                 ]
               });
             });
@@ -1023,7 +1115,270 @@ function updateModalContent(formType, idEmpleado, idEvento) {
   xhr.open("GET", "obtenerEmpleado.php?id=" + idEmpleado, true);
   xhr.send();
   break;
+  case "@editarMenu":
+    modalTitle.textContent = "Modificar menu";
+    modalHeader.classList.remove('modal-header-warning');
+    //Realizar una solicitud AJAX para obtener los datos del empleado
+    var xhr = new XMLHttpRequest();
+    xhr.onreadystatechange = function () {
+      if (xhr.readyState === XMLHttpRequest.DONE) {
+        if (xhr.status === 200) {
+          //Parsear la respuesta JSON
+          var menu = JSON.parse(xhr.responseText);
+          console.log(menu);
+          //Actualizar el contenido del formulario con los datos obtenidos
+          formContent = `
+            <form id="formularioMenu">
+              <div id="mensajeDiv" method="POST"></div> <!-- Div para mensajes de respuesta -->
+              <div class="mb-3">
+                <label class="control-label">Nombre: </label>
+                <input type="text" name="nombre" placeholder="Nombre del menu" class="form-control" maxlength="45" required
+                value='${menu.NOMBRE}'>
+              </div>
+              <div class="mb-3">
+              <label class="control-label">Descripcion:</label>
+              <textarea name="descripcion" placeholder="En que consiste el menu" class="form-control descripcion-input" rows="4" maxlength="500" required>
+              ${menu.DESCRIPCION}
+              </textarea>
+              </div>
+              <div class="mb-3">
+              <div class="form-group mb-3">
+                  <label for="tipoMenu">Tipo de menu:</label>
+                  <select name="tipoMenu" class="form-control form-select">
+                      <option value="1"${menu.TIPO === 'BEBIDAS' ? 'selected' : ''}>Bebidas</option>
+                      <option value="2"${menu.TIPO === 'DESAYUNO' ? 'selected' : ''}>Desayuno</option>
+                      <option value="3"${menu.TIPO === 'DESAYUNO BUFFET' ? 'selected' : ''}>Desayuno Buffet</option>
+                      <option value="4"${menu.TIPO === 'COMIDA' ? 'selected' : ''}>Comida</option>
+                      <option value="5"${menu.TIPO === 'COMIDA BUFFET' ? 'selected' : ''}>Comida Buffet</option>
+                      <option value="6"${menu.TIPO === 'COFFEE BREAK' ? 'selected' : ''}>Coffee Break</option>
+                  </select>
+              </div>
+              <div class="d-flex justify-content-center">
+                  <button type="submit" class="btn btn-primary btn-modal me-2"><i class="fa-solid fa-pencil me-2" style="color: #ffffff;"></i>Modificar</button>
+                  <button type="button" class="btn btn-primary btn-modal" data-bs-dismiss="modal">Cancelar</button>
+              </div>
+            </form>
+              `;
+          // Asignar el contenido al formulario del modal
+          modalForm.innerHTML = formContent;
+          // Obtener el formulario después de haberlo asignado al DOM
+          var formEditarMenu = document.getElementById('formularioMenu');
+          // Agregar evento de envío al formulario de edición
+          formEditarMenu.addEventListener('submit', function (event) {
+            event.preventDefault(); // Evitar que el formulario se envíe por defecto
 
+            // Obtener los valores del formulario
+            var nombre = formEditarMenu.elements.nombre.value;
+            var descripcion = formEditarMenu.elements.descripcion.value;
+            var tipoMenu = formEditarMenu.elements.tipoMenu.value;
+
+            // Realizar una nueva solicitud AJAX para actualizar los datos
+            var updateXHR = new XMLHttpRequest();
+            updateXHR.onreadystatechange = function () {
+              if (updateXHR.readyState === XMLHttpRequest.DONE) {
+                if (updateXHR.status === 200) {
+                  // Estilos al div de mensajes según la respuesta
+                  var respuesta = updateXHR.responseText;
+                  document.getElementById('mensajeDiv').innerHTML = respuesta;
+
+                } else {
+                  console.error("Error en la solicitud AJAX de actualización");
+                }
+              }
+            };
+            // Hacer la solicitud al script PHP para editar al empleado y pasar los datos actualizados
+            updateXHR.open("POST", "/php/viewsMenus/editarMenu.php", true);
+            updateXHR.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+            updateXHR.send(`id=${idEmpleado}&tipoMenu=${tipoMenu}
+            &nombre=${nombre}&descripcion=${descripcion}`);
+            //Ver cual es la tabla activa para refrescar cualquier cambio
+            checkCurrentTable(currentTable);
+          });
+        } else {
+          console.error("Error en la solicitud AJAX");
+        }
+      }
+    };
+    //Hacer la solicitud al script PHP y pasar el ID del empleado
+    xhr.open("GET", "/php/viewsMenus/obtenerMenu.php?id=" + idEmpleado, true);
+    xhr.send();
+    //Ver cual es la tabla activa para refrescar cualquier cambio
+    checkCurrentTable(currentTable);
+    break;
+    case "@descontinuarMenu":
+    modalTitle.textContent = "Descontinuar menu";
+    //Realizar una solicitud AJAX para obtener los datos del menu
+    var xhr = new XMLHttpRequest();
+    xhr.onreadystatechange = function () {
+      if (xhr.readyState === XMLHttpRequest.DONE) {
+        if (xhr.status === 200) {
+          //Parsear la respuesta JSON
+          var menu = JSON.parse(xhr.responseText);
+          console.log(menu);
+          //Actualizar el contenido del formulario con los datos obtenidos
+          formContent = `
+            <form id="formularioMenu">
+              <div id="mensajeDiv" method="POST"></div> <!-- Div para mensajes de respuesta -->
+              <div class="mb-3">
+                <h5>Nombre del menú: </h5>
+                <h6 class="mb-3">${menu.NOMBRE}</h6>
+              </div>
+              <div class="mb-3">
+                <h5>Descripción: </h5>
+                <h6 class="mb-3">${menu.DESCRIPCION}</h6>
+              </div>
+              <div class="mb-3">
+              <div class="form-group mb-3">
+                <h5>Tipo de menú: </h5>
+                <h6 class="mb-3">${menu.TIPO}</h6>
+              </div>
+              <div class="d-flex justify-content-center">
+                  <button id="btnDescMenu" type="submit" class="btn btn-primary btn-modal-warning me-2"><i class="fa-solid fa-circle-minus me-2" style="color: #ffffff;"></i>Descontinuar</button>
+                  <button type="button" class="btn btn-primary btn-modal" data-bs-dismiss="modal">Cancelar</button>
+              </div>
+            </form>
+              `;
+          // Asignar el contenido al formulario del modal
+          modalForm.innerHTML = formContent;
+          
+          // Obtener el formulario después de haberlo asignado al DOM
+          var formEditarMenu = document.getElementById('formularioMenu');
+          var btnDescMenu = document.getElementById('btnDescMenu');
+          // Agregar evento de envío al formulario de edición
+          formEditarMenu.addEventListener('submit', function (event) {
+            event.preventDefault(); // Evitar que el formulario se envíe por defecto
+            
+            //El id de la tupla es la variable idEmpleado
+            // Realizar una solicitud AJAX para descontinuar el menú
+            var xhrDescontinuar = new XMLHttpRequest();
+            xhrDescontinuar.onreadystatechange = function () {
+              if (xhrDescontinuar.readyState === XMLHttpRequest.DONE) {
+                if (xhrDescontinuar.status === 200) {
+                  // Actualizar el mensaje de respuesta en el formulario
+                  var mensajeDiv = document.getElementById('mensajeDiv');
+                  mensajeDiv.innerHTML = xhrDescontinuar.responseText;
+                  if(xhrDescontinuar.responseText == "<div class='alert alert-success'>Menú descontinuado con exito!</div>")
+                  {
+                    //Desactivar el boton de descontinuar 
+                    btnDescMenu.disabled = true;
+                  }
+                } else {
+                  console.error("Error en la solicitud AJAX para descontinuar el menú");
+                }
+              }
+            };
+            console.log(idEmpleado);
+            // Hacer la solicitud al script PHP para descontinuar el menú y pasar el ID del menú
+            xhrDescontinuar.open("POST", "/php/viewsMenus/descontinuarMenu.php", true);
+            xhrDescontinuar.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+            var parametros = "id=" + encodeURIComponent(idEmpleado);
+            xhrDescontinuar.send(parametros);
+          });
+        } else {
+          console.error("Error en la solicitud AJAX");
+        }
+      }
+    };
+    //Hacer la solicitud al script PHP y pasar el ID del empleado
+    xhr.open("GET", "/php/viewsMenus/obtenerMenu.php?id=" + idEmpleado, true);
+    console.log(idEmpleado);
+    xhr.send();
+    //Ver cual es la tabla activa para refrescar cualquier cambio
+    checkCurrentTable(currentTable);
+    break;
+    case "@reincorporarMenu":
+    modalTitle.textContent = "Re-Incorporar Menú";
+    //Realizar una solicitud AJAX para obtener los datos del menu
+    var xhr = new XMLHttpRequest();
+    xhr.onreadystatechange = function () {
+      if (xhr.readyState === XMLHttpRequest.DONE) {
+        if (xhr.status === 200) {
+          //Parsear la respuesta JSON
+          var menu = JSON.parse(xhr.responseText);
+          console.log(menu);
+          //Actualizar el contenido del formulario con los datos obtenidos
+          formContent = `
+            <form id="formularioMenu">
+              <div id="mensajeDiv" method="POST"></div> <!-- Div para mensajes de respuesta -->
+              <div class="mb-3">
+                <h5>Nombre del menú: </h5>
+                <h6 class="mb-3">${menu.NOMBRE}</h6>
+              </div>
+              <div class="mb-3">
+                <h5>Descripción: </h5>
+                <h6 class="mb-3">${menu.DESCRIPCION}</h6>
+              </div>
+              <div class="mb-3">
+              <div class="form-group mb-3">
+                  <label for="tipoMenu">Tipo de menu:</label>
+                  <select id="tipoMenuSelect" name="tipoMenu" class="form-control form-select">
+                      <option value="1"${menu.TIPO === 'BEBIDAS' ? 'selected' : ''}>Bebidas</option>
+                      <option value="2"${menu.TIPO === 'DESAYUNO' ? 'selected' : ''}>Desayuno</option>
+                      <option value="3"${menu.TIPO === 'DESAYUNO BUFFET' ? 'selected' : ''}>Desayuno Buffet</option>
+                      <option value="4"${menu.TIPO === 'COMIDA' ? 'selected' : ''}>Comida</option>
+                      <option value="5"${menu.TIPO === 'COMIDA BUFFET' ? 'selected' : ''}>Comida Buffet</option>
+                      <option value="6"${menu.TIPO === 'COFFEE BREAK' ? 'selected' : ''}>Coffee Break</option>
+                  </select>
+              </div>
+              <div class="d-flex justify-content-center">
+                  <button id="btnDescMenu" type="submit" class="btn btn-primary btn-modal me-2"><i class="fa-solid fa-rotate-left me-2" style="color: #ffffff;"></i>Re-Incorporar</button>
+                  <button type="button" class="btn btn-primary btn-modal" data-bs-dismiss="modal">Cancelar</button>
+              </div>
+            </form>
+              `;
+          // Asignar el contenido al formulario del modal
+          modalForm.innerHTML = formContent;
+          
+          // Obtener el formulario después de haberlo asignado al DOM
+          var formEditarMenu = document.getElementById('formularioMenu');
+          var btnReincorporar = document.getElementById('btnDescMenu');
+
+          // Agregar evento de envío al formulario de edición
+          formEditarMenu.addEventListener('submit', function (event) {
+            event.preventDefault(); // Evitar que el formulario se envíe por defecto
+            // Obtén el valor seleccionado del tipo de menú
+            var tipoMenuSelect = document.getElementById("tipoMenuSelect");
+            var tipoMenuSeleccionado = tipoMenuSelect.value;
+            //El id de la tupla es la variable idEmpleado
+            // Realizar una solicitud AJAX para descontinuar el menú
+            var xhrReIncorporarMenu = new XMLHttpRequest();
+            xhrReIncorporarMenu .onreadystatechange = function () {
+              if (xhrReIncorporarMenu.readyState === XMLHttpRequest.DONE) {
+                if (xhrReIncorporarMenu.status === 200) {
+                  // Actualizar el mensaje de respuesta en el formulario
+                  var mensajeDiv = document.getElementById('mensajeDiv');
+                  mensajeDiv.innerHTML = xhrReIncorporarMenu .responseText;
+                  //Desactivar boton en respuesta exitosa
+                  if(xhrReIncorporarMenu.responseText == "<div class='alert alert-success'>Menú re-incorporado con exito</div>")
+                  {
+                    btnReincorporar.disabled = true;
+                  }
+                } else {
+                  console.error("Error en la solicitud AJAX para descontinuar el menú");
+                }
+              }
+            };
+            console.log(idEmpleado);
+            // Hacer la solicitud al script PHP para re-incorporar el menú y pasar el ID del menú
+            xhrReIncorporarMenu.open("POST", "/php/viewsMenus/re-incorporarMenu.php", true);
+            xhrReIncorporarMenu.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+            var parametros = "id=" + encodeURIComponent(idEmpleado) 
+            + "&tipoMenu=" + encodeURIComponent(tipoMenuSeleccionado);
+            xhrReIncorporarMenu.send(parametros);
+          });
+        } else {
+          console.error("Error en la solicitud AJAX");
+        }
+      }
+    };
+    //Hacer la solicitud al script PHP y pasar el ID del empleado
+    xhr.open("GET", "/php/viewsMenus/obtenerMenu.php?id=" + idEmpleado, true);
+    console.log(idEmpleado);
+    xhr.send();
+    //Ver cual es la tabla activa para refrescar cualquier cambio
+    checkCurrentTable(currentTable);
+    break;
+    
     }
   }
   

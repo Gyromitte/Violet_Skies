@@ -20,21 +20,21 @@ function updateModalContent(formType) {
   
     switch (formType) {
         case "@emp":
-            modalTitle.textContent = "Registrar como Empleado";
+            modalTitle.textContent = "Solicitar Contratacion";
             modalHeader.classList.remove('modal-header-warning');
             formContent = `
             <form id="EmpReg">
                 <div class="mb-3">
                     <label class="control-label">Nombre(s): </label> 
-                    <input class="form-control" type="text" name="nom" placeholder="Nombre" requiered><br>
+                    <input class="form-control" type="text" name="nom" maxlength="30" placeholder="Nombre" requiered><br>
                 </div>
                 <div class="mb-3">
                     <label class="control-label">Apellido Paterno: </label> 
-                    <input class="form-control" type="text" name="ap" placeholder="Apellido Paterno" requiered><br>
+                    <input class="form-control" type="text" name="ap" maxlength="40" placeholder="Apellido Paterno" requiered><br>
                 </div>
                 <div class="mb-3">
                     <label class="control-label">Apellido Materno: </label> 
-                    <input class="form-control" type="text" name="am" placeholder="Apellido Materno" requiered><br>
+                    <input class="form-control" type="text" name="am" maxlength="40" placeholder="Apellido Materno" requiered><br>
                 </div>
                 <div class="mb-3">
                     <label class="control-label">Correo: </label> 
@@ -42,7 +42,7 @@ function updateModalContent(formType) {
                 </div>
                 <div class="mb-3">
                     <label class="control-label">Numero de Celular: </label> 
-                    <input class="form-control" type="text" name="cel" placeholder="Telefono" requiered><br>
+                    <input class="form-control" type="text" name="cel" placeholder="Telefono" maxlength="10" requiered><br>
                 </div>
                 <div class="mb-3">
                     <label class="control-label">Contraseña: </label>
@@ -117,15 +117,15 @@ function updateModalContent(formType) {
             <form id="CliReg">
                 <div class="mb-3">
                     <label class="control-label">Nombre(s): </label> 
-                    <input class="form-control" type="text" name="nom" placeholder="Nombre" requiered><br>
+                    <input class="form-control" type="text" name="nom" maxlength="30" placeholder="Nombre" requiered><br>
                 </div>
                 <div class="mb-3">
                     <label class="control-label">Apellido Paterno: </label> 
-                    <input class="form-control" type="text" name="ap" placeholder="Apellido Paterno" requiered><br>
+                    <input class="form-control" type="text" name="ap" maxlength="40" placeholder="Apellido Paterno" requiered><br>
                 </div>
                 <div class="mb-3">
                     <label class="control-label">Apellido Materno: </label> 
-                    <input class="form-control" type="text" name="am" placeholder="Apellido Materno" requiered><br>
+                    <input class="form-control" type="text" name="am" maxlength="40" placeholder="Apellido Materno" requiered><br>
                 </div>
                 <div class="mb-3">
                     <label class="control-label">Correo: </label> 
@@ -133,7 +133,7 @@ function updateModalContent(formType) {
                 </div>
                 <div class="mb-3">
                     <label class="control-label">Numero de Celular: </label> 
-                    <input class="form-control" type="text" name="cel" placeholder="Telefono" requiered><br>
+                    <input class="form-control" type="text" name="cel" maxlength="15" placeholder="Telefono" requiered><br>
                 </div>
                 <div class="mb-3">
                     <label class="control-label">Contraseña: </label>

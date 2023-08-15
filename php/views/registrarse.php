@@ -181,7 +181,7 @@
             <div class="split left" data-bs-toggle="modal" data-bs-target="#Main" data-bs-whatever=@emp>
                 <div class="centered">
                     <br>
-                    <h1>Registrate como Empleado!</h1>
+                    <h1>¡Regístrate como empleado!</h1>
                     <img class="clientsImages" src="/images/waiter.jpg">
                 </div>
             </div>
@@ -190,7 +190,7 @@
             <div class="split right" data-bs-toggle="modal" data-bs-target="#Main" data-bs-whatever=@cliente>
                 <div class="centered">
                     <br>
-                    <h1>Registrate como Cliente!</h1>
+                    <h1>¡Regístrate como cliente!</h1>
                     <img class="clientsImages" src="/images/customers.jpg">
                 </div>
             </div>

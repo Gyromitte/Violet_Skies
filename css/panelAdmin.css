@@ -183,6 +183,12 @@ nav{
     border: 2px solid white;
 }
 
+.btn-view-custom{
+    border: none;
+    width: 100%;
+    text-align: left;
+}
+
 .custom-ver-historial{
     background-color: #b14aed;
     border: 2px solid white;
@@ -230,14 +236,16 @@ nav{
     background-color: #5603ad;
     color: white;
     border: 2px solid white;
+    border-radius: 10px;
 }
 
 #estadoSelect option:hover {
     background-color: #b14aed;
+    
 }
   
 /*Charts and info*/
-#eventosAño, #proporcionEmpleados, #proporcionEmpleados2{
+#eventosAño, #proporcionEmpleados, #proporcionEmpleados2, #pieTipoMenus{
     background-image: linear-gradient(135deg, #5603ad, #f58cd6);
     color: white;
     border-radius: 20px;
@@ -293,28 +301,40 @@ nav{
     z-index: 3000;
   }
 
-  .alert {
+.alert {
     /* Estilo común para todas las alertas */
     padding: 10px;
     border-radius: 5px;
     margin-bottom: 10px;
   }
   
-  .alert-success {
+.alert-success {
     /* Estilo para alerta de éxito */
     color: #155724;
     background-color: #d4edda;
     border-color: #c3e6cb;
   }
   
-  .alert-danger {
+.alert-danger {
     /* Estilo para alerta de error */
     color: #721c24;
     background-color: #f8d7da;
     border-color: #f5c6cb;
   }
+
+.content-blur {
+  filter: blur(5px); /* Ajusta el valor de blur según tus preferencias */
+  transition: filter 0.3s ease; /* Agrega una transición suave */
+}
+
 @media (max-width: 768px) {
-    /* Adjust the width and font-size for smaller screens */
+    .main-dash-open {
+        margin-left: 00px;
+        transition: margin-left  0.3s ease; /* Agrega una transición suave para una animación fluida */
+    }
+    .dash-button{
+        height: 40px;
+    }
     #nav-button {
         width: 80px;
         font-size: 0.9em;
@@ -322,7 +342,7 @@ nav{
     .nav-user{
         display: none;
     }
-    .info-card, #proporcionEmpleados, #eventosAño, #graficaEventos{
+    .info-card, #proporcionEmpleados, #eventosAño, #graficaEventos, #pieTipoMenus{
         margin-bottom: 10px;
     }
     .btn-options{
@@ -345,7 +365,20 @@ nav{
     .donut-container{
        margin-bottom: 10px;
        margin-right: 10px;
-    }  
+    }
+    /*Graficos*/
+    #participacionEmpleados{
+        height: 200px !important;
+    }
+  
+}
+
+#buscarEmpleado{
+    z-index: 0;
+}
+
+#buscarEmpleado{
+    z-index: 0;
 }
 
 @media (max-width: 576px) {

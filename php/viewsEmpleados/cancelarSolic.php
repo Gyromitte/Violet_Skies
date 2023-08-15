@@ -28,12 +28,10 @@
         echo"<div class='alert alert-danger'>No se puede cancelar, ya faltan menos de 2 dias para el evento</div>";
     } 
     else {
-        $enter="DELETE FROM EVENTO_EMPLEADOS WHERE EVENTO='$eventoId' AND EMPLEADOS='$emp'";
+        $enter="DELETE FROM SOLICITUDES_EMPLEADO WHERE EVENTO='$eventoId' AND EMPLEADO='$emp'";
         $db->ejecutarSQL($enter);
         echo"<div class='alert alert-success'>Cancelado!</div>";
     }
     }
 
 $db->desconectarBD();
-
-

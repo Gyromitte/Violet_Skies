@@ -6,14 +6,14 @@
         $emp=$_SESSION["trabajo"];
         extract($_POST);
 
-        $consulta = "CALL verEmpAtendiendo(?)";
+        $consulta = "CALL verSolicitudAsist(?)";
         $parametros = array($emp);
 
         $tabla = $conexion->seleccionarPreparado($consulta, $parametros);
 
         $num=count($tabla);
         if($num==0){
-            echo"<h1> No estas escrito en ningun evento por el momento</h1>";
+            echo"<h1> No has mandado solicitud a algun evento por el momento</h1>";
         }
         foreach($tabla as $registro){
             $evento=$registro->ID;
@@ -32,10 +32,10 @@
             echo "<p><b>Cocineros Necesarios: </b>$registro->COCINEROS</p>";
                 echo "<div class='text-center'>";
                 echo"<div>";
-                    echo '<button class="col-12 btn btn-options btn-primary border-2 btn-outline-light rounded-5" type="button" 
+                echo '<button class="col-12 btn btn-options btn-primary border-2 btn-outline-light rounded-5" type="button" 
                     href="#" data-bs-toggle="modal" data-bs-target="#empModal" 
-                    data-bs-whatever="@cancelar" 
-                    data-id="'.$registro->ID.'">Cancelar';
+                    data-bs-whatever="@cancelarASIST" 
+                    data-id="'.$evento.'">Cancelar Solicitud';
                 echo"</div>";
                         echo '<br>';
                         echo '<div class="dropdown">';
