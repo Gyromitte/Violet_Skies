@@ -1,5 +1,5 @@
 body {
-  background-color: #e2dbd5;
+  background-color: #F1E9DC;
   margin: 0;
 }
 
@@ -9,15 +9,15 @@ h1 {
 
 /*Nav*/
 .navbar {
-  background-color: #7B873B;
+  background-color: #381c47;
   color: white;
   font-family: 'Patua One', cursive;
   padding: 0.5em !important;
   margin: 0 !important;
 }
-
+/*6d3536*/
 .navbar-header {
-  border-right: 2px solid #6d3536;
+  border-right: 2px solid #4c4c4c;
   margin-right: 1em;
   font-size: 2em;
 }
@@ -234,7 +234,7 @@ h1 {
   font-size: small;
   padding: 0.8em 2em;
   align-self: center;
-  background-color: #6d3536
+  background-color: #616978
   ;
   border: none;
   color: white;
@@ -244,7 +244,7 @@ h1 {
 }
 
 .loginButton:hover {
-  background-color: #987b80;
+  background-color: #d8d8d6;
 }
 
 /*Hero Section*/
@@ -268,7 +268,7 @@ h1 {
 
 .leftHeroSection {
   width: 40vw;
-  color: white;
+  color: #343434;
   display: flex;
   margin: 1em 1em 1em 1em;
   padding-left: 1em;
@@ -294,7 +294,7 @@ h1 {
   padding: 1em;
   width: 15em;
   font-size: medium;
-  background-color:  #6d3536;
+  background-color:  #381c47;
   color: white;
   font-family: 'Lexend', sans-serif;
   font-weight: bold;
@@ -344,6 +344,7 @@ h1 {
   text-align: center;
   font-family: 'Archivo Black', sans-serif;
   font-size: 4vw;
+  color: #343434;
 }
 
 .job-desc-text {
@@ -361,14 +362,14 @@ h1 {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  background-color: #7C873B;
+  background-color: #381c47;
   height: 35vw;
   color: white;
   font-family: 'Patua One', cursive;
 }
 
 .sal-greet {
-  border-bottom: 2px solid #7159ad;
+  border-bottom: 2px solid #6d3536;
   justify-self: center;
   height: 20%;
 }
@@ -421,7 +422,7 @@ h1 {
 
 .ubic-greet {
   text-align: center;
-  background-image: linear-gradient(135deg, #987b80, #6d3536);
+  background-image: linear-gradient(135deg, #616978, #d8d8d6);
   padding: 20px;
 }
 
@@ -438,7 +439,7 @@ h1 {
 
 /*Informes*/
 .informes {
-  background-color: #5603ad;
+  background-color: #381c47;
   height: auto;
   text-align: center;
   color: white;
