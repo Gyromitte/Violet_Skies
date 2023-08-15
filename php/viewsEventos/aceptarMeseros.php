@@ -10,7 +10,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $EVENTO = $_POST['evento_id'];
 
         if (count($empleadosSeleccionados) > $FALTAN_MESEROS) {
-            echo '<script>alert("No puedes agregar meseros");</script>';
+            echo '<script>alert("Selecciona solo ' . $FALTAN_MESEROS . ' mesero(s).");</script>';
             echo '<script>window.history.back();</script>';
             exit();
         } else {

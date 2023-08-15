@@ -9,8 +9,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $FALTAN_COCINA = $_POST['faltan_cocina'];
         $EVENTO = $_POST['evento_id'];
 
-        if (count($empleadosSeleccionados) > $FALTAN_MESEROS) {
-            echo '<script>alert("No puedes agregar mas cocineros");</script>';
+        if (count($empleadosSeleccionados) > $FALTAN_COCINA) {
+            echo '<script>alert("Selecciona solo ' . $FALTAN_COCINA . ' cocina(s).");</script>';
             echo '<script>window.history.back();</script>';
             exit();
         } else {
@@ -21,15 +21,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     $parametros = array(":empleado_id" => $empleado_id, ":EVENTO" => $EVENTO);
                     $conexion->ejecutarPreparado($update_query, $parametros);
                 }
-                echo 'ok';
-                echo '<script>
-                setTimeout(function() {
-                    window.location.reload();
-                }, 3000); // 3000 milisegundos = 3 segundos
-                </script>';
-            } else {
+                echo '<script>alert("Empleados aceptados exitosamente.");</script>';
                 echo '<script>window.history.back();</script>';
-                exit();
+            exit();
+            } else {
+                echo '<script>alert("No se han seleccionado empleados.");</script>';
+                echo '<script>window.history.back();</script>';
+            exit();
             }
         }
 
