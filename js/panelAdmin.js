@@ -824,59 +824,73 @@ function updateModalContent(formType, idEmpleado, idEvento) {
             xhrComida.open("GET", "../viewsEventos/obtenerComida.php", true);
             xhrComida.send();
 
-            formContent = `
-            <form>
-              <h4 align='center'>${detallesEvento.NOMBRE}</h4>
-              <h5 align='center'>${detallesEvento.CLIENTE}</h5><br>
-              <table align='center' cellspacing="20" cellpadding="5">
-                <tr>
-                  <td><h6>Fecha</h6></td>
-                  <td><input class="form-control" type="text" placeholder="Fecha y hora" id="fechaEvento" value="${detallesEvento.F_EVENTO}" disabled></td>
-                </tr>
-                <tr>
-                  <td><h6>Salón</h6></td>
-                  <td><select class="form-control" id="salon" disabled></select></td>
-                </tr>
-                <tr>
-                  <td><h6>Invitados</h6></td>
-                  <td><input class="form-control" type="number" placeholder="Invitados" id="invitados" value="${detallesEvento.INVITADOS}" disabled></td>
-                </tr>
-                <tr>
-                  <td><h6>Menú</h6></td>
-                  <td><select class="form-control" id="comida" disabled></select></td>
-                </tr>
-                <tr id="trMeseros" style="display: ${detallesEvento.ESTADO === 'EN PROCESO' ? 'table-row' : 'none'}">
-                  <td><h6>Meseros</h6></td>
-                  <td><input class="form-control" type="number" placeholder="Meseros requeridos" id="meserosRequeridos" value="${detallesEvento.MESEROS || ''}" disabled></td>
-                </tr>
-                <tr id="trCocineros" style="display: ${detallesEvento.ESTADO === 'EN PROCESO' ? 'table-row' : 'none'}">
-                  <td><h6>Cocineros</h6></td>
-                  <td><input class="form-control" type="number" placeholder="Cocineros requeridos" id="cocinerosRequeridos" value="${detallesEvento.COCINEROS || ''}" disabled></td>
-                </tr>
-                <tr>
-                  <td><h6>Estado</h6></td>
-                  <td>${detallesEvento.ESTADO}</td>
-                </tr>
-              </table>
-              <br>
-              <div align="center">
-              <button type="button" class="btn btn-primary" id="btnModify"
-                  ${detallesEvento.ESTADO === 'CANCELADO' || detallesEvento.ESTADO === 'FINALIZADO' ? 'style="display: none;"' : ''}>
-                  <i class="fa-solid fa-pencil me-2" style="color: #ffffff;"></i>Modificar Detalles</button>
-                <button type="button" class="btn btn-success" id="btnAceptarEvento" 
-                  ${detallesEvento.ESTADO === 'PENDIENTE' ? '' : 'style="display: none;"'}>
-                  <i class="fa-solid fa-check me-2" style="color: #ffffff;"></i>Aceptar Evento</button>
-                <button type="button" class="btn btn-primary" id="btnSaveChanges" style="display: none;">
-                <i class="fa-solid fa-floppy-disk me-2" style="color: #ffffff;"></i>Guardar</button>            
-                <button type="button" class="btn btn-danger" id="btnCancelarEvento" 
-                  ${detallesEvento.ESTADO === 'CANCELADO' || detallesEvento.ESTADO === 'FINALIZADO' ? 'style="display: none;"' : ''}>
-                  <i class="fa-solid fa-ban me-2" style="color: #ffffff;"></i>Cancelar Evento</button>            
-                <button type="button" class="btn btn-info" id="btnEmpleadosRegistrados"
-                  ${detallesEvento.ESTADO === 'CANCELADO' || detallesEvento.ESTADO === 'PENDIENTE' ? 'style="display: none;"' : ''}>
-                  <i class="fa-solid fa-briefcase me-2" style="color: #ffffff;"></i>Empleados</button>
-              </form>
-              <div id="empleadosTable"></div>
-            `;              
+            formContent = `    <h4 align='center'>${detallesEvento.NOMBRE}</h4>
+            <h5 align='center'>${detallesEvento.CLIENTE}</h5><br>
+            <ul class="nav nav-pills nav-fill">
+  <li class="nav-item">
+    <a class="nav-link active tab-link" aria-current="page" href="#" id="detalles">Detalles</a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link tab-link" href="#" id="meserosRegistrados" >Meseros</a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link tab-link" href="#" id="cocinaRegistrados">Cocineros</a>
+  </li>
+</ul>
+
+
+<div id="detallesContenido">
+<br>
+<form>
+    <table align='center' cellspacing="20" cellpadding="5">
+      <tr>
+        <td><h6>Fecha</h6></td>
+        <td><input class="form-control" type="text" placeholder="Fecha y hora" id="fechaEvento" value="${detallesEvento.F_EVENTO}" disabled></td>
+      </tr>
+      <tr>
+        <td><h6>Salón</h6></td>
+        <td><select class="form-control" id="salon" disabled></select></td>
+      </tr>
+      <tr>
+        <td><h6>Invitados</h6></td>
+        <td><input class="form-control" type="number" placeholder="Invitados" id="invitados" value="${detallesEvento.INVITADOS}" disabled></td>
+      </tr>
+      <tr>
+        <td><h6>Menú</h6></td>
+        <td><select class="form-control" id="comida" disabled></select></td>
+      </tr>
+      <tr id="trMeseros" style="display: ${detallesEvento.ESTADO === 'EN PROCESO' ? 'table-row' : 'none'}">
+        <td><h6>Meseros</h6></td>
+        <td><input class="form-control" type="number" placeholder="Meseros requeridos" id="meserosRequeridos" value="${detallesEvento.MESEROS || ''}" disabled></td>
+      </tr>
+      <tr id="trCocineros" style="display: ${detallesEvento.ESTADO === 'EN PROCESO' ? 'table-row' : 'none'}">
+        <td><h6>Cocineros</h6></td>
+        <td><input class="form-control" type="number" placeholder="Cocineros requeridos" id="cocinerosRequeridos" value="${detallesEvento.COCINEROS || ''}" disabled></td>
+      </tr>
+      <tr>
+        <td><h6>Estado</h6></td>
+        <td>${detallesEvento.ESTADO}</td>
+      </tr>
+    </table>
+    <br>
+    <div align="center">
+    <button type="button" class="btn btn-primary" id="btnModify"
+        ${detallesEvento.ESTADO === 'CANCELADO' || detallesEvento.ESTADO === 'FINALIZADO' ? 'style="display: none;"' : ''}>
+        <i class="fa-solid fa-pencil me-2" style="color: #ffffff;"></i>Modificar Detalles</button>
+      <button type="button" class="btn btn-success" id="btnAceptarEvento" 
+        ${detallesEvento.ESTADO === 'PENDIENTE' ? '' : 'style="display: none;"'}>
+        <i class="fa-solid fa-check me-2" style="color: #ffffff;"></i>Aceptar Evento</button>
+      <button type="button" class="btn btn-primary" id="btnSaveChanges" style="display: none;">
+      <i class="fa-solid fa-floppy-disk me-2" style="color: #ffffff;"></i>Guardar</button>            
+      <button type="button" class="btn btn-danger" id="btnCancelarEvento" 
+        ${detallesEvento.ESTADO === 'CANCELADO' || detallesEvento.ESTADO === 'FINALIZADO' ? 'style="display: none;"' : ''}>
+        <i class="fa-solid fa-ban me-2" style="color: #ffffff;"></i>Cancelar Evento</button>            
+    </form>
+
+    </div></div>
+
+  <div id="empleadosTable"><br></div>
+            `;                   
             
             modalForm.innerHTML = formContent;
             $(document).ready(function() {
@@ -898,28 +912,43 @@ function updateModalContent(formType, idEmpleado, idEvento) {
               });
             });
 
-            var tablaVisible = false;
-            var btnEmpleadosRegistrados = document.getElementById('btnEmpleadosRegistrados');
-            btnEmpleadosRegistrados.addEventListener('click', function() {
-              if (!tablaVisible) {
+            var meserosRegistrados = document.getElementById('meserosRegistrados');
+            meserosRegistrados.addEventListener('click', function() {
+              detallesContenido.style.display = 'none';
+              empleadosTable.style.display = 'block';
                 $.ajax({
                   type: "GET",
-                  url: `../viewsEventos/verEmpleadosRegistrados.php?id=${idEvento}`,
+                  url: `../viewsEventos/verEmpleadosRegistrados.php?id=${idEvento}&tipo=MESERO`,
                   success: function (response) {
                     $("#empleadosTable").html(response);
-                    tablaVisible = true; // La tabla está visible
                   },
                   error: function () {
                     console.error(error);
                   },
                 });
-              } else {
-                // Si la tabla está visible, ocultarla
-                $("#empleadosTable").html("");
-                tablaVisible = false; // La tabla está oculta
-              }
+            });            
+            
+            var cocinaRegistrados = document.getElementById('cocinaRegistrados');
+            cocinaRegistrados.addEventListener('click', function() {
+              detallesContenido.style.display = 'none';
+              empleadosTable.style.display = 'block';
+                $.ajax({
+                  type: "GET",
+                  url: `../viewsEventos/verEmpleadosRegistrados.php?id=${idEvento}&tipo=COCINA`,
+                  success: function (response) {
+                    $("#empleadosTable").html(response);
+                  },
+                  error: function () {
+                    console.error(error);
+                  },
+                });
             });
 
+            var detalles = document.getElementById('detalles');
+            detalles.addEventListener('click', function() {
+              detallesContenido.style.display = 'block';
+              empleadosTable.style.display = 'none';
+            });
 
             var btnModificar = document.getElementById('btnModify');
             btnModificar.addEventListener('click', function() {

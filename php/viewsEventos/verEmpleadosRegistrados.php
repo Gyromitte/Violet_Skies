@@ -6,14 +6,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
             $conexion = new Database();
             $conexion->conectarBD();
 
-            // Obtener el ID del evento desde la consulta GET
             $evento = $_GET['id'];
+            $tipo = $_GET['tipo'];
 
             $consulta = "SELECT E.TIPO, CONCAT(C.NOMBRE, ' ', C.AP_PATERNO, ' ', C.AP_MATERNO) AS NOMBRE, C.TELEFONO
                          FROM CUENTAS C
                          JOIN EMPLEADOS E ON C.ID = E.CUENTA
                          JOIN EVENTO_EMPLEADOS EE ON E.ID = EE.EMPLEADOS
-                         WHERE EE.EVENTO = $evento
+                         WHERE EE.EVENTO = $evento AND E.TIPO = '$tipo'
                          ORDER BY E.TIPO, NOMBRE ASC";
 
             $tabla = $conexion->seleccionar($consulta);
@@ -22,14 +22,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
                 echo "<br><table class='table table-hover'>
                 <thead class='thead-purple'>
                     <tr>
-                        <th>TIPO</th><th>NOMBRE</th><th>TELÉFONO</th>
+                        <th>NOMBRE</th><th>TELÉFONO</th>
                     </tr>
                 </thead>
                 <tbody>";
 
                 foreach ($tabla as $registro) {
                     echo "<tr>";
-                    echo "<td> $registro->TIPO </td>";
                     echo "<td> $registro->NOMBRE </td>";
                     echo "<td> $registro->TELEFONO </td>";
                     echo "</tr>";
@@ -38,9 +37,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
                 echo "</tbody>
                 </table>";
             } else {
-                echo "<br><p>Aún no hay empleados registrados para este evento.</p>";
-            }
+                if($tipo === 'MESERO')
+                {
+                    echo "<br><p>No hay meseros por mostrar</p>";
 
+                } else{
+                    echo "<br><p>No hay cocineros por mostrar</p>";
+                }
+            }
             $conexion->desconectarBD();
         } catch (Exception $e) {
             // En caso de error, devolver una respuesta JSON con el mensaje de error
