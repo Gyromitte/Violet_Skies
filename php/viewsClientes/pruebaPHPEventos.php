@@ -20,48 +20,49 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
         // Validar el cupo del salón seleccionado
         $cupo_maximo = 0;
+        $cupo_minimo = 0;
+        
         switch ($salon) {
             case 1:
-                $cupo_maximo = 50;
-                break;
             case 2:
                 $cupo_maximo = 50;
+                $cupo_minimo = 20;
                 break;
             case 3:
-                $cupo_maximo = 120;
-                break;
             case 4:
-                $cupo_maximo = 120;
-                break;
             case 5:
                 $cupo_maximo = 120;
+                $cupo_minimo = 80;
                 break;
             case 6:
-                $cupo_maximo = 20;
-                break;
             case 7:
-                $cupo_maximo = 20;
-                break;
             case 8:
-                $cupo_maximo = 20;
-                break;
             case 9:
                 $cupo_maximo = 20;
+                $cupo_minimo = 10;
                 break;
             case 10:
-                $cupo_maximo = 80;
-                break;
             case 11:
                 $cupo_maximo = 80;
+                $cupo_minimo = 50;
                 break;
             default:
                 break;
         }
-
+        
         if ($invitados > $cupo_maximo) {
             $response = array(
                 "cupoMaximoExcedido" => true,
                 "mensaje" => "La cantidad de invitados supera el cupo máximo del salón. Este salón solo tiene cupo para $cupo_maximo invitados."
+            );
+            echo json_encode($response);
+            exit;
+        }
+        
+        if ($invitados < $cupo_minimo) {
+            $response = array(
+                "cupoMinimoNoAlcanzado" => true,
+                "mensaje" => "La cantidad de invitados no cumple con el cupo mínimo requerido para este salón. El cupo mínimo es de $cupo_minimo invitados."
             );
             echo json_encode($response);
             exit;
