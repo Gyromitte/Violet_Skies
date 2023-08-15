@@ -1,5 +1,5 @@
 body {
-
+  background-color: #e2dbd5;
   margin: 0;
 }
 
@@ -17,7 +17,7 @@ h1 {
 }
 
 .navbar-header {
-  border-right: 2px solid #7159ad;
+  border-right: 2px solid #6d3536;
   margin-right: 1em;
   font-size: 2em;
 }
@@ -234,7 +234,8 @@ h1 {
   font-size: small;
   padding: 0.8em 2em;
   align-self: center;
-  background-color: #5603ad;
+  background-color: #6d3536
+  ;
   border: none;
   color: white;
   font-family: 'Lexend', sans-serif;
@@ -243,16 +244,17 @@ h1 {
 }
 
 .loginButton:hover {
-  background-color: #b14aed;
+  background-color: #987b80;
 }
 
 /*Hero Section*/
 .heroContainer {
   display: flex;
   flex-direction: row;
-  background-image: linear-gradient(135deg, #5603ad, #f58cd6);
+  /* background-image: linear-gradient(135deg, #353B14, #496687); */
   border-radius: 1.5em;
   width: 85%;
+  color: #353B14;
   height: 100%;
   margin: 5em auto 5em;
   padding: 0.5em;
@@ -292,7 +294,7 @@ h1 {
   padding: 1em;
   width: 15em;
   font-size: medium;
-  background-color: #454ade;
+  background-color:  #6d3536;
   color: white;
   font-family: 'Lexend', sans-serif;
   font-weight: bold;
@@ -300,7 +302,7 @@ h1 {
 }
 
 .agendarButton:hover {
-  background-color: #383cb4;
+  background-color: #987b80;
 }
 
 .rightHeroSection {
@@ -323,11 +325,11 @@ h1 {
   color: white;
   padding: 2em 2em 2em 2em;
   height: 25vw;
-  background-color: #1b1f3b
+  background-color: ;
 }
 
 .job-image {
-  background-color: #454ade;
+  background-color: #7B873B;
   background-image: url(/images/mesero.jpg);
   background-size: cover;
   background-position: center;
@@ -359,7 +361,7 @@ h1 {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  background-color: #5603ad;
+  background-color: #7C873B;
   height: 35vw;
   color: white;
   font-family: 'Patua One', cursive;
@@ -419,7 +421,7 @@ h1 {
 
 .ubic-greet {
   text-align: center;
-  background-image: linear-gradient(135deg, #5603ad, #f58cd6);
+  background-image: linear-gradient(135deg, #987b80, #6d3536);
   padding: 20px;
 }
 
