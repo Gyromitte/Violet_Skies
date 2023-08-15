@@ -49,11 +49,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             echo "<td> $registro->CLIENTE</td>";
 
             echo "<td class='text-center'>";
-            echo '<div class="dropdown">';
-            echo "<button class='btn btn-secondary dropdown-toggle custom-dropdown' type='button' data-bs-toggle='modal' data-bs-target='#mainModal'
-            data-bs-whatever='@verDetallesEvento' data-event-id='$registro->ID' >";
-            echo '</button>';
-            echo '</div>';
+            echo "<button class='btn btn-secondary custom-dropdown' type='button' data-bs-toggle='modal' data-bs-target='#mainModal'
+                data-bs-whatever='@verDetallesEvento' data-event-id='$registro->ID'>+</button>";
             echo "</td>";
             echo "</tr>";
         }
