@@ -502,6 +502,7 @@ h1 {
     }
     /*Estos elementos estaran en el dropdown*/
     .navbar .companySection ul  {
+      
         display: none; /* Oculta los enlaces de navegación en dispositivos móviles */
     }
     /* Agrega estilos específicos para los botones o elementos en dispositivos móviles */

@@ -4,13 +4,13 @@ body{
     background-color: #F1E9DC;
 }
 .control-label{
-    color: #343434;
+    color: white;
 }
  #table-info{
 /*     USE Texto Arriva de Tablas*/
     color: #343434 ; 
 } 
-#table-info{
+#table-info-menus{
     color:  #343434;
 }
 .fa-business-time{
@@ -65,7 +65,7 @@ nav{
     left: -350px;
     width: 300px;
     height: 100vh;
-    background-color: #61697b;
+    background-color: #838DA6;
     transition: left 0.3s ease;
     z-index: 1;
 }
@@ -92,7 +92,7 @@ nav{
     border: none;
     border-radius: 20px;
     height: 50px;
-    background-color:#5603ad;
+    background-color:#381c47;
     margin: 10px;
     color: white;
     font-size: small;
@@ -148,7 +148,7 @@ nav{
     color: #5603ad;
 }
 tbody{
-    background-color: #61697b;
+    background-color: #A69A86;
     font-weight: bold;
 }
 .custom-dropdown{
@@ -169,7 +169,7 @@ tbody{
 }
 /*Modal*/
 .modal-content{
-    background-color: #381c47;
+    background-color: #61697b;
 }
 .modal-header{
     background-color: #381c47;
@@ -182,11 +182,11 @@ tbody{
 }
 .btn-modal{
     border-radius: 2em;
-    background-color: #b14aed;
+    background-color: #381c47;
     border: 2px solid white;
 }
 .btn-modal:hover{
-    background-color: #7c56db;
+    background-color: #b14aed;
     border: 2px solid white;
 }
 .btn-modal-warning{
@@ -215,7 +215,7 @@ tbody{
 #btnEmpleadosRegistrados, #btnAceptarEvento, #btnModify, #btnSaveChanges,
 #btnEditarDatosPersonales, #nuevoAdmin, #btnGuardarCambios, #btnpassword{
     color: white;
-    background-color: #b14aed;
+    background-color: #381c47;
     border: 2px solid white;
 }
 #btnCancelarEvento, #btnCancelarCambios{
@@ -229,10 +229,10 @@ tbody{
     justify-content: space-between;
 }
 .btn-options{
-    background-color: #61697b;
+    background-color: #381c47;
 }
 .btn-options:hover{
-    background-color: #d8d8d6;
+    background-color: #b14aed;
 }
 .search-bar{
     width: 40% !important;
@@ -247,7 +247,9 @@ tbody{
   .event-history {
     flex: 1;
   }
-
+.accordion-body{
+    background-color: #A3A5B0;
+}
 .form-select-custom{
     background-color: #381c47;
     color: white;
@@ -261,8 +263,8 @@ tbody{
 }
   
 /*Charts and info*/
-#eventosAño, #proporcionEmpleados, #proporcionEmpleados2, #pieTipoMenus{
-    background-image: linear-gradient(135deg, #5603ad, #f58cd6);
+ #proporcionEmpleados, #proporcionEmpleados2, #pieTipoMenus{
+    background-image: linear-gradient(135deg, #343434, #61697b );
     color: white;
     border-radius: 20px;
     height: 240px;
@@ -272,12 +274,17 @@ tbody{
     width: 200px; 
 }
 .info-card{
-    background-image: linear-gradient(135deg, #5603ad, #ab8cf5);
+    background-image: linear-gradient(180deg, #61697b, #9E9E9D);
+    border-radius: 20px;
+    padding: 50px;
+}
+#eventosAño{
+    background-image: linear-gradient(135deg, #343434, #61697b);
     border-radius: 20px;
     padding: 50px;
 }
 .graficaEventos{
-    background-image: linear-gradient(135deg, #5603ad, #f58cd6);
+    background-image: linear-gradient(135deg, #61697b, #9E9E9D);
     border-radius: 20px;
     padding: 50px;
 }
