@@ -45,6 +45,10 @@ function updateModalContent(formType) {
                     <input class="form-control" type="text" name="cel" placeholder="Telefono" maxlength="10" requiered><br>
                 </div>
                 <div class="mb-3">
+                    <label class="control-label">Direccion: </label> 
+                    <input class="form-control" type="text" name="dire" placeholder="Direccion" requiered><br>
+                </div>
+                <div class="mb-3">
                     <label class="control-label">Contraseña: </label>
                     <input class="form-control" type="password" name="pass" 
                     placeholder="Contraseña" required><br>
@@ -55,8 +59,12 @@ function updateModalContent(formType) {
                     placeholder="Comprobar Contraseña" required><br>
                 </div>
                 <div class="mb-3">
-                    <label class="control-label">Foto de INE: </label>
+                    <label class="control-label">Foto de INE:(Frente) </label>
                     <input class="form-control" type="file" name="ine" accept="image/*" required><br>
+                </div>
+                <div class="mb-3">
+                    <label class="control-label">Foto de INE: (Atras) </label>
+                    <input class="form-control" type="file" name="back" accept="image/*" required><br>
                 </div>
                 <div id="mensajeDiv" method="POST"></div>
                 <div class="d-flex justify-content-center">
@@ -84,17 +92,21 @@ function updateModalContent(formType) {
               var am = form.elements['am'].value;
               var usu = form.elements['usu'].value;
               var cel = form.elements['cel'].value;
+              var dire = form.elements['dire'].value;
               var pass = form.elements['pass'].value;
               var ckpass = form.elements['ckpass'].value;
               var ine = form.elements['ine'].value;
+              var back = form.elements['back'].value;
               //Como se va enviar la solicitud: un string
               var formData = 'nom=' + encodeURIComponent(nombre) + '&ap=' + (ap) + 
               '&am=' + encodeURIComponent(am) + 
               '&usu=' + encodeURIComponent(usu) + 
-              '&cel=' + encodeURIComponent(cel) + 
+              '&cel=' + encodeURIComponent(cel)+ 
+              '&dire=' + encodeURIComponent(dire) + 
               '&pass=' + encodeURIComponent(pass) + 
               '&ckpass=' + encodeURIComponent(ckpass)+ 
-              '&ine=' + encodeURIComponent(ine);
+              '&ine=' + encodeURIComponent(ine)+ 
+              '&back=' + encodeURIComponent(back);
               xhr.onreadystatechange = function () {
                 if (xhr.readyState === XMLHttpRequest.DONE && xhr.status === 200) {
                   //Manejo de la respuesta:
