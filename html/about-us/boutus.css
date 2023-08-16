@@ -1,12 +1,13 @@
 .main-container{
-    color: white;
+    color: #343434;
     text-align: center;
+    
 }
 .two-part{
     height: 200px;
 }
 h5 {
-    border-bottom: 1px solid #8a2be2; /* Borde violeta */
+    border-bottom: 1px solid #381c47; /* Borde violeta */
     padding-bottom: 10px;/* Espacio entre el h5 y el contenido siguiente */
   }
 #mountain{
