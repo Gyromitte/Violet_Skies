@@ -1,6 +1,12 @@
 a{
     text-decoration: none;
 }
+
+/*Estilos para el calendario*/
+#calendar {
+    width: 100%; /* Ancho del contenedor (puede ser en porcentaje o en píxeles) */
+    height: 500px; /* Alto del contenedor en píxeles */
+}
 /*Color de la celda del dia actual*/
 .fc-day-today {
     background-color: #FFF8E7;
@@ -58,6 +64,10 @@ a{
     border: 0px;
 }
 
+
+#evento-form{
+    color: #343434;
+}
 
 @media (max-width: 768px) {
     /*Numeros de los dias*/
