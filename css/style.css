@@ -452,14 +452,14 @@ h1 {
   visibility: hidden;
 }
 .dropdown-btn-custom, .dropdown-menu-costum{
-  background-color: #5603ad !important;
+  background-color: #616978 !important;
   border: 2px solid white;
 }
 .dropdown-item{
   border: 1px solid white;
 }
 .dropdown-item:hover{
-  background-color: #b14aed;
+  background-color: #F1E9DC;
 }
 
 .dropdown-backdrop {

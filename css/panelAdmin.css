@@ -1,7 +1,7 @@
 body{
     margin: 0;
     color: white !important;
-    background-color: #1b1f3b;
+    background-color: #F1E9DC;
 }
 
 .table{
@@ -14,7 +14,7 @@ nav{
     left: 0;
     width: 100%;
     z-index: 99;
-    background-color: #8367c7;
+    background-color: #381c47;
     font-family: 'Patua One', cursive;
     padding: 0.5em;
     font-size: 2em;
@@ -32,13 +32,13 @@ nav{
     height: 100%;
     width: 100px;
     font-size: 1em;
-    background-color: #8367c7;
+    background-color: #61697b;
     border: 2px solid white;
     border-radius: 2em;
     margin-right: 1em;
 }
 #nav-button:hover{
-    background-color: #b14aed;
+    background-color: #d8d8d6;
 }
 #nav-photo-user{
     border-radius: 50%;
@@ -52,7 +52,7 @@ nav{
     left: -350px;
     width: 300px;
     height: 100vh;
-    background-color: #b14aed;
+    background-color: #61697b;
     transition: left 0.3s ease;
     z-index: 1;
 }
@@ -128,13 +128,16 @@ nav{
 
 /*Tablas*/
 .thead-purple {
-    background-color: #b14aed;
+    background-color: #5603ad;
   }
 .table-hover tbody tr:hover {
     background-color: #e0c3ee;
     color: #5603ad;
 }
-
+tbody{
+    background-color: #61697b;
+    font-weight: bold;
+}
 .custom-dropdown{
     background-color: #5603ad !important;
     border: none;
