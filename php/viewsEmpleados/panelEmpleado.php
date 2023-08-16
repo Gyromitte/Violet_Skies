@@ -222,7 +222,7 @@
                 <div class='search-container'>
                 <div class='filter'>
                 <div class='btn-group'>
-                    <label class='control-label'style='margin-right: 8px;color: #343434;'>Orden:</label>
+                    <label class='control-label'style='margin-right: 8px;'>Orden:</label>
                     <select id='tipoorden' name='orden' class='form-select form-select-custom'>;
                         <option value='porcreacion'>Recientemente Creadas</option>;
                         <option value='lejanoevento'>Eventos Lejanos</option>;
