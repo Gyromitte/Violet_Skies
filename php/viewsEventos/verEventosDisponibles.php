@@ -8,6 +8,9 @@
         $emp=$_SESSION["trabajo"];
         $modo=$_SESSION["tipo"];
         extract($_POST);
+        if($modo=='COCINERO'){
+            $modo='COCINA';
+        }
   
         $consulta = "CALL verEventosDisponibles(?,?)";
         $parametros = array($emp,$orden);
@@ -22,24 +25,32 @@
             $evento=$registro->ID;
             $eventoDate= new datetime($registro->F_CREACION);
             $fecha = $eventoDate->format('Y-m-d');
-            if($modo=='MESERO'){
-                if($registro->MESEROS=="0/0"){
-                    continue;
+            $consulta="SELECT COUNT(*) as cant FROM EVENTO_EMPLEADOS WHERE EVENTO = '$evento' AND EMPLEADOS 
+            IN (SELECT ID FROM EMPLEADOS WHERE TIPO='$modo')";
+            $cant=$conexion->seleccionar($consulta);
+            foreach($cant as $many){
+                $people=$many->cant;
+                $cantm="SELECT MESEROS,COCINEROS FROM DETALLE_EVENTO WHERE ID='$evento'";
+                $cantm=$conexion->seleccionar($cantm);
+                foreach($cantm as $numdetails){
+                    if($modo == 'MESERO' && $people == $numdetails->MESEROS){
+                        continue 3; // Skip this event if MESEROS are already fulfilled
+                    }
+                    else if($modo == 'COCINA' && $people == $numdetails->COCINEROS){
+                        continue;
+                    }        
                 }
             }
-            else if($modo=='COCINERO'){
-                if($registro->COCINEROS=="0/0"){
-                    continue;
-                }
-            }
-
             if($registro->MESEROS=='' && $registro->COCINEROS==''){
                 continue;
             }
-            else if($registro->MESEROS=='' && $registro->COCINEROS==''){
-                continue;
+            else if($modo == 'MESERO' && $registro->MESEROS === "0/0"){
+                continue; // Skip this event if MESEROS are already fulfilled
             }
-  
+            else if($modo == 'COCINA' && $registro->COCINEROS === "0/0"){
+                continue; // Skip this event if COCINEROS are already fulfilled
+            }
+
             echo"<div class='container-fluid'";
             echo"<div class=' card-group col-lg-5 col-mb-5 col-sm-12  d-flex '>";
             echo "<div class='card' id='cuadroEvento'>";
