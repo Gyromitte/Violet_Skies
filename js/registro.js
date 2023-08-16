@@ -23,7 +23,7 @@ function updateModalContent(formType) {
             modalTitle.textContent = "Solicitar Contratacion";
             modalHeader.classList.remove('modal-header-warning');
             formContent = `
-            <form id="EmpReg">
+            <form id="EmpReg" enctype="multipart/form-data">
                 <div class="mb-3">
                     <label class="control-label">Nombre(s): </label> 
                     <input class="form-control" type="text" name="nom" maxlength="30" placeholder="Nombre" requiered><br>
@@ -45,6 +45,10 @@ function updateModalContent(formType) {
                     <input class="form-control" type="text" name="cel" placeholder="Telefono" maxlength="10" requiered><br>
                 </div>
                 <div class="mb-3">
+                    <label class="control-label">Direccion: </label> 
+                    <input class="form-control" type="text" name="dire" placeholder="Direccion" requiered><br>
+                </div>
+                <div class="mb-3">
                     <label class="control-label">Contraseña: </label>
                     <input class="form-control" type="password" name="pass" 
                     placeholder="Contraseña" required><br>
@@ -53,6 +57,14 @@ function updateModalContent(formType) {
                     <label class="control-label">Comprobar Contraseña: </label>
                     <input class="form-control" type="password" name="ckpass"
                     placeholder="Comprobar Contraseña" required><br>
+                </div>
+                <div class="mb-3">
+                    <label class="control-label">Foto de INE:(Frente) </label>
+                    <input class="form-control" type="file" name="ine" accept="image/*" required><br>
+                </div>
+                <div class="mb-3">
+                    <label class="control-label">Foto de INE: (Atras) </label>
+                    <input class="form-control" type="file" name="back" accept="image/*" required><br>
                 </div>
                 <div id="mensajeDiv" method="POST"></div>
                 <div class="d-flex justify-content-center">
@@ -75,33 +87,34 @@ function updateModalContent(formType) {
               xhr.open("POST", "../scripts/registro_emp.php", true);
               xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
               //Obtener los datos del formulario
-              var nombre = form.elements['nom'].value;
-              var ap = form.elements['ap'].value;
-              var am = form.elements['am'].value;
-              var usu = form.elements['usu'].value;
-              var cel = form.elements['cel'].value;
-              var pass = form.elements['pass'].value;
-              var ckpass = form.elements['ckpass'].value;
-              //Como se va enviar la solicitud: un string
-              var formData = 'nom=' + encodeURIComponent(nombre) + '&ap=' + (ap) + 
-              '&am=' + encodeURIComponent(am) + 
-              '&usu=' + encodeURIComponent(usu) + 
-              '&cel=' + encodeURIComponent(cel) + 
-              '&pass=' + encodeURIComponent(pass) + 
-              '&ckpass=' + encodeURIComponent(ckpass);
-              xhr.onreadystatechange = function () {
-                if (xhr.readyState === XMLHttpRequest.DONE && xhr.status === 200) {
-                  //Manejo de la respuesta:
-                  var respuesta = xhr.responseText;
-                  document.getElementById('mensajeDiv').innerHTML = respuesta;
-                  if(respuesta==="<div class='alert alert-success'>Te has registrado exitosamente!</div>"){
-                    setTimeout(function () {
-                        window.location.href = "../views/login.php";
-                      }, 2000);
-                }
-                }
-              };
+              var formData = new FormData(form);
+              var nom = formData.get('nom');
+              var ap = formData.get('ap');
+              var am = formData.get('am');
+              var usu = formData.get('usu');
+              var cel = formData.get('cel');
+              var dire = formData.get('dire');
+              var pass = formData.get('pass');
+              var ckpass = formData.get('ckpass');
+              var ine = form.elements['ine'].files[0];
+              var back = form.elements['back'].files[0];
+
+                xhr.open("POST", "../scripts/registro_emp.php", true);
+                xhr.onreadystatechange = function () {
+                    if (xhr.readyState === XMLHttpRequest.DONE && xhr.status === 200) {
+                    //Manejo de la respuesta:
+                    var respuesta = xhr.responseText;
+                    document.getElementById('mensajeDiv').innerHTML = respuesta;
+                    if(respuesta === "<div class='alert alert-success'>Te has registrado exitosamente!</div>") {
+                        setTimeout(function () {
+                            window.location.href = "../views/login.php";
+                        }, 2000);
+                    }
+                    }
+                };
               //Enviar el formulario
+              formData.append('ine', ine);
+              formData.append('back', back);
               xhr.send(formData);
               //Ver cual es la tabla activa para refrescar cualquier cambio
               console.log(currentTable);

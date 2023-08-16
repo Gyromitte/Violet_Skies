@@ -13,16 +13,19 @@
 
         $num=count($tabla);
         if($num==0){
-            echo"<h1> No has mandado solicitud a algun evento por el momento</h1>";
+            echo"<h1 style='color: #343434;
+            '> No has mandado solicitud a algun evento por el momento</h1>";
         }
         foreach($tabla as $registro){
             $evento=$registro->ID;
+            $eventoDate= new datetime($registro->F_CREACION);
+            $fecha = $eventoDate->format('Y-m-d');
             
             echo"<div class='container-fluid'";
             echo"<div class=' card-group col-lg-5 col-mb-5 col-sm-12  d-flex '>";
             echo "<div class='card' id='cuadroEvento'>";
             echo "<h4><b> $registro->NOMBRE</b></h4>";
-            echo "<p><b>Creada: </b> $registro->F_CREACION</p>";
+            echo "<p><b>Creada: </b> $fecha</p>";
             echo "<p><b>Fecha de Evento: </b> $registro->F_EVENTO</p>";
             echo "<p><b>Cliente: </b> $registro->CLIENTE</p>";
             echo "<p><b>Cantidad de invitados: </b> $registro->INVITADOS</p>";

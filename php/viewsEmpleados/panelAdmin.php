@@ -160,7 +160,7 @@
                     <!-- Filtro de estado - A la izquierda -->
                     <div class="filter">
                         <div class="btn-group">
-                            <label class="control-label">Mostrar:</label>
+                            <label class="control-label" style="color :#343434;" >Mostrar:</label>
                             <select id="estadoSelect" name="estado" class="form-select form-select-custom">
                                 <option value="GRAFICOS" selected>Resumen</option>
                                 <option value="todo">Todos</option>

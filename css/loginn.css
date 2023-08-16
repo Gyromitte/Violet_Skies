@@ -23,7 +23,7 @@ body{
     object-fit: cover;
 }
 .btn-custom{
-    background-image: linear-gradient(135deg, #5603ad, #f58cd6);
+    background-image: linear-gradient(135deg, #61697b, #8f8f8f);
 }
 @media screen and (max-width: 768px) {
     .left-one{

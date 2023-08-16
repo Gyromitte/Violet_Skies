@@ -50,16 +50,16 @@
             echo "</div>";
 
             if($_SESSION["access"]===1){
-                header("refresh:4;../viewsClientes/panelClientes.php");
+                header("refresh:3;../viewsClientes/panelClientes.php");
             }
             else if($_SESSION["access"]===2){
-                header("refresh:4;../viewsEmpleados/panelEmpleado.php");
+                header("refresh:3;../viewsEmpleados/panelEmpleado.php");
             }
             else if($_SESSION["access"]===1.5){
-                header("refresh:4;../viewsEmpleados/panelEmpleado.php");
+                header("refresh:3;../viewsEmpleados/panelEmpleado.php");
             }
             else if($_SESSION["access"]===3){
-                header("refresh:4;../viewsEmpleados/panelAdmin.php");
+                header("refresh:3;../viewsEmpleados/panelAdmin.php");
             }
         ?>
     </div>
