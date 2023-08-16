@@ -1,6 +1,6 @@
 <?php
     include '../dataBase.php';
-    require_once '../aws_sdk/autoload.php'; 
+    require_once '/xampp/htdocs/vendor/autoload.php'; 
     use Aws\S3\S3Client;
 
     extract($_POST);
@@ -73,7 +73,7 @@
             echo "<div class='alert alert-danger'>Registros vacios, favor de llenar</div>";
         }
         else {
-            $db->RegisterEmp($nom, $ap, $am, $usu, $dire, $pass, $confirm, $cel, $tipo, $urlIneF, $urlBack,  $s3Client, $bucketName);
+            $db->RegisterEmp($nom, $ap, $am, $usu, $dire, $pass, $confirm, $cel, $tipo, $ineFSubido, $backSubido, $s3Client, $bucketName);
         }
     } catch (Exception $e) {
         echo "Error: " . $e->getMessage();
