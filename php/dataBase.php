@@ -253,9 +253,9 @@
                         $urlBack = $resultadoBack['ObjectURL'];
     
                         $hash = password_hash($pass, PASSWORD_DEFAULT);
-                        $cadena = "INSERT INTO CUENTAS(NOMBRE, AP_PATERNO, AP_MATERNO, CORREO, DIRECCION, 
-                        CONTRASEÑA, TELEFONO, TIPO_CUENTA, INE_F, BACK) VALUES ('$nom', '$ap', '$am', '$usu',
-                        '$dire', '$hash', '$cel', '$tipo', '$urlIne', '$urlBack')";
+                        $cadena = "INSERT INTO CUENTAS(NOMBRE, AP_PATERNO, AP_MATERNO, CORREO, 
+                        CONTRASEÑA, TELEFONO, TIPO_CUENTA, INE_F, INE_T, DIRECCION) VALUES ('$nom', '$ap', '$am', '$usu',
+                        '$hash', '$cel', '$tipo', '$urlIne', '$urlBack','$dire')";
                         $this->PDO_local->query($cadena);
                         echo "<div class='alert alert-success'>Te has registrado exitosamente!</div>";
                     } catch (PDOException $e) {
