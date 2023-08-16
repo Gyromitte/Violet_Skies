@@ -121,7 +121,6 @@ var btnMeseros = document.getElementById('verMeseros');
 var btnBusqueda = document.getElementById('buscarEmpleado');
 var btnSolicitud = document.getElementById('verSolicitudes');
 
-
 var btnBebidas = document.getElementById('verBebidas');
 var btnDesayuno = document.getElementById('verDesayuno');
 var btnDesBuffet = document.getElementById('verDesBuffet');
@@ -140,14 +139,13 @@ modal.addEventListener("show.bs.modal", function (event) {
   var formType = button.getAttribute("data-bs-whatever");
   var idEmpleado = button.getAttribute("data-id");
   var idEvento = button.getAttribute("data-event-id");
-  var idEmpleado = button.getAttribute("data-empleado-id");
   // Actualizar el contenido del formulario
-  updateModalContent(formType, idEmpleado, idEvento, idEmpleado);
+  updateModalContent(formType, idEmpleado, idEvento);
 });
 
 
 // Función para actualizar el contenido del modal según el tipo de formulario
-function updateModalContent(formType, idEmpleado, idEvento, idEmpleado) {
+function updateModalContent(formType, idEmpleado, idEvento) {
   var formContent = "";
   var modalTitle = document.querySelector('#mainModal .modal-title');
   var form;
@@ -1066,19 +1064,15 @@ function updateModalContent(formType, idEmpleado, idEvento, idEmpleado) {
                 console.log("Aceptación del evento cancelada por el usuario");
               }
             });
-
-
-
+            
           } else {
             console.error("Error en la solicitud AJAX");
           }
         }
       };
-
       xhrDetalles.open("GET", "../viewsEventos/verDetalles.php?id=" + idEvento, true);
       xhrDetalles.send();
       break;
-
       case "@verHistorial":
       modalTitle.textContent = "Historial de empleado";
       // Obtener los datos del empleado con una solicitud AJAX
