@@ -1,7 +1,20 @@
 body{
     margin: 0;
     color: white !important;
-    background-color: #1b1f3b;
+    background-color: #F1E9DC;
+}
+.control-label{
+    color: #343434;
+}
+ #table-info{
+/*     USE Texto Arriva de Tablas*/
+    color: #343434 ; 
+} 
+#table-info{
+    color:  #343434;
+}
+.fa-business-time{
+    color: #343434 ;
 }
 
 .table{
@@ -14,7 +27,7 @@ nav{
     left: 0;
     width: 100%;
     z-index: 99;
-    background-color: #8367c7;
+    background-color: #381c47;
     font-family: 'Patua One', cursive;
     padding: 0.5em;
     font-size: 2em;
@@ -32,13 +45,13 @@ nav{
     height: 100%;
     width: 100px;
     font-size: 1em;
-    background-color: #8367c7;
+    background-color: #61697b;
     border: 2px solid white;
     border-radius: 2em;
     margin-right: 1em;
 }
 #nav-button:hover{
-    background-color: #b14aed;
+    background-color: #d8d8d6;
 }
 #nav-photo-user{
     border-radius: 50%;
@@ -52,7 +65,7 @@ nav{
     left: -350px;
     width: 300px;
     height: 100vh;
-    background-color: #b14aed;
+    background-color: #61697b;
     transition: left 0.3s ease;
     z-index: 1;
 }
@@ -100,7 +113,7 @@ nav{
     transition: margin-left  0.3s ease; /* Agrega una transición suave para una animación fluida */
 }
 .test{
-    background-color: #5603ad;
+    background-color: #381c47;
     border-radius: 10em;
     padding: 10px;
     width: 50%;
@@ -128,20 +141,23 @@ nav{
 
 /*Tablas*/
 .thead-purple {
-    background-color: #b14aed;
+    background-color: #5603ad;
   }
 .table-hover tbody tr:hover {
     background-color: #e0c3ee;
     color: #5603ad;
 }
-
+tbody{
+    background-color: #61697b;
+    font-weight: bold;
+}
 .custom-dropdown{
-    background-color: #5603ad !important;
+    background-color: #381c47 !important;
     border: none;
     width: 100%;
 }
 .custom-drop-menu{
-    background-color: #5603ad;
+    background-color: #381c47;
     color: white !important;
     border: 2px solid white;
 }
@@ -153,10 +169,10 @@ nav{
 }
 /*Modal*/
 .modal-content{
-    background-color: #5603ad;
+    background-color: #381c47;
 }
 .modal-header{
-    background-color: #5603ad;
+    background-color: #381c47;
 }
 .modal-header-warning{
     background-color: #dc3545;
@@ -213,10 +229,10 @@ nav{
     justify-content: space-between;
 }
 .btn-options{
-    background-color: #5603ad;
+    background-color: #61697b;
 }
 .btn-options:hover{
-    background-color: #b14aed;
+    background-color: #d8d8d6;
 }
 .search-bar{
     width: 40% !important;
@@ -233,7 +249,7 @@ nav{
   }
 
 .form-select-custom{
-    background-color: #5603ad;
+    background-color: #381c47;
     color: white;
     border: 2px solid white;
     border-radius: 10px;
