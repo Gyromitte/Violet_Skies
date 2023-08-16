@@ -26,7 +26,8 @@
         }
     </style>
 </head>
-<body>
+<body style="    background-color: #1e1250;
+">
     <?php
          session_start();
          if(isset($_SESSION["logged_in"])){

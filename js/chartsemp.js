@@ -74,3 +74,10 @@ function obtenerNombreMes(numeroMes) {
   const nombresMeses = ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'];
   return nombresMeses[numeroMes - 1];
 }
+
+function recargarGraficos(){
+  xhttp.open("GET", "/php/viewsCharts/countingemp.php", true);
+  xhttp.send();
+}
+
+recargarGraficos();
