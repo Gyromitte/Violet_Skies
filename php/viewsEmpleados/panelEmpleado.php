@@ -28,15 +28,15 @@
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <style>
 			#cuadroEvento{
-				border: 3px solid darkblue;
-				background-image: linear-gradient(145deg, #5603ad, #f58cd6);
+				border: 3px solid #A3A5B0;
+				background-image: linear-gradient(145deg, #61697b, #A3A5B0);
 				color: white;
 				padding: 5px; 
 				margin: 5px;
 				float: left;
             }
             .cutebox{
-                background-color: #5603ad;
+                background-color: #A3A5B0;
                 border-radius: 5em;
                 padding: 10px;
                 width: 80%;
