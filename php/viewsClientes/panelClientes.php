@@ -32,6 +32,12 @@
     <script src="filterEvents.js" async defer></script>
     
 
+    <!--Libreria flatpickr-->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/plugins/flatpickr.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr/dist/plugins/flatpickr.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr/dist/plugins/flatpickr.min.js"></script>
 </head>
 <body>
     <!--[if lt IE 7]>
@@ -94,9 +100,92 @@
     </div>
     <!--Main Content-->
     <div id="main">
-        <!-- Página de Eventos del cliente -->
-        <div id="home" class="tab-content active">
-            <div class="panel-header">
+        <!-- Agendar Evento -->
+        <div id="home" class="tab-content active" style="padding: 25px;">
+            <div class="row">
+                <!-- Div del wizard -->
+                <div class="col-md-5 d-flex flex-column align-items-center">
+                    <!-- Div de información pasos -->
+                    <div style="width: fit-content;" class="rounded-2 mb-2" id="infoAgendar"></div>
+                    <!-- Div de advertencia -->
+                    <div class="alert alert-danger" id="infoAdvertencia" style="display: none;"></div>
+                    <!-- Div de explicación -->
+                    <div style="width: fit-content;" class="rounded-2 mb-4" id="infoExpli"></div>
+                    <!--Div de las comidas-->
+                    <div style=" align-content:center; justify-content: center;  display: none;" class="container custom-item rounded-2 mb-2" id="descripcionComida">
+                        <!-- Aquí van las comidas -->
+                        Escoge un menú para ver su descripción
+                    </div>
+                    <div class="container d-flex flex-column align-items-center">
+                        <!-- Formulario de pasos o pestañas -->
+                        <div class="step-form">
+                            <form id="evento-form" method="post">
+                                <!-- Contenido del primer paso (Fecha del evento) -->
+                                <div class="step step-1">
+                                    <!-- Campos del primer paso -->
+                                    <div class="form-group mb-4">
+                                        <label for="fecha_evento">Fecha del evento:</label>
+                                        <input autocomplete="off" type="date" class="form-control abbb" name="fecha" id="selected-date" readonly="" required="">
+                                    </div>
+                                    <div class="form-group mb-4">
+                                        <label for="hora_evento">Hora del evento: </label>
+                                        <input type="text" id="hora_evento" class="form-control" name="hora_evento" placeholder="HH:MM AM/PM">
+                                    </div>
+                                </div>
+
+                                <!-- Contenido del segundo paso (Nombre del evento) -->
+                                <div class="step step-2">
+                                    <!-- Campos del segundo paso -->
+                                    <div class="form-group mb-4">
+                                        <label for="salon">Salón:</label>
+                                        <select class="form-control" id="salon" name="salon" required>
+                                            <!-- Opciones del select -->
+                                            <option value="">Seleccione un salón</option>
+                                            <?php
+                                            foreach ($salonItems as $salonItem) {
+                                                echo '<option value="' . $salonItem['ID'] . '">' . $salonItem['NOMBRE'] . " Cupo: " .  $salonItem["CUPO"] . '</option>';
+                                            }
+                                            ?>
+                                        </select>
+                                    </div>
+                                    <!--Cantidad de invitados-->
+                                    <div class="form-group mb-4">
+                                        <label for="cantidad_invitados">Cantidad de invitados: </label>
+                                        <input type="text" class="form-control" id="invitados" name="invitados" required pattern="[0-9a-zA-Z]{1,3}" maxlength="3">
+                                    </div>
+                                </div>
+
+                                <!-- Contenido del tercer paso (Menu) -->
+                                <div class="step step-3">
+                                    <label for="comida">Menú del evento:</label>
+                                    <select class="form-control mb-4" id="comida" name="comida" required>
+                                        <option value="">Seleccione una comida del menú</option>
+                                        <?php
+                                        foreach ($menuItems as $menuItem) {
+                                            echo '<option value="' . $menuItem['ID'] . '" data-descripcion="' . $menuItem['DESCRIPCION'] . '">' . $menuItem['NOMBRE'] . '</option>';
+                                        }
+                                        ?>
+                                    </select>
+                                </div>
+
+                                <!-- Botones de navegación entre pasos -->
+                                <div class="step-navigation">
+                                    <button class="btn btn-primary prev-step">Anterior</button>
+                                    <button class="btn btn-primary next-step">Siguiente</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+        <!-- Div que contiene el calendario -->
+        <div class="col-md-7">
+            <div id="calendar"></div>
+        </div>
+    </div>
+</div>
+        <!-- Agendar Eventos -->
+        <div id="eventos" class="tab-content colspan">
+            <div class="panel-header" style="display: flex; flex-direction: column; align-items: center;">
                 <h3 class="test" style="text-align: center; margin-top:2%">
                     Mis eventos
                     <i class="fa-solid fa-calendar-days" style="color: #ffffff;"></i>
@@ -326,5 +415,23 @@
     <!-- Agrega la siguiente línea para cargar el complemento datetimepicker -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-datetimepicker/2.5.20/jquery.datetimepicker.full.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+    <script src="/php/viewsClientes/viewsClientes/js/renderCalendar.js"></script>
+    <script src="/php/viewsClientes/viewsClientes/js/wizard.js"></script>
+    
+    <script>
+        flatpickr("#hora_evento", {
+        enableTime: true,          // Habilitar la selección de tiempo
+        noCalendar: true,          // No mostrar el calendario
+        dateFormat: "H:i",         // Cambiar el formato de hora a 24 horas
+        time_24hr: true,           // Usar formato de 24 horas
+        minuteIncrement: 60,       // Incremento de minutos a 60 (solo horas)
+        minTime: "06:00",          // Hora mínima permitida (6:00 AM)
+        maxTime: "22:00",          // Hora máxima permitida (10:00 PM)
+        // Puedes agregar más opciones según tus necesidades
+        });
+    </script>
+
+    
 </body>
 </html>
