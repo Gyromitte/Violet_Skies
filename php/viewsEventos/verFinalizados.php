@@ -13,7 +13,8 @@
 
         $num=count($tabla);
         if($num==0){
-            echo"<h1> No has estado escrito en ningun evento por el momento</h1>";
+            echo"<h1 style='color: #343434;
+            '> No has estado escrito en ningun evento por el momento</h1>";
         }
         foreach($tabla as $registro){
             $evento=$registro->ID;

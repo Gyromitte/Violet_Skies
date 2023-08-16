@@ -19,7 +19,8 @@
 
         $num=count($tabla);
         if($num==0){
-            echo"<h1> No hay eventos pendientes al momento</h1>";
+            echo"<h1style='color: #343434;
+            '> No hay eventos pendientes al momento</h1>";
         }
         foreach($tabla as $registro){
             $evento=$registro->ID;
