@@ -181,37 +181,37 @@ function getMessageByButtonId(buttonId) {
   switch (buttonId) {
     case 'verCocineros':
       currentTable = 'cocineros';
-      return 'Mostrando a los cocineros: <i class="fas fa-utensils" style="color: #ffffff;"></i>'; 
+      return 'Mostrando a los cocineros: <i class="fas fa-utensils" style="color: #343434;"></i>'; 
     case 'verMeseros':
       currentTable = 'meseros';
-      return 'Mostrando a los meseros: <i class="fa-solid fa-bell-concierge" style="color: #ffffff;"></i>';
+      return 'Mostrando a los meseros: <i class="fa-solid fa-bell-concierge" style="color: #343434;"></i>';
     case 'buscarEmpleado':
       currentTable = 'busqueda';
-      return 'Resultados de búsqueda: <i class="fa-solid fa-magnifying-glass" style="color: #ffffff;"></i>';
+      return 'Resultados de búsqueda: <i class="fa-solid fa-magnifying-glass" style="color: #343434;"></i>';
     case 'verSolicitudes':
       currentTable = 'solicitud';
-      return 'Éstas son tus solicitudes pendientes: <i class="fa-solid fa-business-time" style="color: #ffffff;"></i>';
+      return 'Éstas son tus solicitudes pendientes: <i class="fa-solid fa-business-time" style="color: #343434;"></i>';
     case 'verBebidas':
       currentTable = 'bebidas';
-      return 'Menús del tipo bebidas: <i class="fa-solid fa-wine-glass" style="color: #ffffff;"></i>';
+      return 'Menús del tipo bebidas: <i class="fa-solid fa-wine-glass" style="color: #343434;"></i>';
     case 'verDesayuno':
       currentTable = 'desayuno';
-      return 'Menús del tipo desayuno: <i class="fa-solid fa-egg" style="color: #ffffff;"></i>';  
+      return 'Menús del tipo desayuno: <i class="fa-solid fa-egg" style="color: #343434;"></i>';  
     case 'verDesBuffet':
       currentTable = 'desBuffet';
-      return 'Menús del tipo desayuno buffet: <i class="fa-solid fa-bacon" style="color: #ffffff;"></i>';
+      return 'Menús del tipo desayuno buffet: <i class="fa-solid fa-bacon" style="color: #343434;"></i>';
     case 'verComida':
       currentTable = 'comida';
-      return 'Menús del tipo comida: <i class="fa-solid fa-burger" style="color: #ffffff;"></i>';
+      return 'Menús del tipo comida: <i class="fa-solid fa-burger" style="color: #343434;"></i>';
     case 'verComidaBuffet':
       currentTable = 'comidaBuffet';
-      return 'Menús del tipo comida buffet: <i class="fa-solid fa-drumstick-bite" style="color: #ffffff;"></i>';
+      return 'Menús del tipo comida buffet: <i class="fa-solid fa-drumstick-bite" style="color: #343434;"></i>';
     case 'verCoffee':
       currentTable = 'coffee';
-      return 'Menús del tipo coffee break: <i class="fa-solid fa-mug-saucer" style="color: #ffffff;"></i>';
+      return 'Menús del tipo coffee break: <i class="fa-solid fa-mug-saucer" style="color: #343434;"></i>';
     case 'verDescontinuado':
       currentTable = 'descontinuado';
-      return 'Menús que han sido descontinuados: <i class="fa-solid fa-circle-minus" style="color: #ffffff;"></i>';
+      return 'Menús que han sido descontinuados: <i class="fa-solid fa-circle-minus" style="color: #343434;"></i>';
     default:
       return 'Mostrando información:';
   }
