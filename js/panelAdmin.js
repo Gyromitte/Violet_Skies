@@ -1064,7 +1064,7 @@ function updateModalContent(formType, idEmpleado, idEvento) {
                 console.log("Aceptación del evento cancelada por el usuario");
               }
             });
-            
+           
           } else {
             console.error("Error en la solicitud AJAX");
           }
@@ -1073,6 +1073,7 @@ function updateModalContent(formType, idEmpleado, idEvento) {
       xhrDetalles.open("GET", "../viewsEventos/verDetalles.php?id=" + idEvento, true);
       xhrDetalles.send();
       break;
+
       case "@verHistorial":
       modalTitle.textContent = "Historial de empleado";
       // Obtener los datos del empleado con una solicitud AJAX
