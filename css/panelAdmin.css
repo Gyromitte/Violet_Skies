@@ -65,7 +65,7 @@ nav{
     left: -350px;
     width: 300px;
     height: 100vh;
-    background-color: #61697b;
+    background-color: #838DA6;
     transition: left 0.3s ease;
     z-index: 1;
 }
@@ -215,7 +215,7 @@ tbody{
 #btnEmpleadosRegistrados, #btnAceptarEvento, #btnModify, #btnSaveChanges,
 #btnEditarDatosPersonales, #nuevoAdmin, #btnGuardarCambios, #btnpassword{
     color: white;
-    background-color: #b14aed;
+    background-color: #381c47;
     border: 2px solid white;
 }
 #btnCancelarEvento, #btnCancelarCambios{
@@ -247,7 +247,9 @@ tbody{
   .event-history {
     flex: 1;
   }
-
+.accordion-body{
+    background-color: #A3A5B0;
+}
 .form-select-custom{
     background-color: #381c47;
     color: white;
@@ -272,7 +274,7 @@ tbody{
     width: 200px; 
 }
 .info-card{
-    background-image: linear-gradient(135deg, #61697b, #d8d8d6);
+    background-image: linear-gradient(180deg, #61697b, #9E9E9D);
     border-radius: 20px;
     padding: 50px;
 }
@@ -282,7 +284,7 @@ tbody{
     padding: 50px;
 }
 .graficaEventos{
-    background-image: linear-gradient(135deg, #61697b, #d8d8d6);
+    background-image: linear-gradient(135deg, #61697b, #9E9E9D);
     border-radius: 20px;
     padding: 50px;
 }
