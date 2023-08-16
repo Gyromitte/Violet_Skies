@@ -8,7 +8,7 @@ document.addEventListener('DOMContentLoaded', function() {
         initialDate: new Date().toISOString().split('T')[0],
         dayMaxEvents: true, // allow "more" link when too many events,
         events: {
-            url: '/php/viewsClientes/viewsClientes/php/diasOcupados.php', // URL del archivo PHP para obtener los eventos
+            url: '/php/viewsClientes/diasOcupados.php', // URL del archivo PHP para obtener los eventos
             method: 'POST', // Método para realizar la solicitud AJAX (puede ser GET o POST según tu implementación)
             extraParams: {},
             display: 'background',

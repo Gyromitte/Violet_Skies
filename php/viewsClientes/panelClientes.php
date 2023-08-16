@@ -19,7 +19,7 @@
     <link rel="stylesheet" href="/css/agendarEvento.css">
 
     <!--Nuevo styleShett-->
-    <link rel="stylesheet" href="/php/viewsClientes/viewsClientes/css/style.css">
+    <link rel="stylesheet" href="/php/viewsClientes/calendario/css/style.css">
     <!-- Incluir jQuery -->
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
@@ -106,7 +106,7 @@
     <!--Main Content-->
     <div id="main">
         <!-- Agendar Evento -->
-        <div id="home" class="tab-content active" style="padding: 25px;">
+        <div id="home" class="tab-content active" style="padding: 50px;">
             <div class="row">
                 <!-- Div del wizard -->
                 <div class="col-md-5 d-flex flex-column align-items-center">
@@ -409,8 +409,8 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-datetimepicker/2.5.20/jquery.datetimepicker.full.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 
-    <script src="/php/viewsClientes/viewsClientes/js/renderCalendar.js"></script>
-    <script src="/php/viewsClientes/viewsClientes/js/wizard.js"></script>
+    <script src="/php/viewsClientes/calendario/js/renderCalendar.js"></script>
+    <script src="/php/viewsClientes/calendario/js/wizard.js"></script>
     
     <script>
         flatpickr("#hora_evento", {
