@@ -44,24 +44,32 @@
                 align-items: center;
                 justify-content: center;
             }
-            .calendar {
-    display: grid;
-    grid-template-columns: repeat(7, 1fr);
-    grid-gap: 5px;
-    width: 70%;
-    margin: auto;
+            #loading-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
 }
 
-.day {
-    border: 1px solid #ddd;
-    padding: 5px;
-    text-align: center;
+#loading-spinner {
+  border: 4px solid #f3f3f3;
+  border-top: 4px solid #3498db;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  animation: spin 1s linear infinite;
 }
 
-.special-date {
-    background-color: #f0ad4e;
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
 }
-
 		</style>
     <!--Scripts que necesitan ejecutarse primero-->
 </head>
@@ -84,6 +92,9 @@
              header("Location:../views/login.php");
          }
     ?>
+    <div id="loading-overlay">
+        <div id="loading-spinner"></div>
+    </div>
     <nav>
         <div class="nav-menu">
             <button id="nav-button">
