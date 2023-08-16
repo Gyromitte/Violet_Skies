@@ -1,5 +1,5 @@
 body {
-  background-color: #1b1f3b !important;
+  background-color: #F1E9DC;
   margin: 0;
 }
 
@@ -9,15 +9,15 @@ h1 {
 
 /*Nav*/
 .navbar {
-  background-color: #8367c7;
+  background-color: #381c47;
   color: white;
   font-family: 'Patua One', cursive;
   padding: 0.5em !important;
   margin: 0 !important;
 }
-
+/*6d3536*/
 .navbar-header {
-  border-right: 2px solid #7159ad;
+  border-right: 2px solid #4c4c4c;
   margin-right: 1em;
   font-size: 2em;
 }
@@ -234,7 +234,8 @@ h1 {
   font-size: small;
   padding: 0.8em 2em;
   align-self: center;
-  background-color: #5603ad;
+  background-color: #616978
+  ;
   border: none;
   color: white;
   font-family: 'Lexend', sans-serif;
@@ -243,16 +244,17 @@ h1 {
 }
 
 .loginButton:hover {
-  background-color: #b14aed;
+  background-color: #d8d8d6;
 }
 
 /*Hero Section*/
 .heroContainer {
   display: flex;
   flex-direction: row;
-  background-image: linear-gradient(135deg, #5603ad, #f58cd6);
+  /* background-image: linear-gradient(135deg, #353B14, #496687); */
   border-radius: 1.5em;
   width: 85%;
+  color: #353B14;
   height: 100%;
   margin: 5em auto 5em;
   padding: 0.5em;
@@ -266,7 +268,7 @@ h1 {
 
 .leftHeroSection {
   width: 40vw;
-  color: white;
+  color: #343434;
   display: flex;
   margin: 1em 1em 1em 1em;
   padding-left: 1em;
@@ -292,7 +294,7 @@ h1 {
   padding: 1em;
   width: 15em;
   font-size: medium;
-  background-color: #454ade;
+  background-color:  #381c47;
   color: white;
   font-family: 'Lexend', sans-serif;
   font-weight: bold;
@@ -300,7 +302,7 @@ h1 {
 }
 
 .agendarButton:hover {
-  background-color: #383cb4;
+  background-color: #987b80;
 }
 
 .rightHeroSection {
@@ -323,11 +325,10 @@ h1 {
   color: white;
   padding: 2em 2em 2em 2em;
   height: 25vw;
-  background-color: #1b1f3b
 }
 
 .job-image {
-  background-color: #454ade;
+  background-color: #7B873B;
   background-image: url(/images/mesero.jpg);
   background-size: cover;
   background-position: center;
@@ -342,6 +343,7 @@ h1 {
   text-align: center;
   font-family: 'Archivo Black', sans-serif;
   font-size: 4vw;
+  color: #343434;
 }
 
 .job-desc-text {
@@ -359,14 +361,14 @@ h1 {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  background-color: #5603ad;
+  background-color: #381c47;
   height: 35vw;
   color: white;
   font-family: 'Patua One', cursive;
 }
 
 .sal-greet {
-  border-bottom: 2px solid #7159ad;
+  border-bottom: 2px solid #6d3536;
   justify-self: center;
   height: 20%;
 }
@@ -419,7 +421,7 @@ h1 {
 
 .ubic-greet {
   text-align: center;
-  background-image: linear-gradient(135deg, #5603ad, #f58cd6);
+  background-image: linear-gradient(135deg, #616978, #d8d8d6);
   padding: 20px;
 }
 
@@ -436,7 +438,7 @@ h1 {
 
 /*Informes*/
 .informes {
-  background-color: #5603ad;
+  background-color: #381c47;
   height: auto;
   text-align: center;
   color: white;
@@ -450,14 +452,14 @@ h1 {
   visibility: hidden;
 }
 .dropdown-btn-custom, .dropdown-menu-costum{
-  background-color: #5603ad !important;
+  background-color: #616978 !important;
   border: 2px solid white;
 }
 .dropdown-item{
   border: 1px solid white;
 }
 .dropdown-item:hover{
-  background-color: #b14aed;
+  background-color: #F1E9DC;
 }
 
 .dropdown-backdrop {
@@ -500,6 +502,7 @@ h1 {
     }
     /*Estos elementos estaran en el dropdown*/
     .navbar .companySection ul  {
+      
         display: none; /* Oculta los enlaces de navegación en dispositivos móviles */
     }
     /* Agrega estilos específicos para los botones o elementos en dispositivos móviles */

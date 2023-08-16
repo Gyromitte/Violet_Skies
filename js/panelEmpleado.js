@@ -1,4 +1,17 @@
 /*Funcionamiento de la dashboard*/
+window.addEventListener('load', function() {
+  // This event is triggered when the entire page has finished loading
+  hideLoading();
+});
+
+function hideLoading() {
+  var loadingOverlay = document.getElementById('loading-overlay');
+  loadingOverlay.style.opacity = '0'; // Fade out the overlay
+  setTimeout(function() {
+    loadingOverlay.style.display = 'none'; // Hide the overlay after fading out
+  }, 500);
+}
+
 
 const toggleDashboardBtn = document.getElementById('nav-button');
 const dashboard = document.getElementById('dash-board');
@@ -144,6 +157,7 @@ modal.addEventListener("show.bs.modal", function (event) {
                       VerDisp();
                       checkCurrentTable('pend');
                       checkCurrentTable('soli');
+                      recargarGraficos();
 
                     } 
                     else {
@@ -209,7 +223,7 @@ modal.addEventListener("show.bs.modal", function (event) {
 
               cancel.addEventListener("click", function (event) {
                 event.preventDefault();  
-      
+                recargarGraficos();
                 
       
                 var xhrCan = new XMLHttpRequest();
@@ -294,6 +308,7 @@ modal.addEventListener("show.bs.modal", function (event) {
                       document.getElementById("mensajeDiv").innerHTML = xhrCan.responseText;
                       checkCurrentTable(currentTable);
                       VerDisp();
+                      recargarGraficos();
                     } 
                     else {
                       checkCurrentTable(currentTable);

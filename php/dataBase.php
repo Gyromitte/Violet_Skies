@@ -228,8 +228,53 @@
                 echo $e->getMessage();
             }
         }
-        function ejecutarInsert($consulta)
-    {
+        function RegisterEmp($nom, $ap, $am, $usu, $dire, $pass, $confirm, $cel, $tipo, $ineSubido, $backSubido, $s3Client, $bucketName) {
+            try {
+                if ($pass !== $confirm) {
+                    echo "<div class='alert alert-warning'>Contrasenas no concuerdan</div>";
+                } else {
+                    try {
+                        $resultadoIne = $s3Client->putObject([
+                            'Bucket' => $bucketName,
+                            'Key' => $ineSubido['name'],
+                            'Body' => fopen($ineSubido['tmp_name'], 'rb'),
+                            'ACL' => 'public-read',
+                        ]);
+    
+                        $resultadoBack = $s3Client->putObject([
+                            'Bucket' => $bucketName,
+                            'Key' => $backSubido['name'],
+                            'Body' => fopen($backSubido['tmp_name'], 'rb'),
+                            'ACL' => 'public-read',
+                        ]);
+    
+                        // Obtener URLs públicas de las imágenes
+                        $urlIne = $resultadoIne['ObjectURL'];
+                        $urlBack = $resultadoBack['ObjectURL'];
+    
+                        $hash = password_hash($pass, PASSWORD_DEFAULT);
+                        $cadena = "INSERT INTO CUENTAS(NOMBRE, AP_PATERNO, AP_MATERNO, CORREO, 
+                        CONTRASEÑA, TELEFONO, TIPO_CUENTA, INE_F, INE_T, DIRECCION) VALUES ('$nom', '$ap', '$am', '$usu',
+                        '$hash', '$cel', '$tipo', '$urlIne', '$urlBack','$dire')";
+                        $this->PDO_local->query($cadena);
+                        echo "<div class='alert alert-success'>Te has registrado exitosamente!</div>";
+                    } catch (PDOException $e) {
+                        $errorMessage = $e->getMessage();
+    
+                        // Extract the relevant part of the error message
+                        // Assuming the error message format is "SQLSTATE[45000]: <>: 1644 Your trigger message"
+                        $startIndex = strpos($errorMessage, "1644") + 5;
+                        $triggerMessage = substr($errorMessage, $startIndex);
+    
+                        // Display the trigger message without the unwanted part
+                        echo "<div class='alert alert-danger'>" . $triggerMessage . "</div>";
+                    }
+                }
+            } catch (PDOException $e) {
+                echo $e->getMessage();
+            }
+        }
+        function ejecutarInsert($consulta){
         try
         {
             $this->PDO_local->query($consulta);
@@ -245,6 +290,6 @@
             echo "<div class='alert alert-danger'>" . $triggerMessage . "</div>";
 
         }
-    }
+        }
     }
 ?>

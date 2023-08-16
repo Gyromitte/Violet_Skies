@@ -1,8 +1,9 @@
 .main-container{
     padding: 15px;
+    background-color: #F1E9DC;
 }
 .info-eventos{
-    color: white;
+    color: #343434;
 }
 .custom-card{
     background-image: linear-gradient(135deg, #5603ad, #f58cd6);
@@ -57,7 +58,7 @@
     /* Otros estilos adicionales para resaltar */
   }
 .btn-agend-custom {
-    background: linear-gradient(135deg, #5603ad, #8a2be2);
+    background: linear-gradient(135deg, #381c47, #8a2be2);
     color: white;
     border: 2px solid white; 
     padding: 30px 40px;
@@ -82,7 +83,7 @@
     color: white;
   }
   .header-how-to{
-    background-image: linear-gradient(135deg, #5603ad, #f58cd6);
+    background-image: linear-gradient(135deg, #61697b, #d8d8d8);
     height: 100px;
   }
 
