@@ -469,8 +469,8 @@ function updateModalContent(formType, idEmpleado, idEvento) {
                 </div>
                 <div class="form-group">
                     <label for="telefonoInput">Teléfono:</label>
-                    <input type="text" class="form-control" name="telefono" id="telefonoInput" required value="${datosUsuario.telefono}" pattern="[0-9a-zA-Z]" maxlength="10">
-                </div>
+                    <input type="tel" class="form-control" name="telefono" id="telefonoInput" required pattern="[0-9]{10}" title="Ingresa un número de teléfono válido de 10 dígitos" minlength="10" maxlength="10" value="${datosUsuario.telefono}">
+                    </div>
                 <div class="form-group">
                     <label for="contrasenaActualInput">Contraseña Actual:</label>
                     <input type="password" class="form-control" name="contrasena_actual" id="contrasenaActualInput" required>
@@ -489,9 +489,12 @@ function updateModalContent(formType, idEmpleado, idEvento) {
             var telefonoValue = telefonoInput.value.trim();
     
             if (!esNumero(telefonoValue)) {
-              document.getElementById('mensajeDiv').innerHTML = `<div style="text-align:center;"class="alert alert-success">solo puedes ingresar valores numericos</div>`;
-                telefonoInput.focus();
-                return;
+              document.getElementById('mensajeDiv').innerHTML = `<div style="text-align:center;"class="alert alert-success">Debes ingresar el formato correcto para teléfono (10 dígitos)</div>`;
+              telefonoInput.focus();
+              setTimeout(() => {
+                document.getElementById('mensajeDiv').innerHTML = '';
+              }, 2500);
+              return;
             }
     
             var updatePerfilXHR = new XMLHttpRequest();
@@ -547,8 +550,9 @@ function updateModalContent(formType, idEmpleado, idEvento) {
         });
     
         function esNumero(valor) {
-            return !isNaN(valor) && !isNaN(parseFloat(valor));
+          return /^\d{10,}$/.test(valor);
         }
+      
         break;  
     case "@verSolicitud":
         modalTitle.textContent = "Manejar solicitud";
@@ -831,7 +835,7 @@ function updateModalContent(formType, idEmpleado, idEvento) {
               <table align='center' cellspacing="20" cellpadding="5">
                 <tr>
                   <td><h6>Fecha</h6></td>
-                  <td>${detallesEvento.F_EVENTO}</td>
+                  <td><input class="form-control" type="text" placeholder="Fecha y hora" id="fechaEvento" value="${detallesEvento.F_EVENTO}" disabled></td>
                 </tr>
                 <tr>
                   <td><h6>Salón</h6></td>
