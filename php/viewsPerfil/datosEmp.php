@@ -12,11 +12,11 @@ if ($cuenta) {
    <div class="container-fluid text-center" style="margin-top: 100px;">
         <div class="accordion-item mx-auto rounded">
         <h2 class="accordion-header custom-accordion-header text-start">
-            <i class="fa-solid fa-user me-2" style="color: #ffffff;"></i>
+            <i class="fa-solid fa-user me-2" style="color: #ffffff; padding-left: 10px;"></i>
             Datos personales
         </h2>
-        <div>
-        <div class="personal-info accordion" id="accordionExample" style="color: black;">
+        <div style="background-color: #A3A5B0;">
+        <div class="personal-info accordion" id="accordionExample" style="color: black ;">
             <div class="mb-3 row">
                 <label class="col-sm-3 col-form-label">Nombre:</label>
                 <div class="col-sm-9 accordion-header  text-center">
