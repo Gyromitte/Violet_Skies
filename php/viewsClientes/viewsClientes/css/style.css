@@ -63,7 +63,11 @@ a{
 {
     border: 0px;
 }
-
+/*Color del recuadro seleccionado*/
+.fc-day-selected {
+    background-color:#836892; /* Cambia el color a verde */
+    /* Otras propiedades de estilo si es necesario */
+}
 /*Form del evento*/
 #evento-form{
     color: #343434;
@@ -81,6 +85,8 @@ a{
     padding: 20px;
     font-size: 15px;
 }
+
+
 
 @media (max-width: 768px) {
     /*Numeros de los dias*/

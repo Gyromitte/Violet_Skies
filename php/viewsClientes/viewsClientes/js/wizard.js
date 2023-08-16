@@ -50,8 +50,9 @@ document.addEventListener("DOMContentLoaded", function() {
 
     function updateExplanation(stepNumber) {
         var explanations = [
-            "Introduce el nombre del evento",
-            "Selecciona el salón para el evento <br> y la cantidad de invitados",
+            "Selecciona una fecha disponible y la hora del evento",
+            "Ingresa el nombre del evento",
+            "Selecciona la cantid de invitados <br> y el salon del evento",
             "Escoge una opcion del menú"
             // Agrega más explicaciones según los pasos
         ];

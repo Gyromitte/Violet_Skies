@@ -39,6 +39,12 @@
     <!--Libreria full calendar-->
     <script src="/fullCalendar/fullcalendar.js"></script>
 
+    <!--Libreria flatpickr-->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/plugins/flatpickr.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr/dist/plugins/flatpickr.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr/dist/plugins/flatpickr.min.js"></script>
 </head>
 
 <body>
@@ -119,16 +125,20 @@
                         <!-- Formulario de pasos o pestañas -->
                         <div class="step-form">
                             <form id="evento-form" method="post">
-                                <!-- Contenido del primer paso (Nombre del evento) -->
+                                <!-- Contenido del primer paso (Fecha del evento) -->
                                 <div class="step step-1">
                                     <!-- Campos del primer paso -->
                                     <div class="form-group mb-4">
-                                        <label for="nombre_evento">Nombre del evento:</label>
-                                        <input type="text" class="form-control" id="nombre_evento" name="nombre_evento" required maxlength="50">
+                                        <label for="fecha_evento">Fecha del evento:</label>
+                                        <input autocomplete="off" type="date" class="form-control abbb" name="fecha" id="selected-date" readonly="" required="">
+                                    </div>
+                                    <div class="form-group mb-4">
+                                        <label for="hora_evento">Hora del evento: </label>
+                                        <input type="text" id="hora_evento" class="form-control" name="hora_evento" placeholder="HH:MM AM/PM">
                                     </div>
                                 </div>
 
-                                <!-- Contenido del segundo paso (Salon e invitados) -->
+                                <!-- Contenido del segundo paso (Nombre del evento) -->
                                 <div class="step step-2">
                                     <!-- Campos del segundo paso -->
                                     <div class="form-group mb-4">
@@ -350,6 +360,21 @@
 
     <script src="/php/viewsClientes/viewsClientes/js/renderCalendar.js"></script>
     <script src="/php/viewsClientes/viewsClientes/js/wizard.js"></script>
+    
+    <script>
+        flatpickr("#hora_evento", {
+        enableTime: true,          // Habilitar la selección de tiempo
+        noCalendar: true,          // No mostrar el calendario
+        dateFormat: "H:i",         // Cambiar el formato de hora a 24 horas
+        time_24hr: true,           // Usar formato de 24 horas
+        minuteIncrement: 60,       // Incremento de minutos a 60 (solo horas)
+        minTime: "06:00",          // Hora mínima permitida (6:00 AM)
+        maxTime: "22:00",          // Hora máxima permitida (10:00 PM)
+        // Puedes agregar más opciones según tus necesidades
+        });
+    </script>
+
+    
 </body>
 
 </html>
