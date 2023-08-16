@@ -22,22 +22,40 @@ document.addEventListener("DOMContentLoaded", function() {
         }
     });
 
+    // Agrega el evento change al select de opciones del menú
+    var opcionMenu = document.querySelector("#comida");
+    opcionMenu.addEventListener("change", function() {
+        showStep(currentStep); // Actualiza la visualización del paso
+    });
+
     function showStep(stepNumber) {
         var steps = document.querySelectorAll(".step");
         for (var i = 0; i < steps.length; i++) {
             steps[i].style.display = "none";
         }
+        
+        var descripcionComida = document.querySelector("#descripcionComida");
+        var opcionMenu = document.querySelector("#comida");
+        
+        if (stepNumber === 3 && opcionMenu.value) {
+            descripcionComida.style.display = "block";
+        } else {
+            descripcionComida.style.display = "none";
+        }
+        
         steps[stepNumber - 1].style.display = "block";
         updateExplanation(stepNumber);
     }
+    
 
     function updateExplanation(stepNumber) {
         var explanations = [
-            "Paso 1: Introduce el nombre del evento.",
-            "Paso 2: Selecciona el salón para el evento."
+            "Introduce el nombre del evento",
+            "Selecciona el salón para el evento <br> y la cantidad de invitados",
+            "Escoge una opcion del menú"
             // Agrega más explicaciones según los pasos
         ];
-        document.querySelector("#infoAgendar").textContent = explanations[stepNumber - 1];
+        document.querySelector("#infoAgendar").innerHTML = explanations[stepNumber - 1];
     }
 
     function validateStep(stepNumber) {

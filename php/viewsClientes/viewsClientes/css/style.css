@@ -64,9 +64,22 @@ a{
     border: 0px;
 }
 
-
+/*Form del evento*/
 #evento-form{
     color: #343434;
+}
+#infoAgendar{
+    text-align: center;
+    padding: 20px;
+    color: white;
+    background-color: #381C47;
+}
+#home{
+    font-size: 20px;
+}
+#descripcionComida{
+    padding: 20px;
+    font-size: 15px;
 }
 
 @media (max-width: 768px) {

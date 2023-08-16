@@ -102,45 +102,66 @@
         <!-- Agendar Evento -->
         <div id="home" class="tab-content active" style="padding: 25px;">
             <div class="row">
-                <!-- Div que contiene el calendario -->
-                <div class="col-md-7">
-                    <div id="calendar"></div>
-                </div>
                 <!-- Div del wizard -->
                 <div class="col-md-5 d-flex flex-column align-items-center">
-                    <!-- Div de información -->
-                    <div style="width: fit-content;" class="custom-card rounded-5" id="infoAgendar">
-                        <!-- Contenido del div de explicación -->
-                        Hola yo soy contenido
-                    </div>
-
+                    <!-- Div de información pasos -->
+                    <div style="width: fit-content;" class="rounded-2 mb-2" id="infoAgendar"></div>
                     <!-- Div de advertencia -->
                     <div class="alert alert-danger" id="infoAdvertencia" style="display: none;"></div>
+                    <!-- Div de explicación -->
+                    <div style="width: fit-content;" class="rounded-2 mb-4" id="infoExpli"></div>
+                    <!--Div de las comidas-->
+                    <div style=" align-content:center; justify-content: center;  display: none;" class="container custom-item rounded-2 mb-2" id="descripcionComida">
+                        <!-- Aquí van las comidas -->
+                        Escoge un menú para ver su descripción
+                    </div>
                     <div class="container d-flex flex-column align-items-center">
                         <!-- Formulario de pasos o pestañas -->
                         <div class="step-form">
                             <form id="evento-form" method="post">
-                                <!-- Contenido del primer paso -->
+                                <!-- Contenido del primer paso (Nombre del evento) -->
                                 <div class="step step-1">
                                     <!-- Campos del primer paso -->
-                                    <div class="form-group mb-2">
+                                    <div class="form-group mb-4">
                                         <label for="nombre_evento">Nombre del evento:</label>
                                         <input type="text" class="form-control" id="nombre_evento" name="nombre_evento" required maxlength="50">
                                     </div>
                                 </div>
 
-                                <!-- Contenido del segundo paso -->
+                                <!-- Contenido del segundo paso (Salon e invitados) -->
                                 <div class="step step-2">
                                     <!-- Campos del segundo paso -->
-                                    <div class="form-group mb-2">
+                                    <div class="form-group mb-4">
                                         <label for="salon">Salón:</label>
                                         <select class="form-control" id="salon" name="salon" required>
                                             <!-- Opciones del select -->
+                                            <option value="">Seleccione un salón</option>
+                                            <?php
+                                            foreach ($salonItems as $salonItem) {
+                                                echo '<option value="' . $salonItem['ID'] . '">' . $salonItem['NOMBRE'] . " Cupo: " .  $salonItem["CUPO"] . '</option>';
+                                            }
+                                            ?>
                                         </select>
+                                    </div>
+                                    <!--Cantidad de invitados-->
+                                    <div class="form-group mb-4">
+                                        <label for="cantidad_invitados">Cantidad de invitados: </label>
+                                        <input type="text" class="form-control" id="invitados" name="invitados" required pattern="[0-9a-zA-Z]{1,3}" maxlength="3">
                                     </div>
                                 </div>
 
-                                <!-- Contenido de más pasos aquí -->
+                                <!-- Contenido del tercer paso (Menu) -->
+                                <div class="step step-3">
+                                    <label for="comida">Menú del evento:</label>
+                                    <select class="form-control mb-4" id="comida" name="comida" required>
+                                        <option value="">Seleccione una comida del menú</option>
+                                        <?php
+                                        foreach ($menuItems as $menuItem) {
+                                            echo '<option value="' . $menuItem['ID'] . '" data-descripcion="' . $menuItem['DESCRIPCION'] . '">' . $menuItem['NOMBRE'] . '</option>';
+                                        }
+                                        ?>
+                                    </select>
+                                </div>
 
                                 <!-- Botones de navegación entre pasos -->
                                 <div class="step-navigation">
@@ -151,8 +172,12 @@
                         </div>
                     </div>
                 </div>
-            </div>
+        <!-- Div que contiene el calendario -->
+        <div class="col-md-7">
+            <div id="calendar"></div>
         </div>
+    </div>
+</div>
         <!-- Agendar Eventos -->
         <div id="eventos" class="tab-content colspan">
             <div class="panel-header" style="display: flex; flex-direction: column; align-items: center;">
