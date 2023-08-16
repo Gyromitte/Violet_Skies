@@ -1,5 +1,5 @@
 <?php
-include_once "/xampp/htdocs/php/dataBase.php";
+include_once "../dataBase.php";
 $conexion = new Database();
 $conexion->conectarBD();
 
