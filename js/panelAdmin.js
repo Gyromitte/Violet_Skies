@@ -376,28 +376,33 @@ function updateModalContent(formType, idEmpleado, idEvento) {
                     <input type="text" maxlength="35" name="nombre" placeholder="" class="form-control" 
                     required value="${empleado.NOMBRE}">
                     </div>
-                    <div class="mb-3">
+                    <div class="mb-2">
                     <label class="control-label">Ap. Paterno: </label>
                     <input type="text" maxlength="40" name="ap_paterno" placeholder="" class="form-control" 
                     required value="${empleado.AP_PATERNO}">
                     </div>
-                    <div class="mb-3">
+                    <div class="mb-2">
                     <label class="control-label">Ap. Materno: </label>
                     <input type="text" maxlength="40" name="ap_materno" placeholder="" class="form-control" 
                     required value="${empleado.AP_MATERNO}">
                     </div>
                     <div class="mb-3">
+                    <label class="control-label">Comportamiento: </label>
+                    <input type="text" maxlength="15" name="telefono" placeholder="" class="form-control" 
+                    required value="${empleado.COMPORTAMIENTO}">
+                    </div>
+                    <div class="mb-2">
                     <label class="control-label">Telefono: </label>
                     <input type="text" maxlength="15" name="telefono" placeholder="" class="form-control" 
                     required value="${empleado.TELEFONO}">
                     </div>
-                    <div class="mb-3">
+                    <div class="mb-2">
                       <label class="control-label">RFC</label>
-                      <input type="text" maxlength="13" name="rfc" placeholder="Ingresa el RFC" class="form-control" 
+                      <input type="text" maxlength="13" name="comportamiento" placeholder="Ingresa el RFC" class="form-control" 
                       required oninput="this.value = this.value.toUpperCase()"
                       required value="${empleado.RFC}">
                     </div>
-                    <div class="form-group mb-3">
+                    <div class="form-group mb-2">
                       <label for="tipoUsuario">Tipo de Trabajador</label>
                       <select name="tipoUsuario" class="form-control form-select" id="tipoUsuario">
                         <option value="mesero" ${empleado.TIPO === 'MESERO' ? 'selected' : ''}>Mesero</option>
@@ -422,6 +427,7 @@ function updateModalContent(formType, idEmpleado, idEvento) {
               var nombre = formEditarEmpleado.elements.nombre.value;
               var ap_paterno = formEditarEmpleado.elements.ap_paterno.value;
               var ap_materno = formEditarEmpleado.elements.ap_materno.value;
+              var comportamiento = formEditarEmpleado.elements.comportamiento.value;
               var telefono = formEditarEmpleado.elements.telefono.value;
               var rfc = formEditarEmpleado.elements.rfc.value;
               var tipoUsuario = formEditarEmpleado.elements.tipoUsuario.value;
