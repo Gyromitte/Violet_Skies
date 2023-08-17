@@ -32,12 +32,12 @@
         .left {
             left: 0;
             color: white;
-            background-color: #baa0cd;
+            background-color: #d8d8d6;
         }
         .right {
             right: 0;
             color: white;
-            background-color: #6C3483;
+            background-color: #61697b;
         }
         .centered {
             position: absolute;

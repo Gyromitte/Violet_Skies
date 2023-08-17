@@ -26,7 +26,7 @@
         }
     </style>
 </head>
-<body style="    background-color: #1e1250;
+<body style="    background-color: #F1E9DC;
 ">
     <?php
          session_start();
@@ -116,25 +116,25 @@
 <div class="container-fluid full-page-container">
         <div class="row">
         <div class="col-md-4 left-one">
-                <div class="d-flex flex-column align-items-center justify-content-center h-100">
+                <div class="d-flex flex-column align-items-center justify-content-center h-100" style="color: #343434;">
                     <h1>Iniciar sesión</h1>
                     <hr>
                     <form action="../scripts/verificarlogin.php" method="post">
                         <label class="form-label" name="usu">Correo:</label>
-                        <i class="fa-solid fa-envelope" style="color: #ffffff;"></i>
+                        <i class="fa-solid fa-envelope" style="color: #343434;"></i>
                         <input class="form-control" type="email" name="usu" placeholder="Correo"><br>
                         <label class="form-label" name="pass">Contraseña:</label>
-                        <i class="fa-solid fa-lock" style="color: #ffffff;"></i>
+                        <i class="fa-solid fa-lock" style="color: #343434;"></i>
                         <input class="form-control" type="password" name="pass" placeholder="Contraseña"><br>
                         <button class="btn btn-primary btn-custom" type="submit">Ingresar</button>
                     </form>
                     <br>
-                    <center><a href="../views/registrarse.php" class="no-underline">¿No tienes cuenta? ¡Regístrate!</a></center>
+                    <center><a href="../views/registrarse.php" class="no-underline" style="color: #343434;">¿No tienes cuenta? ¡Regístrate!</a></center>
                 </div>
             </div>
             <!-- Right section for the image (remaining 60% of the width) -->
             <div class="col-md-8 d-flex align-items-stretch img-container">
-                <img src="/images/log-in.jpg" class="img-cover">
+                <img src="/images/skyline-1.svg" class="img-cover">
             </div>
         </div>
     </div>
