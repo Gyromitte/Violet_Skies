@@ -140,7 +140,7 @@
             <h3 style="text-align:center;    padding: 10px;
     width: 50%; color: #343434;">
                 Home
-                <i class="fa-solid fa-house" style="color: #ffffff;"></i>
+                <i class="fa-solid fa-house" style="color: #343434;"></i>
             </h3>
             <!--Info Cards-->
             <div class="container-fluid mt-4">
