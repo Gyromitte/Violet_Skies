@@ -102,7 +102,8 @@
     <!--Main Content-->
     <div id="main">
         <div id="home" class="tab-content active">
-            <h3 class="test" style="text-align:center; ">
+            <h3 style="text-align:center;    padding: 10px;
+    width: 50%; color: #343434;">
                 Home
                 <i class="fa-solid fa-house" style="color: #ffffff;"></i>
             </h3>
