@@ -29,7 +29,7 @@
     <style>
 			#cuadroEvento{
 				border: 3px solid #A3A5B0;
-				background-image: linear-gradient(145deg, #61697b, #A3A5B0);
+				background-image: linear-gradient(145deg, #343434, #343434);
 				color: white;
 				padding: 5px; 
 				margin: 5px;
@@ -135,7 +135,7 @@
     <!--Main Content-->
     <div id="main">
         <div id="home" class="tab-content active">
-        <h3 class="test" style="text-align:center; ">
+        <h3 class="test" style="text-align:center; border-radius: 0px ">
                 Home
                 <i class="fa-solid fa-house" style="color: #ffffff;"></i>
             </h3>
@@ -222,7 +222,7 @@
                 <div class='search-container'>
                 <div class='filter'>
                 <div class='btn-group'>
-                    <label class='control-label'style='margin-right: 8px;'>Orden:</label>
+                    <label class='control-label'style='margin-right: 8px; color: #343434;'>Orden:</label>
                     <select id='tipoorden' name='orden' class='form-select form-select-custom'>;
                         <option value='porcreacion'>Recientemente Creadas</option>;
                         <option value='lejanoevento'>Eventos Lejanos</option>;
