@@ -237,7 +237,7 @@
                                     Datos personales
                                 </button>
                             </h2>
-                            <div style="padding-left: 10%; padding-right:10%" id="collapseOne" class="accordion-collapse collapse show" data-bs-parent="#accordionExample">
+                            <div style="padding-left: 10%; padding-right:10% ;background-color:#61697b;" id="collapseOne" class="accordion-collapse collapse show" data-bs-parent="#accordionExample">
                                 <div class="accordion-body">
                                     <div class="personal-info">
                                         <div class="mb-3 row">
