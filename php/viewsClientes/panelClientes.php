@@ -352,37 +352,7 @@
     </div>
 </div>
 
-    <div class="modal fade" id="modalCambiarContrasena" tabindex="-1" aria-labelledby="modalCambiarContrasenaLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title">Cambiar contraseña</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                  </div>
-                  <div class="modal-body">
-                    <form id="formCambiarContrasena" method="POST">
-                      <div class="mb-3">
-                        <label class="form-label">Contraseña actual:</label>
-                        <input type="password" class="form-control" id="currentPassword" name="currentPassword" required>
-                      </div>
-                      <div class="mb-3">
-                        <label class="form-label">Nueva contraseña:</label>
-                        <input type="password" class="form-control" id="newPassword" name="newPassword" required>
-                      </div>
-                      <div class="mb-3">
-                        <label class="form-label">Confirmar contraseña:</label>
-                        <input type="password" class="form-control" id="confirmPassword" name="confirmPassword" required>
-                      </div>
-                      <input type="hidden" name="cuenta" value="<?php echo $_SESSION["ID"]; ?>">
-                      <button type="submit" class="btn btn-primary">Cambiar</button>
-                      <div><br></div>
-                      <div class="alert d-none" role="alert" align="center" id="alertMessage">
-                        </div>
-                    </form>
-                  </div>
-                </div>
-              </div>
-            </div>
+   
 
 
 

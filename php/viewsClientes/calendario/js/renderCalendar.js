@@ -51,29 +51,23 @@ document.addEventListener('DOMContentLoaded', function() {
             var dayCell = info.dayEl;
             dayCell.classList.add('fc-day-selected');
         },
-        
-
         eventDidMount: function(info) {
-            // Verificar si hay más de un evento en la misma fecha
-            if (info.event.start) {
+            if (info.event.extendedProps.disabled) {
+                info.el.classList.add('fc-day-disabled'); // Agregar la clase CSS para el color apagado
+            } else if (info.event.start) {
                 const fecha = info.event.start.toISOString().split('T')[0];
                 const eventosEnFecha = info.view.calendar.getEvents().filter(evento => evento.start.toISOString().split('T')[0] === fecha);
         
                 if (eventosEnFecha.length > 1) {
-                    info.el.style.backgroundColor = '#ff0000'; // Cambiar el color de fondo a rojo
+                    info.el.style.backgroundColor = '#ff0000'; // Cambiar el color de fondo a rojo si hay múltiples eventos
                 }
             }
         }
-        
     });
-
-    
-
     calendar.render();
 });
 
 //Regex's
-
 //Limitar a que solo se puedan escribir letras
 function limitarALetras(input) {
     input.value = input.value.replace(/[^A-Za-zÁÉÍÓÚáéíóúñÑ\s]/g, '');
