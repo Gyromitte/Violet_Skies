@@ -65,7 +65,13 @@
   height: 40px;
   animation: spin 1s linear infinite;
 }
+.loading-spinner {
+    display: block; /* Show the loading spinner */
+}
 
+.info {
+    display: none; /* Hide the actual content */
+}
 @keyframes spin {
   0% { transform: rotate(0deg); }
   100% { transform: rotate(360deg); }
@@ -159,7 +165,13 @@
                     <div class='col-md-4 mb-4'>
                         <div class='info-card d-flex align-items-center justify-content-between'>
                             <div class='info d-flex flex-column align-items-center mb-2'>
+                            <div class='loading-spinner'>
+                                <div class='spinner-border text-light' role='status'>
+                                    <span class='visually-hidden'>Loading...</span>
+                                </div>
+                            </div>
                                 <h3 id='DispCard'></h3>
+                                
                                 <h5>Eventos Disponibles</h5>
                             </div>
                             <i class='fa-solid fa-briefcase fa-5x' style='color: #ffffff;'></i>
@@ -168,7 +180,13 @@
                     <div class='col-md-4 mb-4'>
                         <div class='info-card d-flex align-items-center justify-content-between'>
                             <div class='info d-flex flex-column align-items-center mb-2'>
+                                <div class='loading-spinner'>
+                                    <div class='spinner-border text-light' role='status'>
+                                        <span class='visually-hidden'>Loading...</span>
+                                    </div>
+                                </div>
                                 <h3 id='AsistCard'></h3>
+                                
                                 <h5>Eventos Atendiendo</h5>
                             </div>
                             <i class='fa-solid fa-business-time fa-5x' style='color: #ffffff;'></i>
@@ -177,6 +195,11 @@
                     <div class='col-md-4 mb-4'>
                         <div class='info-card d-flex align-items-center justify-content-between'>
                             <div class='info d-flex flex-column align-items-center mb-2'>
+                                <div class='loading-spinner'>
+                                    <div class='spinner-border text-light' role='status'>
+                                        <span class='visually-hidden'>Loading...</span>
+                                    </div>
+                                </div>
                                 <h3 id='SolicCard'></h3>
                                 <h5>Solicitudes Enviadas</h5>
                             </div>
@@ -195,6 +218,11 @@
                                 <div class='info d-flex flex-column align-items-center mb-2'>
                                     <h2>Proximo Evento</h2>
                                     <i class='fa-solid fa-calendar-days fa-5x' style='color: #ffffff;'></i>
+                                </div>
+                                <div class='loading-spinner'>
+                                    <div class='spinner-border text-light' role='status'>
+                                        <span class='visually-hidden'>Loading...</span>
+                                    </div>
                                 </div>
                                 <h3 id='FechaCard'></h3>
                             </div>
