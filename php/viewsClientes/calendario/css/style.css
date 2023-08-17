@@ -79,6 +79,12 @@ a{
 .fc-day-past {
     background-color: rgba(255, 255, 255, 0.342);
 }
+/*Hacer que el calendario no se pueda clickear*/
+.non-clickable {
+    pointer-events: none;
+}
+
+
 /*Form del evento (Wizard)*/
 #evento-form{
     color: #343434;

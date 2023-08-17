@@ -52,10 +52,11 @@ document.addEventListener("DOMContentLoaded", function() {
         // Desactivar botón "Siguiente" si está en el último paso
         var nextButton = document.querySelector(".next-step");
         nextButton.disabled = stepNumber === steps.length;
-
+    
         // Habilitar o deshabilitar la interacción con el calendario según el paso
-        updateCalendarInteractivity(stepNumber === 1);
+        updateCalendarInteractivity(stepNumber === 1); // Solo permitir interacción si stepNumber es igual a 1
     }
+    
 
     function updateExplanation(stepNumber) {
         var explanations = [
@@ -112,11 +113,9 @@ document.addEventListener("DOMContentLoaded", function() {
         var calendarElement = document.getElementById("calendar");
 
         if (isClickable) {
-            calendarElement.classList.add("clickable-calendar"); // Aplicar estilo de cursor
-            calendarElement.addEventListener("click", handleCalendarClick);
+            calendarElement.classList.remove("non-clickable"); // Quiar estilo de no click al primer paso
         } else {
-            calendarElement.classList.remove("clickable-calendar"); // Quitar estilo de cursor
-            calendarElement.removeEventListener("click", handleCalendarClick);
+            calendarElement.classList.add("non-clickable"); // Agregar estilo de click a todos los demas pasos
         }
     }
 
