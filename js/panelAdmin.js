@@ -921,6 +921,7 @@ function updateModalContent(formType, idEmpleado, idEvento) {
                   url: `../viewsEventos/verEmpleadosRegistrados.php?id=${idEvento}&tipo=MESERO`,
                   success: function (response) {
                     $("#empleadosTable").html(response);
+                    peticionesFuncion();
                   },
                   error: function () {
                     console.error(error);
@@ -937,6 +938,7 @@ function updateModalContent(formType, idEmpleado, idEvento) {
                   url: `../viewsEventos/verEmpleadosRegistrados.php?id=${idEvento}&tipo=COCINA`,
                   success: function (response) {
                     $("#empleadosTable").html(response);
+                    peticionesFuncion();
                   },
                   error: function () {
                     console.error(error);
@@ -989,7 +991,6 @@ function updateModalContent(formType, idEmpleado, idEvento) {
                 return;
               }
               
-
               var xhrGuardarCambios = new XMLHttpRequest();
               xhrGuardarCambios.onreadystatechange = function(response) {
                 if (xhrGuardarCambios.readyState === XMLHttpRequest.DONE) {
@@ -1001,6 +1002,7 @@ function updateModalContent(formType, idEmpleado, idEvento) {
                         updateModalContent(formType, idEmpleado, idEvento);
                       }, 1000); // Actualizar el modal después de 2000 milisegundos (2 segundos)
                       filtrarEventos();
+                      peticionesFuncion();
                       modalForm.innerHTML = formContent;
                     } else {
                       alert('Algo salió mal\nInténtelo de nuevo');

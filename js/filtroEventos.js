@@ -1,8 +1,6 @@
-// Variables para controlar el tiempo de espera en la búsqueda en tiempo real
 var typingTimer;
 var doneTypingInterval = 50;
 
-// Obtener los elementos del DOM
 var form = document.getElementById('filtroForm');
 var tablaResultados = document.getElementById('tablaResultados');
 var peticionesResult = document.getElementById('peticionesResult');
@@ -16,11 +14,8 @@ var peticiones = document.getElementById("peticiones");
 var eventosFin = document.getElementById("eventosFin");
 var fechaInicioInput = document.getElementById('fechaInicioInput');
 var fechaFinInput = document.getElementById('fechaFinInput');
-
-// Obtener el div que contiene el contenido de la clase row
 var contentRow = document.getElementById('contentRow');
 
-// Ejecutar la función de filtrado al cargar la página
 filtrarEventos();
 
 estadoSelect.addEventListener('change', function() {
@@ -63,8 +58,6 @@ eventosFin.addEventListener("click", function() {
 searchButton.addEventListener('click', function() {
     filtrarEventos();
 });
-
-// Escuchar eventos de cambio en las fechas
 fechaInicioInput.addEventListener('change', filtrarEventos);
 fechaFinInput.addEventListener('change', filtrarEventos);
 
@@ -154,3 +147,17 @@ window.addEventListener('load', function() {
     fechaInicioInput.value = params.get('fecha_inicio') || '';
     fechaFinInput.value = params.get('fecha_fin') || '';
 });
+
+document.getElementById("meserosSoli").addEventListener("click", mostrarSolicitudesEmpleados);
+
+function mostrarSolicitudesEmpleados() {
+    var solicitDiv = document.getElementById("solicit");
+
+    if (solicitDiv.style.display === "none") {
+        solicitDiv.style.display = "block";
+
+    } else {
+        solicitDiv.style.display = "none";
+
+    }
+}

@@ -27,17 +27,26 @@
 
         $conexion->desconectarBD();
 
+        
         echo "<h2 class='text-center'>Empleados para $nombre_evento</h2>";
-        echo '<div class="d-flex justify-content-center">';
-    echo '<div class="accordion" id="accordionMeserosCocineros">'; // Iniciar el contenedor de acordeones
+echo '<ul class="nav nav-pills nav-fill" id="pills-tab" role="tablist">';
 
+    echo '<li class="nav-item" role="presentation">';
+    echo '<a class="nav-link" id="pills-meseros-tab" data-bs-toggle="pill" href="#pills-meseros" role="tab" aria-controls="pills-meseros" aria-selected="true" id="meserosSoli" onclick="mostrarSolicitudesEmpleados()">Peticiones</a>
+    ';
+    echo '</li>';
+
+
+    echo '<li class="nav-item" role="presentation">';
+    echo '<a class="nav-link" id="pills-cocineros-tab" data-bs-toggle="pill" href="#pills-cocineros" role="tab" aria-controls="pills-cocineros" aria-selected="false" id="cocinaSoli">Cocineros</a>';
+    echo '</li>';
+
+echo '</ul>';
+
+echo '<div class="tab-content" id="solicit">';
+echo "<h2>Meseros</h2>";
 if (count($solicitudes_meseros) > 0) {
-    echo '<div class="accordion-item">';
-    echo '<h2 class="accordion-header" id="headingMeseros">';
-    echo '<button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseMeseros" aria-expanded="true" aria-controls="collapseMeseros">Meseros</button>';
-    echo '</h2>';
-    echo '<div id="collapseMeseros" class="accordion-collapse collapse show" aria-labelledby="headingMeseros" data-bs-parent="#accordionMeserosCocineros">';
-    echo '<div class="accordion-body">';
+    echo '<div class="tab-pane fade show active" id="pills-meseros" role="tabpanel" aria-labelledby="pills-meseros-tab">';
     echo '<form method="post" action="/php/viewsEventos/aceptarMeseros.php">';
     foreach ($solicitudes_meseros as $solicitud) {
         echo '<div class="form-check">';
@@ -50,41 +59,28 @@ if (count($solicitudes_meseros) > 0) {
     echo '<button type="submit" class="btn btn-primary" name="accion" value="aceptar_seleccionados">Aceptar seleccionados</button>';
     echo '</form>';
     echo '</div>';
-    echo '</div>';
-    echo '</div>';
-}
+} else {echo "<h4>No hay solicitudes por mostrar</h4>";}
+if (count($solicitudes_cocineros) > 0) {
+    echo '<div class="tab-pane fade show active" id="pills-meseros" role="tabpanel" aria-labelledby="pills-meseros-tab">';
+    echo '<form method="post" action="/php/viewsEventos/aceptarCocina.php">';
+    echo "<h2>Cocina</h2>";
+    foreach ($solicitudes_cocineros as $solicitud) {
+        echo '<div class="form-check">';
+        echo '<input class="form-check-input" type="checkbox" name="empleados[]" value="' . $solicitud->ID . '">';
+        echo '<label class="form-check-label">' . $solicitud->EMPLEADO . '</label>';
+        echo '</div>';
+    }
+    echo '<input type="hidden" name="faltan_coina" value="' . $FALTAN_COCINA . '">';
+    echo '<input type="hidden" name="evento_id" value="' . $evento_id . '">';
 
-    if (count($solicitudes_cocineros) > 0) {
-        echo '<div class="accordion-item">';
-        echo '<h2 class="accordion-header" id="headingCocineros">';
-        echo '<button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseCocineros" aria-expanded="false" aria-controls="collapseCocineros">Cocineros</button>';
-        echo '</h2>';
-        echo '<div id="collapseCocineros" class="accordion-collapse collapse" aria-labelledby="headingCocineros" data-bs-parent="#accordionMeserosCocineros">';
-        echo '<div class="accordion-body">';
-        echo '<form method="post" action="/php/viewsEventos/aceptarCocina.php">';
-        foreach ($solicitudes_cocineros as $solicitud) {
-            echo '<div class="form-check">';
-            echo '<input class="form-check-input" type="checkbox" name="empleados[]" value="' . $solicitud->ID . '">';
-            echo '<label class="form-check-label">' . $solicitud->EMPLEADO . '</label>';
-            echo '</div>';
-        }
-        echo '<input type="hidden" name="faltan_cocina" value="' . $FALTAN_COCINA . '">';
-        echo '<input type="hidden" name="evento_id" value="' . $evento_id . '">';
     echo '<button type="submit" class="btn btn-primary" name="accion" value="aceptar_seleccionados">Aceptar seleccionados</button>';
     echo '</form>';
-        echo '</div>';
-        echo '</div>';
-        echo '</div>';
-    }
-    else
-    {
-        echo 'Aún no hay solicitudes para este evento';
-    }
+    echo '</div>';
+} else {echo "<h4>No hay solicitudes por mostrar</h4>";}
 
-    echo '</div>';
-    echo '</div>';
+echo '</div>';
+
 } else {
     echo "<p class='text-center'>Evento no especificado.</p>";
 }
 ?>
-
