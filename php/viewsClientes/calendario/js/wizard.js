@@ -59,9 +59,9 @@ document.addEventListener("DOMContentLoaded", function() {
 
     function updateExplanation(stepNumber) {
         var explanations = [
-            "Selecciona una fecha disponible en el <strong>calendario</strong> y la hora del evento",
+            "Selecciona una fecha disponible en el <strong>calendario</strong>, <br>hora del evento y cantidad de invitados",
             "Ingresa el nombre del evento",
-            "Selecciona la cantidad de invitados <br> y el salón del evento",
+            "Selecciona el salón del evento",
             "Escoge una opción de nuestros menús"
             // Agrega más explicaciones según los pasos
         ];
@@ -70,9 +70,10 @@ document.addEventListener("DOMContentLoaded", function() {
 
     function validateStep(stepNumber) {
         if (stepNumber === 1) {
-            // Validar si la hora del evento ha sido ingresada en el primer paso
+            // Validar si la hora del evento y la cantidad de invitados han sido ingresados en el primer paso
             var horaEvento = document.querySelector("#hora_evento").value;
-            if (!horaEvento) {
+            var cantidadInvitados = document.querySelector("#invitados").value;
+            if (!horaEvento || !cantidadInvitados) {
                 return false;
             }
         } else {

@@ -124,7 +124,7 @@
                         <!-- Formulario de pasos o pestañas -->
                         <div class="step-form">
                             <form id="evento-form" method="post">
-                                <!-- Contenido del primer paso (Fecha del evento) -->
+                                <!-- Contenido del primer paso (Fecha del evento e invitados) -->
                                 <div class="step step-1">
                                     <!-- Campos del primer paso -->
                                     <div class="form-group mb-4">
@@ -134,6 +134,11 @@
                                     <div class="form-group mb-4">
                                         <label for="hora_evento">Hora del evento: </label>
                                         <input type="time" id="hora_evento" class="form-control" name="hora_evento" placeholder="HH:MM AM/PM">
+                                    </div>
+                                    <!--Cantidad de invitados-->
+                                    <div class="form-group mb-4">
+                                        <label for="cantidad_invitados">Cantidad de invitados: </label>
+                                        <input type="text" class="form-control" id="invitados" name="invitados" oninput="limitarANumeros(this)" maxlength="3">
                                     </div>
                                 </div>
 
@@ -145,7 +150,7 @@
                                     </div>
                                 </div>
 
-                                <!-- Contenido del tercer paso (Invitados y salon) -->
+                                <!-- Contenido del tercer paso (Salon) -->
                                 <div class="step step-3">
                                     <!-- Campos del segundo paso -->
                                     <div class="form-group mb-4">
@@ -159,11 +164,6 @@
                                             }
                                             ?>
                                         </select>
-                                    </div>
-                                    <!--Cantidad de invitados-->
-                                    <div class="form-group mb-4">
-                                        <label for="cantidad_invitados">Cantidad de invitados: </label>
-                                        <input type="text" class="form-control" id="invitados" name="invitados" oninput="limitarANumeros(this)" maxlength="3">
                                     </div>
                                 </div>
 
