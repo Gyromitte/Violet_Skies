@@ -53,7 +53,10 @@ document.addEventListener('DOMContentLoaded', function() {
         },
         eventDidMount: function(info) {
             if (info.event.extendedProps.disabled) {
-                info.el.classList.add('fc-day-disabled'); // Agregar la clase CSS para el color apagado
+                const dayCell = info.el.closest('.fc-day'); // Encontrar el contenedor del día
+                if (dayCell) {
+                    dayCell.classList.add('fc-day-disabled', 'fc-day-disabled-default');
+                }
             } else if (info.event.start) {
                 const fecha = info.event.start.toISOString().split('T')[0];
                 const eventosEnFecha = info.view.calendar.getEvents().filter(evento => evento.start.toISOString().split('T')[0] === fecha);
@@ -62,7 +65,18 @@ document.addEventListener('DOMContentLoaded', function() {
                     info.el.style.backgroundColor = '#ff0000'; // Cambiar el color de fondo a rojo si hay múltiples eventos
                 }
             }
-        }
+        },
+        dayCellDidMount: function(info) {
+            const nowDate = new Date();
+            const nextWeekDate = new Date(nowDate);
+            nextWeekDate.setDate(nextWeekDate.getDate() + 7);
+        
+            if (info.date < nowDate || info.date <= nextWeekDate) {
+                const dayCell = info.el;
+                dayCell.classList.add('fc-day-disabled', 'fc-day-disabled-default');
+            }
+        },
+        
     });
     calendar.render();
 });
