@@ -23,19 +23,35 @@ document.addEventListener('DOMContentLoaded', function() {
             const fecha_seleccionada = info.date;
             const fecha_actual = new Date();
             fecha_actual.setHours(0, 0, 0, 0);
-
+        
+            const nowDate = new Date();
+            const selectedDate = info.date;
+        
+            // Deshabilitar selección de fechas antes del día actual
+            if (selectedDate < nowDate) {
+                return;
+            }
+        
+            // Deshabilitar selección de fechas en los próximos 7 días
+            const nextWeekDate = new Date(nowDate);
+            nextWeekDate.setDate(nextWeekDate.getDate() + 7);
+            if (selectedDate <= nextWeekDate) {
+                return;
+            }
+        
             // Remove previous selected date
             var fecha_anterior = document.querySelector('.fc-day-selected');
             if (fecha_anterior) {
                 fecha_anterior.classList.remove('fc-day-selected');
             }
-
+        
             // Add new selected date
             var formattedDate = fecha_seleccionada.toISOString().split('T')[0];
             document.getElementById('selected-date').value = formattedDate;
             var dayCell = info.dayEl;
             dayCell.classList.add('fc-day-selected');
         },
+        
 
         eventDidMount: function(info) {
             // Verificar si hay más de un evento en la misma fecha
@@ -50,6 +66,8 @@ document.addEventListener('DOMContentLoaded', function() {
         }
         
     });
+
+    
 
     calendar.render();
 });
