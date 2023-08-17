@@ -18,6 +18,14 @@ document.addEventListener('DOMContentLoaded', function() {
                 console.log("Dafaq");
             }
         },
+        validRange: function(nowDate) {
+            const maxDate = new Date();
+            maxDate.setFullYear(maxDate.getFullYear() + 2); // Agrega 2 años a la fecha actual
+            return {
+                start: nowDate,
+                end: maxDate
+            };
+        },
         locale: 'es',
         dateClick: function(info) {
             const fecha_seleccionada = info.date;

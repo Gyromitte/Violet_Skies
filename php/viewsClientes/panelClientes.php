@@ -107,8 +107,12 @@
         <!-- Agendar Evento -->
         <div id="home" class="tab-content active" style="padding: 50px;">
             <div class="row">
+                <!-- Div que contiene el calendario -->
+                <div class="col-md-5">
+                    <div id="calendar"></div>
+                </div>
                 <!-- Div del wizard -->
-                <div class="col-md-7 d-flex flex-column align-items-center">
+                <div class="col-md-7 d-flex flex-column align-items-center justify wizard" style="padding-left: 50px;">
                     <!-- Div de información pasos -->
                     <div style="width: fit-content;" class="rounded-2 mb-2" id="infoAgendar"></div>
                     <!-- Div de advertencia -->
@@ -138,30 +142,11 @@
                                     <!--Cantidad de invitados-->
                                     <div class="form-group mb-4">
                                         <label for="cantidad_invitados">Cantidad de invitados: </label>
-                                        <input type="text" class="form-control" id="invitados" name="invitados" oninput="limitarANumeros(this)" maxlength="3">
+                                        <input type="text" class="form-control" id="invitados" name="invitados" oninput="limitarANumeros(this); mostrarSalones();" maxlength="3">
                                     </div>
                                 </div>
                                 <script>
-                                    var cantidadInvitadosInput = document.querySelector("#invitados");
-                                    var salonSelect = document.querySelector("#salon");
-
-                                    cantidadInvitadosInput.addEventListener("blur", function() {
-                                        var cantidadInvitados = parseInt(cantidadInvitadosInput.value);
-
-                                        if (isNaN(cantidadInvitados)) {
-                                            cantidadInvitados = 10; // Establecer 10 como valor predeterminado
-                                        } else {
-                                            cantidadInvitados = Math.min(Math.max(cantidadInvitados, 10), 120);
-                                        }
-
-                                        cantidadInvitadosInput.value = cantidadInvitados;
-
-                                        mostrarSalonesSegunCantidadInvitados(cantidadInvitados);
-                                    });
-
-                                    function mostrarSalonesSegunCantidadInvitados(cantidad) {
-                                        
-                                    }
+                                    
                                 </script>
                                 <!-- Contenido del segundo paso (Nombre del evento) -->
                                 <div class="step step-2">
@@ -179,15 +164,25 @@
                                         <select class="form-control" id="salon" name="salon" required>
                                             <!-- Opciones del select -->
                                             <option value="">Seleccione un salón</option>
-                                            <?php
-                                            foreach ($salonItems as $salonItem) {
-                                                echo '<option value="' . $salonItem['ID'] . '">' . $salonItem['NOMBRE'] . " Cupo: " .  $salonItem["CUPO"] . '</option>';
-                                            }
-                                            ?>
                                         </select>
                                     </div>
                                 </div>
+                                <!--Este es un coco de TF2, si lo quitas los salones no se mostraran, no se por que-->
+                                <script>
+                                    var cantidadInvitadosInput = document.querySelector("#invitados");
+                                    var cantidadInvitados = parseInt(cantidadInvitadosInput.value);
+                                    var salonSelect = document.querySelector("#salon");
 
+                                    function mostrarSalones(){
+                                        console.log(cantidadInvitados);
+                                        if(cantidadInvitados >= 10 && cantidadInvitados < 20 )
+                                        {
+                                            salonSelect.innerHTML = `<option value ='1'> Cuatrociénegas 1 Cupo: 20 </option>`;
+                                            console.log("wow");
+                                        }
+                                        console.log(salonSelect);
+                                    }
+                                </script>
                                 <!--Contenido del cuarto paso (Menu)-->
                                 <div class="step step-4">
                                 <label for="comida">Menú del evento:</label>
@@ -203,17 +198,13 @@
 
                                 <!-- Botones de navegación entre pasos -->
                                 <div class="step-navigation">
-                                    <button class="btn btn-primary prev-step">Anterior</button>
-                                    <button class="btn btn-primary next-step">Siguiente</button>
+                                    <button class="btn btn-primary prev-step btn-wizard">Anterior</button>
+                                    <button class="btn btn-primary next-step btn-wizard">Siguiente</button>
                                 </div>
                             </form>
                         </div>
                     </div>
                 </div>
-        <!-- Div que contiene el calendario -->
-        <div class="col-md-5">
-            <div id="calendar"></div>
-        </div>
     </div>
 </div>
         <!-- Agendar Eventos -->
@@ -404,6 +395,7 @@
     <script src="/php/viewsClientes/calendario/js/renderCalendar.js"></script>
     <script src="/php/viewsClientes/calendario/js/wizard.js"></script>
     
+    <script src="/php/viewsClientes/calendario/js/paramEven.js"></script>
     <script>
         flatpickr("#hora_evento", {
         enableTime: true,          // Habilitar la selección de tiempo
@@ -413,8 +405,6 @@
         minuteIncrement: 60,       // Incremento de minutos a 60 (solo horas)
         minTime: "06:00",          // Hora mínima permitida (6:00 AM)
         maxTime: "22:00",          // Hora máxima permitida (10:00 PM)
-        staticMobile: true,
-        // Puedes agregar más opciones según tus necesidades
         
         });
     </script>

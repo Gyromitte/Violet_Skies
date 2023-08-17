@@ -52,16 +52,17 @@ document.addEventListener("DOMContentLoaded", function() {
         // Desactivar botón "Siguiente" si está en el último paso
         var nextButton = document.querySelector(".next-step");
         nextButton.disabled = stepNumber === steps.length;
-
+    
         // Habilitar o deshabilitar la interacción con el calendario según el paso
-        updateCalendarInteractivity(stepNumber === 1);
+        updateCalendarInteractivity(stepNumber === 1); // Solo permitir interacción si stepNumber es igual a 1
     }
+    
 
     function updateExplanation(stepNumber) {
         var explanations = [
-            "Selecciona una fecha disponible en el <strong>calendario</strong>, <br>hora del evento y cantidad de invitados <br> Por favor toma en cuenta que el mínimo de invitados <br> es 10 y el máximo es 120",
+            "Selecciona una fecha disponible en el <strong>calendario</strong>, <br>hora del evento y cantidad de invitados <br> <strong>Por favor toma en cuenta que el mínimo de invitados <br> es 10 y el máximo es 120</strong>",
             "Ingresa el nombre del evento",
-            "Selecciona el salón del evento <br> Si no encuentras un salón disponible por favor <br> selecciona otra fecha o  revisa la cantidad de invitados",
+            "Selecciona el salón del evento <br> <strong>Si no encuentras un salón disponible por favor <br> selecciona otra fecha o  revisa la cantidad de invitados</strong>",
             "Escoge una opción de nuestros menús"
             // Agrega más explicaciones según los pasos
         ];
@@ -73,7 +74,8 @@ document.addEventListener("DOMContentLoaded", function() {
             // Validar si la hora del evento y la cantidad de invitados han sido ingresados en el primer paso
             var horaEvento = document.querySelector("#hora_evento").value;
             var cantidadInvitados = document.querySelector("#invitados").value;
-            if (!horaEvento || !cantidadInvitados) {
+            var fechaEvento = document.querySelector("#selected-date").value;
+            if (!horaEvento || !cantidadInvitados || !fechaEvento) {
                 return false;
             }
         } else {
@@ -111,11 +113,9 @@ document.addEventListener("DOMContentLoaded", function() {
         var calendarElement = document.getElementById("calendar");
 
         if (isClickable) {
-            calendarElement.classList.add("clickable-calendar"); // Aplicar estilo de cursor
-            calendarElement.addEventListener("click", handleCalendarClick);
+            calendarElement.classList.remove("non-clickable"); // Quiar estilo de no click al primer paso
         } else {
-            calendarElement.classList.remove("clickable-calendar"); // Quitar estilo de cursor
-            calendarElement.removeEventListener("click", handleCalendarClick);
+            calendarElement.classList.add("non-clickable"); // Agregar estilo de click a todos los demas pasos
         }
     }
 
