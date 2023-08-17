@@ -141,7 +141,28 @@
                                         <input type="text" class="form-control" id="invitados" name="invitados" oninput="limitarANumeros(this)" maxlength="3">
                                     </div>
                                 </div>
+                                <script>
+                                    var cantidadInvitadosInput = document.querySelector("#invitados");
+                                    var salonSelect = document.querySelector("#salon");
 
+                                    cantidadInvitadosInput.addEventListener("blur", function() {
+                                        var cantidadInvitados = parseInt(cantidadInvitadosInput.value);
+
+                                        if (isNaN(cantidadInvitados)) {
+                                            cantidadInvitados = 10; // Establecer 10 como valor predeterminado
+                                        } else {
+                                            cantidadInvitados = Math.min(Math.max(cantidadInvitados, 10), 120);
+                                        }
+
+                                        cantidadInvitadosInput.value = cantidadInvitados;
+
+                                        mostrarSalonesSegunCantidadInvitados(cantidadInvitados);
+                                    });
+
+                                    function mostrarSalonesSegunCantidadInvitados(cantidad) {
+                                        
+                                    }
+                                </script>
                                 <!-- Contenido del segundo paso (Nombre del evento) -->
                                 <div class="step step-2">
                                     <div class="form-group mb-4">

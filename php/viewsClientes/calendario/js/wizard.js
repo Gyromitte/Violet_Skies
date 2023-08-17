@@ -59,9 +59,9 @@ document.addEventListener("DOMContentLoaded", function() {
 
     function updateExplanation(stepNumber) {
         var explanations = [
-            "Selecciona una fecha disponible en el <strong>calendario</strong>, <br>hora del evento y cantidad de invitados",
+            "Selecciona una fecha disponible en el <strong>calendario</strong>, <br>hora del evento y cantidad de invitados <br> Por favor toma en cuenta que el mínimo de invitados <br> es 10 y el máximo es 120",
             "Ingresa el nombre del evento",
-            "Selecciona el salón del evento",
+            "Selecciona el salón del evento <br> Si no encuentras un salón disponible por favor <br> selecciona otra fecha o  revisa la cantidad de invitados",
             "Escoge una opción de nuestros menús"
             // Agrega más explicaciones según los pasos
         ];
