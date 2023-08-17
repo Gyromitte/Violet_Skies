@@ -1393,11 +1393,13 @@ function updateModalContent(formType, idEmpleado, idEvento) {
               // Actualizar el contenido del formulario con los datos obtenidos
               formContent = `
                 <form>
+                  <div style=" justify-content: center;">
                   <div class="mb-3">
                     <img src=${solicitud.INE_F}>
                   </div>
                   <div class="mb-3">
                     <img src=${solicitud.INE_T}>
+                  </div>
                   </div>
                 </form>
                 `;
