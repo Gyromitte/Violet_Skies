@@ -75,7 +75,7 @@ nav{
     height: 100vh;
     background-color: #343434;
     transition: left 0.3s ease;
-    z-index: 99999;
+    z-index: 98;
 }
 /* Estilo para abrir el dashboard */
 #dash-board.dashboard-open {
@@ -166,7 +166,7 @@ tbody{
     width: 100%;
 }
 .custom-drop-menu{
-    background-color: #343434;
+    background-color: #A595B7;
     color: white !important;
     border: 2px solid white;
 }
