@@ -41,10 +41,9 @@
 
     <!--Libreria flatpickr-->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/plugins/flatpickr.min.css">
-    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr@latest"></script>
     <script src="https://cdn.jsdelivr.net/npm/flatpickr/dist/plugins/flatpickr.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/flatpickr/dist/plugins/flatpickr.min.js"></script>
+
 </head>
 
 <body>
@@ -393,7 +392,9 @@
         minuteIncrement: 60,       // Incremento de minutos a 60 (solo horas)
         minTime: "06:00",          // Hora mínima permitida (6:00 AM)
         maxTime: "22:00",          // Hora máxima permitida (10:00 PM)
+        staticMobile: true,
         // Puedes agregar más opciones según tus necesidades
+        
         });
     </script>
 

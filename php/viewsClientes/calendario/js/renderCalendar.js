@@ -62,7 +62,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 const eventosEnFecha = info.view.calendar.getEvents().filter(evento => evento.start.toISOString().split('T')[0] === fecha);
         
                 if (eventosEnFecha.length > 1) {
-                    info.el.style.backgroundColor = '#ff0000'; // Cambiar el color de fondo a rojo si hay múltiples eventos
+                    info.el.style.backgroundColor = ''; // Cambiar el color de fondo a rojo si hay múltiples eventos
                 }
             }
         },
