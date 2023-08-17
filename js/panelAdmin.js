@@ -574,6 +574,8 @@ function updateModalContent(formType, idEmpleado, idEvento) {
                   <h6 class="mb-3">${solicitud.TELEFONO}</h6>
                   <h5>Correo: </h5>
                   <h6 class="mb-3">${solicitud.CORREO}</h6>
+                  <h5>Direccion: </h5>
+                  <h6 class="mb-3">${solicitud.DIRECCION}</h6>
                   <div class="mb-3">
                     <label class="control-label">RFC</label>
                     <input maxlength="13" required oninput="this.value = this.value.toUpperCase()"
@@ -1382,7 +1384,41 @@ function updateModalContent(formType, idEmpleado, idEvento) {
     //Ver cual es la tabla activa para refrescar cualquier cambio
     checkCurrentTable(currentTable);
     break;
-    
+    case "@verINE":
+        modalTitle.textContent = "INE";
+        modalHeader.classList.remove('modal-header-warning');
+        // Obtener los datos de la solicitud con una solicitud AJAX
+        var xhr = new XMLHttpRequest();
+        xhr.onreadystatechange = function () {
+          if (xhr.readyState === XMLHttpRequest.DONE) {
+            if (xhr.status === 200) {
+              // Parsear la respuesta JSON
+              var solicitud = JSON.parse(xhr.responseText);
+              // Actualizar el contenido del formulario con los datos obtenidos
+              formContent = `
+                <form>
+                  <div class="mb-3">
+                    <img src=${solicitud.INE_F}>
+                  </div>
+                  <div class="mb-3">
+                    <img src=${solicitud.INE_T}>
+                  </div>
+                </form>
+                `;
+                // Asignar el contenido al formulario del modal
+                modalForm.innerHTML = formContent;
+              } else {
+                console.error("Error en la solicitud AJAX");
+                //Ver cual es la tabla activa para refrescar cualquier cambio
+                checkCurrentTable(currentTable);
+              }
+            }
+          };
+        
+          // Hacer la solicitud al script PHP y pasar el ID de la solicitud
+          xhr.open("GET", "obtenerSolicitud.php?id=" + idEmpleado, true);
+          xhr.send();
+      break;  
     }
   }
   
