@@ -194,8 +194,8 @@
 
                                 <!-- Botones de navegación entre pasos -->
                                 <div class="step-navigation">
-                                    <button class="btn btn-primary prev-step">Anterior</button>
-                                    <button class="btn btn-primary next-step">Siguiente</button>
+                                    <button class="btn btn-primary prev-step btn-wizard">Anterior</button>
+                                    <button class="btn btn-primary next-step btn-wizard">Siguiente</button>
                                 </div>
                             </form>
                         </div>
