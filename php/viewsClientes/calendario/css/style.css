@@ -117,4 +117,22 @@ a{
         color: #343434;
         font-size: 12px;
     }
+    #calendar {
+        width: 100%; /* Ancho del contenedor (puede ser en porcentaje o en píxeles) */
+        height: 300px; /* Alto del contenedor en píxeles */
+        margin-bottom: 20px;
+    }
+    #infoAgendar{
+        font-size: 15px;
+    }
+    #home{
+        padding: 20px !important;
+    }
+    /*Color letras de los titulos (Dom, Lun.. etc)*/
+    .fc-col-header-cell-cushion{
+    font-size: 15px;
+    }
+    .wizard{
+        padding-left: 0px !important;
+    }
 }

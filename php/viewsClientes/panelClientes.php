@@ -107,8 +107,12 @@
         <!-- Agendar Evento -->
         <div id="home" class="tab-content active" style="padding: 50px;">
             <div class="row">
+                <!-- Div que contiene el calendario -->
+                <div class="col-md-5">
+                    <div id="calendar"></div>
+                </div>
                 <!-- Div del wizard -->
-                <div class="col-md-7 d-flex flex-column align-items-center">
+                <div class="col-md-7 d-flex flex-column align-items-center justify wizard" style="padding-left: 50px;">
                     <!-- Div de información pasos -->
                     <div style="width: fit-content;" class="rounded-2 mb-2" id="infoAgendar"></div>
                     <!-- Div de advertencia -->
@@ -201,10 +205,6 @@
                         </div>
                     </div>
                 </div>
-        <!-- Div que contiene el calendario -->
-        <div class="col-md-5">
-            <div id="calendar"></div>
-        </div>
     </div>
 </div>
         <!-- Agendar Eventos -->
@@ -405,8 +405,6 @@
         minuteIncrement: 60,       // Incremento de minutos a 60 (solo horas)
         minTime: "06:00",          // Hora mínima permitida (6:00 AM)
         maxTime: "22:00",          // Hora máxima permitida (10:00 PM)
-        staticMobile: true,
-        // Puedes agregar más opciones según tus necesidades
         
         });
     </script>
