@@ -31,9 +31,13 @@
 				border: 3px solid #A3A5B0;
 				background-image: linear-gradient(145deg, #343434, #343434);
 				color: white;
-				padding: 5px; 
+                padding: 8px;
 				margin: 5px;
 				float: left;
+            }
+            .dropdown ul{
+                padding: 7px;
+                background-color: #55406e;
             }
             .cutebox{
                 background-color: #A3A5B0;
