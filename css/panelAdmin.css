@@ -294,6 +294,11 @@ tbody{
     border-radius: 20px;
     padding: 50px;
 }
+.graficaEventos{
+    background-image: linear-gradient(135deg, #5603ad, #f58cd6);
+    border-radius: 20px;
+    padding: 50px;
+}
 
 .search-container {
     display: flex;
