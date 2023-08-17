@@ -41,10 +41,9 @@
 
     <!--Libreria flatpickr-->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/plugins/flatpickr.min.css">
-    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr@latest"></script>
     <script src="https://cdn.jsdelivr.net/npm/flatpickr/dist/plugins/flatpickr.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/flatpickr/dist/plugins/flatpickr.min.js"></script>
+
 </head>
 
 <body>
@@ -109,7 +108,7 @@
         <div id="home" class="tab-content active" style="padding: 50px;">
             <div class="row">
                 <!-- Div del wizard -->
-                <div class="col-md-5 d-flex flex-column align-items-center">
+                <div class="col-md-7 d-flex flex-column align-items-center">
                     <!-- Div de información pasos -->
                     <div style="width: fit-content;" class="rounded-2 mb-2" id="infoAgendar"></div>
                     <!-- Div de advertencia -->
@@ -125,7 +124,7 @@
                         <!-- Formulario de pasos o pestañas -->
                         <div class="step-form">
                             <form id="evento-form" method="post">
-                                <!-- Contenido del primer paso (Fecha del evento) -->
+                                <!-- Contenido del primer paso (Fecha del evento e invitados) -->
                                 <div class="step step-1">
                                     <!-- Campos del primer paso -->
                                     <div class="form-group mb-4">
@@ -134,12 +133,46 @@
                                     </div>
                                     <div class="form-group mb-4">
                                         <label for="hora_evento">Hora del evento: </label>
-                                        <input type="text" id="hora_evento" class="form-control" name="hora_evento" placeholder="HH:MM AM/PM">
+                                        <input type="time" id="hora_evento" class="form-control" name="hora_evento" placeholder="HH:MM AM/PM">
+                                    </div>
+                                    <!--Cantidad de invitados-->
+                                    <div class="form-group mb-4">
+                                        <label for="cantidad_invitados">Cantidad de invitados: </label>
+                                        <input type="text" class="form-control" id="invitados" name="invitados" oninput="limitarANumeros(this)" maxlength="3">
+                                    </div>
+                                </div>
+                                <script>
+                                    var cantidadInvitadosInput = document.querySelector("#invitados");
+                                    var salonSelect = document.querySelector("#salon");
+
+                                    cantidadInvitadosInput.addEventListener("blur", function() {
+                                        var cantidadInvitados = parseInt(cantidadInvitadosInput.value);
+
+                                        if (isNaN(cantidadInvitados)) {
+                                            cantidadInvitados = 10; // Establecer 10 como valor predeterminado
+                                        } else {
+                                            cantidadInvitados = Math.min(Math.max(cantidadInvitados, 10), 120);
+                                        }
+
+                                        cantidadInvitadosInput.value = cantidadInvitados;
+
+                                        mostrarSalonesSegunCantidadInvitados(cantidadInvitados);
+                                    });
+
+                                    function mostrarSalonesSegunCantidadInvitados(cantidad) {
+                                        
+                                    }
+                                </script>
+                                <!-- Contenido del segundo paso (Nombre del evento) -->
+                                <div class="step step-2">
+                                    <div class="form-group mb-4">
+                                        <label for="nombre_evento">Nombre del evento: </label>
+                                        <input type="text" class="form-control" id="nombre_evento" name="nombre_evento" required maxlength="50" oninput="limitarALetras(this)">
                                     </div>
                                 </div>
 
-                                <!-- Contenido del segundo paso (Nombre del evento) -->
-                                <div class="step step-2">
+                                <!-- Contenido del tercer paso (Salon) -->
+                                <div class="step step-3">
                                     <!-- Campos del segundo paso -->
                                     <div class="form-group mb-4">
                                         <label for="salon">Salón:</label>
@@ -153,16 +186,11 @@
                                             ?>
                                         </select>
                                     </div>
-                                    <!--Cantidad de invitados-->
-                                    <div class="form-group mb-4">
-                                        <label for="cantidad_invitados">Cantidad de invitados: </label>
-                                        <input type="text" class="form-control" id="invitados" name="invitados" required pattern="[0-9a-zA-Z]{1,3}" maxlength="3">
-                                    </div>
                                 </div>
 
-                                <!-- Contenido del tercer paso (Menu) -->
-                                <div class="step step-3">
-                                    <label for="comida">Menú del evento:</label>
+                                <!--Contenido del cuarto paso (Menu)-->
+                                <div class="step step-4">
+                                <label for="comida">Menú del evento:</label>
                                     <select class="form-control mb-4" id="comida" name="comida" required>
                                         <option value="">Seleccione una comida del menú</option>
                                         <?php
@@ -183,7 +211,7 @@
                     </div>
                 </div>
         <!-- Div que contiene el calendario -->
-        <div class="col-md-7">
+        <div class="col-md-5">
             <div id="calendar"></div>
         </div>
     </div>
@@ -343,42 +371,6 @@
         </div>
     </div>
 </div>
-
-    <div class="modal fade" id="modalCambiarContrasena" tabindex="-1" aria-labelledby="modalCambiarContrasenaLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title">Cambiar contraseña</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                  </div>
-                  <div class="modal-body">
-                    <form id="formCambiarContrasena" method="POST">
-                      <div class="mb-3">
-                        <label class="form-label">Contraseña actual:</label>
-                        <input type="password" class="form-control" id="currentPassword" name="currentPassword" required>
-                      </div>
-                      <div class="mb-3">
-                        <label class="form-label">Nueva contraseña:</label>
-                        <input type="password" class="form-control" id="newPassword" name="newPassword" required>
-                      </div>
-                      <div class="mb-3">
-                        <label class="form-label">Confirmar contraseña:</label>
-                        <input type="password" class="form-control" id="confirmPassword" name="confirmPassword" required>
-                      </div>
-                      <input type="hidden" name="cuenta" value="<?php echo $_SESSION["ID"]; ?>">
-                      <button type="submit" class="btn btn-primary">Cambiar</button>
-                      <div><br></div>
-                      <div class="alert d-none" role="alert" align="center" id="alertMessage">
-                        </div>
-                    </form>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-
-
-
     <!--Scripts que necesitan ejecutarse hasta el final-->
     <script>
         // Definir una variable global en JavaScript para almacenar los datos del usuario
@@ -421,7 +413,9 @@
         minuteIncrement: 60,       // Incremento de minutos a 60 (solo horas)
         minTime: "06:00",          // Hora mínima permitida (6:00 AM)
         maxTime: "22:00",          // Hora máxima permitida (10:00 PM)
+        staticMobile: true,
         // Puedes agregar más opciones según tus necesidades
+        
         });
     </script>
 

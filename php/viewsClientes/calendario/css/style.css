@@ -68,6 +68,17 @@ a{
     background-color:#836892; /* Cambia el color a verde */
     /* Otras propiedades de estilo si es necesario */
 }
+.fc-day-disabled{
+    background-color: rgba(95, 95, 95, 0.1); /* Color de fondo más oscuro */
+}
+/*Recuardos desactivados*/
+.fc-day-disabled-default{
+    background-color: rgba(95, 95, 95, 0.1); /* Color de fondo más oscuro */
+}
+/* Aplicar color apagado a los días pasados */
+.fc-day-past {
+    background-color: rgba(255, 255, 255, 0.342);
+}
 /*Form del evento*/
 #evento-form{
     color: #343434;
