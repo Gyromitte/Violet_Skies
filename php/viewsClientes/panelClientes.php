@@ -134,7 +134,7 @@
                                     </div>
                                     <div class="form-group mb-4">
                                         <label for="hora_evento">Hora del evento: </label>
-                                        <input type="text" id="hora_evento" class="form-control" name="hora_evento" placeholder="HH:MM AM/PM">
+                                        <input type="time" id="hora_evento" class="form-control" name="hora_evento" placeholder="HH:MM AM/PM">
                                     </div>
                                 </div>
 
@@ -351,12 +351,6 @@
         </div>
     </div>
 </div>
-
-   
-
-
-
-
     <!--Scripts que necesitan ejecutarse hasta el final-->
     <script>
         // Definir una variable global en JavaScript para almacenar los datos del usuario
