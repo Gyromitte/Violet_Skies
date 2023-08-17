@@ -35,8 +35,8 @@
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <style>
         form img{
-            width: 50%;
-            height: 50%;
+            width: 400px;
+            height: 200px;
         }
         </style>
 </head>
