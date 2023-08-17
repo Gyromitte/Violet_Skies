@@ -95,6 +95,7 @@ a{
 #descripcionComida{
     padding: 20px;
     font-size: 15px;
+    background-color: #836892;
 }
 .btn-wizard{
     background-color: #381C47 !important;
