@@ -53,3 +53,15 @@ document.addEventListener('DOMContentLoaded', function() {
 
     calendar.render();
 });
+
+//Regex's
+
+//Limitar a que solo se puedan escribir letras
+function limitarALetras(input) {
+    input.value = input.value.replace(/[^A-Za-zÁÉÍÓÚáéíóúñÑ\s]/g, '');
+}
+
+//Limitar a que solo se puedan escribir numeros
+function limitarANumeros(input) {
+    input.value = input.value.replace(/[^0-9]/g, '');
+}

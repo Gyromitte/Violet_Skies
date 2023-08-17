@@ -109,7 +109,7 @@
         <div id="home" class="tab-content active" style="padding: 50px;">
             <div class="row">
                 <!-- Div del wizard -->
-                <div class="col-md-5 d-flex flex-column align-items-center">
+                <div class="col-md-7 d-flex flex-column align-items-center">
                     <!-- Div de información pasos -->
                     <div style="width: fit-content;" class="rounded-2 mb-2" id="infoAgendar"></div>
                     <!-- Div de advertencia -->
@@ -140,6 +140,14 @@
 
                                 <!-- Contenido del segundo paso (Nombre del evento) -->
                                 <div class="step step-2">
+                                    <div class="form-group mb-4">
+                                        <label for="nombre_evento">Nombre del evento: </label>
+                                        <input type="text" class="form-control" id="nombre_evento" name="nombre_evento" required maxlength="50" oninput="limitarALetras(this)">
+                                    </div>
+                                </div>
+
+                                <!-- Contenido del tercer paso (Invitados y salon) -->
+                                <div class="step step-3">
                                     <!-- Campos del segundo paso -->
                                     <div class="form-group mb-4">
                                         <label for="salon">Salón:</label>
@@ -156,13 +164,13 @@
                                     <!--Cantidad de invitados-->
                                     <div class="form-group mb-4">
                                         <label for="cantidad_invitados">Cantidad de invitados: </label>
-                                        <input type="text" class="form-control" id="invitados" name="invitados" required pattern="[0-9a-zA-Z]{1,3}" maxlength="3">
+                                        <input type="text" class="form-control" id="invitados" name="invitados" oninput="limitarANumeros(this)" maxlength="3">
                                     </div>
                                 </div>
 
-                                <!-- Contenido del tercer paso (Menu) -->
-                                <div class="step step-3">
-                                    <label for="comida">Menú del evento:</label>
+                                <!--Contenido del cuarto paso (Menu)-->
+                                <div class="step step-4">
+                                <label for="comida">Menú del evento:</label>
                                     <select class="form-control mb-4" id="comida" name="comida" required>
                                         <option value="">Seleccione una comida del menú</option>
                                         <?php
@@ -183,7 +191,7 @@
                     </div>
                 </div>
         <!-- Div que contiene el calendario -->
-        <div class="col-md-7">
+        <div class="col-md-5">
             <div id="calendar"></div>
         </div>
     </div>

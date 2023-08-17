@@ -22,10 +22,9 @@ document.addEventListener("DOMContentLoaded", function() {
         }
     });
 
-    // Agrega el evento change al select de opciones del menú
     var opcionMenu = document.querySelector("#comida");
     opcionMenu.addEventListener("change", function() {
-        showStep(currentStep); // Actualiza la visualización del paso
+        showStep(currentStep);
     });
 
     function showStep(stepNumber) {
@@ -37,7 +36,7 @@ document.addEventListener("DOMContentLoaded", function() {
         var descripcionComida = document.querySelector("#descripcionComida");
         var opcionMenu = document.querySelector("#comida");
         
-        if (stepNumber === 3 && opcionMenu.value) {
+        if (stepNumber === 4 && opcionMenu.value) {
             descripcionComida.style.display = "block";
         } else {
             descripcionComida.style.display = "none";
@@ -45,25 +44,44 @@ document.addEventListener("DOMContentLoaded", function() {
         
         steps[stepNumber - 1].style.display = "block";
         updateExplanation(stepNumber);
+        
+        // Desactivar botón "Anterior" si está en el primer paso
+        var prevButton = document.querySelector(".prev-step");
+        prevButton.disabled = stepNumber === 1;
+        
+        // Desactivar botón "Siguiente" si está en el último paso
+        var nextButton = document.querySelector(".next-step");
+        nextButton.disabled = stepNumber === steps.length;
+
+        // Habilitar o deshabilitar la interacción con el calendario según el paso
+        updateCalendarInteractivity(stepNumber === 1);
     }
-    
 
     function updateExplanation(stepNumber) {
         var explanations = [
-            "Selecciona una fecha disponible y la hora del evento",
+            "Selecciona una fecha disponible en el <strong>calendario</strong> y la hora del evento",
             "Ingresa el nombre del evento",
-            "Selecciona la cantid de invitados <br> y el salon del evento",
-            "Escoge una opcion del menú"
+            "Selecciona la cantidad de invitados <br> y el salón del evento",
+            "Escoge una opción de nuestros menús"
             // Agrega más explicaciones según los pasos
         ];
         document.querySelector("#infoAgendar").innerHTML = explanations[stepNumber - 1];
     }
 
     function validateStep(stepNumber) {
-        var inputs = document.querySelectorAll(".step-" + stepNumber + " input[required], .step-" + stepNumber + " select[required]");
-        for (var i = 0; i < inputs.length; i++) {
-            if (!inputs[i].value) {
+        if (stepNumber === 1) {
+            // Validar si la hora del evento ha sido ingresada en el primer paso
+            var horaEvento = document.querySelector("#hora_evento").value;
+            if (!horaEvento) {
                 return false;
+            }
+        } else {
+            // Validar campos requeridos en los otros pasos
+            var inputs = document.querySelectorAll(".step-" + stepNumber + " input[required], .step-" + stepNumber + " select[required]");
+            for (var i = 0; i < inputs.length; i++) {
+                if (!inputs[i].value) {
+                    return false;
+                }
             }
         }
         return true;
@@ -86,5 +104,21 @@ document.addEventListener("DOMContentLoaded", function() {
     var stepsToHide = document.querySelectorAll(".step:not(.step-1)");
     for (var i = 0; i < stepsToHide.length; i++) {
         stepsToHide[i].style.display = "none";
+    }
+
+    function updateCalendarInteractivity(isClickable) {
+        var calendarElement = document.getElementById("calendar");
+
+        if (isClickable) {
+            calendarElement.classList.add("clickable-calendar"); // Aplicar estilo de cursor
+            calendarElement.addEventListener("click", handleCalendarClick);
+        } else {
+            calendarElement.classList.remove("clickable-calendar"); // Quitar estilo de cursor
+            calendarElement.removeEventListener("click", handleCalendarClick);
+        }
+    }
+
+    function handleCalendarClick(event) {
+        // Aquí puedes poner el código para manejar el clic en el calendario
     }
 });
