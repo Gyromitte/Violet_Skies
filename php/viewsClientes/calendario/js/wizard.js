@@ -73,7 +73,8 @@ document.addEventListener("DOMContentLoaded", function() {
             // Validar si la hora del evento y la cantidad de invitados han sido ingresados en el primer paso
             var horaEvento = document.querySelector("#hora_evento").value;
             var cantidadInvitados = document.querySelector("#invitados").value;
-            if (!horaEvento || !cantidadInvitados) {
+            var fechaEvento = document.querySelector("#selected-date").value;
+            if (!horaEvento || !cantidadInvitados || !fechaEvento) {
                 return false;
             }
         } else {
