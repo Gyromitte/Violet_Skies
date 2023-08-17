@@ -141,9 +141,10 @@
     <!--Main Content-->
     <div id="main">
         <div id="home" class="tab-content active">
-        <h3 class="test" style="text-align:center; border-radius: 0px ">
+        <h3  style="text-align:center;    padding: 10px;
+    width: 50%; color: #343434; ">
                 Home
-                <i class="fa-solid fa-house" style="color: #ffffff;"></i>
+                <i class="fa-solid fa-house" style="color: #343434;"></i>
             </h3>
             <?php
             if($_SESSION["access"]==1.5){
