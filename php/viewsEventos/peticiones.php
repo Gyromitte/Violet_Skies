@@ -43,7 +43,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         gap: 1rem;
     }
     .card {
-        background-image: linear-gradient(135deg, white, #f58cd6);
-        color: #333;
+        background-image: linear-gradient(135deg, #343434, #343434);
+        color: #fff;
     }
 </style>

@@ -5,6 +5,7 @@ body{
 }
 .control-label{
     color: white;
+    font-size: large;
 }
  #table-info{
 /*     USE Texto Arriva de Tablas*/
@@ -13,6 +14,10 @@ body{
 #table-info-menus{
     color:  #343434;
 }
+#tablaResultados{
+    color: #343434;
+}
+
 .fa-business-time{
     color: #343434 ;
 }
