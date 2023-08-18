@@ -51,14 +51,14 @@ cantidadInvitadosInput.addEventListener("blur", function () {
                                             `+ coahuila;
     }
 
-
-
     desactivateSalones();
 
 });
 
 //Desactivar opciones del salon
 function desactivateSalones() {
+    
+
     var fechaSeleccionada = fechaSeleccionadaObj.toISOString().split('T')[0]; // Obtener la fecha en formato 'YYYY-MM-DD'
 
     console.log(fechaSeleccionada);
@@ -70,11 +70,12 @@ function desactivateSalones() {
             var salonOption = document.querySelector(`[value='${evento.salon}']`);
             if (salonOption) {
                 salonOption.disabled = true;
+                var advertenciaDiv = document.querySelector("#infoAdvertencia");
+                advertenciaDiv.style.display = "block";
+                advertenciaDiv.textContent = 'Haz seleccionado un dia en el que no disponemos de todos nuestros salones, si no puedes seleccionar ningun salon por favor escoge otra fecha';
             }
         }
     });
 
-    var advertenciaDiv = document.querySelector("#infoAdvertencia");
-    advertenciaDiv.style.display = "block";
-    advertenciaDiv.textContent = 'Haz seleccionado un dia en el que no disponemos de todos nuestros salones, si no puedes seleccionar ningun salon por favor escoge otra fecha';
+    
 }

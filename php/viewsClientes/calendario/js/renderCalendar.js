@@ -64,6 +64,10 @@ document.addEventListener('DOMContentLoaded', function() {
              // Actualizar la variable global con la fecha seleccionada
              fechaSeleccionadaObj = new Date(fecha_seleccionada);
              console.log(fechaSeleccionadaObj);
+
+            var advertenciaDiv = document.querySelector("#infoAdvertencia");
+            advertenciaDiv.style.display = "none";
+            advertenciaDiv.textContent = 'Haz seleccionado un dia en el que no disponemos de todos nuestros salones, si no puedes seleccionar ningun salon por favor escoge otra fecha';
              
              desactivateSalones();
         },
