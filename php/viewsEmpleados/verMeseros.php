@@ -4,7 +4,11 @@
     $conexion->conectarBD();
 
     /* Mostrar solo a los empleados que sean cocineros */
+<<<<<<< Updated upstream
     $consulta = "SELECT C.NOMBRE, C.AP_PATERNO, C.AP_MATERNO, E.RFC, C.TELEFONO,C.CORREO, E.COMPORTAMIENTO, E.TIPO, E.CUENTA
+=======
+    $consulta = "SELECT C.NOMBRE, C.AP_PATERNO, C.AP_MATERNO, E.RFC, C.TELEFONO, C.CORREO,E.COMPORTAMIENTO ,E.TIPO, E.CUENTA
+>>>>>>> Stashed changes
                  FROM EMPLEADOS E
                  INNER JOIN CUENTAS C ON E.CUENTA = C.ID
                  WHERE E.TIPO = 'MESERO'
@@ -22,7 +26,11 @@ echo '<th>Ape. Materno</th>';
 echo '<th>RFC</th>';
 echo '<th>Teléfono</th>';
 echo '<th>Correo</th>';
+<<<<<<< Updated upstream
 echo '<th>Comportamiento</th>';
+=======
+echo '<th>COMPORTAMIENTO</th>';
+>>>>>>> Stashed changes
 echo '<th>Tipo</th>';
 echo '<th style="text-align: center;"></th>';
 echo '</tr>';
@@ -37,7 +45,11 @@ foreach ($tabla as $registro) {
     echo "<td> $registro->RFC </td>";
     echo "<td> $registro->TELEFONO </td>";
     echo "<td> $registro->CORREO </td>";
+<<<<<<< Updated upstream
     echo "<td> $registro->COMPORTAMIENTO</td>";
+=======
+    echo "<td> $registro->COMPORTAMIENTO </td>";
+>>>>>>> Stashed changes
     echo "<td> $registro->TIPO</td>";
     // Generar el botón de opciones con el menú desplegable
     echo "<td class='text-center'>";
