@@ -74,11 +74,11 @@ a{
 }
 /*Recuardos desactivados*/
 .fc-day-disabled-default{
-    background-color: rgba(95, 95, 95, 0.1); /* Color de fondo más oscuro */
+    background-color: rgba(153, 153, 153, 0.562) !important; /* Color de fondo más oscuro */
 }
 /* Aplicar color apagado a los días pasados */
 .fc-day-past {
-    background-color: rgba(255, 255, 255, 0.342);
+    background-color: rgba(161, 160, 160, 0.89) !important;
 }
 /*Hacer que el calendario no se pueda clickear*/
 .non-clickable {

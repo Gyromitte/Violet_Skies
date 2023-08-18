@@ -1,9 +1,22 @@
-//Cards del home (peticion a countAll.php)
+
+
+
 var xhttp = new XMLHttpRequest();
 xhttp.onreadystatechange = function() {
 if (this.readyState == 4 && this.status == 200) {
 // Parsear la respuesta JSON
 var data = JSON.parse(this.responseText);
+
+var loadingSpinners = document.querySelectorAll('.loading-spinner');
+        var infoContents = document.querySelectorAll('.info');
+
+        loadingSpinners.forEach(function(spinner) {
+            spinner.style.display = 'none';
+        });
+
+        infoContents.forEach(function(content) {
+            content.style.display = 'flex';
+        });
 // Actualizar el contenido de las cards con los datos recibidos
 document.getElementById("DispCard").innerHTML = data.count_disp;
 document.getElementById("AsistCard").innerHTML = data.count_atend;
@@ -25,6 +38,9 @@ xhttp.send();
 function EventosFinales(eventosPorMes) {
   Chart.defaults.color = 'white';
   var Eventos = document.getElementById('EventosFinaliz').getContext('2d');
+  var loadingSpinners = document.querySelectorAll('.loading-spinner');
+  var infoContents = document.querySelectorAll('.info');
+
 
   var Finalizados = new Chart(Eventos, {
     type: 'bar', // Use "bar" for horizontal bar chart
