@@ -22,10 +22,9 @@ document.addEventListener("DOMContentLoaded", function() {
         }
     });
 
-    // Agrega el evento change al select de opciones del menú
     var opcionMenu = document.querySelector("#comida");
     opcionMenu.addEventListener("change", function() {
-        showStep(currentStep); // Actualiza la visualización del paso
+        showStep(currentStep);
     });
 
     function showStep(stepNumber) {
@@ -37,7 +36,7 @@ document.addEventListener("DOMContentLoaded", function() {
         var descripcionComida = document.querySelector("#descripcionComida");
         var opcionMenu = document.querySelector("#comida");
         
-        if (stepNumber === 3 && opcionMenu.value) {
+        if (stepNumber === 4 && opcionMenu.value) {
             descripcionComida.style.display = "block";
         } else {
             descripcionComida.style.display = "none";
@@ -45,25 +44,76 @@ document.addEventListener("DOMContentLoaded", function() {
         
         steps[stepNumber - 1].style.display = "block";
         updateExplanation(stepNumber);
+        
+        // Desactivar botón "Anterior" si está en el primer paso
+        var prevButton = document.querySelector(".prev-step");
+        prevButton.disabled = stepNumber === 1;
+        
+        // Desactivar botón "Siguiente" si está en el último paso
+        var nextButton = document.querySelector(".next-step");
+        nextButton.disabled = stepNumber === steps.length;
+    
+        // Habilitar o deshabilitar la interacción con el calendario según el paso
+        updateCalendarInteractivity(stepNumber === 1); // Solo permitir interacción si stepNumber es igual a 1
+
+        //Mostrar la confirmacion
+        if (stepNumber === 5) {
+            var confirmFecha = document.getElementById("confirm-fecha");
+            var confirmHora = document.getElementById("confirm-hora");
+            var confirmInvitados = document.getElementById("confirm-invitados");
+            var confirmNombre = document.getElementById("confirm-nombre");
+            var confirmSalon = document.getElementById("confirm-salon");
+            var confirmMenu = document.getElementById("confirm-menu");
+
+            // Obtener el valor seleccionado del salón y del menú
+            var salonSelect = document.getElementById("salon");
+            var menuSelect = document.getElementById("comida");
+        
+            var salonSeleccionado = salonSelect.options[salonSelect.selectedIndex].text;
+            var menuSeleccionado = menuSelect.options[menuSelect.selectedIndex].text;
+        
+            // Mostrar los nombres en lugar de los IDs
+            confirmSalon.textContent = salonSeleccionado;
+            confirmMenu.textContent = menuSeleccionado;
+
+            // Aquí actualiza los elementos con los datos ingresados por el usuario
+            confirmFecha.textContent = document.getElementById("selected-date").value;
+            confirmHora.textContent = document.getElementById("hora_evento").value;
+            confirmInvitados.textContent = document.getElementById("invitados").value;
+            confirmNombre.textContent = document.getElementById("nombre_evento").value;
+
+        }
     }
     
 
     function updateExplanation(stepNumber) {
         var explanations = [
-            "Selecciona una fecha disponible y la hora del evento",
+            "Selecciona una fecha disponible dentro del <strong>calendario</strong>, <br>hora del evento y cantidad de invitados <br> <strong>Por favor toma en cuenta que el mínimo de invitados <br> es 10 y el máximo es 120</strong>",
             "Ingresa el nombre del evento",
-            "Selecciona la cantid de invitados <br> y el salon del evento",
-            "Escoge una opcion del menú"
+            "Selecciona el salón del evento <br> <strong>Si no encuentras un salón disponible por favor <br> selecciona otra fecha o  revisa la cantidad de invitados</strong>",
+            "Escoge una opción de nuestros menús",
+            "Confirmación de datos:"
             // Agrega más explicaciones según los pasos
         ];
         document.querySelector("#infoAgendar").innerHTML = explanations[stepNumber - 1];
     }
 
     function validateStep(stepNumber) {
-        var inputs = document.querySelectorAll(".step-" + stepNumber + " input[required], .step-" + stepNumber + " select[required]");
-        for (var i = 0; i < inputs.length; i++) {
-            if (!inputs[i].value) {
+        if (stepNumber === 1) {
+            // Validar si la hora del evento y la cantidad de invitados han sido ingresados en el primer paso
+            var horaEvento = document.querySelector("#hora_evento").value;
+            var cantidadInvitados = document.querySelector("#invitados").value;
+            var fechaEvento = document.querySelector("#selected-date").value;
+            if (!horaEvento || !cantidadInvitados || !fechaEvento) {
                 return false;
+            }
+        } else {
+            // Validar campos requeridos en los otros pasos
+            var inputs = document.querySelectorAll(".step-" + stepNumber + " input[required], .step-" + stepNumber + " select[required]");
+            for (var i = 0; i < inputs.length; i++) {
+                if (!inputs[i].value) {
+                    return false;
+                }
             }
         }
         return true;
@@ -86,5 +136,19 @@ document.addEventListener("DOMContentLoaded", function() {
     var stepsToHide = document.querySelectorAll(".step:not(.step-1)");
     for (var i = 0; i < stepsToHide.length; i++) {
         stepsToHide[i].style.display = "none";
+    }
+
+    function updateCalendarInteractivity(isClickable) {
+        var calendarElement = document.getElementById("calendar");
+
+        if (isClickable) {
+            calendarElement.classList.remove("non-clickable"); // Quiar estilo de no click al primer paso
+        } else {
+            calendarElement.classList.add("non-clickable"); // Agregar estilo de click a todos los demas pasos
+        }
+    }
+
+    function handleCalendarClick(event) {
+        // Aquí puedes poner el código para manejar el clic en el calendario
     }
 });
