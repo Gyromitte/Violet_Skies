@@ -30,12 +30,15 @@
         echo "<h2 class='text-center'>Empleados para $nombre_evento</h2>
         <ul class='nav nav-pills nav-fill' id='pills-tab' role='tablist'>
         <li class='nav-item' role='presentation'>
-        <a class='nav-link' id='pills-meseros-tab' data-bs-toggle='pill' href='#pills-meseros' role='tab' aria-controls='pills-meseros' aria-selected='true' id='meserosSoli' onclick='mostrarSolicitudesEmpleados()'>Peticiones</a>
+        <a class='nav-link' data-bs-toggle='pill' role='tab' aria-selected='true' onclick='mostrarSolicitudesEmpleados()'>Peticiones</a>
         </li>
         <li class='nav-item' role='presentation'>
-        <a class='nav-link' id='pills-cocineros-tab' data-bs-toggle='pill' href='#pills-cocineros' role='tab' aria-controls='pills-cocineros' aria-selected='false' id='cocinaSoli'>Cocineros</a>
+        <a class='nav-link' data-bs-toggle='pill' role='tab' aria-selected='true' onclick='mostrarEmpleadosIngresados($evento_id)'>Ingresados</a>
         </li>
         </ul>
+        
+        <div id='empleadosRegistrados'></div>
+
         <div class='tab-content' id='solicit'>
         <form method='post' action='/php/viewsEventos/ingresosEvento.php'>
         <h2>Meseros</h2>";

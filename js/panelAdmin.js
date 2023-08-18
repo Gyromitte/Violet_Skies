@@ -750,7 +750,7 @@ function updateModalContent(formType, idEmpleado, idEvento) {
         if (xhrDetalles.readyState === XMLHttpRequest.DONE) {
           if (xhrDetalles.status === 200) {
             var detallesEvento = JSON.parse(xhrDetalles.responseText);
-            // Realizar una solicitud AJAX para obtener la lista de salones disponibles
+            
             var xhrSalones = new XMLHttpRequest();
             xhrSalones.onreadystatechange = function() {
               if (xhrSalones.readyState === XMLHttpRequest.DONE) {
@@ -759,21 +759,20 @@ function updateModalContent(formType, idEmpleado, idEvento) {
                   var selectSalon = document.getElementById('salon');
                   selectSalon.innerHTML = "";
                   var optionSeleccionar = document.createElement('option');
-                  optionSeleccionar.value = ""; // Asignar un valor vacío o el que corresponda
-                  optionSeleccionar.textContent = "-Seleccionar salón-"; // Texto a mostrar en la opción predeterminada
+                  optionSeleccionar.value = "";
+                  optionSeleccionar.textContent = "-Seleccionar salón-";
                   selectSalon.appendChild(optionSeleccionar);
                   var salonEncontrado = false;
                     salones.forEach(function(salon) {
                     var option = document.createElement('option');
-                    option.value = salon.ID; // Asignar el valor del ID del salón
-                    option.textContent = salon.NOMBRE; // Asignar el nombre del salón
+                    option.value = salon.ID;
+                    option.textContent = salon.NOMBRE;
                     selectSalon.appendChild(option);
-                    // Verificar si el nombre del salón del evento coincide con el salón actual en el bucle
                     if (salon.NOMBRE === detallesEvento.SALON) {
-                      // Si se encuentra el salón del evento, seleccionarlo en el select y marcarlo como encontrado
                       option.selected = true;
                       salonEncontrado = true;
                     }
+                    
                   });
                   if (!salonEncontrado) {
                     console.error("El salón del evento no se encuentra en la lista de salones disponibles:", detallesEvento.SALON);
@@ -783,7 +782,6 @@ function updateModalContent(formType, idEmpleado, idEvento) {
                 }
               }
             };
-            // Hacer la solicitud al script PHP "obtenerSalones.php" para obtener la lista de salones
             xhrSalones.open("GET", "../viewsEventos/obtenerSalones.php", true);
             xhrSalones.send();
 

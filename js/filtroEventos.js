@@ -140,6 +140,36 @@ function verSolicitudes(eventoId, nombreEvento, faltanMeseros, faltanCocina) {
     xhr.send();
 }
 
+function mostrarSolicitudesEmpleados() {
+    var solicitDiv = document.getElementById("solicit");
+    
+    if (solicitDiv.style.display === "none") {
+        solicitDiv.style.display = "block";
+        
+    } else {
+        solicitDiv.style.display = "none";
+
+    }
+}
+
+function mostrarEmpleadosIngresados(eventoId) {
+    var xhr = new XMLHttpRequest();
+    var url = '../viewsEventos/verEmpleadosRegistrados.php?id=' + eventoId + '&tipo=ESPECIAL';
+console.log(eventoId);
+    xhr.open('GET', url, true);
+    xhr.onload = function() {
+        if (xhr.status === 200) {
+            var empleadosRegistradosDiv = document.getElementById("empleadosRegistrados");
+            empleadosRegistradosDiv.innerHTML = xhr.responseText;
+        }
+    };
+    xhr.send();
+}
+
+
+
+
+
 
 window.addEventListener('load', function() {
     var params = new URLSearchParams(window.location.search);
@@ -147,17 +177,3 @@ window.addEventListener('load', function() {
     fechaInicioInput.value = params.get('fecha_inicio') || '';
     fechaFinInput.value = params.get('fecha_fin') || '';
 });
-
-document.getElementById("meserosSoli").addEventListener("click", mostrarSolicitudesEmpleados);
-
-function mostrarSolicitudesEmpleados() {
-    var solicitDiv = document.getElementById("solicit");
-
-    if (solicitDiv.style.display === "none") {
-        solicitDiv.style.display = "block";
-
-    } else {
-        solicitDiv.style.display = "none";
-
-    }
-}

@@ -9,9 +9,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
             $evento = $_GET['id'];
             $tipo = $_GET['tipo'];
 
+            if ($tipo === 'ESPECIAL') {
+                $condicionTipo = "E.TIPO IN ('MESERO', 'COCINA')";
+            } else {
+                $condicionTipo = "E.TIPO = '$tipo'";
+            }
+
             $consulta = "SELECT E.ID, E.TIPO, CONCAT(C.NOMBRE, ' ', C.AP_PATERNO, ' ', C.AP_MATERNO) AS NOMBRE, C.TELEFONO
                 FROM CUENTAS C JOIN EMPLEADOS E ON C.ID = E.CUENTA JOIN EVENTO_EMPLEADOS EE ON E.ID = EE.EMPLEADOS
-                WHERE EE.EVENTO = $evento AND E.TIPO = '$tipo'
+                WHERE EE.EVENTO = $evento AND $condicionTipo
                 ORDER BY E.TIPO, NOMBRE ASC";
 
             $tabla = $conexion->seleccionar($consulta);
@@ -41,8 +47,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
                 {
                     echo "<br><p>No hay meseros por mostrar</p>";
 
-                } else{
+                } else if ($tipo === 'COCINA'){
                     echo "<br><p>No hay cocineros por mostrar</p>";
+                } else {
+                    echo "<br><p>No hay empleados por mostrar</p>";
                 }
             }
             $conexion->desconectarBD();
