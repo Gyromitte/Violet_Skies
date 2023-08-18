@@ -15,6 +15,7 @@ if (isset($_POST['rfc']) && isset($_POST['id'])
     $employeeId = $_POST['id'];
     $rfc = strtoupper($_POST['rfc']); // Convertir a mayúsculas para homogeneizar
     $tipoUsuario = trim($_POST['tipoUsuario']);
+    $comportamiento=trim($_POST['comportamiento']);
 
     // Variable para almacenar el mensaje de error
     $errorMessage = "";

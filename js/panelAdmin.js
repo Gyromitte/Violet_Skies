@@ -410,14 +410,14 @@ function updateModalContent(formType, idEmpleado, idEvento) {
                       </select>
                     </div>
                     <div class="form-group mb-3">
-                    <label for="comportamiento">Tipo de Trabajador</label>
-                    <select name="comportamiento" class="form-control form-select" id="comportamiento">
-                      <option value="Malo" ${empleado.COMPORTAMIENTO === 'Malo' ? 'selected' : ''}>Malo</option>
-                      <option value="Deficiente" ${empleado.COMPORTAMIENTO === 'Deficiente' ? 'selected' : ''}>Deficiente </option>
-                      <option value="Bueno" ${empleado.COMPORTAMIENTO === 'Bueno' ? 'selected' : ''}>Bueno</option>
-                      <option value="Exelente" ${empleado.COMPORTAMIENTO === 'Exelente' ? 'selected' : ''}>Exelente </option>
-                    </select>
-                  </div>
+                      <label for="comportamiento">Tipo de Trabajador</label>
+                      <select name="comportamiento" class="form-control form-select" id="comportamiento">
+                        <option value="Malo" ${empleado.COMPORTAMIENTO === 'Malo' ? 'selected' : ''}>Malo</option>
+                        <option value="Deficiente" ${empleado.COMPORTAMIENTO === 'Deficiente' ? 'selected' : ''}>Deficiente </option>
+                        <option value="Bueno" ${empleado.COMPORTAMIENTO === 'Bueno' ? 'selected' : ''}>Bueno</option>
+                        <option value="Exelente" ${empleado.COMPORTAMIENTO === 'Exelente' ? 'selected' : ''}>Exelente </option>
+                      </select>
+                    </div>
                     <div class="d-flex justify-content-center">
                     <button type="submit" class="btn btn-primary btn-modal me-2"><i class="fa-solid fa-pencil me-2" style="color: #ffffff;"></i>Modificar</button>
                     <button type="button" class="btn btn-primary btn-modal" data-bs-dismiss="modal">Cancelar</button>
@@ -462,7 +462,7 @@ function updateModalContent(formType, idEmpleado, idEvento) {
               updateXHR.send(`id=${idEmpleado}&rfc=${rfc}&tipoUsuario=${tipoUsuario}
               &nombre=${nombre}&ap_paterno=${ap_paterno}&ap_materno=${ap_materno}
               &telefono=${telefono}&comportamiento=${comportamiento}`);
-                  //Ver cual es la tabla activa para refrescar cualquier cambio
+              //Ver cual es la tabla activa para refrescar cualquier cambio
               checkCurrentTable(currentTable);
             });
 

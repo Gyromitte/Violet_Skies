@@ -44,6 +44,8 @@
     <script src="https://cdn.jsdelivr.net/npm/flatpickr@latest"></script>
     <script src="https://cdn.jsdelivr.net/npm/flatpickr/dist/plugins/flatpickr.min.js"></script>
 
+    <script src="/php/viewsClientes/calendario/js/renderCalendar.js"></script>
+
 </head>
 
 <body>
@@ -107,8 +109,12 @@
         <!-- Agendar Evento -->
         <div id="home" class="tab-content active" style="padding: 50px;">
             <div class="row">
+                <!-- Div que contiene el calendario -->
+                <div class="col-md-5">
+                    <div id="calendar"></div>
+                </div>
                 <!-- Div del wizard -->
-                <div class="col-md-7 d-flex flex-column align-items-center">
+                <div class="col-md-7 d-flex flex-column align-items-center justify wizard" style="padding-left: 50px;">
                     <!-- Div de información pasos -->
                     <div style="width: fit-content;" class="rounded-2 mb-2" id="infoAgendar"></div>
                     <!-- Div de advertencia -->
@@ -124,7 +130,7 @@
                         <!-- Formulario de pasos o pestañas -->
                         <div class="step-form">
                             <form id="evento-form" method="post">
-                                <!-- Contenido del primer paso (Fecha del evento) -->
+                                <!-- Contenido del primer paso (Fecha del evento e invitados) -->
                                 <div class="step step-1">
                                     <!-- Campos del primer paso -->
                                     <div class="form-group mb-4">
@@ -135,8 +141,15 @@
                                         <label for="hora_evento">Hora del evento: </label>
                                         <input type="time" id="hora_evento" class="form-control" name="hora_evento" placeholder="HH:MM AM/PM">
                                     </div>
+                                    <!--Cantidad de invitados-->
+                                    <div class="form-group mb-4">
+                                        <label for="cantidad_invitados">Cantidad de invitados: </label>
+                                        <input type="text" class="form-control" id="invitados" name="invitados" oninput="limitarANumeros(this); mostrarSalones();" maxlength="3">
+                                    </div>
                                 </div>
-
+                                <script>
+                                    
+                                </script>
                                 <!-- Contenido del segundo paso (Nombre del evento) -->
                                 <div class="step step-2">
                                     <div class="form-group mb-4">
@@ -144,8 +157,7 @@
                                         <input type="text" class="form-control" id="nombre_evento" name="nombre_evento" required maxlength="50" oninput="limitarALetras(this)">
                                     </div>
                                 </div>
-
-                                <!-- Contenido del tercer paso (Invitados y salon) -->
+                                <!-- Contenido del tercer paso (Salon) -->
                                 <div class="step step-3">
                                     <!-- Campos del segundo paso -->
                                     <div class="form-group mb-4">
@@ -153,20 +165,40 @@
                                         <select class="form-control" id="salon" name="salon" required>
                                             <!-- Opciones del select -->
                                             <option value="">Seleccione un salón</option>
-                                            <?php
-                                            foreach ($salonItems as $salonItem) {
-                                                echo '<option value="' . $salonItem['ID'] . '">' . $salonItem['NOMBRE'] . " Cupo: " .  $salonItem["CUPO"] . '</option>';
-                                            }
-                                            ?>
                                         </select>
                                     </div>
-                                    <!--Cantidad de invitados-->
-                                    <div class="form-group mb-4">
-                                        <label for="cantidad_invitados">Cantidad de invitados: </label>
-                                        <input type="text" class="form-control" id="invitados" name="invitados" oninput="limitarANumeros(this)" maxlength="3">
-                                    </div>
                                 </div>
+                                <!--Este es un coco de TF2, si lo quitas los salones no se mostraran, no se por que-->
+                                <script>
+                                    var cantidadInvitadosInput = document.querySelector("#invitados");
+                                    var cantidadInvitados = parseInt(cantidadInvitadosInput.value);
+                                    var salonSelect = document.querySelector("#salon");
 
+                                    function mostrarSalones(){
+                                        console.log(cantidadInvitados);
+                                        if(cantidadInvitados >= 10 && cantidadInvitados < 20 )
+                                        {
+                                            salonSelect.innerHTML = `<option value ='1'> Cuatrociénegas 1 Cupo: 20 </option>`;
+                                            console.log("wow");
+                                        }
+                                        console.log(salonSelect);
+                                    }
+                                </script>
+                                <!--Obtener eventos y mandarlo a paramEven.js-->
+                                <script>
+                                    let eventosObtenidos = [];
+                                    $.ajax({
+                                        url: '/php/viewsClientes/checkSalones.php',
+                                        method: 'GET',
+                                        success: function (data) {
+                                            eventosObtenidos = data; // No necesitas JSON.parse aquí
+                                            console.log("Eventos obtenidos:", eventosObtenidos);
+                                        },
+                                        error: function (error) {
+                                            console.error("Error al obtener eventos:", error);
+                                        }
+                                    });
+                                </script>
                                 <!--Contenido del cuarto paso (Menu)-->
                                 <div class="step step-4">
                                 <label for="comida">Menú del evento:</label>
@@ -180,19 +212,32 @@
                                     </select>
                                 </div>
 
+                                <!--Paso final (Confirmacion)-->
+                                <div class="step step-5 align-text-center mb-3">
+                                    <p>Fecha del evento: <span id="confirm-fecha"></span></p>
+                                    <p>Hora del evento: <span id="confirm-hora"></span></p>
+                                    <p>Cantidad de invitados: <span id="confirm-invitados"></span></p>
+                                    <p>Nombre del evento: <span id="confirm-nombre"></span></p>
+                                    <p>Salón seleccionado: <span id="confirm-salon"></span></p>
+                                    <p>Menú seleccionado: <span id="confirm-menu"></span></p>
+                                    <div class="alert alert-info">Recuerda que puedes regresar a cualquier paso <br> anterior para corregir lo que desees</div>
+                                    <div class="center-button">
+                                        <button class="btn btn-primary confirm-button" id="accept-button">
+                                            Enviar solicitud de evento<br>
+                                            <i class="fa-solid fa-paper-plane" style="color: #ffffff;"></i>
+                                        </button>
+                                    </div>
+                                </div>
+
                                 <!-- Botones de navegación entre pasos -->
-                                <div class="step-navigation">
-                                    <button class="btn btn-primary prev-step">Anterior</button>
-                                    <button class="btn btn-primary next-step">Siguiente</button>
+                                <div class="step-navigation step-navigation-container">
+                                    <button class="btn btn-primary prev-step btn-wizard"><i class="fa-solid fa-backward me-2" style="color: #ffffff;"></i>Anterior</button>
+                                    <button class="btn btn-primary next-step btn-wizard">Siguiente <i class="fa-solid fa-forward me-2" style="color: #ffffff;"></i></button>
                                 </div>
                             </form>
                         </div>
                     </div>
                 </div>
-        <!-- Div que contiene el calendario -->
-        <div class="col-md-5">
-            <div id="calendar"></div>
-        </div>
     </div>
 </div>
         <!-- Agendar Eventos -->
@@ -237,7 +282,7 @@
                                     Datos personales
                                 </button>
                             </h2>
-                            <div style="padding-left: 10%; padding-right:10% ;background-color:#61697b;" id="collapseOne" class="accordion-collapse collapse show" data-bs-parent="#accordionExample">
+                            <div style="padding-left: 10%; padding-right:10%" id="collapseOne" class="accordion-collapse collapse show" data-bs-parent="#accordionExample">
                                 <div class="accordion-body">
                                     <div class="personal-info">
                                         <div class="mb-3 row">
@@ -330,26 +375,7 @@
             </div>
         </div>
     </div>
-    <div id="cancelModal" class="modal">
-    <div class="modal-dialog modal-dialog-centered">
-        <div class="modal-content ">
-            <div class="modal-header">
-                <h5 class="modal-title">Cancelar evento</h5>
-                <button type="button" class="close btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-                <form id="cancelForm">
-                    <p id="cancelMessage"></p>
-                    <label>¿Estás seguro de que quieres cancelar el evento?</label>
-                    <input type="hidden" id="eventIDInput" name="eventID">
-                    <label class="form-label" for="password">Contraseña:</label>
-                    <input class="form-control" type="password" id="password" name="password" required>
-                    <button type="submit">Cancelar evento</button>
-                </form>
-            </div>
-        </div>
-    </div>
-</div>
+
     <!--Scripts que necesitan ejecutarse hasta el final-->
     <script>
         // Definir una variable global en JavaScript para almacenar los datos del usuario
@@ -380,9 +406,10 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-datetimepicker/2.5.20/jquery.datetimepicker.full.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 
-    <script src="/php/viewsClientes/calendario/js/renderCalendar.js"></script>
+
     <script src="/php/viewsClientes/calendario/js/wizard.js"></script>
-    
+
+    <script src="/php/viewsClientes/calendario/js/paramEven.js"></script>
     <script>
         flatpickr("#hora_evento", {
         enableTime: true,          // Habilitar la selección de tiempo
@@ -392,13 +419,9 @@
         minuteIncrement: 60,       // Incremento de minutos a 60 (solo horas)
         minTime: "06:00",          // Hora mínima permitida (6:00 AM)
         maxTime: "22:00",          // Hora máxima permitida (10:00 PM)
-        staticMobile: true,
-        // Puedes agregar más opciones según tus necesidades
         
         });
     </script>
-
-    
 </body>
 
 </html>
