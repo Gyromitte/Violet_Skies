@@ -66,7 +66,7 @@ sacarEmpleado.forEach(function(button) {
         var idEvento = this.getAttribute('data-evento-id');
 
 
-    var formContent = '';
+
     // Mostrar el modal de confirmación
     var confirmarCancelacion = window.confirm("¿Estás seguro que deseas sacar este empleado?");
     if (confirmarCancelacion) {
@@ -74,23 +74,22 @@ sacarEmpleado.forEach(function(button) {
         xhrsacarEmpleado.onreadystatechange = function() {
             if (xhrsacarEmpleado.readyState === XMLHttpRequest.DONE) {
                 if (xhrsacarEmpleado.status === 200) {
-                    formContent += `<br><div class="alert alert-success" role="alert" align='center'>
-                        Se ha aja</div>`;
+                    formContent += `<br><div id="successMessage" class="alert alert-success" role="alert" align='center'>
+                    Se ha aja</div>`;
                     setTimeout(() => {
+                        
                         updateModalContent(idEmpleado, idEvento);
-                    }, 500);
+                    }, 2000);
                     peticionesFuncion();
-                    modalForm.innerHTML = formContent;
+                    
                 } else {
                     console.error("Error AJAX para aja el empleado");
                 }
             }
         };
-        // Hacer la solicitud al script PHP y pasar el ID del evento para cancelar
         xhrsacarEmpleado.open("GET", "../viewsEventos/sacarEmpleado.php?id=" + idEmpleado + "&eventoId=" + idEvento, true);
         xhrsacarEmpleado.send();
     } else {
-        // Si el usuario hace clic en "Cancelar", no se realiza ninguna acción
         console.log("Retiro del empleado cancelada por el usuario");
     }
 });

@@ -145,10 +145,10 @@ modal.addEventListener("show.bs.modal", function (event) {
 
 
 // Función para actualizar el contenido del modal según el tipo de formulario
+var formContent = "";
+var form;
 function updateModalContent(formType, idEmpleado, idEvento) {
-  var formContent = "";
   var modalTitle = document.querySelector('#mainModal .modal-title');
-  var form;
   //Conseguir el modal header para cambiarle el color
   var modalHeader = document.querySelector('.modal-header');
 
@@ -742,8 +742,6 @@ function updateModalContent(formType, idEmpleado, idEvento) {
         //Ver cual es la tabla activa para refrescar cualquier cambio
         checkCurrentTable(currentTable);
         break;
-        case "@cancelarEvento":
-          break;
 
     case "@verDetallesEvento":
       modalTitle.textContent = "Detalles del Evento";
@@ -1073,6 +1071,8 @@ function updateModalContent(formType, idEmpleado, idEvento) {
               }
             });
            
+            
+
           } else {
             console.error("Error en la solicitud AJAX");
           }

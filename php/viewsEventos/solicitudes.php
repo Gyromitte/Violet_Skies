@@ -26,61 +26,45 @@
         $solicitudes_cocineros = $conexion->seleccionar($consulta_cocineros, $parametros);
 
         $conexion->desconectarBD();
-
         
-        echo "<h2 class='text-center'>Empleados para $nombre_evento</h2>";
-echo '<ul class="nav nav-pills nav-fill" id="pills-tab" role="tablist">';
-
-    echo '<li class="nav-item" role="presentation">';
-    echo '<a class="nav-link" id="pills-meseros-tab" data-bs-toggle="pill" href="#pills-meseros" role="tab" aria-controls="pills-meseros" aria-selected="true" id="meserosSoli" onclick="mostrarSolicitudesEmpleados()">Peticiones</a>
-    ';
-    echo '</li>';
-
-
-    echo '<li class="nav-item" role="presentation">';
-    echo '<a class="nav-link" id="pills-cocineros-tab" data-bs-toggle="pill" href="#pills-cocineros" role="tab" aria-controls="pills-cocineros" aria-selected="false" id="cocinaSoli">Cocineros</a>';
-    echo '</li>';
-
-echo '</ul>';
-
-echo '<div class="tab-content" id="solicit">';
-echo "<h2>Meseros</h2>";
-if (count($solicitudes_meseros) > 0) {
-    echo '<div class="tab-pane fade show active" id="pills-meseros" role="tabpanel" aria-labelledby="pills-meseros-tab">';
-    echo '<form method="post" action="/php/viewsEventos/aceptarMeseros.php">';
-    foreach ($solicitudes_meseros as $solicitud) {
-        echo '<div class="form-check">';
-        echo '<input class="form-check-input" type="checkbox" name="empleados[]" value="' . $solicitud->ID . '">';
-        echo '<label class="form-check-label">' . $solicitud->EMPLEADO . '</label>';
-        echo '</div>';
-    }
-    echo '<input type="hidden" name="faltan_meseros" value="' . $FALTAN_MESEROS . '">';
-    echo '<input type="hidden" name="evento_id" value="' . $evento_id . '">';
-    echo '<button type="submit" class="btn btn-primary" name="accion" value="aceptar_seleccionados">Aceptar seleccionados</button>';
-    echo '</form>';
-    echo '</div>';
-} else {echo "<h4>No hay solicitudes por mostrar</h4>";}
-if (count($solicitudes_cocineros) > 0) {
-    echo '<div class="tab-pane fade show active" id="pills-meseros" role="tabpanel" aria-labelledby="pills-meseros-tab">';
-    echo '<form method="post" action="/php/viewsEventos/aceptarCocina.php">';
-    echo "<h2>Cocina</h2>";
-    foreach ($solicitudes_cocineros as $solicitud) {
-        echo '<div class="form-check">';
-        echo '<input class="form-check-input" type="checkbox" name="empleados[]" value="' . $solicitud->ID . '">';
-        echo '<label class="form-check-label">' . $solicitud->EMPLEADO . '</label>';
-        echo '</div>';
-    }
-    echo '<input type="hidden" name="faltan_coina" value="' . $FALTAN_COCINA . '">';
-    echo '<input type="hidden" name="evento_id" value="' . $evento_id . '">';
-
-    echo '<button type="submit" class="btn btn-primary" name="accion" value="aceptar_seleccionados">Aceptar seleccionados</button>';
-    echo '</form>';
-    echo '</div>';
-} else {echo "<h4>No hay solicitudes por mostrar</h4>";}
-
-echo '</div>';
-
-} else {
+        echo "<h2 class='text-center'>Empleados para $nombre_evento</h2>
+        <ul class='nav nav-pills nav-fill' id='pills-tab' role='tablist'>
+        <li class='nav-item' role='presentation'>
+        <a class='nav-link' id='pills-meseros-tab' data-bs-toggle='pill' href='#pills-meseros' role='tab' aria-controls='pills-meseros' aria-selected='true' id='meserosSoli' onclick='mostrarSolicitudesEmpleados()'>Peticiones</a>
+        </li>
+        <li class='nav-item' role='presentation'>
+        <a class='nav-link' id='pills-cocineros-tab' data-bs-toggle='pill' href='#pills-cocineros' role='tab' aria-controls='pills-cocineros' aria-selected='false' id='cocinaSoli'>Cocineros</a>
+        </li>
+        </ul>
+        <div class='tab-content' id='solicit'>
+        <form method='post' action='/php/viewsEventos/ingresosEvento.php'>
+        <h2>Meseros</h2>";
+        if (count($solicitudes_meseros) > 0) {
+            echo '<div class="tab-pane fade show active" role="tabpanel">';
+            foreach ($solicitudes_meseros as $solicitud) {
+                echo '<div class="form-check">
+                <input class="form-check-input" type="checkbox" name="meseros[]" value="' . $solicitud->ID . '">
+                <label class="form-check-label">' . $solicitud->EMPLEADO . '</label>
+                </div>';
+            }
+            echo '<input type="hidden" name="faltan_meseros" value="' . $FALTAN_MESEROS . '">';
+        } else {echo "<h4>No hay solicitudes por mostrar</h4>";}
+        echo "<br><h2>Cocina</h2>";
+        if (count($solicitudes_cocineros) > 0) {    
+            foreach ($solicitudes_cocineros as $solicitud) {
+                echo '<div class="form-check">
+                <input class="form-check-input" type="checkbox" name="cocina[]" value="' . $solicitud->ID . '">
+                <label class="form-check-label">' . $solicitud->EMPLEADO . '</label>
+                </div>';
+            }
+            echo '<input type="hidden" name="faltan_cocina" value="' . $FALTAN_COCINA . '">';
+        } else {echo "<h4>No hay solicitudes por mostrar</h4>";}
+        echo '<input type="hidden" name="evento_id" value="' . $evento_id . '">
+        <button type="submit" class="btn btn-primary" name="accion" value="aceptar_seleccionados">Ingresar cocina</button>
+        </form>
+        </div>
+        </div>';
+    } else {
     echo "<p class='text-center'>Evento no especificado.</p>";
 }
 ?>

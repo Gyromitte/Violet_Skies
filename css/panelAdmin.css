@@ -6,6 +6,9 @@ body{
 .control-label{
     color: white;
 }
+#eventos{
+    color: #343434;
+}
  #table-info{
 /*     USE Texto Arriva de Tablas*/
     color: #343434 ; 
