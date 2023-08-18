@@ -13,7 +13,6 @@ document.addEventListener('DOMContentLoaded', function() {
             extraParams: {},
             display: 'background',
             color: '',
-
             failure: function() {
                 console.log("Dafaq");
             }

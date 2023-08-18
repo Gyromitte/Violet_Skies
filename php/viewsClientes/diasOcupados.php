@@ -29,6 +29,4 @@ $conexion->desconectarBD();
 
 // Convertir el arreglo de eventos a formato JSON y enviarlo al cliente
 echo json_encode($eventos);
-
-
 ?>
