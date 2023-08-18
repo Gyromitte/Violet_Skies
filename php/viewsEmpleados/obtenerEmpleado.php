@@ -7,7 +7,7 @@ $conexion->conectarBD();
 $employeeId = $_GET['id'];
 
 // Realizar la consulta para obtener los datos del empleado según el ID
-$consulta = "SELECT E.ID, C.NOMBRE, C.AP_PATERNO, C.AP_MATERNO, E.RFC, C.TELEFONO, C.CORREO,E.COMPORTAMIENTO, E.TIPO, E.CUENTA
+$consulta = "SELECT E.ID, C.NOMBRE, C.AP_PATERNO, C.AP_MATERNO, E.RFC, C.TELEFONO, C.CORREO, E.TIPO, E.CUENTA
              FROM EMPLEADOS E
              INNER JOIN CUENTAS C ON E.CUENTA = C.ID
              WHERE E.CUENTA = '$employeeId'";
