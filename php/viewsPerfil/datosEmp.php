@@ -15,7 +15,7 @@ if ($cuenta) {
             <i class="fa-solid fa-user me-2" style="color: #ffffff; padding-left: 10px;"></i>
             Datos personales
         </h2>
-        <div style="background-color: #A3A5B0;">
+        <div style="background-color: #d8d8d6;">
         <div class="personal-info accordion" id="accordionExample" style="color: black ;">
             <div class="mb-3 row">
                 <label class="col-sm-3 col-form-label">Nombre:</label>

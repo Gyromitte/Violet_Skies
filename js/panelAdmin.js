@@ -1,3 +1,16 @@
+window.addEventListener('load', function() {
+  // This event is triggered when the entire page has finished loading
+  hideLoading();
+});
+
+function hideLoading() {
+  var loadingOverlay = document.getElementById('loading-overlay');
+  loadingOverlay.style.opacity = '0'; // Fade out the overlay
+  setTimeout(function() {
+    loadingOverlay.style.display = 'none'; // Hide the overlay after fading out
+  }, 500);
+}
+
 var datosUsuarioJSON = {};
 var updatePerfilXHR = new XMLHttpRequest();
 /*Funcionamiento de la dashboard*/
@@ -391,6 +404,15 @@ function updateModalContent(formType, idEmpleado, idEvento) {
                         <option value="cocina" ${empleado.TIPO === 'COCINA' ? 'selected' : ''}>Cocinero</option>
                       </select>
                     </div>
+                    <div class="form-group mb-3">
+                      <label for="comportamiento">Tipo de Trabajador</label>
+                      <select name="comportamiento" class="form-control form-select" id="comportamiento">
+                        <option value="Malo" ${empleado.COMPORTAMIENTO === 'Malo' ? 'selected' : ''}>Malo</option>
+                        <option value="Deficiente" ${empleado.COMPORTAMIENTO === 'Deficiente' ? 'selected' : ''}>Deficiente </option>
+                        <option value="Bueno" ${empleado.COMPORTAMIENTO === 'Bueno' ? 'selected' : ''}>Bueno</option>
+                        <option value="Exelente" ${empleado.COMPORTAMIENTO === 'Exelente' ? 'selected' : ''}>Exelente </option>
+                      </select>
+                    </div>
                     <div class="d-flex justify-content-center">
                     <button type="submit" class="btn btn-primary btn-modal me-2"><i class="fa-solid fa-pencil me-2" style="color: #ffffff;"></i>Modificar</button>
                     <button type="button" class="btn btn-primary btn-modal" data-bs-dismiss="modal">Cancelar</button>
@@ -412,6 +434,8 @@ function updateModalContent(formType, idEmpleado, idEvento) {
               var telefono = formEditarEmpleado.elements.telefono.value;
               var rfc = formEditarEmpleado.elements.rfc.value;
               var tipoUsuario = formEditarEmpleado.elements.tipoUsuario.value;
+              var comportamiento = formEditarEmpleado.elements.comportamiento.value;
+
 
               // Realizar una nueva solicitud AJAX para actualizar los datos
               var updateXHR = new XMLHttpRequest();
@@ -432,7 +456,7 @@ function updateModalContent(formType, idEmpleado, idEvento) {
               updateXHR.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
               updateXHR.send(`id=${idEmpleado}&rfc=${rfc}&tipoUsuario=${tipoUsuario}
               &nombre=${nombre}&ap_paterno=${ap_paterno}&ap_materno=${ap_materno}
-              &telefono=${telefono}`);
+              &telefono=${telefono}&comportamiento=${comportamiento}`);
               //Ver cual es la tabla activa para refrescar cualquier cambio
               checkCurrentTable(currentTable);
             });
@@ -574,6 +598,8 @@ function updateModalContent(formType, idEmpleado, idEvento) {
                   <h6 class="mb-3">${solicitud.TELEFONO}</h6>
                   <h5>Correo: </h5>
                   <h6 class="mb-3">${solicitud.CORREO}</h6>
+                  <h5>Direccion: </h5>
+                  <h6 class="mb-3">${solicitud.DIRECCION}</h6>
                   <div class="mb-3">
                     <label class="control-label">RFC</label>
                     <input maxlength="13" required oninput="this.value = this.value.toUpperCase()"
@@ -1382,7 +1408,43 @@ function updateModalContent(formType, idEmpleado, idEvento) {
     //Ver cual es la tabla activa para refrescar cualquier cambio
     checkCurrentTable(currentTable);
     break;
-    
+    case "@verINE":
+        modalTitle.textContent = "INE";
+        modalHeader.classList.remove('modal-header-warning');
+        // Obtener los datos de la solicitud con una solicitud AJAX
+        var xhr = new XMLHttpRequest();
+        xhr.onreadystatechange = function () {
+          if (xhr.readyState === XMLHttpRequest.DONE) {
+            if (xhr.status === 200) {
+              // Parsear la respuesta JSON
+              var solicitud = JSON.parse(xhr.responseText);
+              // Actualizar el contenido del formulario con los datos obtenidos
+              formContent = `
+                <form>
+                  <div style=" justify-content: center;">
+                  <div class="mb-3">
+                    <img src=${solicitud.INE_F}>
+                  </div>
+                  <div class="mb-3">
+                    <img src=${solicitud.INE_T}>
+                  </div>
+                  </div>
+                </form>
+                `;
+                // Asignar el contenido al formulario del modal
+                modalForm.innerHTML = formContent;
+              } else {
+                console.error("Error en la solicitud AJAX");
+                //Ver cual es la tabla activa para refrescar cualquier cambio
+                checkCurrentTable(currentTable);
+              }
+            }
+          };
+        
+          // Hacer la solicitud al script PHP y pasar el ID de la solicitud
+          xhr.open("GET", "obtenerSolicitud.php?id=" + idEmpleado, true);
+          xhr.send();
+      break;  
     }
   }
   
