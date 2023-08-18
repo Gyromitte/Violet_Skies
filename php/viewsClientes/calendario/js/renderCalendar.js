@@ -69,7 +69,9 @@ document.addEventListener('DOMContentLoaded', function() {
             advertenciaDiv.style.display = "none";
             advertenciaDiv.textContent = 'Haz seleccionado un dia en el que no disponemos de todos nuestros salones, si no puedes seleccionar ningun salon por favor escoge otra fecha';
              
-             desactivateSalones();
+            reactivarSalones();
+            desactivateSalones();
+             
         },
         eventDidMount: function(info) {
             if (info.event.extendedProps.disabled) {
