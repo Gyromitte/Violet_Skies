@@ -33,44 +33,6 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-datetimepicker/2.5.20/jquery.datetimepicker.full.min.js"></script>
     <!--Chart.js-->
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <style>
-        form img{
-            width: 400px;
-            height: 200px;
-        }
-        #loading-overlay {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-color: rgba(0, 0, 0, 0.5);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  z-index: 9999;
-}
-
-#loading-spinner {
-  border: 4px solid #f3f3f3;
-  border-top: 4px solid #3498db;
-  border-radius: 50%;
-  width: 40px;
-  height: 40px;
-  animation: spin 1s linear infinite;
-}
-.loading-spinner {
-    display: block; /* Show the loading spinner */
-}
-
-.info {
-    display: none; /* Hide the actual content */
-}
-@keyframes spin {
-  0% { transform: rotate(0deg); }
-  100% { transform: rotate(360deg); }
-}
-        </style>
 </head>
 
 <body>
@@ -90,9 +52,6 @@
             header("Location:../views/login.php");
         }
     ?>
-     <div id="loading-overlay">
-        <div id="loading-spinner"></div>
-    </div>
     <nav>
         <div class="nav-menu">
             <button id="nav-button">
@@ -137,10 +96,9 @@
     <!--Main Content-->
     <div id="main">
         <div id="home" class="tab-content active">
-            <h3 style="text-align:center;    padding: 10px;
-    width: 50%; color: #343434;">
+            <h3 class="test" style="text-align:center; ">
                 Home
-                <i class="fa-solid fa-house" style="color: #343434;"></i>
+                <i class="fa-solid fa-house" style="color: #ffffff;"></i>
             </h3>
             <!--Info Cards-->
             <div class="container-fluid mt-4">
@@ -149,11 +107,6 @@
                     <div class="col-md-4 mb-4">
                         <div class="info-card d-flex align-items-center justify-content-between">
                             <div class="info d-flex flex-column align-items-center mb-2">
-                            <div class='loading-spinner'>
-                                <div class='spinner-border text-light' role='status'>
-                                    <span class='visually-hidden'>Loading...</span>
-                                </div>
-                            </div>
                                 <h3 id="clientesCard"></h3>
                                 <h5>Clientes registrados</h5>
                             </div>
@@ -164,11 +117,6 @@
                     <div class="col-md-4">
                         <div class="info-card d-flex align-items-center justify-content-between">
                             <div class="info d-flex flex-column align-items-center mb-2">
-                            <div class='loading-spinner'>
-                                <div class='spinner-border text-light' role='status'>
-                                    <span class='visually-hidden'>Loading...</span>
-                                </div>
-                            </div>
                                 <h3 id="empleadosCard"></h3>
                                 <h5>Empleados activos</h5>
                             </div>
@@ -179,11 +127,6 @@
                     <div class="col-md-4">
                         <div class="info-card d-flex align-items-center justify-content-between">
                             <div class="info d-flex flex-column align-items-center mb-2">
-                            <div class='loading-spinner'>
-                                <div class='spinner-border text-light' role='status'>
-                                    <span class='visually-hidden'>Loading...</span>
-                                </div>
-                            </div>
                                 <h3 id="eventosCard"></h3>
                                 <h5>Eventos realizados</h5>
                             </div>

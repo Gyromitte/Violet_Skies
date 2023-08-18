@@ -52,7 +52,7 @@ AND (DE.COCINEROS - NUMERO_COCINEROS) != 0;";
         gap: 1rem;
     }
     .card {
-        background-image: linear-gradient(135deg, #343434, #343434);
-        color: #fff;
+        background-image: linear-gradient(135deg, white, #f58cd6);
+        color: #333;
     }
 </style>

@@ -38,9 +38,6 @@ foreach ($tabla as $registro) {
     echo '<li><a class="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#mainModal" data-bs-whatever="@verSolicitud" 
     data-id="' . $registro->CUENTA . '">
     <i class="fa-solid fa-eye me-2" style="color: #ffffff;"></i>Ver Solicitud</a></li>';
-    echo '<li><a class="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#mainModal" data-bs-whatever="@verINE" 
-    data-id="' . $registro->CUENTA . '">
-    <i class="fa-solid fa-eye me-2" style="color: #ffffff;"></i>Ver INE</a></li>';
     echo '</ul>';
     echo '</div>';
     echo "</td>";

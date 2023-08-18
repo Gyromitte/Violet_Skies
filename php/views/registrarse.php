@@ -18,28 +18,6 @@
     <link rel="stylesheet" href="/bootstrap/css/bootstrap.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&display=swap" rel="stylesheet">
     <style>
-        .message-content {
-            display: none;
-        }
-        #loading-spinner {
-            border: 4px solid #f3f3f3;
-            border-top: 4px solid #3498db;
-            border-radius: 50%;
-            width: 40px;
-            height: 40px;
-            animation: spin 1s linear infinite;
-        }
-        .loading-spinner {
-            display: block; /* Show the loading spinner */
-        }
-
-        .info {
-            display: none; /* Hide the actual content */
-        }
-        @keyframes spin {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
-        }
         .split {
             height: 100%;
             width: 50%;
@@ -54,12 +32,12 @@
         .left {
             left: 0;
             color: white;
-            background-color: #d8d8d6;
+            background-color: #baa0cd;
         }
         .right {
             right: 0;
             color: white;
-            background-color: #61697b;
+            background-color: #6C3483;
         }
         .centered {
             position: absolute;

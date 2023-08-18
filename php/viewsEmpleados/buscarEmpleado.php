@@ -20,7 +20,7 @@ if (isset($_GET['busqueda'])) {
     $tabla = $conexion->seleccionar($consulta);
 
     if (empty($tabla)) {
-        echo "<p style= 'color: #343434;'>No se encontró ninguna coincidencia</p>";
+        echo "No se encontró ninguna coincidencia";
     } else {
         echo '<div class="table-responsive">';
         echo '<table class="table table-hover mt-3">';

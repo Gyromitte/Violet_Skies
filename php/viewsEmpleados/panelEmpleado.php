@@ -29,18 +29,14 @@
     <style>
 			#cuadroEvento{
 				border: 3px solid #A3A5B0;
-				background-image: linear-gradient(145deg, #343434, #343434);
+				background-image: linear-gradient(145deg, #61697b, #A3A5B0);
 				color: white;
-                padding: 8px;
+				padding: 5px; 
 				margin: 5px;
 				float: left;
             }
-            .dropdown ul{
-                padding: 7px;
-                background-color: #55406e;
-            }
             .cutebox{
-                background-color: #343434;
+                background-color: #A3A5B0;
                 border-radius: 5em;
                 padding: 10px;
                 width: 80%;
@@ -69,13 +65,7 @@
   height: 40px;
   animation: spin 1s linear infinite;
 }
-.loading-spinner {
-    display: block; /* Show the loading spinner */
-}
 
-.info {
-    display: none; /* Hide the actual content */
-}
 @keyframes spin {
   0% { transform: rotate(0deg); }
   100% { transform: rotate(360deg); }
@@ -145,10 +135,9 @@
     <!--Main Content-->
     <div id="main">
         <div id="home" class="tab-content active">
-        <h3  style="text-align:center;    padding: 10px;
-    width: 50%; color: #343434; ">
+        <h3 class="test" style="text-align:center; ">
                 Home
-                <i class="fa-solid fa-house" style="color: #343434;"></i>
+                <i class="fa-solid fa-house" style="color: #ffffff;"></i>
             </h3>
             <?php
             if($_SESSION["access"]==1.5){
@@ -161,7 +150,7 @@
                 echo"</div>";
                 echo"<br>";
                 echo"<div class='test'>";
-                echo"<div style= 'font-size:large; padding-left:3px' >Un administrador se pondra en contacto con usted proximamente.</div>";
+                echo"<div>Un administrador se pondra en contacto con usted proximamente.</div>";
                 echo"</div>";
             }
             else{
@@ -170,13 +159,7 @@
                     <div class='col-md-4 mb-4'>
                         <div class='info-card d-flex align-items-center justify-content-between'>
                             <div class='info d-flex flex-column align-items-center mb-2'>
-                            <div class='loading-spinner'>
-                                <div class='spinner-border text-light' role='status'>
-                                    <span class='visually-hidden'>Loading...</span>
-                                </div>
-                            </div>
                                 <h3 id='DispCard'></h3>
-                                
                                 <h5>Eventos Disponibles</h5>
                             </div>
                             <i class='fa-solid fa-briefcase fa-5x' style='color: #ffffff;'></i>
@@ -185,13 +168,7 @@
                     <div class='col-md-4 mb-4'>
                         <div class='info-card d-flex align-items-center justify-content-between'>
                             <div class='info d-flex flex-column align-items-center mb-2'>
-                                <div class='loading-spinner'>
-                                    <div class='spinner-border text-light' role='status'>
-                                        <span class='visually-hidden'>Loading...</span>
-                                    </div>
-                                </div>
                                 <h3 id='AsistCard'></h3>
-                                
                                 <h5>Eventos Atendiendo</h5>
                             </div>
                             <i class='fa-solid fa-business-time fa-5x' style='color: #ffffff;'></i>
@@ -200,11 +177,6 @@
                     <div class='col-md-4 mb-4'>
                         <div class='info-card d-flex align-items-center justify-content-between'>
                             <div class='info d-flex flex-column align-items-center mb-2'>
-                                <div class='loading-spinner'>
-                                    <div class='spinner-border text-light' role='status'>
-                                        <span class='visually-hidden'>Loading...</span>
-                                    </div>
-                                </div>
                                 <h3 id='SolicCard'></h3>
                                 <h5>Solicitudes Enviadas</h5>
                             </div>
@@ -224,11 +196,6 @@
                                     <h2>Proximo Evento</h2>
                                     <i class='fa-solid fa-calendar-days fa-5x' style='color: #ffffff;'></i>
                                 </div>
-                                <div class='loading-spinner'>
-                                    <div class='spinner-border text-light' role='status'>
-                                        <span class='visually-hidden'>Loading...</span>
-                                    </div>
-                                </div>
                                 <h3 id='FechaCard'></h3>
                             </div>
                         </div>
@@ -246,7 +213,7 @@
             </h3>
             <?php
             if($_SESSION["access"]==1.5){
-                echo"<h1 style= 'color: #343434;' >El Administrador aun no confirma tu cuenta</h1></div>";
+                echo"<h1>El Administrador aun no confirma tu cuenta</h1></div>";
             }
             else{
             echo"
@@ -255,7 +222,7 @@
                 <div class='search-container'>
                 <div class='filter'>
                 <div class='btn-group'>
-                    <label class='control-label'style='margin-right: 8px; color: #343434;'>Orden:</label>
+                    <label class='control-label'style='margin-right: 8px;'>Orden:</label>
                     <select id='tipoorden' name='orden' class='form-select form-select-custom'>;
                         <option value='porcreacion'>Recientemente Creadas</option>;
                         <option value='lejanoevento'>Eventos Lejanos</option>;
@@ -277,7 +244,7 @@
             </h3>
             <?php
                 if($_SESSION["access"]==1.5){
-                    echo"<h1 style= 'color: #343434;' >El Administrador aun no confirma tu cuenta</h1>";
+                    echo"<h1>El Administrador aun no confirma tu cuenta</h1>";
                 }
                 else{
                     echo"

@@ -5,7 +5,6 @@ body{
 }
 .control-label{
     color: white;
-    font-size: large;
 }
  #table-info{
 /*     USE Texto Arriva de Tablas*/
@@ -14,18 +13,8 @@ body{
 #table-info-menus{
     color:  #343434;
 }
-#tablaResultados{
-    color: #343434;
-}
-
-#cont-table-menus{
-    color: #343434;
-}
 .fa-business-time{
     color: #343434 ;
-}
-#event-cards{
-    color: #343434;
 }
 
 .table{
@@ -38,7 +27,7 @@ nav{
     left: 0;
     width: 100%;
     z-index: 99;
-    background-color: #A595B7;
+    background-color: #381c47;
     font-family: 'Patua One', cursive;
     padding: 0.5em;
     font-size: 2em;
@@ -56,7 +45,7 @@ nav{
     height: 100%;
     width: 100px;
     font-size: 1em;
-    background-color: #343434;
+    background-color: #61697b;
     border: 2px solid white;
     border-radius: 2em;
     margin-right: 1em;
@@ -76,9 +65,9 @@ nav{
     left: -350px;
     width: 300px;
     height: 100vh;
-    background-color: #343434;
+    background-color: #838DA6;
     transition: left 0.3s ease;
-    z-index: 98;
+    z-index: 1;
 }
 /* Estilo para abrir el dashboard */
 #dash-board.dashboard-open {
@@ -103,7 +92,7 @@ nav{
     border: none;
     border-radius: 20px;
     height: 50px;
-    background-color:#A595B7;
+    background-color:#381c47;
     margin: 10px;
     color: white;
     font-size: small;
@@ -124,7 +113,7 @@ nav{
     transition: margin-left  0.3s ease; /* Agrega una transición suave para una animación fluida */
 }
 .test{
-    background-color: #A595B7;
+    background-color: #381c47;
     border-radius: 10em;
     padding: 10px;
     width: 50%;
@@ -159,17 +148,16 @@ nav{
     color: #5603ad;
 }
 tbody{
-    background-color: #d8d8d6;
-    color: #343434;
+    background-color: #A69A86;
     font-weight: bold;
 }
 .custom-dropdown{
-    background-color: #A595B7 !important;
+    background-color: #381c47 !important;
     border: none;
     width: 100%;
 }
 .custom-drop-menu{
-    background-color: #A595B7;
+    background-color: #381c47;
     color: white !important;
     border: 2px solid white;
 }
@@ -184,7 +172,7 @@ tbody{
     background-color: #61697b;
 }
 .modal-header{
-    background-color: #A595B7;
+    background-color: #381c47;
 }
 .modal-header-warning{
     background-color: #dc3545;
@@ -194,7 +182,7 @@ tbody{
 }
 .btn-modal{
     border-radius: 2em;
-    background-color: #A595B7;
+    background-color: #381c47;
     border: 2px solid white;
 }
 .btn-modal:hover{
@@ -227,7 +215,7 @@ tbody{
 #btnEmpleadosRegistrados, #btnAceptarEvento, #btnModify, #btnSaveChanges,
 #btnEditarDatosPersonales, #nuevoAdmin, #btnGuardarCambios, #btnpassword{
     color: white;
-    background-color: #b14aed;
+    background-color: #381c47;
     border: 2px solid white;
 }
 #btnCancelarEvento, #btnCancelarCambios{
@@ -241,7 +229,7 @@ tbody{
     justify-content: space-between;
 }
 .btn-options{
-    background-color: #A595B7;
+    background-color: #381c47;
 }
 .btn-options:hover{
     background-color: #b14aed;
@@ -260,10 +248,10 @@ tbody{
     flex: 1;
   }
 .accordion-body{
-    background-color: #d8d8d6;
+    background-color: #A3A5B0;
 }
 .form-select-custom{
-    background-color: #A595B7;
+    background-color: #381c47;
     color: white;
     border: 2px solid white;
     border-radius: 10px;
@@ -276,7 +264,7 @@ tbody{
   
 /*Charts and info*/
  #proporcionEmpleados, #proporcionEmpleados2, #pieTipoMenus{
-    background-image: linear-gradient(135deg, #343434, #343434 );
+    background-image: linear-gradient(135deg, #343434, #61697b );
     color: white;
     border-radius: 20px;
     height: 240px;
@@ -286,22 +274,17 @@ tbody{
     width: 200px; 
 }
 .info-card{
-    background-image: linear-gradient(180deg, #343434, #343434);
+    background-image: linear-gradient(180deg, #61697b, #9E9E9D);
     border-radius: 20px;
     padding: 50px;
 }
 #eventosAño{
-    background-image: linear-gradient(135deg, #343434, #343434);
+    background-image: linear-gradient(135deg, #343434, #61697b);
     border-radius: 20px;
     padding: 50px;
 }
 .graficaEventos{
-    background-image: linear-gradient(135deg,  #343434, #343434);
-    border-radius: 20px;
-    padding: 50px;
-}
-.graficaEventos{
-    background-image: linear-gradient(135deg, #343434, #343434);
+    background-image: linear-gradient(135deg, #61697b, #9E9E9D);
     border-radius: 20px;
     padding: 50px;
 }

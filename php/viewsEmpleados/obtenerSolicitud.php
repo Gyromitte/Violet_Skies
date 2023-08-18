@@ -9,8 +9,7 @@ if (isset($_GET['id'])) {
   $idSolicitud = $_GET['id'];
 
   // Consulta para obtener los datos de la solicitud con el ID específico
-  $consulta = "SELECT NOMBRE, AP_PATERNO, AP_MATERNO, TELEFONO, CORREO,INE_F,INE_T, DIRECCION FROM 
-  CUENTAS WHERE CUENTAS.ID = :id";
+  $consulta = "SELECT NOMBRE, AP_PATERNO, AP_MATERNO, TELEFONO, CORREO FROM CUENTAS WHERE CUENTAS.ID = :id";
   $parametros = array(':id' => $idSolicitud);
 
   // Ejecutar la consulta preparada para obtener los datos de la solicitud
