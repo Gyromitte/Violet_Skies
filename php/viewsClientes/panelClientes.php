@@ -196,10 +196,27 @@
                                     </select>
                                 </div>
 
+                                <!--Paso final (Confirmacion)-->
+                                <div class="step step-5 align-text-center mb-3">
+                                    <p>Fecha del evento: <span id="confirm-fecha"></span></p>
+                                    <p>Hora del evento: <span id="confirm-hora"></span></p>
+                                    <p>Cantidad de invitados: <span id="confirm-invitados"></span></p>
+                                    <p>Nombre del evento: <span id="confirm-nombre"></span></p>
+                                    <p>Salón seleccionado: <span id="confirm-salon"></span></p>
+                                    <p>Menú seleccionado: <span id="confirm-menu"></span></p>
+                                    <div class="alert alert-info">Recuerda que puedes regresar a cualquier paso <br> anterior para corregir lo que desees</div>
+                                    <div class="center-button">
+                                        <button class="btn btn-primary confirm-button" id="accept-button">
+                                            Enviar solicitud de evento<br>
+                                            <i class="fa-solid fa-paper-plane" style="color: #ffffff;"></i>
+                                        </button>
+                                    </div>
+                                </div>
+
                                 <!-- Botones de navegación entre pasos -->
-                                <div class="step-navigation">
-                                    <button class="btn btn-primary prev-step btn-wizard">Anterior</button>
-                                    <button class="btn btn-primary next-step btn-wizard">Siguiente</button>
+                                <div class="step-navigation step-navigation-container">
+                                    <button class="btn btn-primary prev-step btn-wizard"><i class="fa-solid fa-backward me-2" style="color: #ffffff;"></i>Anterior</button>
+                                    <button class="btn btn-primary next-step btn-wizard">Siguiente <i class="fa-solid fa-forward me-2" style="color: #ffffff;"></i></button>
                                 </div>
                             </form>
                         </div>

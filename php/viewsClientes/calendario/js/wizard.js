@@ -55,15 +55,44 @@ document.addEventListener("DOMContentLoaded", function() {
     
         // Habilitar o deshabilitar la interacción con el calendario según el paso
         updateCalendarInteractivity(stepNumber === 1); // Solo permitir interacción si stepNumber es igual a 1
+
+        //Mostrar la confirmacion
+        if (stepNumber === 5) {
+            var confirmFecha = document.getElementById("confirm-fecha");
+            var confirmHora = document.getElementById("confirm-hora");
+            var confirmInvitados = document.getElementById("confirm-invitados");
+            var confirmNombre = document.getElementById("confirm-nombre");
+            var confirmSalon = document.getElementById("confirm-salon");
+            var confirmMenu = document.getElementById("confirm-menu");
+
+            // Obtener el valor seleccionado del salón y del menú
+            var salonSelect = document.getElementById("salon");
+            var menuSelect = document.getElementById("comida");
+        
+            var salonSeleccionado = salonSelect.options[salonSelect.selectedIndex].text;
+            var menuSeleccionado = menuSelect.options[menuSelect.selectedIndex].text;
+        
+            // Mostrar los nombres en lugar de los IDs
+            confirmSalon.textContent = salonSeleccionado;
+            confirmMenu.textContent = menuSeleccionado;
+
+            // Aquí actualiza los elementos con los datos ingresados por el usuario
+            confirmFecha.textContent = document.getElementById("selected-date").value;
+            confirmHora.textContent = document.getElementById("hora_evento").value;
+            confirmInvitados.textContent = document.getElementById("invitados").value;
+            confirmNombre.textContent = document.getElementById("nombre_evento").value;
+
+        }
     }
     
 
     function updateExplanation(stepNumber) {
         var explanations = [
-            "Selecciona una fecha disponible en el <strong>calendario</strong>, <br>hora del evento y cantidad de invitados <br> <strong>Por favor toma en cuenta que el mínimo de invitados <br> es 10 y el máximo es 120</strong>",
+            "Selecciona una fecha disponible dentro del <strong>calendario</strong>, <br>hora del evento y cantidad de invitados <br> <strong>Por favor toma en cuenta que el mínimo de invitados <br> es 10 y el máximo es 120</strong>",
             "Ingresa el nombre del evento",
             "Selecciona el salón del evento <br> <strong>Si no encuentras un salón disponible por favor <br> selecciona otra fecha o  revisa la cantidad de invitados</strong>",
-            "Escoge una opción de nuestros menús"
+            "Escoge una opción de nuestros menús",
+            "Confirmación de datos:"
             // Agrega más explicaciones según los pasos
         ];
         document.querySelector("#infoAgendar").innerHTML = explanations[stepNumber - 1];

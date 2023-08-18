@@ -111,6 +111,22 @@ a{
     background-color: #432d4e;
 }
 
+.step-navigation-container {
+    text-align: center;
+}
+.center-button {
+    display: flex;
+    justify-content: center;
+}
+.step-5{
+    font-size: 20px;
+}
+
+#accept-button{
+    background-color: #381C47;
+    border: 2px solid #61697B;
+}
+
 @media (max-width: 768px) {
     /*Numeros de los dias*/
     .fc-daygrid-day-number{
