@@ -55,23 +55,33 @@ document.addEventListener('DOMContentLoaded', function() {
                 fecha_anterior.classList.remove('fc-day-selected');
             }
         
-            // Add new selected date
+            // Verificar si la fecha seleccionada tiene más de 2 eventos
             var formattedDate = fecha_seleccionada.toISOString().split('T')[0];
+            var eventosEnFecha = info.view.calendar.getEvents().filter(evento => evento.start.toISOString().split('T')[0] === formattedDate);
+            console.log(eventosEnFecha);
+            if (eventosEnFecha.length > 2) {
+                // Bloquear la selección deshabilitando el día
+                console.log("Dia con mas de 2 eventos");
+                var dayCell = info.dayEl;
+                dayCell.classList.add('fc-day-disabled', 'fc-day-disabled-default');
+                return false; // No permitir la selección si hay más de 2 eventos
+            }
+        
+            // Add new selected date
             document.getElementById('selected-date').value = formattedDate;
             var dayCell = info.dayEl;
             dayCell.classList.add('fc-day-selected');
-
-             // Actualizar la variable global con la fecha seleccionada
-             fechaSeleccionadaObj = new Date(fecha_seleccionada);
-             console.log(fechaSeleccionadaObj);
-
+        
+            // Actualizar la variable global con la fecha seleccionada
+            fechaSeleccionadaObj = new Date(fecha_seleccionada);
+            console.log(fechaSeleccionadaObj);
+        
             var advertenciaDiv = document.querySelector("#infoAdvertencia");
             advertenciaDiv.style.display = "none";
             advertenciaDiv.textContent = 'Haz seleccionado un dia en el que no disponemos de todos nuestros salones, si no puedes seleccionar ningun salon por favor escoge otra fecha';
-             
+        
             reactivarSalones();
             desactivateSalones();
-             
         },
         eventDidMount: function(info) {
             if (info.event.extendedProps.disabled) {
