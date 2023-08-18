@@ -16,6 +16,7 @@ a{
     color: white;
     text-transform: capitalize;
 }
+
 /*Numeros de los dias*/
 .fc-daygrid-day-number{
     color: #343434;
@@ -44,7 +45,7 @@ a{
 }
 /* Cambiar el color de fondo de los eventos */
 .fc-event {
-    background-color: #ff33ff;
+    background-color: rgb(133, 53, 53) !important;
 }
 /* Cambiar el color de fondo de las celdas*/
 .fc-day {
@@ -109,6 +110,22 @@ a{
 }
 .btn-wizard:hover{
     background-color: #432d4e;
+}
+
+.step-navigation-container {
+    text-align: center;
+}
+.center-button {
+    display: flex;
+    justify-content: center;
+}
+.step-5{
+    font-size: 20px;
+}
+
+#accept-button{
+    background-color: #381C47;
+    border: 2px solid #61697B;
 }
 
 @media (max-width: 768px) {

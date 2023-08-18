@@ -1,3 +1,6 @@
+
+let fechaSeleccionadaObj;
+
 document.addEventListener('DOMContentLoaded', function() {
     var calendarEl = document.getElementById('calendar');
     var calendar = new FullCalendar.Calendar(calendarEl, {
@@ -13,7 +16,6 @@ document.addEventListener('DOMContentLoaded', function() {
             extraParams: {},
             display: 'background',
             color: '',
-
             failure: function() {
                 console.log("Dafaq");
             }
@@ -58,6 +60,12 @@ document.addEventListener('DOMContentLoaded', function() {
             document.getElementById('selected-date').value = formattedDate;
             var dayCell = info.dayEl;
             dayCell.classList.add('fc-day-selected');
+
+             // Actualizar la variable global con la fecha seleccionada
+             fechaSeleccionadaObj = new Date(fecha_seleccionada);
+             console.log(fechaSeleccionadaObj);
+             
+             desactivateSalones();
         },
         eventDidMount: function(info) {
             if (info.event.extendedProps.disabled) {
@@ -88,6 +96,8 @@ document.addEventListener('DOMContentLoaded', function() {
     });
     calendar.render();
 });
+
+
 
 //Regex's
 //Limitar a que solo se puedan escribir letras

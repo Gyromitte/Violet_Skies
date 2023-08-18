@@ -44,6 +44,8 @@
     <script src="https://cdn.jsdelivr.net/npm/flatpickr@latest"></script>
     <script src="https://cdn.jsdelivr.net/npm/flatpickr/dist/plugins/flatpickr.min.js"></script>
 
+    <script src="/php/viewsClientes/calendario/js/renderCalendar.js"></script>
+
 </head>
 
 <body>
@@ -155,7 +157,6 @@
                                         <input type="text" class="form-control" id="nombre_evento" name="nombre_evento" required maxlength="50" oninput="limitarALetras(this)">
                                     </div>
                                 </div>
-
                                 <!-- Contenido del tercer paso (Salon) -->
                                 <div class="step step-3">
                                     <!-- Campos del segundo paso -->
@@ -183,6 +184,21 @@
                                         console.log(salonSelect);
                                     }
                                 </script>
+                                <!--Obtener eventos y mandarlo a paramEven.js-->
+                                <script>
+                                    let eventosObtenidos = [];
+                                    $.ajax({
+                                        url: '/php/viewsClientes/checkSalones.php',
+                                        method: 'GET',
+                                        success: function (data) {
+                                            eventosObtenidos = data; // No necesitas JSON.parse aquí
+                                            console.log("Eventos obtenidos:", eventosObtenidos);
+                                        },
+                                        error: function (error) {
+                                            console.error("Error al obtener eventos:", error);
+                                        }
+                                    });
+                                </script>
                                 <!--Contenido del cuarto paso (Menu)-->
                                 <div class="step step-4">
                                 <label for="comida">Menú del evento:</label>
@@ -196,10 +212,27 @@
                                     </select>
                                 </div>
 
+                                <!--Paso final (Confirmacion)-->
+                                <div class="step step-5 align-text-center mb-3">
+                                    <p>Fecha del evento: <span id="confirm-fecha"></span></p>
+                                    <p>Hora del evento: <span id="confirm-hora"></span></p>
+                                    <p>Cantidad de invitados: <span id="confirm-invitados"></span></p>
+                                    <p>Nombre del evento: <span id="confirm-nombre"></span></p>
+                                    <p>Salón seleccionado: <span id="confirm-salon"></span></p>
+                                    <p>Menú seleccionado: <span id="confirm-menu"></span></p>
+                                    <div class="alert alert-info">Recuerda que puedes regresar a cualquier paso <br> anterior para corregir lo que desees</div>
+                                    <div class="center-button">
+                                        <button class="btn btn-primary confirm-button" id="accept-button">
+                                            Enviar solicitud de evento<br>
+                                            <i class="fa-solid fa-paper-plane" style="color: #ffffff;"></i>
+                                        </button>
+                                    </div>
+                                </div>
+
                                 <!-- Botones de navegación entre pasos -->
-                                <div class="step-navigation">
-                                    <button class="btn btn-primary prev-step btn-wizard">Anterior</button>
-                                    <button class="btn btn-primary next-step btn-wizard">Siguiente</button>
+                                <div class="step-navigation step-navigation-container">
+                                    <button class="btn btn-primary prev-step btn-wizard"><i class="fa-solid fa-backward me-2" style="color: #ffffff;"></i>Anterior</button>
+                                    <button class="btn btn-primary next-step btn-wizard">Siguiente <i class="fa-solid fa-forward me-2" style="color: #ffffff;"></i></button>
                                 </div>
                             </form>
                         </div>
@@ -342,26 +375,7 @@
             </div>
         </div>
     </div>
-    <div id="cancelModal" class="modal">
-    <div class="modal-dialog modal-dialog-centered">
-        <div class="modal-content ">
-            <div class="modal-header">
-                <h5 class="modal-title">Cancelar evento</h5>
-                <button type="button" class="close btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-                <form id="cancelForm">
-                    <p id="cancelMessage"></p>
-                    <label>¿Estás seguro de que quieres cancelar el evento?</label>
-                    <input type="hidden" id="eventIDInput" name="eventID">
-                    <label class="form-label" for="password">Contraseña:</label>
-                    <input class="form-control" type="password" id="password" name="password" required>
-                    <button type="submit">Cancelar evento</button>
-                </form>
-            </div>
-        </div>
-    </div>
-</div>
+
     <!--Scripts que necesitan ejecutarse hasta el final-->
     <script>
         // Definir una variable global en JavaScript para almacenar los datos del usuario
@@ -392,9 +406,9 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-datetimepicker/2.5.20/jquery.datetimepicker.full.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 
-    <script src="/php/viewsClientes/calendario/js/renderCalendar.js"></script>
+
     <script src="/php/viewsClientes/calendario/js/wizard.js"></script>
-    
+
     <script src="/php/viewsClientes/calendario/js/paramEven.js"></script>
     <script>
         flatpickr("#hora_evento", {
@@ -408,8 +422,6 @@
         
         });
     </script>
-
-    
 </body>
 
 </html>
