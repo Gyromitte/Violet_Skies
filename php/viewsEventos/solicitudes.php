@@ -60,7 +60,7 @@
             echo '<input type="hidden" name="faltan_cocina" value="' . $FALTAN_COCINA . '">';
         } else {echo "<h4>No hay solicitudes por mostrar</h4>";}
         echo '<input type="hidden" name="evento_id" value="' . $evento_id . '">
-        <button type="submit" class="btn btn-primary" name="accion" value="aceptar_seleccionados">Ingresar cocina</button>
+        <button type="submit" class="btn btn-primary" name="accion" value="aceptar_seleccionados">Aceptar empleados</button>
         </form>
         </div>
         </div>';
