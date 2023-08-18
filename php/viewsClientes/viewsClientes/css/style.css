@@ -1,12 +1,6 @@
 a{
     text-decoration: none;
 }
-
-/*Estilos para el calendario*/
-#calendar {
-    width: 100%; /* Ancho del contenedor (puede ser en porcentaje o en píxeles) */
-    height: 500px; /* Alto del contenedor en píxeles */
-}
 /*Color de la celda del dia actual*/
 .fc-day-today {
     background-color: #FFF8E7;
@@ -63,29 +57,6 @@ a{
 {
     border: 0px;
 }
-/*Color del recuadro seleccionado*/
-.fc-day-selected {
-    background-color:#836892; /* Cambia el color a verde */
-    /* Otras propiedades de estilo si es necesario */
-}
-/*Form del evento*/
-#evento-form{
-    color: #343434;
-}
-#infoAgendar{
-    text-align: center;
-    padding: 20px;
-    color: white;
-    background-color: #381C47;
-}
-#home{
-    font-size: 20px;
-}
-#descripcionComida{
-    padding: 20px;
-    font-size: 15px;
-}
-
 
 
 @media (max-width: 768px) {

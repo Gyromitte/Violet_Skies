@@ -80,11 +80,24 @@ function updateModalContent(formType) {
             //Agregar evento de envio al formulario
             form.addEventListener('submit', function (event) {
               event.preventDefault(); //Para que la pagina no de refresh al dar submit
-      
+                
+              var mensajeDiv = document.getElementById('mensajeDiv');
+                mensajeDiv.innerHTML = ''; // Clear previous message
+
+                var loadingSpinner = document.createElement('div');
+                loadingSpinner.className = 'loading-spinner';
+                loadingSpinner.innerHTML = `
+                <div class="d-flex justify-content-center">
+                    <div class="spinner-border text-primary" role="status">
+                        <span class="visually-hidden">Loading...</span>
+                    </div>
+                    </div>
+                `;
+                mensajeDiv.appendChild(loadingSpinner);
               //Solicitud AJAX
               var xhr = new XMLHttpRequest();
               //Configurar la solicitud
-              xhr.open("POST", "../scripts/registro_emp.php", true);
+              xhr.open("POST", "/registro_emp.php", true);
               xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
               //Obtener los datos del formulario
               var formData = new FormData(form);
@@ -99,7 +112,7 @@ function updateModalContent(formType) {
               var ine = form.elements['ine'].files[0];
               var back = form.elements['back'].files[0];
 
-                xhr.open("POST", "../scripts/registro_emp.php", true);
+                xhr.open("POST", "/registro_emp.php", true);
                 xhr.onreadystatechange = function () {
                     if (xhr.readyState === XMLHttpRequest.DONE && xhr.status === 200) {
                     //Manejo de la respuesta:
@@ -107,7 +120,7 @@ function updateModalContent(formType) {
                     document.getElementById('mensajeDiv').innerHTML = respuesta;
                     if(respuesta === "<div class='alert alert-success'>Te has registrado exitosamente!</div>") {
                         setTimeout(function () {
-                            window.location.href = "../views/login.php";
+                            window.location.href = "./login.php";
                         }, 2000);
                     }
                     }
@@ -173,7 +186,19 @@ function updateModalContent(formType) {
             //Agregar evento de envio al formulario
             form.addEventListener('submit', function (event) {
                 event.preventDefault(); //Para que la pagina no de refresh al dar submit
-          
+                var mensajeDiv = document.getElementById('mensajeDiv');
+                mensajeDiv.innerHTML = ''; // Clear previous message
+
+                var loadingSpinner = document.createElement('div');
+                loadingSpinner.className = 'loading-spinner';
+                loadingSpinner.innerHTML = `
+                <div class="d-flex justify-content-center">
+                    <div class="spinner-border text-primary" role="status">
+                        <span class="visually-hidden">Loading...</span>
+                    </div>
+                    </div>
+                `;
+                mensajeDiv.appendChild(loadingSpinner);
                 //Solicitud AJAX
                 var xhr = new XMLHttpRequest();
                 //Configurar la solicitud
@@ -195,16 +220,20 @@ function updateModalContent(formType) {
                 '&pass=' + encodeURIComponent(pass) + 
                 '&ckpass=' + encodeURIComponent(ckpass);
                 xhr.onreadystatechange = function () {
-                if (xhr.readyState === XMLHttpRequest.DONE && xhr.status === 200) {
-                    var respuesta = xhr.responseText;
-                    document.getElementById('mensajeDiv').innerHTML = respuesta;
-                    if(respuesta==="<div class='alert alert-success'>Te has registrado exitosamente!</div>"){
-                        setTimeout(function () {
-                            window.location.href = "../views/login.php";
-                          }, 2000);
+                    if (xhr.readyState === XMLHttpRequest.DONE) {
+                        mensajeDiv.removeChild(loadingSpinner); // Hide the loading spinner
+            
+                        if (xhr.status === 200) {
+                            var respuesta = xhr.responseText;
+                            document.getElementById('mensajeDiv').innerHTML = respuesta;
+                            if (respuesta === "<div class='alert alert-success'>Te has registrado exitosamente!</div>") {
+                                setTimeout(function () {
+                                    window.location.href = "../views/login.php";
+                                }, 2000);
+                            }
+                        }
                     }
-                }
-            };
+                };
             
             xhr.send(formData);
            

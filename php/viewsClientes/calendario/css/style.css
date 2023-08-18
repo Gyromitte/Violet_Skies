@@ -1,0 +1,155 @@
+a{
+    text-decoration: none;
+}
+
+/*Estilos para el calendario*/
+#calendar {
+    width: 100%; /* Ancho del contenedor (puede ser en porcentaje o en píxeles) */
+    height: 500px; /* Alto del contenedor en píxeles */
+}
+/*Color de la celda del dia actual*/
+.fc-day-today {
+    background-color: #FFF8E7;
+}
+/*Color letras de los titulos (Dom, Lun.. etc)*/
+.fc-col-header-cell-cushion{
+    color: white;
+    text-transform: capitalize;
+}
+
+/*Numeros de los dias*/
+.fc-daygrid-day-number{
+    color: #343434;
+    font-size: 30px;
+}
+/*Titulo del calendario (Mes)*/
+.fc-toolbar-title{
+    color: #343434;
+    text-transform: capitalize;
+    margin-top: 50px !important;
+}
+.fc-toolbar-chunk{
+    text-align: center;
+}
+.fc-header-toolbar{
+    margin-bottom: 0px !important;
+    height: 100px;
+}
+/*Botones*/
+.fc-button{
+    background-color: #381C47 !important;
+}
+/* Cambiar el color de los números y letras en los elementos de día */
+.fc-day, .fc-day-number {
+    color: #343434; /* Cambia este valor al color que desees */
+}
+/* Cambiar el color de fondo de los eventos */
+.fc-event {
+    background-color: rgb(133, 53, 53) !important;
+}
+/* Cambiar el color de fondo de las celdas*/
+.fc-day {
+    background-color: #D8D8D6;
+}
+/*Color de los bordes*/
+.fc-daygrid-day-frame{
+    border: 1px solid #61697B;
+}
+.fc-col-header-cell{
+    background-color: #381C47;
+    border: 1px solid #61697B;
+}
+/*Quitar espacio entre los bordes*/
+.fc-theme-standard td, .fc-theme-standard th
+{
+    border: 0px;
+}
+/*Color del recuadro seleccionado*/
+.fc-day-selected {
+    background-color:#836892; /* Cambia el color a verde */
+    /* Otras propiedades de estilo si es necesario */
+}
+.fc-day-disabled{
+    background-color: rgba(95, 95, 95, 0.1); /* Color de fondo más oscuro */
+}
+/*Recuardos desactivados*/
+.fc-day-disabled-default{
+    background-color: rgba(153, 153, 153, 0.562) !important; /* Color de fondo más oscuro */
+}
+/* Aplicar color apagado a los días pasados */
+.fc-day-past {
+    background-color: rgba(161, 160, 160, 0.89) !important;
+}
+/*Hacer que el calendario no se pueda clickear*/
+.non-clickable {
+    pointer-events: none;
+}
+
+
+/*Form del evento (Wizard)*/
+#evento-form{
+    color: #343434;
+}
+#infoAgendar{
+    text-align: center;
+    padding: 20px;
+    color: white;
+    background-color: #381C47;
+}
+#home{
+    font-size: 20px;
+}
+#descripcionComida{
+    padding: 20px;
+    font-size: 15px;
+    background-color: #836892;
+}
+.btn-wizard{
+    background-color: #381C47 !important;
+    border: 0px;
+}
+.btn-wizard:hover{
+    background-color: #432d4e;
+}
+
+.step-navigation-container {
+    text-align: center;
+}
+.center-button {
+    display: flex;
+    justify-content: center;
+}
+.step-5{
+    font-size: 20px;
+}
+
+#accept-button{
+    background-color: #381C47;
+    border: 2px solid #61697B;
+}
+
+@media (max-width: 768px) {
+    /*Numeros de los dias*/
+    .fc-daygrid-day-number{
+        color: #343434;
+        font-size: 12px;
+    }
+    #calendar {
+        width: 100%; /* Ancho del contenedor (puede ser en porcentaje o en píxeles) */
+        height: 300px; /* Alto del contenedor en píxeles */
+        margin-bottom: 20px;
+    }
+    #infoAgendar{
+        font-size: 15px;
+    }
+    #home{
+        padding: 20px !important;
+    }
+    /*Color letras de los titulos (Dom, Lun.. etc)*/
+    .fc-col-header-cell-cushion{
+    font-size: 15px;
+    }
+    .wizard{
+        padding-left: 0px !important;
+    }
+}
