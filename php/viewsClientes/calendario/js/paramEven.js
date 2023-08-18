@@ -1,8 +1,8 @@
 var cantidadInvitadosInput = document.querySelector("#invitados");
 var salonSelect = document.querySelector("#salon");
 
-//Variable para saber que fecha escogio el usuario
-var fecha = document.querySelector("#selected-date");
+//Array global que tiene los eventos: eventosObtenidos
+//Variable global para saber que fecha escogio el usuario: fechaSeleccionadaObj
 
 cantidadInvitadosInput.addEventListener("blur", function () {
     var cantidadInvitados = parseInt(cantidadInvitadosInput.value);
@@ -51,37 +51,26 @@ cantidadInvitadosInput.addEventListener("blur", function () {
                                             `+ coahuila;
     }
 
-    mostrarSalonesSegunCantidadInvitados(cantidadInvitados);
+
+
+    desactivateSalones();
+
 });
-    function mostrarSalonesSegunCantidadInvitados(cantidad) {
-        var fechaSeleccionada = new Date(fecha.value); // Obtener la fecha seleccionada por el usuario
+
+    //Desactivar opciones del salon
+    function desactivateSalones(){
+        var fechaSeleccionada = fechaSeleccionadaObj.toISOString().split('T')[0]; // Obtener la fecha en formato 'YYYY-MM-DD'
     
-            // Iterar a través de las fechas ocupadas pasadas desde PHP
-        for (var i = 0; i < eventos.length; i++) {
-        var fechaOcupada = new Date(eventos[i].start);
-            var fechaOcupada = new Date(fechasOcupadas[i].start);
+        console.log(fechaSeleccionada);
+        eventosObtenidos.forEach(function (evento) {
+         var eventoFecha = new Date(evento.fecha);
+         var eventoFormatted = eventoFecha.toISOString().split('T')[0];
     
-            // Comparar las fechas y deshabilitar opciones si coinciden
-            if (fechaSeleccionada.getTime() === fechaOcupada.getTime()) {
-                var salonOptions = salonSelect.options;
-                for (var j = 0; j < salonOptions.length; j++) {
-                    salonOptions[j].disabled = true; // Deshabilitar todas las opciones
-    
-                    // Habilitar opciones según la cantidad de invitados
-                    if (cantidad >= 10 && cantidad <= 20 && (salonOptions[j].value >= 6 && salonOptions[j].value <= 9)) {
-                        salonOptions[j].disabled = false;
-                    }
-                    if (cantidad > 20 && cantidad <= 50 && (salonOptions[j].value == 1 || salonOptions[j].value == 2)) {
-                        salonOptions[j].disabled = false;
-                    }
-                    if (cantidad > 50 && cantidad <= 80 && (salonOptions[j].value == 10 || salonOptions[j].value == 11)) {
-                        salonOptions[j].disabled = false;
-                    }
-                    if (cantidad > 80 && cantidad <= 120 && (salonOptions[j].value >= 3 && salonOptions[j].value <= 5)) {
-                        salonOptions[j].disabled = false;
-                    }
-                }
-                break; // Salir del bucle una vez que se encuentra una fecha coincidente
-            }
+         if (eventoFormatted === fechaSeleccionada) {
+             var salonOption = document.querySelector(`[value='${evento.salon}']`);
+             if (salonOption) {
+                 salonOption.disabled = true;
+             }
+         }
+        });
         }
-}

@@ -184,9 +184,9 @@
                                         console.log(salonSelect);
                                     }
                                 </script>
-
+                                <!--Obtener eventos y mandarlo a paramEven.js-->
                                 <script>
-                                    var eventosObtenidos = [];
+                                    let eventosObtenidos = [];
                                     $.ajax({
                                         url: '/php/viewsClientes/checkSalones.php',
                                         method: 'GET',
@@ -199,8 +199,6 @@
                                         }
                                     });
                                 </script>
-
-
                                 <!--Contenido del cuarto paso (Menu)-->
                                 <div class="step step-4">
                                 <label for="comida">Menú del evento:</label>
