@@ -409,6 +409,15 @@ function updateModalContent(formType, idEmpleado, idEvento) {
                         <option value="cocina" ${empleado.TIPO === 'COCINA' ? 'selected' : ''}>Cocinero</option>
                       </select>
                     </div>
+                    <div class="form-group mb-3">
+                    <label for="comportamiento">Tipo de Trabajador</label>
+                    <select name="comportamiento" class="form-control form-select" id="comportamiento">
+                      <option value="Malo" ${empleado.COMPORTAMIENTO === 'Malo' ? 'selected' : ''}>Malo</option>
+                      <option value="Deficiente" ${empleado.COMPORTAMIENTO === 'Deficiente' ? 'selected' : ''}>Deficiente </option>
+                      <option value="Bueno" ${empleado.COMPORTAMIENTO === 'Bueno' ? 'selected' : ''}>Bueno</option>
+                      <option value="Exelente" ${empleado.COMPORTAMIENTO === 'Exelente' ? 'selected' : ''}>Exelente </option>
+                    </select>
+                  </div>
                     <div class="d-flex justify-content-center">
                     <button type="submit" class="btn btn-primary btn-modal me-2"><i class="fa-solid fa-pencil me-2" style="color: #ffffff;"></i>Modificar</button>
                     <button type="button" class="btn btn-primary btn-modal" data-bs-dismiss="modal">Cancelar</button>
