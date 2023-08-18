@@ -84,7 +84,7 @@ function updateModalContent(formType) {
               //Solicitud AJAX
               var xhr = new XMLHttpRequest();
               //Configurar la solicitud
-              xhr.open("POST", "../scripts/registro_emp.php", true);
+              xhr.open("POST", "/registro_emp.php", true);
               xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
               //Obtener los datos del formulario
               var formData = new FormData(form);
@@ -99,7 +99,7 @@ function updateModalContent(formType) {
               var ine = form.elements['ine'].files[0];
               var back = form.elements['back'].files[0];
 
-                xhr.open("POST", "../scripts/registro_emp.php", true);
+                xhr.open("POST", "/registro_emp.php", true);
                 xhr.onreadystatechange = function () {
                     if (xhr.readyState === XMLHttpRequest.DONE && xhr.status === 200) {
                     //Manejo de la respuesta:
@@ -107,7 +107,7 @@ function updateModalContent(formType) {
                     document.getElementById('mensajeDiv').innerHTML = respuesta;
                     if(respuesta === "<div class='alert alert-success'>Te has registrado exitosamente!</div>") {
                         setTimeout(function () {
-                            window.location.href = "../views/login.php";
+                            window.location.href = "./login.php";
                         }, 2000);
                     }
                     }
