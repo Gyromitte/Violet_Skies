@@ -16,9 +16,9 @@ $eventos = array();
 
 foreach ($resultado as $fila) {
     $fechaEvento = $fila->FECHA; // Mantener el formato de fecha sin hora
-    $color = $fila->CANTIDAD_EVENTOS > 1 ? '#ff0000' : '#0000ff'; // Rojo para más de 1 evento, azul para 1 o menos eventos
+    $color = $fila->CANTIDAD_EVENTOS > 1 ? '' : '#0000ff'; // Rojo para más de 1 evento, azul para 1 o menos eventos
     $evento = array(
-        'title' => 'Salón ' . $fila->SALON, // Agregar el número de salón al título del evento
+        'title' => '', // Agregar el número de salón al título del evento
         'start' => $fechaEvento,
         'backgroundColor' => $color,
     );
