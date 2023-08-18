@@ -260,6 +260,7 @@ function updateModalContent(formType, idEmpleado, idEvento) {
       case "@re-incorporarEmpleado":
         modalTitle.textContent = "Re-incorporar a un empleado";
         modalHeader.classList.remove('modal-header-warning');
+        
         formContent = `
           <div id="mensajeDiv" method="POST"></div>
           <form id="formularioEmpleado">
@@ -313,6 +314,17 @@ function updateModalContent(formType, idEmpleado, idEvento) {
     case "@eliminarEmpleado":
       modalTitle.textContent = "Eliminar a un Empleado";
       modalHeader.classList.add('modal-header-warning');
+
+      formContent = `
+        <div class="d-flex justify-content-center">
+        <div class="loading-spinner">
+            <div class="spinner-border text-primary" role="status">
+                <span class="visually-hidden">Loading...</span>
+            </div>
+        </div>
+        </div>
+    `;
+    modalForm.innerHTML = formContent;
       // Obtener los datos del empleado con una solicitud AJAX
       var xhr = new XMLHttpRequest();
       xhr.onreadystatechange = function () {
@@ -357,6 +369,17 @@ function updateModalContent(formType, idEmpleado, idEvento) {
     case "@editarEmpleado":
       modalTitle.textContent = "Modificar datos";
       modalHeader.classList.remove('modal-header-warning');
+
+      formContent = `
+        <div class="d-flex justify-content-center">
+        <div class="loading-spinner">
+            <div class="spinner-border text-primary" role="status">
+                <span class="visually-hidden">Loading...</span>
+            </div>
+        </div>
+        </div>
+    `;
+    modalForm.innerHTML = formContent;
       //Realizar una solicitud AJAX para obtener los datos del empleado
       var xhr = new XMLHttpRequest();
       xhr.onreadystatechange = function () {
@@ -570,6 +593,17 @@ function updateModalContent(formType, idEmpleado, idEvento) {
     case "@verSolicitud":
         modalTitle.textContent = "Manejar solicitud";
         modalHeader.classList.remove('modal-header-warning');
+
+        formContent = `
+        <div class="d-flex justify-content-center">
+        <div class="loading-spinner">
+            <div class="spinner-border text-primary" role="status">
+                <span class="visually-hidden">Loading...</span>
+            </div>
+        </div>
+        </div>
+    `;
+    modalForm.innerHTML = formContent;
         // Obtener los datos de la solicitud con una solicitud AJAX
         var xhr = new XMLHttpRequest();
         xhr.onreadystatechange = function () {
@@ -766,6 +800,17 @@ function updateModalContent(formType, idEmpleado, idEvento) {
 
     case "@verDetallesEvento":
       modalTitle.textContent = "Detalles del Evento";
+
+      formContent = `
+        <div class="d-flex justify-content-center">
+        <div class="loading-spinner">
+            <div class="spinner-border text-primary" role="status">
+                <span class="visually-hidden">Loading...</span>
+            </div>
+        </div>
+        </div>
+    `;
+    modalForm.innerHTML = formContent;
       var xhrDetalles = new XMLHttpRequest();
       xhrDetalles.onreadystatechange = function() {
         if (xhrDetalles.readyState === XMLHttpRequest.DONE) {
@@ -1065,6 +1110,17 @@ function updateModalContent(formType, idEmpleado, idEvento) {
       break;
       case "@verHistorial":
       modalTitle.textContent = "Historial de empleado";
+
+      formContent = `
+        <div class="d-flex justify-content-center">
+        <div class="loading-spinner">
+            <div class="spinner-border text-primary" role="status">
+                <span class="visually-hidden">Loading...</span>
+            </div>
+        </div>
+        </div>
+    `;
+    modalForm.innerHTML = formContent;
       // Obtener los datos del empleado con una solicitud AJAX
       var xhr = new XMLHttpRequest();
       xhr.onreadystatechange = function () {
@@ -1137,6 +1193,17 @@ function updateModalContent(formType, idEmpleado, idEvento) {
   case "@editarMenu":
     modalTitle.textContent = "Modificar menu";
     modalHeader.classList.remove('modal-header-warning');
+
+    formContent = `
+        <div class="d-flex justify-content-center">
+        <div class="loading-spinner">
+            <div class="spinner-border text-primary" role="status">
+                <span class="visually-hidden">Loading...</span>
+            </div>
+        </div>
+        </div>
+    `;
+    modalForm.innerHTML = formContent;
     //Realizar una solicitud AJAX para obtener los datos del empleado
     var xhr = new XMLHttpRequest();
     xhr.onreadystatechange = function () {
@@ -1226,6 +1293,17 @@ function updateModalContent(formType, idEmpleado, idEvento) {
     break;
     case "@descontinuarMenu":
     modalTitle.textContent = "Descontinuar menu";
+
+    formContent = `
+        <div class="d-flex justify-content-center">
+        <div class="loading-spinner">
+            <div class="spinner-border text-primary" role="status">
+                <span class="visually-hidden">Loading...</span>
+            </div>
+        </div>
+        </div>
+    `;
+    modalForm.innerHTML = formContent;
     //Realizar una solicitud AJAX para obtener los datos del menu
     var xhr = new XMLHttpRequest();
     xhr.onreadystatechange = function () {
@@ -1307,6 +1385,17 @@ function updateModalContent(formType, idEmpleado, idEvento) {
     break;
     case "@reincorporarMenu":
     modalTitle.textContent = "Re-Incorporar Menú";
+
+    formContent = `
+        <div class="d-flex justify-content-center">
+        <div class="loading-spinner">
+            <div class="spinner-border text-primary" role="status">
+                <span class="visually-hidden">Loading...</span>
+            </div>
+        </div>
+        </div>
+    `;
+    modalForm.innerHTML = formContent;
     //Realizar una solicitud AJAX para obtener los datos del menu
     var xhr = new XMLHttpRequest();
     xhr.onreadystatechange = function () {
@@ -1400,6 +1489,17 @@ function updateModalContent(formType, idEmpleado, idEvento) {
     case "@verINE":
         modalTitle.textContent = "INE";
         modalHeader.classList.remove('modal-header-warning');
+
+        formContent = `
+        <div class="d-flex justify-content-center">
+        <div class="loading-spinner">
+            <div class="spinner-border text-primary" role="status">
+                <span class="visually-hidden">Loading...</span>
+            </div>
+        </div>
+        </div>
+    `;
+    modalForm.innerHTML = formContent;
         // Obtener los datos de la solicitud con una solicitud AJAX
         var xhr = new XMLHttpRequest();
         xhr.onreadystatechange = function () {
