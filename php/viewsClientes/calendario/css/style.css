@@ -16,7 +16,6 @@ a{
     color: white;
     text-transform: capitalize;
 }
-
 /*Numeros de los dias*/
 .fc-daygrid-day-number{
     color: #343434;
@@ -45,7 +44,7 @@ a{
 }
 /* Cambiar el color de fondo de los eventos */
 .fc-event {
-    background-color: rgb(133, 53, 53) !important;
+    background-color: #5f3b5f;
 }
 /* Cambiar el color de fondo de las celdas*/
 .fc-day {

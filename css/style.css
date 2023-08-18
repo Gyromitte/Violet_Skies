@@ -473,7 +473,7 @@ h1 {
   left: -350px;
   width: 300px;
   height: 100vh;
-  background-image: linear-gradient(to bottom, #5503adfd, #8f27f5);
+  background-image: linear-gradient(to bottom, #343434, #61697b);
   transition: left 0.1s ease;
   z-index: 1;
 }
