@@ -44,6 +44,40 @@
     <script src="https://cdn.jsdelivr.net/npm/flatpickr@latest"></script>
     <script src="https://cdn.jsdelivr.net/npm/flatpickr/dist/plugins/flatpickr.min.js"></script>
 
+    <style>
+    #loading-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+}
+
+#loading-spinner {
+  border: 4px solid #f3f3f3;
+  border-top: 4px solid #3498db;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  animation: spin 1s linear infinite;
+}
+.loading-spinner {
+    display: block; /* Show the loading spinner */
+}
+
+.info {
+    display: none; /* Hide the actual content */
+}
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+        </style>
     <script src="/php/viewsClientes/calendario/js/renderCalendar.js"></script>
 
 </head>
@@ -78,6 +112,9 @@
     // Convertir el array de datos del usuario en formato JSON para poder pasarlo a JavaScript
     $datosUsuarioJSON = json_encode($datosUsuario);
     ?>
+    <div id="loading-overlay">
+        <div id="loading-spinner"></div>
+    </div>
    <nav>
         <div class="nav-menu">
             <button id="nav-button">
