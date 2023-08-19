@@ -196,7 +196,7 @@
             session_start();
             session_destroy();
             echo"<div class='container'>";
-                    echo"<h1 align='center'>Cerrando Sesion</h1>";
+                    echo"<h1 align='center'>Cerrando Sesión</h1>";
                     echo"</div>";
             header("refresh:3;/index.html");
         }
