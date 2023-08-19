@@ -195,7 +195,10 @@
         function cerrarSesion(){
             session_start();
             session_destroy();
-            header("Location:/index.html");
+            echo"<div class='container'>";
+                    echo"<h1 align='center'>Cerrando Session</h1>";
+                    echo"</div>";
+            header("refresh:3;/index.html");
         }
         function Register($nom,$ap,$am,$usu,$pass,$confirm,$cel,$tipo){
             try{

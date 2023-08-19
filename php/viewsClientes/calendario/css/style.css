@@ -16,6 +16,7 @@ a{
     color: white;
     text-transform: capitalize;
 }
+
 /*Numeros de los dias*/
 .fc-daygrid-day-number{
     color: #343434;
@@ -44,7 +45,7 @@ a{
 }
 /* Cambiar el color de fondo de los eventos */
 .fc-event {
-    background-color: #ff33ff;
+    background-color: rgb(133, 53, 53) !important;
 }
 /* Cambiar el color de fondo de las celdas*/
 .fc-day {
@@ -73,13 +74,19 @@ a{
 }
 /*Recuardos desactivados*/
 .fc-day-disabled-default{
-    background-color: rgba(95, 95, 95, 0.1); /* Color de fondo más oscuro */
+    background-color: rgba(153, 153, 153, 0.562) !important; /* Color de fondo más oscuro */
 }
 /* Aplicar color apagado a los días pasados */
 .fc-day-past {
-    background-color: rgba(255, 255, 255, 0.342);
+    background-color: rgba(161, 160, 160, 0.89) !important;
 }
-/*Form del evento*/
+/*Hacer que el calendario no se pueda clickear*/
+.non-clickable {
+    pointer-events: none;
+}
+
+
+/*Form del evento (Wizard)*/
 #evento-form{
     color: #343434;
 }
@@ -95,6 +102,30 @@ a{
 #descripcionComida{
     padding: 20px;
     font-size: 15px;
+    background-color: #836892;
+}
+.btn-wizard{
+    background-color: #381C47 !important;
+    border: 0px;
+}
+.btn-wizard:hover{
+    background-color: #432d4e;
+}
+
+.step-navigation-container {
+    text-align: center;
+}
+.center-button {
+    display: flex;
+    justify-content: center;
+}
+.step-5{
+    font-size: 20px;
+}
+
+#accept-button{
+    background-color: #381C47;
+    border: 2px solid #61697B;
 }
 
 @media (max-width: 768px) {
@@ -102,5 +133,23 @@ a{
     .fc-daygrid-day-number{
         color: #343434;
         font-size: 12px;
+    }
+    #calendar {
+        width: 100%; /* Ancho del contenedor (puede ser en porcentaje o en píxeles) */
+        height: 300px; /* Alto del contenedor en píxeles */
+        margin-bottom: 20px;
+    }
+    #infoAgendar{
+        font-size: 15px;
+    }
+    #home{
+        padding: 20px !important;
+    }
+    /*Color letras de los titulos (Dom, Lun.. etc)*/
+    .fc-col-header-cell-cushion{
+    font-size: 15px;
+    }
+    .wizard{
+        padding-left: 0px !important;
     }
 }

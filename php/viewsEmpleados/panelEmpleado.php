@@ -31,12 +31,16 @@
 				border: 3px solid #A3A5B0;
 				background-image: linear-gradient(145deg, #343434, #343434);
 				color: white;
-				padding: 5px; 
+                padding: 8px;
 				margin: 5px;
 				float: left;
             }
+            .dropdown ul{
+                padding: 7px;
+                background-color: #55406e;
+            }
             .cutebox{
-                background-color: #A3A5B0;
+                background-color: #343434;
                 border-radius: 5em;
                 padding: 10px;
                 width: 80%;
@@ -157,7 +161,7 @@
                 echo"</div>";
                 echo"<br>";
                 echo"<div class='test'>";
-                echo"<div>Un administrador se pondra en contacto con usted proximamente.</div>";
+                echo"<div style= 'font-size:large; padding-left:3px' >Un administrador se pondra en contacto con usted proximamente.</div>";
                 echo"</div>";
             }
             else{
@@ -242,7 +246,7 @@
             </h3>
             <?php
             if($_SESSION["access"]==1.5){
-                echo"<h1>El Administrador aun no confirma tu cuenta</h1></div>";
+                echo"<h1 style= 'color: #343434;' >El Administrador aun no confirma tu cuenta</h1></div>";
             }
             else{
             echo"
@@ -273,7 +277,7 @@
             </h3>
             <?php
                 if($_SESSION["access"]==1.5){
-                    echo"<h1>El Administrador aun no confirma tu cuenta</h1>";
+                    echo"<h1 style= 'color: #343434;' >El Administrador aun no confirma tu cuenta</h1>";
                 }
                 else{
                     echo"
