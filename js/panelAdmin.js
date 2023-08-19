@@ -1041,6 +1041,12 @@ function updateModalContent(formType, idEmpleado, idEvento) {
               var cocinerosRequeridos = document.getElementById('cocinerosRequeridos').value;
               var meserosNecesarios;
               var cocinaNecesarios;
+              var cupoSalon;
+
+
+
+              
+
               if (invitados === 10) {
                 meserosNecesarios = 2;
                 cocinaNecesarios = 5;
@@ -1057,17 +1063,35 @@ function updateModalContent(formType, idEmpleado, idEvento) {
                 alert('Por favor, llene los campos correctamente\nEl mínimo para invitados son 10 y como máximo son 120');
                 return;
               }
-              
-              var xhrGuardarCambios = new XMLHttpRequest();
-              xhrGuardarCambios.onreadystatechange = function(response) {
-                if (xhrGuardarCambios.readyState === XMLHttpRequest.DONE) {
-                  var response = JSON.parse(xhrGuardarCambios.responseText);
-                  if (xhrGuardarCambios.status === 200) {
-                    if (response.success) {
+
+
+
+
+
+              var xhrS = new XMLHttpRequest();
+              xhrS.open('POST', '../viewsEventos/getSalon.php', true);
+              xhrS.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+              xhrS.onreadystatechange = function() {
+                if (xhrS.readyState === 4 && xhrS.status === 200) {
+                  var response = JSON.parse(xhrS.responseText);
+                  console.log(response.CUPO);
+                  console.log(response.MINIMO);
+                  cupoSalon = parseInt(response.CUPO);
+                  minSalon = parseInt(response.MINIMO);
+                  if(cupoSalon < invitados || minSalon > invitados) {
+                    alert("El salón tiene un cupo de al menos " + minSalon + " hasta " + cupoSalon + " invitados");
+                    console.log('sssss');
+                  } else {
+                  var xhrGuardarCambios = new XMLHttpRequest();
+                  xhrGuardarCambios.onreadystatechange = function(response) {
+                    if (xhrGuardarCambios.readyState === XMLHttpRequest.DONE) {
+                      var response = JSON.parse(xhrGuardarCambios.responseText);
+                      if (xhrGuardarCambios.status === 200) {
+                        if (response.success) {
                       formContent += `<br><div class="alert alert-success" role="alert" align='center'>Evento modificado exitosamente</div>`;
                       setTimeout(() => {
                         updateModalContent(formType, idEmpleado, idEvento);
-                      }, 1000); // Actualizar el modal después de 2000 milisegundos (2 segundos)
+                      }, 1000);
                       filtrarEventos();
                       peticionesFuncion();
                       modalForm.innerHTML = formContent;
@@ -1084,6 +1108,10 @@ function updateModalContent(formType, idEmpleado, idEvento) {
               var urlEditarEvento = `../viewsEventos/editarDetalles.php?id=${idEvento}&F_EVENTO=${fecha}&INVITADOS=${invitados}&SALON=${salon}&COMIDA=${comida}&MESEROS=${meserosRequeridos}&COCINEROS=${cocinerosRequeridos}&meserosNecesarios=${meserosNecesarios}&cocinaNecesarios=${cocinaNecesarios}`;
               xhrGuardarCambios.open("GET", urlEditarEvento, true);
               xhrGuardarCambios.send();
+    }
+  }
+};
+xhrS.send('salon=' + encodeURIComponent(salon));              
             });
 
             var btnCancelarEvento = document.getElementById('btnCancelarEvento');
