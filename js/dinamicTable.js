@@ -179,7 +179,7 @@ document.addEventListener('DOMContentLoaded', function() {
 document.addEventListener('DOMContentLoaded', function() {
   var buttons = document.querySelectorAll('.ver-clientes');
   var tableInfo = document.getElementById('table-info');
-  var contTable = document.getElementById('cont-table');
+  var contTable = document.querySelector('.cont-table');
 
   var busquedaInput = document.getElementById('busqueda');
   // Agregar el evento de click a los botones

@@ -7,15 +7,23 @@ isset($_GET['vista']);
     $vista = $_GET['vista'];
     
     $consulta = "SELECT CONCAT(C.NOMBRE, ' ', C.AP_PATERNO, ' ', C.AP_MATERNO) AS NOMBRE,
-    C.CORREO, C.TELEFONO,
+    C.CORREO, C.TELEFONO, C.ID,
     SUM(CASE WHEN E.ESTADO = 'FINALIZADO' THEN 1 ELSE 0 END) AS EVENTOSF,
     SUM(CASE WHEN E.ESTADO = 'CANCELADO' THEN 1 ELSE 0 END) AS EVENTOSC
     FROM CUENTAS C 
     JOIN EVENTO E ON C.ID = E.CLIENTE 
     WHERE C.TIPO_CUENTA = 'CLIENTE' AND C.ESTADO = 'ACTIVO'
-    GROUP BY C.NOMBRE, C.AP_PATERNO, C.AP_MATERNO, C.CORREO, C.TELEFONO
+    GROUP BY C.NOMBRE, C.AP_PATERNO, C.AP_MATERNO, C.CORREO, C.TELEFONO, C.ID
     HAVING (SUM(CASE WHEN E.ESTADO = 'FINALIZADO' THEN 1 ELSE 0 END)
-     + SUM(CASE WHEN E.ESTADO = 'CANCELADO' THEN 1 ELSE 0 END)) = $vista;";
+     + SUM(CASE WHEN E.ESTADO = 'CANCELADO' THEN 1 ELSE 0 END))";
+    if($vista == 0 ){
+        $consulta.="=0";
+    }else if($vista == 1){
+        $consulta.=">=1 AND (SUM(CASE WHEN E.ESTADO = 'FINALIZADO' THEN 1 ELSE 0 END)
+        + SUM(CASE WHEN E.ESTADO = 'CANCELADO' THEN 1 ELSE 0 END)) <=2";
+    }else{
+        $consulta.=">=3";
+    }
     
     $tabla = $conexion->seleccionar($consulta);
 
@@ -36,8 +44,10 @@ echo '<tbody>';
 foreach ($tabla as $registro) {
     echo "<tr>";
     echo "<td> $registro->NOMBRE </td>";
-    echo "<td> $registro->DESCRIPCION </td>";
-    echo "<td> $registro->TIPO </td>";
+    echo "<td> $registro->CORREO </td>";
+    echo "<td> $registro->TELEFONO </td>";
+    echo "<td> $registro->EVENTOSF </td>";
+    echo "<td> $registro->EVENTOSC </td>";
 
     //8 es DESCONTINUADO
     if($vista == '8'){
