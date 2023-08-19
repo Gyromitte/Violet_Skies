@@ -4,6 +4,17 @@
     if (this.readyState == 4 && this.status == 200) {
     // Parsear la respuesta JSON
     var data = JSON.parse(this.responseText);
+
+    var loadingSpinners = document.querySelectorAll('.loading-spinner');
+        var infoContents = document.querySelectorAll('.info');
+
+        loadingSpinners.forEach(function(spinner) {
+            spinner.style.display = 'none';
+        });
+
+        infoContents.forEach(function(content) {
+            content.style.display = 'flex';
+        });
     // Actualizar el contenido de las cards con los datos recibidos
     document.getElementById("clientesCard").innerHTML = data.count_clientes;
     document.getElementById("empleadosCard").innerHTML = data.count_empleados;
