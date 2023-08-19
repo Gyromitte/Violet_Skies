@@ -436,6 +436,7 @@ function updateModalContent(formType, idEmpleado, idEvento) {
               var telefono = formEditarEmpleado.elements.telefono.value;
               var rfc = formEditarEmpleado.elements.rfc.value;
               var tipoUsuario = formEditarEmpleado.elements.tipoUsuario.value;
+              var comportamiento = formEditarEmpleado.elements.comportamiento.value;
 
               // Realizar una nueva solicitud AJAX para actualizar los datos
               var updateXHR = new XMLHttpRequest();
@@ -456,7 +457,7 @@ function updateModalContent(formType, idEmpleado, idEvento) {
               updateXHR.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
               updateXHR.send(`id=${idEmpleado}&rfc=${rfc}&tipoUsuario=${tipoUsuario}
               &nombre=${nombre}&ap_paterno=${ap_paterno}&ap_materno=${ap_materno}
-              &telefono=${telefono}`);
+              &telefono=${telefono}&comportamiento=${comportamiento}`);
               //Ver cual es la tabla activa para refrescar cualquier cambio
               checkCurrentTable(currentTable);
             });
