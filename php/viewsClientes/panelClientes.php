@@ -129,7 +129,7 @@
                     <div class="container d-flex flex-column align-items-center">
                         <!-- Formulario de pasos o pestañas -->
                         <div class="step-form">
-                            <form id="evento-form" method="post">
+                            <form id="evento-form" method="post" action="./pruebaPHPEventos.php">
                                 <!-- Contenido del primer paso (Fecha del evento e invitados) -->
                                 <div class="step step-1">
                                     <!-- Campos del primer paso -->
@@ -141,6 +141,7 @@
                                         <label for="hora_evento">Hora del evento: </label>
                                         <input type="time" id="hora_evento" class="form-control" name="hora_evento" placeholder="HH:MM AM/PM">
                                     </div>
+                                    
                                     <!--Cantidad de invitados-->
                                     <div class="form-group mb-4">
                                         <label for="cantidad_invitados">Cantidad de invitados: </label>
@@ -214,6 +215,7 @@
 
                                 <!--Paso final (Confirmacion)-->
                                 <div class="step step-5 align-text-center mb-3">
+                                    <div id='msgDiv'></div>
                                     <p>Fecha del evento: <span id="confirm-fecha"></span></p>
                                     <p>Hora del evento: <span id="confirm-hora"></span></p>
                                     <p>Cantidad de invitados: <span id="confirm-invitados"></span></p>
@@ -247,7 +249,7 @@
                     Mis eventos
                     <i class="fa-solid fa-calendar-days" style="color: #ffffff;"></i>
                 </h3>
-                <div style=" width:fit-content;" class="custom-card rounded-5">
+                <div style=" width:fit-content; background-color:#381c47;" class="rounded-3 mb-2">
                     <h3 style=" padding-right:5%; padding-left:5%; text-align: center;">Aquí puedes ver tus eventos.</h3>
                     <p style=" padding-right:5%; padding-left:5%; text-align: center;"><b>Si deseas realizar cambios debes contactarte con nosotros para aclarar detalles.</b></p>
                 </div>

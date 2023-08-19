@@ -181,3 +181,7 @@ document.getElementById("cancelForm").addEventListener("submit", function(event)
     });
 });
 filterEvents("PENDIENTE");
+
+console.log("Estado filtrado:", state);
+console.log("Contenedor de tarjetas:", eventCardsContainer);
+console.log("URL de solicitud:", `get_events.php?estado=${state}`);     
