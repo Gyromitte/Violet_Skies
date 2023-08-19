@@ -838,12 +838,12 @@ function updateModalContent(formType, idEmpleado, idEvento) {
                     var option = document.createElement('option');
                     option.value = salon.ID;
                     option.textContent = salon.NOMBRE;
+                    
                     selectSalon.appendChild(option);
                     if (salon.NOMBRE === detallesEvento.SALON) {
                       option.selected = true;
                       salonEncontrado = true;
-                    }
-                    
+                    }                      
                   });
                   if (!salonEncontrado) {
                     console.error("El salón del evento no se encuentra en la lista de salones disponibles:", detallesEvento.SALON);
@@ -875,7 +875,6 @@ function updateModalContent(formType, idEmpleado, idEvento) {
                     option.textContent = comida.NOMBRE; // Asignar el nombre del menú
                     selectMenu.appendChild(option);
                     if (comida.NOMBRE === detallesEvento.COMIDA) {
-                      // Si se encuentra el menú del evento, seleccionarlo en el select y marcarlo como encontrado
                       option.selected = true;
                       menuEncontrado = true;
                     }
@@ -895,7 +894,8 @@ function updateModalContent(formType, idEmpleado, idEvento) {
             <h5 align='center'>${detallesEvento.CLIENTE}</h5><br>
             <ul class="nav nav-pills nav-fill">
   <li class="nav-item">
-    <a class="nav-link active tab-link" aria-current="page" href="#" id="detalles">Detalles</a>
+    <a class="nav-link active aria-selected='true' tab-link" aria-current="page" href="#" id="detalles">Detalles</a>
+    
   </li>
   <li class="nav-item">
     <a class="nav-link tab-link" href="#" id="meserosRegistrados" >Meseros</a>
@@ -1053,8 +1053,8 @@ function updateModalContent(formType, idEmpleado, idEvento) {
                 alert('Por favor, llene los campos correctamente');
                 return;
               }
-              if (!invitados || isNaN(invitados) || parseInt(invitados) < 10) {
-                alert('Por favor, llene los campos correctamente\nEl mínimo para invitados son 10');
+              if (!invitados || isNaN(invitados) || parseInt(invitados) < 10 || parseInt(invitados) >120) {
+                alert('Por favor, llene los campos correctamente\nEl mínimo para invitados son 10 y como máximo son 120');
                 return;
               }
               

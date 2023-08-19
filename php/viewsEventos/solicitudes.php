@@ -27,16 +27,19 @@
 
         $conexion->desconectarBD();
         
-        echo "<h2 class='text-center'>Empleados para $nombre_evento</h2>
+        echo "  <h2 class='text-center'>Empleados para $nombre_evento</h2>
         <ul class='nav nav-pills nav-fill' id='pills-tab' role='tablist'>
         <li class='nav-item' role='presentation'>
         <a class='nav-link' data-bs-toggle='pill' role='tab' aria-selected='true' onclick='mostrarSolicitudesEmpleados()'>Peticiones</a>
         </li>
         <li class='nav-item' role='presentation'>
-        <a class='nav-link' data-bs-toggle='pill' role='tab' aria-selected='true' onclick='mostrarEmpleadosIngresados($evento_id)'>Ingresados</a>
+        <a class='nav-link' data-bs-toggle='pill' role='tab' aria-selected='true' onclick='mostrarmeserosIngresados($evento_id)'>Meseros ingresados</a>
+        </li>
+        <li class='nav-item' role='presentation'>
+        <a class='nav-link' data-bs-toggle='pill' role='tab' aria-selected='true' onclick='mostrarcocinaIngresados($evento_id)'>Cocina ingresados</a>
         </li>
         </ul>
-        
+
         <div id='empleadosRegistrados'></div>
 
         <div class='tab-content' id='solicit'>

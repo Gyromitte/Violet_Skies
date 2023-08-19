@@ -47,7 +47,7 @@
     gap: 1rem;
   }
   .card {
-    background-image: linear-gradient(135deg, white, #f58cd6);
+    background-image: linear-gradient(135deg, white, #A595B7);
     color: #333;
   }
 </style>

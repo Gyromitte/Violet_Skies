@@ -90,9 +90,9 @@
             header("Location:../views/login.php");
         }
     ?>
-     <div id="loading-overlay">
+   <!--  <div id="loading-overlay">
         <div id="loading-spinner"></div>
-    </div>
+    </div> -->
     <nav>
         <div class="nav-menu">
             <button id="nav-button">

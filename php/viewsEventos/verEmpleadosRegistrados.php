@@ -9,15 +9,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
             $evento = $_GET['id'];
             $tipo = $_GET['tipo'];
 
-            if ($tipo === 'ESPECIAL') {
-                $condicionTipo = "E.TIPO IN ('MESERO', 'COCINA')";
-            } else {
-                $condicionTipo = "E.TIPO = '$tipo'";
-            }
 
             $consulta = "SELECT E.ID, E.TIPO, CONCAT(C.NOMBRE, ' ', C.AP_PATERNO, ' ', C.AP_MATERNO) AS NOMBRE, C.TELEFONO
                 FROM CUENTAS C JOIN EMPLEADOS E ON C.ID = E.CUENTA JOIN EVENTO_EMPLEADOS EE ON E.ID = EE.EMPLEADOS
-                WHERE EE.EVENTO = $evento AND $condicionTipo
+                WHERE EE.EVENTO = $evento AND E.TIPO = '$tipo'
                 ORDER BY E.TIPO, NOMBRE ASC";
 
             $tabla = $conexion->seleccionar($consulta);
@@ -72,20 +67,17 @@ sacarEmpleado.forEach(function(button) {
     button.addEventListener('click', function() {
         var idEmpleado = this.getAttribute('data-empleado-id');
         var idEvento = this.getAttribute('data-evento-id');
-
-
-
     // Mostrar el modal de confirmación
     var confirmarCancelacion = window.confirm("¿Estás seguro que deseas sacar este empleado?");
+    
     if (confirmarCancelacion) {
         var xhrsacarEmpleado = new XMLHttpRequest();
         xhrsacarEmpleado.onreadystatechange = function() {
             if (xhrsacarEmpleado.readyState === XMLHttpRequest.DONE) {
                 if (xhrsacarEmpleado.status === 200) {
                     formContent += `<br><div id="successMessage" class="alert alert-success" role="alert" align='center'>
-                    Se ha aja</div>`;
+                    Se ha eliminado con éxito</div>`;
                     setTimeout(() => {
-                        
                         updateModalContent(idEmpleado, idEvento);
                     }, 2000);
                     peticionesFuncion();

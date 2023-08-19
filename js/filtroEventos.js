@@ -152,9 +152,9 @@ function mostrarSolicitudesEmpleados() {
     }
 }
 
-function mostrarEmpleadosIngresados(eventoId) {
+function mostrarmeserosIngresados(eventoId) {
     var xhr = new XMLHttpRequest();
-    var url = '../viewsEventos/verEmpleadosRegistrados.php?id=' + eventoId + '&tipo=ESPECIAL';
+    var url = '../viewsEventos/verEmpleadosRegistrados.php?id=' + eventoId + '&tipo=MESERO';
 console.log(eventoId);
     xhr.open('GET', url, true);
     xhr.onload = function() {
@@ -165,7 +165,19 @@ console.log(eventoId);
     };
     xhr.send();
 }
-
+function mostrarcocinaIngresados(eventoId) {
+    var xhr = new XMLHttpRequest();
+    var url = '../viewsEventos/verEmpleadosRegistrados.php?id=' + eventoId + '&tipo=COCINA';
+console.log(eventoId);
+    xhr.open('GET', url, true);
+    xhr.onload = function() {
+        if (xhr.status === 200) {
+            var empleadosRegistradosDiv = document.getElementById("empleadosRegistrados");
+            empleadosRegistradosDiv.innerHTML = xhr.responseText;
+        }
+    };
+    xhr.send();
+}
 
 
 
