@@ -54,8 +54,8 @@
     <!--NavBar-->
     <?php
     session_start();
-    include_once 'menu.php';
-    include_once 'salones.php';
+    include 'menu.php';
+    include 'salones.php';
     $access = 1;
     if (isset($_SESSION["logged_in"])) {
         if ($_SESSION["access"] !== $access) {
@@ -404,7 +404,11 @@
                                 <option value="">Seleccione una comida del menú</option>
                                 <?php
                                 foreach ($menuItems as $menuItem) {
-                                    echo '<option value="' . $menuItem['ID'] . '">' . $menuItem['NOMBRE'] . '</option>';
+                                    $selected = ($eventMenuId == $menuItem['ID']) ? "selected" : "";
+echo "Event Menu ID: $eventMenuId, Menu Item ID: {$menuItem['ID']}, Selected: $selected";
+
+                                    $selected = ($eventMenuId == $menuItem['ID']) ? "selected" : "";
+                                    echo '<option value="' . $menuItem['ID'] . '" ' . $selected . '>' . $menuItem['NOMBRE'] . '</option>';
                                 }
                                 ?>
                             </select>
@@ -414,7 +418,6 @@
                             <input type="text" class="form-control" id="editInvitadosInput" name="editInvitadosInput" required>
                         </div>
                         <input type="hidden" name="eventId" id="eventId">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
                         <button type="button" class="btn btn-primary" id="editSaveButton">Guardar Cambios</button>
                     </form>
                 </div>
