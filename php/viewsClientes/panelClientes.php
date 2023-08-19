@@ -112,9 +112,6 @@
     // Convertir el array de datos del usuario en formato JSON para poder pasarlo a JavaScript
     $datosUsuarioJSON = json_encode($datosUsuario);
     ?>
-    <div id="loading-overlay">
-        <div id="loading-spinner"></div>
-    </div>
    <nav>
         <div class="nav-menu">
             <button id="nav-button">

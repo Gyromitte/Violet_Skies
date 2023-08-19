@@ -114,21 +114,17 @@ function updateModalContent(formType) {
 
                 xhr.open("POST", "/registro_emp.php", true);
                 xhr.onreadystatechange = function () {
-                    if (xhr.readyState === XMLHttpRequest.DONE) {
-                        mensajeDiv.removeChild(loadingSpinner); // Hide the loading spinner
-            
-                        if (xhr.status === 200) {
-                            var respuesta = xhr.responseText;
-                            document.getElementById('mensajeDiv').innerHTML = respuesta;
-                            if (respuesta === "<div class='alert alert-success'>Te has registrado exitosamente!</div>") {
-                                setTimeout(function () {
-                                    window.location.href = "../views/login.php";
-                                }, 2000);
-                            }
-                        }
+                    if (xhr.readyState === XMLHttpRequest.DONE && xhr.status === 200) {
+                    //Manejo de la respuesta:
+                    var respuesta = xhr.responseText;
+                    document.getElementById('mensajeDiv').innerHTML = respuesta;
+                    if(respuesta === "<div class='alert alert-success'>Te has registrado exitosamente!</div>") {
+                        setTimeout(function () {
+                            window.location.href = "./login.php";
+                        }, 2000);
+                    }
                     }
                 };
-            
               //Enviar el formulario
               formData.append('ine', ine);
               formData.append('back', back);
