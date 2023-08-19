@@ -376,34 +376,44 @@ function updateModalContent(formType, idEmpleado, idEvento) {
                     <input type="text" maxlength="35" name="nombre" placeholder="" class="form-control" 
                     required value="${empleado.NOMBRE}">
                     </div>
-                    <div class="mb-2">
+                    <div class="mb-3">
                     <label class="control-label">Ap. Paterno: </label>
                     <input type="text" maxlength="40" name="ap_paterno" placeholder="" class="form-control" 
                     required value="${empleado.AP_PATERNO}">
                     </div>
-                    <div class="mb-2">
+                    <div class="mb-3">
                     <label class="control-label">Ap. Materno: </label>
                     <input type="text" maxlength="40" name="ap_materno" placeholder="" class="form-control" 
                     required value="${empleado.AP_MATERNO}">
                     </div>
-                    <div class="mb-2">
+                    <div class="mb-3">
                     <label class="control-label">Telefono: </label>
                     <input type="text" maxlength="15" name="telefono" placeholder="" class="form-control" 
                     required value="${empleado.TELEFONO}">
                     </div>
-                    <div class="mb-2">
+                    <div class="mb-3">
                       <label class="control-label">RFC</label>
                       <input type="text" maxlength="13" name="comportamiento" placeholder="Ingresa el RFC" class="form-control" 
                       required oninput="this.value = this.value.toUpperCase()"
                       required value="${empleado.RFC}">
                     </div>
-                    <div class="form-group mb-2">
+                    <div class="form-group mb-3">
                       <label for="tipoUsuario">Tipo de Trabajador</label>
                       <select name="tipoUsuario" class="form-control form-select" id="tipoUsuario">
                         <option value="mesero" ${empleado.TIPO === 'MESERO' ? 'selected' : ''}>Mesero</option>
                         <option value="cocina" ${empleado.TIPO === 'COCINA' ? 'selected' : ''}>Cocinero</option>
                       </select>
                     </div>
+                    <div class="form-group mb-3">
+                    <label for="comportamiento">Comportamiento</label>
+                    <select name="comportamiento" class="form-control form-select" id="comportamiento">
+                      <option value="Malo" ${empleado.COMPORTAMIENTO === 'Malo' ? 'selected' : ''}>Malo</option>
+                      <option value="Deficiente" ${empleado.COMPORTAMIENTO === 'Deficiente' ? 'selected' : ''}>Deficiente</option>
+                      <option value="Bueno" ${empleado.COMPORTAMIENTO === 'Bueno' ? 'selected' : ''}>Bueno</option>
+                      <option value="Exelente" ${empleado.COMPORTAMIENTO === 'Exelente' ? 'selected' : ''}>Exelente</option>
+
+                    </select>
+                  </div>
                     <div class="d-flex justify-content-center">
                     <button type="submit" class="btn btn-primary btn-modal me-2"><i class="fa-solid fa-pencil me-2" style="color: #ffffff;"></i>Modificar</button>
                     <button type="button" class="btn btn-primary btn-modal" data-bs-dismiss="modal">Cancelar</button>
