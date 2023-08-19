@@ -6,7 +6,7 @@ $conexion->conectarBD();
 // Verificar si se recibieron los datos de RFC y tipo
 if (isset($_POST['rfc']) && isset($_POST['id'])
     && isset($_POST['nombre']) && isset($_POST['ap_paterno']) && isset($_POST['ap_materno'])
-    && isset($_POST['telefono']) && isset($_POST['tipoUsuario'])) {
+    && isset($_POST['telefono']) && isset($_POST['tipoUsuario']) &&isset($_POST['comportamiento'])) {
     // Obtener los datos del empleado desde la solicitud
     $nombre = $_POST['nombre'];
     $ap_paterno = $_POST['ap_paterno'];
@@ -15,6 +15,7 @@ if (isset($_POST['rfc']) && isset($_POST['id'])
     $employeeId = $_POST['id'];
     $rfc = strtoupper($_POST['rfc']); // Convertir a mayúsculas para homogeneizar
     $tipoUsuario = trim($_POST['tipoUsuario']);
+    $comportamiento = trim($_POST['comportamiento']);
 
     // Variable para almacenar el mensaje de error
     $errorMessage = "";
@@ -45,7 +46,7 @@ if (isset($_POST['rfc']) && isset($_POST['id'])
         // El RFC tiene el formato correcto, realizar la consulta para actualizar los datos del empleado
         $actualizar =  "UPDATE EMPLEADOS AS E
         INNER JOIN CUENTAS AS C ON E.CUENTA = C.ID
-        SET E.RFC = '$rfc', E.TIPO = '$tipoUsuario',
+        SET E.RFC = '$rfc', E.TIPO = '$tipoUsuario',E.COMPORTAMIENTO= $comportamiento ,
             C.NOMBRE = '$nombre', C.AP_PATERNO = '$ap_paterno', C.AP_MATERNO = '$ap_materno', C.TELEFONO = '$telefono'
         WHERE E.CUENTA = '$employeeId'"; //Este id debería ser el de la cuenta
         $conexion->ejecutarSQL($actualizar);
