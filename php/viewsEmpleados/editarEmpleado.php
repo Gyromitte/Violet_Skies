@@ -46,7 +46,7 @@ if (isset($_POST['rfc']) && isset($_POST['id'])
         // El RFC tiene el formato correcto, realizar la consulta para actualizar los datos del empleado
         $actualizar =  "UPDATE EMPLEADOS AS E
         INNER JOIN CUENTAS AS C ON E.CUENTA = C.ID
-        SET E.RFC = '$rfc', E.TIPO = '$tipoUsuario',E.COMPORTAMIENTO= $comportamiento ,
+        SET E.RFC = '$rfc', E.TIPO = '$tipoUsuario',E.COMPORTAMIENTO= '$comportamiento' ,
             C.NOMBRE = '$nombre', C.AP_PATERNO = '$ap_paterno', C.AP_MATERNO = '$ap_materno', C.TELEFONO = '$telefono'
         WHERE E.CUENTA = '$employeeId'"; //Este id debería ser el de la cuenta
         $conexion->ejecutarSQL($actualizar);
