@@ -105,3 +105,4 @@ function resetInputs() {
     $('#fechaEvento').val(oneWeekLater.toISOString().slice(0, 19).replace('T', ' '));
 }
 
+

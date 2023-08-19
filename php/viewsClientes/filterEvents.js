@@ -35,6 +35,9 @@ function createEventCard(event) {
     const date = document.createElement("p");
     date.textContent = `Fecha: ${event['FECHA DEL EVENTO']}`;
 
+    const salon = document.createElement("p");
+    salon.textContent =`Salón: ${event['NOMBRE DEL SALÓN']}`;
+
     const menu = document.createElement("p");
     menu.textContent = `Menú: ${event['MENÚ']}`;
 
@@ -51,6 +54,18 @@ function createEventCard(event) {
 
     const cancelButton = document.createElement("button");
     cancelButton.textContent = "Cancelar Evento";
+
+    const editButton = document.createElement("button");
+    editButton.textContent = "Editar Evento";
+
+    if (event.ESTADO === "PENDIENTE" || event.ESTADO === "EN PROCESO") {
+        editButton.classList.add("btn-modal-primary");
+        editButton.addEventListener("click", () => {
+            openEditModal(event);
+        });
+    } else {
+        editButton.style.display = "none";
+    }
 
     //Timer que desactiva el botón de cancelar si falta una semana.
     const eventDateParts = event['FECHA DEL EVENTO'].split(' ')[0].split('-');
@@ -81,9 +96,11 @@ function createEventCard(event) {
     card.appendChild(eventId);
     card.appendChild(title);
     card.appendChild(date);
+    card.appendChild(salon);
     card.appendChild(menu);
     card.appendChild(invitados);
     card.appendChild(cancelButton);
+    card.appendChild(editButton);
 
 
     return card;
@@ -100,6 +117,7 @@ function openCancelModal(eventId) {
     modal.style.display = "block";
     passwordInput.value = "";
 }
+
 document.querySelector(".close").addEventListener("click", () => {
     const modal = document.getElementById("cancelModal");
     const passwordInput = document.getElementById("password");
@@ -110,7 +128,7 @@ document.querySelector(".close").addEventListener("click", () => {
     passwordInput.value = "";
     cancelMessage.textContent = "";
 });
-
+filterEvents("PENDIENTE");
 function filterEvents(state) {
     eventCardsContainer.innerHTML = "";
 
@@ -134,6 +152,7 @@ function filterEvents(state) {
         })
         .catch(error => console.error('Error al obtener los eventos:', error));
 }
+
 document.getElementById("cancelForm").addEventListener("submit", function(event) {
     event.preventDefault();
 
@@ -180,7 +199,65 @@ document.getElementById("cancelForm").addEventListener("submit", function(event)
         console.error("Error al cancelar el evento:", error);
     });
 });
-filterEvents("PENDIENTE");
+//modal para editar eventos.
+function openEditModal(event) {
+    const modal = document.getElementById("editModal");
+    const titleInput = document.getElementById("editTitleInput");
+    const dateInput = document.getElementById("editDateInput");
+    const salonInput = document.getElementById("editSalonInput");
+    const menuInput = document.getElementById("editMenuInput");
+    const invitadosInput = document.getElementById("editInvitadosInput");
+
+    titleInput.value = event['NOMBRE DEL EVENTO'];
+    dateInput.value = event['FECHA DEL EVENTO'];
+    salonInput.value = event['NOMBRE DEL SALÓN'];
+    menuInput.value = event['MENÚ'];
+    invitadosInput.value = event['INVITADOS'];
+
+    modal.style.display = "block";
+
+    // Agregar escuchador de eventos para guardar los detalles editados
+    const saveButton = document.getElementById("editSaveButton");
+    saveButton.addEventListener("click", () => {
+        // Reunir los datos editados y enviarlos para su procesamiento
+        const editedData = {
+            title: titleInput.value,
+            date: dateInput.value,
+            salon: salonInput.value,
+            menu: menuInput.value,
+            invitados: invitadosInput.value
+        };
+        // Enviar los datos editados para su procesamiento
+        saveEditedEvent(event.ID_EVENTO, editedData);
+        modal.style.display = "none";
+    });
+}
+
+function saveEditedEvent(eventId, editedData) {
+    // Preparar los datos para enviar
+    const formData = new FormData();
+    formData.append("eventId", eventId);
+    for (const key in editedData) {
+        formData.append(key, editedData[key]);
+    }
+
+    // Enviar los datos al servidor
+    fetch("editEvent.php", {
+        method: "POST",
+        body: formData
+    })
+    .then(response => response.text())
+    .then(message => {
+        // Manejar el mensaje de respuesta, por ejemplo, mostrar un mensaje de éxito
+        console.log(message);
+        // Actualizar las tarjetas de eventos después de la edición
+        filterEvents("PENDIENTE");
+    })
+    .catch(error => {
+        console.error("Error al editar el evento:", error);
+    });
+}
+
 
 console.log("Estado filtrado:", state);
 console.log("Contenedor de tarjetas:", eventCardsContainer);

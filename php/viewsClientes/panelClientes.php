@@ -34,7 +34,6 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&display=swap" rel="stylesheet">
     <script src="https://kit.fontawesome.com/b60c246061.js" crossorigin="anonymous"></script>
-    <script src="filterEvents.js" async defer></script>
 
     <!--Libreria full calendar-->
     <script src="/fullCalendar/fullcalendar.js"></script>
@@ -377,6 +376,54 @@
             </div>
         </div>
     </div>
+    <!-- modal para editar eventos -->
+    <div id="editModal" class="modal">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Editar Evento</h5>
+                    <button type="button" class="close btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="editForm" method="POST">
+                        <div class="mb-3">
+                            <label class="form-label" for="editTitleInput">Título:</label>
+                            <input type="text" class="form-control" id="editTitleInput" name="editTitleInput" required>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label" for="editDateInput">Fecha:</label>
+                            <input type="date" class="form-control" id="editDateInput" name="editDateInput" required>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label" for="editSalonInput">Salón:</label>
+                            <input type="text" class="form-control" id="editSalonInput" name="editSalonInput" required>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label" for="editMenuInput">Menú del evento:</label>
+                            <select class="form-control" id="editMenuInput" name="editMenuInput" required>
+                                <option value="">Seleccione una comida del menú</option>
+                                <?php
+                                foreach ($menuItems as $menuItem) {
+                                    echo '<option value="' . $menuItem['ID'] . '">' . $menuItem['NOMBRE'] . '</option>';
+                                }
+                                ?>
+                            </select>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label" for="editInvitadosInput">Invitados:</label>
+                            <input type="text" class="form-control" id="editInvitadosInput" name="editInvitadosInput" required>
+                        </div>
+                        <input type="hidden" name="eventId" id="eventId">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                        <button type="button" class="btn btn-primary" id="editSaveButton">Guardar Cambios</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
 
     <!--Scripts que necesitan ejecutarse hasta el final-->
     <script>
@@ -395,6 +442,8 @@
 
         });
     </script>
+    <script src="filterEvents.js"></script>
+    <script src="./pruebaJSEventos.js"></script>
     <script src="/js/dinamicTable.js"></script>
     <script src="/bootstrap/js/bootstrap.min.js"></script>
     <script src="/bootstrap/js/bootstrap.bundle.min.js"></script>
@@ -402,7 +451,6 @@
     <!-- Agrega las siguientes líneas para cargar jQuery, el complemento datetimepicker y tu propio script.js -->
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="/js/panelAdmin.js"></script>
-    <script src="./pruebaJSEventos.js"></script>
     <script src="/js/datosAdmin.js"></script>
     <!-- Agrega la siguiente línea para cargar el complemento datetimepicker -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-datetimepicker/2.5.20/jquery.datetimepicker.full.min.js"></script>
