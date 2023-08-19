@@ -92,6 +92,7 @@ function filtrarEventos() {
 
     if (estadoSelect.value === 'GRAFICOS') {
         contentRow.style.display = 'flex';
+        tablaResultados.style.display = 'none';
         searchInput.style.display = 'none';
         searchButton.style.display = 'none';
         fechaInicioInput.style.display = 'none';
