@@ -386,11 +386,6 @@ function updateModalContent(formType, idEmpleado, idEvento) {
                     <input type="text" maxlength="40" name="ap_materno" placeholder="" class="form-control" 
                     required value="${empleado.AP_MATERNO}">
                     </div>
-                    <div class="mb-3">
-                    <label class="control-label">Comportamiento: </label>
-                    <input type="text" maxlength="15" name="telefono" placeholder="" class="form-control" 
-                    required value="${empleado.COMPORTAMIENTO}">
-                    </div>
                     <div class="mb-2">
                     <label class="control-label">Telefono: </label>
                     <input type="text" maxlength="15" name="telefono" placeholder="" class="form-control" 
