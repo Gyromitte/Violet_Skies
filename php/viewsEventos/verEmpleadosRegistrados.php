@@ -9,7 +9,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
             // Obtener el ID del evento desde la consulta GET
             $evento = $_GET['id'];
 
-            $consulta = "SELECT E.TIPO, CONCAT(C.NOMBRE, ' ', C.AP_PATERNO, ' ', C.AP_MATERNO) AS NOMBRE, C.TELEFONO
+            $consulta = "SELECT E.TIPO, CONCAT(C.NOMBRE, ' ', C.AP_PATERNO, ' ', C.AP_MATERNO) AS NOMBRE, C.TELEFONO,E.COMPORTAMIENTO
                          FROM CUENTAS C
                          JOIN EMPLEADOS E ON C.ID = E.CUENTA
                          JOIN EVENTO_EMPLEADOS EE ON E.ID = EE.EMPLEADOS
@@ -22,7 +22,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
                 echo "<br><table class='table table-hover'>
                 <thead class='thead-purple'>
                     <tr>
-                        <th>TIPO</th><th>NOMBRE</th><th>TELÉFONO</th>
+                        <th>TIPO</th><th>NOMBRE</th><th>TELÉFONO</th><th>COMPORTAMIENTO</th>
                     </tr>
                 </thead>
                 <tbody>";
@@ -32,6 +32,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
                     echo "<td> $registro->TIPO </td>";
                     echo "<td> $registro->NOMBRE </td>";
                     echo "<td> $registro->TELEFONO </td>";
+                    echo "<td> $registro->COMPORTAMIENTO </td>";
                     echo "</tr>";
                 }
 

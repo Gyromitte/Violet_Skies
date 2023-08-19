@@ -97,7 +97,7 @@ function updateModalContent(formType) {
               //Solicitud AJAX
               var xhr = new XMLHttpRequest();
               //Configurar la solicitud
-              xhr.open("POST", "../scripts/registro_emp.php", true);
+              xhr.open("POST", "/registro_emp.php", true);
               xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
               //Obtener los datos del formulario
               var formData = new FormData(form);
@@ -112,7 +112,7 @@ function updateModalContent(formType) {
               var ine = form.elements['ine'].files[0];
               var back = form.elements['back'].files[0];
 
-                xhr.open("POST", "../scripts/registro_emp.php", true);
+                xhr.open("POST", "/registro_emp.php", true);
                 xhr.onreadystatechange = function () {
                     if (xhr.readyState === XMLHttpRequest.DONE) {
                         mensajeDiv.removeChild(loadingSpinner); // Hide the loading spinner
