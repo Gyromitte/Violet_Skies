@@ -393,7 +393,7 @@ function updateModalContent(formType, idEmpleado, idEvento) {
                     </div>
                     <div class="mb-3">
                       <label class="control-label">RFC</label>
-                      <input type="text" maxlength="13" name="comportamiento" placeholder="Ingresa el RFC" class="form-control" 
+                      <input type="text" maxlength="13" name="rfc" placeholder="Ingresa el RFC" class="form-control" 
                       required oninput="this.value = this.value.toUpperCase()"
                       required value="${empleado.RFC}">
                     </div>
