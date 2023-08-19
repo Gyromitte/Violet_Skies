@@ -260,7 +260,6 @@ function updateModalContent(formType, idEmpleado, idEvento) {
       case "@re-incorporarEmpleado":
         modalTitle.textContent = "Re-incorporar a un empleado";
         modalHeader.classList.remove('modal-header-warning');
-        
         formContent = `
           <div id="mensajeDiv" method="POST"></div>
           <form id="formularioEmpleado">
@@ -314,17 +313,6 @@ function updateModalContent(formType, idEmpleado, idEvento) {
     case "@eliminarEmpleado":
       modalTitle.textContent = "Eliminar a un Empleado";
       modalHeader.classList.add('modal-header-warning');
-
-      formContent = `
-        <div class="d-flex justify-content-center">
-        <div class="loading-spinner">
-            <div class="spinner-border text-primary" role="status">
-                <span class="visually-hidden">Loading...</span>
-            </div>
-        </div>
-        </div>
-    `;
-    modalForm.innerHTML = formContent;
       // Obtener los datos del empleado con una solicitud AJAX
       var xhr = new XMLHttpRequest();
       xhr.onreadystatechange = function () {
@@ -369,17 +357,6 @@ function updateModalContent(formType, idEmpleado, idEvento) {
     case "@editarEmpleado":
       modalTitle.textContent = "Modificar datos";
       modalHeader.classList.remove('modal-header-warning');
-
-      formContent = `
-        <div class="d-flex justify-content-center">
-        <div class="loading-spinner">
-            <div class="spinner-border text-primary" role="status">
-                <span class="visually-hidden">Loading...</span>
-            </div>
-        </div>
-        </div>
-    `;
-    modalForm.innerHTML = formContent;
       //Realizar una solicitud AJAX para obtener los datos del empleado
       var xhr = new XMLHttpRequest();
       xhr.onreadystatechange = function () {
@@ -399,33 +376,28 @@ function updateModalContent(formType, idEmpleado, idEvento) {
                     <input type="text" maxlength="35" name="nombre" placeholder="" class="form-control" 
                     required value="${empleado.NOMBRE}">
                     </div>
-                    <div class="mb-2">
+                    <div class="mb-3">
                     <label class="control-label">Ap. Paterno: </label>
                     <input type="text" maxlength="40" name="ap_paterno" placeholder="" class="form-control" 
                     required value="${empleado.AP_PATERNO}">
                     </div>
-                    <div class="mb-2">
+                    <div class="mb-3">
                     <label class="control-label">Ap. Materno: </label>
                     <input type="text" maxlength="40" name="ap_materno" placeholder="" class="form-control" 
                     required value="${empleado.AP_MATERNO}">
                     </div>
                     <div class="mb-3">
-                    <label class="control-label">Comportamiento: </label>
-                    <input type="text" maxlength="15" name="telefono" placeholder="" class="form-control" 
-                    required value="${empleado.COMPORTAMIENTO}">
-                    </div>
-                    <div class="mb-2">
                     <label class="control-label">Telefono: </label>
                     <input type="text" maxlength="15" name="telefono" placeholder="" class="form-control" 
                     required value="${empleado.TELEFONO}">
                     </div>
-                    <div class="mb-2">
+                    <div class="mb-3">
                       <label class="control-label">RFC</label>
-                      <input type="text" maxlength="13" name="comportamiento" placeholder="Ingresa el RFC" class="form-control" 
+                      <input type="text" maxlength="13" name="rfc" placeholder="Ingresa el RFC" class="form-control" 
                       required oninput="this.value = this.value.toUpperCase()"
                       required value="${empleado.RFC}">
                     </div>
-                    <div class="form-group mb-2">
+                    <div class="form-group mb-3">
                       <label for="tipoUsuario">Tipo de Trabajador</label>
                       <select name="tipoUsuario" class="form-control form-select" id="tipoUsuario">
                         <option value="mesero" ${empleado.TIPO === 'MESERO' ? 'selected' : ''}>Mesero</option>
@@ -433,14 +405,15 @@ function updateModalContent(formType, idEmpleado, idEvento) {
                       </select>
                     </div>
                     <div class="form-group mb-3">
-                      <label for="comportamiento">Tipo de Trabajador</label>
-                      <select name="comportamiento" class="form-control form-select" id="comportamiento">
-                        <option value="Malo" ${empleado.COMPORTAMIENTO === 'Malo' ? 'selected' : ''}>Malo</option>
-                        <option value="Deficiente" ${empleado.COMPORTAMIENTO === 'Deficiente' ? 'selected' : ''}>Deficiente </option>
-                        <option value="Bueno" ${empleado.COMPORTAMIENTO === 'Bueno' ? 'selected' : ''}>Bueno</option>
-                        <option value="Exelente" ${empleado.COMPORTAMIENTO === 'Exelente' ? 'selected' : ''}>Exelente </option>
-                      </select>
-                    </div>
+                    <div class="form-group mb-3">
+                    <label for="comportamiento">Tipo de Trabajador</label>
+                    <select name="comportamiento" class="form-control form-select" id="comportamiento">
+                      <option value="Malo" ${empleado.COMPORTAMIENTO === 'Malo' ? 'selected' : ''}>Malo</option>
+                      <option value="Deficiente" ${empleado.COMPORTAMIENTO === 'Deficiente' ? 'selected' : ''}>Deficiente </option>
+                      <option value="Bueno" ${empleado.COMPORTAMIENTO === 'Bueno' ? 'selected' : ''}>Bueno</option>
+                      <option value="Exelente" ${empleado.COMPORTAMIENTO === 'Exelente' ? 'selected' : ''}>Exelente </option>
+                    </select>
+                  </div>
                     <div class="d-flex justify-content-center">
                     <button type="submit" class="btn btn-primary btn-modal me-2"><i class="fa-solid fa-pencil me-2" style="color: #ffffff;"></i>Modificar</button>
                     <button type="button" class="btn btn-primary btn-modal" data-bs-dismiss="modal">Cancelar</button>
@@ -609,17 +582,6 @@ function updateModalContent(formType, idEmpleado, idEvento) {
     case "@verSolicitud":
         modalTitle.textContent = "Manejar solicitud";
         modalHeader.classList.remove('modal-header-warning');
-
-        formContent = `
-        <div class="d-flex justify-content-center">
-        <div class="loading-spinner">
-            <div class="spinner-border text-primary" role="status">
-                <span class="visually-hidden">Loading...</span>
-            </div>
-        </div>
-        </div>
-    `;
-    modalForm.innerHTML = formContent;
         // Obtener los datos de la solicitud con una solicitud AJAX
         var xhr = new XMLHttpRequest();
         xhr.onreadystatechange = function () {
@@ -816,17 +778,6 @@ function updateModalContent(formType, idEmpleado, idEvento) {
 
     case "@verDetallesEvento":
       modalTitle.textContent = "Detalles del Evento";
-
-      formContent = `
-        <div class="d-flex justify-content-center">
-        <div class="loading-spinner">
-            <div class="spinner-border text-primary" role="status">
-                <span class="visually-hidden">Loading...</span>
-            </div>
-        </div>
-        </div>
-    `;
-    modalForm.innerHTML = formContent;
       var xhrDetalles = new XMLHttpRequest();
       xhrDetalles.onreadystatechange = function() {
         if (xhrDetalles.readyState === XMLHttpRequest.DONE) {
@@ -1126,17 +1077,6 @@ function updateModalContent(formType, idEmpleado, idEvento) {
       break;
       case "@verHistorial":
       modalTitle.textContent = "Historial de empleado";
-
-      formContent = `
-        <div class="d-flex justify-content-center">
-        <div class="loading-spinner">
-            <div class="spinner-border text-primary" role="status">
-                <span class="visually-hidden">Loading...</span>
-            </div>
-        </div>
-        </div>
-    `;
-    modalForm.innerHTML = formContent;
       // Obtener los datos del empleado con una solicitud AJAX
       var xhr = new XMLHttpRequest();
       xhr.onreadystatechange = function () {
@@ -1209,17 +1149,6 @@ function updateModalContent(formType, idEmpleado, idEvento) {
   case "@editarMenu":
     modalTitle.textContent = "Modificar menu";
     modalHeader.classList.remove('modal-header-warning');
-
-    formContent = `
-        <div class="d-flex justify-content-center">
-        <div class="loading-spinner">
-            <div class="spinner-border text-primary" role="status">
-                <span class="visually-hidden">Loading...</span>
-            </div>
-        </div>
-        </div>
-    `;
-    modalForm.innerHTML = formContent;
     //Realizar una solicitud AJAX para obtener los datos del empleado
     var xhr = new XMLHttpRequest();
     xhr.onreadystatechange = function () {
@@ -1309,17 +1238,6 @@ function updateModalContent(formType, idEmpleado, idEvento) {
     break;
     case "@descontinuarMenu":
     modalTitle.textContent = "Descontinuar menu";
-
-    formContent = `
-        <div class="d-flex justify-content-center">
-        <div class="loading-spinner">
-            <div class="spinner-border text-primary" role="status">
-                <span class="visually-hidden">Loading...</span>
-            </div>
-        </div>
-        </div>
-    `;
-    modalForm.innerHTML = formContent;
     //Realizar una solicitud AJAX para obtener los datos del menu
     var xhr = new XMLHttpRequest();
     xhr.onreadystatechange = function () {
@@ -1401,17 +1319,6 @@ function updateModalContent(formType, idEmpleado, idEvento) {
     break;
     case "@reincorporarMenu":
     modalTitle.textContent = "Re-Incorporar Menú";
-
-    formContent = `
-        <div class="d-flex justify-content-center">
-        <div class="loading-spinner">
-            <div class="spinner-border text-primary" role="status">
-                <span class="visually-hidden">Loading...</span>
-            </div>
-        </div>
-        </div>
-    `;
-    modalForm.innerHTML = formContent;
     //Realizar una solicitud AJAX para obtener los datos del menu
     var xhr = new XMLHttpRequest();
     xhr.onreadystatechange = function () {
@@ -1505,17 +1412,6 @@ function updateModalContent(formType, idEmpleado, idEvento) {
     case "@verINE":
         modalTitle.textContent = "INE";
         modalHeader.classList.remove('modal-header-warning');
-
-        formContent = `
-        <div class="d-flex justify-content-center">
-        <div class="loading-spinner">
-            <div class="spinner-border text-primary" role="status">
-                <span class="visually-hidden">Loading...</span>
-            </div>
-        </div>
-        </div>
-    `;
-    modalForm.innerHTML = formContent;
         // Obtener los datos de la solicitud con una solicitud AJAX
         var xhr = new XMLHttpRequest();
         xhr.onreadystatechange = function () {
