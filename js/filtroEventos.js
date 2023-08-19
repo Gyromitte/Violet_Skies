@@ -16,6 +16,7 @@ var peticiones = document.getElementById("peticiones");
 var eventosFin = document.getElementById("eventosFin");
 var fechaInicioInput = document.getElementById('fechaInicioInput');
 var fechaFinInput = document.getElementById('fechaFinInput');
+var loadingSpinner = document.getElementById('loadingSpinner');
 
 // Obtener el div que contiene el contenido de la clase row
 var contentRow = document.getElementById('contentRow');
@@ -69,6 +70,9 @@ fechaInicioInput.addEventListener('change', filtrarEventos);
 fechaFinInput.addEventListener('change', filtrarEventos);
 
 function filtrarEventos() {
+    tablaResultados.style.display = 'none';
+    loadingSpinner.style.display = 'block';
+
     var formData = new FormData(form);
     formData.append('depa', estadoSelect.value);
     formData.append('search', searchInput.value.trim());
@@ -78,15 +82,16 @@ function filtrarEventos() {
     var xhr = new XMLHttpRequest();
     xhr.open('POST', '../viewsEventos/verEventos.php', true);
     xhr.onload = function() {
+        loadingSpinner.style.display = 'none';
         if (xhr.status === 200) {
             tablaResultados.innerHTML = xhr.responseText;
+            tablaResultados.style.display = 'block';
         }
     };
     xhr.send(formData);
 
     if (estadoSelect.value === 'GRAFICOS') {
         contentRow.style.display = 'flex';
-        tablaResultados.style.display = 'none';
         searchInput.style.display = 'none';
         searchButton.style.display = 'none';
         fechaInicioInput.style.display = 'none';
@@ -94,7 +99,6 @@ function filtrarEventos() {
         peticionesResult.style.display='none';
     } else if (estadoSelect.value !== 'PETICIONES') {
         contentRow.style.display = 'none';
-        tablaResultados.style.display = 'block';
         searchInput.style.display = 'block'; 
         searchButton.style.display = 'block'; 
         fechaInicioInput.style.display = 'block'; 
