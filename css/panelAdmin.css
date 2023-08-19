@@ -238,7 +238,6 @@ tbody{
 .view-options{
     display: flex;
     flex-direction: row;
-    justify-content: space-between;
 }
 .btn-options{
     background-color: #A595B7;
@@ -267,6 +266,7 @@ tbody{
     color: white;
     border: 2px solid white;
     border-radius: 10px;
+    margin-right: 8px;
 }
 
 #estadoSelect option:hover {
