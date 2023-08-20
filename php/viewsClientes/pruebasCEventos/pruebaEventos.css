@@ -53,6 +53,7 @@ button:hover {
     flex-wrap: wrap;
     justify-content: left;
     padding-left: 3%;
+    flex-direction: column;
 }
 .rounded-div {
     width: 200px;
