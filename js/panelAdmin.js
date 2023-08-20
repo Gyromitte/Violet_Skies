@@ -1709,10 +1709,10 @@ function updateModalContent(formType, idEmpleado, idEvento) {
                   // Actualizar el mensaje de respuesta en el formulario
                   var mensajeDiv = document.getElementById('mensajeDiv');
                   mensajeDiv.innerHTML = xhrDescontinuar.responseText;
-                  if(xhrDescontinuar.responseText == "<div class='alert alert-success'>Cliente eliminado con exito!</div>")
+                  if(xhrDescontinuar.responseText == "<div class='alert alert-success'>Cliente eliminado con exito</div>")
                   {
-                    //Desactivar el boton de descontinuar 
-                    btnDescMenu.disabled = true;
+                    //Desactivar el boton de eliminar
+                    btnElimCli.disabled = true;
                   }
                 } else {
                   console.error("Error en la solicitud AJAX para descontinuar el menú");
@@ -1721,7 +1721,7 @@ function updateModalContent(formType, idEmpleado, idEvento) {
             };
             console.log(idEmpleado);
             // Hacer la solicitud al script PHP para descontinuar el menú y pasar el ID del menú
-            xhrDescontinuar.open("POST", "/php/viewsMenus/descontinuarMenu.php", true);
+            xhrDescontinuar.open("POST", "/php/viewsAdminCli/eliminarCliente.php", true);
             xhrDescontinuar.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
             var parametros = "id=" + encodeURIComponent(idEmpleado);
             xhrDescontinuar.send(parametros);
