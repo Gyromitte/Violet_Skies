@@ -54,8 +54,8 @@
     <!--NavBar-->
     <?php
     session_start();
-    include 'menu.php';
-    include 'salones.php';
+    include_once 'menu.php';
+    include_once 'salones.php';
     $access = 1;
     if (isset($_SESSION["logged_in"])) {
         if ($_SESSION["access"] !== $access) {
@@ -377,53 +377,58 @@
         </div>
     </div>
     <!-- modal para editar eventos -->
-    <div id="editModal" class="modal">
-        <div class="modal-dialog modal-dialog-centered">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title">Editar Evento</h5>
-                    <button type="button" class="close btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    <form id="editForm" method="POST">
-                        <div class="mb-3">
-                            <label class="form-label" for="editTitleInput">Título:</label>
-                            <input type="text" class="form-control" id="editTitleInput" name="editTitleInput" required>
-                        </div>
-                        <div class="mb-3">
-                            <label class="form-label" for="editDateInput">Fecha:</label>
-                            <input type="date" class="form-control" id="editDateInput" name="editDateInput" required>
-                        </div>
-                        <div class="mb-3">
-                            <label class="form-label" for="editSalonInput">Salón:</label>
-                            <input type="text" class="form-control" id="editSalonInput" name="editSalonInput" required>
-                        </div>
-                        <div class="mb-3">
-                            <label class="form-label" for="editMenuInput">Menú del evento:</label>
-                            <select class="form-control" id="editMenuInput" name="editMenuInput" required>
-                                <option value="">Seleccione una comida del menú</option>
-                                <?php
-                                foreach ($menuItems as $menuItem) {
-                                    $selected = ($eventMenuId == $menuItem['ID']) ? "selected" : "";
-echo "Event Menu ID: $eventMenuId, Menu Item ID: {$menuItem['ID']}, Selected: $selected";
-
-                                    $selected = ($eventMenuId == $menuItem['ID']) ? "selected" : "";
-                                    echo '<option value="' . $menuItem['ID'] . '" ' . $selected . '>' . $menuItem['NOMBRE'] . '</option>';
-                                }
-                                ?>
-                            </select>
-                        </div>
-                        <div class="mb-3">
-                            <label class="form-label" for="editInvitadosInput">Invitados:</label>
-                            <input type="text" class="form-control" id="editInvitadosInput" name="editInvitadosInput" required>
-                        </div>
-                        <input type="hidden" name="eventId" id="eventId">
-                        <button type="button" class="btn btn-primary" id="editSaveButton">Guardar Cambios</button>
-                    </form>
+        <div id="editModal" class="modal">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Editar Evento</h5>
+                        <button type="button" class="close btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <form id="editForm" method="POST">
+                            <div class="mb-3">
+                                <label class="form-label" for="editTitleInput">Título:</label>
+                                <input type="text" class="form-control" id="editTitleInput" name="editTitleInput" required>
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label" for="editDateInput">Fecha:</label>
+                                <input type="text" class="form-control datetimepicker" id="editDateInput" name="editDateInput" readonly required>
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label" for="editSalonInput">Salón:</label>
+                                <select class="form-control" id="editSalonInput" name="editSalonInput" required>
+                                    <option value="">Seleccione un salón</option>
+                                    <?php
+                                    foreach ($salonItems as $salonItem) {
+                                        echo '<option value="' . $salonItem['ID'] . '">' . $salonItem['NOMBRE'] .  ' Cupo: '. $salonItem['CUPO'] .'</option>';
+                                    }
+                                    ?>
+                                </select>
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label" for="editMenuInput">Menú del evento:</label>
+                                <select class="form-control" id="editMenuInput" name="editMenuInput" required>
+                                    <option value="">Seleccione una comida del menú</option>
+                                    <?php
+                                    foreach ($menuItems as $menuItem) {
+                                        echo '<option value="' . $menuItem['ID'] . '">' . $menuItem['NOMBRE'] .'</option>';
+                                    }
+                                    ?>
+                                </select>
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label" for="editInvitadosInput">Invitados:</label>
+                                <input type="text" class="form-control" id="editInvitadosInput" name="editInvitadosInput" required>
+                            </div>
+                            <input type="hidden" name="eventId" id="eventId">
+                            <button type="button" class="btn btn-primary" id="editSaveButton">Guardar Cambios</button>
+                        </form>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
+
+
 
 
 
@@ -442,8 +447,8 @@ echo "Event Menu ID: $eventMenuId, Menu Item ID: {$menuItem['ID']}, Selected: $s
 
                 descripcionComidaDiv.innerHTML = descripcion;
             });
-
         });
+        
     </script>
     <script src="filterEvents.js"></script>
     <script src="./pruebaJSEventos.js"></script>

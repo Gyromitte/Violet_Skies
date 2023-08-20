@@ -207,56 +207,105 @@ function openEditModal(event) {
     const salonInput = document.getElementById("editSalonInput");
     const menuInput = document.getElementById("editMenuInput");
     const invitadosInput = document.getElementById("editInvitadosInput");
+    const eventIdInput = document.getElementById("eventId");
 
+    eventIdInput.value = event.ID_EVENTO;
     titleInput.value = event['NOMBRE DEL EVENTO'];
     dateInput.value = event['FECHA DEL EVENTO'];
-    salonInput.value = event['NOMBRE DEL SALÓN'];
-    menuInput.value = event['MENÚ'];
+    salonInput.value = event['ID_SALON']; 
+    menuInput.value = event['ID_MENU']; 
     invitadosInput.value = event['INVITADOS'];
 
     modal.style.display = "block";
 
-    // Agregar escuchador de eventos para guardar los detalles editados
-    const saveButton = document.getElementById("editSaveButton");
-    saveButton.addEventListener("click", () => {
-        // Reunir los datos editados y enviarlos para su procesamiento
-        const editedData = {
-            title: titleInput.value,
-            date: dateInput.value,
-            salon: salonInput.value,
-            menu: menuInput.value,
-            invitados: invitadosInput.value
-        };
-        // Enviar los datos editados para su procesamiento
-        saveEditedEvent(event.ID_EVENTO, editedData);
-        modal.style.display = "none";
+    const oneWeekLater = new Date();
+    oneWeekLater.setDate(oneWeekLater.getDate() + 6);
+
+    $(dateInput).datetimepicker({
+        format: 'Y-m-d H:i:s', // Formato deseado para la fecha y hora
+        step: 15, // Intervalo de minutos para seleccionar la hora
+        minDate: oneWeekLater.toISOString().slice(0, 19).replace('T', ' '), // Fecha mínima: una semana después de la actual
+        allowTimes: [
+            '05:00','06:00','07:00','08:00', '09:00', '10:00', '11:00', '12:00', '13:00', // Ejemplo de horas permitidas
+            '14:00', '15:00', '16:00', '17:00', '18:00', '19:00', '20:00', '21:00','22:00' // Puedes agregar más horas aquí
+        ]
     });
 }
 
-function saveEditedEvent(eventId, editedData) {
-    // Preparar los datos para enviar
-    const formData = new FormData();
-    formData.append("eventId", eventId);
-    for (const key in editedData) {
-        formData.append(key, editedData[key]);
-    }
 
-    // Enviar los datos al servidor
-    fetch("editEvent.php", {
-        method: "POST",
-        body: formData
+// Función para cerrar el modal de edición
+function closeEditModal() {
+    const modal = document.getElementById("editModal");
+
+
+    modal.style.display = "none";
+}
+
+// Llama a la función closeEditModal cuando se hace clic en el botón de cierre del modal
+const closeModalButton = document.querySelector("#editModal .btn-close");
+closeModalButton.addEventListener("click", closeEditModal);
+
+$('#editSaveButton').click(function() {
+    const eventId = $('#eventId').val();
+    const editTitle = $('#editTitleInput').val();
+    const editSalon = $('#editSalonInput').val();
+    const editMenu = $('#editMenuInput').val();
+    const editInvitados = parseInt($('#editInvitadosInput').val());
+    const editDate = $('#editDateInput').val();
+    
+    console.log("Event ID:", eventId);
+    console.log("Edited Title:", editTitle);
+    console.log("Edited Salon:", editSalon);
+    console.log("Edited Menu:", editMenu);
+    console.log("Edited Invitados:", editInvitados);
+    console.log("Edited Date:", editDate);
+
+    // Combine la fecha y la hora en el formato deseado si es necesario
+    // const fechaHora = editDate + ' ' + editTime + ':00';
+
+    const editedData = new URLSearchParams();
+    editedData.append("eventId", eventId);
+    editedData.append("editTitleInput", editTitle);
+    editedData.append("editSalonInput", editSalon);
+    editedData.append("editMenuInput", editMenu);
+    editedData.append("editInvitadosInput", editInvitados);
+    editedData.append("editDateInput", editDate);
+
+    fetch('updateEventos.php', {
+        method: 'POST',
+        body: editedData
     })
-    .then(response => response.text())
-    .then(message => {
-        // Manejar el mensaje de respuesta, por ejemplo, mostrar un mensaje de éxito
-        console.log(message);
-        // Actualizar las tarjetas de eventos después de la edición
-        filterEvents("PENDIENTE");
+    .then(response => {
+        return response.json();
+    })
+    .then(data => {
+        console.log('Server Response:', data);
+        
+        if (data && data.cupoMaximoExcedido) {
+            console.error(data.mensaje);
+            alert(data.mensaje);
+            console.log(mensaje);
+        } else if (data && data.cupoMinimoNoAlcanzado) {
+            console.error(data.mensaje);
+            alert(data.mensaje); 
+            console.log(mensaje);
+        } else if (data && data.error) {
+            console.error(data.mensaje);
+            alert(data.mensaje);
+            console.log(mensaje);
+
+        } else {
+            console.log("Evento editado exitosamente:", data.mensaje);
+            alert("Evento editado exitosamente: " + data.mensaje); 
+            filterEvents("PENDIENTE");
+        }
     })
     .catch(error => {
-        console.error("Error al editar el evento:", error);
+        console.error('Error en la solicitud:', error);
     });
-}
+
+});
+
 
 
 console.log("Estado filtrado:", state);

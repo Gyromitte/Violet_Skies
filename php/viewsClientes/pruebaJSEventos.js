@@ -58,7 +58,7 @@ $(window).on('load', function() {
                 }, 3000);
             } else if (jsonData && jsonData.fechaOcupada) {
                 const msgDiv = document.getElementById('msgDiv');
-                const errorMessage = "Lo siento, esta fecha ya está apartada.";
+                const errorMessage = "Lo siento, esta fecha ya está apartada<br>para este salón.";
                 msgDiv.innerHTML = `<div style="text-align:center;" class="alert alert-danger">${errorMessage}</div>`;
                 setTimeout(() => {
                     msgDiv.innerHTML = ''; 
@@ -89,8 +89,8 @@ $(window).on('load', function() {
         } catch (error) {
             console.error('Error al analizar la respuesta JSON:', error);
             // Si ocurre un error al analizar la respuesta JSON, muestra un mensaje de error
-            const msgDiv = document.getElementById('infoAdvertencia');
-            msgDiv.innerHTML = `<div style="text-align:center;" class="alert alert-danger">Lo siento, esta fecha ya está apartada.</div>`;
+            const msgDiv = document.getElementById('msgDiv');
+            msgDiv.innerHTML = `<div style="text-align:center;" class="alert alert-danger">Lo siento, esta fecha ya está apartada <br>para este salón.</div>`;
         }      
     })
       .catch(error => console.error('Error en la solicitud:', error));
