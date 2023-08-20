@@ -50,18 +50,22 @@ $tabla = $conexion->seleccionar($consulta);
             echo "<td> $registro->EVENTOSF </td>";
             echo "<td> $registro->EVENTOSC </td>";
             
+            
         // Generar el botón de opciones con el menú desplegable
         echo "<td class='text-center'>";
         echo '<div class="dropdown">';
         echo '<button class="btn btn-secondary dropdown-toggle custom-dropdown" type="button" data-bs-toggle="dropdown" aria-expanded="false">';
         echo '</button>';
         echo '<ul class="dropdown-menu custom-drop-menu">';
-        echo '<li><a class="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#mainModal" data-bs-whatever="@editarMenu" 
+        echo '<li><a class="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#mainModal" data-bs-whatever="@historialCliente" 
+        data-id="' . $registro->ID . '">
+        <i class="fa-solid fa-clock-rotate-left me-2" style="color: #ffffff;"></i>Historial</a></li>';
+        echo '<li><a class="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#mainModal" data-bs-whatever="@editarCliente" 
         data-id="' . $registro->ID . '">
         <i class="fa-solid fa-pencil me-2" style="color: #ffffff;"></i>Editar</a></li>';
-        echo '<li><a class="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#mainModal" data-bs-whatever="@descontinuarMenu" 
+        echo '<li><a class="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#mainModal" data-bs-whatever="@eliminarCliente" 
         data-id="' . $registro->ID . '">
-        <i class="fa-solid fa-circle-minus me-2" style="color: #ffffff;"></i>Descontinuar</a></li>';
+        <i class="fa-solid fa-user-slash me-2" style="color: #ffffff;"></i>Eliminar</a></li>';
         echo '</ul>';
         echo '</div>';
         echo "</td>";
