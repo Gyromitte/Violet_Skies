@@ -912,7 +912,7 @@ function updateModalContent(formType, idEmpleado, idEvento) {
     <table align='center' cellspacing="20" cellpadding="5">
       <tr>
         <td><h6>Fecha</h6></td>
-        <td><input class="form-control" type="text" placeholder="Fecha y hora" id="fechaEvento" value="${detallesEvento.F_EVENTO}" disabled></td>
+        <td><input class="form-control" type="datetime-local" placeholder="Fecha y hora" id="fechaEvento" value="${detallesEvento.F_EVENTO}" disabled></td>
       </tr>
       <tr>
         <td><h6>Salón</h6></td>
@@ -960,24 +960,58 @@ function updateModalContent(formType, idEmpleado, idEvento) {
             `;                   
             
             modalForm.innerHTML = formContent;
-            $(document).ready(function() {
-              // Obtenemos la fecha actual
-              var currentDate = new Date();
-            
-              // Calculamos la fecha 1 semana después de la actual
-              var oneWeekLater = new Date();
-              oneWeekLater.setDate(currentDate.getDate() + 6);
-            
-              $('#fechaEvento').datetimepicker({
-                format: 'Y-m-d H:i:s', // Formato deseado para la fecha y hora
-                step: 15, // Intervalo de minutos para seleccionar la hora
-                minDate: oneWeekLater.toISOString().slice(0, 19).replace('T', ' '), // Fecha mínima: una semana después de la actual
-                allowTimes: [
-                  '05:00','06:00','07:00','08:00', '09:00', '10:00', '11:00', '12:00', '13:00',
-                  '14:00', '15:00', '16:00', '17:00', '18:00', '19:00', '20:00', '21:00','22:00' 
-                ]
+            function obtenerFechas() {
+              return new Promise(function(resolve, reject) {
+                var xhr = new XMLHttpRequest();
+                xhr.open('POST', '../viewsEventos/eventoFecha.php', true);
+                xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+                xhr.onreadystatechange = function() {
+                  if (xhr.readyState === 4) {
+                    if (xhr.status === 200) {
+                      var fechas = JSON.parse(xhr.responseText);
+                      resolve(fechas);
+                    } else {
+                      reject(xhr.status);
+                    }
+                  }
+                };
+                xhr.send();
               });
-            });
+            }
+            
+            obtenerFechas()
+              .then(function(fechas) {
+                var fechasString = JSON.stringify(fechas);
+            
+                var fechasObjeto = JSON.parse(fechasString);
+                var inputFecha = document.getElementById("fechaEvento");
+                var fechaActual = new Date();
+                var unaSemanaDespues = new Date(fechaActual.getTime() + 7 * 24 * 60 * 60 * 1000);
+                var fechaActualFormateada = fechaActual.toISOString().slice(0, 16).replace('T', ' ');
+                var unaSemanaDespuesFormateada = unaSemanaDespues.toISOString().slice(0, 16).replace('T', ' ');
+                inputFecha.setAttribute("min", unaSemanaDespuesFormateada);
+            
+                flatpickr(inputFecha, {
+                  disable: [
+                    function(date) {
+                      return date < unaSemanaDespues;
+                    },
+                    // Agrega las fechas directamente desde el array obtenido de la respuesta
+                    ...fechasObjeto.map(function(fecha) {
+                      return new Date(fecha);
+                    })
+                  ],
+                  enableTime: true,
+                  dateFormat: "Y-m-d H:i"
+                });
+              })
+              .catch(function(status) {
+                console.error('Error en la solicitud: ' + status);
+              });
+            
+            
+
+
 
             var meserosRegistrados = document.getElementById('meserosRegistrados');
             meserosRegistrados.addEventListener('click', function() {
@@ -1043,10 +1077,6 @@ function updateModalContent(formType, idEmpleado, idEvento) {
               var cocinaNecesarios;
               var cupoSalon;
 
-
-
-              
-
               if (invitados === 10) {
                 meserosNecesarios = 2;
                 cocinaNecesarios = 5;
@@ -1064,23 +1094,16 @@ function updateModalContent(formType, idEmpleado, idEvento) {
                 return;
               }
 
-
-
-
-
               var xhrS = new XMLHttpRequest();
               xhrS.open('POST', '../viewsEventos/getSalon.php', true);
               xhrS.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
               xhrS.onreadystatechange = function() {
                 if (xhrS.readyState === 4 && xhrS.status === 200) {
                   var response = JSON.parse(xhrS.responseText);
-                  console.log(response.CUPO);
-                  console.log(response.MINIMO);
                   cupoSalon = parseInt(response.CUPO);
                   minSalon = parseInt(response.MINIMO);
                   if(cupoSalon < invitados || minSalon > invitados) {
                     alert("El salón tiene un cupo de al menos " + minSalon + " hasta " + cupoSalon + " invitados");
-                    console.log('sssss');
                   } else {
                   var xhrGuardarCambios = new XMLHttpRequest();
                   xhrGuardarCambios.onreadystatechange = function(response) {
