@@ -650,6 +650,8 @@
     <script src="/js/datosAdmin.js"></script>
     <script src="/js/buscarEmpleado.js"></script>
     <script src="/js/panelMenu/buscarMenu.js"></script>
+    <script src="/js/panelAdminCli/buscarCliente.js"></script>
+    
 
     <script src="/js/panelAdminCli/switchBar.js"></script>
 </body>

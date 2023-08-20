@@ -134,7 +134,7 @@
                                     <!-- Campos del primer paso -->
                                     <div class="form-group mb-4">
                                         <label for="fecha_evento">Fecha del evento:</label>
-                                        <input autocomplete="off" type="date" class="form-control abbb" name="fecha" id="selected-date" readonly="" required="">
+                                        <input autocomplete="off" type="date" class="form-control abbb" name="fecha" id="selected-date" readOnly="true" required="" onclick="this.blur()">
                                     </div>
                                     <div class="form-group mb-4">
                                         <label for="hora_evento">Hora del evento: </label>
