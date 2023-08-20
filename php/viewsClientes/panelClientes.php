@@ -34,7 +34,6 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&display=swap" rel="stylesheet">
     <script src="https://kit.fontawesome.com/b60c246061.js" crossorigin="anonymous"></script>
-    <script src="filterEvents.js" async defer></script>
 
     <!--Libreria full calendar-->
     <script src="/fullCalendar/fullcalendar.js"></script>
@@ -129,18 +128,19 @@
                     <div class="container d-flex flex-column align-items-center">
                         <!-- Formulario de pasos o pestañas -->
                         <div class="step-form">
-                            <form id="evento-form" method="post">
+                            <form id="evento-form" method="post" action="./pruebaPHPEventos.php">
                                 <!-- Contenido del primer paso (Fecha del evento e invitados) -->
                                 <div class="step step-1">
                                     <!-- Campos del primer paso -->
                                     <div class="form-group mb-4">
                                         <label for="fecha_evento">Fecha del evento:</label>
-                                        <input autocomplete="off" type="date" class="form-control abbb" name="fecha" id="selected-date" readonly="" required="">
+                                        <input autocomplete="off" type="date" class="form-control abbb" name="fecha" id="selected-date" readOnly="true" required="" onclick="this.blur()">
                                     </div>
                                     <div class="form-group mb-4">
                                         <label for="hora_evento">Hora del evento: </label>
                                         <input type="time" id="hora_evento" class="form-control" name="hora_evento" placeholder="HH:MM AM/PM">
                                     </div>
+                                    
                                     <!--Cantidad de invitados-->
                                     <div class="form-group mb-4">
                                         <label for="cantidad_invitados">Cantidad de invitados: </label>
@@ -214,6 +214,7 @@
 
                                 <!--Paso final (Confirmacion)-->
                                 <div class="step step-5 align-text-center mb-3">
+                                    <div id='msgDiv'></div>
                                     <p>Fecha del evento: <span id="confirm-fecha"></span></p>
                                     <p>Hora del evento: <span id="confirm-hora"></span></p>
                                     <p>Cantidad de invitados: <span id="confirm-invitados"></span></p>
@@ -247,7 +248,7 @@
                     Mis eventos
                     <i class="fa-solid fa-calendar-days" style="color: #ffffff;"></i>
                 </h3>
-                <div style=" width:fit-content;" class="custom-card rounded-5">
+                <div style=" width:fit-content; background-color:#381c47;" class="rounded-3 mb-2">
                     <h3 style=" padding-right:5%; padding-left:5%; text-align: center;">Aquí puedes ver tus eventos.</h3>
                     <p style=" padding-right:5%; padding-left:5%; text-align: center;"><b>Si deseas realizar cambios debes contactarte con nosotros para aclarar detalles.</b></p>
                 </div>
@@ -375,6 +376,62 @@
             </div>
         </div>
     </div>
+    <!-- modal para editar eventos -->
+        <div id="editModal" class="modal">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Editar Evento</h5>
+                        <button type="button" class="close btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <form id="editForm" method="POST">
+                            <div class="mb-3">
+                                <label class="form-label" for="editTitleInput">Título:</label>
+                                <input type="text" class="form-control" id="editTitleInput" name="editTitleInput" required>
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label" for="editDateInput">Fecha:</label>
+                                <input type="text" class="form-control datetimepicker" id="editDateInput" name="editDateInput" readonly required>
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label" for="editSalonInput">Salón:</label>
+                                <select class="form-control" id="editSalonInput" name="editSalonInput" required>
+                                    <option value="">Seleccione un salón</option>
+                                    <?php
+                                    foreach ($salonItems as $salonItem) {
+                                        echo '<option value="' . $salonItem['ID'] . '">' . $salonItem['NOMBRE'] .  ' Cupo: '. $salonItem['CUPO'] .'</option>';
+                                    }
+                                    ?>
+                                </select>
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label" for="editMenuInput">Menú del evento:</label>
+                                <select class="form-control" id="editMenuInput" name="editMenuInput" required>
+                                    <option value="">Seleccione una comida del menú</option>
+                                    <?php
+                                    foreach ($menuItems as $menuItem) {
+                                        echo '<option value="' . $menuItem['ID'] . '">' . $menuItem['NOMBRE'] .'</option>';
+                                    }
+                                    ?>
+                                </select>
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label" for="editInvitadosInput">Invitados:</label>
+                                <input type="text" class="form-control" id="editInvitadosInput" name="editInvitadosInput" required>
+                            </div>
+                            <input type="hidden" name="eventId" id="eventId">
+                            <button type="button" class="btn btn-primary" id="editSaveButton">Guardar Cambios</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+
+
+
 
     <!--Scripts que necesitan ejecutarse hasta el final-->
     <script>
@@ -390,9 +447,11 @@
 
                 descripcionComidaDiv.innerHTML = descripcion;
             });
-
         });
+        
     </script>
+    <script src="filterEvents.js"></script>
+    <script src="./pruebaJSEventos.js"></script>
     <script src="/js/dinamicTable.js"></script>
     <script src="/bootstrap/js/bootstrap.min.js"></script>
     <script src="/bootstrap/js/bootstrap.bundle.min.js"></script>
@@ -400,7 +459,6 @@
     <!-- Agrega las siguientes líneas para cargar jQuery, el complemento datetimepicker y tu propio script.js -->
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="/js/panelAdmin.js"></script>
-    <script src="./pruebaJSEventos.js"></script>
     <script src="/js/datosAdmin.js"></script>
     <!-- Agrega la siguiente línea para cargar el complemento datetimepicker -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-datetimepicker/2.5.20/jquery.datetimepicker.full.min.js"></script>
@@ -419,6 +477,7 @@
         minuteIncrement: 60,       // Incremento de minutos a 60 (solo horas)
         minTime: "06:00",          // Hora mínima permitida (6:00 AM)
         maxTime: "22:00",          // Hora máxima permitida (10:00 PM)
+        disableMobile: "true"
         
         });
     </script>
