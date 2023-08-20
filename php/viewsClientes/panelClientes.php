@@ -298,6 +298,13 @@
                     <i class="fa-brands fa-whatsapp me-1" style="color: #ffffff;"></i><b>WhatsApp</b>
                 </a>
             </div>
+                    <div class='d-flex justify-content-center'>
+                        <div class='loading-spinner' id='loadingSpinner'>
+                            <div class='spinner-border text-primary' role='status'>
+                                <span class='visually-hidden'>Loading...</span>
+                            </div>
+                        </div>
+                    </div>
 
             <div id="event-cards" class="card-container">
                 <!-- Aquí se agregarán las tarjetas de eventos -->

@@ -1,4 +1,6 @@
+var loadingSpinner = document.getElementById('loadingSpinner');
 const eventCardsContainer = document.getElementById("event-cards");
+
 
 const salonImageUrls = {
     1: '/images/salones/salon2.jpg',
@@ -113,11 +115,14 @@ document.querySelector(".close").addEventListener("click", () => {
 
 function filterEvents(state) {
     eventCardsContainer.innerHTML = "";
+    eventCardsContainer.style.display = 'none';
+    loadingSpinner.style.display = 'block';
 
     fetch(`get_events.php?estado=${state}`)
         .then(response => response.json())
         .then(events => {
             if (events.length === 0) {
+                loadingSpinner.style.display = 'none';
                 const noEventsMessage = document.createElement("p");
                 noEventsMessage.textContent = "No hay eventos para mostrar";
                 noEventsMessage.style.fontSize = "80px"; 
@@ -125,10 +130,13 @@ function filterEvents(state) {
                 noEventsMessage.style.marginTop = "50px";
                 noEventsMessage.style.alignContent= "center";
                 eventCardsContainer.appendChild(noEventsMessage);
+                eventCardsContainer.style.display = 'block';
             } else {
                 events.forEach(event => {
+                    loadingSpinner.style.display = 'none';
                     const card = createEventCard(event);
                     eventCardsContainer.appendChild(card);
+                    eventCardsContainer.style.display = 'block';
                 });
             }
         })
