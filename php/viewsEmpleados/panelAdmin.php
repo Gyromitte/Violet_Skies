@@ -391,14 +391,14 @@
             </div> 
         </div>
 
-        <div class='d-flex justify-content-center'>
+            <!--Informacion de la tabla-->
+            <div class='d-flex justify-content-center'>
             <div class='loading-spinner' id='loadingSpinner'>
                 <div class='spinner-border text-primary' role='status'>
                     <span class='visually-hidden'>Loading...</span>
                 </div>
             </div>
             </div>
-            <!--Informacion de la tabla-->
             <h3 id="table-info"></h3>
             <!--Container para tablas-->
             <div class="cont-table">
