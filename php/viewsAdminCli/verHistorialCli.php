@@ -6,9 +6,11 @@ $conexion->conectarBD();
 // Obtener el ID del empleado desde la solicitud (en este caso, a través de la variable $_GET)
 $employeeId = $_GET['id'];
 
-// Realizar la consulta para obtener el historial de eventos del empleado según el ID
-$consulta = "SELECT ev.NAME_EVENTO, ev.FECHA_DEL_EVENTO, ev.ID_EVENTO FROM EVENTO_EMPLEADO_FINALIZADOS AS ev
-JOIN EMPLEADOS AS emp ON ev.ID_EMPLEADO = emp.ID WHERE emp.CUENTA = $employeeId";
+// Realizar la consulta para obtener el historial de evenos del cliente segun el ID
+$consulta = "SELECT ID, NOMBRE, F_EVENTO, ESTADO
+FROM EVENTO
+WHERE CLIENTE = $employeeId AND (ESTADO = 'FINALIZADO' OR ESTADO = 'CANCELADO');
+";
 
 $tabla = $conexion->seleccionar($consulta);
 
@@ -16,8 +18,8 @@ $tabla = $conexion->seleccionar($consulta);
 $numEventos = count($tabla);
 
 if($numEventos > 0){
-    // Mostrar el número de eventos en los que ha participado el empleado
-    echo '<h5>Eventos en los que ha participado: ' . $numEventos . '</h5>';
+    // Mostrar el número de eventos relacionados al cliente
+    echo '<h5>Eventos relacionados al cliente: ' . $numEventos . '</h5>';
 }
 
 
@@ -29,6 +31,7 @@ if (is_countable($tabla) && count($tabla) > 0) {
   echo '<tr>';
   echo '<th>Nombre del Evento</th>';
   echo '<th>Fecha del Evento</th>';
+  echo '<th>Estado</th>';
   echo '<th></th>';
   echo '</tr>';
   echo '</thead>';
@@ -36,13 +39,14 @@ if (is_countable($tabla) && count($tabla) > 0) {
 
   foreach ($tabla as $evento) {
     echo "<tr>";
-    echo "<td> $evento->NAME_EVENTO </td>";
-    echo "<td> $evento->FECHA_DEL_EVENTO </td>";
+    echo "<td> $evento->NOMBRE</td>";
+    echo "<td> $evento->F_EVENTO </td>";
+    echo "<td> $evento->ESTADO </td>";
     echo "<td>";
     echo '<div class="dropdown">';
     echo "<button class='btn-ver-historial btn-secondary custom-ver-historial' 
     type='button'
-    data-bs-whatever='@verDetallesEvento' data-event-id='$evento->ID_EVENTO' >";
+    data-bs-whatever='@verDetallesEvento' data-event-id='$evento->ID' >";
     echo '<i class="fa-solid fa-eye"></i>';
     echo '</button>';
 
@@ -55,7 +59,7 @@ if (is_countable($tabla) && count($tabla) > 0) {
   echo '</table>';
 } else {
   // No se encontraron eventos para el empleado con el ID proporcionado
-  echo '<p>Este empleado aún no ha participado en ningún evento</p>';
+  echo '<p>Este cliente no tiene precedentes</p>';
 }
 
 $conexion->desconectarBD();

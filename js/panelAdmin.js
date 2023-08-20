@@ -1788,7 +1788,7 @@ function updateModalContent(formType, idEmpleado, idEvento) {
           }
         };
         // Hacer la segunda solicitud al script PHP para obtener el historial
-        xhrHistorial.open("GET", "verHistorial.php?id=" + idEmpleado, true);
+        xhrHistorial.open("GET", "/php/viewsAdminCli/verHistorialCli.php?id=" + idEmpleado, true);
         xhrHistorial.send();
         
         // Esperar a que el modal cargue
