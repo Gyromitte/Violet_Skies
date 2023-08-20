@@ -258,16 +258,16 @@ function updateModalContent(formType, idEmpleado, idEvento) {
       });
       break;
       case "@re-incorporarEmpleado":
-        modalTitle.textContent = "Re-incorporar a un empleado";
+        modalTitle.textContent = "Re-incorporar a un usuario";
         modalHeader.classList.remove('modal-header-warning');
         
         formContent = `
           <div id="mensajeDiv" method="POST"></div>
           <form id="formularioEmpleado">
             <div class="mb-3">
-              Aqui puedes volver a integrar al sistema a un empleado que fue dado de baja.
+              Aqui puedes volver a integrar al sistema a un usuario que fue dado de baja.
               <br>
-              Ingresa el correo electronico que pertenecia a la cuenta del empleado:
+              Ingresa el correo electronico que pertenecia a la cuenta del usuario:
             </div>
             <div class="mb-3">
               <label class="control-label">E-mail</label>
