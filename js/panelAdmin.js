@@ -1610,6 +1610,8 @@ function updateModalContent(formType, idEmpleado, idEvento) {
             // Obtener los valores del formulario
             var nombre = formEditarCliente.elements.nombre.value;
             var telefono = formEditarCliente.elements.telefono.value;
+            var ap_paterno = formEditarCliente.elements.ap_paterno.value;
+            var ap_materno = formEditarCliente.elements.ap_materno.value;
 
             // Realizar una nueva solicitud AJAX para actualizar los datos
             var updateXHR = new XMLHttpRequest();
@@ -1626,10 +1628,10 @@ function updateModalContent(formType, idEmpleado, idEvento) {
               }
             };
             // Hacer la solicitud al script PHP para editar al empleado y pasar los datos actualizados
-            updateXHR.open("POST", "/php/viewsMenus/editarMenu.php", true);
+            updateXHR.open("POST", "/php/viewsAdminCli/editarCliente.php", true);
             updateXHR.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-            updateXHR.send(`id=${idEmpleado}&tipoMenu=${tipoMenu}
-            &nombre=${nombre}&descripcion=${descripcion}`);
+            updateXHR.send(`id=${idEmpleado}&telefono=${telefono}
+            &nombre=${nombre}&ap_paterno=${ap_paterno}&ap_materno=${ap_materno}`);
             //Ver cual es la tabla activa para refrescar cualquier cambio
             checkCurrentTable(currentTable);
           });
