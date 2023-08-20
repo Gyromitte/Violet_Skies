@@ -1544,7 +1544,106 @@ function updateModalContent(formType, idEmpleado, idEvento) {
           // Hacer la solicitud al script PHP y pasar el ID de la solicitud
           xhr.open("GET", "obtenerSolicitud.php?id=" + idEmpleado, true);
           xhr.send();
-      break;  
+      break;
+      case "@editarCliente":
+    modalTitle.textContent = "Editar datos del cliente";
+    modalHeader.classList.remove('modal-header-warning');
+    
+    formContent = `
+        <div class="d-flex justify-content-center">
+        <div class="loading-spinner">
+            <div class="spinner-border text-primary" role="status">
+                <span class="visually-hidden">Loading...</span>
+            </div>
+        </div>
+        </div>
+    `;
+
+    modalForm.innerHTML = formContent;
+    //Realizar una solicitud AJAX para obtener los datos del cliente
+    var xhr = new XMLHttpRequest();
+    xhr.onreadystatechange = function () {
+      if (xhr.readyState === XMLHttpRequest.DONE) {
+        if (xhr.status === 200) {
+          //Parsear la respuesta JSON
+          var cliente = JSON.parse(xhr.responseText);
+          //Actualizar el contenido del formulario con los datos obtenidos
+          formContent = `
+            <form id="formularioCliente">
+              <div id="mensajeDiv" method="POST"></div> <!-- Div para mensajes de respuesta -->
+              <div class="mb-3">
+                <label class="control-label">Nombre: </label>
+                <input type="text" name="nombre" placeholder="Nombre del cliente: " class="form-control" maxlength="45" required
+                value='${cliente.NOMBRE}'>
+              </div>
+              <div class="mb-3">
+              <label class="control-label">Ap. Paterno: </label>
+              <input type="text" name="ap_paterno" placeholder="Ap. Paterno: " class="form-control" maxlength="45" required
+              value='${cliente.AP_PATERNO}'>
+              </div>
+              <div class="mb-3">
+              <label class="control-label">Ap. Materno: </label>
+              <input type="text" name="ap_materno" placeholder="Ap. Materno: " class="form-control" maxlength="45" required
+              value='${cliente.AP_MATERNO}'>
+              </div>
+              <h5>Correo: </h5>
+              <h6 class="mb-3">${cliente.CORREO}</h6>
+              <div class="mb-3">
+              <label class="control-label">Telefono: </label>
+              <input type="text" name="telefono" placeholder="Telefono: " class="form-control" maxlength="15" required
+              value='${cliente.TELEFONO}'>
+              </div>
+              <div class="d-flex justify-content-center">
+                  <button type="submit" class="btn btn-primary btn-modal me-2"><i class="fa-solid fa-pencil me-2" style="color: #ffffff;"></i>Modificar</button>
+                  <button type="button" class="btn btn-primary btn-modal" data-bs-dismiss="modal">Cancelar</button>
+              </div>
+            </form>
+              `;
+          // Asignar el contenido al formulario del modal
+          modalForm.innerHTML = formContent;
+          // Obtener el formulario después de haberlo asignado al DOM
+          var formEditarCliente = document.getElementById('formularioCliente');
+          // Agregar evento de envío al formulario de edición
+          formEditarCliente.addEventListener('submit', function (event) {
+            event.preventDefault(); // Evitar que el formulario se envíe por defecto
+
+            // Obtener los valores del formulario
+            var nombre = formEditarCliente.elements.nombre.value;
+            var telefono = formEditarCliente.elements.telefono.value;
+
+            // Realizar una nueva solicitud AJAX para actualizar los datos
+            var updateXHR = new XMLHttpRequest();
+            updateXHR.onreadystatechange = function () {
+              if (updateXHR.readyState === XMLHttpRequest.DONE) {
+                if (updateXHR.status === 200) {
+                  // Estilos al div de mensajes según la respuesta
+                  var respuesta = updateXHR.responseText;
+                  document.getElementById('mensajeDiv').innerHTML = respuesta;
+
+                } else {
+                  console.error("Error en la solicitud AJAX de actualización");
+                }
+              }
+            };
+            // Hacer la solicitud al script PHP para editar al empleado y pasar los datos actualizados
+            updateXHR.open("POST", "/php/viewsMenus/editarMenu.php", true);
+            updateXHR.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+            updateXHR.send(`id=${idEmpleado}&tipoMenu=${tipoMenu}
+            &nombre=${nombre}&descripcion=${descripcion}`);
+            //Ver cual es la tabla activa para refrescar cualquier cambio
+            checkCurrentTable(currentTable);
+          });
+        } else {
+          console.error("Error en la solicitud AJAX");
+        }
+      }
+    };
+    //Hacer la solicitud al script PHP y pasar el ID del empleado
+    xhr.open("GET", "/php/viewsAdminCli/obtenerCliente.php?id=" + idEmpleado, true);
+    xhr.send();
+    //Ver cual es la tabla activa para refrescar cualquier cambio
+    checkCurrentTable(currentTable);
+    break;  
     }
   }
   
