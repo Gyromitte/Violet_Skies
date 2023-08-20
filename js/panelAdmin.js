@@ -1738,6 +1738,88 @@ function updateModalContent(formType, idEmpleado, idEvento) {
     //Ver cual es la tabla activa para refrescar cualquier cambio
     checkCurrentTable(currentTable);
     break;  
+    case "@historialCliente":
+      modalTitle.textContent = "Historial del cliente";
+
+      formContent = `
+        <div class="d-flex justify-content-center">
+        <div class="loading-spinner">
+            <div class="spinner-border text-primary" role="status">
+                <span class="visually-hidden">Loading...</span>
+            </div>
+        </div>
+        </div>
+    `;
+    modalForm.innerHTML = formContent;
+      // Obtener los datos del empleado con una solicitud AJAX
+      var xhr = new XMLHttpRequest();
+      xhr.onreadystatechange = function () {
+        if (xhr.readyState === XMLHttpRequest.DONE) {
+          if (xhr.status === 200) {
+            // Parsear la respuesta JSON del primer AJAX
+            var cliente = JSON.parse(xhr.responseText);
+            // Actualizar el contenido del formulario con los datos obtenidos
+            formContent = `
+              <form">
+                <div id="mensajeDiv" method="POST"></div>
+                <h5>Cliente:  </h5>
+                <h6 class="mb-3">${cliente.NOMBRE} ${cliente.AP_PATERNO} ${cliente.AP_MATERNO}</h6> 
+                <!-- Div para mostrar el historial de eventos -->
+                <div id="historialDiv"></div>
+                <div class="d-flex justify-content-center">
+                  <button type="button" class="btn btn-primary btn-modal" data-bs-dismiss="modal">Cerrar</button>
+                </div>
+              </form>
+            `;
+        // Asignar el contenido al formulario del modal
+        modalForm.innerHTML = formContent;
+
+        // Realizar la segunda solicitud AJAX para obtener los datos del empleado
+        var xhrHistorial = new XMLHttpRequest();
+        xhrHistorial.onreadystatechange = function () {
+          if (xhrHistorial.readyState === XMLHttpRequest.DONE) {
+            if (xhrHistorial.status === 200) {
+              // No es necesario parsear la respuesta como JSON, ya que es HTML
+              // Mostrar la tabla con el historial en el div correspondiente
+              document.getElementById("historialDiv").innerHTML = xhrHistorial.responseText;
+            } else {
+              console.error("Error en la solicitud AJAX para obtener el historial");
+            }
+          }
+        };
+        // Hacer la segunda solicitud al script PHP para obtener el historial
+        xhrHistorial.open("GET", "verHistorial.php?id=" + idEmpleado, true);
+        xhrHistorial.send();
+        
+        // Esperar a que el modal cargue
+        setTimeout(function () {
+          // Conseguir todos los botones para ver el historial
+          var botonesHistorial = document.querySelectorAll('.btn-ver-historial');
+          // Agregar el event listener a cada botón
+          botonesHistorial.forEach(function (btn) {
+            // Obtener el tipo de formulario correspondiente al botón
+            var formType = btn.getAttribute("data-bs-whatever");
+            var idEmpleado = btn.getAttribute("data-id");
+            var idEvento = btn.getAttribute("data-event-id");
+
+            // Agregar el event listener al botón
+            btn.addEventListener("click", function () {
+              // Código a ejecutar cuando se hace clic en el botón
+              console.log("Se hizo clic en el botón");
+              updateModalContent(formType, idEmpleado, idEvento);
+            });
+          });
+        }, 700);
+      } else {
+        console.error("Error en la solicitud AJAX");
+      }
+    }
+  };
+  //console.log(idEmpleado);
+  // Hacer la solicitud al script PHP y pasar el ID del empleado
+  xhr.open("GET", "/php/viewsAdminCli/obtenerCliente.php?id=" + idEmpleado, true);
+  xhr.send();
+  break
     }
   }
   
