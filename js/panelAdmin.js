@@ -125,7 +125,22 @@ function checkCurrentTable(currentTable) {
       setTimeout(function () {
         btnDescontinuado.click();
       }, 300);
-      break;     
+      break;  
+    case 'verEve3':
+      setTimeout(function () {
+        btnEve3.click();
+      }, 300);
+      break;
+    case 'verEve1':
+      setTimeout(function () {
+        btnEve1.click();
+      }, 300);
+      break;  
+    case 'verSinPrece':
+      setTimeout(function () {
+        btnSinPrece.click();
+      }, 300);
+      break;    
   }
 }
 //Obtener botones para refrescar vistas
@@ -133,6 +148,10 @@ var btnCocineros = document.getElementById('verCocineros');
 var btnMeseros = document.getElementById('verMeseros');
 var btnBusqueda = document.getElementById('buscarEmpleado');
 var btnSolicitud = document.getElementById('verSolicitudes');
+
+var btnEve3 = document.getElementById('verEve3');
+var btnEve1 = document.getElementById('verEve1');
+var btnSinPrece= document.getAnimations('verSinPrece');
 
 var btnBebidas = document.getElementById('verBebidas');
 var btnDesayuno = document.getElementById('verDesayuno');
