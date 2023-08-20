@@ -125,6 +125,7 @@ function updateModalContent(formType) {
                     }
                     }
                 };
+            
               //Enviar el formulario
               formData.append('ine', ine);
               formData.append('back', back);
