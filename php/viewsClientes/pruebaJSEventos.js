@@ -1,20 +1,5 @@
 $(window).on('load', function() {
 
-var currentDate = new Date();
-var oneWeekLater = new Date();
-oneWeekLater.setDate(currentDate.getDate()+7);
-
-$('#fechaEvento').datetimepicker({
-    format: 'Y-m-d H:i:00',
-    step: 15,
-    value: oneWeekLater.toISOString().slice(0, 19).replace('T', ' '),
-    minDate: oneWeekLater.toISOString().slice(0, 19).replace('T', ' '), // Establece el valor inicial
-    allowTimes: [
-        '05:00','06:00','07:00','08:00', '09:00', '10:00', '11:00', '12:00', '13:00',
-        '14:00', '15:00', '16:00', '17:00', '18:00', '19:00', '20:00', '21:00','22:00'
-    ]
-});
-
   $('#evento-form').submit(function(event) {
       event.preventDefault();
       
@@ -22,7 +7,20 @@ $('#fechaEvento').datetimepicker({
       const salon = $('#salon').val();
       const comida = $('#comida').val();
       const invitados = parseInt($('#invitados').val());
-      const fechaHora = $('#fechaEvento').val();
+      const fecha = $('#selected-date').val();
+      const hora = $('#hora_evento').val();
+      
+      console.log("Nombre del evento:", nombreEvento);
+      console.log("Salón:", salon);
+      console.log("Comida:", comida);
+      console.log("Invitados:", invitados);
+      console.log("Fecha:", fecha);
+      console.log("Hora:", hora);
+
+      // Combina la fecha y la hora en el formato deseado
+      const fechaHora = fecha + ' ' + hora + ':00';
+
+      console.log("Fecha y Hora Combinadas:", fechaHora);
 
       const datosEvento = new URLSearchParams();
       datosEvento.append("nombre_evento", nombreEvento);
@@ -60,7 +58,7 @@ $('#fechaEvento').datetimepicker({
                 }, 3000);
             } else if (jsonData && jsonData.fechaOcupada) {
                 const msgDiv = document.getElementById('msgDiv');
-                const errorMessage = "Lo siento, esta fecha ya está apartada.";
+                const errorMessage = "Lo siento, esta fecha ya está apartada<br>para este salón.";
                 msgDiv.innerHTML = `<div style="text-align:center;" class="alert alert-danger">${errorMessage}</div>`;
                 setTimeout(() => {
                     msgDiv.innerHTML = ''; 
@@ -78,7 +76,7 @@ $('#fechaEvento').datetimepicker({
                     msgDiv.innerHTML = ''; 
                     location.reload();
                 }, 3000);
-                const btnSolicitarEvento = document.getElementById("solicitarEventoBtn");
+                const btnSolicitarEvento = document.getElementById("accept-button");
 
                 btnSolicitarEvento.addEventListener("click", function() {
                 btnSolicitarEvento.disabled = true;
@@ -92,7 +90,7 @@ $('#fechaEvento').datetimepicker({
             console.error('Error al analizar la respuesta JSON:', error);
             // Si ocurre un error al analizar la respuesta JSON, muestra un mensaje de error
             const msgDiv = document.getElementById('msgDiv');
-            msgDiv.innerHTML = `<div style="text-align:center;" class="alert alert-danger">Lo siento, esta fecha ya está apartada.</div>`;
+            msgDiv.innerHTML = `<div style="text-align:center;" class="alert alert-danger">Lo siento, esta fecha ya está apartada <br>para este salón.</div>`;
         }      
     })
       .catch(error => console.error('Error en la solicitud:', error));
@@ -106,4 +104,5 @@ function resetInputs() {
     $('#invitados').val("");
     $('#fechaEvento').val(oneWeekLater.toISOString().slice(0, 19).replace('T', ' '));
 }
+
 

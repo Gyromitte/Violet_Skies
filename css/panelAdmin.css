@@ -238,7 +238,6 @@ tbody{
 .view-options{
     display: flex;
     flex-direction: row;
-    justify-content: space-between;
 }
 .btn-options{
     background-color: #A595B7;
@@ -246,10 +245,13 @@ tbody{
 .btn-options:hover{
     background-color: #b14aed;
 }
-.search-bar{
-    width: 40% !important;
+.ocultar-search{
+    display: none !important;
 }
-
+  
+.mostrar-search{
+    display: block !important;
+}
 .container {
     display: flex;
     justify-content: space-between;
@@ -267,6 +269,7 @@ tbody{
     color: white;
     border: 2px solid white;
     border-radius: 10px;
+    margin-right: 8px;
 }
 
 #estadoSelect option:hover {
