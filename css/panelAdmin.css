@@ -245,10 +245,13 @@ tbody{
 .btn-options:hover{
     background-color: #b14aed;
 }
-.search-bar{
-    width: 40% !important;
+.ocultar-search{
+    display: none !important;
 }
-
+  
+.mostrar-search{
+    display: block !important;
+}
 .container {
     display: flex;
     justify-content: space-between;
