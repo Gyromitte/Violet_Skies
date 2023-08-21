@@ -128,19 +128,19 @@
             ?>
             <br>
             Admin<br>
-            <button data-tab="home" class="dash-button"><i class="fa-solid fa-house" style="color: #ffffff;"></i><br>
+            <button data-tab="home" class="dash-button"><i class="fa-solid fa-house" style="color: white;"></i><br>
             Home
             </button>
-            <button data-tab="eventos" class="dash-button"><i class="fa-solid fa-calendar-days" style="color: #ffffff;"></i><br>
+            <button data-tab="eventos" class="dash-button"><i class="fa-solid fa-calendar-days" style="color: white;"></i><br>
             Eventos
             </button>
-            <button data-tab="empleados" class="dash-button"><i class="fa-solid fa-briefcase" style="color: #ffffff;"></i><br>
+            <button data-tab="empleados" class="dash-button"><i class="fa-solid fa-briefcase" style="color: white !important;"></i><br>
             Empleados y Clientes
             </button>
-            <button data-tab="comidas" class="dash-button"><i class="fa-solid fa-burger" style="color: #ffffff;"></i><br>
+            <button data-tab="comidas" class="dash-button"><i class="fa-solid fa-burger" style="color: white;"></i><br>
             Menús
             </button>
-            <button data-tab="perfil" class="dash-button"><i class="fa-solid fa-user" style="color: #ffffff;"></i><br>
+            <button data-tab="perfil" class="dash-button"><i class="fa-solid fa-user" style="color: white;"></i><br>
             Perfil
             </button>
             <a style="text-decoration: none;" data-tab="logout" class="dash-button" href="../scripts/CerrarSesion.php">
@@ -167,7 +167,7 @@
                                     <span class='visually-hidden'>Loading...</span>
                                 </div>
                             </div>
-                                <h3 id="clientesCard"></h3>
+                                <h3 id="clientesCard" style="color: white;"></h3>
                                 <h5>Clientes registrados</h5>
                             </div>
                             <i class="fa-solid fa-user fa-5x" style="color: #ffffff;"></i>
@@ -182,7 +182,7 @@
                                     <span class='visually-hidden'>Loading...</span>
                                 </div>
                             </div>
-                                <h3 id="empleadosCard"></h3>
+                                <h3 id="empleadosCard" style="color: white;"></h3>
                                 <h5>Empleados activos</h5>
                             </div>
                             <i class="fa-solid fa-briefcase fa-5x" style="color: #ffffff;"></i>
@@ -197,7 +197,7 @@
                                     <span class='visually-hidden'>Loading...</span>
                                 </div>
                             </div>
-                                <h3 id="eventosCard"></h3>
+                                <h3 id="eventosCard" style="color: white !important;"></h3>
                                 <h5>Eventos realizados</h5>
                             </div>
                             <i class="fa-solid fa-calendar-days fa-5x" style="color: #ffffff;"></i>
@@ -269,39 +269,39 @@
 	            <!-- Contenido de la derecha -->
 	            <div class="col-md-5">
 		            <div id="eventosPendientes" class="info-card mb-2" style="height: 25px; display: flex; align-items: center;">
-                        <h3 class="me-2">
+                        <h3 class="me-2" style="color: white;">
                 		    <i class="fa-solid fa-business-time" style="color: #ffffff;"></i>
                             Eventos pendientes: 
 			            </h3>
-                        <h2 id="pendientesCard"></h2>
+                        <h2 id="pendientesCard" style="color: white;"></h2>
 		            </div>
 		            <div id="eventosEnProceso" class="info-card mb-2" style="height: 25px; display: flex; align-items: center;">
-                        <h3 class="me-2">
+                        <h3 class="me-2" style="color: white;">
                             <i class="fa-regular fa-calendar-days"></i>
                             Eventos en proceso: 
 			            </h3>
-                        <h2 id="procesoCard"></h2>       
+                        <h2 id="procesoCard" style="color: white;"></h2>       
 		            </div>
                     <div id="eventosFin" class="info-card mb-2" style="height: 25px; display: flex; align-items: center;">
-                        <h3 class="me-2">
+                        <h3 class="me-2" style="color: white;">
                             <i class="fa-regular fa-calendar-check"></i>
                              Eventos finalizados: 
 			            </h3>
-                        <h2 id="finCard"></h2>       
+                        <h2 id="finCard" style="color: white;"></h2>       
 		            </div>
                     <div id="eventosCancelados" class="info-card mb-2" style="height: 25px; display: flex; align-items: center;">
-                        <h3 class="me-2">
+                        <h3 class="me-2" style="color: white;">
                             <i class="fa-regular fa-calendar-xmark"></i>
                             Eventos cancelados: 
 			            </h3>
-                        <h2 id="canceladoCard"></h2>       
+                        <h2 id="canceladoCard" style="color: white;"></h2>       
 		            </div>
                     <div id="peticiones" class="info-card mb-2" style="height: 25px; display: flex; align-items: center;">
-                        <h3 class="me-2">
+                        <h3 class="me-2" style="color: white;">
                             <i class="fa-regular fa-calendar-xmark"></i>
                              Peticiones:
 			            </h3>
-                        <h2 id="peticionesCard"></h2>       
+                        <h2 id="peticionesCard" style="color: white;"></h2>       
 		            </div>
 	            </div>
             </div>
