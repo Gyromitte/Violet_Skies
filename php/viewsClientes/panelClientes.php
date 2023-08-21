@@ -243,12 +243,12 @@
 </div>
         <!-- Mis Eventos -->
         <div id="eventos" class="tab-content">
-            <div class="panel-header" style="display: flex; flex-direction: column; align-items: center;">
+            <div class="panel-header" style=" color:#ffffff; display: flex; flex-direction: column; align-items: center;">
                 <h3 class="test" style="text-align: center; margin-top:2%">
                     Mis eventos
                     <i class="fa-solid fa-calendar-days" style="color: #ffffff;"></i>
                 </h3>
-                <div style=" width:fit-content; background-color:#381c47;" class="rounded-3 mb-2">
+                <div style=" width:fit-content; background-color:#381c47; color:#ffffff;" class="rounded-3 mb-2">
                     <h3 style=" padding-right:5%; padding-left:5%; text-align: center;">Aquí puedes ver tus eventos.</h3>
                     <p style=" padding-right:5%; padding-left:5%; text-align: center;"><b>Si deseas realizar cambios debes contactarte con nosotros para aclarar detalles.</b></p>
                 </div>

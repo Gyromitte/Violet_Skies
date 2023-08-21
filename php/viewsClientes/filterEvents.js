@@ -36,15 +36,19 @@ function createEventCard(event) {
 
     const date = document.createElement("p");
     date.textContent = `Fecha: ${event['FECHA DEL EVENTO']}`;
+    date.style.fontSize = "18px"; 
 
     const salon = document.createElement("p");
     salon.textContent =`Salón: ${event['NOMBRE DEL SALÓN']}`;
+    salon.style.fontSize = "18px";
 
     const menu = document.createElement("p");
     menu.textContent = `Menú: ${event['MENÚ']}`;
+    menu.style.fontSize = "18px";
 
     const invitados = document.createElement("p");
     invitados.textContent = `Invitados: ${event['INVITADOS']}`;
+    invitados.style.fontSize = "18px";
 
     const client = document.createElement("p");
     client.textContent = `Cliente: ${event['NOMBRE DEL CLIENTE']}`;
