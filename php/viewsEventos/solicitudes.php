@@ -27,7 +27,7 @@
 
         $conexion->desconectarBD();
 
-        echo "<h2 class='text-center'>Empleados para $nombre_evento</h2>";
+        echo "<h2 class='text-center' style='color: #343434;'>Empleados para $nombre_evento</h2>";
         echo '<div class="d-flex justify-content-center">';
     echo '<div class="accordion" id="accordionMeserosCocineros">'; // Iniciar el contenedor de acordeones
 
@@ -78,13 +78,13 @@ if (count($solicitudes_meseros) > 0) {
     }
     else
     {
-        echo 'Aún no hay solicitudes para este evento';
+        echo '<p style="color: #343434; font-sizes"large">Aún no hay solicitudes para este evento</p>';
     }
 
     echo '</div>';
     echo '</div>';
 } else {
-    echo "<p class='text-center'>Evento no especificado.</p>";
+    echo "<p class='text-center' style='color: #343434;'>Evento no especificado.</p>";
 }
 ?>
 
