@@ -44,6 +44,40 @@
     <script src="https://cdn.jsdelivr.net/npm/flatpickr@latest"></script>
     <script src="https://cdn.jsdelivr.net/npm/flatpickr/dist/plugins/flatpickr.min.js"></script>
 
+    <style>
+    #loading-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+}
+
+#loading-spinner {
+  border: 4px solid #f3f3f3;
+  border-top: 4px solid #3498db;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  animation: spin 1s linear infinite;
+}
+.loading-spinner {
+    display: block; /* Show the loading spinner */
+}
+
+.info {
+    display: none; /* Hide the actual content */
+}
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+        </style>
     <script src="/php/viewsClientes/calendario/js/renderCalendar.js"></script>
 
 </head>
@@ -135,7 +169,7 @@
                                     <!-- Campos del primer paso -->
                                     <div class="form-group mb-4">
                                         <label for="fecha_evento">Fecha del evento:</label>
-                                        <input autocomplete="off" type="date" class="form-control abbb" name="fecha" id="selected-date" readonly="" required="">
+                                        <input autocomplete="off" type="date" class="form-control abbb" name="fecha" id="selected-date" readOnly="true" required="" onclick="this.blur()">
                                     </div>
                                     <div class="form-group mb-4">
                                         <label for="hora_evento">Hora del evento: </label>
@@ -262,7 +296,13 @@
                     <i class="fa-brands fa-whatsapp me-1" style="color: #ffffff;"></i><b>WhatsApp</b>
                 </a>
             </div>
-            </div>
+                    <div class='d-flex justify-content-center'>
+                        <div class='loading-spinner' id='loadingSpinner'>
+                            <div class='spinner-border text-primary' role='status'>
+                                <span class='visually-hidden'>Loading...</span>
+                            </div>
+                        </div>
+                    </div>
 
 
             <div id="event-cards" class="card-container">
@@ -480,6 +520,7 @@
         minuteIncrement: 60,       // Incremento de minutos a 60 (solo horas)
         minTime: "06:00",          // Hora mínima permitida (6:00 AM)
         maxTime: "22:00",          // Hora máxima permitida (10:00 PM)
+        disableMobile: "true"
         
         });
     </script>

@@ -6,6 +6,7 @@ document.addEventListener('DOMContentLoaded', function() {
   var buttons = document.querySelectorAll('.ver-empleados');
   var tableInfo = document.getElementById('table-info');
   var contTable = document.querySelector('.cont-table');
+  
 
   var busquedaInput = document.getElementById('busqueda');
   // Agregar el evento de click a los botones
@@ -38,7 +39,7 @@ document.addEventListener('DOMContentLoaded', function() {
       } else {
         if(buttonId == "verGraficos")
         { 
-          contTable.innerHTML = '';
+          tableInfo.innerHTML = '';
           //Re-insertar el grafico
           contTable.innerHTML = `
           <div class="container-fluid">
@@ -62,7 +63,7 @@ document.addEventListener('DOMContentLoaded', function() {
             </div>
           `;
           //Volver a ejecutar el codigo de la grafica para actualizar datos:
-          recargarGraficos(); //Llamado desde chart.js
+          recargarGraficos();//Llamado desde chart.js
           // Manejar el redimensionamiento del canvas
           const canvas = document.getElementById("proporcionEmpleados2");
           if (canvas) {
@@ -70,7 +71,7 @@ document.addEventListener('DOMContentLoaded', function() {
             context.canvas.width = canvas.offsetWidth;
             context.canvas.height = canvas.offsetHeight;
           }
-          tableInfo.innerHTML = '';
+          
         }else{
           var xhr = new XMLHttpRequest();
           xhr.onreadystatechange = function() {
@@ -277,13 +278,13 @@ function getMessageByButtonId(buttonId) {
       currentTable = 'solicitud';
       return 'Éstas son tus solicitudes pendientes: <i class="fa-solid fa-business-time" style="color: #343434;"></i>';
     case 'verEve3':
-      currentTable = '';
+      currentTable = 'verEve3';
       return 'Clientes con 3 o mas eventos a su nombre <i class="fa-solid fa-users style="color: #343434;"></i>';
     case 'verEve1':
-      currentTable = '';
+      currentTable = 'verEve1';
       return 'Clientes con 1-2 o mas eventos a su nombre <i class="fa-solid fa-users style="color: #343434;"></i>';
     case 'verSinPrece':
-      currentTable = '';
+      currentTable = 'verSinPrece';
       return 'Clientes sin precedentes <i class="fa-solid fa-users style="color: #343434;"></i>';   
     case 'verBebidas':
       currentTable = 'bebidas';

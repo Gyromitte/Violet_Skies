@@ -4,7 +4,7 @@
     $conexion->conectarBD();
 
     /* Mostrar solo a los empleados que sean cocineros */
-    $consulta = "SELECT C.NOMBRE, C.AP_PATERNO, C.AP_MATERNO, E.RFC, C.TELEFONO, C.CORREO, E.TIPO, E.CUENTA
+    $consulta = "SELECT C.NOMBRE, C.AP_PATERNO, C.AP_MATERNO, E.RFC, C.TELEFONO, C.CORREO,E.COMPORTAMIENTO ,E.TIPO, E.CUENTA
                  FROM EMPLEADOS E
                  INNER JOIN CUENTAS C ON E.CUENTA = C.ID
                  WHERE E.TIPO = 'MESERO'
@@ -22,6 +22,7 @@ echo '<th>Ape. Materno</th>';
 echo '<th>RFC</th>';
 echo '<th>Teléfono</th>';
 echo '<th>Correo</th>';
+echo '<th>COMPORTAMIENTO</th>';
 echo '<th>Tipo</th>';
 echo '<th style="text-align: center;"></th>';
 echo '</tr>';
@@ -36,6 +37,7 @@ foreach ($tabla as $registro) {
     echo "<td> $registro->RFC </td>";
     echo "<td> $registro->TELEFONO </td>";
     echo "<td> $registro->CORREO </td>";
+    echo "<td> $registro->COMPORTAMIENTO </td>";
     echo "<td> $registro->TIPO</td>";
     // Generar el botón de opciones con el menú desplegable
     echo "<td class='text-center'>";

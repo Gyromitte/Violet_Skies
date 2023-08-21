@@ -266,6 +266,13 @@
                 </div>
             </form>
             <br>
+            <div class='d-flex justify-content-center'>
+            <div class='loading-spinner' id='loadingSpinner'>
+                <div class='spinner-border text-primary' role='status'>
+                    <span class='visually-hidden'>Loading...</span>
+                </div>
+            </div>
+            </div>
             <div id='tablaResultados'></div>
         </div>";
         }
@@ -305,6 +312,13 @@
                         </div>
                     </div>
                     <br>
+                    <div class='d-flex justify-content-center'>
+                        <div class='loading-spinner' id='loadingSpinner'>
+                            <div class='spinner-border text-primary' role='status'>
+                                <span class='visually-hidden'>Loading...</span>
+                            </div>
+                        </div>
+                    </div>
                     
                     <h3 id='table-info'></h3>
 

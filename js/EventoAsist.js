@@ -2,6 +2,7 @@ document.addEventListener('DOMContentLoaded', function() {
     var buttons = document.querySelectorAll('.ver-eventos');
     var tableInfo = document.getElementById('table-info');
     var contTable = document.querySelector('.cont-table');
+    var loadingSpinner = document.getElementById('loadingSpinner');
   
     // Add event listener to the buttons
     buttons.forEach(function(button) {
@@ -12,6 +13,7 @@ document.addEventListener('DOMContentLoaded', function() {
         this.classList.add('selected');
         var url = this.getAttribute('data-url');
         var buttonId = this.getAttribute('id');
+        loadingSpinner.style.display = 'block';
 
         var xhr = new XMLHttpRequest();
         xhr.onreadystatechange = function() {
@@ -19,6 +21,8 @@ document.addEventListener('DOMContentLoaded', function() {
             var message = getMessageByButtonId(buttonId);
             tableInfo.innerHTML = message; // Modificar el innerHTML en lugar de textContent
             contTable.innerHTML = xhr.responseText;
+
+            loadingSpinner.style.display = 'none';
           }
         };
         xhr.open('GET', url, true);

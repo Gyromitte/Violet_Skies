@@ -69,6 +69,8 @@ fechaInicioInput.addEventListener('change', filtrarEventos);
 fechaFinInput.addEventListener('change', filtrarEventos);
 
 function filtrarEventos() {
+
+
     var formData = new FormData(form);
     formData.append('depa', estadoSelect.value);
     formData.append('search', searchInput.value.trim());
@@ -94,8 +96,8 @@ function filtrarEventos() {
         peticionesResult.style.display='none';
     } else if (estadoSelect.value !== 'PETICIONES') {
         contentRow.style.display = 'none';
-        tablaResultados.style.display = 'block';
         searchInput.style.display = 'block'; 
+        tablaResultados.style.display = 'block';
         searchButton.style.display = 'block'; 
         fechaInicioInput.style.display = 'block'; 
         fechaFinInput.style.display = 'block'; 
