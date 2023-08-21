@@ -905,32 +905,32 @@ function updateModalContent(formType, idEmpleado, idEvento) {
             <form>
               <h4 align='center'>${detallesEvento.NOMBRE}</h4>
               <h5 align='center'>${detallesEvento.CLIENTE}</h5><br>
-              <table align='center' cellspacing="20" cellpadding="5">
-                <tr>
+              <table align='center' cellspacing="20" cellpadding="5" style="background-color: #61697B;">
+                <tr style="background-color: #61697B; color:#F1E9DC"">
                   <td><h6>Fecha</h6></td>
-                  <td><input class="form-control" type="text" placeholder="Fecha y hora" id="fechaEvento" value="${detallesEvento.F_EVENTO}" disabled></td>
+                  <td><input class="form-control"  type="text" placeholder="Fecha y hora" id="fechaEvento" value="${detallesEvento.F_EVENTO}" disabled></td>
                 </tr>
-                <tr>
-                  <td><h6>Salón</h6></td>
+                <tr style="background-color: #61697B; color:#F1E9DC">
+                  <td style="background-color: #61697B;"><h6>Salón</h6></td>
                   <td><select class="form-control" id="salon" disabled></select></td>
                 </tr>
-                <tr>
+                <tr style="background-color: #61697B; color:#F1E9DC">
                   <td><h6>Invitados</h6></td>
                   <td><input class="form-control" type="number" placeholder="Invitados" id="invitados" value="${detallesEvento.INVITADOS}" disabled></td>
                 </tr>
-                <tr>
+                <tr style="background-color: #61697B; color:#F1E9DC">
                   <td><h6>Menú</h6></td>
                   <td><select class="form-control" id="comida" disabled></select></td>
                 </tr>
-                <tr id="trMeseros" style="display: ${detallesEvento.ESTADO === 'EN PROCESO' ? 'table-row' : 'none'}">
+                <tr  id="trMeseros" style=" background-color: #61697B; color:#F1E9DC ; display: ${detallesEvento.ESTADO === 'EN PROCESO' ? 'table-row' : 'none'}">
                   <td><h6>Meseros</h6></td>
                   <td><input class="form-control" type="number" placeholder="Meseros requeridos" id="meserosRequeridos" value="${detallesEvento.MESEROS || ''}" disabled></td>
                 </tr>
-                <tr id="trCocineros" style="display: ${detallesEvento.ESTADO === 'EN PROCESO' ? 'table-row' : 'none'}">
+                <tr id="trCocineros" style=" background-color: #61697B; color:#F1E9DC ;display: ${detallesEvento.ESTADO === 'EN PROCESO' ? 'table-row' : 'none'}">
                   <td><h6>Cocineros</h6></td>
                   <td><input class="form-control" type="number" placeholder="Cocineros requeridos" id="cocinerosRequeridos" value="${detallesEvento.COCINEROS || ''}" disabled></td>
                 </tr>
-                <tr>
+                <tr style="background-color: #61697B; color:#F1E9DC">
                   <td><h6>Estado</h6></td>
                   <td>${detallesEvento.ESTADO}</td>
                 </tr>

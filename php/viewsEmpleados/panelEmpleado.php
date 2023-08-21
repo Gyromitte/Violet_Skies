@@ -156,12 +156,13 @@
                 echo"<h1>Gracias por buscar trabajo con nosotros!</h1>";
                 echo"</div>";
                 echo"<br>";
-                echo"<div class='test'>";
+                echo"<div class='test '>";
                 echo"<h4>Su solicitud ha sido enviada.</h4>";
                 echo"</div>";
                 echo"<br>";
-                echo"<div class='test'>";
-                echo"<div style= 'font-size:large; padding-left:3px' >Un administrador se pondra en contacto con usted proximamente.</div>";
+                echo"<div class=' '>";
+                echo"<div style= 'font-size:large; padding:15px ; padding-left:35px ; width:80%; text-aling:justify;    background-color: #A595B7;
+                border-radius: 10em; word-wrap: break-word;' >Un administrador se pondra en contacto con usted proximamente.</div>";
                 echo"</div>";
             }
             else{
