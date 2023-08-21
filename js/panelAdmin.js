@@ -177,10 +177,10 @@ modal.addEventListener("show.bs.modal", function (event) {
 
 
 // Función para actualizar el contenido del modal según el tipo de formulario
+var formContent = "";
+var form;
 function updateModalContent(formType, idEmpleado, idEvento) {
-  var formContent = "";
   var modalTitle = document.querySelector('#mainModal .modal-title');
-  var form;
   //Conseguir el modal header para cambiarle el color
   var modalHeader = document.querySelector('.modal-header');
 
@@ -537,8 +537,8 @@ function updateModalContent(formType, idEmpleado, idEvento) {
                 </div>
                 <div class="form-group">
                     <label for="telefonoInput">Teléfono:</label>
-                    <input type="tel" class="form-control" name="telefono" id="telefonoInput" required pattern="[0-9]{10}" title="Ingresa un número de teléfono válido de 10 dígitos" minlength="10" maxlength="10" value="${datosUsuario.telefono}">
-                    </div>
+                    <input type="text" class="form-control" name="telefono" id="telefonoInput" required value="${datosUsuario.telefono}" pattern="[0-9a-zA-Z]" maxlength="10">
+                </div>
                 <div class="form-group">
                     <label for="contrasenaActualInput">Contraseña Actual:</label>
                     <input type="password" class="form-control" name="contrasena_actual" id="contrasenaActualInput" required>
@@ -557,12 +557,9 @@ function updateModalContent(formType, idEmpleado, idEvento) {
             var telefonoValue = telefonoInput.value.trim();
     
             if (!esNumero(telefonoValue)) {
-              document.getElementById('mensajeDiv').innerHTML = `<div style="text-align:center;"class="alert alert-success">Debes ingresar el formato correcto para teléfono (10 dígitos)</div>`;
-              telefonoInput.focus();
-              setTimeout(() => {
-                document.getElementById('mensajeDiv').innerHTML = '';
-              }, 2500);
-              return;
+              document.getElementById('mensajeDiv').innerHTML = `<div style="text-align:center;"class="alert alert-success">solo puedes ingresar valores numericos</div>`;
+                telefonoInput.focus();
+                return;
             }
     
             var updatePerfilXHR = new XMLHttpRequest();
@@ -618,9 +615,8 @@ function updateModalContent(formType, idEmpleado, idEvento) {
         });
     
         function esNumero(valor) {
-          return /^\d{10,}$/.test(valor);
+            return !isNaN(valor) && !isNaN(parseFloat(valor));
         }
-      
         break;  
     case "@verSolicitud":
         modalTitle.textContent = "Manejar solicitud";
@@ -827,8 +823,6 @@ function updateModalContent(formType, idEmpleado, idEvento) {
         //Ver cual es la tabla activa para refrescar cualquier cambio
         checkCurrentTable(currentTable);
         break;
-        case "@cancelarEvento":
-          break;
 
     case "@verDetallesEvento":
       modalTitle.textContent = "Detalles del Evento";
@@ -848,7 +842,7 @@ function updateModalContent(formType, idEmpleado, idEvento) {
         if (xhrDetalles.readyState === XMLHttpRequest.DONE) {
           if (xhrDetalles.status === 200) {
             var detallesEvento = JSON.parse(xhrDetalles.responseText);
-            // Realizar una solicitud AJAX para obtener la lista de salones disponibles
+            
             var xhrSalones = new XMLHttpRequest();
             xhrSalones.onreadystatechange = function() {
               if (xhrSalones.readyState === XMLHttpRequest.DONE) {
@@ -857,21 +851,20 @@ function updateModalContent(formType, idEmpleado, idEvento) {
                   var selectSalon = document.getElementById('salon');
                   selectSalon.innerHTML = "";
                   var optionSeleccionar = document.createElement('option');
-                  optionSeleccionar.value = ""; // Asignar un valor vacío o el que corresponda
-                  optionSeleccionar.textContent = "-Seleccionar salón-"; // Texto a mostrar en la opción predeterminada
+                  optionSeleccionar.value = "";
+                  optionSeleccionar.textContent = "-Seleccionar salón-";
                   selectSalon.appendChild(optionSeleccionar);
                   var salonEncontrado = false;
                     salones.forEach(function(salon) {
                     var option = document.createElement('option');
-                    option.value = salon.ID; // Asignar el valor del ID del salón
-                    option.textContent = salon.NOMBRE; // Asignar el nombre del salón
+                    option.value = salon.ID;
+                    option.textContent = salon.NOMBRE;
+                    
                     selectSalon.appendChild(option);
-                    // Verificar si el nombre del salón del evento coincide con el salón actual en el bucle
                     if (salon.NOMBRE === detallesEvento.SALON) {
-                      // Si se encuentra el salón del evento, seleccionarlo en el select y marcarlo como encontrado
                       option.selected = true;
                       salonEncontrado = true;
-                    }
+                    }                      
                   });
                   if (!salonEncontrado) {
                     console.error("El salón del evento no se encuentra en la lista de salones disponibles:", detallesEvento.SALON);
@@ -881,7 +874,6 @@ function updateModalContent(formType, idEmpleado, idEvento) {
                 }
               }
             };
-            // Hacer la solicitud al script PHP "obtenerSalones.php" para obtener la lista de salones
             xhrSalones.open("GET", "../viewsEventos/obtenerSalones.php", true);
             xhrSalones.send();
 
@@ -904,7 +896,6 @@ function updateModalContent(formType, idEmpleado, idEvento) {
                     option.textContent = comida.NOMBRE; // Asignar el nombre del menú
                     selectMenu.appendChild(option);
                     if (comida.NOMBRE === detallesEvento.COMIDA) {
-                      // Si se encuentra el menú del evento, seleccionarlo en el select y marcarlo como encontrado
                       option.selected = true;
                       menuEncontrado = true;
                     }
@@ -920,102 +911,169 @@ function updateModalContent(formType, idEmpleado, idEvento) {
             xhrComida.open("GET", "../viewsEventos/obtenerComida.php", true);
             xhrComida.send();
 
-            formContent = `
-            <form>
-              <h4 align='center'>${detallesEvento.NOMBRE}</h4>
-              <h5 align='center'>${detallesEvento.CLIENTE}</h5><br>
-              <table align='center' cellspacing="20" cellpadding="5">
-                <tr>
-                  <td><h6>Fecha</h6></td>
-                  <td><input class="form-control" type="text" placeholder="Fecha y hora" id="fechaEvento" value="${detallesEvento.F_EVENTO}" disabled></td>
-                </tr>
-                <tr>
-                  <td><h6>Salón</h6></td>
-                  <td><select class="form-control" id="salon" disabled></select></td>
-                </tr>
-                <tr>
-                  <td><h6>Invitados</h6></td>
-                  <td><input class="form-control" type="number" placeholder="Invitados" id="invitados" value="${detallesEvento.INVITADOS}" disabled></td>
-                </tr>
-                <tr>
-                  <td><h6>Menú</h6></td>
-                  <td><select class="form-control" id="comida" disabled></select></td>
-                </tr>
-                <tr id="trMeseros" style="display: ${detallesEvento.ESTADO === 'EN PROCESO' ? 'table-row' : 'none'}">
-                  <td><h6>Meseros</h6></td>
-                  <td><input class="form-control" type="number" placeholder="Meseros requeridos" id="meserosRequeridos" value="${detallesEvento.MESEROS || ''}" disabled></td>
-                </tr>
-                <tr id="trCocineros" style="display: ${detallesEvento.ESTADO === 'EN PROCESO' ? 'table-row' : 'none'}">
-                  <td><h6>Cocineros</h6></td>
-                  <td><input class="form-control" type="number" placeholder="Cocineros requeridos" id="cocinerosRequeridos" value="${detallesEvento.COCINEROS || ''}" disabled></td>
-                </tr>
-                <tr>
-                  <td><h6>Estado</h6></td>
-                  <td>${detallesEvento.ESTADO}</td>
-                </tr>
-              </table>
-              <br>
-              <div align="center">
-              <button type="button" class="btn btn-primary" id="btnModify"
-                  ${detallesEvento.ESTADO === 'CANCELADO' || detallesEvento.ESTADO === 'FINALIZADO' ? 'style="display: none;"' : ''}>
-                  <i class="fa-solid fa-pencil me-2" style="color: #ffffff;"></i>Modificar Detalles</button>
-                <button type="button" class="btn btn-success" id="btnAceptarEvento" 
-                  ${detallesEvento.ESTADO === 'PENDIENTE' ? '' : 'style="display: none;"'}>
-                  <i class="fa-solid fa-check me-2" style="color: #ffffff;"></i>Aceptar Evento</button>
-                <button type="button" class="btn btn-primary" id="btnSaveChanges" style="display: none;">
-                <i class="fa-solid fa-floppy-disk me-2" style="color: #ffffff;"></i>Guardar</button>            
-                <button type="button" class="btn btn-danger" id="btnCancelarEvento" 
-                  ${detallesEvento.ESTADO === 'CANCELADO' || detallesEvento.ESTADO === 'FINALIZADO' ? 'style="display: none;"' : ''}>
-                  <i class="fa-solid fa-ban me-2" style="color: #ffffff;"></i>Cancelar Evento</button>            
-                <button type="button" class="btn btn-info" id="btnEmpleadosRegistrados"
-                  ${detallesEvento.ESTADO === 'CANCELADO' || detallesEvento.ESTADO === 'PENDIENTE' ? 'style="display: none;"' : ''}>
-                  <i class="fa-solid fa-briefcase me-2" style="color: #ffffff;"></i>Empleados</button>
-              </form>
-              <div id="empleadosTable"></div>
-            `;              
+            formContent = `    <h4 align='center'>${detallesEvento.NOMBRE}</h4>
+            <h5 align='center'>${detallesEvento.CLIENTE}</h5><br>
+            <ul class="nav nav-pills nav-fill">
+  <li class="nav-item">
+    <a class="nav-link active aria-selected='true' tab-link" aria-current="page" href="#" id="detalles">Detalles</a>
+    
+  </li>
+  <li class="nav-item">
+    <a class="nav-link tab-link" href="#" id="meserosRegistrados" >Meseros</a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link tab-link" href="#" id="cocinaRegistrados">Cocineros</a>
+  </li>
+</ul>
+
+
+<div id="detallesContenido">
+<br>
+<form>
+    <table align='center' cellspacing="20" cellpadding="5">
+      <tr>
+        <td><h6>Fecha</h6></td>
+        <td><input class="form-control" type="datetime-local" placeholder="Fecha y hora" id="fechaEvento" value="${detallesEvento.F_EVENTO}" disabled></td>
+      </tr>
+      <tr>
+        <td><h6>Salón</h6></td>
+        <td><select class="form-control" id="salon" disabled></select></td>
+      </tr>
+      <tr>
+        <td><h6>Invitados</h6></td>
+        <td><input class="form-control" type="number" placeholder="Invitados" id="invitados" value="${detallesEvento.INVITADOS}" disabled></td>
+      </tr>
+      <tr>
+        <td><h6>Menú</h6></td>
+        <td><select class="form-control" id="comida" disabled></select></td>
+      </tr>
+      <tr id="trMeseros" style="display: ${detallesEvento.ESTADO === 'EN PROCESO' ? 'table-row' : 'none'}">
+        <td><h6>Meseros</h6></td>
+        <td><input class="form-control" type="number" placeholder="Meseros requeridos" id="meserosRequeridos" value="${detallesEvento.MESEROS || ''}" disabled></td>
+      </tr>
+      <tr id="trCocineros" style="display: ${detallesEvento.ESTADO === 'EN PROCESO' ? 'table-row' : 'none'}">
+        <td><h6>Cocineros</h6></td>
+        <td><input class="form-control" type="number" placeholder="Cocineros requeridos" id="cocinerosRequeridos" value="${detallesEvento.COCINEROS || ''}" disabled></td>
+      </tr>
+      <tr>
+        <td><h6>Estado</h6></td>
+        <td>${detallesEvento.ESTADO}</td>
+      </tr>
+    </table>
+    <br>
+    <div align="center">
+    <button type="button" class="btn btn-primary" id="btnModify"
+        ${detallesEvento.ESTADO === 'CANCELADO' || detallesEvento.ESTADO === 'FINALIZADO' ? 'style="display: none;"' : ''}>
+        <i class="fa-solid fa-pencil me-2" style="color: #ffffff;"></i>Modificar Detalles</button>
+      <button type="button" class="btn btn-success" id="btnAceptarEvento" 
+        ${detallesEvento.ESTADO === 'PENDIENTE' ? '' : 'style="display: none;"'}>
+        <i class="fa-solid fa-check me-2" style="color: #ffffff;"></i>Aceptar Evento</button>
+      <button type="button" class="btn btn-primary" id="btnSaveChanges" style="display: none;">
+      <i class="fa-solid fa-floppy-disk me-2" style="color: #ffffff;"></i>Guardar</button>            
+      <button type="button" class="btn btn-danger" id="btnCancelarEvento" 
+        ${detallesEvento.ESTADO === 'CANCELADO' || detallesEvento.ESTADO === 'FINALIZADO' ? 'style="display: none;"' : ''}>
+        <i class="fa-solid fa-ban me-2" style="color: #ffffff;"></i>Cancelar Evento</button>            
+    </form>
+
+    </div></div>
+
+  <div id="empleadosTable"><br></div>
+            `;                   
             
             modalForm.innerHTML = formContent;
-            $(document).ready(function() {
-              // Obtenemos la fecha actual
-              var currentDate = new Date();
-            
-              // Calculamos la fecha 1 semana después de la actual
-              var oneWeekLater = new Date();
-              oneWeekLater.setDate(currentDate.getDate() + 6);
-            
-              $('#fechaEvento').datetimepicker({
-                format: 'Y-m-d H:i:s', // Formato deseado para la fecha y hora
-                step: 15, // Intervalo de minutos para seleccionar la hora
-                minDate: oneWeekLater.toISOString().slice(0, 19).replace('T', ' '), // Fecha mínima: una semana después de la actual
-                allowTimes: [
-                  '05:00','06:00','07:00','08:00', '09:00', '10:00', '11:00', '12:00', '13:00',
-                  '14:00', '15:00', '16:00', '17:00', '18:00', '19:00', '20:00', '21:00','22:00' 
-                ]
+            function obtenerFechas() {
+              return new Promise(function(resolve, reject) {
+                var xhr = new XMLHttpRequest();
+                xhr.open('POST', '../viewsEventos/eventoFecha.php', true);
+                xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+                xhr.onreadystatechange = function() {
+                  if (xhr.readyState === 4) {
+                    if (xhr.status === 200) {
+                      var fechas = JSON.parse(xhr.responseText);
+                      resolve(fechas);
+                    } else {
+                      reject(xhr.status);
+                    }
+                  }
+                };
+                xhr.send();
               });
-            });
+            }
+            
+            obtenerFechas()
+              .then(function(fechas) {
+                var fechasString = JSON.stringify(fechas);
+            
+                var fechasObjeto = JSON.parse(fechasString);
+                var inputFecha = document.getElementById("fechaEvento");
+                var fechaActual = new Date();
+                var unaSemanaDespues = new Date(fechaActual.getTime() + 7 * 24 * 60 * 60 * 1000);
+                var unaSemanaDespuesFormateada = unaSemanaDespues.toISOString().slice(0, 16).replace('T', ' ');
+                inputFecha.setAttribute("min", unaSemanaDespuesFormateada);
+            
+                flatpickr(inputFecha, {
+                  disable: [
+                    function(date) {
+                      return date < unaSemanaDespues;
+                    },
+                    // Agrega las fechas directamente desde el array obtenido de la respuesta
+                    ...fechasObjeto.map(function(fecha) {
+                      return new Date(fecha);
+                    }),
+                  ],
+                  minTime: "05:00",
+                  maxTime: "22:00",
+                  enableTime: true,
+                  dateFormat: "Y-m-d H:i"
+                });
+              })
+              .catch(function(status) {
+                console.error('Error en la solicitud: ' + status);
+              });
+            
+            
 
-            var tablaVisible = false;
-            var btnEmpleadosRegistrados = document.getElementById('btnEmpleadosRegistrados');
-            btnEmpleadosRegistrados.addEventListener('click', function() {
-              if (!tablaVisible) {
+
+
+            var meserosRegistrados = document.getElementById('meserosRegistrados');
+            meserosRegistrados.addEventListener('click', function() {
+              detallesContenido.style.display = 'none';
+              empleadosTable.style.display = 'block';
                 $.ajax({
                   type: "GET",
-                  url: `../viewsEventos/verEmpleadosRegistrados.php?id=${idEvento}`,
+                  url: `../viewsEventos/verEmpleadosRegistrados.php?id=${idEvento}&tipo=MESERO`,
                   success: function (response) {
                     $("#empleadosTable").html(response);
-                    tablaVisible = true; // La tabla está visible
+                    peticionesFuncion();
                   },
                   error: function () {
                     console.error(error);
                   },
                 });
-              } else {
-                // Si la tabla está visible, ocultarla
-                $("#empleadosTable").html("");
-                tablaVisible = false; // La tabla está oculta
-              }
+            });            
+            
+            var cocinaRegistrados = document.getElementById('cocinaRegistrados');
+            cocinaRegistrados.addEventListener('click', function() {
+              detallesContenido.style.display = 'none';
+              empleadosTable.style.display = 'block';
+                $.ajax({
+                  type: "GET",
+                  url: `../viewsEventos/verEmpleadosRegistrados.php?id=${idEvento}&tipo=COCINA`,
+                  success: function (response) {
+                    $("#empleadosTable").html(response);
+                    peticionesFuncion();
+                  },
+                  error: function () {
+                    console.error(error);
+                  },
+                });
             });
 
+            var detalles = document.getElementById('detalles');
+            detalles.addEventListener('click', function() {
+              detallesContenido.style.display = 'block';
+              empleadosTable.style.display = 'none';
+            });
 
             var btnModificar = document.getElementById('btnModify');
             btnModificar.addEventListener('click', function() {
@@ -1038,30 +1096,49 @@ function updateModalContent(formType, idEmpleado, idEvento) {
               var meserosRequeridos = document.getElementById('meserosRequeridos').value;
               var cocinerosRequeridos = document.getElementById('cocinerosRequeridos').value;
               var meserosNecesarios;
-              if (invitados === 10) {meserosNecesarios = 2;} 
-              else {meserosNecesarios = Math.floor(invitados / 15);}
+              var cocinaNecesarios;
+              var cupoSalon;
+
+              if (invitados === 10) {
+                meserosNecesarios = 2;
+                cocinaNecesarios = 5;
+              } else {
+                meserosNecesarios = Math.floor(invitados / 15);
+                cocinaNecesarios = Math.floor((invitados - 10) / 15) + 5;
+              }
               
               if (!fecha || !salon || !comida) {
                 alert('Por favor, llene los campos correctamente');
                 return;
               }
-              if (!invitados || isNaN(invitados) || parseInt(invitados) < 10) {
-                alert('Por favor, llene los campos correctamente\nEl mínimo para invitados son 10');
+              if (!invitados || isNaN(invitados) || parseInt(invitados) < 10 || parseInt(invitados) >120) {
+                alert('Por favor, llene los campos correctamente\nEl mínimo para invitados son 10 y como máximo son 120');
                 return;
               }
-              
 
-              var xhrGuardarCambios = new XMLHttpRequest();
-              xhrGuardarCambios.onreadystatechange = function(response) {
-                if (xhrGuardarCambios.readyState === XMLHttpRequest.DONE) {
-                  var response = JSON.parse(xhrGuardarCambios.responseText);
-                  if (xhrGuardarCambios.status === 200) {
-                    if (response.success) {
+              var xhrS = new XMLHttpRequest();
+              xhrS.open('POST', '../viewsEventos/getSalon.php', true);
+              xhrS.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+              xhrS.onreadystatechange = function() {
+                if (xhrS.readyState === 4 && xhrS.status === 200) {
+                  var response = JSON.parse(xhrS.responseText);
+                  cupoSalon = parseInt(response.CUPO);
+                  minSalon = parseInt(response.MINIMO);
+                  if(cupoSalon < invitados || minSalon > invitados) {
+                    alert("El salón tiene un cupo de al menos " + minSalon + " hasta " + cupoSalon + " invitados");
+                  } else {
+                  var xhrGuardarCambios = new XMLHttpRequest();
+                  xhrGuardarCambios.onreadystatechange = function(response) {
+                    if (xhrGuardarCambios.readyState === XMLHttpRequest.DONE) {
+                      var response = JSON.parse(xhrGuardarCambios.responseText);
+                      if (xhrGuardarCambios.status === 200) {
+                        if (response.success) {
                       formContent += `<br><div class="alert alert-success" role="alert" align='center'>Evento modificado exitosamente</div>`;
                       setTimeout(() => {
                         updateModalContent(formType, idEmpleado, idEvento);
-                      }, 1000); // Actualizar el modal después de 2000 milisegundos (2 segundos)
+                      }, 1000);
                       filtrarEventos();
+                      peticionesFuncion();
                       modalForm.innerHTML = formContent;
                     } else {
                       alert('Algo salió mal\nInténtelo de nuevo');
@@ -1073,9 +1150,13 @@ function updateModalContent(formType, idEmpleado, idEvento) {
                   }
                 }
               };
-              var urlEditarEvento = `../viewsEventos/editarDetalles.php?id=${idEvento}&F_EVENTO=${fecha}&INVITADOS=${invitados}&SALON=${salon}&COMIDA=${comida}&MESEROS=${meserosRequeridos}&COCINEROS=${cocinerosRequeridos}&meserosNecesarios=${meserosNecesarios}`;
+              var urlEditarEvento = `../viewsEventos/editarDetalles.php?id=${idEvento}&F_EVENTO=${fecha}&INVITADOS=${invitados}&SALON=${salon}&COMIDA=${comida}&MESEROS=${meserosRequeridos}&COCINEROS=${cocinerosRequeridos}&meserosNecesarios=${meserosNecesarios}&cocinaNecesarios=${cocinaNecesarios}`;
               xhrGuardarCambios.open("GET", urlEditarEvento, true);
               xhrGuardarCambios.send();
+    }
+  }
+};
+xhrS.send('salon=' + encodeURIComponent(salon));              
             });
 
             var btnCancelarEvento = document.getElementById('btnCancelarEvento');
@@ -1131,7 +1212,9 @@ function updateModalContent(formType, idEmpleado, idEvento) {
                 console.log("Aceptación del evento cancelada por el usuario");
               }
             });
+           
             
+
           } else {
             console.error("Error en la solicitud AJAX");
           }
@@ -1140,6 +1223,7 @@ function updateModalContent(formType, idEmpleado, idEvento) {
       xhrDetalles.open("GET", "../viewsEventos/verDetalles.php?id=" + idEvento, true);
       xhrDetalles.send();
       break;
+
       case "@verHistorial":
       modalTitle.textContent = "Historial de empleado";
 

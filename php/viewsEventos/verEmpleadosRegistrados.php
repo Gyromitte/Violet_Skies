@@ -6,52 +6,93 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
             $conexion = new Database();
             $conexion->conectarBD();
 
-            // Obtener el ID del evento desde la consulta GET
             $evento = $_GET['id'];
+            $tipo = $_GET['tipo'];
 
-            $consulta = "SELECT E.TIPO, CONCAT(C.NOMBRE, ' ', C.AP_PATERNO, ' ', C.AP_MATERNO) AS NOMBRE, C.TELEFONO,E.COMPORTAMIENTO
-                         FROM CUENTAS C
-                         JOIN EMPLEADOS E ON C.ID = E.CUENTA
-                         JOIN EVENTO_EMPLEADOS EE ON E.ID = EE.EMPLEADOS
-                         WHERE EE.EVENTO = $evento
-                         ORDER BY E.TIPO, NOMBRE ASC";
+
+            $consulta = "SELECT E.ID, E.TIPO, CONCAT(C.NOMBRE, ' ', C.AP_PATERNO, ' ', C.AP_MATERNO) AS NOMBRE, C.TELEFONO
+                FROM CUENTAS C JOIN EMPLEADOS E ON C.ID = E.CUENTA JOIN EVENTO_EMPLEADOS EE ON E.ID = EE.EMPLEADOS
+                WHERE EE.EVENTO = $evento AND E.TIPO = '$tipo'
+                ORDER BY E.TIPO, NOMBRE ASC";
 
             $tabla = $conexion->seleccionar($consulta);
 
             if (count($tabla) > 0) {
-                echo "<br><table class='table table-hover'>
+                echo "<br><table class='table table-hover table-sm' id='t'>
                 <thead class='thead-purple'>
                     <tr>
-                        <th>TIPO</th><th>NOMBRE</th><th>TELÉFONO</th><th>COMPORTAMIENTO</th>
+                    <th></th><th>NOMBRE</th><th>TELÉFONO</th>
                     </tr>
                 </thead>
                 <tbody>";
 
                 foreach ($tabla as $registro) {
                     echo "<tr>";
-                    echo "<td> $registro->TIPO </td>";
+                    echo "<td class='text-center'>";
+                    echo "<button class='btn btn-danger sacarEmpleado' type='button' data-empleado-id='$registro->ID' data-evento-id='$evento'>-</button>";
+                    echo "</td>";
                     echo "<td> $registro->NOMBRE </td>";
                     echo "<td> $registro->TELEFONO </td>";
-                    echo "<td> $registro->COMPORTAMIENTO </td>";
                     echo "</tr>";
                 }
-
                 echo "</tbody>
                 </table>";
             } else {
-                echo "<br><p>Aún no hay empleados registrados para este evento.</p>";
-            }
+                if($tipo === 'MESERO')
+                {
+                    echo "<br><p>No hay meseros por mostrar</p>";
 
+                } else if ($tipo === 'COCINA'){
+                    echo "<br><p>No hay cocineros por mostrar</p>";
+                } else {
+                    echo "<br><p>No hay empleados por mostrar</p>";
+                }
+            }
             $conexion->desconectarBD();
         } catch (Exception $e) {
-            // En caso de error, devolver una respuesta JSON con el mensaje de error
             header('Content-Type: application/json');
             echo json_encode(array("error" => $e->getMessage()));
         }
     } else {
-        // Enviar una respuesta de error si no se proporciona el parámetro "id"
         header('Content-Type: application/json');
         echo json_encode(array("error" => "El parámetro 'id' no fue proporcionado."));
     }
 }
 ?>
+
+<script>
+var sacarEmpleado = document.querySelectorAll('.sacarEmpleado');
+
+sacarEmpleado.forEach(function(button) {
+    button.addEventListener('click', function() {
+        var idEmpleado = this.getAttribute('data-empleado-id');
+        var idEvento = this.getAttribute('data-evento-id');
+    // Mostrar el modal de confirmación
+    var confirmarCancelacion = window.confirm("¿Estás seguro que deseas sacar este empleado?");
+    
+    if (confirmarCancelacion) {
+        var xhrsacarEmpleado = new XMLHttpRequest();
+        xhrsacarEmpleado.onreadystatechange = function() {
+            if (xhrsacarEmpleado.readyState === XMLHttpRequest.DONE) {
+                if (xhrsacarEmpleado.status === 200) {
+                    formContent += `<br><div id="successMessage" class="alert alert-success" role="alert" align='center'>
+                    Se ha eliminado con éxito</div>`;
+                    setTimeout(() => {
+                        updateModalContent(idEmpleado, idEvento);
+                    }, 2000);
+                    peticionesFuncion();
+                    
+                } else {
+                    console.error("Error AJAX para aja el empleado");
+                }
+            }
+        };
+        xhrsacarEmpleado.open("GET", "../viewsEventos/sacarEmpleado.php?id=" + idEmpleado + "&eventoId=" + idEvento, true);
+        xhrsacarEmpleado.send();
+    } else {
+        console.log("Retiro del empleado cancelada por el usuario");
+    }
+});
+});
+
+</script>

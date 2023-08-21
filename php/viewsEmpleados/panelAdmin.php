@@ -29,8 +29,9 @@
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
     <!-- Incluir datetimepicker -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-datetimepicker/2.5.20/jquery.datetimepicker.min.css">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-datetimepicker/2.5.20/jquery.datetimepicker.full.min.js"></script>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr@4.6.6/dist/flatpickr.min.css">
+  <script src="https://cdn.jsdelivr.net/npm/flatpickr@4.6.6/dist/flatpickr.min.js"></script>
+
     <!--Chart.js-->
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <style>
@@ -102,9 +103,9 @@
             header("Location:../views/login.php");
         }
     ?>
-     <div id="loading-overlay">
+   <!--  <div id="loading-overlay">
         <div id="loading-spinner"></div>
-    </div>
+    </div> -->
     <nav>
         <div class="nav-menu">
             <button id="nav-button">
