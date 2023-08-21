@@ -2,12 +2,15 @@
 var form = document.getElementById('EmpDisp');
 var tablaResultados = document.getElementById('tablaResultados');
 var tipoorden = document.getElementById('tipoorden');
+var loadingSpinner = document.getElementById('loadingSpinner');
 
 VerDisp();
 
 tipoorden.addEventListener('change', VerDisp);
 //Ver los eventos disponibles en tal orden
 function VerDisp() {
+    tablaResultados.style.display = 'none';
+    loadingSpinner.style.display = 'block';
 
     var formData = new FormData(form);
     formData.append('tipo', tipoorden.value); 
@@ -19,8 +22,10 @@ function VerDisp() {
 
     // Configurar la función de callback cuando se reciba la respuesta
     xhr.onload = function() {
+        loadingSpinner.style.display = 'none';
         if (xhr.status === 200) {
-            tablaResultados.innerHTML = xhr.responseText; // Actualizar la tabla de resultados con la respuesta
+            tablaResultados.innerHTML = xhr.responseText;
+            tablaResultados.style.display = 'block'; // Actualizar la tabla de resultados con la respuesta
         }
     };
 

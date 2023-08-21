@@ -35,9 +35,21 @@
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <style>
         form img{
-            width: 400px;
-            height: 200px;
-        }
+            max-width: 100%; /* Make the image scale to the container's width */
+    height: auto; /* Maintain the image's aspect ratio */
+    display: block; /* Remove any extra spacing around the image */
+
+    /* Add some margin to separate the images */
+    margin: 10px auto;
+}
+
+/* Apply specific styles for screens with a maximum width of 768px (typical mobile devices) */
+@media (max-width: 768px) {
+    form img {
+        /* Adjust the maximum width to fit smaller screens */
+        max-width: 90%;
+    }
+}
         #loading-overlay {
   position: fixed;
   top: 0;
@@ -292,6 +304,7 @@
 		            </div>
 	            </div>
             </div>
+            
             <div class="table-responsive">
                 <div id="tablaResultados"></div>
                 <div id="peticionesResult"></div>
@@ -404,8 +417,9 @@
                 </ul>
             </div>
         </div>
+
             <!--Informacion de la tabla-->
-            <h3 id="table-info"></h3>
+           <h3 id="table-info"></h3>
             <!--Container para tablas-->
             <div class="cont-table">
                 <!--Contenido Default-->

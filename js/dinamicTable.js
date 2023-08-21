@@ -6,6 +6,7 @@ document.addEventListener('DOMContentLoaded', function() {
   var buttons = document.querySelectorAll('.ver-empleados');
   var tableInfo = document.getElementById('table-info');
   var contTable = document.querySelector('.cont-table');
+  
 
   var busquedaInput = document.getElementById('busqueda');
   // Agregar el evento de click a los botones
@@ -38,7 +39,7 @@ document.addEventListener('DOMContentLoaded', function() {
       } else {
         if(buttonId == "verGraficos")
         { 
-          contTable.innerHTML = '';
+          tableInfo.innerHTML = '';
           //Re-insertar el grafico
           contTable.innerHTML = `
           <div class="container-fluid">
@@ -62,7 +63,7 @@ document.addEventListener('DOMContentLoaded', function() {
             </div>
           `;
           //Volver a ejecutar el codigo de la grafica para actualizar datos:
-          recargarGraficos(); //Llamado desde chart.js
+          recargarGraficos();//Llamado desde chart.js
           // Manejar el redimensionamiento del canvas
           const canvas = document.getElementById("proporcionEmpleados2");
           if (canvas) {
@@ -70,7 +71,7 @@ document.addEventListener('DOMContentLoaded', function() {
             context.canvas.width = canvas.offsetWidth;
             context.canvas.height = canvas.offsetHeight;
           }
-          tableInfo.innerHTML = '';
+          
         }else{
           var xhr = new XMLHttpRequest();
           xhr.onreadystatechange = function() {
