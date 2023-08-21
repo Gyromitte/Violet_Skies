@@ -28,21 +28,9 @@
         $conexion->desconectarBD();
         
         echo "  <h2 class='text-center'>Empleados para $nombre_evento</h2>
-        <ul class='nav nav-pills nav-fill' id='pills-tab' role='tablist'>
-        <li class='nav-item' role='presentation'>
-        <a class='nav-link' data-bs-toggle='pill' role='tab' aria-selected='true' onclick='mostrarSolicitudesEmpleados()'>Peticiones</a>
-        </li>
-        <li class='nav-item' role='presentation'>
-        <a class='nav-link' data-bs-toggle='pill' role='tab' aria-selected='' onclick='mostrarmeserosIngresados($evento_id)'>Meseros ingresados</a>
-        </li>
-        <li class='nav-item' role='presentation'>
-        <a class='nav-link' data-bs-toggle='pill' role='tab' aria-selected='' onclick='mostrarcocinaIngresados($evento_id)'>Cocina ingresados</a>
-        </li>
-        </ul>
 
-        <div id='empleadosRegistrados'></div>
 
-        <div class='tab-content' id='solicit'>
+
         <form method='post' action='/php/viewsEventos/ingresosEvento.php'>
         <h2>Meseros</h2>";
         if (count($solicitudes_meseros) > 0) {
@@ -68,8 +56,7 @@
         echo '<input type="hidden" name="evento_id" value="' . $evento_id . '">
         <button type="submit" class="btn btn-primary" name="accion" value="aceptar_seleccionados">Aceptar empleados</button>
         </form>
-        </div>
-        </div>';
+';
     } else {
     echo "<p class='text-center'>Evento no especificado.</p>";
 }
