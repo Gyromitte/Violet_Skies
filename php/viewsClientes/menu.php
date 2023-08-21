@@ -10,7 +10,7 @@
         $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
         // Consulta para obtener los valores del menú
-        $consultaMenu = "SELECT ID, NOMBRE, DESCRIPCION, TIPO FROM COMIDAS WHERE COMIDAS.TIPO != 'DESCONTINUADO'";
+        $consultaMenu = "SELECT ID, NOMBRE, DESCRIPCION, TIPO FROM COMIDAS WHERE COMIDAS.TIPO != 8";
         $resultadosMenu = $pdo->query($consultaMenu);
         $menuItems = $resultadosMenu->fetchAll(PDO::FETCH_ASSOC);
     } catch (PDOException $e) {

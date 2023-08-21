@@ -110,6 +110,17 @@ modal.addEventListener("show.bs.modal", function (event) {
       case "@asist":
         modalTitle.textContent = "Trabajar en este evento?";
         modalHeader.classList.remove('modal-header-warning');
+
+        formContent = `
+        <div class="d-flex justify-content-center">
+        <div class="loading-spinner">
+            <div class="spinner-border text-primary" role="status">
+                <span class="visually-hidden">Loading...</span>
+            </div>
+        </div>
+        </div>
+    `;
+    modalForm.innerHTML = formContent;
         var xhr = new XMLHttpRequest();
         xhr.onreadystatechange = function() {
           if (xhr.readyState === XMLHttpRequest.DONE) {
@@ -186,6 +197,17 @@ modal.addEventListener("show.bs.modal", function (event) {
       case "@cancelar":
         modalTitle.textContent = "No asistir este evento?";
         modalHeader.classList.remove('modal-header-warning');
+
+        formContent = `
+        <div class="d-flex justify-content-center">
+        <div class="loading-spinner">
+            <div class="spinner-border text-primary" role="status">
+                <span class="visually-hidden">Loading...</span>
+            </div>
+        </div>
+        </div>
+    `;
+    modalForm.innerHTML = formContent;
         var xhr = new XMLHttpRequest();
         xhr.onreadystatechange = function() {
           if (xhr.readyState === XMLHttpRequest.DONE) {
@@ -261,6 +283,17 @@ modal.addEventListener("show.bs.modal", function (event) {
         case "@cancelarASIST":
         modalTitle.textContent = "Cancelar solicitud de asistencia a este evento?";
         modalHeader.classList.remove('modal-header-warning');
+
+        formContent = `
+        <div class="d-flex justify-content-center">
+        <div class="loading-spinner">
+            <div class="spinner-border text-primary" role="status">
+                <span class="visually-hidden">Loading...</span>
+            </div>
+        </div>
+        </div>
+    `;
+    modalForm.innerHTML = formContent;
         var xhr = new XMLHttpRequest();
         xhr.onreadystatechange = function() {
           if (xhr.readyState === XMLHttpRequest.DONE) {

@@ -6,7 +6,7 @@ $conexion->conectarBD();
 if (isset($_GET['busqueda'])) {
     $busqueda = $_GET['busqueda'];
 
-    $consulta = "SELECT E.ID, C.NOMBRE, C.AP_PATERNO, C.AP_MATERNO, E.RFC, C.TELEFONO, C.CORREO, E.TIPO, E.CUENTA
+    $consulta = "SELECT E.ID, C.NOMBRE, C.AP_PATERNO, C.AP_MATERNO, E.RFC, C.TELEFONO, C.CORREO, E.TIPO,E.COMPORTAMIENTO, E.CUENTA
     FROM EMPLEADOS E
     INNER JOIN CUENTAS C ON E.CUENTA = C.ID
     WHERE (C.CORREO LIKE '%$busqueda%'
@@ -15,7 +15,8 @@ if (isset($_GET['busqueda'])) {
     OR C.AP_MATERNO LIKE '%$busqueda%'
     or C.TELEFONO LIKE '%$busqueda%'
     OR E.TIPO LIKE '%$busqueda%'
-    OR E.RFC LIKE '%$busqueda%')
+    OR E.RFC LIKE '%$busqueda%'
+    OR E.COMPORTAMIENTO LIKE '%$busqueda%')
     AND C.ESTADO = 'ACTIVO'";
     $tabla = $conexion->seleccionar($consulta);
 
@@ -32,6 +33,7 @@ if (isset($_GET['busqueda'])) {
         echo '<th>RFC</th>';
         echo '<th>Teléfono</th>';
         echo '<th>Correo</th>';
+        echo '<th>Comportamiento</th>';
         echo '<th>Tipo</th>';
         echo '<th style="text-align: center;"></th>';
         echo '</tr>';
@@ -46,6 +48,7 @@ if (isset($_GET['busqueda'])) {
             echo "<td> $registro->RFC </td>";
             echo "<td> $registro->TELEFONO </td>";
             echo "<td> $registro->CORREO </td>";
+            echo "<td> $registro->COMPORTAMIENTO </td>";
             echo "<td> $registro->TIPO</td>";
             
             // Generar el botón de opciones con el menú desplegable
@@ -54,6 +57,9 @@ if (isset($_GET['busqueda'])) {
             echo '<button class="btn btn-secondary dropdown-toggle custom-dropdown" type="button" data-bs-toggle="dropdown" aria-expanded="false">';
             echo '</button>';
             echo '<ul class="dropdown-menu custom-drop-menu">';
+            echo '<li><a class="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#mainModal" data-bs-whatever="@verINE" 
+            data-id="' . $registro->CUENTA . '">
+            <i class="fa-solid fa-eye me-2" style="color: #ffffff;"></i>Ver INE</a></li>';
             echo '<li><a class="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#mainModal" data-bs-whatever="@verHistorial" 
             data-id="' . $registro->CUENTA . '">
             <i class="fa-solid fa-clock-rotate-left me-2" style="color: #ffffff;"></i>Historial</a></li>';
