@@ -277,13 +277,13 @@ function getMessageByButtonId(buttonId) {
       currentTable = 'solicitud';
       return 'Éstas son tus solicitudes pendientes: <i class="fa-solid fa-business-time" style="color: #343434;"></i>';
     case 'verEve3':
-      currentTable = '';
+      currentTable = 'verEve3';
       return 'Clientes con 3 o mas eventos a su nombre <i class="fa-solid fa-users style="color: #343434;"></i>';
     case 'verEve1':
-      currentTable = '';
+      currentTable = 'verEve1';
       return 'Clientes con 1-2 o mas eventos a su nombre <i class="fa-solid fa-users style="color: #343434;"></i>';
     case 'verSinPrece':
-      currentTable = '';
+      currentTable = 'verSinPrece';
       return 'Clientes sin precedentes <i class="fa-solid fa-users style="color: #343434;"></i>';   
     case 'verBebidas':
       currentTable = 'bebidas';
