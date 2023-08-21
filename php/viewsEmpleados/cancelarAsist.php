@@ -30,6 +30,13 @@
     else {
         $enter="DELETE FROM EVENTO_EMPLEADOS WHERE EVENTO='$eventoId' AND EMPLEADOS='$emp'";
         $db->ejecutarSQL($enter);
+        $enter="SELECT * FROM SOLICITUDES_EMPLEADO WHERE EVENTO='$eventoId' AND EMPLEADO='$emp'";
+        $solici=$db->seleccionar($enter);
+        if (!empty($solici)) {
+            // If the employee exists in SOLICITUDES_EMPLEADO, delete the entry
+            $deleteQuery = "DELETE FROM SOLICITUDES_EMPLEADO WHERE EVENTO='$eventoId' AND EMPLEADO='$emp'";
+            $db->ejecutarSQL($deleteQuery);
+        }
         echo"<div class='alert alert-success'>Cancelado!</div>";
     }
     }
