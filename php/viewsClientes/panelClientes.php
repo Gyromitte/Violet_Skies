@@ -17,11 +17,14 @@
     <link rel="stylesheet" href="/css/panelAdmin.css">
     <link rel="stylesheet" href="/css/cards.css">
     <link rel="stylesheet" href="/css/agendarEvento.css">
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 
     <!--Nuevo styleShett-->
     <link rel="stylesheet" href="/php/viewsClientes/calendario/css/style.css">
     <!-- Incluir jQuery -->
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+
 
     <!-- Agrega la siguiente línea para cargar el CSS del complemento datetimepicker -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-datetimepicker/2.5.20/jquery.datetimepicker.min.css">
@@ -263,7 +266,7 @@
                 </a>
             </div>
 
-            <div id="event-cards" class="card-container">
+            <div style="display: flex; flex-direction: column; align-items: center;" id="event-cards" class="card-container">
                 <!-- Aquí se agregarán las tarjetas de eventos -->
             </div>
         </div>
@@ -385,6 +388,7 @@
                         <button type="button" class="close btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
+                        <div id="errorDiv"></div>
                         <form id="editForm" method="POST">
                             <div class="mb-3">
                                 <label class="form-label" for="editTitleInput">Título:</label>
