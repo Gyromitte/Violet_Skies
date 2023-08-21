@@ -122,7 +122,7 @@
             Eventos
             </button>
             <button data-tab="empleados" class="dash-button"><i class="fa-solid fa-briefcase" style="color: #ffffff;"></i><br>
-            Empleados y Clientes
+            Empleados
             </button>
             <button data-tab="comidas" class="dash-button"><i class="fa-solid fa-burger" style="color: #ffffff;"></i><br>
             Menús
@@ -322,10 +322,8 @@
         
         <div id="empleados" class="tab-content">
             <h3 class="test" style="text-align:center; ">
-                Empleados 
+                Panel de Empleados
                 <i class="fa-solid fa-briefcase" style="color: #ffffff;"></i>
-                y Clientes
-                <i class="fa-solid fa-users" style="color: #ffffff;"></i>
             </h3>
             <br>
             <div class="search-container">
@@ -339,16 +337,22 @@
                         Re-incorporar
                     </button>
                 </div>
-                <div id="search-container">
-
+                <!--Barra de Busqueda-->
+                <div class="input-group mb-3 search-bar" id="search">
+                    <input type="text" id="busqueda" class="form-control" placeholder="Buscar a un empleado"
+                        onkeyup="searchEmployee()"
+                     aria-label="" aria-describedby="button-addon2">
+                    <button id="buscarEmpleado" data-url="buscarEmpleado.php" class="ver-empleados btn btn-outline-primary" type="button" id="button-addon2">
+                    <i class="fa-solid fa-magnifying-glass" style="color: #1f71ff;"></i></button>
                 </div>
             </div>
             <br>
             <!--Opciones de Vistas-->
         <div class="view-options mb-2">
-            <div class="dropdown form-select-custom">
+            <div>
+                <div class="dropdown form-select-custom">
                     <button class="btn btn-secondary dropdown-toggle custom-dropdown" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                        Empleados: <i class="fa-solid fa-briefcase me-2" style="color: #ffffff;"></i>
+                        Vistas:
                     </button>
                     <ul class="dropdown-menu custom-drop-menu">
                         <li>
@@ -376,33 +380,8 @@
                             </button>
                         </li>
                     </ul>
-            </div>
-
-            <div class="dropdown form-select-custom">
-                <button class="btn btn-secondary dropdown-toggle custom-dropdown" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                    Clientes: <i class="fa-solid fa-users me-2" style="color: #ffffff;"></i>
-                </button>
-                <ul class="dropdown-menu custom-drop-menu">
-                <li>
-                    <button id="verEve3" data-vista="3" data-url="/php/viewsAdminCli/verClientes.php" type="button" class="btn-view-custom btn-options ver-clientes btn btn-primary border-2 btn-outline-light rounded-5" data-bs-target="#mainModal">
-                        <i class="fa-solid fa-calendar-days" style="color: #ffffff;"></i>
-                            Eventos 3
-                    </button>
-                </li>
-                <li>
-                     <button id="verEve1" data-vista="1" data-url="/php/viewsAdminCli/verClientes.php" type="button" class="btn-view-custom btn-options ver-clientes btn btn-primary border-2 btn-outline-light rounded-5" data-bs-target="#mainModal">
-                        <i class="fa-solid fa-calendar-days" style="color: #ffffff;"></i>
-                            Eventos 1 - 2
-                    </button>
-                </li>
-                <li>
-                    <button id="verSinPrece" data-vista="0" data-url="/php/viewsAdminCli/verClientes.php" type="button" class="btn-view-custom btn-options ver-clientes btn btn-primary border-2 btn-outline-light rounded-5" data-bs-target="#mainModal">
-                        <i class="fa-solid fa-calendar-days" style="color: #ffffff;"></i>
-                            Sin precedentes
-                    </button>
-                </li>
-                </ul>
-            </div>
+                </div>
+            </div> 
         </div>
             <!--Informacion de la tabla-->
             <h3 id="table-info"></h3>
@@ -447,7 +426,7 @@
                     </button>
                 </div>
                 <!--Barra de Busqueda-->
-                <div class="input-group mb-3 search-bar" id="search" style="width: 40% !important;">
+                <div class="input-group mb-3 search-bar" id="search">
                     <input type="text" id="busquedaMenu" class="form-control" placeholder="Buscar un menú"
                         onkeyup="searchMenu()"
                      aria-label="" aria-describedby="button-addon2">
@@ -650,8 +629,6 @@
     <script src="/js/datosAdmin.js"></script>
     <script src="/js/buscarEmpleado.js"></script>
     <script src="/js/panelMenu/buscarMenu.js"></script>
-
-    <script src="/js/panelAdminCli/switchBar.js"></script>
 </body>
 
 </html>

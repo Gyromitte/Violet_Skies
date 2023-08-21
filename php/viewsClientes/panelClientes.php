@@ -15,8 +15,8 @@
     <!--StyleSheets-->
     <link rel="stylesheet" href="/bootstrap/css/bootstrap.min.css">
     <link rel="stylesheet" href="/css/panelAdmin.css">
-    <link rel="stylesheet" href="/css/cards.css">
     <link rel="stylesheet" href="/css/agendarEvento.css">
+    <link rel="stylesheet" href="./pruebasCEventos/pruebaEventos.css">
     <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 
     <!--Nuevo styleShett-->
@@ -24,8 +24,6 @@
     <!-- Incluir jQuery -->
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-
-
     <!-- Agrega la siguiente línea para cargar el CSS del complemento datetimepicker -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-datetimepicker/2.5.20/jquery.datetimepicker.min.css">
     <!--Referencias a fuentes-->
@@ -244,8 +242,8 @@
                 </div>
     </div>
 </div>
-        <!-- Agendar Eventos -->
-        <div id="eventos" class="tab-content colspan">
+        <!-- Mis Eventos -->
+        <div id="eventos" class="tab-content">
             <div class="panel-header" style="display: flex; flex-direction: column; align-items: center;">
                 <h3 class="test" style="text-align: center; margin-top:2%">
                     Mis eventos
@@ -255,8 +253,7 @@
                     <h3 style=" padding-right:5%; padding-left:5%; text-align: center;">Aquí puedes ver tus eventos.</h3>
                     <p style=" padding-right:5%; padding-left:5%; text-align: center;"><b>Si deseas realizar cambios debes contactarte con nosotros para aclarar detalles.</b></p>
                 </div>
-            </div>
-            <div class="filter-buttons">
+                <div class="filter-buttons">
                 <button class="btn-options ver-empleados btn btn-primary border-2 btn-outline-light rounded-5" onclick="filterEvents('PENDIENTE')">Pendiente</button>
                 <button class="btn-options ver-empleados btn btn-primary border-2 btn-outline-light rounded-5" onclick="filterEvents('EN PROCESO')">En Proceso</button>
                 <button class="btn-options ver-empleados btn btn-primary border-2 btn-outline-light rounded-5" onclick="filterEvents('FINALIZADO')">Finalizado</button>
@@ -265,8 +262,10 @@
                     <i class="fa-brands fa-whatsapp me-1" style="color: #ffffff;"></i><b>WhatsApp</b>
                 </a>
             </div>
+            </div>
 
-            <div style="display: flex; flex-direction: column; align-items: center;" id="event-cards" class="card-container">
+
+            <div id="event-cards" class="card-container">
                 <!-- Aquí se agregarán las tarjetas de eventos -->
             </div>
         </div>
@@ -341,7 +340,7 @@
                         <input type="hidden" id="eventIDInput" name="eventID">
                         <label class="form-label" for="password">Contraseña:</label>
                         <input class="form-control" type="password" id="password" name="password" required>
-                        <button type="submit">Cancelar evento</button>
+                        <button style="background-color: #a595b7;" type="submit" class="btn btn-primary">Cancelar evento</button>
                     </form>
                 </div>
             </div>
@@ -425,7 +424,7 @@
                                 <input type="text" class="form-control" id="editInvitadosInput" name="editInvitadosInput" required>
                             </div>
                             <input type="hidden" name="eventId" id="eventId">
-                            <button type="button" class="btn btn-primary" id="editSaveButton">Guardar Cambios</button>
+                            <button style="background-color: #a595b7;" type="button" class="btn btn-primary" id="editSaveButton">Guardar Cambios</button>
                         </form>
                     </div>
                 </div>

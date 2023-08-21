@@ -39,22 +39,7 @@ button:hover {
     position: absolute;
     z-index: 9999;
 }
-.card {
-    border: 3px solid darkblue;
-    background-image: linear-gradient(145deg, #5603ad, #f58cd6);
-    color: white;
-    padding: 5px; 
-    margin: 1.5%;
-    float: left;
-}
-    
-.card-container {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: left;
-    padding-left: 3%;
-    flex-direction: column;
-}
+
 .rounded-div {
     width: 200px;
     height: 150px;
@@ -93,5 +78,57 @@ button:hover {
         flex-basis: 100%; 
         margin: 0; 
     }
+}
+.card {
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 20px;
+    margin: 1%;
+    width: 300px;
+    float: left;
+    }
+    
+    .card-container {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: left;
+      margin-left:3%;
+    }
+    @media (max-width: 767px) {
+        .card {
+          margin: 1% auto; /* Margen vertical 1% y centrar horizontalmente */
+          float: none; /* Eliminar float en dispositivos móviles */
+        }
+        
+        .card-container {
+          margin-left: 0; /* No necesitas margen izquierdo en dispositivos móviles */
+        }
+      }
+  
+/* Estilos básicos para las cards */
+
+  
+  .card img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    border-radius: 5px;
+    margin-bottom: 10px;
+  }
+  
+  .card ul {
+    list-style-type: none;
+    padding: 0;
+  }
+  
+  .card li {
+    margin-bottom: 5px;
+  }
+  
+  .hidden {
+    display: none;
+}
+h2{
+  height: 115px;
 }
 

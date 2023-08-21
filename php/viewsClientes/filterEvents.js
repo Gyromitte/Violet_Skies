@@ -73,11 +73,12 @@ function createEventCard(event) {
 
     
     if (event.ESTADO === "PENDIENTE" || event.ESTADO === "EN PROCESO") {
-        editButton.classList.add("btn-modal-primary");
+        editButton.classList.add("btn-modal-warning");
+        editButton.style.backgroundColor="#a595b7";
         editButton.addEventListener("click", () => {
             if (timeDifferenceInMilliseconds <= ONE_WEEK_IN_MILLISECONDS) {
                 // Mostrar un mensaje de alerta
-                window.alert("Para cancelar el evento, por favor póngase en contacto con un administrador mediante el botón de WhatsApp.");
+                window.alert("Para editar el evento, por favor póngase en contacto con un administrador mediante el botón de WhatsApp.");
             } else {
                 openEditModal(event);
             }
