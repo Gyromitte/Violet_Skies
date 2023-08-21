@@ -6,7 +6,7 @@
     color: #343434;
 }
 .custom-card{
-    background-image: linear-gradient(135deg, #5603ad, #f58cd6);
+    background-image: linear-gradient(135deg, #343434, #61697b);
     color: white;
 }
 
@@ -39,26 +39,26 @@
 
   /* Estilo para el primer tier */
   .tier1 {
-    background: linear-gradient(135deg, #8a2be2, #5603ad);
+    background: linear-gradient(135deg, #d8d8d8, #61697b);
     color: white;
     /* Otros estilos adicionales para resaltar */
   }
 
   /* Estilo para el segundo tier */
   .tier2 {
-    background: linear-gradient(135deg, #ae52d4, #8a2be2);
+    background: linear-gradient(135deg, #d8d8d4, #61697b);
     color: white;
     /* Otros estilos adicionales para resaltar */
   }
 
   /* Estilo para el tercer tier */
   .tier3 {
-    background: linear-gradient(135deg, #c77dff, #ae52d4);
+    background: linear-gradient(135deg, #61697b, #f8d8d6);
     color: white;
     /* Otros estilos adicionales para resaltar */
   }
 .btn-agend-custom {
-    background: linear-gradient(135deg, #381c47, #8a2be2);
+    background: linear-gradient(135deg, #61697b, #d8d8d6);
     color: white;
     border: 2px solid white; 
     padding: 30px 40px;
