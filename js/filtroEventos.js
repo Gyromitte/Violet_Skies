@@ -74,6 +74,8 @@ fechaFinInput.addEventListener('change', filtrarEventos);
 
 
 function filtrarEventos() {
+
+
     var formData = new FormData(form);
     formData.append('depa', estadoSelect.value);
     formData.append('search', searchInput.value.trim());

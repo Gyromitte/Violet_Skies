@@ -8,7 +8,7 @@ if (this.readyState == 4 && this.status == 200) {
 var data = JSON.parse(this.responseText);
 
 var loadingSpinners = document.querySelectorAll('.loading-spinner');
-        var infoContents = document.querySelectorAll('.info');
+var infoContents = document.querySelectorAll('.info');
 
         loadingSpinners.forEach(function(spinner) {
             spinner.style.display = 'none';

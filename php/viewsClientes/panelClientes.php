@@ -15,14 +15,15 @@
     <!--StyleSheets-->
     <link rel="stylesheet" href="/bootstrap/css/bootstrap.min.css">
     <link rel="stylesheet" href="/css/panelAdmin.css">
-    <link rel="stylesheet" href="/css/cards.css">
     <link rel="stylesheet" href="/css/agendarEvento.css">
+    <link rel="stylesheet" href="./pruebasCEventos/pruebaEventos.css">
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 
     <!--Nuevo styleShett-->
     <link rel="stylesheet" href="/php/viewsClientes/calendario/css/style.css">
     <!-- Incluir jQuery -->
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
     <!-- Agrega la siguiente línea para cargar el CSS del complemento datetimepicker -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-datetimepicker/2.5.20/jquery.datetimepicker.min.css">
     <!--Referencias a fuentes-->
@@ -42,7 +43,6 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
     <script src="https://cdn.jsdelivr.net/npm/flatpickr@latest"></script>
     <script src="https://cdn.jsdelivr.net/npm/flatpickr/dist/plugins/flatpickr.min.js"></script>
-
     <script src="/php/viewsClientes/calendario/js/renderCalendar.js"></script>
 
 </head>
@@ -241,19 +241,18 @@
                 </div>
     </div>
 </div>
-        <!-- Agendar Eventos -->
-        <div id="eventos" class="tab-content colspan">
-            <div class="panel-header" style="display: flex; flex-direction: column; align-items: center;">
+        <!-- Mis Eventos -->
+        <div id="eventos" class="tab-content">
+            <div class="panel-header" style=" color:#ffffff; display: flex; flex-direction: column; align-items: center;">
                 <h3 class="test" style="text-align: center; margin-top:2%">
                     Mis eventos
                     <i class="fa-solid fa-calendar-days" style="color: #ffffff;"></i>
                 </h3>
-                <div style=" width:fit-content; background-color:#381c47;" class="rounded-3 mb-2">
+                <div style=" width:fit-content; background-color:#381c47; color:#ffffff;" class="rounded-3 mb-2">
                     <h3 style=" padding-right:5%; padding-left:5%; text-align: center;">Aquí puedes ver tus eventos.</h3>
                     <p style=" padding-right:5%; padding-left:5%; text-align: center;"><b>Si deseas realizar cambios debes contactarte con nosotros para aclarar detalles.</b></p>
                 </div>
-            </div>
-            <div class="filter-buttons">
+                <div class="filter-buttons">
                 <button class="btn-options ver-empleados btn btn-primary border-2 btn-outline-light rounded-5" onclick="filterEvents('PENDIENTE')">Pendiente</button>
                 <button class="btn-options ver-empleados btn btn-primary border-2 btn-outline-light rounded-5" onclick="filterEvents('EN PROCESO')">En Proceso</button>
                 <button class="btn-options ver-empleados btn btn-primary border-2 btn-outline-light rounded-5" onclick="filterEvents('FINALIZADO')">Finalizado</button>
@@ -262,7 +261,8 @@
                     <i class="fa-brands fa-whatsapp me-1" style="color: #ffffff;"></i><b>WhatsApp</b>
                 </a>
             </div>
-
+            </div>
+ 
             <div id="event-cards" class="card-container">
                 <!-- Aquí se agregarán las tarjetas de eventos -->
             </div>
@@ -338,7 +338,7 @@
                         <input type="hidden" id="eventIDInput" name="eventID">
                         <label class="form-label" for="password">Contraseña:</label>
                         <input class="form-control" type="password" id="password" name="password" required>
-                        <button type="submit">Cancelar evento</button>
+                        <button style="background-color: #a595b7;" type="submit" class="btn btn-primary">Cancelar evento</button>
                     </form>
                 </div>
             </div>
@@ -385,6 +385,7 @@
                         <button type="button" class="close btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
+                        <div id="errorDiv"></div>
                         <form id="editForm" method="POST">
                             <div class="mb-3">
                                 <label class="form-label" for="editTitleInput">Título:</label>
@@ -421,7 +422,7 @@
                                 <input type="text" class="form-control" id="editInvitadosInput" name="editInvitadosInput" required>
                             </div>
                             <input type="hidden" name="eventId" id="eventId">
-                            <button type="button" class="btn btn-primary" id="editSaveButton">Guardar Cambios</button>
+                            <button style="background-color: #a595b7;" type="button" class="btn btn-primary" id="editSaveButton">Guardar Cambios</button>
                         </form>
                     </div>
                 </div>

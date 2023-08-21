@@ -447,14 +447,16 @@ function updateModalContent(formType, idEmpleado, idEvento) {
                       </select>
                     </div>
                     <div class="form-group mb-3">
-                      <label for="comportamiento">Tipo de Trabajador</label>
-                      <select name="comportamiento" class="form-control form-select" id="comportamiento">
-                        <option value="Malo" ${empleado.COMPORTAMIENTO === 'Malo' ? 'selected' : ''}>Malo</option>
-                        <option value="Deficiente" ${empleado.COMPORTAMIENTO === 'Deficiente' ? 'selected' : ''}>Deficiente </option>
-                        <option value="Bueno" ${empleado.COMPORTAMIENTO === 'Bueno' ? 'selected' : ''}>Bueno</option>
-                        <option value="Exelente" ${empleado.COMPORTAMIENTO === 'Exelente' ? 'selected' : ''}>Exelente </option>
-                      </select>
-                    </div>
+                    <div class="form-group mb-3">
+                    <label for="comportamiento">Tipo de Trabajador</label>
+                    <select name="comportamiento" class="form-control form-select" id="comportamiento">
+                      <option value="Malo" ${empleado.COMPORTAMIENTO === 'Malo' ? 'selected' : ''}>Malo</option>
+                      <option value="Deficiente" ${empleado.COMPORTAMIENTO === 'Deficiente' ? 'selected' : ''}>Deficiente </option>
+                      <option value="Normal" ${empleado.COMPORTAMIENTO === 'Normal' ? 'selected' : ''}>Normal </option>
+                      <option value="Bueno" ${empleado.COMPORTAMIENTO === 'Bueno' ? 'selected' : ''}>Bueno</option>
+                      <option value="Exelente" ${empleado.COMPORTAMIENTO === 'Exelente' ? 'selected' : ''}>Exelente </option>
+                    </select>
+                  </div>
                     <div class="d-flex justify-content-center">
                     <button type="submit" class="btn btn-primary btn-modal me-2"><i class="fa-solid fa-pencil me-2" style="color: #ffffff;"></i>Modificar</button>
                     <button type="button" class="btn btn-primary btn-modal" data-bs-dismiss="modal">Cancelar</button>
@@ -473,11 +475,11 @@ function updateModalContent(formType, idEmpleado, idEvento) {
               var nombre = formEditarEmpleado.elements.nombre.value;
               var ap_paterno = formEditarEmpleado.elements.ap_paterno.value;
               var ap_materno = formEditarEmpleado.elements.ap_materno.value;
+              var comportamiento = formEditarEmpleado.elements.comportamiento.value;
               var telefono = formEditarEmpleado.elements.telefono.value;
               var rfc = formEditarEmpleado.elements.rfc.value;
               var tipoUsuario = formEditarEmpleado.elements.tipoUsuario.value;
               var comportamiento = formEditarEmpleado.elements.comportamiento.value;
-
 
               // Realizar una nueva solicitud AJAX para actualizar los datos
               var updateXHR = new XMLHttpRequest();

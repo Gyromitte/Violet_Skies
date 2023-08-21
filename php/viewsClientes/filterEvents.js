@@ -1,4 +1,6 @@
+var loadingSpinner = document.getElementById('loadingSpinner');
 const eventCardsContainer = document.getElementById("event-cards");
+
 
 const salonImageUrls = {
     1: '/images/salones/salon2.jpg',
@@ -34,15 +36,19 @@ function createEventCard(event) {
 
     const date = document.createElement("p");
     date.textContent = `Fecha: ${event['FECHA DEL EVENTO']}`;
+    date.style.fontSize = "18px"; 
 
     const salon = document.createElement("p");
     salon.textContent =`Salón: ${event['NOMBRE DEL SALÓN']}`;
+    salon.style.fontSize = "18px";
 
     const menu = document.createElement("p");
     menu.textContent = `Menú: ${event['MENÚ']}`;
+    menu.style.fontSize = "18px";
 
     const invitados = document.createElement("p");
     invitados.textContent = `Invitados: ${event['INVITADOS']}`;
+    invitados.style.fontSize = "18px";
 
     const client = document.createElement("p");
     client.textContent = `Cliente: ${event['NOMBRE DEL CLIENTE']}`;
@@ -58,15 +64,6 @@ function createEventCard(event) {
     const editButton = document.createElement("button");
     editButton.textContent = "Editar Evento";
 
-    if (event.ESTADO === "PENDIENTE" || event.ESTADO === "EN PROCESO") {
-        editButton.classList.add("btn-modal-primary");
-        editButton.addEventListener("click", () => {
-            openEditModal(event);
-        });
-    } else {
-        editButton.style.display = "none";
-    }
-
     //Timer que desactiva el botón de cancelar si falta una semana.
     const eventDateParts = event['FECHA DEL EVENTO'].split(' ')[0].split('-');
     const eventDate = new Date(
@@ -79,6 +76,22 @@ function createEventCard(event) {
     const timeDifferenceInMilliseconds = eventDate.getTime() - currentDate.getTime();
 
     const ONE_WEEK_IN_MILLISECONDS = 7 * 24 * 60 * 60 * 1000;
+
+    
+    if (event.ESTADO === "PENDIENTE" || event.ESTADO === "EN PROCESO") {
+        editButton.classList.add("btn-modal-warning");
+        editButton.style.backgroundColor="#a595b7";
+        editButton.addEventListener("click", () => {
+            if (timeDifferenceInMilliseconds <= ONE_WEEK_IN_MILLISECONDS) {
+                // Mostrar un mensaje de alerta
+                window.alert("Para editar el evento, por favor póngase en contacto con un administrador mediante el botón de WhatsApp.");
+            } else {
+                openEditModal(event);
+            }
+        });
+    } else {
+        editButton.style.display = "none";
+    }
 
     if (event.ESTADO !== "FINALIZADO" && event.ESTADO !== "CANCELADO") {
         cancelButton.classList.add("btn-modal-warning");
@@ -131,6 +144,7 @@ document.querySelector(".close").addEventListener("click", () => {
 filterEvents("PENDIENTE");
 function filterEvents(state) {
     eventCardsContainer.innerHTML = "";
+    eventCardsContainer.style.display = 'none';
 
     fetch(`get_events.php?estado=${state}`)
         .then(response => response.json())
@@ -143,10 +157,12 @@ function filterEvents(state) {
                 noEventsMessage.style.marginTop = "50px";
                 noEventsMessage.style.alignContent= "center";
                 eventCardsContainer.appendChild(noEventsMessage);
+                eventCardsContainer.style.display = 'block';
             } else {
                 events.forEach(event => {
                     const card = createEventCard(event);
                     eventCardsContainer.appendChild(card);
+                    eventCardsContainer.style.display = 'block';
                 });
             }
         })
@@ -220,16 +236,48 @@ function openEditModal(event) {
 
     const oneWeekLater = new Date();
     oneWeekLater.setDate(oneWeekLater.getDate() + 6);
-
+    
     $(dateInput).datetimepicker({
-        format: 'Y-m-d H:i:s', // Formato deseado para la fecha y hora
-        step: 15, // Intervalo de minutos para seleccionar la hora
-        minDate: oneWeekLater.toISOString().slice(0, 19).replace('T', ' '), // Fecha mínima: una semana después de la actual
+        format: 'Y-m-d H:i:s',
+        step: 15,
+        minDate: oneWeekLater.toISOString().slice(0, 19).replace('T', ' '),
         allowTimes: [
-            '05:00','06:00','07:00','08:00', '09:00', '10:00', '11:00', '12:00', '13:00', // Ejemplo de horas permitidas
-            '14:00', '15:00', '16:00', '17:00', '18:00', '19:00', '20:00', '21:00','22:00' // Puedes agregar más horas aquí
-        ]
+            '05:00', '06:00', '07:00', '08:00', '09:00', '10:00', '11:00',
+            '12:00', '13:00', '14:00', '15:00', '16:00', '17:00', '18:00',
+            '19:00', '20:00', '21:00', '22:00'
+        ],
+        onSelect: function(dateText, inst) {
+            const selectedDate = new Date(dateText);
+            isDateBlocked(selectedDate).then(isBlocked => {
+                if (isBlocked) {
+                    $(this).val('');
+                }
+            });
+        }
     });
+    
+    function isDateBlocked(date) {
+        return new Promise((resolve, reject) => {
+            // Hacer una llamada fetch al archivo PHP contadorEventos.php
+            fetch('contadorEventos.php')
+                .then(response => response.json())
+                .then(data => {
+                    const dateString = date.toISOString().slice(0, 10); // Formato 'yyyy-mm-dd'
+                    
+                    for (var i = 0; i < data.length; i++) {
+                        if (data[i].fecha === dateString && data[i].cantidad_eventos >= 3) {
+                            resolve(true);
+                            return;
+                        }
+                    }
+                    resolve(false);
+                })
+                .catch(error => {
+                    console.error('Error en la solicitud fetch:', error);
+                    reject(error);
+                });
+        });
+    }
 }
 
 
@@ -282,22 +330,32 @@ $('#editSaveButton').click(function() {
         console.log('Server Response:', data);
         
         if (data && data.cupoMaximoExcedido) {
-            console.error(data.mensaje);
-            alert(data.mensaje);
-            console.log(mensaje);
+            const errorDiv = document.getElementById('errorDiv');
+            errorDiv.innerHTML = `<div style="text-align:center;" class="alert alert-danger">${data.mensaje}</div>`;
+            setTimeout(() => {
+                errorDiv.innerHTML = ''; 
+            }, 3000);
         } else if (data && data.cupoMinimoNoAlcanzado) {
-            console.error(data.mensaje);
-            alert(data.mensaje); 
-            console.log(mensaje);
+            const errorDiv = document.getElementById('errorDiv');
+            errorDiv.innerHTML = `<div style="text-align:center;" class="alert alert-danger">${data.mensaje}</div>`;
+            setTimeout(() => {
+                errorDiv.innerHTML = ''; 
+            }, 3000);
         } else if (data && data.error) {
-            console.error(data.mensaje);
-            alert(data.mensaje);
-            console.log(mensaje);
+            const errorDiv = document.getElementById('errorDiv');
+            errorDiv.innerHTML = `<div style="text-align:center;" class="alert alert-danger">${data.mensaje}</div>`;
+            setTimeout(() => {
+                errorDiv.innerHTML = ''; 
+            }, 3000);
 
         } else {
+            const errorDiv = document.getElementById('errorDiv');
+            errorDiv.innerHTML = `<div style="text-align:center;" class="alert alert-success">El evento se actualizó correctamente</div>`;
+            setTimeout(() => {
+                errorDiv.innerHTML = ''; 
+                filterEvents("PENDIENTE");
+            }, 3000);
             console.log("Evento editado exitosamente:", data.mensaje);
-            alert("Evento editado exitosamente: " + data.mensaje); 
-            filterEvents("PENDIENTE");
         }
     })
     .catch(error => {

@@ -92,13 +92,13 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
             $response = array(
                 "error" => true,
                 "cupoMaximoExcedido" => true,
-                "mensaje" => $errorMessage
+                "mensaje" => "Ya cuentas con 5 eventos pendientes"
             );
         } elseif (strpos($errorMessage, "Lo siento, esta fecha y salón ya están ocupados por otro evento.") !== false) {
             $response = array(
                 "error" => true,
                 "fechaOcupada" => true,
-                "mensaje" => $errorMessage
+                "mensaje" => "Lo sentimos, no podemos agendar <br> más eventos para esa fecha"
             );
         } else {
             $response = array(
