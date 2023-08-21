@@ -63,13 +63,8 @@ $(window).on('load', function() {
                 setTimeout(() => {
                     msgDiv.innerHTML = ''; 
                 }, 3000);
-            } else if (jsonData && jsonData.cupoMinimoNoAlcanzado) {
-                const msgDiv = document.getElementById('msgDiv');
-                msgDiv.innerHTML = `<div style="text-align:center;" class="alert alert-danger">${jsonData.mensaje}</div>`;
-                setTimeout(() => {
-                    msgDiv.innerHTML = ''; 
-                }, 3000);
-            }else{
+            } else {
+
                 const msgDiv = document.getElementById('msgDiv');
                 msgDiv.innerHTML = `<div style="text-align:center;" class="alert alert-success">Evento solicitado con éxito <br>espera a que los administradores lo confirmen</div>`;
                 setTimeout(() => {
