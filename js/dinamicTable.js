@@ -6,7 +6,7 @@ document.addEventListener('DOMContentLoaded', function() {
   var buttons = document.querySelectorAll('.ver-empleados');
   var tableInfo = document.getElementById('table-info');
   var contTable = document.querySelector('.cont-table');
-  var loadingSpinner = document.getElementById('loadingSpinner');
+  
 
   var busquedaInput = document.getElementById('busqueda');
   // Agregar el evento de click a los botones
@@ -14,14 +14,11 @@ document.addEventListener('DOMContentLoaded', function() {
     button.addEventListener('click', function() {
       var url = this.getAttribute('data-url');
       var buttonId = this.getAttribute('id');
-      contTable.style.display = 'none';
-      tableInfo.innerHTML = '';
 
       if (buttonId === 'buscarEmpleado') {
         var busquedaValor = busquedaInput.value.trim(); // Obtener el valor de la barra de búsqueda y eliminar los espacios en blanco al inicio y al final
 
         if (busquedaValor === '') {
-          loadingSpinner.style.display = 'block';
           ('La barra de búsqueda está vacía. Por favor, ingrese un correo o nombre');
           return; // Detener la ejecución si la barra de búsqueda está vacía
         }
@@ -32,9 +29,6 @@ document.addEventListener('DOMContentLoaded', function() {
             var message = getMessageByButtonId(buttonId);
             tableInfo.innerHTML = message; // Modificar el innerHTML en lugar de textContent
             contTable.innerHTML = xhr.responseText;
-            contTable.style.display = 'block';
-
-            loadingSpinner.style.display = 'none';
             // Limpiar la barra de búsqueda después de una búsqueda exitosa
             //Bug donde al querer eliminar o editar el warning salia por que la barra estaba vacia
             //busquedaInput.value = '';
@@ -45,7 +39,7 @@ document.addEventListener('DOMContentLoaded', function() {
       } else {
         if(buttonId == "verGraficos")
         { 
-          loadingSpinner.style.display = 'block';
+          tableInfo.innerHTML = '';
           //Re-insertar el grafico
           contTable.innerHTML = `
           <div class="container-fluid">
@@ -69,7 +63,7 @@ document.addEventListener('DOMContentLoaded', function() {
             </div>
           `;
           //Volver a ejecutar el codigo de la grafica para actualizar datos:
-          recargarGraficos(); //Llamado desde chart.js
+          recargarGraficos();//Llamado desde chart.js
           // Manejar el redimensionamiento del canvas
           const canvas = document.getElementById("proporcionEmpleados2");
           if (canvas) {
@@ -77,7 +71,7 @@ document.addEventListener('DOMContentLoaded', function() {
             context.canvas.width = canvas.offsetWidth;
             context.canvas.height = canvas.offsetHeight;
           }
-          tableInfo.innerHTML = '';
+          
         }else{
           var xhr = new XMLHttpRequest();
           xhr.onreadystatechange = function() {
@@ -85,9 +79,6 @@ document.addEventListener('DOMContentLoaded', function() {
               var message = getMessageByButtonId(buttonId);
               tableInfo.innerHTML = message; // Modificar el innerHTML en lugar de textContent
               contTable.innerHTML = xhr.responseText;
-              contTable.style.display = 'block';
-
-              loadingSpinner.style.display = 'none';
             }
           };
           xhr.open('GET', url, true);
