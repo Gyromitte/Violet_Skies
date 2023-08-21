@@ -18,7 +18,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
             $tabla = $conexion->seleccionar($consulta);
 
             if (count($tabla) > 0) {
-                echo "<br><table class='table table-hover'>
+                echo "<br><table class='table table-hover table-sm' id='t'>
                 <thead class='thead-purple'>
                     <tr>
                     <th></th><th>NOMBRE</th><th>TELÉFONO</th>

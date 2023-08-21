@@ -35,8 +35,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 $conexion->ejecutarSQL("CALL ProcesoActualizarTablaEventoEmpleados();");
                 
                 echo '<script>alert("Empleados aceptados exitosamente.");</script>';
+                echo '<script>window.history.back();</script>';
             } else {
                 echo '<script>alert("No se han seleccionado empleados.");</script>';
+                echo '<script>window.history.back();</script>';
             }
             exit();
         }

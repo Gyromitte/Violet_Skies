@@ -987,7 +987,6 @@ function updateModalContent(formType, idEmpleado, idEvento) {
                 var inputFecha = document.getElementById("fechaEvento");
                 var fechaActual = new Date();
                 var unaSemanaDespues = new Date(fechaActual.getTime() + 7 * 24 * 60 * 60 * 1000);
-                var fechaActualFormateada = fechaActual.toISOString().slice(0, 16).replace('T', ' ');
                 var unaSemanaDespuesFormateada = unaSemanaDespues.toISOString().slice(0, 16).replace('T', ' ');
                 inputFecha.setAttribute("min", unaSemanaDespuesFormateada);
             
@@ -999,8 +998,10 @@ function updateModalContent(formType, idEmpleado, idEvento) {
                     // Agrega las fechas directamente desde el array obtenido de la respuesta
                     ...fechasObjeto.map(function(fecha) {
                       return new Date(fecha);
-                    })
+                    }),
                   ],
+                  minTime: "05:00",
+                  maxTime: "22:00",
                   enableTime: true,
                   dateFormat: "Y-m-d H:i"
                 });

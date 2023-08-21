@@ -33,10 +33,10 @@
         <a class='nav-link' data-bs-toggle='pill' role='tab' aria-selected='true' onclick='mostrarSolicitudesEmpleados()'>Peticiones</a>
         </li>
         <li class='nav-item' role='presentation'>
-        <a class='nav-link' data-bs-toggle='pill' role='tab' aria-selected='true' onclick='mostrarmeserosIngresados($evento_id)'>Meseros ingresados</a>
+        <a class='nav-link' data-bs-toggle='pill' role='tab' aria-selected='' onclick='mostrarmeserosIngresados($evento_id)'>Meseros ingresados</a>
         </li>
         <li class='nav-item' role='presentation'>
-        <a class='nav-link' data-bs-toggle='pill' role='tab' aria-selected='true' onclick='mostrarcocinaIngresados($evento_id)'>Cocina ingresados</a>
+        <a class='nav-link' data-bs-toggle='pill' role='tab' aria-selected='' onclick='mostrarcocinaIngresados($evento_id)'>Cocina ingresados</a>
         </li>
         </ul>
 

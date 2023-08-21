@@ -6,6 +6,7 @@ var tablaResultados = document.getElementById('tablaResultados');
 var peticionesResult = document.getElementById('peticionesResult');
 var estadoSelect = document.getElementById('estadoSelect');
 var searchInput = document.getElementById('searchInput');
+var buscar = document.getElementById('buscar');
 var searchButton = document.getElementById('searchButton');
 var eventosPendientes = document.getElementById("eventosPendientes");
 var eventosEnProceso = document.getElementById("eventosEnProceso");
@@ -18,48 +19,59 @@ var contentRow = document.getElementById('contentRow');
 
 filtrarEventos();
 
-estadoSelect.addEventListener('change', function() {
+estadoSelect.addEventListener('change', function () {
     if (estadoSelect.value === 'PETICIONES') {
         peticionesFuncion();
     } else {
         filtrarEventos();
     }
 });
-searchInput.addEventListener('input', function() {
+searchInput.addEventListener('input', function () {
     clearTimeout(typingTimer);
     typingTimer = setTimeout(filtrarEventos, doneTypingInterval);
 });
-searchInput.addEventListener('keydown', function(event) {
+searchInput.addEventListener('keydown', function (event) {
     if (event.keyCode === 13) {
         event.preventDefault();
         filtrarEventos();
     }
 });
-eventosPendientes.addEventListener("click", function() {
+buscar.addEventListener('input', function () {
+    clearTimeout(typingTimer);
+    typingTimer = setTimeout(filtrarbUSCAR, doneTypingInterval);
+});
+buscar.addEventListener('keydown', function (event) {
+    if (event.keyCode === 13) {
+        event.preventDefault();
+        filtrarbUSCAR();
+    }
+});
+eventosPendientes.addEventListener("click", function () {
     estadoSelect.value = "PENDIENTE";
     filtrarEventos();
 });
-eventosEnProceso.addEventListener("click", function() {
+eventosEnProceso.addEventListener("click", function () {
     estadoSelect.value = "EN PROCESO";
     filtrarEventos();
 });
-peticiones.addEventListener("click", function() {
+peticiones.addEventListener("click", function () {
     estadoSelect.value = "PETICIONES";
     peticionesFuncion();
 });
-eventosCancelados.addEventListener("click", function() {
+eventosCancelados.addEventListener("click", function () {
     estadoSelect.value = "CANCELADO";
     filtrarEventos();
 });
-eventosFin.addEventListener("click", function() {
+eventosFin.addEventListener("click", function () {
     estadoSelect.value = "FINALIZADO";
     filtrarEventos();
 });
-searchButton.addEventListener('click', function() {
+searchButton.addEventListener('click', function () {
     filtrarEventos();
 });
 fechaInicioInput.addEventListener('change', filtrarEventos);
 fechaFinInput.addEventListener('change', filtrarEventos);
+
 
 function filtrarEventos() {
     var formData = new FormData(form);
@@ -70,7 +82,7 @@ function filtrarEventos() {
 
     var xhr = new XMLHttpRequest();
     xhr.open('POST', '../viewsEventos/verEventos.php', true);
-    xhr.onload = function() {
+    xhr.onload = function () {
         if (xhr.status === 200) {
             tablaResultados.innerHTML = xhr.responseText;
         }
@@ -84,15 +96,15 @@ function filtrarEventos() {
         searchButton.style.display = 'none';
         fechaInicioInput.style.display = 'none';
         fechaFinInput.style.display = 'none';
-        peticionesResult.style.display='none';
+        peticionesResult.style.display = 'none';
     } else if (estadoSelect.value !== 'PETICIONES') {
         contentRow.style.display = 'none';
         tablaResultados.style.display = 'block';
-        searchInput.style.display = 'block'; 
-        searchButton.style.display = 'block'; 
-        fechaInicioInput.style.display = 'block'; 
-        fechaFinInput.style.display = 'block'; 
-        peticionesResult.style.display='none';
+        searchInput.style.display = 'block';
+        searchButton.style.display = 'block';
+        fechaInicioInput.style.display = 'block';
+        fechaFinInput.style.display = 'block';
+        peticionesResult.style.display = 'none';
     }
 
     var params = new URLSearchParams(formData);
@@ -105,7 +117,7 @@ function peticionesFuncion() {
 
     var xhr = new XMLHttpRequest();
     xhr.open('POST', '../viewsEventos/peticiones.php', true);
-    xhr.onload = function() {
+    xhr.onload = function () {
         if (xhr.status === 200) {
             peticionesResult.innerHTML = xhr.responseText;
         }
@@ -120,19 +132,19 @@ function peticionesFuncion() {
         searchButton.style.display = 'none';
         fechaInicioInput.style.display = 'none';
         fechaFinInput.style.display = 'none';
-    } 
+    }
     var params = new URLSearchParams(formData);
     history.replaceState(null, '', '?' + params.toString());
 }
 function verSolicitudes(eventoId, nombreEvento, faltanMeseros, faltanCocina) {
     var xhr = new XMLHttpRequest();
     var url = '../viewsEventos/solicitudes.php?evento_id=' + eventoId +
-              '&nombre_evento=' + encodeURIComponent(nombreEvento) +
-              '&FALTAN_MESEROS=' + faltanMeseros +
-              '&FALTAN_COCINA=' + faltanCocina;
+        '&nombre_evento=' + encodeURIComponent(nombreEvento) +
+        '&FALTAN_MESEROS=' + faltanMeseros +
+        '&FALTAN_COCINA=' + faltanCocina;
 
     xhr.open('GET', url, true);
-    xhr.onload = function() {
+    xhr.onload = function () {
         if (xhr.status === 200) {
             peticionesResult.innerHTML = xhr.responseText;
         }
@@ -141,23 +153,23 @@ function verSolicitudes(eventoId, nombreEvento, faltanMeseros, faltanCocina) {
 }
 
 function mostrarSolicitudesEmpleados() {
-    var solicitDiv = document.getElementById("solicit");
-    
+    var solicitDiv = document.getElementById("solicit")
     if (solicitDiv.style.display === "none") {
         solicitDiv.style.display = "block";
-        
-    } else {
-        solicitDiv.style.display = "none";
-
-    }
+        var empleadosRegistradosDiv = document.getElementById("empleadosRegistrados");
+            empleadosRegistradosDiv.innerHTML = "";
+    } 
 }
 
 function mostrarmeserosIngresados(eventoId) {
     var xhr = new XMLHttpRequest();
+    var solicitDiv = document.getElementById("solicit");
+        solicitDiv.style.display = "none";
+    
     var url = '../viewsEventos/verEmpleadosRegistrados.php?id=' + eventoId + '&tipo=MESERO';
-console.log(eventoId);
+    console.log(eventoId);
     xhr.open('GET', url, true);
-    xhr.onload = function() {
+    xhr.onload = function () {
         if (xhr.status === 200) {
             var empleadosRegistradosDiv = document.getElementById("empleadosRegistrados");
             empleadosRegistradosDiv.innerHTML = xhr.responseText;
@@ -167,10 +179,12 @@ console.log(eventoId);
 }
 function mostrarcocinaIngresados(eventoId) {
     var xhr = new XMLHttpRequest();
+    var solicitDiv = document.getElementById("solicit");
+        solicitDiv.style.display = "none";
     var url = '../viewsEventos/verEmpleadosRegistrados.php?id=' + eventoId + '&tipo=COCINA';
-console.log(eventoId);
+    console.log(eventoId);
     xhr.open('GET', url, true);
-    xhr.onload = function() {
+    xhr.onload = function () {
         if (xhr.status === 200) {
             var empleadosRegistradosDiv = document.getElementById("empleadosRegistrados");
             empleadosRegistradosDiv.innerHTML = xhr.responseText;
@@ -179,11 +193,7 @@ console.log(eventoId);
     xhr.send();
 }
 
-
-
-
-
-window.addEventListener('load', function() {
+window.addEventListener('load', function () {
     var params = new URLSearchParams(window.location.search);
     estadoSelect.value = params.get('depa') || 'GRAFICOS';
     fechaInicioInput.value = params.get('fecha_inicio') || '';
