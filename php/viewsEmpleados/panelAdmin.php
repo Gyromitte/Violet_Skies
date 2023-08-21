@@ -665,11 +665,8 @@
     <script src="/js/datosAdmin.js"></script>
     <script src="/js/buscarEmpleado.js"></script>
     <script src="/js/panelMenu/buscarMenu.js"></script>
-<<<<<<< HEAD
     <script src="/js/panelAdminCli/buscarCliente.js"></script>
     
-=======
->>>>>>> parent of df86678 (Estilos a panelCliente)
 
     <script src="/js/panelAdminCli/switchBar.js"></script>
 </body>
